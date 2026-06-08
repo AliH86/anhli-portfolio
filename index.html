@@ -1,0 +1,2022 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Anh Li — Sạp Âm Nhạc</title>
+<meta name="description" content="Anh Li · Creative Producer · Show Director · Songwriter · Saigon Vietnam"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<style>
+/* ============================================
+   RESET & VARS
+============================================ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --ink:#09080E;
+  --ink2:#13111C;
+  --ink3:#1E1B28;
+  --ink4:#2A2636;
+  --taupe:#8B7B68;
+  --taupe2:#B8A894;
+  --taupe3:#D9CFBF;
+  --amber:#CC9F4A;
+  --amber2:#E8C870;
+  --amber3:#F5DFA0;
+  --blush:#C4806A;
+  --text:#EDE6DC;
+  --text2:#B8B0A4;
+  --text3:#7A7268;
+  --border:rgba(184,168,148,0.1);
+  --border2:rgba(204,159,74,0.2);
+  --glow:rgba(204,159,74,0.08);
+  --hero-scale:1;
+  --marquee-dur:30s;
+  --album-dur:70s;
+}
+
+/* TWEAK HOOKS */
+body.no-grain::before { display:none; }
+body.no-wm .section-wm, body.no-wm .hero-watermark, body.no-wm .contact-wm, body.no-wm .music-decor { display:none; }
+body.no-motion .marquee-track, body.no-motion .album-track, body.no-motion .hero-bg::after,
+body.no-motion .hero-backlight, body.no-motion .sw-bar, body.no-motion .hero-watermark,
+body.no-motion .player.playing .player-eq span, body.no-motion .num-eq i,
+body.no-motion .htag-track, body.no-motion [id^="section"]::before,
+body.no-motion #about::before, body.no-motion #music::before, body.no-motion #videos::before,
+body.no-motion #gallery::before, body.no-motion #work::before, body.no-motion #contact::before { animation:none !important; }
+
+html { scroll-behavior:smooth; font-size:16px; }
+
+body {
+  background:var(--ink);
+  color:var(--text);
+  font-family:'Instrument Sans', sans-serif;
+  overflow-x:hidden;
+  cursor:none;
+}
+
+/* ============================================
+   GRAIN TEXTURE
+============================================ */
+body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  pointer-events:none;
+  opacity:0.035;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size:200px 200px;
+}
+/* Site-wide vignette — frames the page, adds cinematic depth */
+body::after {
+  content:'';
+  position:fixed; inset:0; z-index:9998;
+  pointer-events:none;
+  background:radial-gradient(130% 110% at 50% 42%, transparent 58%, rgba(4,3,8,0.5) 100%);
+}
+
+/* ============================================
+   CUSTOM CURSOR
+============================================ */
+#cursor {
+  width:8px; height:8px;
+  background:var(--amber);
+  border-radius:50%;
+  position:fixed;
+  top:0; left:0;
+  pointer-events:none;
+  z-index:10000;
+  transform:translate(-50%,-50%);
+  transition:transform 0.1s, width 0.3s, height 0.3s, opacity 0.3s;
+  mix-blend-mode:screen;
+}
+#cursor-ring {
+  width:32px; height:32px;
+  border:1px solid rgba(204,159,74,0.4);
+  border-radius:50%;
+  position:fixed;
+  top:0; left:0;
+  pointer-events:none;
+  z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:transform 0.12s ease-out, width 0.3s, height 0.3s, border-color 0.3s;
+}
+body:has(a:hover) #cursor, body:has(button:hover) #cursor { width:4px; height:4px; }
+body:has(a:hover) #cursor-ring, body:has(button:hover) #cursor-ring { width:48px; height:48px; border-color:var(--amber); }
+
+/* ============================================
+   NAV
+============================================ */
+nav {
+  position:fixed; top:0; width:100%; z-index:100;
+  padding:1.5rem 4rem;
+  display:flex; justify-content:space-between; align-items:center;
+  transition:all 0.5s;
+}
+nav.solid {
+  background:rgba(9,8,14,0.9);
+  backdrop-filter:blur(20px);
+  border-bottom:0.5px solid var(--border);
+  padding:1rem 4rem;
+}
+.nav-logo {
+  font-family:'Cormorant Garamond', serif;
+  font-size:1.2rem; font-weight:400;
+  letter-spacing:0.25em;
+  color:var(--amber);
+  text-decoration:none;
+}
+.nav-links { display:flex; gap:2.5rem; list-style:none; }
+.nav-links a {
+  color:var(--text3); text-decoration:none;
+  font-size:0.72rem; letter-spacing:0.15em;
+  text-transform:uppercase;
+  transition:color 0.3s;
+  position:relative;
+}
+.nav-links a::after {
+  content:''; position:absolute; bottom:-3px; left:0;
+  width:0; height:0.5px; background:var(--amber);
+  transition:width 0.3s;
+}
+.nav-links a:hover { color:var(--amber); }
+.nav-links a:hover::after { width:100%; }
+
+/* ============================================
+   HERO
+============================================ */
+.hero {
+  position:relative; min-height:100vh;
+  display:flex; flex-direction:column;
+  justify-content:center;
+  padding:7rem 4rem 5rem;
+  overflow:hidden;
+}
+.shader-host {
+  position:absolute; inset:0; z-index:0; pointer-events:none;
+  opacity:0; transition:opacity 1.4s ease;
+}
+.shader-host.ready { opacity:1; }
+.shader-host.shader-unsupported { display:none; }
+body.no-shader .shader-host { display:none; }
+.hero-bg {
+  position:absolute; inset:0; z-index:1;
+  background:
+    radial-gradient(120% 80% at 18% 28%, rgba(204,159,74,0.10), transparent 52%),
+    radial-gradient(90% 70% at 88% 80%, rgba(120,86,160,0.06), transparent 60%),
+    linear-gradient(to top, var(--ink) 2%, rgba(9,8,14,0.2) 30%, transparent 60%);
+}
+.hero-bg::after {
+  /* drifting aurora glow for atmospheric depth */
+  content:''; position:absolute; inset:-20%;
+  background:
+    radial-gradient(40% 50% at 30% 40%, rgba(204,159,74,0.10), transparent 60%),
+    radial-gradient(35% 45% at 70% 60%, rgba(96,72,140,0.08), transparent 60%);
+  filter:blur(20px);
+  animation:auroraDrift 22s ease-in-out infinite alternate;
+}
+@keyframes auroraDrift {
+  0%   { transform:translate(0,0) scale(1); }
+  100% { transform:translate(4%,-3%) scale(1.12); }
+}
+.hero-vignette {
+  position:absolute; inset:0; z-index:2; pointer-events:none;
+  background:radial-gradient(120% 100% at 50% 45%, transparent 52%, rgba(5,4,9,0.55) 100%);
+}
+.hero-watermark {
+  position:absolute; z-index:1; left:-2%; bottom:6%;
+  font-family:'Cormorant Garamond', serif; font-weight:300;
+  font-size:clamp(14rem,30vw,34rem); line-height:0.8;
+  letter-spacing:-0.04em; white-space:nowrap;
+  color:transparent; -webkit-text-stroke:1px rgba(184,168,148,0.07);
+  pointer-events:none; user-select:none;
+  animation:wmDrift 26s ease-in-out infinite alternate;
+}
+.hero-photo {
+  position:absolute; top:0; right:0; bottom:0;
+  width:60%; z-index:1;
+  background-image:url('./images/hero/hero.jpg');
+  background-size:cover;
+  background-position:52% 16%;
+  opacity:1;
+  animation:heroPhotoIn 1.9s cubic-bezier(0.2,0.7,0,1) both;
+  filter:contrast(1.06) saturate(0.92) brightness(0.98);
+  -webkit-mask-image:
+    radial-gradient(125% 115% at 66% 40%, #000 30%, rgba(0,0,0,0.55) 60%, transparent 84%),
+    linear-gradient(to right, transparent 0%, #000 30%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    radial-gradient(125% 115% at 66% 40%, #000 30%, rgba(0,0,0,0.55) 60%, transparent 84%),
+    linear-gradient(to right, transparent 0%, #000 30%);
+  mask-composite: intersect;
+}
+.hero-backlight {
+  position:absolute; z-index:0; top:18%; right:14%;
+  width:36vw; height:62vh; border-radius:50%;
+  background:radial-gradient(circle, rgba(204,159,74,0.16), rgba(204,159,74,0.05) 45%, transparent 70%);
+  filter:blur(40px); pointer-events:none;
+  animation:breathe 9s ease-in-out infinite;
+}
+@keyframes breathe { 0%,100%{ opacity:0.7; transform:scale(1); } 50%{ opacity:1; transform:scale(1.07); } }
+@keyframes wmDrift { 0%{ transform:translateX(0); } 100%{ transform:translateX(-3%); } }
+.hero-photo.loaded { opacity:1; }
+@keyframes heroPhotoIn { from{ opacity:0; transform:translateX(6%); } to{ opacity:1; transform:none; } }
+.hero-tint {
+  position:absolute; inset:0; z-index:2; pointer-events:none;
+  background:
+    radial-gradient(80% 70% at 66% 38%, rgba(204,159,74,0.07), transparent 60%),
+    linear-gradient(to top, var(--ink) 1%, rgba(9,8,14,0.12) 26%, transparent 52%);
+}
+.hero-side {
+  position:absolute; top:50%; right:1.5rem; z-index:3;
+  transform:translateY(-50%) rotate(180deg); writing-mode:vertical-rl;
+  font-size:0.6rem; letter-spacing:0.34em; text-transform:uppercase;
+  color:var(--text3); animation:fadeIn 1.2s 1s both;
+}
+.hero-content { position:relative; z-index:3; max-width:920px; }
+
+.hero-eyebrow {
+  font-size:0.68rem; letter-spacing:0.4em;
+  text-transform:uppercase; color:var(--amber);
+  margin-bottom:1.5rem;
+  animation:riseIn 1s 0.2s both;
+}
+.hero-name {
+  font-family:'Cormorant Garamond', serif;
+  font-size:calc(clamp(7rem,18.5vw,18rem) * var(--hero-scale, 1));
+  font-weight:300; line-height:0.76;
+  letter-spacing:-0.045em;
+  margin-bottom:1.75rem;
+  animation:riseIn 1s 0.4s both;
+}
+.hero-name .line1 { display:block; }
+.hero-name .line2 { display:block; font-style:italic; color:var(--amber); }
+
+.hero-roles {
+  font-size:0.9rem; color:var(--taupe2);
+  font-weight:300; letter-spacing:0.05em;
+  margin-bottom:3rem; height:1.5rem; overflow:hidden;
+  animation:riseIn 1s 0.6s both;
+}
+#typewriter { display:inline; }
+#typewriter-cursor {
+  display:inline-block; width:2px; height:1em;
+  background:var(--amber); vertical-align:middle;
+  margin-left:2px; animation:blink 1s step-end infinite;
+}
+
+.hero-bottom {
+  display:flex; align-items:flex-end; justify-content:flex-start; gap:2.5rem;
+  animation:riseIn 1s 0.8s both;
+}
+.hero-quote {
+  font-family:'Cormorant Garamond', serif;
+  font-style:italic; font-size:1.05rem;
+  color:var(--taupe2); line-height:1.7;
+  max-width:380px; border-left:1px solid var(--amber);
+  padding-left:1.25rem;
+}
+.hero-counter {
+  text-align:left;
+  font-size:0.68rem; color:var(--text3);
+  letter-spacing:0.12em;
+}
+.counter-num {
+  font-family:'Cormorant Garamond', serif;
+  font-size:2rem; color:var(--amber);
+  display:block; line-height:1;
+}
+
+/* SCROLL HINT */
+.scroll-hint {
+  position:absolute; bottom:2rem; left:50%;
+  transform:translateX(-50%);
+  z-index:3; animation:fadeIn 1s 1.5s both;
+  display:flex; flex-direction:column; align-items:center; gap:0.5rem;
+}
+.scroll-hint span { font-size:0.6rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--text3); }
+.scroll-line { width:0.5px; height:50px; background:linear-gradient(to bottom,var(--amber),transparent); animation:scrollPulse 2s ease-in-out infinite; }
+
+/* MARQUEE */
+.marquee-wrap {
+  position:relative; z-index:3;
+  border-top:0.5px solid var(--border);
+  border-bottom:0.5px solid var(--border);
+  overflow:hidden; padding:0.75rem 0;
+  background:rgba(9,8,14,0.5);
+  backdrop-filter:blur(10px);
+}
+.marquee-track {
+  display:flex; gap:0; white-space:nowrap;
+  animation:marquee var(--marquee-dur, 30s) linear infinite;
+}
+.marquee-item {
+  font-size:0.65rem; letter-spacing:0.25em; text-transform:uppercase;
+  color:var(--text3); padding:0 2.5rem;
+}
+.marquee-item.accent { color:var(--amber); }
+
+/* ============================================
+   SECTIONS
+============================================ */
+section { padding:5.25rem 4rem; position:relative; }
+.sec-label { font-size:0.62rem; letter-spacing:0.4em; text-transform:uppercase; color:var(--amber); margin-bottom:0.75rem; }
+.sec-h { font-family:'Cormorant Garamond', serif; font-size:clamp(2.5rem,5vw,4rem); font-weight:300; line-height:1.05; }
+.sec-h em { font-style:italic; }
+.sec-bar { width:40px; height:0.5px; background:var(--amber); margin:2rem 0 4rem; }
+.divider { height:0.5px; background:var(--border); }
+
+/* SECTION DEPTH — atmospheric glow + giant kinetic watermark */
+#about, #music, #videos, #gallery, #work, #contact { isolation:isolate; }
+/* drifting ambient fog seated behind each section's content */
+#about::before, #music::before, #videos::before, #gallery::before, #work::before, #contact::before {
+  content:''; position:absolute; inset:-12%; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(36% 30% at 26% 16%, rgba(204,159,74,0.05), transparent 62%),
+    radial-gradient(32% 26% at 78% 76%, rgba(96,72,140,0.045), transparent 62%);
+  filter:blur(10px);
+  animation:sectionFog 26s ease-in-out infinite alternate;
+}
+#music::before { animation-delay:-6s; }
+#gallery::before { animation-delay:-12s; }
+#contact::before { animation-delay:-18s; }
+@keyframes sectionFog { 0%{ transform:translate(0,0) scale(1); } 100%{ transform:translate(3.5%,-2.5%) scale(1.1); } }
+.section-wm {
+  position:absolute; z-index:-1; pointer-events:none; user-select:none;
+  font-family:'Cormorant Garamond', serif; font-weight:300; line-height:0.8;
+  white-space:nowrap; color:transparent;
+  -webkit-text-stroke:1px rgba(184,168,148,0.055);
+  font-size:clamp(8rem,20vw,21rem);
+}
+.section-wm.tl { top:3%; left:-2%; }
+.section-wm.tr { top:5%; right:-2%; }
+.section-wm.br { bottom:4%; right:-2%; }
+
+/* ============================================
+   ABOUT
+============================================ */
+#about { background:radial-gradient(78% 60% at 14% 8%, rgba(204,159,74,0.05), transparent 55%), var(--ink2); position:relative; overflow:hidden; }
+
+/* ABOUT — unified editorial layout: portrait left, quote + body right */
+.about-wrap {
+  display:grid; grid-template-columns:0.82fr 1.18fr; gap:clamp(2.5rem,5vw,5.5rem);
+  align-items:start; margin-top:2.5rem;
+}
+.about-figure { position:relative; align-self:start; }
+.about-figure img {
+  width:100%; aspect-ratio:3/4; object-fit:cover; object-position:50% 18%;
+  display:block; border:0.5px solid var(--border2); border-radius:3px;
+  filter:contrast(1.03) saturate(0.86) sepia(0.14) hue-rotate(-10deg) brightness(1.02);
+  transition:filter 0.7s, transform 0.9s;
+}
+.about-figure::after {
+  content:''; position:absolute; inset:0; pointer-events:none; border-radius:3px;
+  background:linear-gradient(160deg, rgba(204,159,74,0.14), transparent 42%, rgba(9,8,14,0.55));
+  mix-blend-mode:soft-light;
+}
+.about-figure:hover img { filter:contrast(1.05) saturate(1) sepia(0.04) hue-rotate(-5deg); }
+.about-fig-cap {
+  position:absolute; left:0.9rem; bottom:0.9rem; z-index:2;
+  font-family:'SF Mono', ui-monospace, monospace;
+  font-size:0.55rem; letter-spacing:0.24em; text-transform:uppercase;
+  color:var(--text2); background:rgba(9,8,14,0.5); backdrop-filter:blur(6px);
+  padding:0.3rem 0.6rem; border:0.5px solid var(--border);
+}
+.about-right { display:flex; flex-direction:column; }
+.about-quote {
+  position:relative; margin:0 0 2.75rem;
+  font-family:'Cormorant Garamond', serif; font-weight:300;
+  font-size:clamp(1.7rem,3.2vw,3.1rem); line-height:1.22;
+  letter-spacing:-0.02em; color:var(--text);
+  display:flex; flex-direction:column;
+}
+.about-quote .aq-mark {
+  font-size:clamp(3.5rem,6vw,6rem); color:var(--amber);
+  line-height:0.5; margin-bottom:0.4rem; opacity:0.85;
+}
+.about-quote .aq-l2 { color:var(--taupe2); font-style:italic; padding-left:1.5rem; }
+.about-quote .aq-l3 { margin-top:0.6rem; }
+.about-quote .aq-l3 em { font-style:italic; color:var(--amber2); }
+.about-quote .aq-l4 { color:var(--taupe2); padding-left:1.5rem; }
+
+.about-eyebrow { font-size:0.6rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--amber); margin-bottom:1.25rem; padding-top:2rem; border-top:0.5px solid var(--border); }
+.about-desc { font-size:1.02rem; line-height:1.9; color:var(--text2); max-width:60ch; }
+.about-desc p { margin-bottom:1.5rem; text-wrap:pretty; }
+.about-desc p:first-child { font-size:1.5rem; line-height:1.55; color:var(--text); font-weight:300; letter-spacing:-0.01em; margin-bottom:2rem; }
+.about-desc strong { color:var(--text); font-weight:500; }
+.about-desc p:first-child strong { color:var(--amber2); }
+
+/* HASHTAG MARQUEE — kinetic scrolling skill band */
+.htag-band {
+  margin-top:4.5rem; padding:1.75rem 0;
+  border-top:0.5px solid var(--border); border-bottom:0.5px solid var(--border);
+  overflow:hidden; position:relative;
+  -webkit-mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.htag-track { display:flex; gap:0; width:max-content; animation:htagScroll 46s linear infinite; }
+.htag-band:hover .htag-track { animation-play-state:paused; }
+@keyframes htagScroll { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+.htag {
+  font-family:'Cormorant Garamond', serif;
+  font-size:clamp(1.6rem,3vw,2.6rem); font-weight:300; font-style:italic;
+  color:var(--text2); white-space:nowrap; padding:0 1.5rem;
+  display:inline-flex; align-items:center; gap:1.5rem;
+  transition:color 0.3s;
+}
+.htag::after { content:'✦'; font-style:normal; font-size:0.5em; color:var(--amber); opacity:0.7; }
+.htag:hover { color:var(--amber2); }
+
+/* ============================================
+   MUSIC
+============================================ */
+#music { background:var(--ink); }
+.music-head { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:4rem; }
+.music-meta { font-size:0.78rem; color:var(--text3); }
+.music-meta a { color:var(--amber); text-decoration:none; }
+
+/* SOUNDWAVE BAND */
+.soundwave {
+  display:flex; align-items:center; gap:3px;
+  height:96px; margin:0 0 3.5rem; overflow:hidden;
+  border-top:0.5px solid var(--border);
+  border-bottom:0.5px solid var(--border);
+}
+.sw-bar {
+  flex:1 1 0; min-width:2px;
+  background:linear-gradient(to top, rgba(204,159,74,0.25), var(--amber));
+  border-radius:2px;
+  transform-origin:center;
+  animation:swPulse 1.6s ease-in-out infinite;
+}
+@keyframes swPulse { 0%,100%{ transform:scaleY(0.32); opacity:0.55; } 50%{ transform:scaleY(1); opacity:1; } }
+
+/* DECOR — diagonal flowing genre text */
+#music { position:relative; overflow:hidden; }
+.music-decor {
+  position:absolute; top:-12%; left:-15%; right:-15%; bottom:-12%;
+  z-index:0; pointer-events:none;
+  transform:rotate(-15deg); transform-origin:center;
+  display:flex; flex-direction:column; gap:0.35rem;
+  opacity:0.17;
+  mask-image:linear-gradient(to bottom, #000 0%, #000 52%, rgba(0,0,0,0.35) 72%, transparent 90%);
+  -webkit-mask-image:linear-gradient(to bottom, #000 0%, #000 52%, rgba(0,0,0,0.35) 72%, transparent 90%);
+}
+.md-row { display:flex; gap:1.4rem; white-space:nowrap; will-change:transform; }
+.md-row span {
+  font-family:'SF Mono', ui-monospace, monospace;
+  font-size:1.02rem; color:var(--taupe2); letter-spacing:0.01em;
+}
+.md-row span:nth-child(3n) { color:var(--amber); }
+.md-row.a { animation:mdScroll 38s linear infinite; }
+.md-row.b { animation:mdScroll 52s linear infinite reverse; }
+@keyframes mdScroll { from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+#music > *:not(.music-decor) { position:relative; z-index:1; }
+
+/* ALBUMS CAROUSEL + DRAWER */
+.albums-label { font-size:0.62rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--text3); margin-bottom:1.5rem; }
+.album-carousel {
+  position:relative; overflow:hidden; margin:0 -4rem 2rem; padding:0.5rem 0;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);
+}
+.album-track { display:flex; gap:0; width:max-content; padding:0 4rem; animation:albScroll var(--album-dur, 70s) linear infinite; }
+.album-carousel:hover .album-track, .album-carousel.paused .album-track { animation-play-state:paused; }
+@keyframes albScroll { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+.album { width:206px; margin-right:1.75rem; flex-shrink:0; cursor:pointer; transition:transform 0.35s; }
+.album:hover { transform:translateY(-6px); }
+.album.selected .album-cover { box-shadow:0 0 0 1px var(--amber), 0 16px 48px rgba(204,159,74,0.25); }
+.album-cover {
+  position:relative; aspect-ratio:1; overflow:hidden;
+  margin-bottom:0.85rem; box-shadow:0 10px 36px rgba(0,0,0,0.5);
+  transition:box-shadow 0.35s;
+}
+.album:hover .album-cover { box-shadow:0 18px 52px rgba(204,159,74,0.22); }
+.album-cover img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.5s; filter:grayscale(15%); }
+.album-badge { position:absolute; left:0.6rem; top:0.6rem; white-space:nowrap; font-size:0.54rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--text2); background:rgba(9,8,14,0.6); backdrop-filter:blur(6px); padding:0.22rem 0.5rem; border:0.5px solid var(--border2); border-radius:100px; }
+.album:hover .album-cover img { transform:scale(1.05); filter:grayscale(0%); }
+.album-cover-blank {
+  width:100%; height:100%;
+  background:repeating-linear-gradient(135deg, rgba(184,168,148,0.05) 0 2px, transparent 2px 12px), var(--ink3);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Cormorant Garamond', serif; font-size:2.5rem; color:var(--text3);
+}
+.album-play {
+  position:absolute; right:0.7rem; bottom:0.7rem;
+  width:38px; height:38px; border-radius:50%;
+  background:var(--amber); color:var(--ink);
+  display:flex; align-items:center; justify-content:center;
+  font-size:0.8rem; opacity:0; transform:translateY(8px);
+  transition:opacity 0.3s, transform 0.3s;
+  box-shadow:0 6px 18px rgba(0,0,0,0.4);
+}
+.album:hover .album-play { opacity:1; transform:none; }
+.album-play { opacity:0.45; transform:none; transition:opacity 0.3s, transform 0.4s; }
+.album.selected .album-play { transform:rotate(180deg); background:var(--text); opacity:1; }
+.album-eq {
+  position:absolute; left:0.7rem; bottom:0.85rem;
+  display:none; align-items:flex-end; gap:3px; height:18px;
+}
+.album.playing .album-eq { display:flex; }
+.album.playing .album-play { background:var(--text); }
+.album-eq span {
+  width:3px; background:var(--amber); border-radius:2px;
+  animation:eqBounce 0.9s ease-in-out infinite;
+}
+.album-eq span:nth-child(1){ height:40%; animation-delay:0s; }
+.album-eq span:nth-child(2){ height:90%; animation-delay:0.2s; }
+.album-eq span:nth-child(3){ height:60%; animation-delay:0.4s; }
+.album-eq span:nth-child(4){ height:100%; animation-delay:0.1s; }
+@keyframes eqBounce { 0%,100%{ transform:scaleY(0.4); } 50%{ transform:scaleY(1); } }
+.album.playing .album-cover { box-shadow:0 0 0 1px var(--amber), 0 14px 44px rgba(204,159,74,0.22); }
+.album-name { font-family:'Cormorant Garamond', serif; font-size:1.15rem; color:var(--text); line-height:1.25; margin-bottom:0.4rem; white-space:normal; }
+.album-sub { font-size:0.68rem; color:var(--text3); letter-spacing:0.04em; line-height:1.5; white-space:normal; }
+.album-count { font-size:0.6rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--amber); margin-top:0.55rem; }
+.album-artist { display:inline-block; font-size:0.56rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--ink); background:var(--amber); padding:0.18rem 0.5rem; border-radius:100px; margin-bottom:0.6rem; }
+.album-artist.dli { background:none; color:var(--taupe2); border:0.5px solid var(--border2); }
+
+/* ALBUM DRAWER (sổ danh sách bài) */
+.album-drawer { overflow:hidden; max-height:0; opacity:0; transition:max-height 0.5s cubic-bezier(0.5,0,0,1), opacity 0.4s, margin 0.4s; margin-bottom:0; }
+.album-drawer.open { max-height:1200px; opacity:1; margin-bottom:2rem; }
+.drawer-inner { border:0.5px solid var(--border2); border-radius:14px; background:linear-gradient(135deg, rgba(20,18,28,0.6), rgba(14,13,20,0.6)); padding:1.5rem 1.75rem; }
+.drawer-head { display:flex; justify-content:space-between; align-items:baseline; gap:1rem; margin-bottom:1.25rem; padding-bottom:1rem; border-bottom:0.5px solid var(--border); flex-wrap:wrap; }
+.drawer-title { font-family:'Cormorant Garamond', serif; font-size:1.5rem; color:var(--text); }
+.drawer-title span { color:var(--text3); font-size:0.95rem; font-family:'Instrument Sans',sans-serif; margin-left:0.5rem; }
+.drawer-suno { font-size:0.66rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--amber); text-decoration:none; white-space:nowrap; }
+.drawer-suno:hover { text-decoration:underline; }
+.tlist { display:flex; flex-direction:column; }
+.trow { display:grid; grid-template-columns:30px 38px 1fr auto; align-items:center; gap:1rem; padding:0.7rem 0.5rem; border-radius:8px; cursor:pointer; transition:background 0.25s; }
+.trow:hover { background:rgba(204,159,74,0.05); }
+.trow.playing { background:rgba(204,159,74,0.08); }
+.trow-num { font-size:0.72rem; color:var(--text3); text-align:center; position:relative; width:30px; }
+.trow-num .num-d { display:inline-block; }
+.trow.playing .trow-num { color:var(--amber); }
+.trow.playing .num-d { display:none; }
+.num-eq { display:none; align-items:flex-end; justify-content:center; gap:2px; height:13px; }
+.trow.playing .num-eq { display:flex; }
+.num-eq i { width:2.5px; background:var(--amber); border-radius:2px; height:30%; animation:eqBounce 0.85s ease-in-out infinite; }
+.num-eq i:nth-child(2){ animation-delay:0.22s; height:90%; }
+.num-eq i:nth-child(3){ animation-delay:0.44s; height:55%; }
+.trow-art { width:38px; height:38px; border-radius:5px; object-fit:cover; background:var(--ink4); }
+.trow-info { min-width:0; }
+.trow-name { font-size:0.88rem; color:var(--text2); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.trow.playing .trow-name { color:var(--amber2); }
+.trow-dur { font-size:0.72rem; color:var(--text3); font-variant-numeric:tabular-nums; }
+.drawer-playall { font-size:0.66rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--amber); background:none; border:0.5px solid var(--border2); border-radius:100px; padding:0.4rem 0.9rem; cursor:pointer; font-family:inherit; transition:all 0.25s; }
+.drawer-playall:hover { border-color:var(--amber); background:var(--glow); }
+.drawer-more { margin-top:1rem; text-align:center; font-size:0.7rem; letter-spacing:0.08em; color:var(--text3); }
+.drawer-more a { color:var(--amber); text-decoration:none; }
+
+/* ARTISTS STRIP (info, không phải album) */
+.artist-strip { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-bottom:3.5rem; }
+.artist { display:flex; gap:1.4rem; align-items:center; padding:1.4rem; border:0.5px solid var(--border); border-radius:14px; background:linear-gradient(135deg, rgba(20,18,28,0.5), rgba(14,13,20,0.4)); transition:border-color 0.4s, transform 0.4s; }
+.artist:hover { border-color:var(--border2); transform:translateY(-3px); }
+.artist-photo { width:92px; height:92px; flex-shrink:0; border-radius:50%; overflow:hidden; background:var(--ink4); box-shadow:0 8px 26px rgba(0,0,0,0.45); }
+.artist-photo img { width:100%; height:100%; object-fit:cover; display:block; }
+.artist.real .artist-photo img { filter:grayscale(100%) contrast(1.05); }
+.artist-photo.blank::after { content:'♪'; display:flex; align-items:center; justify-content:center; height:100%; color:var(--text3); font-size:1.6rem; }
+.artist-type { font-size:0.56rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--amber); margin-bottom:0.3rem; }
+.artist.virtual .artist-type { color:var(--taupe2); }
+.artist-name { font-family:'Cormorant Garamond', serif; font-size:1.7rem; color:var(--text); line-height:1; margin-bottom:0.5rem; }
+.artist-desc { font-size:0.78rem; color:var(--text3); line-height:1.6; }
+
+/* EMBED FALLBACK (chỉ hiện nếu stream trực tiếp bị chặn) */
+.track-embed { overflow:hidden; max-height:0; transition:max-height 0.4s; margin-bottom:0; }
+.track-embed.open { max-height:200px; margin-bottom:1.5rem; }
+.track-embed iframe { width:100%; height:160px; border:none; border-radius:12px; background:var(--ink3); }
+
+/* PLAYER */
+.player {
+  display:flex; align-items:center; gap:1.5rem;
+  background:linear-gradient(135deg, var(--ink2), var(--ink3));
+  border:0.5px solid var(--border2); border-radius:16px;
+  padding:1.1rem 1.4rem; margin-bottom:1.5rem;
+}
+.player-cover {
+  width:76px; height:76px; flex-shrink:0; border-radius:10px; overflow:hidden;
+  background:var(--ink4); display:flex; align-items:center; justify-content:center;
+  box-shadow:0 8px 28px rgba(0,0,0,0.5);
+}
+.player-cover img { width:100%; height:100%; object-fit:cover; display:block; }
+.player-cover-ph { font-family:'Cormorant Garamond', serif; font-size:2rem; color:var(--text3); }
+.player-main { flex:1; min-width:0; }
+.player-top { display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; margin-bottom:0.95rem; }
+.player-meta { min-width:0; }
+.player-title { font-family:'Cormorant Garamond', serif; font-size:1.4rem; color:var(--text); line-height:1.1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.player-sub { font-size:0.72rem; color:var(--text3); margin-top:0.25rem; letter-spacing:0.04em; }
+.player-controls { display:flex; align-items:center; gap:0.85rem; }
+.pc-btn {
+  width:40px; height:40px; border-radius:50%; flex-shrink:0;
+  background:rgba(255,255,255,0.04); border:0.5px solid var(--border2);
+  color:var(--text2); font-size:0.85rem; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:all 0.25s; font-family:inherit;
+}
+.pc-btn:hover { border-color:var(--amber); color:var(--amber); }
+.pc-play { width:48px; height:48px; background:var(--amber); border-color:var(--amber); color:var(--ink); font-size:1rem; }
+.pc-play:hover { background:var(--amber2); color:var(--ink); transform:scale(1.05); }
+.pc-time { font-size:0.68rem; color:var(--text3); font-variant-numeric:tabular-nums; flex-shrink:0; min-width:34px; text-align:center; }
+.pc-bar { flex:1; height:5px; border-radius:3px; background:rgba(255,255,255,0.08); cursor:pointer; position:relative; overflow:hidden; }
+.pc-bar-fill { position:absolute; left:0; top:0; bottom:0; width:0%; background:linear-gradient(90deg, var(--amber2), var(--amber)); border-radius:3px; }
+/* Equalizer — animates only while a track is actually playing */
+.player-eq { display:flex; align-items:flex-end; gap:3px; height:30px; flex-shrink:0; opacity:0.25; transition:opacity 0.3s; }
+.player.playing .player-eq { opacity:1; }
+.player-eq span { width:4px; background:linear-gradient(to top, rgba(204,159,74,0.3), var(--amber)); border-radius:2px; height:18%; transform-origin:bottom; }
+.player.playing .player-eq span { animation:eqBounce 0.9s ease-in-out infinite; }
+.player-eq span:nth-child(1){ animation-delay:0s; height:45%; }
+.player-eq span:nth-child(2){ animation-delay:0.18s; height:80%; }
+.player-eq span:nth-child(3){ animation-delay:0.36s; height:55%; }
+.player-eq span:nth-child(4){ animation-delay:0.10s; height:100%; }
+.player-eq span:nth-child(5){ animation-delay:0.28s; height:65%; }
+.player-eq span:nth-child(6){ animation-delay:0.42s; height:88%; }
+.player-eq span:nth-child(7){ animation-delay:0.20s; height:50%; }
+
+/* DOWNLOAD GUARD */
+#audioEl { display:none; }
+.player-cover img { pointer-events:none; -webkit-user-drag:none; user-select:none; }
+
+/* ============================================
+   EVENTS CAROUSEL
+============================================ */
+#events { background:var(--ink2); }
+.ev-timeline { border-top:0.5px solid var(--border); }
+.ev-row {
+  display:grid; grid-template-columns:120px 1fr auto;
+  gap:2rem; align-items:baseline;
+  padding:1.7rem 0; border-bottom:0.5px solid var(--border);
+  transition:padding-left 0.3s, background 0.3s;
+}
+.ev-row:hover { padding-left:0.75rem; background:rgba(204,159,74,0.03); }
+.ev-row .ev-year { padding-top:0.15rem; }
+.ev-row .ev-title { margin-bottom:0.25rem; transition:color 0.3s; }
+.ev-row:hover .ev-title { color:var(--amber2); }
+.ev-row .ev-tags { display:flex; gap:0.4rem; flex-wrap:wrap; justify-content:flex-end; max-width:240px; }
+.ev-tag { font-size:0.58rem; letter-spacing:0.1em; text-transform:uppercase; padding:0.2rem 0.6rem; border:0.5px solid var(--border); color:var(--text3); white-space:nowrap; }
+.carousel-outer { position:relative; }
+.carousel {
+  display:flex; gap:1.5rem;
+  overflow-x:auto; scroll-snap-type:x mandatory;
+  scrollbar-width:none; padding-bottom:1rem;
+  cursor:grab; user-select:none;
+}
+.carousel::-webkit-scrollbar { display:none; }
+.carousel.dragging { cursor:grabbing; scroll-snap-type:none; }
+.ev-card {
+  min-width:320px; scroll-snap-align:start;
+  flex-shrink:0; background:var(--ink3);
+  border:0.5px solid var(--border);
+  transition:border-color 0.3s, transform 0.3s;
+  position:relative; overflow:hidden;
+}
+.ev-card:hover { border-color:var(--border2); transform:translateY(-4px); }
+.ev-img {
+  width:100%; aspect-ratio:4/3;
+  object-fit:cover; display:block;
+  filter:grayscale(30%);
+  transition:filter 0.4s, transform 0.4s;
+}
+.ev-card:hover .ev-img { filter:grayscale(0%); transform:scale(1.03); }
+.ev-img-placeholder {
+  width:100%; aspect-ratio:4/3;
+  background:
+    repeating-linear-gradient(135deg, rgba(184,168,148,0.04) 0 2px, transparent 2px 12px),
+    var(--ink4);
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden;
+}
+.ev-img-placeholder-inner {
+  text-align:center; color:var(--text3);
+  font-family:'SF Mono', ui-monospace, monospace;
+  font-size:0.58rem; letter-spacing:0.22em; text-transform:uppercase;
+  line-height:1.9;
+}
+.ev-overlay {
+  position:absolute; top:0; left:0; right:0;
+  padding:1rem 1.25rem;
+  background:linear-gradient(to bottom, rgba(9,8,14,0.6),transparent);
+}
+.ev-year { font-size:0.65rem; letter-spacing:0.2em; color:var(--amber); text-transform:uppercase; }
+.ev-info { padding:1.25rem 1.5rem; }
+.ev-title { font-family:'Cormorant Garamond', serif; font-size:1.15rem; margin-bottom:0.3rem; }
+.ev-meta { font-size:0.72rem; color:var(--text3); }
+
+.carousel-controls {
+  display:flex; align-items:center; justify-content:space-between;
+  margin-top:2rem;
+}
+.carousel-dots { display:flex; gap:0.5rem; }
+.cdot { width:6px; height:6px; border-radius:50%; background:var(--border); transition:all 0.3s; cursor:pointer; }
+.cdot.active { background:var(--amber); width:20px; border-radius:3px; }
+.carousel-btns { display:flex; gap:0.5rem; }
+.cbtn {
+  width:36px; height:36px; border:0.5px solid var(--border);
+  background:none; color:var(--text3); cursor:pointer;
+  font-size:0.9rem; transition:all 0.2s;
+  display:flex; align-items:center; justify-content:center;
+}
+.cbtn:hover { border-color:var(--amber); color:var(--amber); }
+
+/* ============================================
+   VIDEOS
+============================================ */
+#videos { background:radial-gradient(70% 60% at 86% 6%, rgba(96,72,140,0.07), transparent 55%), var(--ink); position:relative; overflow:hidden; }
+.vid-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.5rem; }
+.vid-card { background:var(--ink2); border:0.5px solid var(--border); transition:border-color 0.3s; overflow:hidden; }
+.vid-card:hover { border-color:var(--border2); }
+.vid-thumb { position:relative; aspect-ratio:16/9; overflow:hidden; cursor:pointer; background:var(--ink3); }
+.vid-thumb img { width:100%; height:100%; object-fit:cover; opacity:0.7; transition:opacity 0.3s, transform 0.4s; }
+.vid-card:hover .vid-thumb img { opacity:0.9; transform:scale(1.05); }
+.vid-overlay { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; }
+.vid-play {
+  width:52px; height:52px;
+  border:1.5px solid rgba(204,159,74,0.7);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--amber); font-size:1.1rem;
+  transition:all 0.3s; backdrop-filter:blur(4px);
+}
+.vid-card:hover .vid-play { background:var(--amber); color:var(--ink); border-color:var(--amber); }
+.vid-info { padding:1.1rem 1.25rem; }
+.vid-title { font-family:'Cormorant Garamond', serif; font-size:1.1rem; margin-bottom:0.25rem; }
+.vid-meta { font-size:0.7rem; color:var(--text3); }
+.vid-status { font-size:0.82rem; color:var(--text3); margin-bottom:2rem; }
+
+/* ============================================
+   GALLERY (Visual Lab)
+============================================ */
+#gallery { background:radial-gradient(74% 55% at 12% 6%, rgba(204,159,74,0.05), transparent 55%), var(--ink2); position:relative; overflow:hidden; }
+.g-filters { display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:2.75rem; }
+.g-chip {
+  font-size:0.64rem; letter-spacing:0.14em; text-transform:uppercase; white-space:nowrap;
+  padding:0.5rem 1.05rem; border:0.5px solid var(--border);
+  color:var(--text3); background:none; cursor:pointer; transition:all 0.3s;
+  font-family:inherit;
+}
+.g-chip:hover { border-color:var(--border2); color:var(--taupe2); }
+.g-chip.active { border-color:var(--amber); color:var(--amber); background:var(--glow); }
+.gallery { columns:3; column-gap:1.25rem; }
+@media(max-width:900px){ .gallery{ columns:2; } }
+@media(max-width:560px){ .gallery{ columns:1; } }
+.g-item {
+  break-inside:avoid; margin-bottom:1.25rem; position:relative;
+  border:0.5px solid var(--border); overflow:hidden; cursor:pointer;
+  transition:border-color 0.35s, transform 0.45s, box-shadow 0.45s;
+  animation:gRise 0.7s var(--gd,0s) both;
+}
+.g-item:not(.g-real) { border:1px dashed color-mix(in srgb, var(--amber) 26%, transparent); }
+.g-item:hover { border-color:var(--border2); transform:translateY(-4px); box-shadow:0 18px 50px rgba(0,0,0,0.45); }
+@keyframes gRise { from{ opacity:0; transform:translateY(26px); } to{ opacity:1; transform:none; } }
+.g-frame { position:relative; width:100%; transition:aspect-ratio 0.6s cubic-bezier(0.5,0,0,1); }
+.g-ph {
+  position:absolute; inset:0;
+  background:repeating-linear-gradient(135deg, rgba(204,159,74,0.05) 0 2px, transparent 2px 11px), color-mix(in srgb, var(--ink3) 70%, var(--ink2));
+  display:flex; align-items:center; justify-content:center; text-align:center; padding:1rem;
+}
+.g-ph::before {
+  content:'✦'; position:absolute; top:50%; left:50%; transform:translate(-50%,-160%);
+  font-family:'Cormorant Garamond',serif; font-size:2.2rem; color:var(--border2);
+}
+.g-ph-label {
+  font-family:'SF Mono', ui-monospace, monospace;
+  font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase;
+  color:var(--text3); line-height:1.7; transform:translateY(0.8rem);
+}
+.g-frame img {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; display:block; filter:grayscale(20%);
+  transition:transform 0.5s, filter 0.5s;
+}
+.g-item:hover .g-frame img { transform:scale(1.05); filter:grayscale(0%); }
+.g-tag {
+  position:absolute; top:0.7rem; left:0.7rem; z-index:2;
+  font-size:0.54rem; letter-spacing:0.16em; text-transform:uppercase;
+  color:var(--amber); background:rgba(9,8,14,0.65); backdrop-filter:blur(6px);
+  padding:0.25rem 0.55rem; border:0.5px solid var(--border2);
+}
+.g-item.g-hide { display:none; }
+/* Motion / video items */
+.g-frame video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
+.g-play {
+  position:absolute; inset:0; z-index:3; display:flex; align-items:center; justify-content:center;
+  pointer-events:none;
+}
+.g-play::before {
+  content:''; width:54px; height:54px; border-radius:50%;
+  background:rgba(9,8,14,0.55); backdrop-filter:blur(6px);
+  border:0.5px solid var(--border2);
+  transition:transform 0.35s, background 0.35s;
+}
+.g-play::after {
+  content:''; position:absolute;
+  border-style:solid; border-width:9px 0 9px 15px;
+  border-color:transparent transparent transparent var(--amber);
+  margin-left:4px;
+}
+.g-item:hover .g-play::before { transform:scale(1.12); background:rgba(204,159,74,0.18); }
+
+/* ============================================
+   WORK
+============================================ */
+/* Work section — compact horizontal header */
+#work { background:radial-gradient(68% 55% at 88% 6%, rgba(204,159,74,0.045), transparent 55%), var(--ink2); position:relative; overflow:hidden; }
+.work-head-row {
+  display:flex; align-items:baseline; gap:1.5rem;
+  padding-bottom:2rem; border-bottom:0.5px solid var(--border);
+  margin-bottom:0;
+}
+.work-head-label { font-size:0.6rem; letter-spacing:0.32em; text-transform:uppercase; color:var(--amber); flex-shrink:0; }
+.work-head-title { font-family:'Cormorant Garamond', serif; font-size:clamp(1.4rem,2.4vw,2.2rem); font-weight:300; color:var(--text); line-height:1; white-space:nowrap; }
+.work-head-title em { font-style:italic; }
+.work-head-line { flex:1; height:0.5px; background:var(--border); align-self:center; }
+.work-item {
+  display:grid; grid-template-columns:130px 1fr auto;
+  gap:1.5rem; padding:1rem 0;
+  border-bottom:0.5px solid var(--border);
+  align-items:center;
+  transition:padding-left 0.3s;
+}
+.work-item:hover { padding-left:0.75rem; }
+.work-yr { font-size:0.65rem; color:var(--text3); letter-spacing:0.08em; }
+.work-role { font-size:0.88rem; color:var(--text); }
+.work-co { font-size:0.72rem; color:var(--amber); letter-spacing:0.04em; margin-top:0.12rem; }
+.work-desc { font-size:0.8rem; color:var(--text2); line-height:1.7; }
+.work-badges { display:flex; flex-direction:row; gap:0.3rem; flex-wrap:wrap; justify-content:flex-end; }
+.wbadge { font-size:0.58rem; letter-spacing:0.1em; text-transform:uppercase; padding:0.2rem 0.6rem; border:0.5px solid var(--border); color:var(--text3); white-space:nowrap; }
+
+.aim-badge {
+  display:inline-flex; align-items:center; gap:0.75rem;
+  border:0.5px solid var(--border2);
+  padding:0.75rem 1.25rem;
+  margin-top:2rem; font-size:0.78rem;
+  color:var(--taupe2); text-decoration:none;
+  transition:all 0.3s;
+}
+.aim-badge:hover { border-color:var(--amber); color:var(--amber); }
+.aim-dot { width:6px; height:6px; border-radius:50%; background:var(--amber); animation:pulse 2s infinite; }
+
+/* ============================================
+   CONTACT
+============================================ */
+#contact { background:var(--ink2); position:relative; overflow:hidden; }
+.contact-wm {
+  position:absolute; left:50%; top:8%; transform:translateX(-50%);
+  font-family:'Cormorant Garamond', serif; font-weight:300;
+  font-size:clamp(7rem,20vw,20rem); line-height:0.8; white-space:nowrap;
+  color:transparent; -webkit-text-stroke:1px rgba(184,168,148,0.06);
+  pointer-events:none; user-select:none; z-index:0;
+}
+.contact-inner { position:relative; z-index:1; max-width:780px; margin:0 auto; text-align:center; }
+.contact-inner .sec-bar { margin-left:auto; margin-right:auto; }
+.contact-lead { font-size:1.05rem; color:var(--text2); line-height:1.7; max-width:520px; margin:1.5rem auto 0; text-wrap:pretty; }
+.contact-deck {
+  display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:2.5rem; justify-content:center;
+}
+.clink {
+  padding:0.55rem 1.1rem; border:0.5px solid var(--border);
+  text-decoration:none; transition:all 0.25s;
+  display:flex; align-items:center; gap:0.55rem; border-radius:100px;
+}
+.clink:hover { border-color:var(--amber); background:var(--glow); transform:translateY(-2px); }
+.cl-label { font-size:0.54rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--text3); }
+.cl-val { font-size:0.76rem; color:var(--taupe2); white-space:nowrap; }
+.clink:hover .cl-val { color:var(--amber); }
+.cl-arr { font-size:0.75rem; color:var(--text3); margin-top:auto; }
+
+/* ============================================
+   FOOTER
+============================================ */
+footer {
+  padding:4.5rem 4rem 3rem;
+  position:relative; z-index:1;
+  background:radial-gradient(80% 90% at 50% 0%, rgba(204,159,74,0.045), transparent 60%), var(--ink);
+}
+.foot-marquee { margin-bottom:0; }
+.f-top { display:flex; justify-content:space-between; align-items:flex-end; padding-bottom:2.5rem; border-bottom:0.5px solid var(--border); margin-bottom:2.5rem; }
+.f-logo { font-family:'Cormorant Garamond', serif; font-size:1.9rem; color:var(--text); letter-spacing:0.01em; }
+.f-tag { font-size:0.64rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--text3); margin-top:0.45rem; }
+.f-sig {
+  font-family:'Cormorant Garamond', serif;
+  font-style:italic; font-size:2rem;
+  color:var(--amber); opacity:0.7; letter-spacing:0.04em;
+}
+.f-disc { display:grid; grid-template-columns:repeat(3,1fr); gap:2.75rem; margin-bottom:2.5rem; }
+.f-disc-h { font-size:0.58rem; letter-spacing:0.24em; text-transform:uppercase; color:var(--amber); margin-bottom:0.9rem; }
+.f-disc-col p { font-size:0.72rem; line-height:1.8; color:var(--text3); text-wrap:pretty; }
+.f-disc-col strong { color:var(--taupe2); font-weight:500; }
+.f-bottom { display:flex; justify-content:space-between; padding-top:1.75rem; border-top:0.5px solid var(--border); font-size:0.62rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--text3); }
+
+/* ============================================
+   VIDEO MODAL
+============================================ */
+.modal-bg {
+  position:fixed; inset:0; z-index:500;
+  background:rgba(0,0,0,0.94);
+  opacity:0; pointer-events:none;
+  transition:opacity 0.3s;
+  display:flex; align-items:center; justify-content:center;
+}
+.modal-bg.open { opacity:1; pointer-events:all; }
+.modal-box { width:90%; max-width:800px; background:var(--ink2); border:0.5px solid var(--border); }
+.modal-head {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:1rem 1.5rem; border-bottom:0.5px solid var(--border);
+}
+.modal-tit { font-family:'Cormorant Garamond', serif; font-size:1.1rem; }
+.modal-close { background:none; border:none; color:var(--text3); cursor:pointer; font-size:1.2rem; }
+.modal-close:hover { color:var(--amber); }
+.modal-box iframe { width:100%; aspect-ratio:16/9; display:block; border:none; }
+
+/* ============================================
+   ANIMATIONS
+============================================ */
+@keyframes slideUp { from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:none;} }
+@keyframes riseIn { from{transform:translateY(30px);}to{transform:none;} }
+@keyframes fadeIn { from{opacity:0;}to{opacity:1;} }
+@keyframes blink { 0%,100%{opacity:1;}50%{opacity:0;} }
+@keyframes scrollPulse { 0%,100%{transform:scaleY(1);opacity:1;}50%{transform:scaleY(0.6);opacity:0.4;} }
+@keyframes marquee { from{transform:translateX(0);}to{transform:translateX(-50%);} }
+@keyframes pulse { 0%,100%{opacity:1;}50%{opacity:0.3;} }
+@keyframes barBounce { 0%,100%{height:6px;}50%{height:22px;} }
+
+@media (prefers-reduced-motion: reduce){
+  .hero-eyebrow,.hero-name,.hero-roles,.hero-bottom,.scroll-hint{ animation:none !important; }
+  .sw-bar,.np-bar,.marquee-track,.album-eq span{ animation:none !important; }
+  .g-item{ animation:none !important; }
+  .track-strip,.md-row,.player-eq span{ animation:none !important; }
+  .reveal{ opacity:1 !important; transform:none !important; transition:none !important; }
+}
+
+.reveal { animation:riseIn 0.8s both; }
+.reveal.d1 { animation-delay:0.08s; }
+.reveal.d2 { animation-delay:0.16s; }
+.reveal.d3 { animation-delay:0.24s; }
+.reveal.d4 { animation-delay:0.32s; }
+
+/* ============================================
+   RESPONSIVE
+============================================ */
+@media(max-width:900px){
+  nav { padding:1rem 1.5rem; }
+  nav.solid { padding:0.75rem 1.5rem; }
+  .hero { padding:0 1.5rem 3.5rem; }
+  .hero-photo {
+    width:100%; background-position:50% 12%;
+    -webkit-mask-image:linear-gradient(to top, var(--ink) 4%, #000 34%, #000 72%, transparent 100%);
+    mask-image:linear-gradient(to top, var(--ink) 4%, #000 34%, #000 72%, transparent 100%);
+    -webkit-mask-composite:source-over; mask-composite:add;
+  }
+  .hero-tint { background:linear-gradient(to top, var(--ink) 8%, rgba(9,8,14,0.5) 44%, rgba(9,8,14,0.25) 100%); }
+  .hero-side { display:none; }
+  .hero-bottom { flex-direction:column; align-items:flex-start; gap:1.5rem; }
+  section { padding:5rem 1.5rem; }
+  .about-wrap { grid-template-columns:1fr; gap:2.5rem; margin-top:1.5rem; }
+  .about-figure img { aspect-ratio:4/5; }
+  .about-quote .aq-l2,.about-quote .aq-l4 { padding-left:0.75rem; }
+  .album-carousel { margin-left:-1.5rem; margin-right:-1.5rem; }
+  .album-track { padding:0 1.5rem; }
+  .album { width:160px; margin-right:1.25rem; }
+  .player { flex-direction:column; align-items:stretch; gap:1rem; text-align:center; }
+  .player-cover { width:64px; height:64px; margin:0 auto; }
+  .player-title { white-space:normal; }
+  .player-controls { justify-content:center; flex-wrap:wrap; }
+  .pc-bar { order:5; flex-basis:100%; }
+  .player-top { flex-direction:column; align-items:center; }
+  .music-decor { opacity:0.08; }
+  .work-item { grid-template-columns:1fr; gap:0.5rem; }
+  .work-badges { flex-direction:row; align-items:flex-start; }
+  .contact-deck { grid-template-columns:1fr 1fr; }
+  .contact-wm { top:5%; }
+  footer { text-align:left; }
+  .f-top { flex-direction:column; align-items:flex-start; gap:1.25rem; }
+  .f-disc { grid-template-columns:1fr; gap:1.75rem; }
+  .f-bottom { flex-direction:column; gap:0.5rem; }
+  #cursor, #cursor-ring { display:none; }
+  body { cursor:auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- CUSTOM CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="#">ANH LI ✦</a>
+  <ul class="nav-links">
+    <li><a href="#music">Nhạc</a></li>
+    <li><a href="#videos">Videos</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home" data-screen-label="Hero">
+  <div class="shader-host" id="shaderHost"></div>
+  <div class="hero-bg"></div>
+  <div class="hero-backlight"></div>
+  <div class="hero-watermark" aria-hidden="true">ANH LI</div>
+  <div class="hero-photo" id="heroBg"></div>
+  <div class="hero-tint"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-side">Creative Producer · Saigon</div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Saigon, Vietnam · Est. 2010</div>
+    <h1 class="hero-name">
+      <span class="line1">Anh</span>
+      <span class="line2">Li.</span>
+    </h1>
+    <div class="hero-roles">
+      <span id="typewriter"></span><span id="typewriter-cursor"></span>
+    </div>
+    <div class="hero-bottom">
+      <p class="hero-quote">
+        "Tử tế. Tinh tế.<br/>
+        Tạo giá trị thật.<br/>
+        Đó là cách Anh Li làm nghề."
+      </p>
+      <div class="hero-counter">
+        <span class="counter-num" id="visit-count">—</span>
+        lượt ghé thăm
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="marqueeTrack"></div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec-label reveal">About</div>
+
+  <div class="about-wrap">
+    <figure class="about-figure reveal">
+      <img src="./images/portraits/about.jpg" alt="Anh Li"/>
+      <figcaption class="about-fig-cap">Anh Li · on site</figcaption>
+    </figure>
+    <div class="about-right">
+      <blockquote class="about-quote reveal d1">
+        <span class="aq-mark" style="font-size: 120px; line-height: 0">“</span>
+        <span class="aq-l1">Mình không làm</span>
+        <span class="aq-l2" style="font-weight: 700">sự kiện.</span>
+        <span class="aq-l3">Mình dựng những <em>khoảnh khắc</em></span>
+        <span class="aq-l4" style="font-weight: 700">người ta mang về nhà.</span>
+      </blockquote>
+      <div class="about-eyebrow reveal">Chân dung</div>
+      <div class="about-desc reveal d1">
+        <p style="font-size: 33px">Mình là Anh Li — người dựng cảm xúc bằng
+âm nhạc, ánh sáng và sân khấu.</p>
+        <p style="font-size: 13px">Hơn 15 năm, mình đi từ trang giấy phác thảo đến những đêm diễn hàng nghìn người, và vẫn tin vào một điều giản dị: chạm được vào cảm xúc thật của khán giả thì mới gọi là làm nghề.</p>
+        <p style="font-size: 13px">Mình tự trưởng thành với tư cách 'tự phong' - một nhạc-sĩ-sáng-tác-độc-lập-tự do-hạnh phúc; 
+Chuyên sản xuất nhạc tham gia các sự kiện lớn nhỏ khác nhau, từ concert thương hiệu đến lễ ra mắt quy mô quốc gia — tất cả đều xoay quanh chuyên môn Sáng tạo và <strong style="font-weight:100">Sự kiện và Tình yêu Âm nhạc.</strong>
+Bạn có thể gặp mình qua các khóa học về Sự kiện tại AIM Academy - nơi chia sẻ kinh nghiệm thực tế của mình với thế hệ làm nghề tương lai.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="htag-band reveal" aria-label="Kỹ năng">
+    <div class="htag-track" id="htagTrack"></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- MUSIC -->
+<section id="music">
+  <div class="music-decor" id="musicDecor" aria-hidden="true"></div>
+  <div class="music-head">
+    <div>
+      <div class="sec-label reveal">Discography</div>
+      <h2 class="sec-h reveal">Cái Sạp <em>nhạc của Li</em></h2>
+      <div class="sec-bar reveal"></div>
+    </div>
+    <div class="music-meta reveal">Nhạc gốc tiếng Việt · Sản xuất với hỗ trợ bởi Suno.com</div>
+  </div>
+
+  <!-- ARTISTS (info — không phải album) -->
+  <div class="albums-label reveal">Nghệ sĩ</div>
+  <div class="artist-strip reveal" id="artistStrip"></div>
+
+  <!-- SOUNDWAVE -->
+  <div class="soundwave reveal" id="soundwave"></div>
+
+  <!-- ALBUMS -->
+  <div class="albums-label reveal">Albums · 9 playlist · bấm để mở danh sách bài</div>
+  <div class="album-carousel reveal" id="albumCarousel"><div class="album-track" id="albumGrid"></div></div>
+  <div class="album-drawer" id="albumDrawer" aria-live="polite"></div>
+
+  <!-- PLAYER (trình phát riêng của trang) -->
+  <div class="player reveal" id="player" oncontextmenu="return false">
+    <div class="player-cover" id="playerCover"><span class="player-cover-ph">♪</span></div>
+    <div class="player-main">
+      <div class="player-top">
+        <div class="player-meta">
+          <div class="player-title" id="playerTitle">Chọn một bài để bắt đầu</div>
+          <div class="player-sub" id="playerSub">Cái Sạp nhạc</div>
+        </div>
+        <div class="player-eq" id="playerEq"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      </div>
+      <div class="player-controls">
+        <button class="pc-btn" id="pcPrev" aria-label="Trước" onclick="prevTrack()">⏮</button>
+        <button class="pc-btn pc-play" id="pcPlay" aria-label="Phát" onclick="togglePlay()">▶</button>
+        <button class="pc-btn" id="pcNext" aria-label="Sau" onclick="nextTrack()">⏭</button>
+        <span class="pc-time" id="pcCur">0:00</span>
+        <div class="pc-bar" id="pcBar"><div class="pc-bar-fill" id="pcFill"></div></div>
+        <span class="pc-time" id="pcDur">0:00</span>
+      </div>
+    </div>
+  </div>
+  <div class="track-embed" id="trackEmbed"></div>
+  <audio id="audioEl" preload="none" controlsList="nodownload noplaybackrate" oncontextmenu="return false"></audio>
+</section>
+
+<div class="divider"></div>
+
+<!-- VIDEOS -->
+<section id="videos">
+  <div class="section-wm tr" aria-hidden="true">VIDEO</div>
+  <div class="sec-label reveal">Visual Works</div>
+  <h2 class="sec-h reveal">Videos · <em>Sạp Âm Nhạc</em></h2>
+  <div class="sec-bar reveal"></div>
+  <p class="vid-status" id="yt-status">Đang tải video…</p>
+  <div class="vid-grid" id="yt-grid"></div>
+  <div style="margin-top:2.5rem;text-align:center;" class="reveal">
+    <a href="https://www.youtube.com/@caisapamnhaccuaLine" target="_blank"
+       style="font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--amber);text-decoration:none;">
+      Xem kênh YouTube →
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-wm tl" aria-hidden="true">VISUAL</div>
+  <div class="sec-label reveal">Visual Lab</div>
+  <h2 class="sec-h reveal">Tác phẩm <em>thị giác</em> — Nguồn cảm hứng tổng hợp</h2>
+  <div class="sec-bar reveal"></div>
+  <div class="g-filters reveal" id="gFilters"></div>
+  <div class="gallery" id="galleryGrid"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WORK -->
+<section id="work">
+  <div class="section-wm br" aria-hidden="true">NGHỀ</div>
+  <div class="work-head-row reveal">
+    <span class="work-head-label">Professional</span>
+    <h2 class="work-head-title">Kinh nghiệm <em>nổi bật</em></h2>
+    <div class="work-head-line"></div>
+  </div>
+
+  <div id="workList"></div>
+
+  <a class="aim-badge reveal" href="https://aimacademy.vn/giang-vien/huynh-chi-lap/" target="_blank">
+    <div class="aim-dot"></div>
+    Giảng viên tại AIM Academy · Event & Activation Management
+    <span style="margin-left:auto;font-size:0.8rem;">→</span>
+  </a>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wm" aria-hidden="true">LIÊN HỆ</div>
+  <div class="contact-inner" style="width:780px;">
+    <div class="sec-label reveal">Connect</div>
+    <h2 class="sec-h reveal">Kết nối <em>với Anh Li</em></h2>
+    <div class="sec-bar reveal"></div>
+    <p class="contact-lead reveal" style="margin: 10px 130px 0px; padding: 3px 0px 0px; width: 820px; line-height: 1.7; font-size: 6px">Có một show cần dựng, một bài cần viết, hay chỉ muốn nói chuyện nghề — cứ nhắn.</p>
+    <div class="contact-deck" id="contactDeck"></div>
+  </div>
+</section>
+
+<!-- EVENTS MARQUEE (gần disclaimer) -->
+<div class="marquee-wrap foot-marquee">
+  <div class="marquee-track" id="marqueeTrack2"></div>
+</div>
+
+<footer>
+  <div class="f-top">
+    <div class="f-brand">
+      <div class="f-logo">Cái Sạp nhạc ✦</div>
+      <div class="f-tag">Music AILi-made · Saigon, Vietnam</div>
+    </div>
+    <div class="f-sig">Anh Li</div>
+  </div>
+
+  <div class="f-disc">
+    <div class="f-disc-col">
+      <div class="f-disc-h">Về dự án</div>
+      <p><strong>Cái Sạp nhạc</strong> / <strong>AILi-made</strong> là dự án âm nhạc cá nhân của Anh Li, sản xuất với sự hỗ trợ của AI. Toàn bộ ca từ, ý tưởng, biên tập, mix/master, nhận diện hình ảnh và phát hành đều do Anh Li tạo và kiểm soát.</p>
+    </div>
+    <div class="f-disc-col">
+      <div class="f-disc-h">Nghệ sĩ</div>
+      <p><strong>Anh Li</strong> — nghệ sĩ indie (người thật), hát bằng giọng AI của riêng mình. <strong>D’Li</strong> — nghệ sĩ ảo (nam) do Anh Li sáng tạo & quản lý; giọng là vocal AI tổng hợp tạo bằng Suno, không đại diện người thật và không mô phỏng bất kỳ ai.</p>
+    </div>
+    <div class="f-disc-col">
+      <div class="f-disc-h">Bản quyền &amp; sử dụng</div>
+      <p>Không reupload, phân phối lại, tách audio/giọng, sao chép giọng (voice cloning), huấn luyện mô hình, sao chép nhân vật / nhận diện, hay remix thương mại — khi chưa được phép.</p>
+    </div>
+  </div>
+
+  <div class="f-bottom">
+    <span>© 2026 Cái Sạp nhạc / Anh Li · Huỳnh Chí Lập</span>
+    <span>All rights reserved</span>
+  </div>
+</footer>
+
+<!-- VIDEO MODAL -->
+<div class="modal-bg" id="modal" onclick="bgClose(event)">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-tit" id="modalTitle"></div>
+      <button class="modal-close" onclick="closeVideo()">✕</button>
+    </div>
+    <iframe id="modalFrame" src="" allowfullscreen></iframe>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   DATA — chỉnh sửa phần này để cập nhật nội dung
+============================================================ */
+const TRACKS = [
+  { id:'91b5c27d-c383-4a6d-8b34-75464148322d', name:'Mùa Giáng Sinh Đi Qua..', genre:'Cinematic Orchestral · Power Ballad', tags:['Featured','Ballad'], dur:'3:40', featured:true },
+  { id:'906cdce3-1030-47ed-9036-a0b7a398adb6', name:'Bạn Tình Cô Đơn!', genre:'Cinematic Soul · Downtempo Trip-hop', tags:['Soul','Cinematic'], dur:'4:43' },
+  { id:'295c3f26-330d-47d6-ab2e-7440f0b4dcb2', name:'Nhớ Hay Quên!', genre:'Dark R&B · Neo-soul · Urban Jazz', tags:['R&B','Neo-soul'], dur:'4:33' },
+  { id:'a29966fb-a3d8-405d-baf1-6977fac27818', name:'Mơ Giấc Tình Nồng Say', genre:'Slow Jam R&B · Deep Male Vocals', tags:['R&B','Slow Jam'], dur:'3:23' },
+  { id:'891bc6cb-0ed4-4939-b413-5ea3fb2dcc91', name:'Mưa Vương Bụi Sầu...', genre:'Vietnamese Indie Pop · Acoustic R&B', tags:['Indie','Folk'], dur:'4:22' },
+];
+
+/* ALBUMS — mỗi album: tên, ảnh bìa, và `tracks`.
+   Mỗi track: { name, genre, src, cover }
+     • src   = đường dẫn file nhạc trong thư mục audio/  (vd 'audio/mua-giang-sinh.mp3')
+     • cover = đường dẫn ảnh bìa trong images/covers/    (vd 'images/covers/track1.jpg')
+   Anh tách 129 bài thành các album (doanh nghiệp, Tết, yêu nước…), mỗi album 1 khối { }. */
+/* ====== MUSIC DATA ======
+   Trình phát dùng nhạc thật từ Cái Sạp nhạc.
+   stream  = https://cdn1.suno.ai/<id>.mp3   (phát trong player của trang)
+   art     = https://cdn2.suno.ai/image_<id>.jpeg
+   Mỗi album = 1 playlist. Thêm album mới: copy 1 khối { } và dán id bài.
+   Đủ 9 album. Thêm album mới: copy 1 khối { } và dán id bài. */
+const ARTISTS = [
+  { name:'Anh Li', type:'Indie Artist', kind:'real',
+    img:'images/portraits/about-bw.jpg',
+    desc:'Người thật. Sáng tác & sản xuất, phát hành tác phẩm cá nhân bằng giọng hát AI của riêng mình.' },
+  { name:'D’Li', type:'Virtual Artist', kind:'virtual',
+    img:'images/portraits/dli.jpg',
+    desc:'Nhân vật nghệ sĩ ảo (nam) do Anh Li sáng tạo & quản lý — giọng vocal AI tổng hợp tạo bằng Suno.' },
+];
+
+const ALBUMS = [
+  {
+    name:'I ❤ VN', sub:'Epic · Cinematic · Tự hào',
+    cover:'https://cdn2.suno.ai/7622500f.jpeg',
+    url:'https://suno.com/playlist/df0c36ec-4afd-4760-9aa3-3b05350a1b87',
+    tracks:[
+      { name:'Hẹn Ước Bắc Nam', id:'f8628247-b5d2-4839-b501-8308976c1615', dur:'5:03' },
+      { name:'Viết Tiếp Ước Mong', id:'9bd3da93-4f91-4053-a88e-8d09109d29d5', dur:'4:42' },
+      { name:'Vững Hậu Phương Vươn Tiền Tuyến', id:'4d8aa486-6064-41b7-a890-84c01cc2cc8e', dur:'4:57' },
+      { name:'Tiếng Vọng Non Sông', id:'93aab150-3285-4534-b71c-97c8d408371a', dur:'4:11' },
+      { name:'Đất Trời Nước Nam', id:'f6adf1b5-3075-46fe-8b85-fb6b7177b182', dur:'4:41' },
+      { name:'Dưới Bầu Trời Ta Yêu', id:'2cf71f83-6d84-4abb-a241-123e19dea645', dur:'3:11' },
+      { name:'Một Việt Nam!', id:'99752465-a1c0-4e7e-a3ac-563dd22bba1b', dur:'4:32' },
+      { name:'Khúc Ca Việt Tự Hào', id:'1e75456e-d27d-4e85-9afc-9c5d67cd50f0', dur:'4:26' },
+      { name:'Vươn Cao Khát Vọng Việt Nam', id:'4c3815e9-5c08-48d4-88b0-cfbcd1356c0b', dur:'4:58' },
+      { name:'Việt Nam Ta Yêu', id:'2096197a-b0a3-4fba-89d2-d654b2f1188e', dur:'3:54' },
+      { name:'Cho Tất Cả Chúng Ta', id:'243a6f34-f01a-4b17-8399-71e398fe3a34', dur:'3:47' },
+      { name:'Chất-Việt-Chất!', id:'b8f7a3ec-5e4d-4d15-b0cc-53ceee89cf16', dur:'2:44' },
+    ],
+  },
+  {
+    name:'TẾT Ngọ Sum Vầy ’26', sub:'Festive · Folktronica · Xuân',
+    cover:'https://cdn2.suno.ai/image_11015d6d-3fc4-4aea-80f0-f889d3e06610.jpeg',
+    url:'https://suno.com/playlist/0bd2c183-50a7-4917-ae88-2ecdc9f0d2f3',
+    tracks:[
+      { name:'Tết Nay Cầu Gì?', id:'9baaa82b-34cf-4728-80aa-7658c43fe299', dur:'3:44' },
+      { name:'Đỉnh Chóp (On Top)', id:'220ef898-680f-4f6f-942f-a617df5bb86e', dur:'3:40' },
+      { name:'Duyên, Hợp, Tan', id:'5129eb62-7610-4ea6-b283-b2f863dc1bcc', dur:'3:18' },
+      { name:'Lý “Về Nhà”', id:'9c788787-17d1-4d53-b7be-7da79732ab0a', dur:'2:54' },
+      { name:'Mã Điệu Khai Xuân', id:'95bdc6bf-9c93-419e-ac5a-1f4ab0efaa1c', dur:'3:32' },
+      { name:'Fa Cai Lah × Phát Tài To', id:'db3c24ae-d524-4197-94f0-d053651d91e7', dur:'2:51' },
+      { name:'Về Nhà Là Có Tết', id:'9ee05b6f-7336-4473-965f-81d37de644a5', dur:'3:06' },
+      { name:'Không Bằng AI?!', id:'ba077c07-6f33-4b60-bfc4-d47221a84ca8', dur:'3:21' },
+      { name:'發財發財啦! (Unplugged)', id:'85c27ed2-4bf4-4679-a7b8-3bd81508eef4', dur:'2:24' },
+    ],
+  },
+  {
+    name:'MiTek · Way of Stars', sub:'EDM · Stadium · Show',
+    cover:'https://cdn2.suno.ai/image_b0e95414-5c1f-43dc-a01b-00691e184ed3.jpeg',
+    url:'https://suno.com/playlist/1c504bd2-2249-4fca-931a-f1c992581a25',
+    tracks:[
+      { name:'We Are The Stars Tonight (D’Li)', id:'a03438fa-df97-4d68-917d-82b2f9c9086e', dur:'4:46' },
+      { name:'We Are The Stars', id:'5a877608-94ba-40ab-ac74-c291d23730e4', dur:'4:00' },
+      { name:'Mitek-nista…', id:'5f686228-97f3-4c13-bd26-daac9b75b1cd', dur:'3:18' },
+      { name:'Lovers Gonna Love (Electro House)', id:'e1ee21d5-f187-407c-b751-198c2a28c074', dur:'3:37' },
+    ],
+  },
+  {
+    name:'Cảm Thán Ca', sub:'Indie Folk · Anh Li & D’Li',
+    cover:'https://cdn2.suno.ai/image_2ca4a4ac-4ed5-43db-bfed-bcf126963070.jpeg',
+    url:'https://suno.com/playlist/8f8611b8-416e-4624-9bd9-e91e1c2dea62',
+    tracks:[
+      { name:'Thì Thôi!!!!', id:'2ca4a4ac-4ed5-43db-bfed-bcf126963070', dur:'3:02' },
+      { name:'Ừ - Thì - Là - Vậy - Mà', id:'b1764573-79ba-4adb-bb48-7e72e1b63039', dur:'2:58' },
+      { name:'Ôh… Kìa!', id:'0a20485e-60a9-46c4-b7cb-11e50fc74a8c', dur:'4:42' },
+      { name:'Ơ Hay', id:'0721e27a-3d98-4831-b02f-eb51b66ab42d', dur:'2:59' },
+      { name:'Ối Giờiii… Là Trời Ơi (ft. D’Li)', id:'fe9a5917-d92b-4c74-beeb-26e48d87a508', dur:'3:55' },
+      { name:'Ô Thôi Chếc…', id:'482a5bfa-d45d-40cb-9a1c-e26a6e1ae69f', dur:'4:22' },
+      { name:'Ủa????', id:'a83954f8-0d20-4cfc-9ede-da12c17d09b1', dur:'4:04' },
+      { name:'Úi Dào…', id:'7011c7e7-3861-4b89-bdf4-ffdc38ed1b34', dur:'4:07' },
+      { name:'À… Ra Là.. (Anh Li × D’Li)', id:'91199211-9380-4e1f-b408-14033ab3a615', dur:'5:04' },
+    ],
+  },
+  {
+    name:'Mỹ Vị Nhân Sinh', sub:'Alt-Indie Folk · Anh Li',
+    cover:'https://cdn2.suno.ai/image_142b3ba1-12a5-4fdc-96d5-ce5984f90e12.jpeg',
+    url:'https://suno.com/playlist/b1021057-56bd-49e8-a1fb-5af4d69c2c0e',
+    tracks:[
+      { name:'Ngọt Lạc', id:'142b3ba1-12a5-4fdc-96d5-ce5984f90e12', dur:'2:39' },
+      { name:'Đúng Đắng', id:'98dac03b-7ba7-4889-80aa-d5d5e9e9a05d', dur:'2:14' },
+      { name:'Chua Cay Tự Tình', id:'152d5bf6-119e-4c39-b712-68f3b7ebc1e8', dur:'2:21' },
+      { name:'Men Mầm Muối', id:'fb44f4ac-3615-4766-b323-99215101017b', dur:'3:38' },
+    ],
+  },
+  {
+    name:'Tôi Hát Cả Bốn Mùa', sub:'Ghibli Folk · Anh Li & D’Li',
+    cover:'https://cdn2.suno.ai/image_749e34d4-7589-471f-a9d8-320b5fe13a5b.jpeg',
+    url:'https://suno.com/playlist/bd830721-0b26-40ea-b7d5-508e5d6612a2',
+    tracks:[
+      { name:'Mùa Hạ Của Tôi (Xuân Quỳnh)', id:'749e34d4-7589-471f-a9d8-320b5fe13a5b', dur:'3:18' },
+      { name:'Tiếng Thu Chùng Chình Sang (Hữu Thỉnh)', id:'5eecfc34-d147-40a0-b674-d06d4b452d58', dur:'3:32' },
+      { name:'Màu Đông (Phan Vũ)', id:'af69d99f-c006-4ecd-aef7-cd0ed2afe698', dur:'4:03' },
+      { name:'Xuân Xanh Tự Tình (Nguyễn Bính)', id:'32c66e9b-2746-4c0b-922a-57a7816ed29c', dur:'2:30' },
+      { name:'Hát Ca Cả Bốn Mùa', id:'7eddbbb4-fbb0-47e3-a1dc-daa0cb0ec3ef', dur:'3:58' },
+    ],
+  },
+  {
+    name:'Vietnam Young Lions ’26', sub:'Electropop · Anthem · Award',
+    cover:'https://cdn2.suno.ai/image_4618b412-a7bd-4334-bff2-b56d5334024e.jpeg',
+    url:'https://suno.com/playlist/c358ba32-19d4-46ef-bef9-5de138b03ea4',
+    tracks:[
+      { name:'APEX ROAR', id:'50633010-4d6e-463d-9610-1c1b8f021a5e', dur:'2:38' },
+      { name:'A Decade of Gold', id:'38b8f448-d7da-46b6-a5e4-70ecc177cb4b', dur:'3:47' },
+      { name:'Xin Chào the World…', id:'bc3eb8c6-f6b4-4629-a9a7-60062c9c483f', dur:'3:30' },
+      { name:'The Joyful Roar', id:'dbf006f5-80a4-4235-8c56-d2699fc20ae4', dur:'3:04' },
+      { name:'Unstoppable Light', id:'9eda94ee-334c-4c08-af65-5cef6ec048aa', dur:'3:00' },
+      { name:'Step to the Roar', id:'605eea17-4d4d-411d-abc7-622be8a29ec9', dur:'2:56' },
+      { name:'Welcome to the Pride', id:'953e15f5-79f0-45ef-b013-dfcfbdcfb5d2', dur:'4:12' },
+    ],
+  },
+  {
+    name:'Vietnam Young Lions ’25', sub:'Rock · Anthem · Final',
+    cover:'https://cdn2.suno.ai/0a00a58b.jpeg',
+    url:'https://suno.com/playlist/12435dd8-eaf8-4046-8bee-cb0aa03533f8',
+    tracks:[
+      { name:'Born to Break the Brief', id:'f17edfb8-d150-4d06-b1e9-9463935250f4', dur:'2:53' },
+      { name:'To the Lions', id:'d4c7b098-27a4-4d55-b4df-4b9f07165c84', dur:'2:22' },
+      { name:'Beat It!', id:'79ba22f3-80be-4b35-81d0-6de86168c753', dur:'1:45' },
+      { name:'Epicconic Me', id:'5c97b422-97e4-4a1f-b9e7-a3b409052fab', dur:'2:44' },
+      { name:'Nah, I’m Epiconic!', id:'b5813ae3-e570-4a46-bbc0-cb399f3dd510', dur:'2:37' },
+      { name:'Let’s Roar – We Are VN Young Lions', id:'cc4f940a-9d34-462c-b258-a430a340488d', dur:'3:06' },
+    ],
+  },
+  {
+    name:'Unplugged Vol.1', sub:'Acoustic · Indie Folk · Hát mộc',
+    cover:'https://cdn2.suno.ai/image_3b949f7a-601e-4206-a610-e55ed9a03c24.jpeg',
+    url:'https://suno.com/playlist/2818d6f0-318d-4aad-94ac-027ccc756ec4',
+    tracks:[
+      { name:'9PM', id:'3b949f7a-601e-4206-a610-e55ed9a03c24', dur:'2:18' },
+      { name:'Bí Kíp Luyện Deadlines', id:'8b81a6e1-d7c2-41d9-84d2-7f27609cc099', dur:'3:16' },
+      { name:'Nào, Cho Mượn Bờ Vai Này', id:'f06e6c2a-b56c-4784-aebb-b2a68cd84ed3', dur:'3:14' },
+      { name:'An(h) Yên, Quên Phiền', id:'f2dfd824-606d-4f9c-ac6c-364ff94b405d', dur:'4:36' },
+      { name:'Có Sao Đâu (It’s Alright)', id:'aa8e1283-e121-416f-a054-c573ce0291f2', dur:'3:33' },
+      { name:'Tôi Yêu…', id:'6e96c3d7-41fc-4841-800b-b4764b862c3c', dur:'2:51' },
+      { name:'Con Đường Ta Đi', id:'75c08a9c-2c7c-4024-9a6e-2ad25bf1fce3', dur:'3:46' },
+      { name:'Chạm Vào Ánh Nắng', id:'5c3f3c0d-d9f1-4e7e-b864-982832e07295', dur:'4:38' },
+      { name:'Hiên Nhà Của 50…', id:'89f1c8f1-57a3-4395-8b1b-d8c755eb5909', dur:'3:54' },
+    ],
+  },
+];
+
+/* ═══════════════════ GALLERY — TÁC PHẨM THỊ GIÁC ═══════════════════
+   4 thư mục riêng, mỗi bộ môn một folder:
+     images/2d/      · images/3d/     · images/sketch/   · images/motion/
+
+   QUY LUẬT ĐẶT TÊN (cực đơn giản): chỉ cần ĐÁNH SỐ.
+     2d/1.jpg  2d/2.jpg  2d/3.jpg ...        (ảnh 2D)
+     3d/1.jpg  3d/2.jpg ...                  (ảnh 3D)
+     sketch/1.jpg  sketch/2.jpg ...          (phác thảo)
+     motion/1.mp4  motion/2.mp4 ...          (clip / video AI / motion)
+   → Tên file không dấu, không khoảng trắng. Ảnh để tỉ lệ gốc, không cần cắt vuông.
+
+   2D & 3D & Sketch = HÌNH ẢNH  → dùng { type:'img', src:'images/2d/1.jpg' }
+   MOTION = VIDEO, up theo 1 trong 2 cách:
+     • File trong project:   { type:'video', src:'images/motion/1.mp4', poster:'images/motion/1.jpg' }
+     • Link YouTube:         { type:'yt',    yt:'MÃ_VIDEO',  poster:'images/motion/1.jpg' }
+       (MÃ_VIDEO là đoạn sau ?v= trong link YouTube, vd youtu.be/AbC123 → 'AbC123')
+   poster = ảnh đại diện hiện trước khi bấm play (không bắt buộc, nên có cho đẹp).
+   ar = tỉ lệ khung (rộng/cao) — đổi cho khớp ảnh: '3/4','1/1','4/5','16/9'... */
+const GALLERY = [
+  // ——— 2D ———
+  { tag:'2D', type:'img', src:'images/2d/1.jpg',  ar:'16/9' },  // VIFF2021 Film Festival
+  { tag:'2D', type:'img', src:'images/2d/2.jpg',  ar:'16/9' },  // Nova Miss beauty pageant
+  { tag:'2D', type:'img', src:'images/2d/3.jpg',  ar:'4/3'  },  // Diamond Century real estate
+  { tag:'2D', type:'img', src:'images/2d/4.jpg',  ar:'16/9' },  // Sunshine Group lifestyle
+  { tag:'2D', type:'img', src:'images/2d/5.jpg',  ar:'3/4'  },  // KV 22 March event
+  { tag:'2D', type:'img', src:'images/2d/6.jpg',  ar:'16/9' },  // CJ Vina brand
+  { tag:'2D', type:'img', src:'images/2d/7.jpg',  ar:'16/9' },  // VinSmart TV
+  { tag:'2D', type:'img', src:'images/2d/8.jpg',  ar:'3/4'  },  // Sportia poster
+  { tag:'2D', type:'img', src:'images/2d/9.jpg',  ar:'4/3'  },  // Prulympic
+  { tag:'2D', type:'img', src:'images/2d/10.jpg', ar:'4/5'  },  // E-Invite KV
+  { tag:'2D', type:'img', src:'images/2d/11.jpg', ar:'9/10' },  // Star brand logo
+  // ——— 3D ———
+  { tag:'3D', type:'img', src:'images/3d/1.jpg',  ar:'16/9' },  // AW Stage render
+  { tag:'3D', type:'img', src:'images/3d/2.jpg',  ar:'16/9' },  // YCA concert stage
+  { tag:'3D', type:'img', src:'images/3d/3.jpg',  ar:'16/9' },  // Tết stage
+  { tag:'3D', type:'img', src:'images/3d/4.jpg',  ar:'16/9' },  // Pony Mall
+  { tag:'3D', type:'img', src:'images/3d/5.jpg',  ar:'16/9' },  // ComicCon LOL stage
+  { tag:'3D', type:'img', src:'images/3d/6.jpg',  ar:'16/9' },  // Foyer AW
+  { tag:'3D', type:'img', src:'images/3d/7.jpg',  ar:'4/3'  },  // Yan reception
+  { tag:'3D', type:'img', src:'images/3d/8.jpg',  ar:'16/9' },  // Cụm Đảo Yến resort
+  { tag:'3D', type:'img', src:'images/3d/9.jpg',  ar:'16/9' },  // Lazada stage
+  { tag:'3D', type:'img', src:'images/3d/10.jpg', ar:'16/9' },  // 3D scene view
+  { tag:'3D', type:'img', src:'images/3d/11.jpg', ar:'16/9' },  // Fabia 2026 — main hall
+  { tag:'3D', type:'img', src:'images/3d/12.jpg', ar:'16/9' },  // Fabia 2026 — venue detail
+  { tag:'3D', type:'img', src:'images/3d/13.jpg', ar:'16/9' },  // Fabia 2026 — stage area
+  { tag:'3D', type:'img', src:'images/3d/14.jpg', ar:'1/1'  },  // Fabia 2026 — floor plan
+  { tag:'3D', type:'img', src:'images/3d/15.jpg', ar:'16/9' },  // Fabia 2026 — red interior
+  // ——— Sketch — thêm ảnh vào images/sketch/ theo tên 1.jpg, 2.jpg... ———
+  // { tag:'Sketch', type:'img', src:'images/sketch/1.jpg', ar:'4/5' },
+  // ——— Motion ———
+  { tag:'Motion', type:'video', src:'images/motion/1.mp4', poster:'images/motion/1.jpg', ar:'16/9' },
+  // Thêm YouTube: { tag:'Motion', type:'yt', yt:'YOUTUBE_ID', ar:'16/9' },
+];
+
+const EVENTS = [
+  { year:'2026', title:'MiTek PS100 — Way of Stars', meta:'Reward Trip · Ninh Bình · 130 pax', tags:['Reward Trip'] },
+  { year:'2021', title:'VinID Spring Concert', meta:'Vingroup · Live Concert Production', tags:['Concert'] },
+  { year:'2019', title:'Vinhomes GrandPark Kick-Off', meta:'Vingroup · Grand Launch Event', tags:['Launch'] },
+  { year:'2019', title:'GO.VN · Formula 1 Music Fest', meta:'Vietnam Grand Prix · Music Festival', tags:['Festival'] },
+  { year:'2016', title:'Vinhomes Central Park Grand Opening', meta:'“Your First Day in Paradise”', tags:['Grand Opening'] },
+  { year:'2015', title:'Yan Beat Fest 2015', meta:'Samsung S6 · Produced by YanLive', tags:['Music Fest'] },
+  { year:'2014', title:'2NE1 Galaxy Stage Concert', meta:'Samsung Galaxy S5 · Phú Thọ Stadium', tags:['K-pop Concert'] },
+  { year:'2013', title:'Forbes 30 Under 30 · Katy Perry', meta:'UNICEF Speech · YanLive Production', tags:['Show · Speech'] },
+];
+
+const WORK = [
+  { yr:'2025 – nay', role:'Creative Services Producer', co:'Freelance · Independent', desc:'Dẫn dắt đội ngũ sáng tạo, chỉ đạo nghệ thuật và quản lý dự án đa lĩnh vực. Tích hợp AI workflow vào quy trình sản xuất sáng tạo.', badges:['Creative','AI','Management'] },
+  { yr:'Mar – Nov 2025', role:'Associate Producer', co:'2RES', desc:'Sản xuất nội dung sáng tạo, kịch bản biểu diễn và phối hợp vận hành đội ngũ đa môn.', badges:['Production','Performing Arts'] },
+  { yr:'2016 – 2021', role:'Director of Client Services', co:'White Lion Communication', desc:'Quản lý tài khoản 20 tỷ VND/năm: Vingroup, Vinpearl, VinFast, HoaSenGroup, Manulife, VN Grand Prix, PHENIKAA Uni, Becamex IDC.', badges:['Event','Brand','Leadership'] },
+  { yr:'2014 – 2016', role:'Creative Specialist', co:'Yan Live · Yan Group', desc:'Phối hợp bộ phận sáng tạo, multimedia và truyền thông doanh nghiệp. Triển khai các chiến dịch lớn tạo thương hiệu đáng nhớ.', badges:['Show','Music','Brand'] },
+  { yr:'2010 – 2014', role:'Account Supervisor', co:'Gamma Production · SquareGroup', desc:'Phát triển ý tưởng sáng tạo từ brief, điều phối đội ngũ đa phòng ban, đảm bảo chất lượng và tiến độ trong môi trường áp lực cao.', badges:['Creative','Design','Account'] },
+];
+
+const CONTACTS = [
+  { label:'Linktree', val:'linktr.ee/alihuang', url:'https://linktr.ee/alihuang' },
+  { label:'Email', val:'ali.readytostart@gmail.com', url:'mailto:ali.readytostart@gmail.com' },
+  { label:'YouTube', val:'Sạp Âm Nhạc', url:'https://www.youtube.com/@caisapamnhaccuaLine' },
+  { label:'Behance', val:'lucasdesign911', url:'https://www.behance.net/lucasdesign911' },
+  { label:'LinkedIn', val:'Huỳnh Chí Lập', url:'https://www.linkedin.com/in/lap-huynh-chi-06a948305' },
+];
+
+const YT_CHANNEL = 'UC2Cat4-Hl0SZqKFkRKu72zQ';
+const SUNO_PLAYLIST = 'https://suno.com/playlist/61998e72-7e4b-4e3c-b3f0-06fc159d0ced';
+
+/* VIDEOS — dán link/ID video YouTube vào đây để hiện chắc chắn.
+   id = phần sau "watch?v=" hoặc "youtu.be/". Ví dụ link
+   https://www.youtube.com/watch?v=dQw4w9WgXcQ  →  id:'dQw4w9WgXcQ'
+   Để trống mảng này thì web sẽ tự thử tải từ kênh (kém ổn định hơn). */
+const VIDEOS = [
+  { id:'ZZd9Avifl-4', title:'AILi-made · Music Video', meta:'Cái Sạp nhạc · D’Li' },
+  { id:'ZJTlHmumzjc', title:'AILi-made · Music Video', meta:'Cái Sạp nhạc · D’Li' },
+  { id:'z0-rWw82m3Q', title:'AILi-made · Music Video', meta:'Cái Sạp nhạc · D’Li' },
+];
+
+/* ============================================================
+   CURSOR
+============================================================ */
+const cur = document.getElementById('cursor');
+const curR = document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  cur.style.left=mx+'px'; cur.style.top=my+'px';
+});
+function animCursor(){
+  rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
+  curR.style.left=rx+'px'; curR.style.top=ry+'px';
+  requestAnimationFrame(animCursor);
+}
+animCursor();
+
+/* ============================================================
+   NAV SCROLL
+============================================================ */
+addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('solid',scrollY>60);
+});
+
+/* ============================================================
+   TYPEWRITER
+============================================================ */
+const roles = ['Creative Producer','Show Director','Songwriter','Nhà Sản Xuất Sáng Tạo','Đạo Diễn Sân Khấu','Nhạc Sĩ Độc Lập'];
+let ri=0,ci=0,deleting=false;
+const tw = document.getElementById('typewriter');
+function type(){
+  const word = roles[ri];
+  tw.textContent = deleting ? word.slice(0,ci--) : word.slice(0,ci++);
+  if(!deleting && ci>word.length){ deleting=true; setTimeout(type,1800); return; }
+  if(deleting && ci<0){ deleting=false; ri=(ri+1)%roles.length; setTimeout(type,400); return; }
+  setTimeout(type, deleting?50:80);
+}
+setTimeout(type,1200);
+
+/* ============================================================
+   HERO PARALLAX
+============================================================ */
+addEventListener('scroll',()=>{
+  const h=document.getElementById('heroBg');
+  if(h) h.style.transform=`translateY(${scrollY*0.25}px)`;
+});
+
+/* ============================================================
+   REVEAL ON SCROLL
+============================================================ */
+const revObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:0.08});
+function revealInView(){
+  document.querySelectorAll('.reveal:not(.in)').forEach(el=>{
+    const r=el.getBoundingClientRect();
+    if(r.top < innerHeight*0.92 && r.bottom > 0) el.classList.add('in');
+  });
+}
+function observe(){
+  document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+  revealInView();
+}
+addEventListener('scroll', revealInView, {passive:true});
+addEventListener('load', revealInView);
+// Safety net: never leave content hidden if observers/scroll don't fire
+[300,1000,2500].forEach(t=>setTimeout(revealInView,t));
+
+/* ============================================================
+   RENDER TRACKS
+============================================================ */
+function coverUrl(c){
+  if(!c) return '';
+  // full URL or local path → as-is; bare Suno id → cdn image
+  return /[\/.]/.test(c) ? c : `https://cdn2.suno.ai/image_${c}.jpeg`;
+}
+function artUrl(id){ return `https://cdn2.suno.ai/image_${id}.jpeg`; }
+function streamUrl(id){ return `https://cdn1.suno.ai/${id}.mp3`; }
+function embedUrl(id){ return `https://suno.com/embed/${id}`; }
+
+function renderArtists(){
+  const el=document.getElementById('artistStrip');
+  if(!el) return;
+  el.innerHTML=ARTISTS.map(a=>`
+    <div class="artist ${a.kind}">
+      <div class="artist-photo"><img src="${a.img}" alt="${a.name}" loading="lazy" oncontextmenu="return false" onerror="this.parentElement.classList.add('blank')"/></div>
+      <div class="artist-info">
+        <div class="artist-type">${a.type}</div>
+        <div class="artist-name">${a.name}</div>
+        <p class="artist-desc">${a.desc}</p>
+      </div>
+    </div>`).join('');
+}
+
+function renderMusic(){
+  renderArtists();
+  // Soundwave (animated bars)
+  const sw=document.getElementById('soundwave');
+  if(sw){
+    const N=72; let bars='';
+    for(let i=0;i<N;i++){
+      const h=22+Math.round(Math.abs(Math.sin(i*0.5))*40+Math.random()*22);
+      const d=(Math.random()*1.6).toFixed(2);
+      const dur=(1.1+Math.random()*1.1).toFixed(2);
+      bars+=`<div class="sw-bar" style="height:${h}%;animation-delay:${d}s;animation-duration:${dur}s;"></div>`;
+    }
+    sw.innerHTML=bars;
+  }
+
+  // Album cards (duplicated for a seamless auto-scrolling carousel)
+  const grid=document.getElementById('albumGrid');
+  if(grid){
+    const card=(a,i)=>`
+      <div class="album" data-aidx="${i}" onclick="selectAlbum(${i})">
+        <div class="album-cover">
+          <img src="${coverUrl(a.cover)}" alt="${a.name}" loading="lazy" oncontextmenu="return false" onerror="this.outerHTML='<div class=album-cover-blank>♪</div>'"/>
+          <div class="album-play">⌄</div>
+          <span class="album-badge">${(a.tracks||[]).length} bài</span>
+        </div>
+        <div class="album-name">${a.name}</div>
+        <div class="album-sub">${a.sub||''}</div>
+      </div>`;
+    const seq=ALBUMS.map(card).join('');
+    grid.innerHTML=seq+seq; // duplicate for seamless loop
+  }
+
+  // Decorative diagonal genre text
+  const decor=document.getElementById('musicDecor');
+  if(decor){
+    const words=['Cinematic Soul','Dark R&B','Neo-soul','Trip-hop','Power Ballad','Slow Jam','Indie Pop','Urban Jazz','Downtempo','Acoustic R&B','Vietnamese Pop','Orchestral','Folk','Dream Pop','Lo-fi','Ballad','Soulful','Melancholic','Expressive','Cinematic','Warm Vocals','Original'];
+    let rows='';
+    for(let r=0;r<18;r++){
+      const shuffled=[...words].sort(()=>Math.random()-0.5);
+      const line=shuffled.map(w=>`<span>${w}</span>`).join('');
+      rows+=`<div class="md-row ${r%2?'b':'a'}">${line}${line}</div>`;
+    }
+    decor.innerHTML=rows;
+  }
+
+  // Auto-open first album
+  // (carousel runs freely until the user clicks an album)
+}
+
+/* ===== ALBUM DRAWER (sổ danh sách bài) ===== */
+let curAlbum=-1, curTracks=[], activeIdx=-1;
+const TRACK_PAGE=8;
+function selectAlbum(i, silent){
+  const drawer=document.getElementById('albumDrawer');
+  const carousel=document.getElementById('albumCarousel');
+  if(curAlbum===i && drawer.classList.contains('open') && !silent){
+    drawer.classList.remove('open');
+    if(carousel) carousel.classList.remove('paused');
+    document.querySelectorAll('.album[data-aidx]').forEach(a=>a.classList.remove('selected'));
+    curAlbum=-1; return;
+  }
+  curAlbum=i;
+  const a=ALBUMS[i];
+  curTracks=(a.tracks||[]).slice();
+  document.querySelectorAll('.album[data-aidx]').forEach(a=>a.classList.toggle('selected', +a.dataset.aidx===i));
+  renderDrawer(a);
+  drawer.classList.add('open');
+  if(carousel) carousel.classList.add('paused');
+}
+function renderDrawer(a, showAll){
+  const drawer=document.getElementById('albumDrawer');
+  const shown = showAll ? curTracks : curTracks.slice(0,TRACK_PAGE);
+  const rows=shown.map((t,j)=>`
+    <div class="trow" data-idx="${j}" onclick="playAt(${j})">
+      <div class="trow-num"><span class="num-d">${String(j+1).padStart(2,'0')}</span><span class="num-eq"><i></i><i></i><i></i></span></div>
+      <img class="trow-art" src="${artUrl(t.id)}" alt="" loading="lazy" oncontextmenu="return false" onerror="this.style.visibility='hidden'"/>
+      <div class="trow-info">
+        <div class="trow-name">${t.name}</div>
+      </div>
+      <div class="trow-dur">${t.dur||''}</div>
+    </div>`).join('');
+  const more = (!showAll && curTracks.length>TRACK_PAGE)
+    ? `<div class="drawer-more"><a href="javascript:void(0)" onclick="renderDrawer(ALBUMS[curAlbum], true)">+ ${curTracks.length-TRACK_PAGE} bài nữa</a></div>`
+    : '';
+  drawer.innerHTML=`
+    <div class="drawer-inner">
+      <div class="drawer-head">
+        <div class="drawer-title">${a.name}<span>${curTracks.length} bài</span></div>
+        <button class="drawer-playall" onclick="playAt(0)">▶ Phát từ đầu</button>
+      </div>
+      <div class="tlist">${rows||'<div class="drawer-more">Album đang cập nhật — bài hát sẽ sớm có mặt.</div>'}</div>
+      ${more}
+    </div>`;
+  if(curAlbum===ALBUMS.indexOf(a) && activeIdx>=0) markPlaying(activeIdx);
+}
+function markPlaying(idx){
+  document.querySelectorAll('.trow').forEach(r=>r.classList.toggle('playing', +r.dataset.idx===idx));
+}
+
+/* ===== AUDIO ENGINE (trình phát của trang, nhạc thật từ Cái Sạp nhạc) ===== */
+const audio=document.getElementById('audioEl');
+let isPlaying=false;
+function fmt(s){ s=Math.floor(s||0); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); }
+
+function playAt(j){
+  if(!curTracks.length) return;
+  if(j<0) j=curTracks.length-1;
+  if(j>=curTracks.length) j=0;
+  if(j===activeIdx){ if(audio.paused) audio.play().catch(()=>{}); else audio.pause(); return; }
+  activeIdx=j;
+  const t=curTracks[j];
+  markPlaying(j);
+  hideEmbed();
+
+  const cover=document.getElementById('playerCover');
+  cover.innerHTML=`<img src="${artUrl(t.id)}" alt="" oncontextmenu="return false" onerror="this.parentElement.innerHTML='<span class=player-cover-ph>♪</span>'"/>`;
+  document.getElementById('playerTitle').textContent=t.name;
+  const al=ALBUMS[curAlbum];
+  document.getElementById('playerSub').textContent=(al?al.name:'Cái Sạp nhạc')+' · Cái Sạp nhạc';
+  document.getElementById('pcDur').textContent=t.dur||'0:00';
+  document.getElementById('pcCur').textContent='0:00';
+  document.getElementById('pcFill').style.width='0%';
+
+  audio.src=streamUrl(t.id);
+  audio.play().catch(()=>{ /* autoplay blocked — user can press play */ });
+}
+function nextTrack(){ playAt(activeIdx<0?0:activeIdx+1); }
+function prevTrack(){ playAt(activeIdx<0?0:activeIdx-1); }
+function togglePlay(){
+  if(activeIdx<0){ playAt(0); return; }
+  if(audio.paused) audio.play().catch(()=>{}); else audio.pause();
+}
+audio.addEventListener('play', ()=>{
+  isPlaying=true;
+  document.getElementById('player').classList.add('playing');
+  document.getElementById('pcPlay').textContent='❚❚';
+});
+audio.addEventListener('pause', ()=>{
+  isPlaying=false;
+  document.getElementById('player').classList.remove('playing');
+  document.getElementById('pcPlay').textContent='▶';
+});
+audio.addEventListener('ended', ()=>{ nextTrack(); });
+audio.addEventListener('timeupdate', ()=>{
+  const d=audio.duration||0;
+  document.getElementById('pcFill').style.width=(d?audio.currentTime/d*100:0)+'%';
+  document.getElementById('pcCur').textContent=fmt(audio.currentTime);
+});
+audio.addEventListener('loadedmetadata', ()=>{
+  if(audio.duration) document.getElementById('pcDur').textContent=fmt(audio.duration);
+});
+// If the direct stream is blocked, fall back to Suno's embed player for that track
+audio.addEventListener('error', ()=>{ if(activeIdx>=0 && curTracks[activeIdx]) showEmbed(curTracks[activeIdx].id); });
+function showEmbed(id){
+  const w=document.getElementById('trackEmbed');
+  if(!w) return;
+  w.innerHTML=`<iframe src="${embedUrl(id)}" allow="autoplay" loading="lazy"></iframe>`;
+  w.classList.add('open');
+}
+function hideEmbed(){
+  const w=document.getElementById('trackEmbed');
+  if(w){ w.classList.remove('open'); w.innerHTML=''; }
+}
+// Seek
+(function(){
+  const bar=document.getElementById('pcBar');
+  if(!bar) return;
+  bar.addEventListener('click', e=>{
+    const r=bar.getBoundingClientRect();
+    if(audio.duration) audio.currentTime=((e.clientX-r.left)/r.width)*audio.duration;
+  });
+})();
+
+/* ============================================================
+   RENDER EVENTS CAROUSEL
+============================================================ */
+function renderMarquee(){
+  // Lời chào đa ngôn ngữ + thương hiệu — đổi/bổ sung thoải mái ở mảng dưới
+  const WORDS=[
+    {t:'Anh Li', a:true}, {t:'Xin chào'}, {t:'Hello'}, {t:'你好'},
+    {t:'Cái Sạp nhạc', a:true}, {t:'D’Li'}, {t:'Bonjour'}, {t:'こんにちは'},
+    {t:'Music AILi-made', a:true}, {t:'Hola'}, {t:'안녕하세요'}, {t:'Saigon'},
+  ];
+  const seq=WORDS.map(w=>
+    `<span class="marquee-item${w.a?' accent':''}">${w.t}</span><span class="marquee-item accent">✦</span>`
+  ).join('');
+  ['marqueeTrack','marqueeTrack2'].forEach(id=>{
+    const tk=document.getElementById(id);
+    if(tk) tk.innerHTML=seq+seq; // duplicate for seamless loop
+  });
+}
+
+const HASHTAGS=['Music Production','Live Show Direction','Songwriting','Artist Development','Event Creative','2D Design','3D Render','Sketching','Visual Production','AI Creative','AIM Academy'];
+function renderHashtags(){
+  const tk=document.getElementById('htagTrack');
+  if(!tk) return;
+  const seq=HASHTAGS.map(h=>`<span class="htag">#${h.replace(/\s+/g,'')}</span>`).join('');
+  tk.innerHTML=seq+seq; // duplicate for seamless loop
+}
+
+/* ============================================================
+   RENDER GALLERY (Visual Lab)
+============================================================ */
+function renderGallery(){
+  const grid=document.getElementById('galleryGrid');
+  const filt=document.getElementById('gFilters');
+  if(!grid||!filt) return;
+  const tags=['Tất cả',...[...new Set(GALLERY.map(g=>g.tag))]];
+  tags.forEach((t,i)=>{
+    const b=document.createElement('button');
+    b.className='g-chip'+(i===0?' active':'');
+    b.textContent=t;
+    b.onclick=()=>filterGallery(t,b);
+    filt.appendChild(b);
+  });
+  GALLERY.forEach((g,i)=>{
+    const d=document.createElement('div');
+    d.className='g-item g-'+g.type;
+    d.dataset.tag=g.tag;
+    d.style.setProperty('--gd', (i%4*0.06)+'s');
+    const phLabel=`${g.tag} · ${g.type==='img'?'drop image':'drop video'}`;
+    let media='', play='';
+    if(g.type==='img'){
+      media=`<img src="${g.src}" alt="" loading="lazy"
+          onload="this.closest('.g-frame').style.aspectRatio=(this.naturalWidth/this.naturalHeight)||'${g.ar}'; this.closest('.g-item').classList.add('g-real');"
+          oncontextmenu="return false" onerror="this.style.display='none'"/>`;
+    } else if(g.type==='video'){
+      media=`<video ${g.poster?`poster="${g.poster}"`:''} muted loop playsinline preload="none"
+          data-src="${g.src}" oncontextmenu="return false"
+          onloadeddata="this.closest('.g-item').classList.add('g-real')"
+          onmouseenter="if(!this.src){this.src=this.dataset.src;} this.play().catch(()=>{})" onmouseleave="this.pause()"></video>`;
+      play=`<div class="g-play"></div>`;
+    } else if(g.type==='yt'){
+      const poster=g.poster||(g.yt?`https://img.youtube.com/vi/${g.yt}/hqdefault.jpg`:'');
+      media=poster?`<img src="${poster}" alt="" loading="lazy" oncontextmenu="return false"
+          onload="this.closest('.g-item').classList.add('g-real')" onerror="this.style.display='none'"/>`:'';
+      play=g.yt?`<div class="g-play" style="pointer-events:auto;cursor:pointer" onclick="openVideo('https://www.youtube.com/embed/${g.yt}')"></div>`:`<div class="g-play"></div>`;
+    }
+    d.innerHTML=`
+      <div class="g-tag">${g.tag}</div>
+      <div class="g-frame" style="aspect-ratio:${g.ar};">
+        <div class="g-ph"><span class="g-ph-label">${phLabel}</span></div>
+        ${media}
+        ${play}
+      </div>`;
+    grid.appendChild(d);
+  });
+}
+function filterGallery(tag,btn){
+  document.querySelectorAll('.g-chip').forEach(c=>c.classList.remove('active'));
+  btn.classList.add('active');
+  const all=tag==='Tất cả';
+  document.querySelectorAll('.g-item').forEach(it=>{
+    it.classList.toggle('g-hide', !all && it.dataset.tag!==tag);
+  });
+}
+
+/* ============================================================
+   RENDER WORK
+============================================================ */
+function renderWork(){
+  const el=document.getElementById('workList');
+  WORK.forEach(w=>{
+    el.innerHTML+=`
+      <div class="work-item reveal">
+        <div class="work-yr">${w.yr}</div>
+        <div>
+          <div class="work-role">${w.role}</div>
+          <div class="work-co">${w.co}</div>
+        </div>
+        <div class="work-badges">${w.badges.map(b=>`<span class="wbadge">${b}</span>`).join('')}</div>
+      </div>`;
+  });
+}
+
+/* ============================================================
+   RENDER CONTACTS
+============================================================ */
+function renderContacts(){
+  const el=document.getElementById('contactDeck');
+  CONTACTS.forEach(c=>{
+    el.innerHTML+=`
+      <a href="${c.url}" target="_blank" class="clink reveal">
+        <div class="cl-label">${c.label}</div>
+        <div class="cl-val">${c.val}</div>
+        <div class="cl-arr">→</div>
+      </a>`;
+  });
+}
+
+/* ============================================================
+   YOUTUBE RSS
+============================================================ */
+function renderVideos(){
+  const status=document.getElementById('yt-status');
+  const grid=document.getElementById('yt-grid');
+  if(VIDEOS.length){
+    status.style.display='none';
+    grid.innerHTML=VIDEOS.map(v=>`
+      <div class="vid-card reveal">
+        <div class="vid-thumb" onclick="openVideo('https://www.youtube.com/embed/${v.id}?autoplay=1','${(v.title||'').replace(/['"]/g,'')}')">
+          <img src="https://img.youtube.com/vi/${v.id}/hqdefault.jpg" alt="${v.title||''}" loading="lazy"/>
+          <div class="vid-overlay"><div class="vid-play">▶</div></div>
+        </div>
+        <div class="vid-info">
+          <div class="vid-title">${v.title||'Video'}</div>
+          <div class="vid-meta">${v.meta||'Sạp Âm Nhạc'}</div>
+        </div>
+      </div>`).join('');
+    observe();
+    return;
+  }
+  loadYT(); // fallback to channel RSS
+}
+
+async function loadYT(){
+  const status=document.getElementById('yt-status');
+  const grid=document.getElementById('yt-grid');
+  try {
+    const url=`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent('https://www.youtube.com/feeds/videos.xml?channel_id='+YT_CHANNEL)}&count=6`;
+    const r=await fetch(url);
+    const d=await r.json();
+    if(d.status!=='ok'||!d.items?.length) throw new Error('no items');
+    status.style.display='none';
+    grid.innerHTML='';
+    d.items.forEach(item=>{
+      const vid=item.link.split('v=')[1]?.split('&')[0];
+      if(!vid) return;
+      const dt=new Date(item.pubDate).toLocaleDateString('vi-VN',{year:'numeric',month:'long'});
+      grid.innerHTML+=`
+        <div class="vid-card reveal">
+          <div class="vid-thumb" onclick="openVideo('https://www.youtube.com/embed/${vid}','${item.title.replace(/'/g,'').replace(/"/g,'')}')">
+            <img src="https://img.youtube.com/vi/${vid}/mqdefault.jpg" alt="${item.title}" loading="lazy"/>
+            <div class="vid-overlay"><div class="vid-play">▶</div></div>
+          </div>
+          <div class="vid-info">
+            <div class="vid-title">${item.title}</div>
+            <div class="vid-meta">${dt} · Sạp Âm Nhạc</div>
+          </div>
+        </div>`;
+    });
+    observe();
+  } catch(e) {
+    status.innerHTML='Chưa tải được danh sách tự động. <a href="https://www.youtube.com/@caisapamnhaccuaLine" target="_blank" style="color:var(--amber);">Xem kênh YouTube →</a>';
+  }
+}
+
+/* ============================================================
+   VISITOR COUNTER
+============================================================ */
+async function loadCounter(){
+  try {
+    const r=await fetch('https://api.counterapi.dev/v1/anhliportfolio26/visits/up');
+    const d=await r.json();
+    const el=document.getElementById('visit-count');
+    if(el&&d.count) el.textContent=Number(d.count).toLocaleString('vi-VN');
+  } catch(e){}
+}
+
+/* ============================================================
+   VIDEO MODAL
+============================================================ */
+function openVideo(url,title){
+  document.getElementById('modalTitle').textContent=title||'';
+  document.getElementById('modalFrame').src=url+'?autoplay=1';
+  document.getElementById('modal').classList.add('open');
+}
+function closeVideo(){
+  document.getElementById('modalFrame').src='';
+  document.getElementById('modal').classList.remove('open');
+}
+function bgClose(e){ if(e.target.id==='modal') closeVideo(); }
+
+/* ============================================================
+   INIT
+============================================================ */
+renderMusic();
+renderMarquee();
+renderHashtags();
+renderGallery();
+renderWork();
+// Wire player controls
+document.getElementById('pcPrev')?.addEventListener('click', prevTrack);
+document.getElementById('pcNext')?.addEventListener('click', nextTrack);
+document.getElementById('pcPlay')?.addEventListener('click', togglePlay);
+renderContacts();
+renderVideos();
+loadCounter();
+observe();
+
+// Hero photo: detect if real image exists; show placeholder otherwise
+(function(){
+  const probe=new Image();
+  probe.onload=()=>{
+    if(probe.naturalWidth>0){
+      document.body.classList.add('has-hero');
+      document.getElementById('heroBg')?.classList.add('loaded');
+    }
+  };
+  probe.onerror=()=>{}; // keep elegant placeholder
+  probe.src='./images/hero/hero.jpg';
+})();
+</script>
+
+<!-- INTERACTIVE SHADER WALLPAPER (hero) -->
+<script src="shader-bg.js"></script>
+
+<!-- TWEAKS PANEL -->
+<div id="tweaks-root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="tweaks-app.jsx"></script>
+</body>
+</html>
