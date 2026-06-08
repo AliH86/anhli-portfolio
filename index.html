@@ -1132,9 +1132,10 @@ Bạn có thể gặp mình qua các khóa học về Sự kiện tại AIM Acad
         <div class="player-eq" id="playerEq"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
       </div>
       <div class="player-controls">
-        <button class="pc-btn" id="pcPrev" aria-label="Trước" onclick="prevTrack()">⏮</button>
-        <button class="pc-btn pc-play" id="pcPlay" aria-label="Phát" onclick="togglePlay()">▶</button>
-        <button class="pc-btn" id="pcNext" aria-label="Sau" onclick="nextTrack()">⏭</button>
+        <button class="pc-btn" id="pcShuffle" aria-label="Ngẫu nhiên" title="Phát ngẫu nhiên">⇄</button>
+        <button class="pc-btn" id="pcPrev" aria-label="Trước">⏮</button>
+        <button class="pc-btn pc-play" id="pcPlay" aria-label="Phát">▶</button>
+        <button class="pc-btn" id="pcNext" aria-label="Sau">⏭</button>
         <span class="pc-time" id="pcCur">0:00</span>
         <div class="pc-bar" id="pcBar"><div class="pc-bar-fill" id="pcFill"></div></div>
         <span class="pc-time" id="pcDur">0:00</span>
@@ -1767,11 +1768,23 @@ function playAt(j){
   audio.src=streamUrl(t.id);
   audio.play().catch(()=>{ /* autoplay blocked — user can press play */ });
 }
-function nextTrack(){ playAt(activeIdx<0?0:activeIdx+1); }
+let shuffleOn=false;
+function nextTrack(){
+  if(!curTracks.length) return;
+  if(shuffleOn){
+    let r; do{ r=Math.floor(Math.random()*curTracks.length); }while(curTracks.length>1 && r===activeIdx);
+    playAt(r);
+  } else { playAt(activeIdx<0?0:activeIdx+1); }
+}
 function prevTrack(){ playAt(activeIdx<0?0:activeIdx-1); }
 function togglePlay(){
   if(activeIdx<0){ playAt(0); return; }
   if(audio.paused) audio.play().catch(()=>{}); else audio.pause();
+}
+function toggleShuffle(){
+  shuffleOn=!shuffleOn;
+  const btn=document.getElementById('pcShuffle');
+  if(btn){ btn.style.color=shuffleOn?'var(--amber)':''; btn.style.opacity=shuffleOn?'1':'0.5'; }
 }
 audio.addEventListener('play', ()=>{
   isPlaying=true;
@@ -2022,10 +2035,13 @@ renderMarquee();
 renderHashtags();
 renderGallery();
 renderWork();
-// Wire player controls
+// Wire player controls (single listener — no onclick= on buttons)
 document.getElementById('pcPrev')?.addEventListener('click', prevTrack);
 document.getElementById('pcNext')?.addEventListener('click', nextTrack);
 document.getElementById('pcPlay')?.addEventListener('click', togglePlay);
+document.getElementById('pcShuffle')?.addEventListener('click', toggleShuffle);
+// Init shuffle button appearance
+(()=>{ const b=document.getElementById('pcShuffle'); if(b) b.style.opacity='0.5'; })();
 renderContacts();
 renderVideos();
 loadCounter();
