@@ -6,7 +6,7 @@ echo "📝 Đang lưu thay đổi..."
 git add .
 
 echo "💾 Đang commit..."
-git commit -m "Update portfolio" 2>&1 | grep -v "^warning"
+git commit -m "Fix mobile layout; Pinterest gallery; Momo QR; contact fix" 2>&1 | grep -v "^warning"
 
 echo ""
 echo "📤 Đang push lên GitHub..."

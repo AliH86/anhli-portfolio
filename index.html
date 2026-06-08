@@ -1028,6 +1028,19 @@ footer {
   .momo-btn { bottom:1.25rem; right:1.25rem; width:46px; height:46px; font-size:1.1rem; }
   .cta-float { bottom:1.25rem; left:1.25rem; }
   .cta-float-btn { font-size:0.6rem; padding:0.45rem 0.8rem; }
+  /* Artist cards: stack vertically on phone */
+  .artist { flex-direction:column; align-items:center; text-align:center; padding:1.1rem; gap:0.9rem; }
+  .artist-photo { width:72px; height:72px; }
+  .artist-name { font-size:1.25rem; }
+  .artist-desc { font-size:0.72rem; }
+  /* Gallery: Pinterest 2-col */
+  .gallery { columns:2; column-gap:0.5rem; }
+  .g-item { margin-bottom:0.5rem; }
+  /* Contact: single column on small phones */
+  .contact-deck { flex-direction:column; align-items:stretch; }
+  .clink { justify-content:space-between; border-radius:10px; }
+  /* Section padding tighter */
+  section { padding:4rem 1.1rem; }
 }
 
 .reveal { opacity:0; transform:translateY(24px); transition:opacity 0.75s ease, transform 0.75s ease; }
@@ -1288,11 +1301,11 @@ Bạn có thể gặp mình qua các khóa học về Sự kiện tại AIM Acad
 <!-- CONTACT -->
 <section id="contact">
   <div class="contact-wm" aria-hidden="true">LIÊN HỆ</div>
-  <div class="contact-inner" style="width:780px;">
+  <div class="contact-inner">
     <div class="sec-label reveal">Connect</div>
     <h2 class="sec-h reveal">Kết nối <em>với Anh Li</em></h2>
     <div class="sec-bar reveal"></div>
-    <p class="contact-lead reveal" style="margin: 10px 130px 0px; padding: 3px 0px 0px; width: 820px; line-height: 1.7; font-size: 6px">Có một show cần dựng, một bài cần viết, hay chỉ muốn nói chuyện nghề — cứ nhắn.</p>
+    <p class="contact-lead reveal">Có một show cần dựng, một bài cần viết, hay chỉ muốn nói chuyện nghề — cứ nhắn.</p>
     <div class="contact-deck" id="contactDeck"></div>
   </div>
 </section>
