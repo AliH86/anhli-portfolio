@@ -2,3 +2,5 @@
 **/.DS_Store
 *.ai
 deploy-github.sh
+deploy.command
+.git-token
