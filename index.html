@@ -755,13 +755,14 @@ section { padding:5.25rem 4rem; position:relative; }
 }
 .g-chip:hover { border-color:var(--border2); color:var(--taupe2); }
 .g-chip.active { border-color:var(--amber); color:var(--amber); background:var(--glow); }
-.gallery { columns:4; column-gap:1.25rem; }
-@media(min-width:1800px){ .gallery{ columns:5; } }
-@media(max-width:1200px){ .gallery{ columns:3; } }
-@media(max-width:900px){ .gallery{ columns:2; } }
-@media(max-width:560px){ .gallery{ columns:1; } }
+.gallery { columns:5; column-gap:0.75rem; }
+@media(min-width:1800px){ .gallery{ columns:6; } }
+@media(max-width:1400px){ .gallery{ columns:4; } }
+@media(max-width:1100px){ .gallery{ columns:3; } }
+@media(max-width:700px){ .gallery{ columns:2; } }
+@media(max-width:420px){ .gallery{ columns:2; } }
 .g-item {
-  break-inside:avoid; margin-bottom:1.25rem; position:relative;
+  break-inside:avoid; margin-bottom:0.75rem; position:relative;
   border:0.5px solid var(--border); overflow:hidden; cursor:pointer;
   transition:border-color 0.35s, transform 0.45s, box-shadow 0.45s;
   animation:gRise 0.7s var(--gd,0s) both;
@@ -949,11 +950,92 @@ footer {
   .reveal{ opacity:1 !important; transform:none !important; transition:none !important; }
 }
 
-.reveal { animation:riseIn 0.8s both; }
-.reveal.d1 { animation-delay:0.08s; }
-.reveal.d2 { animation-delay:0.16s; }
-.reveal.d3 { animation-delay:0.24s; }
-.reveal.d4 { animation-delay:0.32s; }
+/* ============================================
+   MOMO DONATE WIDGET
+============================================ */
+.momo-btn {
+  position:fixed; bottom:2rem; right:2rem; z-index:200;
+  width:52px; height:52px; border-radius:50%;
+  background:linear-gradient(135deg,#ae2070,#d82d8b);
+  border:none; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 4px 22px rgba(174,32,112,0.55);
+  transition:transform 0.3s, box-shadow 0.3s;
+  font-size:1.3rem;
+}
+.momo-btn:hover { transform:scale(1.1) translateY(-2px); box-shadow:0 8px 32px rgba(174,32,112,0.7); }
+.momo-badge-tip {
+  position:absolute; right:60px; top:50%; transform:translateY(-50%);
+  background:rgba(9,8,14,0.92); border:0.5px solid var(--border2);
+  color:var(--taupe2); font-size:0.66rem; letter-spacing:0.1em;
+  white-space:nowrap; padding:0.35rem 0.75rem; border-radius:4px;
+  pointer-events:none; opacity:0; transition:opacity 0.25s;
+  font-family:inherit;
+}
+.momo-btn:hover .momo-badge-tip { opacity:1; }
+
+.momo-modal {
+  position:fixed; inset:0; z-index:600;
+  background:rgba(0,0,0,0.82); backdrop-filter:blur(8px);
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; pointer-events:none; transition:opacity 0.3s;
+}
+.momo-modal.open { opacity:1; pointer-events:all; }
+.momo-card {
+  background:var(--ink2); border:0.5px solid var(--border2);
+  padding:2rem 1.75rem; max-width:300px; width:calc(100% - 3rem);
+  text-align:center; position:relative;
+  animation:riseIn 0.4s ease both;
+}
+.momo-close-btn {
+  position:absolute; top:0.65rem; right:0.9rem;
+  background:none; border:none; color:var(--text3);
+  cursor:pointer; font-size:1rem; line-height:1;
+}
+.momo-close-btn:hover { color:var(--amber); }
+.momo-card-title { font-family:'Cormorant Garamond',serif; font-size:1.4rem; color:var(--amber); margin-bottom:0.15rem; }
+.momo-card-sub { font-size:0.62rem; letter-spacing:0.15em; color:var(--text3); text-transform:uppercase; margin-bottom:1.25rem; }
+.momo-qr-wrap {
+  width:190px; height:190px; margin:0 auto 1rem;
+  background:white; padding:0.6rem; border-radius:6px;
+  display:flex; align-items:center; justify-content:center;
+}
+.momo-qr-wrap img { width:100%; height:100%; object-fit:contain; display:block; }
+.momo-card-name { font-size:0.82rem; color:var(--taupe2); font-weight:500; }
+.momo-card-stk { font-size:0.7rem; color:var(--text3); letter-spacing:0.1em; margin-top:0.2rem; }
+.momo-card-note { font-size:0.62rem; color:var(--text3); margin-top:0.75rem; line-height:1.6; }
+
+/* ============================================
+   FLOATING CTA
+============================================ */
+.cta-float {
+  position:fixed; bottom:2rem; left:2rem; z-index:200;
+  display:flex; flex-direction:column; align-items:flex-start; gap:0.45rem;
+}
+.cta-float-btn {
+  display:flex; align-items:center; gap:0.6rem;
+  background:rgba(9,8,14,0.88); border:0.5px solid var(--border2);
+  color:var(--taupe2); padding:0.55rem 1rem;
+  text-decoration:none; font-size:0.66rem;
+  letter-spacing:0.12em; text-transform:uppercase;
+  transition:all 0.3s; backdrop-filter:blur(12px);
+  border-radius:100px; cursor:pointer; white-space:nowrap;
+  font-family:inherit;
+}
+.cta-float-btn:hover { border-color:var(--amber); color:var(--amber); transform:translateY(-2px); }
+.cta-float-dot { width:5px; height:5px; border-radius:50%; background:var(--amber); animation:pulse 2s infinite; flex-shrink:0; }
+@media(max-width:600px){
+  .momo-btn { bottom:1.25rem; right:1.25rem; width:46px; height:46px; font-size:1.1rem; }
+  .cta-float { bottom:1.25rem; left:1.25rem; }
+  .cta-float-btn { font-size:0.6rem; padding:0.45rem 0.8rem; }
+}
+
+.reveal { opacity:0; transform:translateY(24px); transition:opacity 0.75s ease, transform 0.75s ease; }
+.reveal.in { opacity:1; transform:none; }
+.reveal.d1 { transition-delay:0.10s; }
+.reveal.d2 { transition-delay:0.20s; }
+.reveal.d3 { transition-delay:0.30s; }
+.reveal.d4 { transition-delay:0.40s; }
 
 /* ============================================
    RESPONSIVE
@@ -961,6 +1043,8 @@ footer {
 @media(max-width:900px){
   nav { padding:1rem 1.5rem; }
   nav.solid { padding:0.75rem 1.5rem; }
+  .nav-links { gap:1.2rem; }
+  .nav-links a { font-size:0.6rem; letter-spacing:0.1em; }
   .hero { padding:0 1.5rem 3.5rem; }
   .hero-photo {
     width:100%; background-position:50% 12%;
@@ -985,6 +1069,9 @@ footer {
   .pc-bar { order:5; flex-basis:100%; }
   .player-top { flex-direction:column; align-items:center; }
   .music-decor { opacity:0.08; }
+  .artist-strip { grid-template-columns:1fr; }
+  .artist-photo { width:76px; height:76px; }
+  .artist-name { font-size:1.4rem; }
   .work-item { grid-template-columns:1fr; gap:0.5rem; }
   .work-badges { flex-direction:row; align-items:flex-start; }
   .contact-deck { grid-template-columns:1fr 1fr; }
@@ -1254,6 +1341,35 @@ Bạn có thể gặp mình qua các khóa học về Sự kiện tại AIM Acad
     </div>
     <iframe id="modalFrame" src="" allowfullscreen></iframe>
   </div>
+</div>
+
+<!-- MOMO DONATE WIDGET -->
+<button class="momo-btn" id="momoBtn" onclick="toggleMomo()" aria-label="Ủng hộ Anh Li qua Momo">
+  <span style="font-size:1.25rem;line-height:1">💗</span>
+  <span class="momo-badge-tip">Ủng hộ Anh Li ☕</span>
+</button>
+<div class="momo-modal" id="momoModal" onclick="bgCloseMomo(event)">
+  <div class="momo-card">
+    <button class="momo-close-btn" onclick="toggleMomo()">✕</button>
+    <div class="momo-card-title">Ủng hộ Anh Li</div>
+    <div class="momo-card-sub">Buy me a coffee · Momo QR</div>
+    <div class="momo-qr-wrap">
+      <img src="images/momo-qr.jpg" alt="Momo QR Code" onerror="this.parentElement.innerHTML='<div style=\'font-size:0.7rem;color:#888;text-align:center;padding:1rem\'>Lưu ảnh QR vào<br/><code>images/momo-qr.jpg</code></div>'"/>
+    </div>
+    <div class="momo-card-name">Huỳnh Chí Lập</div>
+    <div class="momo-card-stk">STK: *******277</div>
+    <div class="momo-card-note">Quét mã Momo · VietQR · Napas 247<br/>Cảm ơn bạn đã ghé thăm Cái Sạp nhạc 🙏</div>
+  </div>
+</div>
+
+<!-- FLOATING CTA -->
+<div class="cta-float">
+  <a class="cta-float-btn"
+     href="mailto:ali.readytostart@gmail.com?subject=Liên hệ hợp tác với Anh Li&body=Xin chào Anh Li,%0A%0AMình tên là [Tên bạn], liên hệ về [chủ đề].%0A%0A[Nội dung]%0A%0AThân mến."
+     target="_blank">
+    <span class="cta-float-dot"></span>
+    Liên hệ ngay →
+  </a>
 </div>
 
 <script>
@@ -2026,6 +2142,22 @@ function closeVideo(){
   document.getElementById('modal').classList.remove('open');
 }
 function bgClose(e){ if(e.target.id==='modal') closeVideo(); }
+
+/* ============================================================
+   MOMO DONATE
+============================================================ */
+function toggleMomo(){
+  const m=document.getElementById('momoModal');
+  m.classList.toggle('open');
+}
+function bgCloseMomo(e){ if(e.target.id==='momoModal') document.getElementById('momoModal').classList.remove('open'); }
+// Close with Escape key
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    document.getElementById('momoModal')?.classList.remove('open');
+    closeVideo();
+  }
+});
 
 /* ============================================================
    INIT
