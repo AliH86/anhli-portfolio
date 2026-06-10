@@ -1241,7 +1241,7 @@ Bạn có thể gặp mình qua các khóa học về Sự kiện tại AIM Acad
   <div class="soundwave reveal" id="soundwave"></div>
 
   <!-- ALBUMS -->
-  <div class="albums-label reveal">Albums · 12 playlist · bấm để mở danh sách bài</div>
+  <div class="albums-label reveal">Albums · 14 playlist · bấm để mở danh sách bài</div>
   <div class="album-carousel reveal" id="albumCarousel"><div class="album-track" id="albumGrid"></div></div>
   <div class="album-drawer" id="albumDrawer" aria-live="polite"></div>
 
@@ -1443,77 +1443,226 @@ const ARTISTS = [
 ];
 
 const ALBUMS = [
-  {
-    id:'f821410f-651f-4aba-b620-b92e1f9b5112',
+  { id:'f821410f-651f-4aba-b620-b92e1f9b5112',
     name:'Dai-Ichi Life Vietnam', sub:'Corporate Anthem · Kick-off · EDM',
-    cover:'images/covers/dai-ichi-life.jpg',
+    cover:'https://cdn2.suno.ai/ed9b604d.jpeg',
     desc:'Album Kick-off soundtracks qua nhiều mùa sôi nổi', count:8,
+    tracks:[
+      {id:'3e1f52a5-b6df-4723-bab3-9b6bc154809e', name:'Cùng ghi dấu vinh quang', dur:'3:46'},
+      {id:'7a9ab5bb-fc39-40a0-b271-fe73bcada6b6', name:'Vững Bước Vươn Xa', dur:'3:03'},
+      {id:'dfea314a-7563-4147-8f71-55168de35c45', name:'Vươn Xa Hơn! (Remastered)', dur:'3:27'},
+      {id:'8a534215-0674-4772-b49a-bafedf14cfc1', name:'Đỉnh Nóc Kịch Trần Phất Phới như DLV', dur:'3:59'},
+      {id:'f9c39d8b-7f79-4a50-ae5d-55f4e52a6ffd', name:'AD Dai Ichi - GẮN KẾT VƯƠN XA (HƠN!)', dur:'3:34'},
+      {id:'aadebd45-e4dd-462c-b065-53de1c299a3e', name:'Rhythm of Triumph (Remastered)', dur:'3:49'},
+      {id:'fe35ec74-0a37-4904-a5cf-d98eec31682b', name:'Đường Đua Rực Rỡ (Cover) (Remastered)', dur:'3:06'},
+      {id:'45d8920d-6a4c-43d5-be2b-a36f43a33546', name:'Mã Phi Nước Đại -Ichi - ANo1! (edited)', dur:'4:10'},
+    ],
   },
-  {
-    id:'4b8e4a6c-d6f0-4baf-baef-894ee0e9f41a',
+  { id:'4b8e4a6c-d6f0-4baf-baef-894ee0e9f41a',
     name:'Dấu Ấn Thanh Âm', sub:'Selected Event Soundtracks · Stage · Brand',
-    cover:'images/covers/dau-an-thanh-am.jpg',
+    cover:'https://cdn2.suno.ai/3375ea42.jpeg',
     desc:'Dấu ấn âm nhạc từ những sân khấu, thương hiệu và khoảnh khắc đã đi qua — được Anh Li gom lại thành một hành trình thanh âm.', count:16,
+    tracks:[
+      {id:'e247bbb1-1ded-42c6-ad80-ec5257a23956', name:'Vĩnh Tân Gr- Vươn Xa Biển Lớn! (Remastered)', dur:'3:40'},
+      {id:'baaf0f91-51ce-4254-ac9a-928132663775', name:'Icon to ICONIC', dur:'2:36'},
+      {id:'755436dc-577b-4f80-a8c8-d90656b9efd8', name:'Đại Lộ Vinh Hoa', dur:'3:27'},
+      {id:'b0b2bab2-aa2e-4c8e-aae5-f75f3bdb036e', name:'House Vietnam (HVN)', dur:'3:46'},
+      {id:'0a954ad3-3c6c-427f-a637-9ee24bbf6176', name:'Nhịp đập vinh quang', dur:'2:41'},
+      {id:'b71b4c7a-703e-4949-9a68-c538ac0ef11c', name:'House of Champions (FLAG Marching) (Cover)', dur:'2:56'},
+      {id:'0c737040-849f-4689-abc4-f33e67cfb08d', name:'Tết nay cầu gì -Nestlé', dur:'3:17'},
+      {id:'30f93d2d-d21f-4a1d-acc6-f2e71f6a7c9a', name:'Salon Deluxe Vietnam- The Runway 3', dur:'4:38'},
+      {id:'0ebaa9f2-6a2b-49f0-90a1-df1cf8ca0a98', name:'Timor Leste rhythm-TEBE', dur:'2:04'},
+      {id:'cbbc700c-0cf3-4cd3-a6eb-ab8117b7f9c3', name:'Timor Leste rhythm TEBE - Jose Mesquita (1)', dur:'4:03'},
+      {id:'123d7218-0e83-4ba2-a2c1-1d37f3ec69e3', name:'Shine, Shine, Shineeee! (Remastered x2)', dur:'3:24'},
+      {id:'b844c787-2f36-43f3-9d09-d337cae5b331', name:'Before the Start', dur:'2:44'},
+      {id:'46402498-ae34-4c0c-827b-a1e277468fd0', name:'WE\'RE ALREADY 2.25', dur:'3:53'},
+      {id:'5bb0a305-f2e4-435a-8956-54b616d22cc8', name:'CÓ MẶT TRÊN MÀN HÌNH!!!', dur:'3:14'},
+      {id:'9d192425-b4b6-416d-8c52-49bbc7e22130', name:'On the Screen (Remix)', dur:'2:06'},
+      {id:'45d8920d-6a4c-43d5-be2b-a36f43a33546', name:'Mã Phi Nước Đại -Ichi - ANo1! (edited)', dur:'4:10'},
+    ],
   },
-  {
-    id:'e7dd732d-9b6c-487c-836e-d2f412b1683e',
+  { id:'e7dd732d-9b6c-487c-836e-d2f412b1683e',
     name:'Untamed', sub:'R&B · Dark Pop · Anh Li & D\'Li',
-    cover:'images/covers/untamed.jpg',
+    cover:'https://cdn2.suno.ai/3f985bfa.jpeg',
     desc:'Nổi loạn lên, Si mê lên, Cuồng dại lên', count:13,
+    tracks:[
+      {id:'a29966fb-a3d8-405d-baf1-6977fac27818', name:'Mơ Giấc Tình Nồng Say', dur:'3:23'},
+      {id:'269bde35-151e-4da0-aeb1-e1f1f23380b4', name:'Cớ sao vậy em? [D\'li x Ali]', dur:'2:27'},
+      {id:'14a7e8d3-6cc8-4b9d-acca-ee463d8122f9', name:'Những kẻ Drill Loves', dur:'2:36'},
+      {id:'7517a458-e4a8-419c-965d-d095eb1ad8ef', name:'Mật ngọt, anh say đó.[ D\'Li - Anh Li]', dur:'3:19'},
+      {id:'1cfa61e1-471b-4cfd-a05a-0083e8fa1fdb', name:'Chuyện....Mình Lạ', dur:'3:04'},
+      {id:'10d67ecd-8ef6-4dc6-98bf-35e502e25af0', name:'Xin đừng nói câu gì...', dur:'3:22'},
+      {id:'126c5e9f-e68e-4e35-8df6-8e0f35fd01a9', name:'Nhịp Đêm Slay', dur:'3:24'},
+      {id:'9ed95313-5d21-4601-98df-4b462d493086', name:'Rock Tình Thừ-a', dur:'3:41'},
+      {id:'21c513f1-619f-44b1-9738-6ad030e5b29b', name:'Ex-Cursed Me', dur:'3:47'},
+      {id:'6fb457a9-df03-4bc8-a3af-f6b80505abba', name:'Vì Hết Yêu?', dur:'3:35'},
+      {id:'12e6cf23-3518-43fa-9808-b029c16c94b6', name:'Gã si & ly \'on the rock\'', dur:'3:28'},
+      {id:'85db229c-21a6-41b7-8299-8cf6a5986abd', name:'Không Còn ~Chúng ta~', dur:'3:54'},
+      {id:'e28362d8-175e-4787-9061-7b4e5c979355', name:'Mãi mãi là ...?! (Clean Studio Cut)', dur:'4:49'},
+    ],
   },
-  {
-    id:'2818d6f0-318d-4aad-94ac-027ccc756ec4',
+  { id:'2818d6f0-318d-4aad-94ac-027ccc756ec4',
     name:'Unplugged Vol.1', sub:'Acoustic · Indie Folk · Hát mộc',
-    cover:'images/covers/unplugged-vol1.jpg',
+    cover:'https://cdn2.suno.ai/image_3b949f7a-601e-4206-a610-e55ed9a03c24.jpeg',
     desc:'Hát mộc chữa lòng lành liền một mạch— qua nhiều lát cắt đời thường, bằng những cảm xúc rất riêng....', count:9,
+    tracks:[
+      {id:'3b949f7a-601e-4206-a610-e55ed9a03c24', name:'9PM', dur:'2:18'},
+      {id:'8b81a6e1-d7c2-41d9-84d2-7f27609cc099', name:'Bí Kíp Luyện Deadlines', dur:'3:16'},
+      {id:'f06e6c2a-b56c-4784-aebb-b2a68cd84ed3', name:'Nào, cho mượn bờ vai này', dur:'3:14'},
+      {id:'f2dfd824-606d-4f9c-ac6c-364ff94b405d', name:'An(h) Yên, Quên Phiền', dur:'4:36'},
+      {id:'aa8e1283-e121-416f-a054-c573ce0291f2', name:'Có Sao Đâu (It\'s Alright)', dur:'3:33'},
+      {id:'6e96c3d7-41fc-4841-800b-b4764b862c3c', name:'Tôi yêu....', dur:'2:51'},
+      {id:'75c08a9c-2c7c-4024-9a6e-2ad25bf1fce3', name:'Con đường ta di', dur:'3:46'},
+      {id:'5c3f3c0d-d9f1-4e7e-b864-982832e07295', name:'Chạm vào ánh nắng.', dur:'4:38'},
+      {id:'89f1c8f1-57a3-4395-8b1b-d8c755eb5909', name:'Hiên nhà của 50...', dur:'3:54'},
+    ],
   },
-  {
-    id:'15c4b5fa-3d24-4a7c-b1bf-6ca2420d81c7',
+  { id:'15c4b5fa-3d24-4a7c-b1bf-6ca2420d81c7',
     name:'Unplugged Vol 2', sub:'Acoustic · Bossa Nova · Indie Folk',
-    cover:'images/covers/unplugged-vol2.jpg',
+    cover:'https://cdn2.suno.ai/image_ceec7c53-c045-4455-9b79-6d72cc29a56e.jpeg',
     desc:'', count:8,
+    tracks:[
+      {id:'ceec7c53-c045-4455-9b79-6d72cc29a56e', name:'Đừng lỡ nhịp!', dur:'3:08'},
+      {id:'76655d83-8252-4fda-97ae-9db85cc9de37', name:'Nẹh Têh...', dur:'2:44'},
+      {id:'976a442f-08d6-4dee-92ed-f84e60045b6d', name:'Đi nhớ trở về', dur:'3:17'},
+      {id:'0fff744e-1553-4b9f-977d-4b19ee5e9817', name:'Buôn Mây Bán Gió...', dur:'3:17'},
+      {id:'5c9b9dee-eddd-4d29-b068-c0481e37f60b', name:'Trước hiên nhà...', dur:'5:44'},
+      {id:'ebe6bc52-0ac4-4930-aaeb-97e6588b79a4', name:'Đời tự lo', dur:'4:01'},
+      {id:'86500156-b834-4f87-b194-a6cd80efb068', name:'Ai bằng mình đâu?', dur:'5:14'},
+      {id:'e5fcd0cc-9be3-47b5-86ff-56f7bc2afbed', name:'Cho tất cả Chúng Ta', dur:'4:00'},
+    ],
   },
-  {
-    id:'b1021057-56bd-49e8-a1fb-5af4d69c2c0e',
+  { id:'b1021057-56bd-49e8-a1fb-5af4d69c2c0e',
     name:'Mỹ Vị Nhân Sinh', sub:'Alt-Indie Folk · Anh Li',
-    cover:'images/covers/my-vi-nhan-sinh.jpg',
+    cover:'https://cdn2.suno.ai/image_142b3ba1-12a5-4fdc-96d5-ce5984f90e12.jpeg',
     desc:'Một lát cắt về cuộc đời muôn vị. Có cay để nhớ, có đắng để thấm, có ngọt để thương, có nhạt để bình yên. Với Anh Li, mỗi hương vị đi qua đời người đều là một cách thế gian kể chuyện...', count:4,
+    tracks:[
+      {id:'142b3ba1-12a5-4fdc-96d5-ce5984f90e12', name:'Ngọt lạc', dur:'2:39'},
+      {id:'98dac03b-7ba7-4889-80aa-d5d5e9e9a05d', name:'Đúng đắng', dur:'2:14'},
+      {id:'152d5bf6-119e-4c39-b712-68f3b7ebc1e8', name:'Chua Cay tự tình.', dur:'2:21'},
+      {id:'fb44f4ac-3615-4766-b323-99215101017b', name:'Men Mầm Muối', dur:'3:38'},
+    ],
   },
-  {
-    id:'74ba3104-59db-41e6-90d6-ecd657c449ce',
+  { id:'74ba3104-59db-41e6-90d6-ecd657c449ce',
     name:'Unplugged Special – Âm Hưởng', sub:'Acoustic · Tribal Folk · Âm Hưởng Dân Tộc',
-    cover:'images/covers/unplugged-am-huong.jpg',
+    cover:'https://cdn2.suno.ai/image_872122de-24f4-4196-825d-2214e151c69a.jpeg',
     desc:'', count:13,
+    tracks:[
+      {id:'872122de-24f4-4196-825d-2214e151c69a', name:'Thương sao...rau đắng sau hè', dur:'3:42'},
+      {id:'75c08a9c-2c7c-4024-9a6e-2ad25bf1fce3', name:'Con đường ta di', dur:'3:46'},
+      {id:'4c2ac9b3-9eff-49d6-bb79-4b90d5e50e98', name:'Mấy bạn mấy bè', dur:'2:40'},
+      {id:'7bc4edd1-5bf5-4426-b929-98834bea6c1e', name:'Duyên, Hợp, Tan', dur:'3:14'},
+      {id:'33fe03db-c6a1-4a37-8413-780099068b41', name:'Vọng Về Bản Nguyên', dur:'3:15'},
+      {id:'c19b8ca9-b4a2-4054-8705-cbc02d4b1aa7', name:'Vá lòng người thương', dur:'4:03'},
+      {id:'90c0babf-2229-442c-a54b-92055c11cbf4', name:'Ơ Lúa Rãy Ơi...', dur:'3:21'},
+      {id:'963ef218-b6ae-486c-9637-025dee4a8f77', name:'Đời nảy mầm', dur:'4:07'},
+      {id:'1eb49547-b8a6-4169-a511-c9ccc521f0ba', name:'Dzung Dzăng Dzung Dzẻ', dur:'3:30'},
+      {id:'5696bea8-9baf-4bdd-85f9-e2afc86554e5', name:'Vũ điệu của Đất', dur:'2:49'},
+      {id:'699551f2-d491-4b67-bbaa-4a6e015911c1', name:'Tôi mang một chút mây về thành phố', dur:'5:18'},
+      {id:'0fff744e-1553-4b9f-977d-4b19ee5e9817', name:'Buôn Mây Bán Gió...', dur:'3:17'},
+      {id:'2096197a-b0a3-4fba-89d2-d654b2f1188e', name:'Việt Nam Ta Yêu', dur:'3:54'},
+    ],
   },
-  {
-    id:'1c504bd2-2249-4fca-931a-f1c992581a25',
+  { id:'1c504bd2-2249-4fca-931a-f1c992581a25',
     name:'MiTek · Way of Stars', sub:'EDM · Stadium · Show',
-    cover:'images/covers/mitek-way-of-stars.jpg',
+    cover:'https://cdn2.suno.ai/image_b0e95414-5c1f-43dc-a01b-00691e184ed3.jpeg',
     desc:'', count:4,
+    tracks:[
+      {id:'a03438fa-df97-4d68-917d-82b2f9c9086e', name:'[Way of STARS] -We are The Stars Tonight-D\'Li', dur:'4:46'},
+      {id:'5a877608-94ba-40ab-ac74-c291d23730e4', name:'[Way of STARS] -We are The Stars', dur:'4:00'},
+      {id:'5f686228-97f3-4c13-bd26-daac9b75b1cd', name:'Mitek-nista...', dur:'3:18'},
+      {id:'e1ee21d5-f187-407c-b751-198c2a28c074', name:'Lovers Gonna Love (Electro House Edit)', dur:'3:37'},
+    ],
   },
-  {
-    id:'8f8611b8-416e-4624-9bd9-e91e1c2dea62',
+  { id:'df0c36ec-4afd-4760-9aa3-3b05350a1b87',
+    name:'I ❤ VN', sub:'Patriotic · Pop · Epic',
+    cover:'https://cdn2.suno.ai/7622500f.jpeg',
+    desc:'', count:12,
+    tracks:[
+      {id:'f8628247-b5d2-4839-b501-8308976c1615', name:'HẸN ƯỚC BẮC NAM - Cover', dur:'5:03'},
+      {id:'9bd3da93-4f91-4053-a88e-8d09109d29d5', name:'Viết Tiếp Ước Mong', dur:'4:42'},
+      {id:'4d8aa486-6064-41b7-a890-84c01cc2cc8e', name:'Vững Hậu Phương Vươn Tiền Tuyến (Epic Marching Mix)', dur:'4:57'},
+      {id:'93aab150-3285-4534-b71c-97c8d408371a', name:'Tiếng Vọng Non Sông', dur:'4:11'},
+      {id:'f6adf1b5-3075-46fe-8b85-fb6b7177b182', name:'Đất Trời Nước Nam', dur:'4:41'},
+      {id:'2cf71f83-6d84-4abb-a241-123e19dea645', name:'Dưới Bầu Trời Ta Yêu', dur:'3:11'},
+      {id:'99752465-a1c0-4e7e-a3ac-563dd22bba1b', name:'Một Việt Nam!', dur:'4:32'},
+      {id:'1e75456e-d27d-4e85-9afc-9c5d67cd50f0', name:'Khúc ca Việt tự hào', dur:'4:26'},
+      {id:'4c3815e9-5c08-48d4-88b0-cfbcd1356c0b', name:'Vươn Cao Khát Vọng Việt Nam', dur:'4:58'},
+      {id:'2096197a-b0a3-4fba-89d2-d654b2f1188e', name:'Việt Nam Ta Yêu', dur:'3:54'},
+      {id:'243a6f34-f01a-4b17-8399-71e398fe3a34', name:'Cho tất cả chúng ta.', dur:'3:47'},
+      {id:'b8f7a3ec-5e4d-4d15-b0cc-53ceee89cf16', name:'Chất-Việt-Chất!', dur:'2:44'},
+    ],
+  },
+  { id:'0bd2c183-50a7-4917-ae88-2ecdc9f0d2f3',
+    name:'TẾT Ngọ Sum Vầy \'26', sub:'Tết · Folk Pop · Celebration',
+    cover:'https://cdn2.suno.ai/image_11015d6d-3fc4-4aea-80f0-f889d3e06610.jpeg',
+    desc:'', count:9,
+    tracks:[
+      {id:'9baaa82b-34cf-4728-80aa-7658c43fe299', name:'Tết nay cầu gì?', dur:'3:44'},
+      {id:'220ef898-680f-4f6f-942f-a617df5bb86e', name:'”ĐỈNH CHÓP (On Top)”', dur:'3:40'},
+      {id:'5129eb62-7610-4ea6-b283-b2f863dc1bcc', name:'Duyên, Hợp, Tan', dur:'3:18'},
+      {id:'9c788787-17d1-4d53-b7be-7da79732ab0a', name:'Lý “Về Nhà”', dur:'2:54'},
+      {id:'95bdc6bf-9c93-419e-ac5a-1f4ab0efaa1c', name:'Mã Điệu Khai Xuân', dur:'3:32'},
+      {id:'db3c24ae-d524-4197-94f0-d053651d91e7', name:'Fa cai, Fa cai lah x Phát tài to (Mashup)', dur:'2:51'},
+      {id:'9ee05b6f-7336-4473-965f-81d37de644a5', name:'Về Nhà Là Có Tết. (Edit)', dur:'3:06'},
+      {id:'ba077c07-6f33-4b60-bfc4-d47221a84ca8', name:'Không bằng AI?!', dur:'3:21'},
+      {id:'85c27ed2-4bf4-4679-a7b8-3bd81508eef4', name:'發財，發財啦! (Unplugged Groove Mix)', dur:'2:24'},
+    ],
+  },
+  { id:'8f8611b8-416e-4624-9bd9-e91e1c2dea62',
     name:'Cảm Thán Ca', sub:'Indie Folk · Anh Li & D\'Li',
-    cover:'images/covers/cam-than-ca.jpg',
+    cover:'https://cdn2.suno.ai/image_2ca4a4ac-4ed5-43db-bfed-bcf126963070.jpeg',
     desc:'Chuỗi cảm xúc được thốt lên giữa cuộc sống muôn màu. Qua màu giọng của Anh Li và D\'Li, mỗi ca khúc là một tiếng lòng rất đời: vui, buồn, thương, giận, ngỡ ngàng… rồi cũng “thì thôi” mà bước tiếp.', count:9,
+    tracks:[
+      {id:'2ca4a4ac-4ed5-43db-bfed-bcf126963070', name:'Thì thôi!!!!', dur:'3:02'},
+      {id:'b1764573-79ba-4adb-bb48-7e72e1b63039', name:'ừ - thì - là - vậy - mà -', dur:'2:58'},
+      {id:'0a20485e-60a9-46c4-b7cb-11e50fc74a8c', name:'ôh ... kìa!', dur:'4:42'},
+      {id:'0721e27a-3d98-4831-b02f-eb51b66ab42d', name:'Ơ hay', dur:'2:59'},
+      {id:'fe9a5917-d92b-4c74-beeb-26e48d87a508', name:'Ối Giờiii... Là Trời Ơi...[ft D\'Li]', dur:'3:55'},
+      {id:'482a5bfa-d45d-40cb-9a1c-e26a6e1ae69f', name:'Ô thôi chếc...', dur:'4:22'},
+      {id:'a83954f8-0d20-4cfc-9ede-da12c17d09b1', name:'Ủa????', dur:'4:04'},
+      {id:'7011c7e7-3861-4b89-bdf4-ffdc38ed1b34', name:'Úi dào...', dur:'4:07'},
+      {id:'91199211-9380-4e1f-b408-14033ab3a615', name:'À... ra là..[Anh Li x D\'Li]', dur:'5:04'},
+    ],
   },
-  {
-    id:'bd830721-0b26-40ea-b7d5-508e5d6612a2',
+  { id:'bd830721-0b26-40ea-b7d5-508e5d6612a2',
     name:'Tôi Hát Cả Bốn Mùa', sub:'Ghibli Folk · Anh Li & D\'Li',
-    cover:'images/covers/toi-hat-ca-bon-mua.jpg',
+    cover:'https://cdn2.suno.ai/image_749e34d4-7589-471f-a9d8-320b5fe13a5b.jpeg',
     desc:'Có những mùa đi qua như cơn gió, có những mùa ở lại thành bài ca. Hành trình của Anh Li và D\'Li qua thiên nhiên, tình yêu, ký ức và vòng tuần hoàn kỳ diệu của cuộc sống.', count:5,
+    tracks:[
+      {id:'749e34d4-7589-471f-a9d8-320b5fe13a5b', name:'Mùa Hạ của Tôi [Xuân Quỳnh]', dur:'3:18'},
+      {id:'5eecfc34-d147-40a0-b674-d06d4b452d58', name:'Tiếng Thu Chùng Chình Sang [Hửu Thỉnh]', dur:'3:32'},
+      {id:'af69d99f-c006-4ecd-aef7-cd0ed2afe698', name:'Màu Đông [Phan Vũ]', dur:'4:03'},
+      {id:'32c66e9b-2746-4c0b-922a-57a7816ed29c', name:'Xuân Xanh Tự Tình [Nguyễn Bính]', dur:'2:30'},
+      {id:'7eddbbb4-fbb0-47e3-a1dc-daa0cb0ec3ef', name:'Hát Ca cả Bốn Mùa', dur:'3:58'},
+    ],
   },
-  {
-    id:'c358ba32-19d4-46ef-bef9-5de138b03ea4',
+  { id:'c358ba32-19d4-46ef-bef9-5de138b03ea4',
     name:'Vietnam Young Lions \'26', sub:'Electropop · Anthem · Award',
-    cover:'images/covers/vnyl-2026.jpg',
+    cover:'https://cdn2.suno.ai/image_4618b412-a7bd-4334-bff2-b56d5334024e.jpeg',
     desc:'', count:7,
+    tracks:[
+      {id:'50633010-4d6e-463d-9610-1c1b8f021a5e', name:'APEX ROAR', dur:'2:38'},
+      {id:'38b8f448-d7da-46b6-a5e4-70ecc177cb4b', name:'A Decade of Gold', dur:'3:47'},
+      {id:'bc3eb8c6-f6b4-4629-a9a7-60062c9c483f', name:'Xin Chào the world...', dur:'3:30'},
+      {id:'dbf006f5-80a4-4235-8c56-d2699fc20ae4', name:'THE JOYFUL ROAR', dur:'3:04'},
+      {id:'9eda94ee-334c-4c08-af65-5cef6ec048aa', name:'UNSTOPPABLE LIGHT', dur:'3:00'},
+      {id:'605eea17-4d4d-411d-abc7-622be8a29ec9', name:'STEP TO THE ROAR', dur:'2:56'},
+      {id:'953e15f5-79f0-45ef-b013-dfcfbdcfb5d2', name:'WELCOME TO THE PRIDE', dur:'4:12'},
+    ],
   },
-  {
-    id:'12435dd8-eaf8-4046-8bee-cb0aa03533f8',
+  { id:'12435dd8-eaf8-4046-8bee-cb0aa03533f8',
     name:'Vietnam Young Lions \'25', sub:'Rock · Anthem · Final',
-    cover:'images/covers/vnyl-2025.jpg',
+    cover:'https://cdn2.suno.ai/0a00a58b.jpeg',
     desc:'Made by Ali, phát tại chương trình chung kết cùng tên.', count:6,
+    tracks:[
+      {id:'f17edfb8-d150-4d06-b1e9-9463935250f4', name:'”BORN TO BREAK THE BRIEF”', dur:'2:53'},
+      {id:'d4c7b098-27a4-4d55-b4df-4b9f07165c84', name:'🏆 “TO THE LIONS”', dur:'2:22'},
+      {id:'79ba22f3-80be-4b35-81d0-6de86168c753', name:'Beat IT!', dur:'1:45'},
+      {id:'5c97b422-97e4-4a1f-b9e7-a3b409052fab', name:'EPICCONIC ME', dur:'2:44'},
+      {id:'b5813ae3-e570-4a46-bbc0-cb399f3dd510', name:'Nah, Iam Epiconic!', dur:'2:37'},
+      {id:'cc4f940a-9d34-462c-b258-a430a340488d', name:'LET\'S ROAR – WE ARE VIETNAM YOUNG LIONS”', dur:'3:06'},
+    ],
   },
 ];
 
@@ -1784,26 +1933,11 @@ function selectAlbum(i, silent){
     document.querySelectorAll('.album[data-aidx]').forEach(a=>a.classList.remove('selected'));
     curAlbum=-1; curTracks=[]; return;
   }
-  curAlbum=i; curTracks=[];
+  curAlbum=i; curTracks=ALBUMS[i].tracks||[];
   document.querySelectorAll('.album[data-aidx]').forEach(a=>a.classList.toggle('selected',+a.dataset.aidx===i));
-  renderDrawer(ALBUMS[i], null);
+  renderDrawer(ALBUMS[i], curTracks);
   drawer.classList.add('open');
   if(carousel) carousel.classList.add('paused');
-  loadTracks(i);
-}
-
-async function loadTracks(i){
-  const a=ALBUMS[i];
-  try{
-    const r=await fetch(`https://studio-api.suno.ai/api/playlist/${a.id}/?page=0&page_size=50`,{cache:'no-cache'});
-    if(!r.ok) throw new Error('status '+r.status);
-    const d=await r.json();
-    curTracks=(d.playlist_clips||[]).map(c=>({id:c.clip.id,name:c.clip.title||c.clip.display_name||''}));
-    if(curAlbum===i) renderDrawer(a, curTracks);
-  }catch(err){
-    console.warn('Suno fetch:',err);
-    if(curAlbum===i) renderDrawer(a,'error');
-  }
 }
 
 function showAllTracks(i){
