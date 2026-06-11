@@ -4,16 +4,94 @@
   width: clamp(220px, 16vw, 260px);
   margin-right: clamp(1rem, 2vw, 2.2rem);
 }
+
 .album-cover {
   border-radius: 22px;
   isolation: isolate;
   box-shadow: 0 18px 54px rgba(0,0,0,0.46), inset 0 0 0 1px rgba(255,255,255,0.04);
 }
+
 .album-cover::after {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: inherit;
   pointer-events: none;
-  background:
-    radial-gradient(80% 70% at 18% 8%, rgba
+  background: radial-gradient(80% 70% at 18% 8%, rgba(255,255,255,0.18), transparent 46%), linear-gradient(135deg, rgba(255,255,255,0.06), transparent 42%, rgba(0,0,0,0.2));
+  mix-blend-mode: screen;
+  opacity: 0.72;
+}
+
+.album:hover .album-cover {
+  transform: translateY(-6px) scale(1.025);
+  box-shadow: 0 28px 70px rgba(0,0,0,0.55), 0 0 0 1px var(--border2);
+}
+
+.album-track {
+  animation-duration: calc(var(--album-dur, 70s) * 1.15);
+}
+
+.album-carousel {
+  padding-block: 1.2rem;
+}
+
+.vinyl-bg {
+  opacity: 0.24;
+  right: 1rem;
+  transform: scale(1.42);
+  filter: drop-shadow(0 18px 50px rgba(0,0,0,0.55));
+}
+
+.vinyl-disc {
+  animation-duration: 18s !important;
+}
+
+.drawer-inner {
+  border-radius: 24px;
+  background: radial-gradient(65% 90% at 88% 20%, rgba(204,159,74,0.10), transparent 58%), linear-gradient(135deg, rgba(20,18,28,0.88), rgba(10,9,16,0.78));
+  box-shadow: 0 24px 90px rgba(0,0,0,0.42), inset 0 1px 0 rgba(255,255,255,0.04);
+  overflow: hidden;
+}
+
+.gallery {
+  columns: 4 220px;
+  column-gap: 1rem;
+}
+
+.g-item {
+  border-radius: 18px;
+  margin-bottom: 1rem;
+  background: rgba(255,255,255,0.025);
+  box-shadow: 0 12px 38px rgba(0,0,0,0.22);
+}
+
+.g-item:hover {
+  transform: translateY(-6px) scale(1.012);
+  box-shadow: 0 28px 80px rgba(0,0,0,0.50);
+}
+
+.g-frame img,
+.g-frame video {
+  filter: grayscale(8%) contrast(1.04) saturate(0.96);
+}
+
+.g-tag {
+  border-radius: 999px;
+  background: rgba(9,8,14,0.55);
+}
+
+#gallery {
+  background: radial-gradient(70% 60% at 12% 6%, rgba(204,159,74,0.08), transparent 58%), radial-gradient(60% 50% at 90% 22%, rgba(120,86,160,0.07), transparent 58%), var(--ink2);
+}
+
+body.no-motion .vinyl-disc,
+body.no-motion .album-track {
+  animation: none !important;
+}
+
+@media (max-width: 700px) {
+  .album { width: 190px; }
+  .vinyl-bg { transform: scale(1.05); opacity: 0.16; }
+  .gallery { columns: 2; column-gap: 0.75rem; }
+  .g-item { border-radius: 14px; margin-bottom: 0.75rem; }
+}
