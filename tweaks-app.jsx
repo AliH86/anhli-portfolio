@@ -1,6 +1,15 @@
 // tweaks-app.jsx — Tweaks panel for Anh Li portfolio.
 // Applies values to the (vanilla) page via CSS variables + body classes.
 
+(function loadPortfolioUpgrade(){
+  if (document.getElementById('portfolio-upgrade-css')) return;
+  const link = document.createElement('link');
+  link.id = 'portfolio-upgrade-css';
+  link.rel = 'stylesheet';
+  link.href = 'portfolio-upgrade.css?v=20260611';
+  document.head.appendChild(link);
+})();
+
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "accent": "#CC9F4A",
   "bg": "Midnight",
