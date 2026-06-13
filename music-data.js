@@ -1,7 +1,7 @@
 // music-data.js — external playlist delta for Anh Li portfolio.
 // This file keeps the live site synced without touching the large inline fallback in index.html.
 window.PORTFOLIO_MUSIC = {
-  version: '2026-06-13-10',
+  version: '2026-06-13-11',
   source: 'Playlists curated by Anh Li',
   albums: [
     {
@@ -210,7 +210,7 @@ window.PORTFOLIO_MUSIC = {
         {id:'4c3815e9-5c08-48d4-88b0-cfbcd1356c0b', name:'Vươn Cao Khát Vọng Việt Nam', dur:'4:58'},
         {id:'2096197a-b0a3-4fba-89d2-d654b2f1188e', name:'Việt Nam Ta Yêu', dur:'3:54'},
         {id:'243a6f34-f01a-4b17-8399-71e398fe3a34', name:'Cho tất cả chúng ta.', dur:'3:47'},
-        {id:'b8f7a3ec-5e4d-4d15-b0cc-53ceee89cf16', name:'Chất-Việt-Chất!', dur:'2:44'}
+        {id:'b8f7a3ec-5e4d-4d15-b0cc-53ceee89cf16', name:'Chát-Việt-Chất!', dur:'2:44'}
       ]
     },
     {
@@ -306,8 +306,18 @@ window.PORTFOLIO_MUSIC = {
       sub:'Vietnam Travel · Folk Pop · Anh Li',
       cover:'uploads/di-khap-mot-day-non-song.jpg',
       desc:'Một hành trình âm nhạc đi qua những miền non sông Việt Nam — gom phong cảnh, ký ức và tình quê thành một dải thanh âm.',
-      count:0,
-      tracks:[]
+      count:9,
+      tracks:[
+        {id:'2096197a-b0a3-4fba-89d2-d654b2f1188e', name:'Việt Nam Ta Yêu', dur:'3:54'},
+        {id:'b8f7a3ec-5e4d-4d15-b0cc-53ceee89cf16', name:'Chát-Việt-Chất!', dur:'2:44'},
+        {id:'f595f503-1399-4f0b-800c-07cf0503153e', name:'Khát Vọng Sông Vàm', dur:'4:47'},
+        {id:'222f5fdc-1516-40c4-ba37-cb41685c4758', name:'Vươn Cao Long An', dur:'4:04'},
+        {id:'2cf71f83-6d84-4abb-a241-123e19dea645', name:'Dưới Bầu Trời Ta Yêu', dur:'3:11'},
+        {id:'38a81c22-bfe4-48a4-991c-5a4b65322d0f', name:'Tôi Yêu Lâm Đồng', dur:'3:29'},
+        {id:'6f1de184-72ab-4078-8a1e-112bbd09aa41', name:'Lâm Đồng Ngày Mới', dur:'3:02'},
+        {id:'976a442f-08d6-4dee-92ed-f84e60045b6d', name:'Đi nhớ trở về', dur:'3:17'},
+        {id:'e5fcd0cc-9be3-47b5-86ff-56f7bc2afbed', name:'Cho tất cả Chúng Ta', dur:'4:00'}
+      ]
     }
   ]
 };
