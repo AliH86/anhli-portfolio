@@ -1,7 +1,7 @@
 // music-data.js — external playlist delta for Anh Li portfolio.
 // This file keeps the live site synced without touching the large inline fallback in index.html.
 window.PORTFOLIO_MUSIC = {
-  version: '2026-06-13-5',
+  version: '2026-06-13-6',
   source: 'Playlists curated by Anh Li',
   albums: [
     {
@@ -69,7 +69,18 @@ window.PORTFOLIO_MUSIC = {
       name:'Tôi ❤ Việt Nam',
       sub:'Patriotic · Pop · Epic',
       cover:'uploads/toi-yeu-vn.jpg',
-      desc:'Những khúc ca viết cho dải đất hình chữ S — hào sảng, tự cường và đầy thương mến, từ hậu phương tới tiền tuyến, từ Bắc chí Nam.'
+      desc:'Những khúc ca viết cho dải đất hình chữ S — hào sảng, tự cường và đầy thương mến, từ hậu phương tới tiền tuyến, từ Bắc chí Nam.',
+      count:8,
+      tracks:[
+        {id:'f8628247-b5d2-4839-b501-8308976c1615', name:'HẸN ƯỚC BẮC NAM - Cover', dur:'5:03'},
+        {id:'9bd3da93-4f91-4053-a88e-8d09109d29d5', name:'Viết Tiếp Ước Mơ', dur:'4:42'},
+        {id:'4d8aa486-6064-41b7-a890-84c01cc2cc8e', name:'Vững Hậu Phương Vươn Tiền Tuyến...', dur:'4:57'},
+        {id:'93aab150-3285-4534-b71c-97c8d408371a', name:'Tiếng Vọng Non Sông', dur:'4:11'},
+        {id:'f6adf1b5-3075-46fe-8b85-fb6b7177b182', name:'Đất Trời Nước Nam', dur:'4:41'},
+        {id:'99752465-a1c0-4e7e-a3ac-563dd22bba1b', name:'Một Việt Nam!', dur:'4:32'},
+        {id:'4c3815e9-5c08-48d4-88b0-cfbcd1356c0b', name:'Một Việt Nam Vươn Cao', dur:'4:58'},
+        {id:'1e75456e-d27d-4e85-9afc-9c5d67cd50f0', name:'Khúc ca Việt tự hào', dur:'4:26'}
+      ]
     },
     {
       id:'8f2c17b4-cb70-46e1-9f2e-464ccadaf1ab',
