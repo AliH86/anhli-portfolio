@@ -1,7 +1,7 @@
 // music-data.js — external playlist delta for Anh Li portfolio.
 // This file keeps the live site synced without touching the large inline fallback in index.html.
 window.PORTFOLIO_MUSIC = {
-  version: '2026-06-13-8',
+  version: '2026-06-13-9',
   source: 'Playlists curated by Anh Li',
   albums: [
     {
@@ -68,13 +68,13 @@ window.PORTFOLIO_MUSIC = {
       playlistUrl:'https://suno.com/playlist/1c504bd2-2249-4fca-931a-f1c992581a25',
       name:'MiTek · Way of Stars',
       sub:'EDM · Stadium · Show',
-      cover:'https://cdn2.suno.ai/image_6f0dfec6-8e3b-47cc-8d5f-bbddf941d67f.jpeg',
+      cover:'uploads/WoS-MiTek.jpg',
       desc:'Nhạc dựng cho đêm gala “Way of Stars” — từ anthem khai màn tới khoảnh khắc sáng đèn cuối show, cả khán phòng cùng hát.',
       count:5,
       tracks:[
         {id:'a03438fa-df97-4d68-917d-82b2f9c9086e', name:'[Way of STARS] -We are The Stars Tonight-D\'Li', dur:'4:46'},
         {id:'6f0dfec6-8e3b-47cc-8d5f-bbddf941d67f', name:'Way of STAR — Master', sourceUrl:'https://suno.com/song/6f0dfec6-8e3b-47cc-8d5f-bbddf941d67f'},
-        {id:'59b37b9a-9fe7-4c1a-9cc3-acce0a8a6377', name:'Way of STARS — Extra Track', sourceUrl:'https://suno.com/song/59b37b9a-9fe7-4c1a-9cc3-acce0a8a6377'},
+        {id:'59b37b9a-9fe7-4c1a-9cc3-acce0a8a6377', name:'Gọi Tên Những Vì Sao', sourceUrl:'https://suno.com/song/59b37b9a-9fe7-4c1a-9cc3-acce0a8a6377'},
         {id:'5f686228-97f3-4c13-bd26-daac9b75b1cd', name:'Mitek-nista...', dur:'3:18'},
         {id:'e1ee21d5-f187-407c-b751-198c2a28c074', name:'Lovers Gonna Love (Electro House Edit)', dur:'3:37'}
       ]
