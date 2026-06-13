@@ -1,0 +1,134 @@
+/* Portfolio upgrade layer — album, vinyl, and Visual Lab polish */
+
+.album {
+  width: clamp(200px, 42vw, 240px);
+  margin: 0;
+}
+
+.album-cover {
+  border-radius: 22px;
+  isolation: isolate;
+  box-shadow: 0 18px 54px rgba(0,0,0,0.46), inset 0 0 0 1px rgba(255,255,255,0.04);
+}
+
+.album-cover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(80% 70% at 18% 8%, rgba(255,255,255,0.18), transparent 46%), linear-gradient(135deg, rgba(255,255,255,0.06), transparent 42%, rgba(0,0,0,0.2));
+  mix-blend-mode: screen;
+  opacity: 0.72;
+}
+
+.album.cf-focus .album-cover {
+  box-shadow: 0 30px 76px rgba(0,0,0,0.6), 0 0 0 1px rgba(204,159,74,0.4);
+}
+
+.album-track {
+  /* coverflow: để JS quản lý transform, không auto-scroll */
+}
+
+.album-carousel {
+  padding-block: 2.6rem;
+}
+
+/* DĨA THAN — đưa ra trước, rõ ràng, có chiều sâu 3D + rãnh + ánh bóng */
+.nowplaying .np-z { position:relative; z-index:1; }
+@media (min-width:701px){
+  .nowplaying .np-z { padding-right: clamp(160px, 17vw, 230px); }
+}
+.np-vinyl, .vinyl-bg.np-vinyl {
+  right: clamp(8px, 2.6vw, 42px) !important;
+  left: auto !important;
+  width: clamp(150px, 16vw, 208px) !important;
+  height: clamp(150px, 16vw, 208px) !important;
+  opacity: 1 !important;
+  z-index: 0 !important;
+  transform: translateY(-50%) perspective(640px) rotateY(-13deg) rotateX(5deg) !important;
+  filter: drop-shadow(0 24px 50px rgba(0,0,0,0.62));
+}
+.np-vinyl::after { /* ánh sáng cố định, không quay theo dĩa */
+  content:''; position:absolute; inset:0; border-radius:50%; pointer-events:none; z-index:3;
+  background: linear-gradient(118deg, rgba(255,255,255,0.30) 0 14%, rgba(255,255,255,0.05) 30%, transparent 46%);
+  mix-blend-mode: screen; opacity:0.7;
+}
+.nowplaying .vinyl-disc {
+  opacity: 1 !important;
+  background-color: #0a0910;
+  box-shadow: 0 0 0 1px rgba(204,159,74,0.22), inset 0 0 36px rgba(0,0,0,0.7);
+  animation-duration: 14s !important;
+}
+.nowplaying.playing .vinyl-disc { opacity:1 !important; }
+.vinyl-disc::before { /* rãnh đĩa đồng tâm */
+  content:''; position:absolute; inset:0; border-radius:50%; z-index:1;
+  background:
+    repeating-radial-gradient(circle at 50% 50%, rgba(0,0,0,0.34) 0 1px, rgba(255,255,255,0.015) 1px 2px, rgba(0,0,0,0) 2px 4px);
+  mix-blend-mode: multiply; opacity:0.85;
+}
+.vinyl-disc::after { /* viền nhãn giữa + lỗ trục */
+  content:''; position:absolute; inset:0; border-radius:50%; z-index:2; pointer-events:none;
+  background:
+    radial-gradient(circle at 50% 50%, transparent 0 25%, rgba(204,159,74,0.55) 25% 25.8%, transparent 26.4% 100%),
+    radial-gradient(circle at 50% 50%, #0c0b12 0 5.5%, transparent 6%);
+}
+.vinyl-center {
+  z-index:3 !important;
+  box-shadow: 0 0 0 2px rgba(0,0,0,0.6);
+}
+
+.drawer-inner {
+  border-radius: 24px;
+  background: radial-gradient(65% 90% at 88% 20%, rgba(204,159,74,0.10), transparent 58%), linear-gradient(135deg, rgba(20,18,28,0.88), rgba(10,9,16,0.78));
+  box-shadow: 0 24px 90px rgba(0,0,0,0.42), inset 0 1px 0 rgba(255,255,255,0.04);
+  overflow: hidden;
+}
+
+.gallery {
+  columns: 4 220px;
+  column-gap: 1rem;
+}
+
+.g-item {
+  border-radius: 18px;
+  margin-bottom: 1rem;
+  background: rgba(255,255,255,0.025);
+  box-shadow: 0 12px 38px rgba(0,0,0,0.22);
+}
+
+.g-item:hover {
+  transform: translateY(-6px) scale(1.012);
+  box-shadow: 0 28px 80px rgba(0,0,0,0.50);
+}
+
+.g-frame img,
+.g-frame video {
+  filter: grayscale(8%) contrast(1.04) saturate(0.96);
+}
+
+.g-tag {
+  border-radius: 999px;
+  background: rgba(9,8,14,0.55);
+}
+
+#gallery {
+  background: radial-gradient(70% 60% at 12% 6%, rgba(204,159,74,0.08), transparent 58%), radial-gradient(60% 50% at 90% 22%, rgba(120,86,160,0.07), transparent 58%), var(--ink2);
+}
+
+body.no-motion .vinyl-disc,
+body.no-motion .album-track {
+  animation: none !important;
+}
+
+@media (max-width: 700px) {
+  .album { width: clamp(180px, 64vw, 220px); }
+  .nowplaying .np-z { padding-right:0; }
+  .np-vinyl, .vinyl-bg.np-vinyl {
+    width: clamp(120px,38vw,150px) !important; height: clamp(120px,38vw,150px) !important;
+    right: -28px !important; opacity: 0.85 !important;
+    transform: translateY(-50%) perspective(560px) rotateY(-10deg) !important;
+  }
+  .gallery { columns: 2; column-gap: 0.75rem; }
+  .g-item { border-radius: 14px; margin-bottom: 0.75rem; }
+}

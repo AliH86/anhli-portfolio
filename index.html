@@ -283,6 +283,13 @@ body.no-shader .shader-host { display:none; }
   font-size:0.68rem; color:var(--text3);
   letter-spacing:0.12em;
 }
+.hero-manifesto {
+  margin-top:1.6rem; max-width:420px;
+  font-family:'Cormorant Garamond', serif; font-style:italic;
+  font-size:0.92rem; line-height:1.6; color:var(--taupe);
+  letter-spacing:0.01em; text-wrap:pretty;
+  animation:riseIn 1s 1s both;
+}
 .counter-num {
   font-family:'Cormorant Garamond', serif;
   font-size:2rem; color:var(--amber);
@@ -323,7 +330,7 @@ body.no-shader .shader-host { display:none; }
 ============================================ */
 section { padding:5.25rem 4rem; position:relative; }
 .sec-label { font-size:0.62rem; letter-spacing:0.4em; text-transform:uppercase; color:var(--amber); margin-bottom:0.75rem; }
-.sec-h { font-family:'Cormorant Garamond', serif; font-size:clamp(2.5rem,5vw,4rem); font-weight:300; line-height:1.05; }
+.sec-h { font-family:'Cormorant Garamond', serif; font-size:clamp(2.5rem,5vw,4rem); font-weight:300; line-height:1.05; word-break:keep-all; overflow-wrap:break-word; text-wrap:balance; }
 .sec-h em { font-style:italic; }
 .sec-bar { width:40px; height:0.5px; background:var(--amber); margin:2rem 0 4rem; }
 .divider { height:0.5px; background:var(--border); }
@@ -477,16 +484,42 @@ section { padding:5.25rem 4rem; position:relative; }
 
 /* ALBUMS CAROUSEL + DRAWER */
 .albums-label { font-size:0.62rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--text3); margin-bottom:1.5rem; }
+/* COVERFLOW — điều hướng tới lui để chọn album, có magnetic zoom */
+.album-stage { position:relative; margin:0 -1rem 2rem; }
 .album-carousel {
-  position:relative; overflow:hidden; margin:0 -4rem 2rem; padding:0.5rem 0;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);
-  mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);
+  position:relative; overflow:hidden; margin:0; padding:2.6rem 0;
+  perspective:1800px;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);
+  touch-action:pan-y; outline:none;
 }
-.album-track { display:flex; gap:0; width:max-content; padding:0 4rem; animation:albScroll var(--album-dur, 70s) linear infinite; }
-.album-carousel:hover .album-track, .album-carousel.paused .album-track { animation-play-state:paused; }
-@keyframes albScroll { from{transform:translateX(0);} to{transform:translateX(-50%);} }
-.album { width:206px; margin-right:1.75rem; flex-shrink:0; cursor:pointer; transition:transform 0.35s; }
-.album:hover { transform:translateY(-6px); }
+.album-track {
+  display:flex; gap:clamp(1rem,2.2vw,2.2rem); width:max-content; padding:0;
+  transform-style:preserve-3d; will-change:transform;
+}
+.album-carousel { cursor:grab; }
+.album-carousel.dragging { cursor:grabbing; }
+.album {
+  width:206px; flex-shrink:0; opacity:0.5;
+  transform:rotateY(var(--cf-rot,0deg)) scale(var(--cf-scale,0.78));
+  transform-origin:center center; will-change:transform, opacity;
+}
+.album.cf-focus { opacity:1 !important; }
+.cf-nav {
+  position:absolute; top:calc(50% - 1.4rem); transform:translateY(-50%);
+  z-index:25; width:52px; height:52px; border-radius:50%;
+  background:rgba(14,13,20,0.74); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+  border:0.5px solid var(--border2); color:var(--taupe3);
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  font-family:'Cormorant Garamond',serif; font-size:1.9rem; line-height:0;
+  transition:background 0.3s, color 0.3s, border-color 0.3s, transform 0.3s, opacity 0.3s;
+}
+.cf-nav:hover { background:var(--amber); color:var(--ink); border-color:var(--amber); transform:translateY(-50%) scale(1.08); }
+.cf-nav:active { transform:translateY(-50%) scale(0.94); }
+.cf-prev { left:-0.4rem; } .cf-next { right:-0.4rem; }
+.cf-nav[disabled] { opacity:0.2; pointer-events:none; }
+.album-cover { cursor:pointer; }
+@media (max-width:640px){ .cf-nav{ width:44px; height:44px; font-size:1.5rem; } }
 .album.selected .album-cover { box-shadow:0 0 0 1px var(--amber), 0 16px 48px rgba(204,159,74,0.25); }
 .album-cover {
   position:relative; aspect-ratio:1; overflow:hidden;
@@ -569,7 +602,7 @@ section { padding:5.25rem 4rem; position:relative; }
 .drawer-more { margin-top:1rem; text-align:center; font-size:0.7rem; letter-spacing:0.08em; color:var(--text3); }
 .drawer-more a { color:var(--amber); text-decoration:none; }
 
-/* VINYL BACKGROUND */
+/* VINYL BACKGROUND (chỉ dùng cho khối Now Playing — dĩa than đang xoay) */
 .drawer-inner { position:relative; overflow:hidden; }
 .vinyl-bg { position:absolute; right:-80px; top:50%; transform:translateY(-50%); width:320px; height:320px; pointer-events:none; z-index:0; }
 .vinyl-disc { width:100%; height:100%; border-radius:50%; background-size:cover; background-position:center; animation:vinylSpin 10s linear infinite; opacity:0.18; }
@@ -578,6 +611,20 @@ section { padding:5.25rem 4rem; position:relative; }
 .vinyl-center { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:30px; height:30px; border-radius:50%; background:radial-gradient(circle, #14121c 45%, rgba(204,159,74,0.3) 100%); }
 @keyframes vinylSpin { to{ transform:rotate(360deg); } }
 .drawer-z { position:relative; z-index:1; }
+
+/* DRAWER BACKGROUND — ảnh bìa album ẩn dưới playlist (tĩnh, không xoay,
+   để không trùng dĩa than đang quay ở khối Now Playing) */
+.drawer-bg { position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden; border-radius:14px; }
+.drawer-bg-img {
+  position:absolute; inset:-16%;
+  background-size:cover; background-position:center;
+  filter:blur(17px) saturate(1.18) brightness(0.96);
+  opacity:0.68; transform:scale(1.2);
+}
+.drawer-bg::after {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(102deg, rgba(12,11,18,0.95) 0%, rgba(12,11,18,0.8) 40%, rgba(12,11,18,0.34) 100%);
+}
 /* LIKE BUTTON on album card */
 .album-like { position:absolute; left:0.6rem; bottom:0.6rem; display:inline-flex; align-items:center; gap:0.2rem; font-size:0.62rem; color:var(--text2); background:rgba(9,8,14,0.65); backdrop-filter:blur(6px); border:0.5px solid var(--border2); border-radius:100px; padding:0.2rem 0.45rem; cursor:pointer; font-family:inherit; line-height:1; transition:all 0.25s; opacity:0; transform:translateY(5px); }
 .album:hover .album-like { opacity:1; transform:translateY(0); }
@@ -662,6 +709,112 @@ section { padding:5.25rem 4rem; position:relative; }
 /* DOWNLOAD GUARD */
 #audioEl { display:none; }
 .player-cover img { pointer-events:none; -webkit-user-drag:none; user-select:none; }
+
+/* ============================================================
+   EMOTIONAL GATE — cửa cảm xúc phủ playlist + Now Playing
+============================================================ */
+.gate-zone { position:relative; }
+.music-gate {
+  position:absolute; inset:-1.25rem -0.75rem;
+  z-index:30; display:flex; align-items:center; justify-content:center;
+  padding:clamp(2.5rem,6vw,5rem) clamp(1.25rem,4vw,3rem);
+  border-radius:18px;
+  background:
+    radial-gradient(130% 90% at 50% -10%, rgba(204,159,74,0.16), transparent 58%),
+    linear-gradient(180deg, rgba(11,10,17,0.74) 0%, rgba(9,8,14,0.9) 100%);
+  -webkit-backdrop-filter:blur(16px) saturate(1.08);
+  backdrop-filter:blur(16px) saturate(1.08);
+  border:0.5px solid var(--border2);
+  box-shadow:inset 0 1px 0 rgba(232,200,112,0.08), 0 30px 80px rgba(0,0,0,0.5);
+  overflow:hidden; text-align:center;
+  opacity:0; transform:translateY(8px);
+  animation:mgFade 1s 0.15s ease both;
+  transition:opacity 0.9s ease, transform 0.9s ease, visibility 0.9s;
+}
+@keyframes mgFade { to{ opacity:1; transform:translateY(0);} }
+.music-gate.dismissed {
+  opacity:0; visibility:hidden; pointer-events:none;
+  transform:translateY(-6px) scale(0.99);
+}
+.gate-zone:not(.gated) .music-gate { display:none; }
+
+/* Khi đang khoá: nội dung nhạc bị làm mờ + không bấm được — không chỉ lớp phủ */
+.gate-zone .albums-label,
+.gate-zone .album-stage,
+.gate-zone #albumDrawer,
+.gate-zone .nowplaying { transition:filter 0.9s ease; }
+.gate-zone.gated .albums-label,
+.gate-zone.gated .album-stage,
+.gate-zone.gated #albumDrawer,
+.gate-zone.gated .nowplaying {
+  filter:blur(12px) brightness(0.46) saturate(0.6);
+  pointer-events:none !important; user-select:none;
+}
+@keyframes mgShake {
+  0%,100%{ transform:translateX(0); } 18%{ transform:translateX(-9px); }
+  36%{ transform:translateX(8px); } 54%{ transform:translateX(-6px); }
+  72%{ transform:translateX(4px); } 88%{ transform:translateX(-2px); }
+}
+.music-gate.nudged .mg-inner { animation:mgShake 0.55s ease; }
+
+.mg-leak {
+  position:absolute; left:50%; top:-30%; width:78%; height:120%;
+  transform:translateX(-50%);
+  background:radial-gradient(50% 40% at 50% 30%, rgba(245,223,160,0.18), transparent 70%);
+  filter:blur(28px); pointer-events:none; opacity:0.85;
+  animation:mgLeak 7s ease-in-out infinite alternate;
+}
+@keyframes mgLeak { from{ opacity:0.55; transform:translateX(-52%) scale(1);} to{ opacity:0.95; transform:translateX(-48%) scale(1.06);} }
+
+.mg-inner { position:relative; z-index:1; max-width:560px; }
+.mg-eyebrow {
+  font-size:0.6rem; letter-spacing:0.3em; text-transform:uppercase;
+  color:var(--amber); margin-bottom:1.4rem;
+}
+.mg-line {
+  font-family:'Cormorant Garamond', serif;
+  font-size:clamp(1.7rem,3.4vw,2.5rem); line-height:1.28;
+  color:var(--taupe3); font-weight:400; text-wrap:balance;
+}
+.mg-line em { font-style:italic; color:var(--amber2); }
+.mg-sub {
+  margin-top:1.4rem; font-size:0.82rem; line-height:1.85;
+  color:var(--taupe2); text-wrap:pretty;
+  max-width:440px; margin-left:auto; margin-right:auto;
+}
+.mg-actions {
+  display:flex; gap:0.9rem; justify-content:center; flex-wrap:wrap;
+  margin-top:2.2rem;
+}
+.mg-btn {
+  font-family:inherit; cursor:pointer;
+  font-size:0.7rem; letter-spacing:0.16em; text-transform:uppercase;
+  padding:0.85rem 1.6rem; border-radius:100px;
+  transition:all 0.3s ease;
+}
+.mg-go {
+  background:var(--amber); color:var(--ink);
+  border:0.5px solid var(--amber);
+  box-shadow:0 8px 24px rgba(204,159,74,0.28);
+}
+.mg-go:hover { background:var(--amber2); box-shadow:0 10px 30px rgba(232,200,112,0.4); transform:translateY(-2px); }
+.mg-skip {
+  background:transparent; color:var(--taupe2);
+  border:0.5px solid var(--border2);
+}
+.mg-skip:hover { color:var(--taupe3); border-color:var(--taupe); }
+.mg-foot {
+  margin-top:1.8rem; font-size:0.56rem; letter-spacing:0.2em;
+  text-transform:uppercase; color:var(--text3);
+}
+@media (max-width:640px){
+  .music-gate { inset:-0.75rem -0.5rem; border-radius:14px; }
+  .mg-line { font-size:1.45rem; }
+}
+@media (prefers-reduced-motion: reduce){
+  .music-gate { animation:none !important; opacity:1; transform:none; }
+  .mg-leak { animation:none !important; }
+}
 
 /* ============================================
    EVENTS CAROUSEL
@@ -1098,9 +1251,10 @@ footer {
   .about-wrap { grid-template-columns:1fr; gap:2.5rem; margin-top:1.5rem; }
   .about-figure img { aspect-ratio:4/5; }
   .about-quote .aq-l2,.about-quote .aq-l4 { padding-left:0.75rem; }
-  .album-carousel { margin-left:-1.5rem; margin-right:-1.5rem; }
-  .album-track { padding:0 1.5rem; }
-  .album { width:160px; margin-right:1.25rem; }
+  .music-head { flex-direction:column; align-items:flex-start; gap:0.85rem; margin-bottom:2.5rem; }
+  .album-carousel { margin-left:0; margin-right:0; }
+  .album-track { padding:0; }
+  .album { width:170px; margin:0; }
   .player { flex-direction:column; align-items:stretch; gap:1rem; text-align:center; }
   .player-cover { width:64px; height:64px; margin:0 auto; }
   .player-title { white-space:normal; }
@@ -1123,6 +1277,8 @@ footer {
   body { cursor:auto; }
 }
 </style>
+<link rel="stylesheet" href="experience.css"/>
+<link rel="stylesheet" id="portfolio-upgrade-css" href="portfolio-upgrade.css?v=20260613"/>
 </head>
 <body>
 
@@ -1173,6 +1329,7 @@ footer {
         lượt ghé thăm
       </div>
     </div>
+    <p class="hero-manifesto">Không gian này không trưng bày công cụ — nó trưng bày cách một người tạo ra cảm xúc.</p>
   </div>
 
   <div class="scroll-hint">
@@ -1191,9 +1348,11 @@ footer {
   <div class="sec-label reveal">About</div>
 
   <div class="about-wrap">
-    <figure class="about-figure reveal">
-      <img src="./images/portraits/about.jpg" alt="Anh Li"/>
-      <figcaption class="about-fig-cap">Anh Li · on site</figcaption>
+    <figure class="about-figure photo-stack reveal" id="photoStack" title="Chạm để lật ảnh">
+      <div class="ps-card" data-pos="2"><img src="./images/portraits/about-bw.jpg" alt="Anh Li — đen trắng"/></div>
+      <div class="ps-card" data-pos="1"><img src="./images/portraits/cinematic.jpg" alt="Anh Li — cinematic"/></div>
+      <div class="ps-card" data-pos="0"><img src="./images/portraits/about.jpg" alt="Anh Li"/></div>
+      <figcaption class="about-fig-cap">Anh Li · chạm để lật ✦</figcaption>
     </figure>
     <div class="about-right">
       <blockquote class="about-quote reveal d1">
@@ -1205,12 +1364,13 @@ footer {
       </blockquote>
       <div class="about-eyebrow reveal">Chân dung</div>
       <div class="about-desc reveal d1">
-        <p style="font-size: 33px">Mình là Anh Li — người dựng cảm xúc bằng
-âm nhạc, ánh sáng và sân khấu.</p>
-        <p style="font-size: 13px">Hơn 15 năm, mình đi từ trang giấy phác thảo đến những đêm diễn hàng nghìn người, và vẫn tin vào một điều giản dị: chạm được vào cảm xúc thật của khán giả thì mới gọi là làm nghề.</p>
-        <p style="font-size: 13px">Mình tự trưởng thành với tư cách 'tự phong' - một nhạc-sĩ-sáng-tác-độc-lập-tự do-hạnh phúc; 
-Chuyên sản xuất nhạc tham gia các sự kiện lớn nhỏ khác nhau, từ concert thương hiệu đến lễ ra mắt quy mô quốc gia — tất cả đều xoay quanh chuyên môn Sáng tạo và <strong style="font-weight:100">Sự kiện và Tình yêu Âm nhạc.</strong>
-Bạn có thể gặp mình qua các khóa học về Sự kiện tại AIM Academy - nơi chia sẻ kinh nghiệm thực tế của mình với thế hệ làm nghề tương lai.</p>
+        <p class="about-lead" id="aboutLead" style="font-size: 33px">Mình là Anh Li — creative producer, show director &amp; songwriter, sống và làm nghề ở Sài Gòn.</p>
+      </div>
+      <div class="about-punch reveal d2">
+        <div class="ap-line"><span class="ap-n">01</span><span>15 năm — từ nét phác thảo đến đêm diễn <em>nghìn người</em>.</span></div>
+        <div class="ap-line"><span class="ap-n">02</span><span>Tự viết, tự phối, tự phát hành. Cả cái sạp này — <em>một tay</em>.</span></div>
+        <div class="ap-line"><span class="ap-n">03</span><span>Nhạc sĩ độc lập "tự phong" — tự do, và <em>hạnh phúc</em> với điều đó.</span></div>
+        <div class="ap-line"><span class="ap-n">04</span><span>Đứng lớp ở AIM Academy. Truyền nghề, <em>không giấu nghề</em>.</span></div>
       </div>
     </div>
   </div>
@@ -1231,23 +1391,33 @@ Bạn có thể gặp mình qua các khóa học về Sự kiện tại AIM Acad
       <h2 class="sec-h reveal">Cái Sạp <em>nhạc của Li</em></h2>
       <div class="sec-bar reveal"></div>
     </div>
-    <div class="music-meta reveal">Nhạc gốc tiếng Việt · Sản xuất với hỗ trợ bởi Suno.com</div>
+    <div class="music-meta reveal">Nhạc gốc tiếng Việt · Viết, sản xuất &amp; phát hành bởi Anh Li</div>
   </div>
 
   <!-- ARTISTS (info — không phải album) -->
   <div class="albums-label reveal">Nghệ sĩ</div>
   <div class="artist-strip reveal" id="artistStrip"></div>
 
-  <!-- SOUNDWAVE -->
-  <div class="soundwave reveal" id="soundwave"></div>
-
   <!-- ALBUMS -->
-  <div class="albums-label reveal">Albums · 14 playlist · bấm để mở danh sách bài</div>
-  <div class="album-carousel reveal" id="albumCarousel"><div class="album-track" id="albumGrid"></div></div>
+  <div class="gate-zone gated" id="gateZone">
+  <div class="albums-label reveal" id="playlistLabel">Playlist</div>
+  <div class="album-stage reveal">
+    <button class="cf-nav cf-prev" id="cfPrev" type="button" aria-label="Album trước">‹</button>
+    <div class="album-carousel" id="albumCarousel"><div class="album-track" id="albumGrid"></div></div>
+    <button class="cf-nav cf-next" id="cfNext" type="button" aria-label="Album sau">›</button>
+  </div>
   <div class="album-drawer" id="albumDrawer" aria-live="polite"></div>
 
-  <!-- PLAYER (trình phát riêng của trang) -->
-  <div class="player reveal" id="player" oncontextmenu="return false">
+  <!-- NOW PLAYING — soundwave + dĩa than + player: một khối liền mạch -->
+  <div class="nowplaying reveal" id="nowplaying">
+    <div class="vinyl-bg np-vinyl" aria-hidden="true"><div class="vinyl-disc" id="npVinyl"><div class="vinyl-center"></div></div></div>
+    <div class="np-z">
+      <div class="np-head">
+        <span class="np-label">Now Playing ✦</span>
+        <span class="np-state" id="npState">chọn một bài trong sạp để bắt đầu</span>
+      </div>
+      <div class="soundwave" id="soundwave" title="Chạm để phát / dừng"></div>
+  <div class="player" id="player" oncontextmenu="return false">
     <div class="player-cover" id="playerCover"><span class="player-cover-ph">♪</span></div>
     <div class="player-main">
       <div class="player-top">
@@ -1268,6 +1438,25 @@ Bạn có thể gặp mình qua các khóa học về Sự kiện tại AIM Acad
       </div>
     </div>
   </div>
+    </div>
+  </div>
+
+    <!-- EMOTIONAL GATE — cửa cảm xúc, chỉ phủ playlist + Now Playing -->
+    <div class="music-gate" id="musicGate" role="dialog" aria-label="Trước khi bạn nghe">
+      <div class="mg-leak" aria-hidden="true"></div>
+      <div class="mg-inner">
+        <div class="mg-eyebrow">Trước khi bạn nghe</div>
+        <p class="mg-line">AI không thay thế trái tim.<br/>Nó chỉ là một <em>nhạc cụ khác</em> — người chơi vẫn là một con người.</p>
+        <p class="mg-sub">Không gian này không trưng bày công cụ. Nó trưng bày cách một người tạo ra cảm xúc. Mỗi bài ở đây là một lần thử thành thật.</p>
+        <div class="mg-actions">
+          <button class="mg-btn mg-go" id="mgGo" type="button">Tôi đã sẵn sàng nghe</button>
+          <button class="mg-btn mg-skip" id="mgSkip" type="button">Tôi chưa sẵn sàng</button>
+        </div>
+        <div class="mg-foot">Một sản phẩm độc lập · Cái Sạp nhạc của Li</div>
+      </div>
+    </div>
+  </div><!-- /gate-zone -->
+
   <div class="track-embed" id="trackEmbed"></div>
   <audio id="audioEl" preload="none" controlsList="nodownload noplaybackrate" oncontextmenu="return false"></audio>
 </section>
@@ -1353,11 +1542,11 @@ Bạn có thể gặp mình qua các khóa học về Sự kiện tại AIM Acad
   <div class="f-disc">
     <div class="f-disc-col">
       <div class="f-disc-h">Về dự án</div>
-      <p><strong>Cái Sạp nhạc</strong> / <strong>AILi-made</strong> là dự án âm nhạc cá nhân của Anh Li, sản xuất với sự hỗ trợ của AI. Toàn bộ ca từ, ý tưởng, biên tập, mix/master, nhận diện hình ảnh và phát hành đều do Anh Li tạo và kiểm soát.</p>
+      <p><strong>Cái Sạp nhạc</strong> là dự án âm nhạc cá nhân của Anh Li — toàn bộ ca từ, giai điệu, bản phối, mix/master, nhận diện hình ảnh và phát hành đều do một tay Anh Li thực hiện và kiểm soát, trên quy trình studio số của riêng mình.</p>
     </div>
     <div class="f-disc-col">
       <div class="f-disc-h">Nghệ sĩ</div>
-      <p><strong>Anh Li</strong> — nghệ sĩ indie (người thật), hát bằng giọng AI của riêng mình. <strong>D\'Li</strong> — nghệ sĩ ảo (nam) do Anh Li sáng tạo & quản lý; giọng là vocal AI tổng hợp tạo bằng Suno, không đại diện người thật và không mô phỏng bất kỳ ai.</p>
+      <p><strong>Anh Li</strong> — nghệ sĩ indie (người thật), hát bằng màu giọng nhân bản mang cá tính riêng của chính mình. <strong>D'Li</strong> — nghệ sĩ ảo do Anh Li sáng tạo &amp; quản lý; màu giọng trầm được nhân bản &amp; tổng hợp riêng, không đại diện và không mô phỏng bất kỳ người thật nào.</p>
     </div>
     <div class="f-disc-col">
       <div class="f-disc-h">Bản quyền &amp; sử dụng</div>
@@ -1367,6 +1556,7 @@ Bạn có thể gặp mình qua các khóa học về Sự kiện tại AIM Acad
 
   <div class="f-bottom">
     <span>© 2026 Cái Sạp nhạc / Anh Li · Huỳnh Chí Lập</span>
+    <span class="f-secret">✦ ba lần, một bí mật</span>
     <span>All rights reserved</span>
   </div>
 </footer>
@@ -1403,15 +1593,13 @@ Bạn có thể gặp mình qua các khóa học về Sự kiện tại AIM Acad
 
 <!-- FLOATING CTA -->
 <div class="cta-float">
-  <a class="cta-float-btn"
-     href="mailto:ali.readytostart@gmail.com?subject=Liên hệ hợp tác với Anh Li&body=Xin chào Anh Li,%0A%0AMình tên là [Tên bạn], liên hệ về [chủ đề].%0A%0A[Nội dung]%0A%0AThân mến."
-     target="_blank">
+  <a class="cta-float-btn" href="/cdn-cgi/l/email-protection#40212c296e3225212439342f333421323400272d21292c6e232f2d7f3335222a2523347d0c2983ea2e6028a1fbc76028a1fbe330603483e1236036a1fbdb2960012e28600c2966222f24397d18292e60232883e02f60012e28600c296c6570016570010d83ec2e28603483ea2e602c83e0601b1483ea2e6022a1fae12e1d6c602c2983ea2e6028a1fbc76036a1fbc1601b2328a1fbe76084d1a1fbc11d6e6570016570011b0ea1fbd9296024352e271d657001657001142883e22e602da1faff2e6e" target="_blank">
     <span class="cta-float-dot"></span>
     Liên hệ ngay →
   </a>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ============================================================
    DATA — chỉnh sửa phần này để cập nhật nội dung
 ============================================================ */
@@ -1437,16 +1625,16 @@ const TRACKS = [
 const ARTISTS = [
   { name:'Anh Li', type:'Indie Artist', kind:'real',
     img:'images/portraits/about-bw.jpg',
-    desc:'Người thật. Sáng tác & sản xuất, phát hành tác phẩm cá nhân bằng giọng hát AI của riêng mình.' },
+    desc:'Nghệ sĩ indie tại Sài Gòn — tự viết, tự sản xuất và phát hành toàn bộ tác phẩm. Hát bằng màu giọng nhân bản mang cá tính riêng của chính mình: mộc khi cần thủ thỉ, dày và phiêu khi cần bùng nổ.' },
   { name:'D\'Li', type:'Virtual Artist', kind:'virtual',
     img:'images/portraits/dli.jpg',
-    desc:'Nhân vật nghệ sĩ ảo (nam) do Anh Li sáng tạo & quản lý — giọng vocal AI tổng hợp tạo bằng Suno.' },
+    desc:'Mảnh ghép song hành cùng Anh Li trong Cái Sạp nhạc — màu giọng trầm cá tính được nhân bản & tổng hợp riêng cho thế giới này. D\'Li trẻ hơn, liều hơn, nhận phần nổi loạn trong những bản phối mà Anh Li muốn đẩy đi xa.' },
 ];
 
 const ALBUMS = [
   { id:'f821410f-651f-4aba-b620-b92e1f9b5112',
     name:'Dai-Ichi Life Vietnam', sub:'Corporate Anthem · Kick-off · EDM',
-    cover:'https://cdn2.suno.ai/ed9b604d.jpeg',
+    cover:'uploads/Dai-ichi-life.png',
     desc:'Album Kick-off soundtracks qua nhiều mùa sôi nổi', count:8,
     tracks:[
       {id:'3e1f52a5-b6df-4723-bab3-9b6bc154809e', name:'Cùng ghi dấu vinh quang', dur:'3:46'},
@@ -1461,7 +1649,7 @@ const ALBUMS = [
   },
   { id:'4b8e4a6c-d6f0-4baf-baef-894ee0e9f41a',
     name:'Dấu Ấn Thanh Âm', sub:'Selected Event Soundtracks · Stage · Brand',
-    cover:'https://cdn2.suno.ai/3375ea42.jpeg',
+    cover:'uploads/dau-an-thanh-am.png',
     desc:'Dấu ấn âm nhạc từ những sân khấu, thương hiệu và khoảnh khắc đã đi qua — được Anh Li gom lại thành một hành trình thanh âm.', count:16,
     tracks:[
       {id:'e247bbb1-1ded-42c6-ad80-ec5257a23956', name:'Vĩnh Tân Gr- Vươn Xa Biển Lớn! (Remastered)', dur:'3:40'},
@@ -1484,12 +1672,11 @@ const ALBUMS = [
   },
   { id:'e7dd732d-9b6c-487c-836e-d2f412b1683e',
     name:'Untamed', sub:'R&B · Dark Pop · Anh Li & D\'Li',
-    cover:'https://cdn2.suno.ai/3f985bfa.jpeg',
-    desc:'Nổi loạn lên, Si mê lên, Cuồng dại lên', count:13,
+    cover:'uploads/Untamed.png',
+    desc:'Nổi loạn lên, Si mê lên, Cuồng dại lên', count:12,
     tracks:[
       {id:'a29966fb-a3d8-405d-baf1-6977fac27818', name:'Mơ Giấc Tình Nồng Say', dur:'3:23'},
       {id:'269bde35-151e-4da0-aeb1-e1f1f23380b4', name:'Cớ sao vậy em? [D\'li x Ali]', dur:'2:27'},
-      {id:'14a7e8d3-6cc8-4b9d-acca-ee463d8122f9', name:'Những kẻ Drill Loves', dur:'2:36'},
       {id:'7517a458-e4a8-419c-965d-d095eb1ad8ef', name:'Mật ngọt, anh say đó.[ D\'Li - Anh Li]', dur:'3:19'},
       {id:'1cfa61e1-471b-4cfd-a05a-0083e8fa1fdb', name:'Chuyện....Mình Lạ', dur:'3:04'},
       {id:'10d67ecd-8ef6-4dc6-98bf-35e502e25af0', name:'Xin đừng nói câu gì...', dur:'3:22'},
@@ -1502,9 +1689,28 @@ const ALBUMS = [
       {id:'e28362d8-175e-4787-9061-7b4e5c979355', name:'Mãi mãi là ...?! (Clean Studio Cut)', dur:'4:49'},
     ],
   },
+  { id:'560a4089-5871-4536-8375-785f7a2f8dca',
+    name:'Những Kẻ DRILL Loves', sub:'Dark R&B · Drill · D\'Li & SEN[SE] da Band',
+    cover:'https://cdn2.suno.ai/4145e7a0.jpeg',
+    desc:'Những kẻ yêu bằng bản năng, giữ vết thương như kỷ niệm, biến cảm xúc thành âm thanh — tình yêu với đủ gương mặt: đẹp đẽ, hỗn loạn, ngông cuồng, quyến rũ và buồn bã.', count:12,
+    tracks:[
+      {id:'97ab34d8-8a6d-4b66-acf2-cdce31987e25', name:'Phai Nhat Phai...', dur:'3:08'},
+      {id:'adbe7826-8f50-42e3-ae14-9cd0c6a251a7', name:'Quên Đi Nhớ Chi?!', dur:'3:41'},
+      {id:'14a7e8d3-6cc8-4b9d-acca-ee463d8122f9', name:'Những kẻ Drill Loves', dur:'2:36'},
+      {id:'21c513f1-619f-44b1-9738-6ad030e5b29b', name:'Ex-Cursed Me', dur:'3:47'},
+      {id:'8e11c0e5-4c85-40ef-8ec2-8087e3dcb3d9', name:'Track này không thể Delete!', dur:'3:45'},
+      {id:'31cbee82-0d6d-4ab9-960e-94c29920e3df', name:'Như Chưa Từng Thương', dur:'3:52'},
+      {id:'2b64256d-1c14-4fdc-90c3-8e14d6b03f6d', name:'Tan hết vào gió…', dur:'3:28'},
+      {id:'159a30ea-b21a-434b-936b-958734b800fe', name:'Đừng vây mà, bae~', dur:'3:49'},
+      {id:'7b162469-4032-439a-b3c6-2e12d20b10af', name:'Tình ảo\'s', dur:'2:42'},
+      {id:'96ad72a0-2c6f-4894-b8d6-ea538d0b9a85', name:'Baby à, nhắm trúng tim em rồi đấy...', dur:'2:42'},
+      {id:'229d579c-7ace-43cf-b0b0-a59d9c9332ec', name:'Đố elm Si ah!', dur:'2:51'},
+      {id:'419a558c-8f8a-4401-81be-826eec0ff7e8', name:'Đom đóm; Ánh sao và Mắt em', dur:'3:32'},
+    ],
+  },
   { id:'2818d6f0-318d-4aad-94ac-027ccc756ec4',
     name:'Unplugged Vol.1', sub:'Acoustic · Indie Folk · Hát mộc',
-    cover:'https://cdn2.suno.ai/image_3b949f7a-601e-4206-a610-e55ed9a03c24.jpeg',
+    cover:'uploads/Unplugged vol1.png',
     desc:'Hát mộc chữa lòng lành liền một mạch— qua nhiều lát cắt đời thường, bằng những cảm xúc rất riêng....', count:9,
     tracks:[
       {id:'3b949f7a-601e-4206-a610-e55ed9a03c24', name:'9PM', dur:'2:18'},
@@ -1520,8 +1726,8 @@ const ALBUMS = [
   },
   { id:'15c4b5fa-3d24-4a7c-b1bf-6ca2420d81c7',
     name:'Unplugged Vol 2', sub:'Acoustic · Bossa Nova · Indie Folk',
-    cover:'https://cdn2.suno.ai/image_ceec7c53-c045-4455-9b79-6d72cc29a56e.jpeg',
-    desc:'', count:8,
+    cover:'uploads/Unplugged vol2.png',
+    desc:'Tiếp mạch hát mộc — lần này đong đưa hơn một chút, có bossa, có gió. Những bài hát như chiếc võng trước hiên nhà: chậm rãi, êm, và rất đời.', count:8,
     tracks:[
       {id:'ceec7c53-c045-4455-9b79-6d72cc29a56e', name:'Đừng lỡ nhịp!', dur:'3:08'},
       {id:'76655d83-8252-4fda-97ae-9db85cc9de37', name:'Nẹh Têh...', dur:'2:44'},
@@ -1535,7 +1741,7 @@ const ALBUMS = [
   },
   { id:'b1021057-56bd-49e8-a1fb-5af4d69c2c0e',
     name:'Mỹ Vị Nhân Sinh', sub:'Alt-Indie Folk · Anh Li',
-    cover:'https://cdn2.suno.ai/image_142b3ba1-12a5-4fdc-96d5-ce5984f90e12.jpeg',
+    cover:'uploads/My-vi-nhan-sinh.png',
     desc:'Một lát cắt về cuộc đời muôn vị. Có cay để nhớ, có đắng để thấm, có ngọt để thương, có nhạt để bình yên. Với Anh Li, mỗi hương vị đi qua đời người đều là một cách thế gian kể chuyện...', count:4,
     tracks:[
       {id:'142b3ba1-12a5-4fdc-96d5-ce5984f90e12', name:'Ngọt lạc', dur:'2:39'},
@@ -1545,9 +1751,9 @@ const ALBUMS = [
     ],
   },
   { id:'74ba3104-59db-41e6-90d6-ecd657c449ce',
-    name:'Unplugged Special – Âm Hưởng', sub:'Acoustic · Tribal Folk · Âm Hưởng Dân Tộc',
-    cover:'https://cdn2.suno.ai/image_872122de-24f4-4196-825d-2214e151c69a.jpeg',
-    desc:'', count:13,
+    name:'Unplugged Special – Âm Hưởng', sub:'Acoustic · Tribal Folk · Anh Li & D\'Li',
+    cover:'uploads/am-huong-19b7d470.png',
+    desc:'Gửi đến những giá trị nguyên bản — từ quê hương đến trái tim. Tiếng đàn, tiếng sáo và những điệu lý ngân lên giữa đại ngàn, qua hai màu giọng Anh Li & D\'Li.', count:13,
     tracks:[
       {id:'872122de-24f4-4196-825d-2214e151c69a', name:'Thương sao...rau đắng sau hè', dur:'3:42'},
       {id:'75c08a9c-2c7c-4024-9a6e-2ad25bf1fce3', name:'Con đường ta di', dur:'3:46'},
@@ -1566,8 +1772,8 @@ const ALBUMS = [
   },
   { id:'1c504bd2-2249-4fca-931a-f1c992581a25',
     name:'MiTek · Way of Stars', sub:'EDM · Stadium · Show',
-    cover:'https://cdn2.suno.ai/image_b0e95414-5c1f-43dc-a01b-00691e184ed3.jpeg',
-    desc:'', count:4,
+    cover:'uploads/WoS-MiTek.png',
+    desc:'Nhạc dựng cho đêm gala “Way of Stars” — từ anthem khai màn tới khoảnh khắc sáng đèn cuối show, cả khán phòng cùng hát.', count:4,
     tracks:[
       {id:'a03438fa-df97-4d68-917d-82b2f9c9086e', name:'[Way of STARS] -We are The Stars Tonight-D\'Li', dur:'4:46'},
       {id:'5a877608-94ba-40ab-ac74-c291d23730e4', name:'[Way of STARS] -We are The Stars', dur:'4:00'},
@@ -1578,7 +1784,7 @@ const ALBUMS = [
   { id:'df0c36ec-4afd-4760-9aa3-3b05350a1b87',
     name:'I ❤ VN', sub:'Patriotic · Pop · Epic',
     cover:'https://cdn2.suno.ai/7622500f.jpeg',
-    desc:'', count:12,
+    desc:'Những khúc ca viết cho dải đất hình chữ S — hào sảng, tự cường và đầy thương mến, từ hậu phương tới tiền tuyến, từ Bắc chí Nam.', count:12,
     tracks:[
       {id:'f8628247-b5d2-4839-b501-8308976c1615', name:'HẸN ƯỚC BẮC NAM - Cover', dur:'5:03'},
       {id:'9bd3da93-4f91-4053-a88e-8d09109d29d5', name:'Viết Tiếp Ước Mong', dur:'4:42'},
@@ -1597,7 +1803,7 @@ const ALBUMS = [
   { id:'0bd2c183-50a7-4917-ae88-2ecdc9f0d2f3',
     name:'TẾT Ngọ Sum Vầy \'26', sub:'Tết · Folk Pop · Celebration',
     cover:'https://cdn2.suno.ai/image_11015d6d-3fc4-4aea-80f0-f889d3e06610.jpeg',
-    desc:'', count:9,
+    desc:'Mùa Ngọ gõ cửa — nhạc Tết rộn ràng cho những chuyến về nhà, mâm cơm sum vầy và lời chúc đầu năm phát tài, phát lộc.', count:9,
     tracks:[
       {id:'9baaa82b-34cf-4728-80aa-7658c43fe299', name:'Tết nay cầu gì?', dur:'3:44'},
       {id:'220ef898-680f-4f6f-942f-a617df5bb86e', name:'”ĐỈNH CHÓP (On Top)”', dur:'3:40'},
@@ -1612,7 +1818,7 @@ const ALBUMS = [
   },
   { id:'8f8611b8-416e-4624-9bd9-e91e1c2dea62',
     name:'Cảm Thán Ca', sub:'Indie Folk · Anh Li & D\'Li',
-    cover:'https://cdn2.suno.ai/image_2ca4a4ac-4ed5-43db-bfed-bcf126963070.jpeg',
+    cover:'uploads/cam-than-ca.png',
     desc:'Chuỗi cảm xúc được thốt lên giữa cuộc sống muôn màu. Qua màu giọng của Anh Li và D\'Li, mỗi ca khúc là một tiếng lòng rất đời: vui, buồn, thương, giận, ngỡ ngàng… rồi cũng “thì thôi” mà bước tiếp.', count:9,
     tracks:[
       {id:'2ca4a4ac-4ed5-43db-bfed-bcf126963070', name:'Thì thôi!!!!', dur:'3:02'},
@@ -1628,7 +1834,7 @@ const ALBUMS = [
   },
   { id:'bd830721-0b26-40ea-b7d5-508e5d6612a2',
     name:'Tôi Hát Cả Bốn Mùa', sub:'Ghibli Folk · Anh Li & D\'Li',
-    cover:'https://cdn2.suno.ai/image_749e34d4-7589-471f-a9d8-320b5fe13a5b.jpeg',
+    cover:'uploads/toi-hat-ca-ca-bon-mua.png',
     desc:'Có những mùa đi qua như cơn gió, có những mùa ở lại thành bài ca. Hành trình của Anh Li và D\'Li qua thiên nhiên, tình yêu, ký ức và vòng tuần hoàn kỳ diệu của cuộc sống.', count:5,
     tracks:[
       {id:'749e34d4-7589-471f-a9d8-320b5fe13a5b', name:'Mùa Hạ của Tôi [Xuân Quỳnh]', dur:'3:18'},
@@ -1640,8 +1846,8 @@ const ALBUMS = [
   },
   { id:'c358ba32-19d4-46ef-bef9-5de138b03ea4',
     name:'Vietnam Young Lions \'26', sub:'Electropop · Anthem · Award',
-    cover:'https://cdn2.suno.ai/image_4618b412-a7bd-4334-bff2-b56d5334024e.jpeg',
-    desc:'', count:7,
+    cover:'uploads/VNYL26.png',
+    desc:'Bộ anthem tiếp lửa cho đấu trường sáng tạo trẻ — gắt, rực và đầy khí thế, viết riêng cho những tiếng gầm đầu tiên.', count:7,
     tracks:[
       {id:'50633010-4d6e-463d-9610-1c1b8f021a5e', name:'APEX ROAR', dur:'2:38'},
       {id:'38b8f448-d7da-46b6-a5e4-70ecc177cb4b', name:'A Decade of Gold', dur:'3:47'},
@@ -1654,7 +1860,7 @@ const ALBUMS = [
   },
   { id:'12435dd8-eaf8-4046-8bee-cb0aa03533f8',
     name:'Vietnam Young Lions \'25', sub:'Rock · Anthem · Final',
-    cover:'https://cdn2.suno.ai/0a00a58b.jpeg',
+    cover:'uploads/VNYL25.png',
     desc:'Made by Ali, phát tại chương trình chung kết cùng tên.', count:6,
     tracks:[
       {id:'f17edfb8-d150-4d06-b1e9-9463935250f4', name:'”BORN TO BREAK THE BRIEF”', dur:'2:53'},
@@ -1749,7 +1955,6 @@ const CONTACTS = [
 ];
 
 const YT_CHANNEL = 'UC2Cat4-Hl0SZqKFkRKu72zQ';
-const SUNO_PLAYLIST = 'https://suno.com/playlist/61998e72-7e4b-4e3c-b3f0-06fc159d0ced';
 
 /* VIDEOS — dán link/ID video YouTube vào đây để hiện chắc chắn.
    id = phần sau "watch?v=" hoặc "youtu.be/". Ví dụ link
@@ -1801,12 +2006,9 @@ function type(){
 setTimeout(type,1200);
 
 /* ============================================================
-   HERO PARALLAX
+   HERO PARALLAX — chuyển vào experience.js (applyFx),
+   dùng thuộc tính `translate` để không xung đột với animation.
 ============================================================ */
-addEventListener('scroll',()=>{
-  const h=document.getElementById('heroBg');
-  if(h) h.style.transform=`translateY(${scrollY*0.25}px)`;
-});
 
 /* ============================================================
    REVEAL ON SCROLL
@@ -1859,7 +2061,7 @@ function renderMusic(){
   renderArtists();
   // Soundwave (animated bars)
   const sw=document.getElementById('soundwave');
-  if(sw){
+  if(sw && !sw.childElementCount){ // chỉ dựng 1 lần — equalizer thật giữ tham chiếu tới các thanh
     const N=72; let bars='';
     for(let i=0;i<N;i++){
       const h=22+Math.round(Math.abs(Math.sin(i*0.5))*40+Math.random()*22);
@@ -1875,7 +2077,7 @@ function renderMusic(){
   if(grid){
     const card=(a,i)=>{
       const likeN=parseInt(localStorage.getItem('album_likes_'+a.id)||'0');
-      return `<div class="album" data-aidx="${i}" onclick="selectAlbum(${i})">
+      return `<div class="album" data-aidx="${i}" onclick="cfClick(${i})">
         <div class="album-cover">
           <img src="${coverUrl(a.cover)}" alt="${a.name}" loading="lazy" oncontextmenu="return false" onerror="this.outerHTML='<div class=album-cover-blank>♪</div>'"/>
           <div class="album-play">⌄</div>
@@ -1887,12 +2089,15 @@ function renderMusic(){
       </div>`;
     };
     const seq=ALBUMS.map(card).join('');
-    grid.innerHTML=seq+seq; // duplicate for seamless loop
+    grid.innerHTML=seq+seq; // 2 bản để coverflow trôi vô tận, liền mạch
+    initCoverflow();
   }
+  const pl=document.getElementById('playlistLabel');
+  if(pl) pl.textContent=`Playlist · ${ALBUMS.length} album`;
 
   // Decorative diagonal genre text
   const decor=document.getElementById('musicDecor');
-  if(decor){
+  if(decor && !decor.childElementCount){
     const words=['Cinematic Soul','Dark R&B','Neo-soul','Trip-hop','Power Ballad','Slow Jam','Indie Pop','Urban Jazz','Downtempo','Acoustic R&B','Vietnamese Pop','Orchestral','Folk','Dream Pop','Lo-fi','Ballad','Soulful','Melancholic','Expressive','Cinematic','Warm Vocals','Original'];
     let rows='';
     for(let r=0;r<18;r++){
@@ -1905,6 +2110,117 @@ function renderMusic(){
 
   // Auto-open first album
   // (carousel runs freely until the user clicks an album)
+}
+
+/* ===== COVERFLOW tự trôi + vuốt mượt + magnetic zoom ở tâm ===== */
+let cfCards=[], cfOffset=0, cfSetW=0, cfDragging=false, cfHover=false,
+    cfMomentum=0, cfGlide=null, cfLastX=0, cfMoved=0, cfRunning=false;
+const CF_AUTO=0.35; // tốc độ tự trôi (px / frame)
+
+function initCoverflow(){
+  const track=document.getElementById('albumGrid');
+  const car=document.getElementById('albumCarousel');
+  if(!track||!car) return;
+  cfCards=[...track.children];
+  if(!cfCards.length) return;
+  measureCF();
+  document.getElementById('cfPrev')?.addEventListener('click', ()=>cfNudge(-1));
+  document.getElementById('cfNext')?.addEventListener('click', ()=>cfNudge(1));
+  // dừng tự trôi khi rê chuột vào (để xem kỹ)
+  car.addEventListener('pointerenter', ()=>{ cfHover=true; });
+  car.addEventListener('pointerleave', ()=>{ if(!cfDragging) cfHover=false; });
+  // kéo / vuốt lướt ngang + quán tính
+  car.addEventListener('pointerdown', cfDown);
+  window.addEventListener('pointermove', cfMove, {passive:true});
+  window.addEventListener('pointerup', cfUp);
+  window.addEventListener('pointercancel', cfUp);
+  // lăn chuột ngang / trackpad
+  car.addEventListener('wheel', e=>{
+    if(Math.abs(e.deltaX) > Math.abs(e.deltaY)){ cfOffset += e.deltaX; cfGlide=null; cfMomentum=0; e.preventDefault(); }
+  }, {passive:false});
+  // bàn phím
+  car.setAttribute('tabindex','0');
+  car.addEventListener('keydown', e=>{
+    if(e.key==='ArrowLeft'){ cfNudge(-1); e.preventDefault(); }
+    else if(e.key==='ArrowRight'){ cfNudge(1); e.preventDefault(); }
+  });
+  window.addEventListener('resize', measureCF);
+  if(!cfRunning){ cfRunning=true; requestAnimationFrame(cfFrame); }
+}
+function measureCF(){
+  const half=cfCards.length/2;
+  if(half>=1 && cfCards[half]){ cfSetW = cfCards[half].offsetLeft - cfCards[0].offsetLeft; }
+}
+function cfStep(){ const half=cfCards.length/2; return half ? cfSetW/half : 220; }
+function cfNudge(dir){ cfGlide = (cfGlide==null?cfOffset:cfGlide) + dir*cfStep(); cfMomentum=0; }
+function cfDown(e){
+  cfDragging=true; cfHover=true; cfMomentum=0; cfGlide=null;
+  cfLastX=e.clientX; cfMoved=0;
+  document.getElementById('albumCarousel')?.classList.add('dragging');
+}
+function cfMove(e){
+  if(!cfDragging) return;
+  const dx=e.clientX-cfLastX; cfLastX=e.clientX; cfMoved+=Math.abs(dx);
+  cfOffset -= dx; cfMomentum = -dx;
+}
+function cfUp(){
+  if(!cfDragging) return;
+  cfDragging=false;
+  document.getElementById('albumCarousel')?.classList.remove('dragging');
+}
+function cfClick(i){
+  if(cfMoved>6){ cfMoved=0; return; } // vừa kéo → bỏ qua click
+  selectAlbum(i);
+}
+function glideToAlbum(i){
+  const car=document.getElementById('albumCarousel');
+  if(!car||!cfSetW) return;
+  const center=car.clientWidth/2;
+  let off=cfOffset % cfSetW; if(off<0) off+=cfSetW;
+  const half=cfCards.length/2;
+  let bestDelta=1e9;
+  [i, i+half].forEach(k=>{ const el=cfCards[k]; if(!el) return;
+    const cx=el.offsetLeft + el.offsetWidth/2 - off;
+    const delta=cx - center;
+    if(Math.abs(delta)<Math.abs(bestDelta)) bestDelta=delta;
+  });
+  if(Math.abs(bestDelta)<1e8){ cfGlide=cfOffset + bestDelta; cfMomentum=0; }
+}
+function cfFrame(){
+  if(cfDragging){ /* offset do cfMove điều khiển */ }
+  else if(cfGlide!=null){
+    cfOffset += (cfGlide-cfOffset)*0.14;
+    if(Math.abs(cfGlide-cfOffset)<0.4){ cfOffset=cfGlide; cfGlide=null; }
+  } else if(Math.abs(cfMomentum)>0.06){
+    cfOffset += cfMomentum; cfMomentum *= 0.93;
+  } else if(!cfHover){
+    cfOffset += CF_AUTO;
+  }
+  cfRender();
+  requestAnimationFrame(cfFrame);
+}
+function cfRender(){
+  if(!cfSetW){ measureCF(); if(!cfSetW) return; }
+  const car=document.getElementById('albumCarousel');
+  const track=document.getElementById('albumGrid');
+  if(!car||!track) return;
+  let off=cfOffset % cfSetW; if(off<0) off+=cfSetW;
+  track.style.transform=`translate3d(${(-off).toFixed(2)}px,0,0)`;
+  const center=car.clientWidth/2;
+  const reach=Math.max(center,1);
+  cfCards.forEach(el=>{
+    const cx=el.offsetLeft + el.offsetWidth/2 - off;
+    const d=cx - center, ad=Math.abs(d);
+    const t=Math.min(1, ad/(reach*0.92));
+    const scale=1.14 - 0.46*t;                 // ở tâm to nhất, ra rìa nhỏ dần
+    const rot=Math.max(-40, Math.min(40, (d/reach)*-34));
+    const op=1 - 0.72*t;
+    el.style.setProperty('--cf-scale', scale.toFixed(3));
+    el.style.setProperty('--cf-rot', rot.toFixed(1)+'deg');
+    el.style.opacity=op.toFixed(2);
+    el.style.zIndex=String(200-Math.round(ad));
+    el.classList.toggle('cf-focus', ad < el.offsetWidth*0.5);
+  });
 }
 
 /* ===== ALBUM DRAWER (sổ danh sách bài) ===== */
@@ -1935,6 +2251,7 @@ function selectAlbum(i, silent){
     curAlbum=-1; curTracks=[]; return;
   }
   curAlbum=i; curTracks=ALBUMS[i].tracks||[];
+  glideToAlbum(i);
   document.querySelectorAll('.album[data-aidx]').forEach(a=>a.classList.toggle('selected',+a.dataset.aidx===i));
   renderDrawer(ALBUMS[i], curTracks);
   drawer.classList.add('open');
@@ -1954,7 +2271,7 @@ function renderDrawer(a, tracks, showAll){
   if(tracks===null||tracks===undefined){
     listHtml=`<div class="drawer-loading"><div class="drawer-spin"></div>Đang tải danh sách bài...</div>`;
   } else if(tracks==='error'){
-    listHtml=`<div class="drawer-more" style="padding:1.5rem 0">Không tải được từ Suno. <a href="https://suno.com/playlist/${a.id}" target="_blank" rel="noopener" class="drawer-suno">Mở trên Suno →</a></div>`;
+    listHtml=`<div class="drawer-more" style="padding:1.5rem 0">Chưa tải được danh sách bài — thử lại sau nhé.</div>`;
   } else {
     const list=showAll?tracks:tracks.slice(0,TRACK_PAGE);
     const rows=list.map((t,j)=>`
@@ -1971,7 +2288,7 @@ function renderDrawer(a, tracks, showAll){
   const count=curTracks.length||a.count;
   drawer.innerHTML=`
     <div class="drawer-inner">
-      <div class="vinyl-bg" aria-hidden="true"><div class="vinyl-disc" style="background-image:url('${coverUrl(a.cover)}')"><div class="vinyl-center"></div></div></div>
+      <div class="drawer-bg" aria-hidden="true"><div class="drawer-bg-img" style="background-image:url('${coverUrl(a.cover)}')"></div></div>
       <div class="drawer-z">
         <div class="drawer-head">
           <div style="min-width:0;flex:1">
@@ -2314,6 +2631,48 @@ renderVideos();
 loadCounter();
 observe();
 
+/* ============================================================
+   EMOTIONAL GATE — cửa cảm xúc (1 lần / phiên, sessionStorage)
+============================================================ */
+(function(){
+  const zone=document.getElementById('gateZone');
+  const gate=document.getElementById('musicGate');
+  if(!zone||!gate) return;
+  const KEY='anhli_music_gate_seen';
+
+  if(sessionStorage.getItem(KEY)==='1'){
+    zone.classList.remove('gated');
+    return;
+  }
+
+  function unlock(){
+    sessionStorage.setItem(KEY,'1');
+    gate.classList.add('dismissed');
+    setTimeout(()=>{ zone.classList.remove('gated'); }, 950);
+  }
+
+  document.getElementById('mgGo')?.addEventListener('click', ()=>{
+    unlock();
+    // nhẹ nhàng đưa người nghe tới sạp nhạc
+    setTimeout(()=>{
+      const label=document.getElementById('playlistLabel');
+      if(label){
+        const y=label.getBoundingClientRect().top + window.pageYOffset - 110;
+        window.scrollTo({ top:y, behavior:'smooth' });
+      }
+    }, 220);
+  });
+
+  // "Tôi chưa sẵn sàng" → KHÔNG mở khoá. Nhạc vẫn ẩn sau lớp mờ & không bấm được;
+  // chỉ rung nhẹ cánh cửa để báo rằng phần này vẫn đang đóng.
+  document.getElementById('mgSkip')?.addEventListener('click', ()=>{
+    gate.classList.remove('nudged');
+    void gate.offsetWidth; // reset animation
+    gate.classList.add('nudged');
+    setTimeout(()=>gate.classList.remove('nudged'), 650);
+  });
+})();
+
 // Hero photo: detect if real image exists; show placeholder otherwise
 (function(){
   const probe=new Image();
@@ -2330,6 +2689,8 @@ observe();
 
 <!-- INTERACTIVE SHADER WALLPAPER (hero) -->
 <script src="shader-bg.js"></script>
+<!-- EXPERIENCE LAYER — intro, 3D motion, EQ thật, dock dĩa than, gallery ♥, Mặt B -->
+<script src="experience.js"></script>
 
 <!-- TWEAKS PANEL -->
 <div id="tweaks-root"></div>
