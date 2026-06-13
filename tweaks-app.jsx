@@ -6,12 +6,12 @@
   const link = document.createElement('link');
   link.id = 'portfolio-upgrade-css';
   link.rel = 'stylesheet';
-  link.href = 'portfolio-upgrade.css?v=20260611';
+  link.href = 'portfolio-upgrade.css?v=20260613';
   document.head.appendChild(link);
 })();
 
 (function loadExternalMusicData(){
-  const DATA_VERSION = '20260611-2';
+  const DATA_VERSION = '20260613-1';
   const TRACK_PAGE = 10;
   let albums = [];
   let curAlbum = -1;
@@ -35,6 +35,45 @@
     s = Math.floor(s || 0);
     return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
   };
+
+  function normalizeMusicData(data){
+    if (!data || !Array.isArray(data.albums)) return data;
+    const list = data.albums;
+    const byId = new Map(list.map((a) => [a.id, a]));
+
+    const toiYeuVn = byId.get('df0c36ec-4afd-4760-9aa3-3b05350a1b87');
+    if (toiYeuVn) {
+      toiYeuVn.name = 'Tôi ❤ Việt Nam';
+      toiYeuVn.playlistUrl = 'https://suno.com/playlist/df0c36ec-4afd-4760-9aa3-3b05350a1b87';
+      toiYeuVn.sub = 'Patriotic · Pop · Epic';
+    }
+
+    const unpluggedVol1 = byId.get('2818d6f0-318d-4aad-94ac-027ccc756ec4');
+    if (unpluggedVol1) {
+      unpluggedVol1.name = 'Unplugged Vol.1';
+      unpluggedVol1.playlistUrl = 'https://suno.com/playlist/2818d6f0-318d-4aad-94ac-027ccc756ec4';
+    }
+
+    const newAlbumId = '8f2c17b4-cb70-46e1-9f2e-464ccadaf1ab';
+    if (!byId.has(newAlbumId)) {
+      const newAlbum = {
+        id: newAlbumId,
+        playlistUrl: 'https://suno.com/playlist/8f2c17b4-cb70-46e1-9f2e-464ccadaf1ab',
+        name: 'Đi Khắp Một Dãy Non Sông',
+        sub: 'Vietnam Travel · Folk Pop · Anh Li',
+        cover: 'uploads/di-khap-mot-day-non-song.jpg',
+        desc: 'Một hành trình âm nhạc đi qua những miền non sông Việt Nam — gom phong cảnh, ký ức và tình quê thành một dải thanh âm.',
+        count: 0,
+        tracks: [],
+      };
+      const vnIndex = list.findIndex((a) => a.id === 'df0c36ec-4afd-4760-9aa3-3b05350a1b87');
+      if (vnIndex >= 0) list.splice(vnIndex + 1, 0, newAlbum);
+      else list.push(newAlbum);
+    }
+
+    data.version = '2026-06-13-1';
+    return data;
+  }
 
   function updateAlbumLabel(){
     const label = $$('.albums-label').find((el) => /Albums|playlist/i.test(el.textContent || ''));
@@ -100,6 +139,9 @@
     const openSuno = a.playlistUrl
       ? `<a href="${esc(a.playlistUrl)}" target="_blank" rel="noopener" class="drawer-suno">Mở playlist Suno →</a>`
       : '';
+    const emptyHtml = (!tracks || !tracks.length)
+      ? `<div class="drawer-more" style="padding:1rem 0 0">Album đã được thêm. Danh sách bài sẽ phát trên web khi có song ID từ Suno.</div>`
+      : '';
     drawer.innerHTML = `<div class="drawer-inner">
       <div class="vinyl-bg" aria-hidden="true"><div class="vinyl-disc" style="background-image:url('${esc(cover(a.cover))}')"><div class="vinyl-center"></div></div></div>
       <div class="drawer-z">
@@ -111,10 +153,10 @@
           <div class="drawer-actions">
             ${openSuno}
             <button class="drawer-like${likeN > 0 ? ' liked' : ''}" onclick="likeAlbum(${idx},event)">♡<span class="like-n">${likeN > 0 ? ' ' + likeN : ''}</span></button>
-            <button class="drawer-playall" onclick="playAt(0)">▶ Phát từ đầu</button>
+            <button class="drawer-playall" onclick="playAt(0)"${(!tracks || !tracks.length) ? ' disabled style="opacity:0.4;cursor:default"' : ''}>▶ Phát từ đầu</button>
           </div>
         </div>
-        <div class="tlist">${rows}</div>${more}
+        <div class="tlist">${rows}</div>${more}${emptyHtml}
       </div>
     </div>`;
     if (curAlbum === idx && activeIdx >= 0) markPlaying(activeIdx);
@@ -260,6 +302,7 @@
   }
 
   window.applyPortfolioMusicData = function applyPortfolioMusicData(data){
+    data = normalizeMusicData(data);
     if (!data || !Array.isArray(data.albums) || !data.albums.length) return;
     albums = data.albums;
     window.PORTFOLIO_ALBUMS = albums;
