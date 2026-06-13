@@ -1,7 +1,7 @@
 // music-data.js — external playlist delta for Anh Li portfolio.
 // This file keeps the live site synced without touching the large inline fallback in index.html.
 window.PORTFOLIO_MUSIC = {
-  version: '2026-06-13-11',
+  version: '2026-06-13-12',
   source: 'Playlists curated by Anh Li',
   albums: [
     {
@@ -74,7 +74,7 @@ window.PORTFOLIO_MUSIC = {
       id:'560a4089-5871-4536-8375-785f7a2f8dca',
       name:'Những Kẻ DRILL Loves',
       sub:'Dark R&B · Drill · D\'Li & SEN[SE] da Band',
-      cover:'https://cdn2.suno.ai/4145e7a0.jpeg',
+      cover:'uploads/nhung-ke-drill-loves.jpg',
       desc:'Những kẻ yêu bằng bản năng, giữ vết thương như kỷ niệm, biến cảm xúc thành âm thanh — tình yêu với đủ gương mặt: đẹp đẽ, hỗn loạn, ngông cuồng, quyến rũ và buồn bã.',
       count:12,
       tracks:[
@@ -217,7 +217,7 @@ window.PORTFOLIO_MUSIC = {
       id:'0bd2c183-50a7-4917-ae88-2ecdc9f0d2f3',
       name:'TẾT Ngọ Sum Vầy \'26',
       sub:'Tết · Folk Pop · Celebration',
-      cover:'https://cdn2.suno.ai/image_11015d6d-3fc4-4aea-80f0-f889d3e06610.jpeg',
+      cover:'uploads/tet-ngo-sum-vay-26.jpg',
       desc:'Mùa Ngọ gõ cửa — nhạc Tết rộn ràng cho những chuyến về nhà, mâm cơm sum vầy và lời chúc đầu năm phát tài, phát lộc.',
       count:9,
       tracks:[
