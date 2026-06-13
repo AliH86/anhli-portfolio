@@ -1,13 +1,8 @@
 /* Portfolio upgrade layer — album, vinyl, and Visual Lab polish */
 
 .album {
-<<<<<<< HEAD
   width: clamp(200px, 42vw, 240px);
   margin: 0;
-=======
-  width: clamp(220px, 16vw, 260px);
-  margin-right: clamp(1rem, 2vw, 2.2rem);
->>>>>>> f8308ab4816f504f0cd88279e922f59d8823f598
 }
 
 .album-cover {
@@ -27,7 +22,6 @@
   opacity: 0.72;
 }
 
-<<<<<<< HEAD
 .album.cf-focus .album-cover {
   box-shadow: 0 30px 76px rgba(0,0,0,0.6), 0 0 0 1px rgba(204,159,74,0.4);
 }
@@ -82,30 +76,6 @@
 .vinyl-center {
   z-index:3 !important;
   box-shadow: 0 0 0 2px rgba(0,0,0,0.6);
-=======
-.album:hover .album-cover {
-  transform: translateY(-6px) scale(1.025);
-  box-shadow: 0 28px 70px rgba(0,0,0,0.55), 0 0 0 1px var(--border2);
-}
-
-.album-track {
-  animation-duration: calc(var(--album-dur, 70s) * 1.15);
-}
-
-.album-carousel {
-  padding-block: 1.2rem;
-}
-
-.vinyl-bg {
-  opacity: 0.24;
-  right: 1rem;
-  transform: scale(1.42);
-  filter: drop-shadow(0 18px 50px rgba(0,0,0,0.55));
-}
-
-.vinyl-disc {
-  animation-duration: 18s !important;
->>>>>>> f8308ab4816f504f0cd88279e922f59d8823f598
 }
 
 .drawer-inner {
@@ -152,7 +122,6 @@ body.no-motion .album-track {
 }
 
 @media (max-width: 700px) {
-<<<<<<< HEAD
   .album { width: clamp(180px, 64vw, 220px); }
   .nowplaying .np-z { padding-right:0; }
   .np-vinyl, .vinyl-bg.np-vinyl {
@@ -160,10 +129,6 @@ body.no-motion .album-track {
     right: -28px !important; opacity: 0.85 !important;
     transform: translateY(-50%) perspective(560px) rotateY(-10deg) !important;
   }
-=======
-  .album { width: 190px; }
-  .vinyl-bg { transform: scale(1.05); opacity: 0.16; }
->>>>>>> f8308ab4816f504f0cd88279e922f59d8823f598
   .gallery { columns: 2; column-gap: 0.75rem; }
   .g-item { border-radius: 14px; margin-bottom: 0.75rem; }
 }
