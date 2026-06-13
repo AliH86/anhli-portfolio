@@ -1,7 +1,7 @@
 // music-data.js — external playlist delta for Anh Li portfolio.
 // This file keeps the live site synced without touching the large inline fallback in index.html.
 window.PORTFOLIO_MUSIC = {
-  version: '2026-06-13-4',
+  version: '2026-06-13-5',
   source: 'Playlists curated by Anh Li',
   albums: [
     {
@@ -10,7 +10,20 @@ window.PORTFOLIO_MUSIC = {
       name:'Unplugged Vol.1',
       sub:'Acoustic · Indie Folk · Hát mộc',
       cover:'uploads/Unplugged-vol1.jpg',
-      desc:'Hát mộc chữa lòng lành liền một mạch— qua nhiều lát cắt đời thường, bằng những cảm xúc rất riêng....'
+      desc:'Hát mộc chữa lòng lành liền một mạch— qua nhiều lát cắt đời thường, bằng những cảm xúc rất riêng....',
+      count:10,
+      tracks:[
+        {id:'3b949f7a-601e-4206-a610-e55ed9a03c24', name:'9PM', dur:'2:18'},
+        {id:'8b81a6e1-d7c2-41d9-84d2-7f27609cc099', name:'Bí Kíp Luyện Deadlines', dur:'3:16'},
+        {id:'f06e6c2a-b56c-4784-aebb-b2a68cd84ed3', name:'Nào, cho mượn bờ vai này', dur:'3:14'},
+        {id:'f2dfd824-606d-4f9c-ac6c-364ff94b405d', name:'An(h) Yên, Quên Phiền', dur:'4:36'},
+        {id:'aa8e1283-e121-416f-a054-c573ce0291f2', name:"Có Sao Đâu (It's Alright)", dur:'3:33'},
+        {id:'6e96c3d7-41fc-4841-800b-b4764b862c3c', name:'Tôi yêu....', dur:'2:51'},
+        {id:'75c08a9c-2c7c-4024-9a6e-2ad25bf1fce3', name:'Con đường ta đi', dur:'3:46'},
+        {id:'5c3f3c0d-d9f1-4e7e-b864-982832e07295', name:'Chạm vào ánh nắng.', dur:'4:38'},
+        {id:'89f1c8f1-57a3-4395-8b1b-d8c755eb5909', name:'Hiên nhà của 50...', dur:'3:54'},
+        {id:'8e79698b-0423-46b9-8bbc-f000197d4def', name:'Đêm nay thì không...', dur:'3:28'}
+      ]
     },
     {
       id:'15c4b5fa-3d24-4a7c-b1bf-6ca2420d81c7',
