@@ -727,10 +727,14 @@ section { padding:5.25rem 4rem; position:relative; }
   border:0.5px solid var(--border2);
   box-shadow:inset 0 1px 0 rgba(232,200,112,0.08), 0 30px 80px rgba(0,0,0,0.5);
   overflow:hidden; text-align:center;
-  opacity:0; transform:translateY(8px);
-  animation:mgFade 1s 0.15s ease both;
+  /* Resting state is fully visible — the gate must never depend on an entrance
+     animation completing, or it can stay invisible (and the music stays locked)
+     if the animation clock is throttled/paused. The fade-in is layered on top via
+     the .mg-enter class, removed by JS right after load so it only plays once. */
+  opacity:1; transform:none;
   transition:opacity 0.9s ease, transform 0.9s ease, visibility 0.9s;
 }
+.music-gate.mg-enter { opacity:0; transform:translateY(8px); }
 @keyframes mgFade { to{ opacity:1; transform:translateY(0);} }
 .music-gate.dismissed {
   opacity:0; visibility:hidden; pointer-events:none;
@@ -2089,13 +2093,15 @@ body.no-motion .album-track {
 
 <!-- FLOATING CTA -->
 <div class="cta-float">
-  <a class="cta-float-btn" href="/cdn-cgi/l/email-protection#f1909d98df8394909588859e8285908385b1969c90989ddf929e9cce8284939b949285ccbd98325b9fd199104a76d199104a5281d185325092d187104a6a98d1b09f99d1bd98d7939e9588cca9989fd1929932519ed1b09f99d1bd98ddd4c1b0d4c1b0bc325d9f99d185325b9fd19d3251d1aaa5325b9fd193104b509facddd19d98325b9fd199104a76d187104a70d1aa9299104a56d13560104a70acdfd4c1b0d4c1b0aabf104a6898d195849f96acd4c1b0d4c1b0a59932539fd19c104b4e9fdf" target="_blank">
+  <a class="cta-float-btn"
+     href="mailto:ali.readytostart@gmail.com?subject=Liên hệ hợp tác với Anh Li&body=Xin chào Anh Li,%0A%0AMình tên là [Tên bạn], liên hệ về [chủ đề].%0A%0A[Nội dung]%0A%0AThân mến."
+     target="_blank">
     <span class="cta-float-dot"></span>
     Liên hệ ngay →
   </a>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 /* ============================================================
    DATA — chỉnh sửa phần này để cập nhật nội dung
 ============================================================ */
@@ -3141,6 +3147,12 @@ observe();
     return;
   }
 
+  // One-time fade-in: start hidden, then release on the next frame so the CSS
+  // transition runs. Driven by JS (not a keyframe), so if this never executes
+  // the gate simply stays visible — it can never get stuck invisible.
+  gate.classList.add('mg-enter');
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ gate.classList.remove('mg-enter'); }); });
+
   function unlock(){
     sessionStorage.setItem(KEY,'1');
     gate.classList.add('dismissed');
@@ -4014,12 +4026,84 @@ if(MOBILE){
 
 </script>
 
-<!-- TWEAKS PANEL -->
-<div id="tweaks-root"></div>
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-<script type="text/babel" src="tweaks-panel.jsx"></script>
-<script type="text/babel" src="tweaks-app.jsx"></script>
+<!-- DESIGN SETTINGS + LIVE PLAYLIST DATA
+     The interactive Tweaks editor (React/Babel) was a design-time tool and is not
+     shipped. The settings the design landed on are applied below as plain CSS vars,
+     and the real playlist data is merged in from music-data.js. -->
+<script>
+(function(){
+  // Locked-in look chosen in the design (was TWEAK_DEFAULTS in tweaks-app.jsx).
+  var TWEAKS = {
+    accent: '#5B8DEF', bg: 'Midnight', heroScale: 116, heroFx: 'Đường vân',
+    speed: 'Vừa', shader: true, shaderIntensity: 115, grain: true,
+    watermark: true, motion: true
+  };
+  var BG_MOODS = {
+    'Midnight': ['#09080E', '#13111C', '#1E1B28', '#2A2636'],
+    'Đen':      ['#050507', '#0C0C10', '#16161C', '#222228'],
+    'Than ấm':  ['#0E0B09', '#181310', '#241C17', '#322620'],
+  };
+  var SPEEDS = { 'Chậm': ['48s', '108s'], 'Vừa': ['30s', '70s'], 'Nhanh': ['18s', '42s'] };
+  var HERO_FX = { 'Khói': 0, 'Cực quang': 1, 'Bụi sao': 2, 'Đường vân': 3 };
+
+  function applyTweaks(t){
+    var r = document.documentElement, b = document.body;
+    var a = t.accent || '#CC9F4A';
+    r.style.setProperty('--amber', a);
+    r.style.setProperty('--amber2', 'color-mix(in srgb, ' + a + ' 70%, white)');
+    r.style.setProperty('--amber3', 'color-mix(in srgb, ' + a + ' 45%, white)');
+    r.style.setProperty('--border2', 'color-mix(in srgb, ' + a + ' 24%, transparent)');
+    r.style.setProperty('--glow', 'color-mix(in srgb, ' + a + ' 9%, transparent)');
+
+    var bg = BG_MOODS[t.bg] || BG_MOODS['Midnight'];
+    r.style.setProperty('--ink', bg[0]);
+    r.style.setProperty('--ink2', bg[1]);
+    r.style.setProperty('--ink3', bg[2]);
+    r.style.setProperty('--ink4', bg[3]);
+
+    r.style.setProperty('--hero-scale', (t.heroScale || 100) / 100);
+
+    var sp = SPEEDS[t.speed] || SPEEDS['Vừa'];
+    r.style.setProperty('--marquee-dur', sp[0]);
+    r.style.setProperty('--album-dur', sp[1]);
+
+    b.classList.toggle('no-grain', !t.grain);
+    b.classList.toggle('no-wm', !t.watermark);
+    b.classList.toggle('no-motion', !t.motion);
+    b.classList.toggle('no-shader', !t.shader);
+
+    if (window.shaderRefreshPalette) window.shaderRefreshPalette();
+    if (window.shaderSetIntensity) window.shaderSetIntensity((t.shaderIntensity == null ? 100 : t.shaderIntensity) / 100);
+    if (window.shaderSetMode) window.shaderSetMode(HERO_FX[t.heroFx] == null ? 0 : HERO_FX[t.heroFx]);
+  }
+  applyTweaks(TWEAKS);
+
+  // Merge the up-to-date playlist data (covers, track lists) into the page engine.
+  function merge(data){
+    if (!data || !Array.isArray(data.albums) || !data.albums.length) return;
+    if (typeof ALBUMS === 'undefined' || typeof renderMusic !== 'function') return;
+    data.albums.forEach(function(src){
+      var dst = ALBUMS.find(function(a){ return a.id === src.id; });
+      if (dst) {
+        if (src.tracks && src.tracks.length) dst.tracks = src.tracks;
+        if (src.cover) dst.cover = src.cover;
+        if (src.name) dst.name = src.name;
+        if (src.sub) dst.sub = src.sub;
+        if (src.desc) dst.desc = src.desc;
+        dst.count = (dst.tracks || []).length || dst.count || 0;
+      } else {
+        src.count = (src.tracks || []).length;
+        ALBUMS.push(src);
+      }
+    });
+    renderMusic();
+  }
+  var s = document.createElement('script');
+  s.src = 'music-data.js?v=20260612-2';
+  s.onload = function(){ merge(window.PORTFOLIO_MUSIC); };
+  s.onerror = function(){ console.warn('[Anh Li Portfolio] music-data.js could not load; using inline data.'); };
+  document.head.appendChild(s);
+})();
+</script>
 </body>
 </html>

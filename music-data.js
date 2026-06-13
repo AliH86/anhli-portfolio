@@ -1,15 +1,15 @@
-// music-data.js — external Suno playlist data for Anh Li portfolio.
-// Update this file when Suno album covers, track lists, or playlist names change.
+// music-data.js — external playlist data for Anh Li portfolio.
+// Update this file when album covers, track lists, or playlist names change.
 // The old inline data in index.html remains as fallback only.
 window.PORTFOLIO_MUSIC = {
-  version: '2026-06-11',
-  source: 'Suno playlists curated by Anh Li',
+  version: '2026-06-12-4',
+  source: 'Playlists curated by Anh Li',
   albums: [
     {
       id:'f821410f-651f-4aba-b620-b92e1f9b5112',
       playlistUrl:'https://suno.com/playlist/f821410f-651f-4aba-b620-b92e1f9b5112',
       name:'Dai-Ichi Life Vietnam', sub:'Corporate Anthem · Kick-off · EDM',
-      cover:'https://cdn2.suno.ai/ed9b604d.jpeg',
+      cover:'uploads/Dai-ichi-life.png',
       desc:'Album Kick-off soundtracks qua nhiều mùa sôi nổi',
       tracks:[
         {id:'3e1f52a5-b6df-4723-bab3-9b6bc154809e', name:'Cùng ghi dấu vinh quang', dur:'3:46'},
@@ -26,7 +26,7 @@ window.PORTFOLIO_MUSIC = {
       id:'4b8e4a6c-d6f0-4baf-baef-894ee0e9f41a',
       playlistUrl:'https://suno.com/playlist/4b8e4a6c-d6f0-4baf-baef-894ee0e9f41a',
       name:'Dấu Ấn Thanh Âm', sub:'Selected Event Soundtracks · Stage · Brand',
-      cover:'https://cdn2.suno.ai/3375ea42.jpeg',
+      cover:'uploads/dau-an-thanh-am.png',
       desc:'Dấu ấn âm nhạc từ những sân khấu, thương hiệu và khoảnh khắc đã đi qua — được Anh Li gom lại thành một hành trình thanh âm.',
       tracks:[
         {id:'e247bbb1-1ded-42c6-ad80-ec5257a23956', name:'Vĩnh Tân Gr- Vươn Xa Biển Lớn! (Remastered)', dur:'3:40'},
@@ -51,12 +51,11 @@ window.PORTFOLIO_MUSIC = {
       id:'e7dd732d-9b6c-487c-836e-d2f412b1683e',
       playlistUrl:'https://suno.com/playlist/e7dd732d-9b6c-487c-836e-d2f412b1683e',
       name:'Untamed', sub:"R&B · Dark Pop · Anh Li & D'Li",
-      cover:'https://cdn2.suno.ai/3f985bfa.jpeg',
+      cover:'uploads/Untamed.png',
       desc:'Nổi loạn lên, Si mê lên, Cuồng dại lên',
       tracks:[
         {id:'a29966fb-a3d8-405d-baf1-6977fac27818', name:'Mơ Giấc Tình Nồng Say', dur:'3:23'},
         {id:'269bde35-151e-4da0-aeb1-e1f1f23380b4', name:"Cớ sao vậy em? [D'li x Ali]", dur:'2:27'},
-        {id:'14a7e8d3-6cc8-4b9d-acca-ee463d8122f9', name:'Những kẻ Drill Loves', dur:'2:36'},
         {id:'7517a458-e4a8-419c-965d-d095eb1ad8ef', name:"Mật ngọt, anh say đó.[ D'Li - Anh Li]", dur:'3:19'},
         {id:'1cfa61e1-471b-4cfd-a05a-0083e8fa1fdb', name:'Chuyện....Mình Lạ', dur:'3:04'},
         {id:'10d67ecd-8ef6-4dc6-98bf-35e502e25af0', name:'Xin đừng nói câu gì...', dur:'3:22'},
@@ -70,10 +69,31 @@ window.PORTFOLIO_MUSIC = {
       ],
     },
     {
+      id:'560a4089-5871-4536-8375-785f7a2f8dca',
+      playlistUrl:'https://suno.com/playlist/560a4089-5871-4536-8375-785f7a2f8dca',
+      name:'Những Kẻ DRILL Loves', sub:"Dark R&B · Drill · D'Li & SEN[SE] da Band",
+      cover:'https://cdn2.suno.ai/4145e7a0.jpeg',
+      desc:'Những kẻ yêu bằng bản năng, giữ vết thương như kỷ niệm, biến cảm xúc thành âm thanh — tình yêu với đủ gương mặt: đẹp đẽ, hỗn loạn, ngông cuồng, quyến rũ và buồn bã.',
+      tracks:[
+        {id:'97ab34d8-8a6d-4b66-acf2-cdce31987e25', name:'Phai Nhat Phai...', dur:'3:08'},
+        {id:'adbe7826-8f50-42e3-ae14-9cd0c6a251a7', name:'Quên Đi Nhớ Chi?!', dur:'3:41'},
+        {id:'14a7e8d3-6cc8-4b9d-acca-ee463d8122f9', name:'Những kẻ Drill Loves', dur:'2:36'},
+        {id:'21c513f1-619f-44b1-9738-6ad030e5b29b', name:'Ex-Cursed Me', dur:'3:47'},
+        {id:'8e11c0e5-4c85-40ef-8ec2-8087e3dcb3d9', name:'Track này không thể Delete!', dur:'3:45'},
+        {id:'31cbee82-0d6d-4ab9-960e-94c29920e3df', name:'Như Chưa Từng Thương', dur:'3:52'},
+        {id:'2b64256d-1c14-4fdc-90c3-8e14d6b03f6d', name:'Tan hết vào gió…', dur:'3:28'},
+        {id:'159a30ea-b21a-434b-936b-958734b800fe', name:'Đừng vây mà, bae~', dur:'3:49'},
+        {id:"7b162469-4032-439a-b3c6-2e12d20b10af", name:"Tình ảo's", dur:'2:42'},
+        {id:'96ad72a0-2c6f-4894-b8d6-ea538d0b9a85', name:'Baby à, nhắm trúng tim em rồi đấy...', dur:'2:42'},
+        {id:'229d579c-7ace-43cf-b0b0-a59d9c9332ec', name:'Đố elm Si ah!', dur:'2:51'},
+        {id:'419a558c-8f8a-4401-81be-826eec0ff7e8', name:'Đom đóm; Ánh sao và Mắt em', dur:'3:32'},
+      ],
+    },
+    {
       id:'2818d6f0-318d-4aad-94ac-027ccc756ec4',
       playlistUrl:'https://suno.com/playlist/2818d6f0-318d-4aad-94ac-027ccc756ec4',
       name:'Unplugged Vol.1', sub:'Acoustic · Indie Folk · Hát mộc',
-      cover:'https://cdn2.suno.ai/image_3b949f7a-601e-4206-a610-e55ed9a03c24.jpeg',
+      cover:'uploads/Unplugged vol1.png',
       desc:'Hát mộc chữa lòng lành liền một mạch— qua nhiều lát cắt đời thường, bằng những cảm xúc rất riêng....',
       tracks:[
         {id:'3b949f7a-601e-4206-a610-e55ed9a03c24', name:'9PM', dur:'2:18'},
@@ -91,8 +111,8 @@ window.PORTFOLIO_MUSIC = {
       id:'15c4b5fa-3d24-4a7c-b1bf-6ca2420d81c7',
       playlistUrl:'https://suno.com/playlist/15c4b5fa-3d24-4a7c-b1bf-6ca2420d81c7',
       name:'Unplugged Vol 2', sub:'Acoustic · Bossa Nova · Indie Folk',
-      cover:'https://cdn2.suno.ai/image_ceec7c53-c045-4455-9b79-6d72cc29a56e.jpeg',
-      desc:'',
+      cover:'uploads/Unplugged vol2.png',
+      desc:'Tiếp mạch hát mộc — lần này đong đưa hơn một chút, có bossa, có gió. Những bài hát như chiếc võng trước hiên nhà: chậm rãi, êm, và rất đời.',
       tracks:[
         {id:'ceec7c53-c045-4455-9b79-6d72cc29a56e', name:'Đừng lỡ nhịp!', dur:'3:08'},
         {id:'76655d83-8252-4fda-97ae-9db85cc9de37', name:'Nẹh Têh...', dur:'2:44'},
@@ -108,7 +128,7 @@ window.PORTFOLIO_MUSIC = {
       id:'b1021057-56bd-49e8-a1fb-5af4d69c2c0e',
       playlistUrl:'https://suno.com/playlist/b1021057-56bd-49e8-a1fb-5af4d69c2c0e',
       name:'Mỹ Vị Nhân Sinh', sub:'Alt-Indie Folk · Anh Li',
-      cover:'https://cdn2.suno.ai/image_142b3ba1-12a5-4fdc-96d5-ce5984f90e12.jpeg',
+      cover:'uploads/My-vi-nhan-sinh.png',
       desc:'Một lát cắt về cuộc đời muôn vị. Có cay để nhớ, có đắng để thấm, có ngọt để thương, có nhạt để bình yên. Với Anh Li, mỗi hương vị đi qua đời người đều là một cách thế gian kể chuyện...',
       tracks:[
         {id:'142b3ba1-12a5-4fdc-96d5-ce5984f90e12', name:'Ngọt lạc', dur:'2:39'},
@@ -120,9 +140,9 @@ window.PORTFOLIO_MUSIC = {
     {
       id:'74ba3104-59db-41e6-90d6-ecd657c449ce',
       playlistUrl:'https://suno.com/playlist/74ba3104-59db-41e6-90d6-ecd657c449ce',
-      name:'Unplugged Special – Âm Hưởng', sub:'Acoustic · Tribal Folk · Âm Hưởng Dân Tộc',
-      cover:'https://cdn2.suno.ai/image_872122de-24f4-4196-825d-2214e151c69a.jpeg',
-      desc:'',
+      name:'Unplugged Special – Âm Hưởng', sub:"Acoustic · Tribal Folk · Anh Li & D'Li",
+      cover:'uploads/am-huong-19b7d470.png',
+      desc:"Gửi đến những giá trị nguyên bản — từ quê hương đến trái tim. Tiếng đàn, tiếng sáo và những điệu lý ngân lên giữa đại ngàn, qua hai màu giọng Anh Li & D'Li.",
       tracks:[
         {id:'872122de-24f4-4196-825d-2214e151c69a', name:'Thương sao...rau đắng sau hè', dur:'3:42'},
         {id:'75c08a9c-2c7c-4024-9a6e-2ad25bf1fce3', name:'Con đường ta di', dur:'3:46'},
@@ -142,14 +162,18 @@ window.PORTFOLIO_MUSIC = {
     {
       id:'1c504bd2-2249-4fca-931a-f1c992581a25',
       playlistUrl:'https://suno.com/playlist/1c504bd2-2249-4fca-931a-f1c992581a25',
-      name:'MiTek · Way of Stars', sub:'EDM · Stadium · Show',
-      cover:'https://cdn2.suno.ai/image_b0e95414-5c1f-43dc-a01b-00691e184ed3.jpeg',
-      desc:'',
+      name:'MiTek · Way of Stars', sub:'EDM · Progressive House · Stadium',
+      cover:'uploads/WoS-MiTek.png',
+      badge:'Show',
+      desc:'Nhạc sân khấu cho đêm gala MiTek — từ anthem khai màn tới moment sáng đèn cuối show.',
       tracks:[
-        {id:'a03438fa-df97-4d68-917d-82b2f9c9086e', name:"[Way of STARS] -We are The Stars Tonight-D'Li", dur:'4:46'},
-        {id:'5a877608-94ba-40ab-ac74-c291d23730e4', name:'[Way of STARS] -We are The Stars', dur:'4:00'},
+        {id:'a03438fa-df97-4d68-917d-82b2f9c9086e', name:"We are The Stars Tonight (ft. D'Li)", dur:'4:46'},
+        {id:'fec55083-ff97-40f2-be22-72f3bd178dbf', name:'We are The Stars_Master', dur:'4:00'},
         {id:'5f686228-97f3-4c13-bd26-daac9b75b1cd', name:'Mitek-nista...', dur:'3:18'},
         {id:'e1ee21d5-f187-407c-b751-198c2a28c074', name:'Lovers Gonna Love (Electro House Edit)', dur:'3:37'},
+        {id:'59b37b9a-9fe7-4c1a-9cc3-acce0a8a6377', name:'Gọi Tên Những Vì Sao', dur:'3:30'},
+        {id:'6a2c9d7c-5096-4a26-bda9-370c6166f6f6', name:'Gọi Tên Những Vì Sao [Master]', dur:'3:30'},
+        {id:'ca5e6c6e-1517-472a-bc69-f63384b3e96a', name:'Gọi Tên Những Vì Sao [Beat+bè]', dur:'3:30'},
       ],
     },
     {
@@ -157,7 +181,7 @@ window.PORTFOLIO_MUSIC = {
       playlistUrl:'https://suno.com/playlist/df0c36ec-4afd-4760-9aa3-3b05350a1b87',
       name:'I ❤ VN', sub:'Patriotic · Pop · Epic',
       cover:'https://cdn2.suno.ai/7622500f.jpeg',
-      desc:'',
+      desc:'Những khúc ca viết cho dải đất hình chữ S — hào sảng, tự cường và đầy thương mến, từ hậu phương tới tiền tuyến, từ Bắc chí Nam.',
       tracks:[
         {id:'f8628247-b5d2-4839-b501-8308976c1615', name:'HẸN ƯỚC BẮC NAM - Cover', dur:'5:03'},
         {id:'9bd3da93-4f91-4053-a88e-8d09109d29d5', name:'Viết Tiếp Ước Mong', dur:'4:42'},
@@ -178,7 +202,7 @@ window.PORTFOLIO_MUSIC = {
       playlistUrl:'https://suno.com/playlist/0bd2c183-50a7-4917-ae88-2ecdc9f0d2f3',
       name:"TẾT Ngọ Sum Vầy '26", sub:'Tết · Folk Pop · Celebration',
       cover:'https://cdn2.suno.ai/image_11015d6d-3fc4-4aea-80f0-f889d3e06610.jpeg',
-      desc:'',
+      desc:'Mùa Ngọ gõ cửa — nhạc Tết rộn ràng cho những chuyến về nhà, mâm cơm sum vầy và lời chúc đầu năm phát tài, phát lộc.',
       tracks:[
         {id:'9baaa82b-34cf-4728-80aa-7658c43fe299', name:'Tết nay cầu gì?', dur:'3:44'},
         {id:'220ef898-680f-4f6f-942f-a617df5bb86e', name:'”ĐỈNH CHÓP (On Top)”', dur:'3:40'},
@@ -195,7 +219,7 @@ window.PORTFOLIO_MUSIC = {
       id:'8f8611b8-416e-4624-9bd9-e91e1c2dea62',
       playlistUrl:'https://suno.com/playlist/8f8611b8-416e-4624-9bd9-e91e1c2dea62',
       name:'Cảm Thán Ca', sub:"Indie Folk · Anh Li & D'Li",
-      cover:'https://cdn2.suno.ai/image_2ca4a4ac-4ed5-43db-bfed-bcf126963070.jpeg',
+      cover:'uploads/cam-than-ca.png',
       desc:"Chuỗi cảm xúc được thốt lên giữa cuộc sống muôn màu. Qua màu giọng của Anh Li và D'Li, mỗi ca khúc là một tiếng lòng rất đời: vui, buồn, thương, giận, ngỡ ngàng… rồi cũng “thì thôi” mà bước tiếp.",
       tracks:[
         {id:'2ca4a4ac-4ed5-43db-bfed-bcf126963070', name:'Thì thôi!!!!', dur:'3:02'},
@@ -213,7 +237,7 @@ window.PORTFOLIO_MUSIC = {
       id:'bd830721-0b26-40ea-b7d5-508e5d6612a2',
       playlistUrl:'https://suno.com/playlist/bd830721-0b26-40ea-b7d5-508e5d6612a2',
       name:'Tôi Hát Cả Bốn Mùa', sub:"Ghibli Folk · Anh Li & D'Li",
-      cover:'https://cdn2.suno.ai/image_749e34d4-7589-471f-a9d8-320b5fe13a5b.jpeg',
+      cover:'uploads/toi-hat-ca-ca-bon-mua.png',
       desc:"Có những mùa đi qua như cơn gió, có những mùa ở lại thành bài ca. Hành trình của Anh Li và D'Li qua thiên nhiên, tình yêu, ký ức và vòng tuần hoàn kỳ diệu của cuộc sống.",
       tracks:[
         {id:'749e34d4-7589-471f-a9d8-320b5fe13a5b', name:'Mùa Hạ của Tôi [Xuân Quỳnh]', dur:'3:18'},
@@ -227,8 +251,8 @@ window.PORTFOLIO_MUSIC = {
       id:'c358ba32-19d4-46ef-bef9-5de138b03ea4',
       playlistUrl:'https://suno.com/playlist/c358ba32-19d4-46ef-bef9-5de138b03ea4',
       name:"Vietnam Young Lions '26", sub:'Electropop · Anthem · Award',
-      cover:'https://cdn2.suno.ai/image_4618b412-a7bd-4334-bff2-b56d5334024e.jpeg',
-      desc:'',
+      cover:'uploads/VNYL26.png',
+      desc:'Bộ anthem tiếp lửa cho đấu trường sáng tạo trẻ — gắt, rực và đầy khí thế, viết riêng cho những tiếng gầm đầu tiên.',
       tracks:[
         {id:'50633010-4d6e-463d-9610-1c1b8f021a5e', name:'APEX ROAR', dur:'2:38'},
         {id:'38b8f448-d7da-46b6-a5e4-70ecc177cb4b', name:'A Decade of Gold', dur:'3:47'},
@@ -243,7 +267,7 @@ window.PORTFOLIO_MUSIC = {
       id:'12435dd8-eaf8-4046-8bee-cb0aa03533f8',
       playlistUrl:'https://suno.com/playlist/12435dd8-eaf8-4046-8bee-cb0aa03533f8',
       name:"Vietnam Young Lions '25", sub:'Rock · Anthem · Final',
-      cover:'https://cdn2.suno.ai/0a00a58b.jpeg',
+      cover:'uploads/VNYL25.png',
       desc:'Made by Ali, phát tại chương trình chung kết cùng tên.',
       tracks:[
         {id:'f17edfb8-d150-4d06-b1e9-9463935250f4', name:'”BORN TO BREAK THE BRIEF”', dur:'2:53'},
