@@ -1,5 +1,5 @@
-// tweaks-app.jsx — Tweaks panel for Anh Li portfolio.
-// Applies values to the (vanilla) page via CSS variables + body classes.
+// tweaks-app.jsx — Tweaks panel + external music data layer for Anh Li portfolio.
+// Applies values to the vanilla page via CSS variables + body classes.
 
 (function loadPortfolioUpgrade(){
   if (document.getElementById('portfolio-upgrade-css')) return;
@@ -11,7 +11,7 @@
 })();
 
 (function loadExternalMusicData(){
-  const DATA_VERSION = '20260613-2';
+  const DATA_VERSION = '20260613-4';
   const TRACK_PAGE = 10;
   let albums = [];
   let curAlbum = -1;
@@ -58,6 +58,7 @@
     if (unpluggedVol2) {
       unpluggedVol2.name = 'Unplugged Vol.2';
       unpluggedVol2.playlistUrl = 'https://suno.com/playlist/15c4b5fa-3d24-4a7c-b1bf-6ca2420d81c7';
+      if (Array.isArray(unpluggedVol2.tracks)) unpluggedVol2.count = unpluggedVol2.tracks.length;
     }
 
     const myVi = byId.get('b1021057-56bd-49e8-a1fb-5af4d69c2c0e');
@@ -65,16 +66,7 @@
       myVi.name = 'Mỹ Vị Nhân Sinh';
       myVi.playlistUrl = 'https://suno.com/playlist/b1021057-56bd-49e8-a1fb-5af4d69c2c0e';
       myVi.sub = 'Alt-Indie Folk · Anh Li';
-      myVi.tracks = [
-        { id:'142b3ba1-12a5-4fdc-96d5-ce5984f90e12', name:'Ngọt Lạc', dur:'2:39' },
-        { id:'98dac03b-7ba7-4889-80aa-d5d5e9e9a05d', name:'Đúng Đắng', dur:'2:14' },
-        { id:'1d4cb85c-8889-4499-8c29-b8a45ed7d690', name:'Chua Cay Tự Tình', sourceUrl:'https://suno.com/song/1d4cb85c-8889-4499-8c29-b8a45ed7d690' },
-        { id:'301f5020-6c93-4a82-9236-dcbd7498f2d3', name:'Thương Mầm Muối Mặn', sourceUrl:'https://suno.com/song/301f5020-6c93-4a82-9236-dcbd7498f2d3' },
-        { id:'4fbb1f41-8966-4d15-8cde-e43135debf0b', name:'Hồi (T)hương', sourceUrl:'https://suno.com/song/4fbb1f41-8966-4d15-8cde-e43135debf0b' },
-        { id:'', shortId:'Vxu7NsGxCvGhendI', sourceUrl:'https://suno.com/s/Vxu7NsGxCvGhendI', name:"Chát Buồn Buồn Chát - Ft D'Li" },
-        { id:'', shortId:'5gjauy2QT6FEgdFS', sourceUrl:'https://suno.com/s/5gjauy2QT6FEgdFS', name:'Thế Gian Thêm Vị' },
-      ];
-      myVi.count = myVi.tracks.length;
+      if (Array.isArray(myVi.tracks)) myVi.count = myVi.tracks.length;
     }
 
     const newAlbumId = '8f2c17b4-cb70-46e1-9f2e-464ccadaf1ab';
@@ -94,7 +86,7 @@
       else list.push(newAlbum);
     }
 
-    data.version = '2026-06-13-2';
+    data.version = '2026-06-13-4';
     return data;
   }
 
