@@ -175,7 +175,7 @@
           </div>
           <div class="drawer-actions">
             ${openSuno}
-            <button class="drawer-like${likeN > 0 ? ' liked' : ''}" onclick="likeAlbum(${idx},event)">♡<span class="like-n">${likeN > 0 ? ' ' + n : ''}</span></button>
+            <button class="drawer-like${likeN > 0 ? ' liked' : ''}" onclick="likeAlbum(${idx},event)">♡<span class="like-n">${likeN > 0 ? ' ' + likeN : ''}</span></button>
             <button class="drawer-playall" onclick="playAt(0)"${(!tracks || !tracks.length) ? ' disabled style="opacity:0.4;cursor:default"' : ''}>▶ Phát từ đầu</button>
           </div>
         </div>
