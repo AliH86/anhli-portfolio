@@ -1617,6 +1617,7 @@ body.no-motion .hero-photo { animation:heroPhotoIn 1.9s cubic-bezier(0.2,0.7,0,1
 body.no-motion .hero-name .hl { animation-duration:0.01s; animation-delay:0s; transition:none; }
 
 /* ═══════════ TIÊU ĐỀ SECTION — ký tự bay vào khi cuộn tới ═══════════ */
+.sec-h.chsplit .word { display:inline-block; white-space:nowrap; }
 .sec-h.chsplit .ch {
   display:inline-block;
   opacity:0; transform:translateY(0.55em) rotate(5deg); filter:blur(6px);
@@ -4046,11 +4047,19 @@ function drawEQ(){
       [...node.childNodes].forEach(n=>{
         if(n.nodeType===3){
           const frag=document.createDocumentFragment();
-          [...n.textContent].forEach(c=>{
-            if(/\s/.test(c)){ frag.appendChild(document.createTextNode(c)); return; }
-            const sp=document.createElement('span');
-            sp.className='ch'; sp.textContent=c; sp.style.setProperty('--i', i++);
-            frag.appendChild(sp);
+          // Tách theo từ — giữ khoảng trắng làm điểm xuống dòng, nhưng bọc mỗi từ
+          // trong .word để ký tự trong cùng một từ KHÔNG bị ngắt giữa chừng.
+          n.textContent.split(/(\s+)/).forEach(tok=>{
+            if(!tok) return;
+            if(/^\s+$/.test(tok)){ frag.appendChild(document.createTextNode(tok)); return; }
+            const word=document.createElement('span');
+            word.className='word';
+            [...tok].forEach(c=>{
+              const sp=document.createElement('span');
+              sp.className='ch'; sp.textContent=c; sp.style.setProperty('--i', i++);
+              word.appendChild(sp);
+            });
+            frag.appendChild(word);
           });
           n.replaceWith(frag);
         } else if(n.nodeType===1) walk(n);
