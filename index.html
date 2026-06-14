@@ -144,6 +144,23 @@ nav.solid {
 .nav-links a:hover { color:var(--amber); }
 .nav-links a:hover::after { width:100%; }
 
+/* Hamburger — chỉ hiện trên mobile (xem RESPONSIVE) */
+.nav-burger {
+  display:none; flex-direction:column; justify-content:center; gap:5px;
+  width:42px; height:42px; padding:0; margin:-9px 0;
+  background:transparent; border:0.5px solid var(--border); border-radius:10px;
+  cursor:pointer; z-index:120; transition:border-color 0.3s;
+}
+.nav-burger span {
+  display:block; width:20px; height:1.5px; margin:0 auto;
+  background:var(--amber); border-radius:2px;
+  transition:transform 0.32s ease, opacity 0.2s ease;
+}
+.nav-burger:hover { border-color:var(--amber); }
+nav.menu-open .nav-burger span:nth-child(1){ transform:translateY(6.5px) rotate(45deg); }
+nav.menu-open .nav-burger span:nth-child(2){ opacity:0; }
+nav.menu-open .nav-burger span:nth-child(3){ transform:translateY(-6.5px) rotate(-45deg); }
+
 /* ============================================
    HERO
 ============================================ */
@@ -1239,8 +1256,25 @@ footer {
 @media(max-width:900px){
   nav { padding:1rem 1.5rem; }
   nav.solid { padding:0.75rem 1.5rem; }
-  .nav-links { gap:1.2rem; }
-  .nav-links a { font-size:0.6rem; letter-spacing:0.1em; }
+  .nav-burger { display:flex; }
+  /* Menu xổ xuống — ẩn mặc định, mở khi bấm hamburger */
+  .nav-links {
+    position:absolute; top:100%; right:1.5rem; left:1.5rem;
+    flex-direction:column; gap:0; padding:0.4rem 0;
+    background:rgba(9,8,14,0.96); backdrop-filter:blur(20px);
+    border:0.5px solid var(--border); border-radius:14px;
+    box-shadow:0 18px 50px rgba(0,0,0,0.55);
+    opacity:0; transform:translateY(-10px) scale(0.98); transform-origin:top right;
+    pointer-events:none; transition:opacity 0.28s ease, transform 0.28s ease;
+  }
+  nav.menu-open .nav-links { opacity:1; transform:translateY(0) scale(1); pointer-events:auto; }
+  .nav-links li { width:100%; }
+  .nav-links a {
+    display:block; padding:0.85rem 1.4rem; font-size:0.72rem; letter-spacing:0.14em;
+    border-bottom:0.5px solid var(--border);
+  }
+  .nav-links li:last-child a { border-bottom:0; }
+  .nav-links a::after { display:none; }
   .hero { padding:0 1.5rem 3.5rem; }
   .hero-photo {
     width:100%; background-position:50% 12%;
@@ -1789,7 +1823,10 @@ body.no-motion .album-track {
 <!-- NAV -->
 <nav id="nav">
   <a class="nav-logo" href="#">ANH LI ✦</a>
-  <ul class="nav-links">
+  <button class="nav-burger" id="navBurger" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="navLinks">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
     <li><a href="#music">Nhạc</a></li>
     <li><a href="#videos">Videos</a></li>
     <li><a href="#gallery">Gallery</a></li>
@@ -2136,7 +2173,7 @@ const ARTISTS = [
 const ALBUMS = [
   { id:'f821410f-651f-4aba-b620-b92e1f9b5112',
     name:'Dai-Ichi Life Vietnam', sub:'Corporate Anthem · Kick-off · EDM',
-    cover:'uploads/Dai-ichi-life.png',
+    cover:'uploads/Dai-ichi-life.jpg',
     desc:'Album Kick-off soundtracks qua nhiều mùa sôi nổi', count:8,
     tracks:[
       {id:'3e1f52a5-b6df-4723-bab3-9b6bc154809e', name:'Cùng ghi dấu vinh quang', dur:'3:46'},
@@ -2151,7 +2188,7 @@ const ALBUMS = [
   },
   { id:'4b8e4a6c-d6f0-4baf-baef-894ee0e9f41a',
     name:'Dấu Ấn Thanh Âm', sub:'Selected Event Soundtracks · Stage · Brand',
-    cover:'uploads/dau-an-thanh-am.png',
+    cover:'uploads/dau-an-thanh-am.jpg',
     desc:'Dấu ấn âm nhạc từ những sân khấu, thương hiệu và khoảnh khắc đã đi qua — được Anh Li gom lại thành một hành trình thanh âm.', count:16,
     tracks:[
       {id:'e247bbb1-1ded-42c6-ad80-ec5257a23956', name:'Vĩnh Tân Gr- Vươn Xa Biển Lớn! (Remastered)', dur:'3:40'},
@@ -2174,7 +2211,7 @@ const ALBUMS = [
   },
   { id:'e7dd732d-9b6c-487c-836e-d2f412b1683e',
     name:'Untamed', sub:'R&B · Dark Pop · Anh Li & D\'Li',
-    cover:'uploads/Untamed.png',
+    cover:'uploads/Untamed.jpg',
     desc:'Nổi loạn lên, Si mê lên, Cuồng dại lên', count:12,
     tracks:[
       {id:'a29966fb-a3d8-405d-baf1-6977fac27818', name:'Mơ Giấc Tình Nồng Say', dur:'3:23'},
@@ -2212,7 +2249,7 @@ const ALBUMS = [
   },
   { id:'2818d6f0-318d-4aad-94ac-027ccc756ec4',
     name:'Unplugged Vol.1', sub:'Acoustic · Indie Folk · Hát mộc',
-    cover:'uploads/Unplugged vol1.png',
+    cover:'uploads/Unplugged-vol1.jpg',
     desc:'Hát mộc chữa lòng lành liền một mạch— qua nhiều lát cắt đời thường, bằng những cảm xúc rất riêng....', count:9,
     tracks:[
       {id:'3b949f7a-601e-4206-a610-e55ed9a03c24', name:'9PM', dur:'2:18'},
@@ -2228,7 +2265,7 @@ const ALBUMS = [
   },
   { id:'15c4b5fa-3d24-4a7c-b1bf-6ca2420d81c7',
     name:'Unplugged Vol 2', sub:'Acoustic · Bossa Nova · Indie Folk',
-    cover:'uploads/Unplugged vol2.png',
+    cover:'uploads/Unplugged-vol2.jpg',
     desc:'Tiếp mạch hát mộc — lần này đong đưa hơn một chút, có bossa, có gió. Những bài hát như chiếc võng trước hiên nhà: chậm rãi, êm, và rất đời.', count:8,
     tracks:[
       {id:'ceec7c53-c045-4455-9b79-6d72cc29a56e', name:'Đừng lỡ nhịp!', dur:'3:08'},
@@ -2243,7 +2280,7 @@ const ALBUMS = [
   },
   { id:'b1021057-56bd-49e8-a1fb-5af4d69c2c0e',
     name:'Mỹ Vị Nhân Sinh', sub:'Alt-Indie Folk · Anh Li',
-    cover:'uploads/My-vi-nhan-sinh.png',
+    cover:'uploads/My-vi-nhan-sinh.jpg',
     desc:'Một lát cắt về cuộc đời muôn vị. Có cay để nhớ, có đắng để thấm, có ngọt để thương, có nhạt để bình yên. Với Anh Li, mỗi hương vị đi qua đời người đều là một cách thế gian kể chuyện...', count:4,
     tracks:[
       {id:'142b3ba1-12a5-4fdc-96d5-ce5984f90e12', name:'Ngọt lạc', dur:'2:39'},
@@ -2254,7 +2291,7 @@ const ALBUMS = [
   },
   { id:'74ba3104-59db-41e6-90d6-ecd657c449ce',
     name:'Unplugged Special – Âm Hưởng', sub:'Acoustic · Tribal Folk · Anh Li & D\'Li',
-    cover:'uploads/am-huong-19b7d470.png',
+    cover:'uploads/am-huong.jpg',
     desc:'Gửi đến những giá trị nguyên bản — từ quê hương đến trái tim. Tiếng đàn, tiếng sáo và những điệu lý ngân lên giữa đại ngàn, qua hai màu giọng Anh Li & D\'Li.', count:13,
     tracks:[
       {id:'872122de-24f4-4196-825d-2214e151c69a', name:'Thương sao...rau đắng sau hè', dur:'3:42'},
@@ -2274,7 +2311,7 @@ const ALBUMS = [
   },
   { id:'1c504bd2-2249-4fca-931a-f1c992581a25',
     name:'MiTek · Way of Stars', sub:'EDM · Stadium · Show',
-    cover:'uploads/WoS-MiTek.png',
+    cover:'uploads/WoS-MiTek.jpg',
     desc:'Nhạc dựng cho đêm gala “Way of Stars” — từ anthem khai màn tới khoảnh khắc sáng đèn cuối show, cả khán phòng cùng hát.', count:4,
     tracks:[
       {id:'a03438fa-df97-4d68-917d-82b2f9c9086e', name:'[Way of STARS] -We are The Stars Tonight-D\'Li', dur:'4:46'},
@@ -2320,7 +2357,7 @@ const ALBUMS = [
   },
   { id:'8f8611b8-416e-4624-9bd9-e91e1c2dea62',
     name:'Cảm Thán Ca', sub:'Indie Folk · Anh Li & D\'Li',
-    cover:'uploads/cam-than-ca.png',
+    cover:'uploads/cam-than-ca.jpg',
     desc:'Chuỗi cảm xúc được thốt lên giữa cuộc sống muôn màu. Qua màu giọng của Anh Li và D\'Li, mỗi ca khúc là một tiếng lòng rất đời: vui, buồn, thương, giận, ngỡ ngàng… rồi cũng “thì thôi” mà bước tiếp.', count:9,
     tracks:[
       {id:'2ca4a4ac-4ed5-43db-bfed-bcf126963070', name:'Thì thôi!!!!', dur:'3:02'},
@@ -2336,7 +2373,7 @@ const ALBUMS = [
   },
   { id:'bd830721-0b26-40ea-b7d5-508e5d6612a2',
     name:'Tôi Hát Cả Bốn Mùa', sub:'Ghibli Folk · Anh Li & D\'Li',
-    cover:'uploads/toi-hat-ca-ca-bon-mua.png',
+    cover:'uploads/toi-hat-ca-ca-bon-mua.jpg',
     desc:'Có những mùa đi qua như cơn gió, có những mùa ở lại thành bài ca. Hành trình của Anh Li và D\'Li qua thiên nhiên, tình yêu, ký ức và vòng tuần hoàn kỳ diệu của cuộc sống.', count:5,
     tracks:[
       {id:'749e34d4-7589-471f-a9d8-320b5fe13a5b', name:'Mùa Hạ của Tôi [Xuân Quỳnh]', dur:'3:18'},
@@ -2348,7 +2385,7 @@ const ALBUMS = [
   },
   { id:'c358ba32-19d4-46ef-bef9-5de138b03ea4',
     name:'Vietnam Young Lions \'26', sub:'Electropop · Anthem · Award',
-    cover:'uploads/VNYL26.png',
+    cover:'uploads/VNYL26.jpg',
     desc:'Bộ anthem tiếp lửa cho đấu trường sáng tạo trẻ — gắt, rực và đầy khí thế, viết riêng cho những tiếng gầm đầu tiên.', count:7,
     tracks:[
       {id:'50633010-4d6e-463d-9610-1c1b8f021a5e', name:'APEX ROAR', dur:'2:38'},
@@ -2362,7 +2399,7 @@ const ALBUMS = [
   },
   { id:'12435dd8-eaf8-4046-8bee-cb0aa03533f8',
     name:'Vietnam Young Lions \'25', sub:'Rock · Anthem · Final',
-    cover:'uploads/VNYL25.png',
+    cover:'uploads/VNYL25.jpg',
     desc:'Made by Ali, phát tại chương trình chung kết cùng tên.', count:6,
     tracks:[
       {id:'f17edfb8-d150-4d06-b1e9-9463935250f4', name:'”BORN TO BREAK THE BRIEF”', dur:'2:53'},
@@ -2548,6 +2585,28 @@ animCursor();
 addEventListener('scroll',()=>{
   document.getElementById('nav').classList.toggle('solid',scrollY>60);
 });
+
+/* ============================================================
+   MOBILE MENU (hamburger)
+============================================================ */
+(function(){
+  const nav=document.getElementById('nav');
+  const burger=document.getElementById('navBurger');
+  const links=document.getElementById('navLinks');
+  if(!nav||!burger||!links) return;
+  const setOpen=(open)=>{
+    nav.classList.toggle('menu-open', open);
+    burger.setAttribute('aria-expanded', open?'true':'false');
+    burger.setAttribute('aria-label', open?'Đóng menu':'Mở menu');
+  };
+  burger.addEventListener('click', e=>{ e.stopPropagation(); setOpen(!nav.classList.contains('menu-open')); });
+  // Chọn một mục → đóng menu
+  links.addEventListener('click', e=>{ if(e.target.closest('a')) setOpen(false); });
+  // Bấm ra ngoài → đóng
+  document.addEventListener('click', e=>{ if(nav.classList.contains('menu-open') && !nav.contains(e.target)) setOpen(false); });
+  // Esc → đóng
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') setOpen(false); });
+})();
 
 /* ============================================================
    TYPEWRITER
@@ -2896,12 +2955,31 @@ function playAt(j){
   audio.play().catch(()=>{ /* autoplay blocked — user can press play */ });
 }
 let shuffleOn=false;
+// Bốc ngẫu nhiên một (album, bài) trên TOÀN BỘ sạp — tránh lặp lại bài đang nghe.
+function pickRandomTrack(exAlbum, exIdx){
+  const pool=[];
+  ALBUMS.forEach((a,ai)=>{ (a.tracks||[]).forEach((t,ti)=>{ pool.push([ai,ti]); }); });
+  if(!pool.length) return null;
+  if(pool.length===1) return pool[0];
+  let p; do{ p=pool[Math.floor(Math.random()*pool.length)]; }
+  while(p[0]===exAlbum && p[1]===exIdx);
+  return p;
+}
+// Phát một bài ngẫu nhiên xuyên album → tự trỏ/cuộn & highlight đúng album chứa bài đó.
+function shufflePlay(){
+  const p=pickRandomTrack(curAlbum, activeIdx);
+  if(!p) return;
+  const [ai,ti]=p;
+  if(ai!==curAlbum){
+    selectAlbum(ai, true); // mở & highlight đúng album (silent)
+    activeIdx=-1;          // đổi album → ép playAt phát mới (kể cả khi trùng chỉ số bài)
+  }
+  playAt(ti);
+}
 function nextTrack(){
+  if(shuffleOn){ shufflePlay(); return; }   // hết bài → tự bốc bài kế xuyên album
   if(!curTracks.length) return;
-  if(shuffleOn){
-    let r; do{ r=Math.floor(Math.random()*curTracks.length); }while(curTracks.length>1 && r===activeIdx);
-    playAt(r);
-  } else { playAt(activeIdx<0?0:activeIdx+1); }
+  playAt(activeIdx<0?0:activeIdx+1);
 }
 function prevTrack(){ playAt(activeIdx<0?0:activeIdx-1); }
 function togglePlay(){
@@ -2911,7 +2989,15 @@ function togglePlay(){
 function toggleShuffle(){
   shuffleOn=!shuffleOn;
   const btn=document.getElementById('pcShuffle');
-  if(btn){ btn.style.color=shuffleOn?'var(--amber)':''; btn.style.opacity=shuffleOn?'1':'0.5'; }
+  if(btn){
+    btn.classList.toggle('on', shuffleOn);
+    btn.style.color=shuffleOn?'var(--amber)':'';
+    btn.style.opacity=shuffleOn?'1':'0.5';
+    btn.title=shuffleOn?'Đang phát ngẫu nhiên — bấm để nghe tuần tự trong album':'Phát ngẫu nhiên';
+  }
+  // Bật shuffle = bốc & phát ngay một bài ngẫu nhiên (cho người khó chọn bài).
+  // Tắt shuffle = giữ nguyên bài đang nghe, các bài kế sẽ phát tuần tự trong album.
+  if(shuffleOn) shufflePlay();
 }
 audio.addEventListener('play', ()=>{
   isPlaying=true;
