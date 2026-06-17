@@ -1861,10 +1861,10 @@ body.no-motion .album-track {
   </button>
   <ul class="nav-links" id="navLinks">
     <li><a href="#music">Nhạc</a></li>
-    <li><a href="#videos">Videos</a></li>
-    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#gallery">Visual</a></li>
+    <li><a href="#work">Nghề</a></li>
     <li><a href="#about">About</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact">Liên hệ</a></li>
   </ul>
 </nav>
 
@@ -1912,6 +1912,29 @@ body.no-motion .album-track {
 <div class="marquee-wrap">
   <div class="marquee-track" id="marqueeTrack"></div>
 </div>
+
+<!-- LỜI CHỦ NHÀ -->
+<section id="welcome" class="welcome" data-screen-label="Lời chủ nhà">
+  <div class="welcome-inner reveal">
+    <div class="sec-label">Trước khi bước vào</div>
+    <p class="welcome-lead">
+      Không gian này không trưng bày công cụ.<br/>
+      Nó trưng bày <em>cách một người tạo ra cảm xúc.</em>
+    </p>
+    <p class="welcome-sub">
+      Bạn có thể bắt đầu bằng một bài hát, một hình ảnh, một show,
+      hoặc chỉ một chút tò mò về cách Anh Li dựng nên thế giới này.
+    </p>
+  </div>
+</section>
+<style>
+  .welcome { background:var(--ink); padding:5.5rem 1.5rem; position:relative; }
+  .welcome-inner { max-width:760px; margin:0 auto; text-align:center; }
+  .welcome .sec-label { margin-bottom:1.5rem; }
+  .welcome-lead { font-size:clamp(1.5rem,3.4vw,2.4rem); line-height:1.45; font-weight:300; color:var(--cream,#F3ECDD); margin:0 0 1.4rem; }
+  .welcome-lead em { font-style:italic; color:var(--amber2); }
+  .welcome-sub { font-size:clamp(0.95rem,1.6vw,1.1rem); line-height:1.8; color:rgba(243,236,221,0.62); max-width:560px; margin:0 auto; }
+</style>
 
 <!-- ABOUT -->
 <section id="about">
@@ -1963,6 +1986,15 @@ body.no-motion .album-track {
     </div>
     <div class="music-meta reveal">Nhạc gốc tiếng Việt · Viết, sản xuất &amp; phát hành bởi Anh Li</div>
   </div>
+
+  <p class="music-dli-note reveal">
+    Anh Li là người thật đứng sau phần viết, chọn hướng và dựng cảm xúc.
+    <em>D'Li</em> là một giọng hát / nhân vật ảo do Anh Li tạo ra để mở rộng thế giới âm nhạc này.
+  </p>
+  <style>
+    .music-dli-note { max-width:680px; margin:-0.5rem 0 2.5rem; font-size:0.98rem; line-height:1.75; color:rgba(243,236,221,0.6); }
+    .music-dli-note em { font-style:normal; color:var(--amber2); font-weight:600; }
+  </style>
 
   <!-- ARTISTS (info — không phải album) -->
   <div class="albums-label reveal">Nghệ sĩ</div>
@@ -2081,6 +2113,33 @@ body.no-motion .album-track {
     <div class="work-head-line"></div>
   </div>
 
+  <p class="work-method reveal">
+    Anh Li không bắt đầu một show từ sân khấu. Anh bắt đầu từ <em>cảm xúc lõi</em>:
+    người xem cần mang điều gì về sau khoảnh khắc đó? Từ đó, câu chuyện được dựng thành
+    mạch chương trình, âm nhạc, visual, nhịp cue, và những điểm chạm đủ rõ
+    để một sự kiện không chỉ diễn ra — mà còn <em>ở lại</em>.
+  </p>
+
+  <!-- CASE STUDY — placeholder: Anh Li bổ sung nội dung thật -->
+  <div class="work-case reveal">
+    <div class="work-case-tag">Case study</div>
+    <h3 class="work-case-title">Tên dự án / show</h3>
+    <p class="work-case-meta">Vai trò · Năm · Quy mô</p>
+    <p class="work-case-body">
+      Cảm xúc lõi của dự án → cách dựng mạch chương trình, âm nhạc &amp; visual →
+      điểm chạm khán giả mang về. (Chỗ này để Anh Li điền nội dung thật.)
+    </p>
+  </div>
+  <style>
+    .work-method { max-width:760px; margin:0.5rem 0 2.5rem; font-size:1.02rem; line-height:1.85; color:rgba(243,236,221,0.7); }
+    .work-method em { font-style:italic; color:var(--amber2); }
+    .work-case { max-width:760px; margin:0 0 2.5rem; padding:1.6rem 1.8rem; border:1px solid rgba(204,159,74,0.28); border-left:3px solid var(--amber); border-radius:10px; background:rgba(204,159,74,0.04); }
+    .work-case-tag { font-size:0.6rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--amber); margin-bottom:0.7rem; }
+    .work-case-title { font-size:1.3rem; margin:0 0 0.3rem; color:var(--cream,#F3ECDD); }
+    .work-case-meta { font-size:0.82rem; letter-spacing:0.05em; color:rgba(243,236,221,0.5); margin:0 0 1rem; }
+    .work-case-body { font-size:0.96rem; line-height:1.75; color:rgba(243,236,221,0.66); margin:0; }
+  </style>
+
   <div id="workList"></div>
 
   <a class="aim-badge reveal" href="https://aimacademy.vn/giang-vien/huynh-chi-lap/" target="_blank">
@@ -2133,11 +2192,18 @@ body.no-motion .album-track {
     </div>
   </div>
 
+  <div class="f-update">
+    Cập nhật tháng 6/2026 · Cái Sạp vẫn đang mở, vẫn đang viết thêm nhạc mới.
+  </div>
+
   <div class="f-bottom">
     <span>© 2026 Cái Sạp nhạc / Anh Li · Huỳnh Chí Lập</span>
     <span class="f-secret">✦ ba lần, một bí mật</span>
     <span>All rights reserved</span>
   </div>
+  <style>
+    .f-update { text-align:center; font-size:0.86rem; line-height:1.6; color:var(--amber2); opacity:0.85; padding:1.4rem 1rem 0.4rem; }
+  </style>
 </footer>
 
 <!-- VIDEO MODAL -->
