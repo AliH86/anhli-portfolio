@@ -1,7 +1,7 @@
 // music-data.js — external playlist delta for Anh Li portfolio.
 // This file keeps the live site synced without touching the large inline fallback in index.html.
 window.PORTFOLIO_MUSIC = {
-  version: "2026-06-17-1",
+  version: "2026-06-17-2",
   source: "Playlists curated by Anh Li",
   albums: [
     {
@@ -90,7 +90,7 @@ window.PORTFOLIO_MUSIC = {
       playlistUrl: "https://suno.com/playlist/35ce4803-2ec5-405a-abdb-4a4a2cbf64a1",
       name: "Cả Biển Trời Trong Mắt",
       sub: "Ballad Collection · Anh Li · Healing Pop",
-      cover: "https://cdn2.suno.ai/image_06bf905f-1765-4369-a706-4197d6f76801.jpeg",
+      cover: "uploads/ca-bien-troi-trong-mat.jpg",
       desc: "Ballad Collection dịu sâu từ Cái Sạp Nhạc của Li — nơi những câu chuyện tình, ký ức, chia xa và chữa lành được kể bằng giai điệu chậm, gần, và nhiều khoảng thở...",
       count: 9,
       tracks: [
@@ -155,7 +155,7 @@ window.PORTFOLIO_MUSIC = {
       playlistUrl: "https://suno.com/playlist/549189a6-43bd-4112-b3cc-f6a05105b082",
       name: "Tình Vuu-verse",
       sub: "City Pop · Dream Pop · Bossa Nova · Jazz Moods",
-      cover: "https://cdn2.suno.ai/image_c321302b-bd2d-473b-a72c-cc5a2b3ff445.jpeg",
+      cover: "uploads/tinh-vuu-verse.jpg",
       desc: "Một thế giới âm nhạc cho những tâm hồn mềm và những đêm chưa muốn ngủ. Tình Vuu-verse gói lại tình yêu, nỗi nhớ và chút mộng mị trong một không gian vừa cổ điển, vừa rất thành thị...",
       count: 8,
       tracks: [
