@@ -1,7 +1,7 @@
 // music-data.js — external playlist delta for Anh Li portfolio.
 // This file keeps the live site synced without touching the large inline fallback in index.html.
 window.PORTFOLIO_MUSIC = {
-  version: "2026-06-13-13",
+  version: "2026-06-17-1",
   source: "Playlists curated by Anh Li",
   albums: [
     {
@@ -83,6 +83,26 @@ window.PORTFOLIO_MUSIC = {
         {id:"1d4cb85c-8889-4499-8c29-b8a45ed7d690", name:"Hồi (T)hương"},
         {id:"301f5020-6c93-4a82-9236-dcbd7498f2d3", name:"Chát Buồn Buồn Chát - Ft D'Li"},
         {id:"4fbb1f41-8966-4d15-8cde-e43135debf0b", name:"Thế Gian Thêm Vị"}
+      ]
+    },
+    {
+      id: "35ce4803-2ec5-405a-abdb-4a4a2cbf64a1",
+      playlistUrl: "https://suno.com/playlist/35ce4803-2ec5-405a-abdb-4a4a2cbf64a1",
+      name: "Cả Biển Trời Trong Mắt",
+      sub: "Ballad Collection · Anh Li · Healing Pop",
+      cover: "https://cdn2.suno.ai/image_06bf905f-1765-4369-a706-4197d6f76801.jpeg",
+      desc: "Ballad Collection dịu sâu từ Cái Sạp Nhạc của Li — nơi những câu chuyện tình, ký ức, chia xa và chữa lành được kể bằng giai điệu chậm, gần, và nhiều khoảng thở...",
+      count: 9,
+      tracks: [
+        {id:"06bf905f-1765-4369-a706-4197d6f76801", name:"[Lỗi 404] Chợt Nhớ Lúc Quên Em.", dur:"3:43"},
+        {id:"10d67ecd-8ef6-4dc6-98bf-35e502e25af0", name:"Xin đừng nói câu gì...", dur:"3:22"},
+        {id:"2aa5616a-016e-4867-ac87-b0d0ad861e2f", name:"Lạc Lối...", dur:"4:49"},
+        {id:"91b5c27d-c383-4a6d-8b34-75464148322d", name:"Mùa giáng sinh đi qua..", dur:"3:40"},
+        {id:"fbc726bb-7ca1-433a-baf2-4208f60928ad", name:"Nhớ em...nhiều", dur:"4:52"},
+        {id:"97edf55c-f92c-4e49-b100-5e1ba5da11b5", name:"Cả biển trời trong", dur:"4:52"},
+        {id:"448b3ec7-c670-4f51-85dd-ae4cebf6a42c", name:"Điều Anh Thấy...", dur:"3:55"},
+        {id:"295c3f26-330d-47d6-ab2e-7440f0b4dcb2", name:"Nhớ hay Quên!", dur:"4:33"},
+        {id:"906cdce3-1030-47ed-9036-a0b7a398adb6", name:"Bạn tình Cô đơn!", dur:"4:43"}
       ]
     },
     {
