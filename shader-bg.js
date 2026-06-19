@@ -160,9 +160,11 @@
   document.addEventListener('visibilitychange', () => { if (!document.hidden && visible) loop(); });
 
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let running = false, start = performance.now();
+  let running = false, start = performance.now(), paused = false;
+  // Cho phép tắt hẳn vòng lặp WebGL (nguồn nóng máy lớn nhất) khi bật Giảm chuyển động.
+  window.shaderSetPaused = v => { paused = !!v; if (!paused) loop(); };
   function frame(now) {
-    if (!visible || document.hidden) { running = false; return; }
+    if (paused || !visible || document.hidden) { running = false; return; }
     running = true;
     mouse.x += (mouse.tx - mouse.x) * 0.06;
     mouse.y += (mouse.ty - mouse.y) * 0.06;

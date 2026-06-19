@@ -2157,24 +2157,9 @@ body.no-motion .album-track {
     để một sự kiện không chỉ diễn ra — mà còn <em>ở lại</em>.
   </p>
 
-  <!-- CASE STUDY — placeholder: Anh Li bổ sung nội dung thật -->
-  <div class="work-case reveal">
-    <div class="work-case-tag">Case study</div>
-    <h3 class="work-case-title">Tên dự án / show</h3>
-    <p class="work-case-meta">Vai trò · Năm · Quy mô</p>
-    <p class="work-case-body">
-      Cảm xúc lõi của dự án → cách dựng mạch chương trình, âm nhạc &amp; visual →
-      điểm chạm khán giả mang về. (Chỗ này để Anh Li điền nội dung thật.)
-    </p>
-  </div>
   <style>
     .work-method { max-width:760px; margin:0.5rem 0 2.5rem; font-size:1.02rem; line-height:1.85; color:rgba(243,236,221,0.7); }
     .work-method em { font-style:italic; color:var(--amber2); }
-    .work-case { max-width:760px; margin:0 0 2.5rem; padding:1.6rem 1.8rem; border:1px solid rgba(204,159,74,0.28); border-left:3px solid var(--amber); border-radius:10px; background:rgba(204,159,74,0.04); }
-    .work-case-tag { font-size:0.6rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--amber); margin-bottom:0.7rem; }
-    .work-case-title { font-size:1.3rem; margin:0 0 0.3rem; color:var(--cream,#F3ECDD); }
-    .work-case-meta { font-size:0.82rem; letter-spacing:0.05em; color:rgba(243,236,221,0.5); margin:0 0 1rem; }
-    .work-case-body { font-size:0.96rem; line-height:1.75; color:rgba(243,236,221,0.66); margin:0; }
   </style>
 
   <div id="workList"></div>
@@ -4508,7 +4493,8 @@ if(MOBILE){
     renderMusic();
   }
   var s = document.createElement('script');
-  s.src = 'music-data.js?v=20260612-2';
+  // Cache-bust mỗi lần tải → sửa music-data.js xong push là lên ngay, KHÔNG cần bump version.
+  s.src = 'music-data.js?v=' + Date.now();
   s.onload = function(){ merge(window.PORTFOLIO_MUSIC); };
   s.onerror = function(){ console.warn('[Anh Li Portfolio] music-data.js could not load; using inline data.'); };
   document.head.appendChild(s);

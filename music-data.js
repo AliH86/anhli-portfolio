@@ -1,5 +1,15 @@
-// music-data.js — external playlist delta for Anh Li portfolio.
-// This file keeps the live site synced without touching the large inline fallback in index.html.
+// ============================================================
+// music-data.js — NGUỒN DỮ LIỆU NHẠC CHÍNH của trang Anh Li.
+// ------------------------------------------------------------
+// MUỐN THÊM / SỬA ALBUM, CHỈ SỬA FILE NÀY — không đụng index.html.
+// • Khớp album theo "id": id trùng → ghi đè (cover, name, sub, desc, tracks);
+//   id mới → thêm album mới vào sạp.
+// • Mỗi track: { id, name, dur }  (id = mã Suno; dur = "m:ss").
+// • cover: đường dẫn ảnh trong repo, vd "uploads/ten-album.jpg".
+// Sửa xong → chạy script push (vd finish-push.command) là lên live ngay,
+// KHÔNG cần đổi số version ở đâu cả (index.html tự cache-bust mỗi lần tải).
+// (index.html vẫn giữ một bản dữ liệu dự phòng phòng khi file này lỗi tải.)
+// ============================================================
 window.PORTFOLIO_MUSIC = {
   version: "2026-06-17-2",
   source: "Playlists curated by Anh Li",
