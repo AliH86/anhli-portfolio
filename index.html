@@ -229,6 +229,20 @@ body.no-shader .shader-host { display:none; }
     linear-gradient(to right, transparent 0%, #000 30%);
   mask-composite: intersect;
 }
+/* GHOST LAYER — D'Li ẩn trong Hero, chỉ hé lộ trong vòng tròn quanh con trỏ.
+   Nằm trên ảnh nền (z1) nhưng dưới tint/vignette (z2) và chữ (z3) → không che nội dung. */
+.hero-ghost {
+  position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:url('./images/dli/dli-ghost.jpg') center/cover no-repeat;
+  filter:grayscale(0.18) contrast(1.05) brightness(0.9);
+  opacity:0; transition:opacity 0.55s ease;
+  --gx:-300px; --gy:-300px;
+  -webkit-mask-image:radial-gradient(circle 210px at var(--gx) var(--gy), #000 0%, #000 20%, rgba(0,0,0,0.22) 55%, transparent 75%);
+          mask-image:radial-gradient(circle 210px at var(--gx) var(--gy), #000 0%, #000 20%, rgba(0,0,0,0.22) 55%, transparent 75%);
+}
+body:not(.no-motion) .hero.ghost-on .hero-ghost { opacity:0.82; }
+body.no-motion .hero-ghost { display:none; }
+@media (hover:none){ .hero-ghost { display:none; } }
 .hero-backlight {
   position:absolute; z-index:0; top:18%; right:14%;
   width:36vw; height:62vh; border-radius:50%;
@@ -1912,6 +1926,8 @@ body.no-motion .album-track {
   <div class="hero-backlight"></div>
   <div class="hero-watermark" aria-hidden="true">ANH LI</div>
   <div class="hero-photo" id="heroBg"></div>
+  <!-- GHOST LAYER — D'Li hé lộ theo con trỏ (desktop, tắt khi giảm chuyển động) -->
+  <div class="hero-ghost" id="heroGhost" aria-hidden="true"></div>
   <div class="hero-tint"></div>
   <div class="hero-vignette"></div>
   <div class="hero-side">Creative Producer · Saigon</div>
@@ -4538,6 +4554,24 @@ if(MOBILE){
     setTimeout(function(){ nudge.classList.add('show'); }, 2600);
     setTimeout(hideNudge, 11000);
   }
+})();
+</script>
+
+<!-- GHOST LAYER — D'Li hé lộ theo con trỏ trên Hero -->
+<script>
+(function(){
+  var hero=document.getElementById('home');
+  var ghost=document.getElementById('heroGhost');
+  if(!hero || !ghost) return;
+  if(window.matchMedia && window.matchMedia('(hover:none)').matches) return; // bỏ qua màn cảm ứng
+  hero.addEventListener('pointermove', function(e){
+    if(document.body.classList.contains('no-motion')) return;
+    var r=hero.getBoundingClientRect();
+    ghost.style.setProperty('--gx', (e.clientX-r.left)+'px');
+    ghost.style.setProperty('--gy', (e.clientY-r.top)+'px');
+    if(!hero.classList.contains('ghost-on')) hero.classList.add('ghost-on');
+  }, {passive:true});
+  hero.addEventListener('pointerleave', function(){ hero.classList.remove('ghost-on'); });
 })();
 </script>
 
