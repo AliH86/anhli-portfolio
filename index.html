@@ -229,18 +229,24 @@ body.no-shader .shader-host { display:none; }
     linear-gradient(to right, transparent 0%, #000 30%);
   mask-composite: intersect;
 }
-/* GHOST LAYER — D'Li ẩn trong Hero, chỉ hé lộ trong vòng tròn quanh con trỏ.
-   Nằm trên ảnh nền (z1) nhưng dưới tint/vignette (z2) và chữ (z3) → không che nội dung. */
-.hero-ghost {
-  position:absolute; inset:0; z-index:1; pointer-events:none;
+/* GHOST LAYER — D'Li ẩn trong Hero, hé lộ trong vòng tròn quanh con trỏ.
+   Tối ưu: chỉ DỊCH CHUYỂN bằng transform (GPU) — không vẽ lại mặt nạ mỗi lần di chuột.
+   Nằm trên ảnh nền (z1), dưới tint/vignette (z2) và chữ (z3) → không che nội dung. */
+.hero-ghost { position:absolute; inset:0; z-index:1; overflow:hidden; pointer-events:none; }
+.hero-ghost-win {
+  position:absolute; top:0; left:0; width:440px; height:440px; border-radius:50%;
+  overflow:hidden; opacity:0; transition:opacity 0.5s ease;
+  transform:translate3d(-9999px,-9999px,0); will-change:transform;
+  -webkit-mask-image:radial-gradient(circle at 50% 50%, #000 40%, rgba(0,0,0,0.3) 64%, transparent 78%);
+          mask-image:radial-gradient(circle at 50% 50%, #000 40%, rgba(0,0,0,0.3) 64%, transparent 78%);
+}
+.hero-ghost-img {
+  position:absolute; top:0; left:0; width:100vw; height:100vh;
   background:url('./images/dli/dli-ghost.jpg') center/cover no-repeat;
   filter:grayscale(0.18) contrast(1.05) brightness(0.9);
-  opacity:0; transition:opacity 0.55s ease;
-  --gx:-300px; --gy:-300px;
-  -webkit-mask-image:radial-gradient(circle 210px at var(--gx) var(--gy), #000 0%, #000 20%, rgba(0,0,0,0.22) 55%, transparent 75%);
-          mask-image:radial-gradient(circle 210px at var(--gx) var(--gy), #000 0%, #000 20%, rgba(0,0,0,0.22) 55%, transparent 75%);
+  will-change:transform;
 }
-body:not(.no-motion) .hero.ghost-on .hero-ghost { opacity:0.82; }
+body:not(.no-motion) .hero.ghost-on .hero-ghost-win { opacity:0.85; }
 body.no-motion .hero-ghost { display:none; }
 @media (hover:none){ .hero-ghost { display:none; } }
 .hero-backlight {
@@ -1927,7 +1933,9 @@ body.no-motion .album-track {
   <div class="hero-watermark" aria-hidden="true">ANH LI</div>
   <div class="hero-photo" id="heroBg"></div>
   <!-- GHOST LAYER — D'Li hé lộ theo con trỏ (desktop, tắt khi giảm chuyển động) -->
-  <div class="hero-ghost" id="heroGhost" aria-hidden="true"></div>
+  <div class="hero-ghost" id="heroGhost" aria-hidden="true">
+    <div class="hero-ghost-win" id="heroGhostWin"><div class="hero-ghost-img" id="heroGhostImg"></div></div>
+  </div>
   <div class="hero-tint"></div>
   <div class="hero-vignette"></div>
   <div class="hero-side">Làm nhạc, làm show, làm cho nó ở lại · Sài Gòn</div>
@@ -4561,15 +4569,26 @@ if(MOBILE){
 <script>
 (function(){
   var hero=document.getElementById('home');
-  var ghost=document.getElementById('heroGhost');
-  if(!hero || !ghost) return;
+  var win=document.getElementById('heroGhostWin');
+  var img=document.getElementById('heroGhostImg');
+  if(!hero || !win || !img) return;
   if(window.matchMedia && window.matchMedia('(hover:none)').matches) return; // bỏ qua màn cảm ứng
+  var R=220; // nửa đường kính vòng hé lộ (440/2)
+  var px=0, py=0, raf=null;
+  function size(){ var r=hero.getBoundingClientRect(); img.style.width=r.width+'px'; img.style.height=r.height+'px'; }
+  size(); window.addEventListener('resize', size);
+  function apply(){
+    raf=null;
+    var x=px-R, y=py-R;
+    win.style.transform='translate3d('+x+'px,'+y+'px,0)';
+    img.style.transform='translate3d('+(-x)+'px,'+(-y)+'px,0)'; // bù lại để ảnh đứng yên theo Hero
+  }
   hero.addEventListener('pointermove', function(e){
     if(document.body.classList.contains('no-motion')) return;
     var r=hero.getBoundingClientRect();
-    ghost.style.setProperty('--gx', (e.clientX-r.left)+'px');
-    ghost.style.setProperty('--gy', (e.clientY-r.top)+'px');
+    px=e.clientX-r.left; py=e.clientY-r.top;
     if(!hero.classList.contains('ghost-on')) hero.classList.add('ghost-on');
+    if(!raf) raf=requestAnimationFrame(apply); // gộp về 1 lần/khung hình
   }, {passive:true});
   hero.addEventListener('pointerleave', function(){ hero.classList.remove('ghost-on'); });
 })();
