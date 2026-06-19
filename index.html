@@ -1845,6 +1845,43 @@ body.no-motion .album-track {
   .gallery { columns: 2; column-gap: 0.75rem; }
   .g-item { border-radius: 14px; margin-bottom: 0.75rem; }
 }
+
+/* ═══ #3 — MOBILE NOW PLAYING: bìa album là tâm, dĩa xoay đồng tâm ═══
+   Màn hẹp/scale nhỏ chỉ còn MỘT khối: bìa album = nhãn dĩa than, có vòng
+   rãnh + viền amber bao quanh. Bỏ dĩa trôi bên phải + soundwave + eq nhỏ
+   để 3 mảng không còn tranh nhau / loãng vào nhau. */
+@media (max-width: 700px) {
+  .nowplaying .soundwave,
+  .nowplaying .player-eq { display:none !important; }
+  .np-vinyl, .vinyl-bg.np-vinyl { display:none !important; }
+
+  .nowplaying .player { flex-direction:column; align-items:center; text-align:center; gap:1.1rem; }
+  .nowplaying .player-top { flex-direction:column; align-items:center; gap:0.35rem; margin-bottom:0.1rem; }
+  .nowplaying .player-meta { min-width:0; text-align:center; }
+  .nowplaying .player-title { white-space:normal; }
+  .nowplaying .player-controls { justify-content:center; flex-wrap:wrap; gap:0.7rem; width:100%; }
+
+  /* Bìa album = nhãn ở tâm dĩa than: tròn, có rãnh + viền amber, xoay khi phát */
+  .nowplaying .player-cover {
+    width:clamp(150px,52vw,176px); height:clamp(150px,52vw,176px);
+    border-radius:50%; overflow:visible;
+    box-shadow:
+      0 0 0 8px #0a0910,
+      0 0 0 9px rgba(204,159,74,0.10),
+      0 0 0 16px rgba(10,9,16,0.9),
+      0 0 0 17px rgba(204,159,74,0.34),
+      0 18px 46px rgba(0,0,0,0.6);
+  }
+  .nowplaying .player-cover img { border-radius:50%; }
+  .nowplaying .player-cover::after { /* lỗ trục giữa nhãn */
+    content:''; position:absolute; top:50%; left:50%; width:13px; height:13px;
+    transform:translate(-50%,-50%); border-radius:50%;
+    background:radial-gradient(circle, #14121c 45%, rgba(204,159,74,0.4) 100%);
+    box-shadow:0 0 0 2px rgba(0,0,0,0.6); z-index:2; pointer-events:none;
+  }
+  .nowplaying.playing .player-cover img { animation:vinylSpin 16s linear infinite; }
+  body.no-motion .nowplaying.playing .player-cover img { animation:none !important; }
+}
 </style>
 </head>
 <body>
@@ -2235,6 +2272,44 @@ body.no-motion .album-track {
     <div class="momo-card-note">Quét mã Momo · VietQR · Napas 247<br/>Cảm ơn bạn đã ghé thăm Cái Sạp nhạc 🙏</div>
   </div>
 </div>
+
+<!-- MOTION TOGGLE — giảm chuyển động cho máy dịu, đỡ nóng -->
+<button class="motion-toggle" id="motionToggle" type="button" aria-pressed="false" aria-label="Giảm chuyển động">
+  <span class="mt-ico" aria-hidden="true">✦</span>
+  <span class="mt-label">Giảm chuyển động</span>
+</button>
+<style>
+  .motion-toggle{
+    position:fixed; left:1.1rem; bottom:1.2rem; z-index:330;
+    display:inline-flex; align-items:center; gap:0.5rem;
+    padding:0.55rem 0.95rem; border-radius:100px;
+    background:rgba(12,11,18,0.74); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+    border:0.5px solid var(--border2); color:var(--text2);
+    font-family:inherit; font-size:0.72rem; letter-spacing:0.04em; cursor:pointer;
+    transition:border-color 0.3s, color 0.3s, background 0.3s;
+  }
+  .motion-toggle:hover{ border-color:var(--amber); color:var(--amber); }
+  .motion-toggle .mt-ico{ color:var(--amber); display:inline-block; }
+  body:not(.no-motion) .motion-toggle .mt-ico{ animation:vinylSpin 9s linear infinite; }
+  body.no-motion .motion-toggle{ border-color:var(--amber); color:var(--amber2); }
+  /* nudge — câu quan tâm giọng Anh */
+  .motion-nudge{
+    position:fixed; left:1.1rem; bottom:3.7rem; z-index:330; max-width:248px;
+    padding:0.75rem 0.95rem; border-radius:14px;
+    background:rgba(12,11,18,0.94); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+    border:0.5px solid var(--border2); color:var(--text2);
+    font-size:0.75rem; line-height:1.58; box-shadow:0 16px 44px rgba(0,0,0,0.45);
+    opacity:0; transform:translateY(8px); pointer-events:none;
+    transition:opacity 0.55s ease, transform 0.55s ease;
+  }
+  .motion-nudge.show{ opacity:1; transform:translateY(0); }
+  .motion-nudge b{ color:var(--amber2); font-weight:600; }
+  /* khi player dính đáy (docked) trên mobile thì đẩy nút lên trên dock */
+  @media(max-width:700px){
+    body.docked .motion-toggle{ bottom:calc(0.9rem + 80px); }
+    body.docked .motion-nudge{ bottom:calc(0.9rem + 80px + 2.5rem); }
+  }
+</style>
 
 <!-- FLOATING CTA -->
 <div class="cta-float">
@@ -3051,10 +3126,12 @@ function playAt(j){
   hideEmbed();
   document.getElementById('npSuggest')?.classList.add('hide'); // đã có bài → ẩn gợi ý
 
-  const cover=document.getElementById('playerCover');
-  cover.innerHTML=`<img src="${artUrl(t.id)}" alt="" oncontextmenu="return false" onerror="this.parentElement.innerHTML='<span class=player-cover-ph>♪</span>'"/>`;
-  document.getElementById('playerTitle').textContent=t.name;
   const al=ALBUMS[curAlbum];
+  const cover=document.getElementById('playerCover');
+  // Ưu tiên bìa album Anh đã upload → bìa riêng của bài → cuối cùng mới fallback ảnh Suno
+  const coverSrc = coverUrl(al&&al.cover) || coverUrl(t.cover) || artUrl(t.id);
+  cover.innerHTML=`<img src="${coverSrc}" alt="" oncontextmenu="return false" onerror="if(this.dataset.fb){this.parentElement.innerHTML='<span class=player-cover-ph>♪</span>'}else{this.dataset.fb=1;this.src='${artUrl(t.id)}'}"/>`;
+  document.getElementById('playerTitle').textContent=t.name;
   document.getElementById('playerSub').textContent=(al?al.name:'Cái Sạp nhạc')+' · Cái Sạp nhạc';
   document.getElementById('pcDur').textContent=t.dur||'0:00';
   document.getElementById('pcCur').textContent='0:00';
@@ -3691,9 +3768,11 @@ observe();
   document.addEventListener('visibilitychange', () => { if (!document.hidden && visible) loop(); });
 
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let running = false, start = performance.now();
+  let running = false, start = performance.now(), paused = false;
+  // Tắt hẳn vòng lặp WebGL (nguồn nóng máy lớn nhất) khi bật Giảm chuyển động.
+  window.shaderSetPaused = v => { paused = !!v; if (!paused) loop(); };
   function frame(now) {
-    if (!visible || document.hidden) { running = false; return; }
+    if (paused || !visible || document.hidden) { running = false; return; }
     running = true;
     mouse.x += (mouse.tx - mouse.x) * 0.06;
     mouse.y += (mouse.ty - mouse.y) * 0.06;
@@ -4435,5 +4514,46 @@ if(MOBILE){
   document.head.appendChild(s);
 })();
 </script>
+<!-- MOTION TOGGLE LOGIC — giảm chuyển động + tắt shader để máy đỡ nóng -->
+<script>
+(function(){
+  var b=document.body, btn=document.getElementById('motionToggle');
+  if(!btn) return;
+  var label=btn.querySelector('.mt-label');
+  var mqReduce=window.matchMedia('(prefers-reduced-motion: reduce)');
+  // Máy yếu: ít RAM → tự dịu sẵn (vẫn cho tự bật lại)
+  var weak = (navigator.deviceMemory && navigator.deviceMemory<=4);
+  var saved=null; try{ saved=localStorage.getItem('anhli-motion'); }catch(e){}
+  var reduce = saved==='off' ? true : saved==='on' ? false : (mqReduce.matches || weak);
+
+  function apply(r){
+    b.classList.toggle('no-motion', r);
+    b.classList.toggle('no-shader', r);            // ẩn nền shader
+    if(window.shaderSetPaused) window.shaderSetPaused(r); // và tắt hẳn vòng lặp WebGL
+    btn.setAttribute('aria-pressed', r?'true':'false');
+    if(label) label.textContent = r ? 'Đang dịu nhẹ ✦' : 'Giảm chuyển động';
+  }
+  apply(reduce);
+
+  var nudge=null;
+  function hideNudge(){ if(nudge) nudge.classList.remove('show'); }
+  btn.addEventListener('click', function(){
+    reduce=!reduce; apply(reduce);
+    try{ localStorage.setItem('anhli-motion', reduce?'off':'on'); }catch(e){}
+    hideNudge();
+  });
+
+  // Câu quan tâm giọng Anh — chỉ hiện khi đang để chuyển động & người dùng chưa chọn gì
+  if(!reduce && !saved){
+    nudge=document.createElement('div');
+    nudge.className='motion-nudge';
+    nudge.innerHTML='Máy hơi nóng? <b>Bật giảm chuyển động</b> đi, mình chill cùng nhạc, để phần lung linh đó lại sau cũng được. ✦';
+    document.body.appendChild(nudge);
+    setTimeout(function(){ nudge.classList.add('show'); }, 2600);
+    setTimeout(hideNudge, 11000);
+  }
+})();
+</script>
+
 </body>
 </html>
