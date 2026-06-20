@@ -234,19 +234,21 @@ body.no-shader .shader-host { display:none; }
    Nằm trên ảnh nền (z1), dưới tint/vignette (z2) và chữ (z3) → không che nội dung. */
 .hero-ghost { position:absolute; inset:0; z-index:1; overflow:hidden; pointer-events:none; }
 .hero-ghost-win {
-  position:absolute; top:0; left:0; width:440px; height:440px; border-radius:50%;
+  position:absolute; top:0; left:0; width:360px; height:360px; border-radius:50%;
   overflow:hidden; opacity:0; transition:opacity 0.5s ease;
   transform:translate3d(-9999px,-9999px,0); will-change:transform;
-  -webkit-mask-image:radial-gradient(circle at 50% 50%, #000 40%, rgba(0,0,0,0.3) 64%, transparent 78%);
-          mask-image:radial-gradient(circle at 50% 50%, #000 40%, rgba(0,0,0,0.3) 64%, transparent 78%);
+  /* screen blend: chỉ phần SÁNG của D'Li (mặt) hiện lên — vùng tối không tạo "đốm đen". */
+  mix-blend-mode:screen;
+  -webkit-mask-image:radial-gradient(circle at 50% 50%, #000 32%, rgba(0,0,0,0.28) 60%, transparent 76%);
+          mask-image:radial-gradient(circle at 50% 50%, #000 32%, rgba(0,0,0,0.28) 60%, transparent 76%);
 }
 .hero-ghost-img {
   position:absolute; top:0; left:0; width:100vw; height:100vh;
   background:url('./images/dli/dli-ghost.jpg') center/cover no-repeat;
-  filter:grayscale(0.18) contrast(1.05) brightness(0.9);
+  filter:contrast(1.06) saturate(1.04);
   will-change:transform;
 }
-body:not(.no-motion) .hero.ghost-on .hero-ghost-win { opacity:0.85; }
+body:not(.no-motion) .hero.ghost-on .hero-ghost-win { opacity:0.7; }
 body.no-motion .hero-ghost { display:none; }
 @media (hover:none){ .hero-ghost { display:none; } }
 .hero-backlight {
@@ -1865,6 +1867,11 @@ body.no-motion .album-track {
   .gallery { columns: 2; column-gap: 0.75rem; }
   .g-item { border-radius: 14px; margin-bottom: 0.75rem; }
 }
+
+/* #3 — Gộp visualizer: chỉ giữ VÒNG equalizer bao quanh dĩa than.
+   Ẩn soundwave ngang + dãy eq nhỏ ở MỌI khổ màn hình để không còn 3 mảng chạy cùng lúc. */
+.nowplaying .soundwave,
+.nowplaying .player-eq { display:none !important; }
 
 /* ═══ #3 — MOBILE NOW PLAYING: bìa album là tâm, dĩa xoay đồng tâm ═══
    Màn hẹp/scale nhỏ chỉ còn MỘT khối: bìa album = nhãn dĩa than, có vòng
@@ -4533,13 +4540,16 @@ if(MOBILE){
   var mqReduce=window.matchMedia('(prefers-reduced-motion: reduce)');
   // Máy yếu: ít RAM → tự dịu sẵn (vẫn cho tự bật lại)
   var weak = (navigator.deviceMemory && navigator.deviceMemory<=4);
+  // Mobile / màn cảm ứng: luôn TẮT shader WebGL (nguồn nóng máy lớn nhất) cho dù chế độ nào.
+  var mobile = !!(window.matchMedia && (matchMedia('(hover:none)').matches || matchMedia('(max-width:760px)').matches));
   var saved=null; try{ saved=localStorage.getItem('anhli-motion'); }catch(e){}
   var reduce = saved==='off' ? true : saved==='on' ? false : (mqReduce.matches || weak);
 
   function apply(r){
     b.classList.toggle('no-motion', r);
-    b.classList.toggle('no-shader', r);            // ẩn nền shader
-    if(window.shaderSetPaused) window.shaderSetPaused(r); // và tắt hẳn vòng lặp WebGL
+    var shaderOff = r || mobile;                    // mobile luôn tắt nền shader
+    b.classList.toggle('no-shader', shaderOff);
+    if(window.shaderSetPaused) window.shaderSetPaused(shaderOff); // tắt hẳn vòng lặp WebGL
     btn.setAttribute('aria-pressed', r?'true':'false');
     if(label) label.textContent = r ? 'Đang dịu nhẹ ✦' : 'Giảm chuyển động';
   }
@@ -4573,7 +4583,7 @@ if(MOBILE){
   var img=document.getElementById('heroGhostImg');
   if(!hero || !win || !img) return;
   if(window.matchMedia && window.matchMedia('(hover:none)').matches) return; // bỏ qua màn cảm ứng
-  var R=220; // nửa đường kính vòng hé lộ (440/2)
+  var R=180; // nửa đường kính vòng hé lộ (360/2)
   var px=0, py=0, raf=null;
   function size(){ var r=hero.getBoundingClientRect(); img.style.width=r.width+'px'; img.style.height=r.height+'px'; }
   size(); window.addEventListener('resize', size);
