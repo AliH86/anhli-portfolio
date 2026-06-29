@@ -11,9 +11,28 @@
 // (index.html vẫn giữ một bản dữ liệu dự phòng phòng khi file này lỗi tải.)
 // ============================================================
 window.PORTFOLIO_MUSIC = {
-  version: "2026-06-17-2",
+  version: "2026-06-29-1",
   source: "Playlists curated by Anh Li",
   albums: [
+    {
+      id: "c6672b33-6803-4fa3-8c9d-900d15dfaf2d",
+      playlistUrl: "https://suno.com/playlist/c6672b33-6803-4fa3-8c9d-900d15dfaf2d",
+      name: "01KhoảngLặng",
+      sub: "Lo-fi Hip-hop · Vietnamese R&B · Cinematic Soul",
+      cover: "uploads/khoang-lang.svg",
+      desc: "01KhoảngLặng là góc nhỏ để ngồi lại giữa những ngày ồn ào. Từ mưa, piano cũ, boom-bap chậm, R&B khàn đến rap tự sự, playlist đi qua nhiều sắc thái cô đơn và học cách buông nhẹ. Đây là những bài hát để nghe khi cần một khoảng lặng riêng.",
+      count: 8,
+      tracks: [
+        {id:"cd33b9bf-5cc1-409e-833f-865b13fdb10b", name:"01KhoảngLặng....", dur:"3:23"},
+        {id:"468409c6-0ef0-42fc-bf0b-c9d44fff4ba1", name:"Ta có thể khóc không?", dur:"3:44"},
+        {id:"9ecaada6-8cba-49c7-b420-8a09ab5c3101", name:"Cry The Rain", dur:"3:23"},
+        {id:"dabc255b-9048-42cf-952e-efa5755d8311", name:"dday doesn't 5...", dur:"3:39"},
+        {id:"906cdce3-1030-47ed-9036-a0b7a398adb6", name:"Bạn tình Cô đơn!", dur:"4:43"},
+        {id:"95047cbf-54f0-4e1a-8116-612b0e40ae27", name:"Anh Glitch Một Mình...", dur:"3:27"},
+        {id:"54f44e62-baf9-493f-b712-95e7c7c7abae", name:"Nhảy vào Mưa....", dur:"4:20"},
+        {id:"7bc4edd1-5bf5-4426-b929-98834bea6c1e", name:"Duyên, Hợp, Tan", dur:"3:14"}
+      ]
+    },
     {
       id: "560a4089-5871-4536-8375-785f7a2f8dca",
       name: "Những Kẻ DRILL Loves",
