@@ -942,6 +942,7 @@ body.no-motion .heart-fx { display:none; }
 .trow { display:grid; grid-template-columns:30px 38px 1fr auto; align-items:center; gap:1rem; padding:0.7rem 0.5rem; border-radius:8px; cursor:pointer; transition:background 0.25s; }
 .trow:hover { background:rgba(204,159,74,0.05); }
 .trow.playing { background:rgba(204,159,74,0.08); }
+.trow.deeplinked { background:var(--glow); box-shadow:inset 0 0 0 1px var(--border2); }
 .trow-num { font-size:0.72rem; color:var(--text3); text-align:center; position:relative; width:30px; }
 .trow-num .num-d { display:inline-block; }
 .trow.playing .trow-num { color:var(--amber); }
@@ -4045,6 +4046,14 @@ function aliScrollMusic(){
   var el=document.getElementById('playlistLabel')||document.getElementById('music'); if(!el) return;
   window.scrollTo({ top:el.getBoundingClientRect().top+window.pageYOffset-110, behavior:'smooth' });
 }
+function aliHighlightTrack(ti){
+  var row=document.querySelector('.trow[data-idx="'+ti+'"]');
+  if(row){
+    document.querySelectorAll('.trow.deeplinked').forEach(function(r){ r.classList.remove('deeplinked'); });
+    row.classList.add('deeplinked');
+    try{ row.scrollIntoView({behavior:'smooth', block:'center'}); }catch(e){ aliScrollMusic(); }
+  } else { aliScrollMusic(); }
+}
 var aliDeepDone=false;
 function applyDeepLink(){
   if(aliDeepDone) return;
@@ -4056,7 +4065,13 @@ function applyDeepLink(){
     for(var ai=0;ai<ALBUMS.length;ai++){
       var ts=ALBUMS[ai].tracks||[];
       for(var ti=0;ti<ts.length;ti++){
-        if(aliSlug(ts[ti].name)===bai){ aliDeepDone=true; selectAlbum(ai,true); pendingTrack=ti; setTimeout(aliScrollMusic,250); return; }
+        if(aliSlug(ts[ti].name)===bai){
+          aliDeepDone=true; selectAlbum(ai,true);
+          if(typeof showAllTracks==='function') showAllTracks(ai); // render hết bài để có đúng hàng (kể cả bài >10)
+          pendingTrack=ti;
+          setTimeout(function(){ aliHighlightTrack(ti); }, 400);
+          return;
+        }
       }
     }
   }
