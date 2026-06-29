@@ -1271,7 +1271,7 @@ body.no-motion .np-viz { display:none; }
    VIDEOS
 ============================================ */
 #videos { background:radial-gradient(70% 60% at 86% 6%, rgba(96,72,140,0.07), transparent 55%), var(--ink); position:relative; overflow:hidden; }
-.vid-stage { max-width:500px; margin:0 auto 2.75rem; }
+.vid-stage { max-width:820px; margin:0 auto 2.75rem; transition:max-width 0.4s ease; }
 .vid-stage-frame { position:relative; width:100%; min-height:281px; background:var(--ink2); border:0.5px solid var(--border2); border-radius:14px; overflow:hidden; display:flex; align-items:center; justify-content:center; }
 .vid-stage-frame iframe { display:block; width:100%; height:100%; border:none; }
 .vid-stage-frame > img { width:100%; height:100%; object-fit:cover; display:block; }
@@ -1287,7 +1287,11 @@ body.no-motion .np-viz { display:none; }
 .vid-card.active .vid-title { color:var(--amber2); }
 .vid-card.is-fb .vid-thumb { background:linear-gradient(135deg,var(--ink3),var(--ink)); }
 .vid-card .fb-badge { position:absolute; bottom:0.5rem; left:0.6rem; font-size:0.5rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--taupe2); z-index:2; }
-.vid-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.5rem; }
+.vid-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(168px,1fr)); gap:0.9rem; }
+.vid-grid.v-collapsed .vid-card.v-extra { display:none; }
+.v-more-wrap { text-align:center; margin-top:2rem; }
+.v-more { font-family:inherit; font-size:0.62rem; letter-spacing:0.16em; text-transform:uppercase; padding:0.65rem 1.5rem; border:0.5px solid var(--border2); background:none; color:var(--taupe2); cursor:pointer; transition:all 0.3s; border-radius:100px; }
+.v-more:hover { border-color:var(--amber); color:var(--amber); background:var(--glow); }
 .vid-card { background:var(--ink2); border:0.5px solid var(--border); transition:border-color 0.3s; overflow:hidden; }
 .vid-card:hover { border-color:var(--border2); }
 .vid-thumb { position:relative; aspect-ratio:16/9; overflow:hidden; cursor:pointer; background:var(--ink3); }
@@ -3041,7 +3045,7 @@ body.theme-dandelion:not(.no-season) footer::after {
   <div class="sec-label reveal">Visual Works</div>
   <h2 class="sec-h reveal">Videos · <em>Sạp Âm Nhạc</em></h2>
   <div class="sec-bar reveal"></div>
-  <div class="vid-stage reveal">
+  <div class="vid-stage reveal" id="vidStageWrap">
     <div class="vid-stage-frame" id="vidStage"><span class="vid-stage-ph">Đang tải…</span></div>
     <div class="vid-stage-cap" id="vidStageCap"></div>
   </div>
@@ -4398,6 +4402,7 @@ function renderVideos(){
   if(!grid) return;
   if(!VIDEOS.length){ loadYT(); return; }
   if(status) status.style.display='none';
+  var VID_INIT=8;
   grid.innerHTML=VIDEOS.map(function(v,i){
     var safe=(v.title||'').replace(/"/g,'');
     var thumb = v.fb
@@ -4405,11 +4410,19 @@ function renderVideos(){
       : v.drive
       ? '<div class="vid-thumb"><img src="https://drive.google.com/thumbnail?id='+v.drive+'&sz=w480" alt="'+safe+'" loading="lazy" onerror="this.style.display=\'none\'"/><div class="vid-overlay"><div class="vid-play">▶</div></div><span class="fb-badge">Drive</span></div>'
       : '<div class="vid-thumb"><img src="https://img.youtube.com/vi/'+v.id+'/hqdefault.jpg" alt="'+safe+'" loading="lazy"/><div class="vid-overlay"><div class="vid-play">▶</div></div></div>';
-    return '<div class="vid-card reveal'+(v.fb?' is-fb':'')+'" data-vid="'+i+'" onclick="setFeatured('+i+',true)">'
+    return '<div class="vid-card reveal'+(v.fb?' is-fb':'')+(i>=VID_INIT?' v-extra':'')+'" data-vid="'+i+'" onclick="setFeatured('+i+',true)">'
       + thumb
       + '<div class="vid-info"><div class="vid-title">'+(v.title||'Video')+'</div><div class="vid-meta">'+(v.meta||'Sạp Âm Nhạc')+'</div></div>'
       + '</div>';
   }).join('');
+  if(VIDEOS.length>VID_INIT){
+    grid.classList.add('v-collapsed');
+    var vw=document.createElement('div'); vw.className='v-more-wrap';
+    var vb=document.createElement('button'); vb.type='button'; vb.className='v-more';
+    vb.textContent='Xem thêm '+(VIDEOS.length-VID_INIT)+' video ↓';
+    vb.onclick=function(){ grid.classList.remove('v-collapsed'); vw.style.display='none'; };
+    vw.appendChild(vb); grid.after(vw);
+  }
   observe();
   setFeatured(0,false);  // chọn sẵn video đầu (FB) làm sân khấu, CHƯA tải iframe
   lazyStage();           // chỉ tải iframe khi cuộn tới — giữ nhẹ
@@ -4418,6 +4431,8 @@ let curFeatured=-1, stageLoaded=false;
 function setFeatured(i, play){
   var v=VIDEOS[i]; if(!v) return;
   curFeatured=i;
+  var wrap=document.getElementById('vidStageWrap');
+  if(wrap) wrap.style.maxWidth = v.fb ? '560px' : '820px';
   var frame=document.getElementById('vidStage');
   var cap=document.getElementById('vidStageCap');
   if(cap){
@@ -4444,7 +4459,7 @@ function setFeatured(i, play){
 function loadStage(i){
   var v=VIDEOS[i]; var frame=document.getElementById('vidStage'); if(!v||!frame) return;
   stageLoaded=true;
-  var w=Math.min(frame.clientWidth||500, 500);
+  var w = v.fb ? Math.min(frame.clientWidth||500, 500) : (frame.clientWidth||720);
   if(v.fb){
     var h=Math.round(w*0.62)+70; frame.style.height=h+'px';
     var src='https://www.facebook.com/plugins/post.php?href='+encodeURIComponent(v.fb)+'&show_text=false&width='+w+'&height='+h;
