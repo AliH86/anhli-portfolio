@@ -1271,6 +1271,12 @@ body.no-motion .np-viz { display:none; }
    VIDEOS
 ============================================ */
 #videos { background:radial-gradient(70% 60% at 86% 6%, rgba(96,72,140,0.07), transparent 55%), var(--ink); position:relative; overflow:hidden; }
+.fb-feature { max-width:500px; margin:0 auto 3rem; }
+.fb-feature-frame { position:relative; width:100%; min-height:300px; background:var(--ink2); border:0.5px solid var(--border2); border-radius:14px; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+.fb-feature-frame iframe { display:block; width:100%; border:none; }
+.fb-feature-ph { color:var(--text3); font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; }
+.fb-feature-cap { margin-top:0.95rem; text-align:center; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.2rem; color:var(--text2); line-height:1.35; }
+.fb-feature-cap span { display:block; font-style:normal; font-family:'Instrument Sans',sans-serif; font-size:0.66rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--text3); margin-top:0.4rem; }
 .vid-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.5rem; }
 .vid-card { background:var(--ink2); border:0.5px solid var(--border); transition:border-color 0.3s; overflow:hidden; }
 .vid-card:hover { border-color:var(--border2); }
@@ -3025,6 +3031,12 @@ body.theme-dandelion:not(.no-season) footer::after {
   <div class="sec-label reveal">Visual Works</div>
   <h2 class="sec-h reveal">Videos · <em>Sạp Âm Nhạc</em></h2>
   <div class="sec-bar reveal"></div>
+  <div class="fb-feature reveal">
+    <div class="fb-feature-frame" id="fbFeatureFrame" data-fbhref="https://www.facebook.com/hoaithuog.phan/posts/pfbid02giNt8zp7ouhbVgL7Ro9YBjUFszPxDo7nbvw2Yv7ERugV32LS5WDwp8aw8jJ4BAk1l">
+      <span class="fb-feature-ph">Đang tải video…</span>
+    </div>
+    <div class="fb-feature-cap">Vươn Xa Biển Lớn — Lễ kỷ niệm 25 năm Vĩnh Tân Group<span>Sáng tác &amp; chỉ đạo âm nhạc · Anh Li × VPRO Event</span></div>
+  </div>
   <p class="vid-status" id="yt-status">Đang tải video…</p>
   <div class="vid-grid" id="yt-grid"></div>
   <div style="margin-top:2.5rem;text-align:center;" class="reveal">
@@ -3633,6 +3645,7 @@ const YT_CHANNEL = 'UC2Cat4-Hl0SZqKFkRKu72zQ';
    https://www.youtube.com/watch?v=dQw4w9WgXcQ  →  id:'dQw4w9WgXcQ'
    Để trống mảng này thì web sẽ tự thử tải từ kênh (kém ổn định hơn). */
 const VIDEOS = [
+  { id:'v-9cnEqwRBA', title:'YouTube Shopping Accelerator — Opening', meta:'Sự kiện · 2025' },
   { id:'ZZd9Avifl-4', title:'AILi-made · Music Video', meta:'Cái Sạp nhạc · D\'Li' },
   { id:'ZJTlHmumzjc', title:'AILi-made · Music Video', meta:'Cái Sạp nhạc · D\'Li' },
   { id:'z0-rWw82m3Q', title:'AILi-made · Music Video', meta:'Cái Sạp nhạc · D\'Li' },
@@ -5817,6 +5830,28 @@ if(MOBILE){
     if(!raf) raf=requestAnimationFrame(apply); // gộp về 1 lần/khung hình
   }, {passive:true});
   hero.addEventListener('pointerleave', function(){ hero.classList.remove('ghost-on'); });
+})();
+</script>
+
+<!-- FACEBOOK FEATURED VIDEO — lazy-load (chỉ tải khi cuộn tới, giữ perf) -->
+<script>
+(function(){
+  var frame=document.getElementById('fbFeatureFrame');
+  if(!frame) return;
+  var loaded=false;
+  function load(){
+    if(loaded) return; loaded=true;
+    var href=frame.getAttribute('data-fbhref');
+    var w=Math.min(frame.clientWidth||500, 500);
+    var h=Math.round(w*0.62)+96;
+    var src='https://www.facebook.com/plugins/post.php?href='+encodeURIComponent(href)+'&show_text=false&width='+w+'&height='+h;
+    frame.innerHTML='<iframe src="'+src+'" width="'+w+'" height="'+h+'" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" title="Vươn Xa Biển Lớn — VPRO Event"></iframe>';
+    frame.style.minHeight='0';
+  }
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ load(); io.disconnect(); } }); }, {rootMargin:'300px 0px'});
+    io.observe(frame);
+  } else { load(); }
 })();
 </script>
 
