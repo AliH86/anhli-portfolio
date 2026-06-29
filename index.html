@@ -799,16 +799,16 @@ section { padding:5.25rem 4rem; position:relative; }
   z-index:0; pointer-events:none;
   transform:rotate(-15deg); transform-origin:center;
   display:flex; flex-direction:column; gap:0.35rem;
-  opacity:0.17;
-  mask-image:linear-gradient(to bottom, #000 0%, #000 52%, rgba(0,0,0,0.35) 72%, transparent 90%);
-  -webkit-mask-image:linear-gradient(to bottom, #000 0%, #000 52%, rgba(0,0,0,0.35) 72%, transparent 90%);
+  opacity:0.12;
+  mask-image:linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, #000 38%, rgba(0,0,0,0.3) 70%, transparent 90%);
+  -webkit-mask-image:linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, #000 38%, rgba(0,0,0,0.3) 70%, transparent 90%);
 }
 .md-row { display:flex; gap:1.4rem; white-space:nowrap; will-change:transform; }
 .md-row span {
   font-family:'SF Mono', ui-monospace, monospace;
   font-size:1.02rem; color:var(--taupe2); letter-spacing:0.01em;
 }
-.md-row span:nth-child(3n) { color:var(--amber); }
+.md-row span:nth-child(4n) { color:var(--amber); opacity:0.6; }
 .md-row.a { animation:mdScroll 38s linear infinite; }
 .md-row.b { animation:mdScroll 52s linear infinite reverse; }
 @keyframes mdScroll { from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
@@ -1052,6 +1052,8 @@ body.no-motion .np-viz { display:none; }
 .pc-btn:hover { border-color:var(--amber); color:var(--amber); }
 .pc-play { width:48px; height:48px; background:var(--amber); border-color:var(--amber); color:var(--ink); font-size:1rem; }
 .pc-play:hover { background:var(--amber2); color:var(--ink); transform:scale(1.05); }
+.pc-share { margin-left:0.35rem; color:var(--amber); border-color:var(--border2); }
+.pc-share:hover { color:var(--amber2); border-color:var(--amber2); }
 .pc-time { font-size:0.68rem; color:var(--text3); font-variant-numeric:tabular-nums; flex-shrink:0; min-width:34px; text-align:center; }
 .pc-bar { flex:1; height:5px; border-radius:3px; background:rgba(255,255,255,0.08); cursor:pointer; position:relative; overflow:hidden; }
 .pc-bar-fill { position:absolute; left:0; top:0; bottom:0; width:0%; background:linear-gradient(90deg, var(--amber2), var(--amber)); border-radius:3px; }
@@ -1301,6 +1303,12 @@ body.no-motion .np-viz { display:none; }
 }
 .g-chip:hover { border-color:var(--border2); color:var(--taupe2); }
 .g-chip.active { border-color:var(--amber); color:var(--amber); background:var(--glow); }
+.gallery.g-collapsed .g-item.g-extra { display:none; }
+.g-more-wrap { text-align:center; margin-top:2.25rem; }
+.g-more { font-family:inherit; font-size:0.64rem; letter-spacing:0.16em; text-transform:uppercase;
+  padding:0.7rem 1.6rem; border:0.5px solid var(--border2); background:none; color:var(--taupe2);
+  cursor:pointer; transition:all 0.3s; border-radius:100px; }
+.g-more:hover { border-color:var(--amber); color:var(--amber); background:var(--glow); }
 .gallery { columns:6; column-gap:0.75rem; }
 @media(min-width:1800px){ .gallery{ columns:7; } }
 @media(max-width:1400px){ .gallery{ columns:4; } }
@@ -2978,6 +2986,7 @@ body.theme-dandelion:not(.no-season) footer::after {
         <span class="pc-time" id="pcCur">0:00</span>
         <div class="pc-bar" id="pcBar"><div class="pc-bar-fill" id="pcFill"></div></div>
         <span class="pc-time" id="pcDur">0:00</span>
+        <button class="pc-btn pc-share" id="pcShare" type="button" aria-label="Chép link bài đang phát" title="Chép link bài đang phát">↗</button>
       </div>
     </div>
   </div>
@@ -3699,11 +3708,11 @@ setTimeout(type,1200);
 ============================================================ */
 const revObs = new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
-},{threshold:0.08});
+},{threshold:0, rootMargin:'0px 0px 12% 0px'});
 function revealInView(){
   document.querySelectorAll('.reveal:not(.in)').forEach(el=>{
     const r=el.getBoundingClientRect();
-    if(r.top < innerHeight*0.92 && r.bottom > 0) el.classList.add('in');
+    if(r.top < innerHeight*1.08 && r.bottom > 0) el.classList.add('in');
   });
 }
 function observe(){
@@ -3784,7 +3793,7 @@ function renderMusic(){
   if(decor && !decor.childElementCount){
     const words=['Cinematic Soul','Dark R&B','Neo-soul','Trip-hop','Power Ballad','Slow Jam','Indie Pop','Urban Jazz','Downtempo','Acoustic R&B','Vietnamese Pop','Orchestral','Folk','Dream Pop','Lo-fi','Ballad','Soulful','Melancholic','Expressive','Cinematic','Warm Vocals','Original'];
     let rows='';
-    for(let r=0;r<18;r++){
+    for(let r=0;r<12;r++){
       const shuffled=[...words].sort(()=>Math.random()-0.5);
       const line=shuffled.map(w=>`<span>${w}</span>`).join('');
       rows+=`<div class="md-row ${r%2?'b':'a'}">${line}${line}</div>`;
@@ -3981,6 +3990,7 @@ function renderDrawer(a, tracks, showAll){
           </div>
           <div class="drawer-actions">
             <button class="drawer-like${likeN>0?' liked':''}" onclick="likeAlbum(${idx},event)">♡<span class="like-n">${likeN>0?' '+likeN:''}</span></button>
+            <button class="drawer-like drawer-share" type="button" title="Chép link album này" aria-label="Chép link album này" onclick="shareAlbum(${idx},event)">↗</button>
             <button class="drawer-playall"${loading?' disabled style="opacity:0.4;cursor:default"':''} onclick="userPick(0)">▶ Phát từ đầu</button>
           </div>
         </div>
@@ -3996,6 +4006,66 @@ function markPlaying(idx){
 /* ===== AUDIO ENGINE (trình phát của trang, nhạc thật từ Cái Sạp nhạc) ===== */
 const audio=document.getElementById('audioEl');
 let isPlaying=false;
+let pendingTrack=-1;
+
+/* ===== SHARE — deep-link tới bài / album (cho post Threads, dẫn thẳng về chỗ nghe) ===== */
+function aliSlug(s){
+  return (s||'').toString().normalize('NFD').replace(/[̀-ͯ]/g,'')
+    .replace(/đ/g,'d').replace(/Đ/g,'D').toLowerCase()
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+}
+function aliShareBase(){ return location.origin+location.pathname; }
+function aliCopy(url,msg){
+  function done(){ toast(msg); }
+  try{
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(url).then(done).catch(function(){ aliCopyFb(url,done); });
+    } else aliCopyFb(url,done);
+  }catch(e){ aliCopyFb(url,done); }
+}
+function aliCopyFb(url,done){
+  try{ var ta=document.createElement('textarea'); ta.value=url; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.focus(); ta.select(); document.execCommand('copy'); ta.remove(); done(); }
+  catch(e){ toast('Link: '+url); }
+}
+function shareCurrentTrack(){
+  if(activeIdx>=0&&curAlbum>=0&&ALBUMS[curAlbum]){
+    var t=(ALBUMS[curAlbum].tracks||[])[activeIdx];
+    if(t){ aliCopy(aliShareBase()+'?bai='+aliSlug(t.name),'Đã chép link bài <em>'+t.name+'</em> ✦'); return; }
+  }
+  if(curAlbum>=0&&ALBUMS[curAlbum]){ shareAlbum(curAlbum); return; }
+  toast('Chọn một bài để chia sẻ nhé ✦');
+}
+function shareAlbum(idx,ev){
+  if(ev&&ev.stopPropagation) ev.stopPropagation();
+  var a=ALBUMS[idx]; if(!a) return;
+  aliCopy(aliShareBase()+'?album='+aliSlug(a.name),'Đã chép link album <em>'+a.name+'</em> ✦');
+}
+function aliScrollMusic(){
+  var el=document.getElementById('playlistLabel')||document.getElementById('music'); if(!el) return;
+  window.scrollTo({ top:el.getBoundingClientRect().top+window.pageYOffset-110, behavior:'smooth' });
+}
+var aliDeepDone=false;
+function applyDeepLink(){
+  if(aliDeepDone) return;
+  var p; try{ p=new URLSearchParams(location.search); }catch(e){ aliDeepDone=true; return; }
+  var bai=p.get('bai'), alb=p.get('album');
+  if(!bai&&!alb){ aliDeepDone=true; return; }
+  if(typeof ALBUMS==='undefined'||!ALBUMS.length) return; // chờ data nạp xong
+  if(bai){
+    for(var ai=0;ai<ALBUMS.length;ai++){
+      var ts=ALBUMS[ai].tracks||[];
+      for(var ti=0;ti<ts.length;ti++){
+        if(aliSlug(ts[ti].name)===bai){ aliDeepDone=true; selectAlbum(ai,true); pendingTrack=ti; setTimeout(aliScrollMusic,250); return; }
+      }
+    }
+  }
+  if(alb){
+    for(var k=0;k<ALBUMS.length;k++){
+      if(aliSlug(ALBUMS[k].name)===alb){ aliDeepDone=true; selectAlbum(k,true); setTimeout(aliScrollMusic,250); return; }
+    }
+  }
+}
 function fmt(s){ s=Math.floor(s||0); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); }
 
 function playAt(j){
@@ -4078,7 +4148,7 @@ function nextTrack(){
 }
 function prevTrack(){ playAt(activeIdx<0?0:activeIdx-1); }
 function togglePlay(){
-  if(activeIdx<0){ playAt(0); return; }
+  if(activeIdx<0){ playAt(pendingTrack>=0?pendingTrack:0); pendingTrack=-1; return; }
   if(audio.paused) audio.play().catch(()=>{}); else audio.pause();
 }
 function toggleShuffle(){
@@ -4165,6 +4235,7 @@ function renderHashtags(){
 /* ============================================================
    RENDER GALLERY (Visual Lab)
 ============================================================ */
+let galleryExpanded=false, gMoreWrap=null;
 function renderGallery(){
   const grid=document.getElementById('galleryGrid');
   const filt=document.getElementById('gFilters');
@@ -4177,10 +4248,12 @@ function renderGallery(){
     b.onclick=()=>filterGallery(t,b);
     filt.appendChild(b);
   });
+  const GAL_INIT=18;
   GALLERY.forEach((g,i)=>{
     const d=document.createElement('div');
     d.className='g-item g-'+g.type;
     d.dataset.tag=g.tag;
+    if(i>=GAL_INIT) d.classList.add('g-extra');
     d.style.setProperty('--gd', (i%4*0.06)+'s');
     const phLabel=`${g.tag} · ${g.type==='img'?'drop image':'drop video'}`;
     let media='', play='';
@@ -4209,11 +4282,23 @@ function renderGallery(){
       </div>`;
     grid.appendChild(d);
   });
+  if(GALLERY.length>GAL_INIT){
+    grid.classList.add('g-collapsed');
+    gMoreWrap=document.createElement('div'); gMoreWrap.className='g-more-wrap';
+    const mb=document.createElement('button'); mb.type='button'; mb.className='g-more';
+    mb.textContent='Xem thêm '+(GALLERY.length-GAL_INIT)+' tác phẩm ↓';
+    mb.onclick=()=>{ grid.classList.remove('g-collapsed'); galleryExpanded=true; gMoreWrap.style.display='none'; };
+    gMoreWrap.appendChild(mb);
+    grid.after(gMoreWrap);
+  }
 }
 function filterGallery(tag,btn){
   document.querySelectorAll('.g-chip').forEach(c=>c.classList.remove('active'));
   btn.classList.add('active');
   const all=tag==='Tất cả';
+  const grid=document.getElementById('galleryGrid');
+  if(all && !galleryExpanded){ grid&&grid.classList.add('g-collapsed'); if(gMoreWrap) gMoreWrap.style.display=''; }
+  else { grid&&grid.classList.remove('g-collapsed'); if(gMoreWrap) gMoreWrap.style.display='none'; }
   document.querySelectorAll('.g-item').forEach(it=>{
     it.classList.toggle('g-hide', !all && it.dataset.tag!==tag);
   });
@@ -4364,6 +4449,7 @@ document.getElementById('pcPrev')?.addEventListener('click', prevTrack);
 document.getElementById('pcNext')?.addEventListener('click', nextTrack);
 document.getElementById('pcPlay')?.addEventListener('click', togglePlay);
 document.getElementById('pcShuffle')?.addEventListener('click', toggleShuffle);
+document.getElementById('pcShare')?.addEventListener('click', shareCurrentTrack);
 // Init shuffle button appearance
 (()=>{ const b=document.getElementById('pcShuffle'); if(b) b.style.opacity='0.5'; })();
 // Gợi ý "bốc cho tôi một bài" — bật shuffle + phát ngay một bài ngẫu nhiên
@@ -5635,6 +5721,7 @@ if(MOBILE){
       }
     });
     renderMusic();
+    try{ if(typeof applyDeepLink==='function') applyDeepLink(); }catch(e){}
   }
   var s = document.createElement('script');
   // Cache-bust mỗi lần tải → sửa music-data.js xong push là lên ngay, KHÔNG cần bump version.
@@ -5642,6 +5729,7 @@ if(MOBILE){
   s.onload = function(){ merge(window.PORTFOLIO_MUSIC); };
   s.onerror = function(){ console.warn('[Anh Li Portfolio] music-data.js could not load; using inline data.'); };
   document.head.appendChild(s);
+  setTimeout(function(){ try{ if(typeof applyDeepLink==='function') applyDeepLink(); }catch(e){} }, 1800);
 })();
 </script>
 <!-- MOTION TOGGLE LOGIC — giảm chuyển động + tắt shader để máy đỡ nóng -->
