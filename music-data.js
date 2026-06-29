@@ -11,7 +11,7 @@
 // (index.html vẫn giữ một bản dữ liệu dự phòng phòng khi file này lỗi tải.)
 // ============================================================
 window.PORTFOLIO_MUSIC = {
-  version: "2026-06-29-2",
+  version: "2026-06-29-3",
   source: "Playlists curated by Anh Li",
   albums: [
     {
@@ -183,6 +183,15 @@ window.PORTFOLIO_MUSIC = {
         {id:"4c3815e9-5c08-48d4-88b0-cfbcd1356c0b", name:"Một Việt Nam Vươn Cao", dur:"4:58"},
         {id:"1e75456e-d27d-4e85-9afc-9c5d67cd50f0", name:"Khúc ca Việt tự hào", dur:"4:26"}
       ]
+    },
+    {
+      id: "0bd2c183-50a7-4917-ae88-2ecdc9f0d2f3",
+      name: "TẾT Ngọ Sum Vầy '26",
+      sub: "Tết · Folk Pop · Celebration",
+      cover: "uploads/tet-ngo-sum-vay-26.jpg",
+      desc: "Mùa Ngọ gõ cửa — nhạc Tết rộn ràng cho những chuyến về nhà, mâm cơm sum vầy và lời chúc đầu năm phát tài, phát lộc.",
+      count: 9,
+      tracks: []
     },
     {
       id: "8f2c17b4-cb70-46e1-9f2e-464ccadaf1ab",
