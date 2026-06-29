@@ -1271,12 +1271,22 @@ body.no-motion .np-viz { display:none; }
    VIDEOS
 ============================================ */
 #videos { background:radial-gradient(70% 60% at 86% 6%, rgba(96,72,140,0.07), transparent 55%), var(--ink); position:relative; overflow:hidden; }
-.fb-feature { max-width:500px; margin:0 auto 3rem; }
-.fb-feature-frame { position:relative; width:100%; min-height:300px; background:var(--ink2); border:0.5px solid var(--border2); border-radius:14px; overflow:hidden; display:flex; align-items:center; justify-content:center; }
-.fb-feature-frame iframe { display:block; width:100%; border:none; }
-.fb-feature-ph { color:var(--text3); font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; }
-.fb-feature-cap { margin-top:0.95rem; text-align:center; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.2rem; color:var(--text2); line-height:1.35; }
-.fb-feature-cap span { display:block; font-style:normal; font-family:'Instrument Sans',sans-serif; font-size:0.66rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--text3); margin-top:0.4rem; }
+.vid-stage { max-width:500px; margin:0 auto 2.75rem; }
+.vid-stage-frame { position:relative; width:100%; min-height:281px; background:var(--ink2); border:0.5px solid var(--border2); border-radius:14px; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+.vid-stage-frame iframe { display:block; width:100%; height:100%; border:none; }
+.vid-stage-frame > img { width:100%; height:100%; object-fit:cover; display:block; }
+.vid-stage-ph { color:var(--text3); font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; padding:1rem; text-align:center; }
+.vid-stage-play { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; cursor:pointer; }
+.vid-stage-play .vp { width:62px; height:62px; border-radius:50%; border:1px solid var(--amber2); color:var(--amber2); display:flex; align-items:center; justify-content:center; font-size:1.3rem; background:rgba(9,8,14,0.45); transition:all 0.3s; }
+.vid-stage-play:hover .vp { background:var(--amber); color:var(--ink); transform:scale(1.06); }
+.vid-stage-cap { margin-top:1rem; text-align:center; }
+.vid-stage-cap .vs-title { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.45rem; color:var(--text); line-height:1.3; }
+.vid-stage-cap .vs-credits { margin-top:0.6rem; font-size:0.72rem; line-height:1.7; color:var(--text3); white-space:pre-line; }
+.vid-card { cursor:pointer; }
+.vid-card.active { border-color:var(--amber); }
+.vid-card.active .vid-title { color:var(--amber2); }
+.vid-card.is-fb .vid-thumb { background:linear-gradient(135deg,var(--ink3),var(--ink)); }
+.vid-card .fb-badge { position:absolute; bottom:0.5rem; left:0.6rem; font-size:0.5rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--taupe2); z-index:2; }
 .vid-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.5rem; }
 .vid-card { background:var(--ink2); border:0.5px solid var(--border); transition:border-color 0.3s; overflow:hidden; }
 .vid-card:hover { border-color:var(--border2); }
@@ -3031,11 +3041,9 @@ body.theme-dandelion:not(.no-season) footer::after {
   <div class="sec-label reveal">Visual Works</div>
   <h2 class="sec-h reveal">Videos · <em>Sạp Âm Nhạc</em></h2>
   <div class="sec-bar reveal"></div>
-  <div class="fb-feature reveal">
-    <div class="fb-feature-frame" id="fbFeatureFrame" data-fbhref="https://www.facebook.com/hoaithuog.phan/posts/pfbid02giNt8zp7ouhbVgL7Ro9YBjUFszPxDo7nbvw2Yv7ERugV32LS5WDwp8aw8jJ4BAk1l">
-      <span class="fb-feature-ph">Đang tải video…</span>
-    </div>
-    <div class="fb-feature-cap">Vươn Xa Biển Lớn — Lễ kỷ niệm 25 năm Vĩnh Tân Group<span>Sáng tác &amp; chỉ đạo âm nhạc · Anh Li × VPRO Event</span></div>
+  <div class="vid-stage reveal">
+    <div class="vid-stage-frame" id="vidStage"><span class="vid-stage-ph">Đang tải…</span></div>
+    <div class="vid-stage-cap" id="vidStageCap"></div>
   </div>
   <p class="vid-status" id="yt-status">Đang tải video…</p>
   <div class="vid-grid" id="yt-grid"></div>
@@ -3645,7 +3653,13 @@ const YT_CHANNEL = 'UC2Cat4-Hl0SZqKFkRKu72zQ';
    https://www.youtube.com/watch?v=dQw4w9WgXcQ  →  id:'dQw4w9WgXcQ'
    Để trống mảng này thì web sẽ tự thử tải từ kênh (kém ổn định hơn). */
 const VIDEOS = [
+  { fb:'https://www.facebook.com/hoaithuog.phan/posts/pfbid02giNt8zp7ouhbVgL7Ro9YBjUFszPxDo7nbvw2Yv7ERugV32LS5WDwp8aw8jJ4BAk1l',
+    title:'Vươn Xa Biển Lớn — Lễ kỷ niệm 25 năm Vĩnh Tân Group',
+    meta:'Vĩnh Tân Group · VPRO Event',
+    credits:'Sáng tác: Ali Huỳnh · VPRO Creative Director\nCa sĩ: Phạm Anh Khoa  ·  Producer: Hà Trà Đá  ·  Biên đạo: An Nguyễn' },
   { id:'v-9cnEqwRBA', title:'YouTube Shopping Accelerator — Opening', meta:'Sự kiện · 2025' },
+  { drive:'1sMlvyiL3RXHxVq_2JPUNdjRc3g6OsKQc', title:'Mekong — Dai-ichi Life Vietnam', meta:'Sự kiện · DLVN' },
+  { drive:'1S9lMpQ7BQlADa4FwIU2eXjg7kW35Z-9A', title:'Mekong — Dai-ichi Life Vietnam (II)', meta:'Sự kiện · DLVN' },
   { id:'ZZd9Avifl-4', title:'AILi-made · Music Video', meta:'Cái Sạp nhạc · D\'Li' },
   { id:'ZJTlHmumzjc', title:'AILi-made · Music Video', meta:'Cái Sạp nhạc · D\'Li' },
   { id:'z0-rWw82m3Q', title:'AILi-made · Music Video', meta:'Cái Sạp nhạc · D\'Li' },
@@ -4371,23 +4385,73 @@ function renderContacts(){
 function renderVideos(){
   const status=document.getElementById('yt-status');
   const grid=document.getElementById('yt-grid');
-  if(VIDEOS.length){
-    status.style.display='none';
-    grid.innerHTML=VIDEOS.map(v=>`
-      <div class="vid-card reveal">
-        <div class="vid-thumb" onclick="openVideo('https://www.youtube.com/embed/${v.id}?autoplay=1','${(v.title||'').replace(/['"]/g,'')}')">
-          <img src="https://img.youtube.com/vi/${v.id}/hqdefault.jpg" alt="${v.title||''}" loading="lazy"/>
-          <div class="vid-overlay"><div class="vid-play">▶</div></div>
-        </div>
-        <div class="vid-info">
-          <div class="vid-title">${v.title||'Video'}</div>
-          <div class="vid-meta">${v.meta||'Sạp Âm Nhạc'}</div>
-        </div>
-      </div>`).join('');
-    observe();
-    return;
+  if(!grid) return;
+  if(!VIDEOS.length){ loadYT(); return; }
+  if(status) status.style.display='none';
+  grid.innerHTML=VIDEOS.map(function(v,i){
+    var safe=(v.title||'').replace(/"/g,'');
+    var thumb = v.fb
+      ? '<div class="vid-thumb"><div class="vid-overlay"><div class="vid-play">▶</div></div><span class="fb-badge">Facebook</span></div>'
+      : v.drive
+      ? '<div class="vid-thumb"><img src="https://drive.google.com/thumbnail?id='+v.drive+'&sz=w480" alt="'+safe+'" loading="lazy" onerror="this.style.display=\'none\'"/><div class="vid-overlay"><div class="vid-play">▶</div></div><span class="fb-badge">Drive</span></div>'
+      : '<div class="vid-thumb"><img src="https://img.youtube.com/vi/'+v.id+'/hqdefault.jpg" alt="'+safe+'" loading="lazy"/><div class="vid-overlay"><div class="vid-play">▶</div></div></div>';
+    return '<div class="vid-card reveal'+(v.fb?' is-fb':'')+'" data-vid="'+i+'" onclick="setFeatured('+i+',true)">'
+      + thumb
+      + '<div class="vid-info"><div class="vid-title">'+(v.title||'Video')+'</div><div class="vid-meta">'+(v.meta||'Sạp Âm Nhạc')+'</div></div>'
+      + '</div>';
+  }).join('');
+  observe();
+  setFeatured(0,false);  // chọn sẵn video đầu (FB) làm sân khấu, CHƯA tải iframe
+  lazyStage();           // chỉ tải iframe khi cuộn tới — giữ nhẹ
+}
+let curFeatured=-1, stageLoaded=false;
+function setFeatured(i, play){
+  var v=VIDEOS[i]; if(!v) return;
+  curFeatured=i;
+  var frame=document.getElementById('vidStage');
+  var cap=document.getElementById('vidStageCap');
+  if(cap){
+    cap.innerHTML='<div class="vs-title">'+(v.title||'')+'</div>'
+      + (v.credits ? '<div class="vs-credits">'+v.credits+'</div>' : (v.meta?'<div class="vs-credits">'+v.meta+'</div>':''));
   }
-  loadYT(); // fallback to channel RSS
+  document.querySelectorAll('.vid-card').forEach(function(c){ c.classList.toggle('active', +c.dataset.vid===i); });
+  if(!frame) return;
+  if(play){
+    loadStage(i);
+    var y=frame.getBoundingClientRect().top+window.pageYOffset-110;
+    window.scrollTo({top:y, behavior:'smooth'});
+  } else if(v.fb){
+    frame.style.height=''; frame.innerHTML='<span class="vid-stage-ph">Bấm để phát ✦ Vươn Xa Biển Lớn</span>';
+  } else if(v.drive){
+    frame.style.height='';
+    frame.innerHTML='<img src="https://drive.google.com/thumbnail?id='+v.drive+'&sz=w800" onerror="this.style.display=\'none\'" alt=""/><div class="vid-stage-play" onclick="loadStage('+i+')"><span class="vp">▶</span></div>';
+  } else {
+    frame.style.height='';
+    frame.innerHTML='<img src="https://img.youtube.com/vi/'+v.id+'/maxresdefault.jpg" onerror="this.src=\'https://img.youtube.com/vi/'+v.id+'/hqdefault.jpg\'" alt=""/><div class="vid-stage-play" onclick="loadStage('+i+')"><span class="vp">▶</span></div>';
+  }
+}
+function loadStage(i){
+  var v=VIDEOS[i]; var frame=document.getElementById('vidStage'); if(!v||!frame) return;
+  stageLoaded=true;
+  var w=Math.min(frame.clientWidth||500, 500);
+  if(v.fb){
+    var h=Math.round(w*0.62)+70; frame.style.height=h+'px';
+    var src='https://www.facebook.com/plugins/post.php?href='+encodeURIComponent(v.fb)+'&show_text=false&width='+w+'&height='+h;
+    frame.innerHTML='<iframe src="'+src+'" width="'+w+'" height="'+h+'" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" title="Vươn Xa Biển Lớn"></iframe>';
+  } else if(v.drive){
+    var hd=Math.round(w*9/16); frame.style.height=hd+'px';
+    frame.innerHTML='<iframe src="https://drive.google.com/file/d/'+v.drive+'/preview" width="'+w+'" height="'+hd+'" style="border:none" allow="autoplay" allowfullscreen title="'+(v.title||'').replace(/"/g,'')+'"></iframe>';
+  } else {
+    var hy=Math.round(w*9/16); frame.style.height=hy+'px';
+    frame.innerHTML='<iframe src="https://www.youtube.com/embed/'+v.id+'?autoplay=1" width="'+w+'" height="'+hy+'" style="border:none" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen title="'+(v.title||'').replace(/"/g,'')+'"></iframe>';
+  }
+}
+function lazyStage(){
+  var frame=document.getElementById('vidStage'); if(!frame) return;
+  function go(){ if(!stageLoaded && VIDEOS[curFeatured] && VIDEOS[curFeatured].fb) loadStage(curFeatured); }
+  if(!('IntersectionObserver' in window)){ go(); return; }
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ go(); io.disconnect(); } }); }, {rootMargin:'250px 0px'});
+  io.observe(frame);
 }
 
 async function loadYT(){
@@ -5830,28 +5894,6 @@ if(MOBILE){
     if(!raf) raf=requestAnimationFrame(apply); // gộp về 1 lần/khung hình
   }, {passive:true});
   hero.addEventListener('pointerleave', function(){ hero.classList.remove('ghost-on'); });
-})();
-</script>
-
-<!-- FACEBOOK FEATURED VIDEO — lazy-load (chỉ tải khi cuộn tới, giữ perf) -->
-<script>
-(function(){
-  var frame=document.getElementById('fbFeatureFrame');
-  if(!frame) return;
-  var loaded=false;
-  function load(){
-    if(loaded) return; loaded=true;
-    var href=frame.getAttribute('data-fbhref');
-    var w=Math.min(frame.clientWidth||500, 500);
-    var h=Math.round(w*0.62)+96;
-    var src='https://www.facebook.com/plugins/post.php?href='+encodeURIComponent(href)+'&show_text=false&width='+w+'&height='+h;
-    frame.innerHTML='<iframe src="'+src+'" width="'+w+'" height="'+h+'" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" title="Vươn Xa Biển Lớn — VPRO Event"></iframe>';
-    frame.style.minHeight='0';
-  }
-  if('IntersectionObserver' in window){
-    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ load(); io.disconnect(); } }); }, {rootMargin:'300px 0px'});
-    io.observe(frame);
-  } else { load(); }
 })();
 </script>
 
