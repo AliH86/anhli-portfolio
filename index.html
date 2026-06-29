@@ -4421,7 +4421,8 @@ function setFeatured(i, play){
     var y=frame.getBoundingClientRect().top+window.pageYOffset-110;
     window.scrollTo({top:y, behavior:'smooth'});
   } else if(v.fb){
-    frame.style.height=''; frame.innerHTML='<span class="vid-stage-ph">Bấm để phát ✦ Vươn Xa Biển Lớn</span>';
+    frame.style.height='';
+    frame.innerHTML='<div class="vid-stage-play" onclick="loadStage('+i+')"><span class="vp">▶</span></div>';
   } else if(v.drive){
     frame.style.height='';
     frame.innerHTML='<img src="https://drive.google.com/thumbnail?id='+v.drive+'&sz=w800" onerror="this.style.display=\'none\'" alt=""/><div class="vid-stage-play" onclick="loadStage('+i+')"><span class="vp">▶</span></div>';
