@@ -11,7 +11,7 @@
 // (index.html vẫn giữ một bản dữ liệu dự phòng phòng khi file này lỗi tải.)
 // ============================================================
 window.PORTFOLIO_MUSIC = {
-  version: "2026-06-29-1",
+  version: "2026-06-29-2",
   source: "Playlists curated by Anh Li",
   albums: [
     {
@@ -31,6 +31,21 @@ window.PORTFOLIO_MUSIC = {
         {id:"95047cbf-54f0-4e1a-8116-612b0e40ae27", name:"Anh Glitch Một Mình...", dur:"3:27"},
         {id:"54f44e62-baf9-493f-b712-95e7c7c7abae", name:"Nhảy vào Mưa....", dur:"4:20"},
         {id:"7bc4edd1-5bf5-4426-b929-98834bea6c1e", name:"Duyên, Hợp, Tan", dur:"3:14"}
+      ]
+    },
+    {
+      id: "debb379c-7814-426c-8409-abe0f0a43215",
+      playlistUrl: "https://suno.com/playlist/debb379c-7814-426c-8409-abe0f0a43215",
+      name: "Chuyện Tình Này...Nó Lạ...",
+      sub: "Folk-soul Noir · Retro Pop · Anh Li & D'Li",
+      cover: "https://cdn2.suno.ai/image_1a222b30-6000-4546-941b-61570bf0b7f2.jpeg?width=720",
+      desc: "Góc nhìn mới về những câu chuyện tình....",
+      count: 4,
+      tracks: [
+        {id:"1cfa61e1-471b-4cfd-a05a-0083e8fa1fdb", name:"Chuyện....Mình Lạ", dur:"3:04"},
+        {id:"71487cfe-2274-4940-8de9-09d5149cb734", name:"Sòul Đown Đắng Hoài?", dur:"5:44"},
+        {id:"2ff7643d-0a80-4b44-80ad-9d47471c14ab", name:"Có hai người mới ngang phố này...", dur:"4:27"},
+        {id:"d293ccc7-7386-4168-8787-26f93de8beb8", name:"Anh tính thế này này [Anh Li ft D'Li]", dur:"3:32"}
       ]
     },
     {
