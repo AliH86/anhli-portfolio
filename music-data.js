@@ -11,7 +11,7 @@
 // (index.html vẫn giữ một bản dữ liệu dự phòng phòng khi file này lỗi tải.)
 // ============================================================
 window.PORTFOLIO_MUSIC = {
-  "version": "2026-06-30-1",
+  "version": "2026-06-30-2",
   "source": "Playlists curated by Anh Li",
   "albums": [
     {
@@ -19,7 +19,7 @@ window.PORTFOLIO_MUSIC = {
       "playlistUrl": "https://suno.com/playlist/c6672b33-6803-4fa3-8c9d-900d15dfaf2d",
       "name": "01KhoảngLặng",
       "sub": "Lo-fi Hip-hop · Vietnamese R&B · Cinematic Soul",
-      "cover": "uploads/khoang-lang.svg",
+      "cover": "uploads/01-khoang-lang.jpg",
       "desc": "01KhoảngLặng là góc nhỏ để ngồi lại giữa những ngày ồn ào. Từ mưa, piano cũ, boom-bap chậm, R&B khàn đến rap tự sự, playlist đi qua nhiều sắc thái cô đơn và học cách buông nhẹ. Đây là những bài hát để nghe khi cần một khoảng lặng riêng.",
       "count": 8,
       "tracks": [
@@ -70,7 +70,7 @@ window.PORTFOLIO_MUSIC = {
       "playlistUrl": "https://suno.com/playlist/debb379c-7814-426c-8409-abe0f0a43215",
       "name": "Chuyện Tình Này...Nó Lạ...",
       "sub": "Folk-soul Noir · Retro Pop · Anh Li & D'Li",
-      "cover": "https://cdn2.suno.ai/image_1a222b30-6000-4546-941b-61570bf0b7f2.jpeg?width=720",
+      "cover": "uploads/chuyen-tinh-nay-no-la.jpg",
       "desc": "Góc nhìn mới về những câu chuyện tình....",
       "count": 4,
       "tracks": [

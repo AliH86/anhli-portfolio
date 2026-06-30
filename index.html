@@ -2456,12 +2456,12 @@ body.no-motion .album-track {
 /* HERO ART DIRECTION — final ratio map.
    One source of truth for portrait placement, grass cover and edge fade. */
 .hero.poster-hero {
-  --person-w:clamp(620px, 44vw, 940px);
-  --person-right:clamp(3rem, 8vw, 13rem);
+  --person-w:clamp(760px, 50vw, 1420px);
+  --person-right:clamp(8rem, 17vw, 36rem);
   --person-bottom:-6vh;
   --person-top:auto;
   --person-mask:linear-gradient(to bottom, #000 0%, #000 80%, rgba(0,0,0,0.72) 88%, rgba(0,0,0,0.18) 97%, transparent 100%);
-  --fg-h:clamp(9rem, 22vh, 17rem);
+  --fg-h:clamp(10rem, 24vh, 19rem);
 }
 .hero-person-wrap {
   top:var(--person-top) !important;
@@ -2476,11 +2476,143 @@ body.no-motion .album-track {
 .poster-foreground {
   height:var(--fg-h) !important;
 }
+.hero-garden-haze {
+  position:absolute;
+  inset:0;
+  z-index:7;
+  pointer-events:none;
+  background:
+    radial-gradient(36% 34% at 55% 20%, rgba(255,255,255,0.44), rgba(255,255,255,0.16) 42%, transparent 72%),
+    radial-gradient(28% 24% at 66% 50%, rgba(255,250,226,0.34), rgba(255,250,226,0.1) 48%, transparent 76%),
+    linear-gradient(90deg, transparent 0 44%, rgba(255,255,255,0.12) 52%, transparent 70%);
+  mix-blend-mode:screen;
+  filter:blur(2px);
+  opacity:0.82;
+}
+.hero-garden-haze::after {
+  content:'';
+  position:absolute;
+  right:-6vw;
+  bottom:5vh;
+  width:min(58vw, 980px);
+  height:min(30vh, 340px);
+  border-radius:52% 48% 40% 60%;
+  background:
+    radial-gradient(54% 72% at 34% 42%, rgba(122,143,62,0.78), transparent 72%),
+    radial-gradient(48% 62% at 68% 56%, rgba(72,88,42,0.72), transparent 74%),
+    linear-gradient(90deg, rgba(111,132,56,0.42), rgba(47,66,33,0.24));
+  filter:blur(34px);
+  opacity:0.58;
+  transform:rotate(-4deg);
+}
+.hero-album-garden {
+  position:absolute;
+  inset:0;
+  z-index:8;
+  pointer-events:none;
+  perspective:1200px;
+  transform-style:preserve-3d;
+}
+.garden-piece {
+  position:absolute;
+  display:block;
+  opacity:0.88;
+  transform:
+    translate3d(0,0,var(--z, 0))
+    rotateX(var(--rx, 0deg))
+    rotateY(var(--ry, 0deg))
+    rotateZ(var(--rot, 0deg));
+  filter:
+    blur(var(--blur, 0))
+    drop-shadow(0 22px 30px rgba(15,24,16,0.26))
+    drop-shadow(0 5px 12px rgba(0,0,0,0.2));
+  animation:gardenFloat var(--dur, 9s) ease-in-out infinite;
+  animation-delay:var(--delay, 0s);
+}
+.garden-card {
+  width:var(--s, 150px);
+  aspect-ratio:1;
+  border-radius:4px;
+  overflow:hidden;
+  background:rgba(12,14,10,0.5);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,250,226,0.16),
+    inset 0 -32px 54px rgba(0,0,0,0.22);
+}
+.garden-card::after {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(132deg, rgba(255,255,255,0.28), transparent 30%),
+    radial-gradient(70% 80% at 50% 100%, rgba(0,0,0,0.42), transparent 74%);
+  mix-blend-mode:screen;
+  opacity:0.62;
+}
+.garden-card img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.garden-disc {
+  width:var(--s, 150px);
+  aspect-ratio:1;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 50% 50%, #111017 0 8%, transparent 8.4%),
+    repeating-radial-gradient(circle, rgba(255,255,255,0.06) 0 1px, rgba(0,0,0,0.58) 1px 4px),
+    conic-gradient(from 18deg, #050507, #302a25, #0b0b0e, #19161d, #050507);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,250,226,0.14),
+    inset 0 0 34px rgba(0,0,0,0.64);
+}
+.garden-disc::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  background:linear-gradient(118deg, rgba(255,255,255,0.24) 0 12%, transparent 28% 74%, rgba(255,255,255,0.08));
+  mix-blend-mode:screen;
+}
+.garden-disc::after {
+  content:'';
+  position:absolute;
+  inset:36%;
+  border-radius:50%;
+  background:var(--cover) center/cover;
+  box-shadow:0 0 0 2px rgba(11,11,12,0.78), 0 0 0 3px rgba(255,250,226,0.1);
+}
+.gc-1 { --s:clamp(120px, 8.8vw, 220px); --rot:-17deg; --rx:10deg; --ry:22deg; --dx:18px; --dy:-14px; --dur:10s; left:29vw; top:50vh; opacity:0.76; }
+.gc-2 { --s:clamp(92px, 6vw, 150px); --rot:18deg; --rx:-8deg; --ry:-24deg; --dx:-14px; --dy:18px; --dur:11s; right:17vw; top:31vh; opacity:0.82; }
+.gc-3 { --s:clamp(170px, 18vw, 380px); --rot:-9deg; --rx:14deg; --ry:-18deg; --blur:10px; --dx:24px; --dy:-18px; --dur:12s; right:8vw; bottom:12vh; opacity:0.42; z-index:3; }
+.gc-4 { --s:clamp(100px, 7.4vw, 180px); --rot:4deg; --rx:-14deg; --ry:18deg; --blur:1px; --dx:-18px; --dy:14px; --dur:9.5s; right:6.5vw; top:47vh; opacity:0.62; }
+.gd-1 { --s:clamp(118px, 8.2vw, 190px); --rot:18deg; --rx:64deg; --ry:-16deg; --dx:-12px; --dy:-20px; --dur:10.5s; left:45vw; top:18vh; opacity:0.72; }
+.gd-2 { --s:clamp(88px, 6.2vw, 142px); --rot:-12deg; --rx:58deg; --ry:22deg; --blur:4px; --dx:16px; --dy:16px; --dur:12.5s; right:11vw; bottom:22vh; opacity:0.5; }
+@keyframes gardenFloat {
+  0%, 100% {
+    transform:
+      translate3d(0,0,var(--z, 0))
+      rotateX(var(--rx, 0deg))
+      rotateY(var(--ry, 0deg))
+      rotateZ(var(--rot, 0deg));
+  }
+  50% {
+    transform:
+      translate3d(var(--dx, 0), var(--dy, -16px), var(--z, 0))
+      rotateX(calc(var(--rx, 0deg) + 2deg))
+      rotateY(calc(var(--ry, 0deg) - 3deg))
+      rotateZ(calc(var(--rot, 0deg) + 3deg));
+  }
+}
+body.no-motion .garden-piece {
+  animation:none !important;
+}
 
 @media (min-width: 1700px) {
   .hero.poster-hero {
-    --person-w:clamp(760px, 38vw, 980px);
-    --person-right:clamp(4rem, 7vw, 12rem);
+    --person-w:clamp(960px, 48vw, 1600px);
+    --person-right:clamp(15rem, 20vw, 46rem);
     --person-bottom:-5vh;
     --fg-h:clamp(9rem, 21vh, 16rem);
   }
@@ -2552,6 +2684,38 @@ body.no-motion .album-track {
   }
   .poster-hero .hero-manifesto {
     display:none;
+  }
+  .hero-garden-haze {
+    opacity:0.44;
+    filter:blur(5px);
+  }
+  .hero-garden-haze::after {
+    width:80vw;
+    height:18vh;
+    right:-18vw;
+    bottom:12vh;
+    opacity:0.34;
+  }
+  .gc-1, .gc-2, .gd-1 {
+    display:none;
+  }
+  .gc-3 {
+    --s:42vw;
+    right:-17vw;
+    bottom:20vh;
+    opacity:0.24;
+  }
+  .gc-4 {
+    --s:25vw;
+    top:22svh;
+    right:4vw;
+    opacity:0.34;
+  }
+  .gd-2 {
+    --s:22vw;
+    right:18vw;
+    bottom:25vh;
+    opacity:0.28;
   }
 }
 
@@ -2837,6 +3001,15 @@ body.theme-dandelion:not(.no-season) footer::after {
   <canvas class="hero-wind" id="heroWind" aria-hidden="true"></canvas>
   <div class="hero-person-wrap" id="heroBg" aria-hidden="true">
     <img class="hero-person" src="./images/hero/anh-li-cutout-softedge.png" alt=""/>
+  </div>
+  <div class="hero-garden-haze" aria-hidden="true"></div>
+  <div class="hero-album-garden" aria-hidden="true">
+    <span class="garden-piece garden-disc gd-1" style="--cover:url('./uploads/01-khoang-lang.jpg')"></span>
+    <span class="garden-piece garden-card gc-1"><img src="./uploads/chuyen-tinh-nay-no-la.jpg" alt=""/></span>
+    <span class="garden-piece garden-card gc-2"><img src="./uploads/ca-bien-troi-trong-mat.jpg" alt=""/></span>
+    <span class="garden-piece garden-disc gd-2" style="--cover:url('./uploads/nhung-ke-drill-loves.jpg')"></span>
+    <span class="garden-piece garden-card gc-3"><img src="./uploads/01-khoang-lang.jpg" alt=""/></span>
+    <span class="garden-piece garden-card gc-4"><img src="./uploads/chuyen-tinh-nay-no-la.jpg" alt=""/></span>
   </div>
   <div class="poster-foreground" aria-hidden="true"></div>
   <div class="hero-tint"></div>
