@@ -1,5 +1,27 @@
 # Dandelion Garden Hero Handoff
 
+## 2026-07-01 PART 6 — Pushed live
+
+Ali confirmed the visual and said to push. `finish-push.command` first failed:
+`git pull` refused because an untracked local scratch file
+(`dandelion-scene-view.html`, an old "preview-only, does NOT modify
+index.html" experiment file from an earlier session) collided with a
+same-named file that origin/main already had from Ali's own separate commits
+(`Add dandelion scene view shell` → … → `Hide album controls and add rotating
+disc shimmer`). Those 5 remote commits never touched `index.html` — confirmed
+via `git show --stat` on each — so they were unrelated to this hero work.
+Fixed with `retry-push.command`: removed the stale local
+`dandelion-scene-view.*` files, pulled again (clean auto-merge this time,
+`ort` strategy, only added the file back from origin), then pushed. Live now
+at https://alih86.github.io/anhli-portfolio/ — confirmed via fetch (page
+title/meta mentions "The Anhli Muse's Dandelion Garden").
+
+Lesson: before running any push script, check `git status` for untracked
+files that might collide with remote-only files of the same name — this
+sandbox's Terminal automation can't type through an interactive git prompt
+(click-tier only, no keyboard), so a stuck `read -p` after a failed pull will
+just hang forever until the Terminal window is closed manually.
+
 ## 2026-07-01 PART 5 — Second PSD re-edit (better case/disc ratio), final disc measurement, committed
 
 Ali adjusted the PSD again in Photoshop for a better case/disc proportion
