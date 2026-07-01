@@ -81,18 +81,37 @@
     if (heroRoles && !document.querySelector('.hero-actions')) {
       var actions = document.createElement('div');
       actions.className = 'hero-actions';
-      actions.innerHTML = '<a class="hero-cta hero-cta-primary" href="#music" data-hero-listen>Nghe thử một bài</a><button class="hero-cta" type="button" data-hero-pick>Để Li bốc bài ✨</button>';
+      actions.innerHTML = '<a class="hero-cta hero-cta-primary" href="#music" data-hero-listen>Xuống khu nghe nhạc</a><button class="hero-cta" type="button" data-hero-pick>Để Li bốc bài ✨</button>';
       heroRoles.insertAdjacentElement('afterend', actions);
     }
 
-    function openGate(){
-      var gate = document.getElementById('gateZone');
-      var go = document.getElementById('mgGo');
-      if (gate && gate.classList.contains('gated') && go) go.click();
-    }
     function scrollToMusic(){
       var music = document.getElementById('music');
       if (music) music.scrollIntoView({ behavior:'smooth', block:'start' });
+    }
+    function nudgeGate(){
+      var gate = document.getElementById('gateZone');
+      if (!gate || !gate.classList.contains('gated')) return;
+      gate.classList.remove('nudged');
+      void gate.offsetWidth;
+      gate.classList.add('nudged');
+    }
+    function showGateHint(kind){
+      var skip = document.getElementById('mgSkip');
+      var actions = skip ? skip.closest('.mg-actions') : null;
+      if (!actions) return;
+      var box = document.querySelector('.mg-soft-note');
+      if (!box) {
+        box = document.createElement('div');
+        box.className = 'mg-soft-note';
+        actions.insertAdjacentElement('afterend', box);
+      }
+      box.textContent = kind === 'pick'
+        ? 'Li bốc được, nhưng trước hết người nghe cần tự mở cửa disclaimer AI nha ✦'
+        : 'Khu nhạc ở ngay dưới đây. Muốn nghe thì tự bấm “Tôi đã sẵn sàng nghe” nha ✦';
+      box.classList.remove('show');
+      void box.offsetWidth;
+      box.classList.add('show');
     }
 
     var listen = document.querySelector('[data-hero-listen]');
@@ -100,8 +119,8 @@
       listen.dataset.bound = '1';
       listen.addEventListener('click', function(e){
         e.preventDefault();
-        openGate();
-        setTimeout(scrollToMusic, 180);
+        scrollToMusic();
+        setTimeout(function(){ nudgeGate(); showGateHint('listen'); }, 420);
       });
     }
 
@@ -109,12 +128,8 @@
     if (pick && !pick.dataset.bound) {
       pick.dataset.bound = '1';
       pick.addEventListener('click', function(){
-        openGate();
-        setTimeout(function(){
-          scrollToMusic();
-          var suggest = document.getElementById('npSuggest');
-          if (suggest) suggest.click();
-        }, 340);
+        scrollToMusic();
+        setTimeout(function(){ nudgeGate(); showGateHint('pick'); }, 420);
       });
     }
 
