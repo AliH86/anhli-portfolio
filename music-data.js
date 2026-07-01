@@ -81,7 +81,7 @@
     if (heroRoles && !document.querySelector('.hero-actions')) {
       var actions = document.createElement('div');
       actions.className = 'hero-actions';
-      actions.innerHTML = '<a class="hero-cta hero-cta-primary" href="#music" data-hero-listen>Xuống khu nghe nhạc</a><button class="hero-cta" type="button" data-hero-pick>Để Li bốc bài ✨</button>';
+      actions.innerHTML = '<a class="hero-cta hero-cta-primary" href="#music" data-hero-listen>Trước khi nghe ✦</a>';
       heroRoles.insertAdjacentElement('afterend', actions);
     }
 
@@ -96,7 +96,7 @@
       void gate.offsetWidth;
       gate.classList.add('nudged');
     }
-    function showGateHint(kind){
+    function showGateHint(){
       var skip = document.getElementById('mgSkip');
       var actions = skip ? skip.closest('.mg-actions') : null;
       if (!actions) return;
@@ -106,9 +106,7 @@
         box.className = 'mg-soft-note';
         actions.insertAdjacentElement('afterend', box);
       }
-      box.textContent = kind === 'pick'
-        ? 'Li bốc được, nhưng trước hết người nghe cần tự mở cửa disclaimer AI nha ✦'
-        : 'Khu nhạc ở ngay dưới đây. Muốn nghe thì tự bấm “Tôi đã sẵn sàng nghe” nha ✦';
+      box.textContent = 'Cái Sạp mở ở đây. Muốn nghe thì tự bấm “Tôi đã sẵn sàng nghe” nha ✦';
       box.classList.remove('show');
       void box.offsetWidth;
       box.classList.add('show');
@@ -120,16 +118,7 @@
       listen.addEventListener('click', function(e){
         e.preventDefault();
         scrollToMusic();
-        setTimeout(function(){ nudgeGate(); showGateHint('listen'); }, 420);
-      });
-    }
-
-    var pick = document.querySelector('[data-hero-pick]');
-    if (pick && !pick.dataset.bound) {
-      pick.dataset.bound = '1';
-      pick.addEventListener('click', function(){
-        scrollToMusic();
-        setTimeout(function(){ nudgeGate(); showGateHint('pick'); }, 420);
+        setTimeout(function(){ nudgeGate(); showGateHint(); }, 420);
       });
     }
 
