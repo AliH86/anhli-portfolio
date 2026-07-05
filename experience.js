@@ -77,6 +77,11 @@ function toast(msg){
 const fx={ nx:0, ny:0, dirty:true };
 const heroContent=$('.hero-content'), heroPhoto=$('#heroBg'), heroSec=$('.hero');
 const heroLine1=$('.hero-name .line1'), heroLine2=$('.hero-name .line2');
+/* 2.5D garden: hai tầng ảnh tách từ PSD (plane-far = đồng cỏ, plane-mid = case
+   + 2 nhân vật + đĩa xoay lồng bên trong). Cả cụm #heroGardenScene đã được
+   applyFx dịch chung; hai ref này chỉ thêm ĐỘ LỆCH giữa các tầng để tạo
+   chiều sâu. Chỉ đụng thuộc tính `translate` — `transform` thuộc CSS. */
+const planeFar=$('.hga-plane-far'), planeMid=$('.hga-plane-mid'), albumStage=$('#heroAlbumStage');
 const pxTargets=[];
 if(!REDUCED){
   document.querySelectorAll('.section-wm').forEach(e=>pxTargets.push({e, s:36}));
@@ -121,6 +126,14 @@ function applyFx(){
     /* kinetic typography — hai dòng tên trượt ngược chiều khi cuộn */
     if(heroLine1) heroLine1.style.transform=`translateX(${(-s*0.16).toFixed(1)}px)`;
     if(heroLine2) heroLine2.style.transform=`translateX(${(s*0.22).toFixed(1)}px)`;
+    /* 2.5D depth trong vườn: cả cụm đã trôi theo heroPhoto ở trên — ở đây chỉ
+       bù/lệch từng tầng: nền trôi NGƯỢC lại một phần (xa hơn = chậm hơn),
+       stage album trôi thêm (gần mắt nhất). Biên độ nhỏ để không lộ mép ảnh. */
+    if(planeFar && !document.body.classList.contains('no-motion')){
+      planeFar.style.translate=`${(fx.nx*10).toFixed(1)}px ${(fx.ny*6).toFixed(1)}px`;
+      if(planeMid) planeMid.style.translate=`${(-fx.nx*5).toFixed(1)}px ${(-fx.ny*3).toFixed(1)}px`;
+      if(albumStage) albumStage.style.translate=`${(-fx.nx*12).toFixed(1)}px ${(-fx.ny*7).toFixed(1)}px`;
+    }
   }
   for(const t of pxTargets){
     const r=t.e.getBoundingClientRect();

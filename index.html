@@ -6,6 +6,10 @@
 <title>Anh Li — Sạp Âm Nhạc</title>
 <meta name="description" content="Anh Li · Creative Producer · Show Director · Songwriter · Saigon Vietnam"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
+<!-- hero LCP images: desktop tải 2 tầng parallax, mobile chỉ tải ảnh master phẳng -->
+<link rel="preload" as="image" href="./images/hero/dandelion-garden/plane-far.webp" media="(min-width: 621px)"/>
+<link rel="preload" as="image" href="./images/hero/dandelion-garden/plane-mid.webp" media="(min-width: 621px)"/>
+<link rel="preload" as="image" href="./images/hero/dandelion-garden/dandelion-scene-master.jpg" media="(max-width: 620px)"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
 <style>
 /* ============================================
@@ -169,11 +173,26 @@ body:has(a:hover) #cursor-ring, body:has(button:hover) #cursor-ring { width:52px
 /* ============================================
    NAV
 ============================================ */
+/* SCROLL PROGRESS — sợi chỉ mảnh trên cùng, scaleX do JS cập nhật */
+.scroll-progress {
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:2px;
+  z-index:120;
+  transform:scaleX(0);
+  transform-origin:0 50%;
+  background:linear-gradient(90deg, var(--amber), var(--amber2, var(--amber)));
+  opacity:0.8;
+  pointer-events:none;
+}
+body.no-motion .scroll-progress { display:none; }
 nav {
   position:fixed; top:0; width:100%; z-index:100;
   padding:1.5rem 4rem;
   display:flex; justify-content:space-between; align-items:center;
   transition:all 0.5s;
+  background:linear-gradient(180deg, rgba(9,8,14,0.42), rgba(9,8,14,0.12) 64%, transparent);
+  text-shadow:0 1px 12px rgba(9,8,14,0.5);
 }
 nav.solid {
   background:rgba(9,8,14,0.94);
@@ -185,16 +204,18 @@ nav.solid {
   font-family:'Cormorant Garamond', serif;
   font-size:1.2rem; font-weight:400;
   letter-spacing:0.25em;
-  color:var(--amber);
+  color:color-mix(in srgb, var(--amber2) 72%, #a8c669);
   text-decoration:none;
+  text-shadow:0 0 18px rgba(9,8,14,0.42), 0 0 12px rgba(204,159,74,0.22);
 }
 .nav-links { display:flex; gap:2.5rem; list-style:none; }
 .nav-links a {
-  color:var(--text3); text-decoration:none;
+  color:rgba(245,223,160,0.74); text-decoration:none;
   font-size:0.72rem; letter-spacing:0.15em;
   text-transform:uppercase;
   transition:color 0.3s;
   position:relative;
+  text-shadow:0 0 16px rgba(9,8,14,0.72), 0 1px 4px rgba(9,8,14,0.48);
 }
 .nav-links a::after {
   content:''; position:absolute; bottom:-3px; left:0;
@@ -414,6 +435,108 @@ body.no-shader .shader-host { display:none; }
     linear-gradient(180deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.30) 34%, rgba(255,255,255,0.04) 58%, transparent 76%),
     radial-gradient(70% 38% at 54% 52%, rgba(255,246,210,0.22), transparent 72%);
 }
+/* HERO VIDEO — nằm TRÊN poster-field/grade/atmosphere (z2, sau atmosphere trong
+   DOM) nhưng DƯỚI tint(3)/vignette(4) để lớp màu giữ chữ dễ đọc, dưới hạt bay(8).
+   scale nhẹ để mép không hở khi hero-content parallax. */
+.hero-video {
+  position:absolute;
+  inset:0;
+  z-index:2;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transform:scale(1.05);
+  opacity:0;
+  transition:opacity 1.3s ease;
+  pointer-events:none;
+}
+.poster-hero.video-on .hero-video { opacity:1; }
+/* video đã chứa case + nhân vật + đĩa chuyển động → ẩn cảnh tĩnh 2.5D (poster/
+   fallback lúc video chưa tải). Album props GIỮ LẠI — chúng nổi trên video và
+   là điểm xuất phát cho hiệu ứng bìa bay vào đĩa. */
+.poster-hero.video-on .hga-master-scene {
+  opacity:0;
+  visibility:hidden;
+  transition:opacity 0.9s ease, visibility 0s 0.9s;
+}
+/* ĐĨA SỐNG — overlay bìa album lên mặt đĩa trong video. Toạ độ đo trực tiếp
+   từ frame video (tâm hiệu chỉnh 1540,696 · r178 trong khung 1920×1080,
+   đã kiểm bằng cross-correlation); JS quy đổi theo object-fit:cover + scale
+   1.05 của .hero-video mỗi lần resize. Đáy đĩa khuất sau cỏ trong video nên
+   overlay fade dần ở 15% cuối cho cỏ thật lộ ra. */
+.hgv-disc {
+  position:absolute;
+  z-index:2;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 1s ease;
+  -webkit-mask-image:linear-gradient(180deg, #000 78%, transparent 96%);
+  mask-image:linear-gradient(180deg, #000 78%, transparent 96%);
+}
+.poster-hero.video-on .hgv-disc.ready { opacity:1; }
+body.debug-disc .hgv-disc { outline:2px solid rgba(255,70,110,0.9); outline-offset:0; }
+body.debug-disc .hgv-disc::after {
+  content:'';
+  position:absolute;
+  left:50%; top:50%;
+  width:18px; height:18px;
+  transform:translate(-50%,-50%);
+  border:2px solid rgba(120,255,230,0.95);
+  border-radius:50%;
+  box-shadow:0 0 0 999px rgba(255,70,110,0.04);
+  pointer-events:none;
+}
+.hgv-disc-face {
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  background:var(--hgv-cover, var(--hero-cover, url('./uploads/My-vi-nhan-sinh.jpg'))) center/cover;
+  opacity:0.8;
+  /* KHÔNG dùng hgaDiscSpin: keyframe đó kèm translate(-50%,-50%) cho đĩa tĩnh
+     cũ — mượn nó làm mặt đĩa này trôi dần lên góc trên-trái rồi giật về
+     (bug Ali thấy 04/07). Đĩa này inset:0 nên chỉ cần xoay thuần. */
+  animation:hgvSpin 36s linear infinite;
+  -webkit-mask-image:radial-gradient(circle, transparent 0 13%, #000 14% 100%);
+  mask-image:radial-gradient(circle, transparent 0 13%, #000 14% 100%);
+  box-shadow:inset 0 0 40px rgba(255,255,255,0.18), inset 0 0 64px rgba(0,0,0,0.18);
+}
+.hgv-disc-face::after {
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  background:
+    repeating-radial-gradient(circle, rgba(255,255,255,0.12) 0 1px, transparent 1px 5px),
+    conic-gradient(from 22deg, rgba(255,255,255,0.10), rgba(82,244,236,0.22), rgba(255,111,192,0.16), rgba(255,237,174,0.20), rgba(255,255,255,0.10));
+  mix-blend-mode:screen;
+  opacity:0.4;
+}
+@keyframes hgvSpin { to { transform:rotate(360deg); } }
+/* nhịp "nuốt bìa": scale đặt trên WRAPPER (không có animation transform nào
+   khác) — nếu đặt trên .hgv-disc-face sẽ giành thuộc tính transform với
+   hgvSpin làm vòng xoay khựng lại */
+.hgv-disc.gulp { animation:hgvGulp 0.7s ease; }
+@keyframes hgvGulp { 0%{ transform:scale(1);} 35%{ transform:scale(1.045);} 100%{ transform:scale(1);} }
+/* bìa bay: ghost clone từ prop → đĩa */
+.hgv-fly {
+  position:absolute;
+  z-index:7;
+  pointer-events:none;
+  border-radius:10px;
+  background:var(--cover) center/cover;
+  box-shadow:0 18px 44px rgba(20,30,15,0.4);
+  transition:transform 1.05s cubic-bezier(0.5, 0.05, 0.25, 1), opacity 0.32s ease 0.78s, border-radius 1.05s ease;
+  will-change:transform;
+}
+.hgv-fly.go { border-radius:50%; opacity:0; }
+/* prop bấm được trong chế độ video (chỉ prop, KHÔNG mở pointer-events cho cả
+   stage inset:0 kẻo chặn click nút hero) */
+.poster-hero.video-on .hga-prop { pointer-events:auto; cursor:pointer; }
+.poster-hero.video-on .hga-prop:hover { --op:1; }
+body.no-motion .hgv-disc { display:none; }
+@media (max-width:620px) { .hgv-disc { display:none; } }
+body.no-motion .hero-video { display:none; }
+@media (max-width:620px) { .hero-video { display:none; } }
 .hero-wind {
   z-index:8;
   width:100%;
@@ -754,12 +877,51 @@ section { padding:5.25rem 4rem; position:relative; }
 
 /* DECOR — diagonal flowing genre text */
 #music { position:relative; overflow:hidden; }
+.music-scroll-bg {
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  overflow:hidden;
+  opacity:0;
+  transition:opacity 0.9s ease;
+}
+.music-scroll-bg.ready { opacity:1; }
+.music-scroll-video {
+  position:absolute;
+  inset:-6% -4%;
+  width:108%;
+  height:112%;
+  object-fit:cover;
+  filter:saturate(0.74) contrast(1.02) brightness(0.78) sepia(0.12) hue-rotate(16deg);
+  opacity:0.78;
+  transform:scale(1.04);
+}
+.music-scroll-bg::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:
+    radial-gradient(72% 55% at 50% 24%, rgba(232,200,112,0.11), transparent 62%),
+    linear-gradient(180deg, rgba(9,8,14,0.36), rgba(20,29,14,0.18) 34%, rgba(9,8,14,0.62) 100%),
+    linear-gradient(90deg, rgba(9,8,14,0.58), rgba(68,70,36,0.16) 46%, rgba(9,8,14,0.62));
+}
+.music-scroll-bg::after {
+  content:'';
+  position:absolute;
+  inset:0;
+  z-index:2;
+  background:repeating-linear-gradient(90deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 120px);
+  opacity:0.035;
+  mix-blend-mode:screen;
+}
 .music-decor {
   position:absolute; top:-12%; left:-15%; right:-15%; bottom:-12%;
   z-index:0; pointer-events:none;
   transform:rotate(-15deg); transform-origin:center;
   display:flex; flex-direction:column; gap:0.35rem;
-  opacity:0.12;
+  opacity:0;
   mask-image:linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, #000 38%, rgba(0,0,0,0.3) 70%, transparent 90%);
   -webkit-mask-image:linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, #000 38%, rgba(0,0,0,0.3) 70%, transparent 90%);
 }
@@ -772,7 +934,30 @@ section { padding:5.25rem 4rem; position:relative; }
 .md-row.a { animation:mdScroll 38s linear infinite; }
 .md-row.b { animation:mdScroll 52s linear infinite reverse; }
 @keyframes mdScroll { from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
-#music > *:not(.music-decor) { position:relative; z-index:1; }
+#music > *:not(.music-decor):not(.music-scroll-bg) { position:relative; z-index:1; }
+/* VINYL 3D — three.js nằm TRONG .np-vinyl của khối "đang phát" (xem chú thích
+   ở markup). Thu vào trong vòng visualizer để không che equalizer. */
+.vinyl3d {
+  position:absolute;
+  inset:5%;
+  z-index:2;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 1.2s ease;
+}
+.vinyl3d.on { opacity:1; }
+/* đĩa 3D sẵn sàng → giấu mặt đĩa CSS phẳng (giữ nguyên nếu :has không hỗ trợ —
+   canvas 3D phủ lên trên nên vẫn ổn) */
+.np-vinyl:has(.vinyl3d.on) .vinyl-disc { visibility:hidden; }
+.vinyl3d canvas { width:100% !important; height:100% !important; display:block; }
+.nowplaying .np-viz {
+  z-index:4;
+  mix-blend-mode:screen;
+  filter:drop-shadow(0 0 10px rgba(204,159,74,0.22));
+}
+.np-vinyl::after { z-index:5; }
+@media (max-width:1100px) { .vinyl3d { display:none; } }
+body.no-motion .vinyl3d { display:none; }
 
 /* ALBUMS CAROUSEL + DRAWER */
 .albums-label { font-size:0.62rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--text3); margin-bottom:1.5rem; }
@@ -1045,10 +1230,10 @@ body.no-motion .np-viz { display:none; }
   padding:clamp(2.5rem,6vw,5rem) clamp(1.25rem,4vw,3rem);
   border-radius:18px;
   background:
-    radial-gradient(130% 90% at 50% -10%, rgba(204,159,74,0.16), transparent 58%),
-    linear-gradient(180deg, rgba(11,10,17,0.74) 0%, rgba(9,8,14,0.9) 100%);
-  -webkit-backdrop-filter:blur(16px) saturate(1.08);
-  backdrop-filter:blur(16px) saturate(1.08);
+    radial-gradient(120% 80% at 50% -10%, rgba(204,159,74,0.11), transparent 58%),
+    linear-gradient(180deg, rgba(11,10,17,0.86) 0%, rgba(9,8,14,0.96) 100%);
+  -webkit-backdrop-filter:blur(18px) saturate(0.9);
+  backdrop-filter:blur(18px) saturate(0.9);
   border:0.5px solid var(--border2);
   box-shadow:inset 0 1px 0 rgba(232,200,112,0.08), 0 30px 80px rgba(0,0,0,0.5);
   overflow:hidden; text-align:center;
@@ -1076,7 +1261,7 @@ body.no-motion .np-viz { display:none; }
 .gate-zone.gated .album-stage,
 .gate-zone.gated #albumDrawer,
 .gate-zone.gated .nowplaying {
-  filter:blur(12px) brightness(0.46) saturate(0.6);
+  filter:blur(14px) brightness(0.34) saturate(0.48);
   pointer-events:none !important; user-select:none;
 }
 @keyframes mgShake {
@@ -1300,11 +1485,20 @@ body.no-motion .np-viz { display:none; }
   break-inside:avoid; margin-bottom:0.75rem; position:relative;
   border:0.5px solid var(--border); overflow:hidden; cursor:pointer;
   transition:border-color 0.35s, transform 0.45s, box-shadow 0.45s;
-  animation:gRise 0.7s var(--gd,0s) both;
+  /* 2026-07-04: gRise giờ nằm chờ (paused) tới khi cuộn tới nơi — trước đây nó
+     chạy ngay lúc load, dưới fold nên chẳng ai kịp thấy. IO trong script chính
+     thêm .gin để nhả animation. Giữ nguyên cơ chế animation (không đổi sang
+     transition) để hover translateY không bị dính transition-delay. */
+  animation:gRise 0.85s cubic-bezier(0.22, 0.7, 0.2, 1) var(--gd,0s) both paused;
 }
 .g-item:not(.g-real) { border:1px dashed color-mix(in srgb, var(--amber) 26%, transparent); }
 .g-item:hover { border-color:var(--border2); transform:translateY(-4px); box-shadow:0 18px 50px rgba(0,0,0,0.45); }
-@keyframes gRise { from{ opacity:0; transform:translateY(26px); } to{ opacity:1; transform:none; } }
+@keyframes gRise {
+  from{ opacity:0; transform:translateY(26px); clip-path:inset(14% 4% 0 0); }
+  60%{ clip-path:inset(0 0 0 0); }
+  to{ opacity:1; transform:none; clip-path:inset(0 0 0 0); }
+}
+.g-item.gin { animation-play-state:running; }
 .g-frame { position:relative; width:100%; transition:aspect-ratio 0.6s cubic-bezier(0.5,0,0,1); }
 .g-ph {
   position:absolute; inset:0;
@@ -2710,7 +2904,7 @@ body.no-motion .hg-disc {
 /* HERO COMPOSITE — real dandelion garden asset stack.
    Album covers are injected from music-data.js; theme assets stay isolated here. */
 .hero.poster-hero {
-  --dandelion-bg:url('./images/hero/dandelion-garden/bg-meadow.jpg');
+  --dandelion-bg:url('./images/hero/dandelion-garden/bg-meadow.webp');
   --dandelion-fg:url('./images/hero/dandelion-garden/foreground-dandelions.png');
 }
 .poster-field {
@@ -2781,8 +2975,32 @@ body.no-motion .hg-disc {
   transform:translateX(-50%);
   width:min(100%, 177.8vh);
   aspect-ratio:2600/1462;
-  background:url('./images/hero/dandelion-garden/dandelion-scene-master.jpg') center bottom/100% 100% no-repeat;
   filter:drop-shadow(0 20px 30px rgba(20,30,15,0.2));
+}
+/* 2.5D depth planes — same 2600×1462 frame as the old flat master, stacked
+   inset:0 so all the disc/mask % measurements stay valid. plane-far is scaled
+   up a hair (bottom-anchored, so the grass line doesn't move) to give the
+   parallax translate breathing room at the edges; plane-mid is NOT scaled —
+   its edges are transparent so it needs no margin, and not scaling it keeps
+   Ali's carefully-tuned case/figure proportions exactly as shipped. JS in
+   experience.js drives the `translate` property only (never `transform`,
+   which the disc spin keyframe owns on children). */
+.hga-plane {
+  position:absolute;
+  inset:0;
+  background-position:center bottom;
+  background-size:100% 100%;
+  background-repeat:no-repeat;
+}
+.hga-plane-far {
+  background-image:url('./images/hero/dandelion-garden/plane-far.webp');
+  scale:1.018;
+  transform-origin:50% 100%;
+  will-change:translate;
+}
+.hga-plane-mid {
+  background-image:url('./images/hero/dandelion-garden/plane-mid.webp');
+  will-change:translate;
 }
 .hga-feature-disc {
   position:absolute;
@@ -3024,8 +3242,18 @@ body.no-motion .hga-prop {
     bottom:22vh;
     transform:none;
     opacity:0.4;
+    background:url('./images/hero/dandelion-garden/dandelion-scene-master.jpg') center bottom/100% 100% no-repeat;
     -webkit-mask-image:linear-gradient(to right, transparent 0 74%, #000 88% 100%);
     mask-image:linear-gradient(to right, transparent 0 74%, #000 88% 100%);
+  }
+  /* mobile keeps the flat pre-composited master (one small ambient element,
+     no parallax). Only the plane BACKGROUNDS are dropped (unused background-
+     image values are never downloaded) — the plane divs themselves must stay,
+     because .hga-feature-disc lives inside .hga-plane-mid. */
+  .hga-plane {
+    background-image:none;
+    scale:none;
+    translate:none;
   }
   .hga-feature-album,
   .hga-prop-1,
@@ -3288,6 +3516,7 @@ body.theme-dandelion:not(.no-season) footer::after {
 </style>
 </head>
 <body data-theme="dandelion">
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
 <!-- CUSTOM CURSOR -->
 <div id="cursor"></div>
@@ -3315,6 +3544,15 @@ body.theme-dandelion:not(.no-season) footer::after {
   <div class="poster-field" aria-hidden="true"></div>
   <div class="poster-grade" aria-hidden="true"></div>
   <div class="poster-atmosphere" aria-hidden="true"></div>
+  <!-- 2026-07-04: HERO VIDEO — bản render động của chính cảnh dandelion (Ali làm),
+       videos/hero-dandelion-1080.mp4. Desktop-only, JS mới gán src (mobile không
+       tải 13.7MB). Khi video sẵn sàng → .video-on: cảnh tĩnh 2.5D + album props
+       ẩn đi (video đã chứa case/nhân vật/đĩa chuyển động). Cảnh tĩnh giữ vai trò
+       poster trong lúc video tải — trang không bao giờ trống. -->
+  <video class="hero-video" id="heroVideo" muted playsinline loop preload="none" aria-hidden="true"></video>
+  <!-- ĐĨA SỐNG: overlay bìa album lên mặt đĩa trong video, JS định vị + xử lý
+       bìa bay vào đĩa (xem #hero-disc-live-js) -->
+  <div class="hgv-disc" id="hgvDisc" aria-hidden="true"><div class="hgv-disc-face" id="hgvDiscFace"></div></div>
   <canvas class="hero-wind" id="heroWind" aria-hidden="true"></canvas>
   <!-- 2026-07-01: hero scene rebuilt around a single pre-composited master image
        (dandelion-scene-master.jpg) instead of separately-positioned CSS layers.
@@ -3333,7 +3571,18 @@ body.theme-dandelion:not(.no-season) footer::after {
        small floating album cards, driven by ALBUMS/data-supporting-albums). -->
   <div class="hero-garden-scene" id="heroGardenScene" aria-hidden="true">
     <div class="hga-layer hga-master-scene">
-      <span class="hga-feature-disc"></span>
+      <!-- 2026-07-04: master scene split into 2 depth planes (same PSD, same
+           pixel frame 2600×1462) for 2.5D parallax. plane-far = Background
+           layer only (full meadow, no holes behind the case). plane-mid =
+           everything else (case + both figures + base grass) with true alpha —
+           these MUST stay one plane: the standing figure leans on the case.
+           The disc lives INSIDE plane-mid so any translate on the plane moves
+           disc + case together — alignment can never drift. Mobile keeps the
+           old flat master jpg (planes display:none there → not downloaded). -->
+      <div class="hga-plane hga-plane-far"></div>
+      <div class="hga-plane hga-plane-mid">
+        <span class="hga-feature-disc"></span>
+      </div>
     </div>
     <div class="hga-layer hero-album-stage" id="heroAlbumStage"></div>
   </div>
@@ -3378,13 +3627,14 @@ body.theme-dandelion:not(.no-season) footer::after {
 
 <!-- LỜI CHỦ NHÀ -->
 <section id="welcome" class="welcome" data-screen-label="Lời chủ nhà">
-  <div class="welcome-inner reveal">
-    <div class="sec-label">Trước khi bước vào</div>
-    <p class="welcome-lead">
+  <div class="welcome-inner">
+    <!-- lời chủ nhà hiện từng nhịp (d1→d3) thay vì cả khối fade một lượt -->
+    <div class="sec-label reveal">Trước khi bước vào</div>
+    <p class="welcome-lead reveal d1">
       Có những thế giới phải nghe mới thấy.<br/>
       Đây là <em>một trong số đó.</em>
     </p>
-    <p class="welcome-sub">
+    <p class="welcome-sub reveal d3">
       Đừng vội tìm điểm bắt đầu — cứ để một bài hát, một khung hình,
       hay một thoáng tò mò dẫn bạn đi.
     </p>
@@ -3405,10 +3655,10 @@ body.theme-dandelion:not(.no-season) footer::after {
 
   <div class="about-wrap">
     <figure class="about-figure photo-stack reveal" id="photoStack" title="Chạm để lật ảnh">
-      <div class="ps-card" data-pos="3"><img src="./images/hero/hero.jpg" alt="Anh Li — dandelion hero"/></div>
-      <div class="ps-card" data-pos="2"><img src="./images/portraits/about-bw.jpg" alt="Anh Li — đen trắng"/></div>
-      <div class="ps-card" data-pos="1"><img src="./images/portraits/cinematic.jpg" alt="Anh Li — cinematic"/></div>
-      <div class="ps-card" data-pos="0"><img src="./images/portraits/about.jpg" alt="Anh Li"/></div>
+      <div class="ps-card" data-pos="3"><img src="./images/hero/hero.jpg" alt="Anh Li — dandelion hero" loading="lazy" decoding="async"/></div>
+      <div class="ps-card" data-pos="2"><img src="./images/portraits/about-bw.jpg" alt="Anh Li — đen trắng" loading="lazy" decoding="async"/></div>
+      <div class="ps-card" data-pos="1"><img src="./images/portraits/cinematic.jpg" alt="Anh Li — cinematic" loading="lazy" decoding="async"/></div>
+      <div class="ps-card" data-pos="0"><img src="./images/portraits/about.jpg" alt="Anh Li" loading="lazy" decoding="async"/></div>
       <figcaption class="about-fig-cap">Anh Li · chạm để lật ✦</figcaption>
     </figure>
     <div class="about-right">
@@ -3441,6 +3691,10 @@ body.theme-dandelion:not(.no-season) footer::after {
 
 <!-- MUSIC -->
 <section id="music">
+  <div class="music-scroll-bg" id="musicScrollBg" aria-hidden="true">
+    <video class="music-scroll-video" id="musicScrollVideo" muted playsinline loop preload="none"
+      data-src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4"></video>
+  </div>
   <div class="music-decor" id="musicDecor" aria-hidden="true"></div>
   <div class="music-head">
     <div>
@@ -3482,7 +3736,12 @@ body.theme-dandelion:not(.no-season) footer::after {
 
   <!-- NOW PLAYING — soundwave + dĩa than + player: một khối liền mạch -->
   <div class="nowplaying reveal" id="nowplaying">
-    <div class="vinyl-bg np-vinyl" aria-hidden="true"><canvas class="np-viz" id="npViz"></canvas><div class="vinyl-disc" id="npVinyl"><div class="vinyl-center"></div></div></div>
+    <!-- 2026-07-04 (Ali: "để chỗ phát nhạc, dung hoà giúp anh"): đĩa vinyl 3D
+         three.js chuyển từ đầu section xuống đây, thế chỗ mặt đĩa CSS phẳng khi
+         WebGL sẵn sàng (.vinyl-disc tự ẩn qua :has). Texture = bìa BÀI ĐANG
+         PHÁT (theo dõi #playerCover), quay nhanh khi body.playing. Tải lười,
+         desktop >1100px; lỗi CDN/WebGL → đĩa CSS cũ hiện như thường. -->
+    <div class="vinyl-bg np-vinyl" aria-hidden="true"><canvas class="np-viz" id="npViz"></canvas><div class="vinyl-disc" id="npVinyl"><div class="vinyl-center"></div></div><div class="vinyl3d" id="vinyl3d"></div></div>
     <div class="np-z">
       <div class="np-head">
         <span class="np-label">Now Playing ✦</span>
@@ -3682,7 +3941,7 @@ body.theme-dandelion:not(.no-season) footer::after {
     <div class="momo-card-title">Ủng hộ Anh Li</div>
     <div class="momo-card-sub">Buy me a coffee · Momo QR</div>
     <div class="momo-qr-wrap">
-      <img src="images/momo-qr.jpg" alt="Momo QR Code" onerror="this.parentElement.innerHTML='<div style=\'font-size:0.7rem;color:#888;text-align:center;padding:1rem\'>Lưu ảnh QR vào<br/><code>images/momo-qr.jpg</code></div>'"/>
+      <img src="images/momo-qr.jpg" alt="Momo QR Code" loading="lazy" decoding="async" onerror="this.parentElement.innerHTML='<div style=\'font-size:0.7rem;color:#888;text-align:center;padding:1rem\'>Lưu ảnh QR vào<br/><code>images/momo-qr.jpg</code></div>'"/>
     </div>
     <div class="momo-card-name">Huỳnh Chí Lập</div>
     <div class="momo-card-stk">STK: *******277</div>
@@ -4256,6 +4515,12 @@ function revealInView(){
     const r=el.getBoundingClientRect();
     if(r.top < innerHeight*1.08 && r.bottom > 0) el.classList.add('in');
   });
+  /* g-item cũng cần đường dự phòng này: IO có thể bị throttle ở tab nền/che
+     khuất — không được để ảnh gallery kẹt vô hình vĩnh viễn */
+  document.querySelectorAll('.g-item:not(.gin)').forEach(el=>{
+    const r=el.getBoundingClientRect();
+    if(r.top < innerHeight*1.08 && r.bottom > 0) el.classList.add('gin');
+  });
 }
 function observe(){
   document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
@@ -4263,8 +4528,42 @@ function observe(){
 }
 addEventListener('scroll', revealInView, {passive:true});
 addEventListener('load', revealInView);
+
+/* GALLERY WIPE-REVEAL — gRise được đặt paused trong CSS; thêm .gin khi item
+   vào viewport để animation chạy đúng lúc mắt nhìn tới (kể cả nhóm .g-extra
+   hiện ra sau khi bấm "xem thêm" — IO tự bắn khi display đổi). */
+const ginObs = 'IntersectionObserver' in window
+  ? new IntersectionObserver(es=>{
+      es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('gin'); ginObs.unobserve(e.target); } });
+    },{threshold:0.1, rootMargin:'0px 0px -4% 0px'})
+  : null;
+function armGallery(){
+  document.querySelectorAll('.g-item:not(.gin)').forEach(el=>{
+    if(ginObs) ginObs.observe(el); else el.classList.add('gin');
+  });
+}
+armGallery();
+
+/* SCROLL PROGRESS — sợi chỉ amber trên cùng, báo vị trí đọc */
+const sprog=document.getElementById('scrollProgress');
+function updProg(){
+  if(!sprog) return;
+  const m=document.documentElement.scrollHeight-innerHeight;
+  sprog.style.transform=`scaleX(${m>0?Math.min(1, scrollY/m).toFixed(4):0})`;
+}
+addEventListener('scroll', updProg, {passive:true});
+addEventListener('resize', updProg, {passive:true});
+updProg();
+
 // Safety net: never leave content hidden if observers/scroll don't fire
-[300,1000,2500].forEach(t=>setTimeout(revealInView,t));
+[300,1000,2500].forEach(t=>setTimeout(()=>{
+  revealInView();
+  /* nếu IO không chạy được vì lý do gì, item đang trong khung nhìn vẫn phải hiện */
+  document.querySelectorAll('.g-item:not(.gin)').forEach(el=>{
+    const r=el.getBoundingClientRect();
+    if(r.top < innerHeight*1.08 && r.bottom > 0) el.classList.add('gin');
+  });
+},t));
 
 /* ============================================================
    RENDER TRACKS
@@ -5129,6 +5428,7 @@ renderMusic();
 renderMarquee();
 renderHashtags();
 renderGallery();
+armGallery(); /* g-item vừa được render xong mới quan sát được (gRise nằm chờ .gin) */
 renderWork();
 // Wire player controls (single listener — no onclick= on buttons)
 document.getElementById('pcPrev')?.addEventListener('click', prevTrack);
@@ -5200,7 +5500,7 @@ observe();
   const THEMES = {
     dandelion: {
       label: 'Bồ Công Anh',
-      heroBg: './images/hero/dandelion-garden/bg-meadow.jpg',
+      heroBg: './images/hero/dandelion-garden/bg-meadow.webp',
       heroBgPosition: 'center center',
       particle: 'dandelion',
       cursor: 'mote',
@@ -5762,6 +6062,11 @@ const fx={ nx:0, ny:0, dirty:true };
 const heroContent=$('.hero-content'), heroPhoto=$('#heroGardenScene'), heroSec=$('.hero');
 const posterField=$('.poster-field'), posterForeground=$('.poster-foreground');
 const heroLine1=$('.hero-name .line1'), heroLine2=$('.hero-name .line2');
+/* 2.5D garden: hai tầng ảnh tách từ PSD (plane-far = đồng cỏ, plane-mid = case
+   + 2 nhân vật + đĩa xoay lồng bên trong). Cả cụm #heroGardenScene đã được
+   applyFx dịch chung ở trên; hai ref này chỉ thêm ĐỘ LỆCH giữa các tầng để
+   tạo chiều sâu. Chỉ đụng thuộc tính `translate` — `transform` thuộc CSS. */
+const planeFar=$('.hga-plane-far'), planeMid=$('.hga-plane-mid'), albumStage=$('#heroAlbumStage');
 const pxTargets=[];
 if(!REDUCED){
   document.querySelectorAll('.section-wm').forEach(e=>pxTargets.push({e, s:36}));
@@ -5808,6 +6113,14 @@ function applyFx(){
     /* kinetic typography — hai dòng tên trượt ngược chiều khi cuộn */
     if(heroLine1) heroLine1.style.transform=`translateX(${(-s*0.16).toFixed(1)}px)`;
     if(heroLine2) heroLine2.style.transform=`translateX(${(s*0.22).toFixed(1)}px)`;
+    /* 2.5D depth trong vườn: cả cụm đã trôi theo heroPhoto ở trên — ở đây chỉ
+       bù/lệch từng tầng: nền trôi NGƯỢC lại một phần (xa hơn = chậm hơn),
+       stage album trôi thêm (gần mắt nhất). Biên độ nhỏ để không lộ mép ảnh. */
+    if(planeFar && !document.body.classList.contains('no-motion')){
+      planeFar.style.translate=`${(fx.nx*10).toFixed(1)}px ${(fx.ny*6).toFixed(1)}px`;
+      if(planeMid) planeMid.style.translate=`${(-fx.nx*5).toFixed(1)}px ${(-fx.ny*3).toFixed(1)}px`;
+      if(albumStage) albumStage.style.translate=`${(-fx.nx*12).toFixed(1)}px ${(-fx.ny*7).toFixed(1)}px`;
+    }
   }
   for(const t of pxTargets){
     const r=t.e.getBoundingClientRect();
@@ -6473,6 +6786,371 @@ if(MOBILE){
     if(!raf) raf=requestAnimationFrame(apply); // gộp về 1 lần/khung hình
   }, {passive:true});
   hero.addEventListener('pointerleave', function(){ hero.classList.remove('ghost-on'); });
+})();
+</script>
+
+<!-- MUSIC VINYL BACKGROUND — video nền autoplay, fade mượt khi vào section -->
+<script id="music-scroll-bg-js">
+(function(){
+  const music=document.getElementById('music');
+  const bg=document.getElementById('musicScrollBg');
+  const video=document.getElementById('musicScrollVideo');
+  if(!music || !bg || !video) return;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if(navigator.connection && navigator.connection.saveData) return;
+  let loaded=false;
+  function load(){
+    if(loaded) return;
+    loaded=true;
+    const src=video.dataset.src;
+    if(!src) return;
+    video.src=src;
+    video.preload='auto';
+    video.load();
+    video.addEventListener('canplay', ()=>{
+      bg.classList.add('ready');
+      video.play().catch(()=>{});
+    }, {once:true});
+  }
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(es=>{
+      if(es[0].isIntersecting){
+        load();
+        if(loaded) video.play().catch(()=>{});
+      } else if(loaded) {
+        video.pause();
+      }
+    }, {rootMargin:'640px'});
+    io.observe(music);
+  } else {
+    load();
+  }
+  document.addEventListener('visibilitychange', ()=>{
+    if(!loaded) return;
+    if(document.hidden) video.pause();
+    else video.play().catch(()=>{});
+  });
+})();
+</script>
+
+<!-- HERO VIDEO — điều khiển video nền hero (desktop-only, tự ngủ khi cuộn qua) -->
+<script id="hero-video-js">
+(function(){
+  const hero=document.getElementById('home');
+  const video=document.getElementById('heroVideo');
+  if(!hero || !video) return;
+  const heroParams=new URLSearchParams(location.search);
+  const freezeHero=heroParams.has('pauseHero');
+  if(heroParams.has('debugDisc')) document.body.classList.add('debug-disc');
+  if(innerWidth<=620) return;                                    /* mobile: không tải 13.7MB */
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if(navigator.connection && navigator.connection.saveData) return;
+
+  /* preload=none trong markup chỉ để chặn tải sớm — qua hết guard rồi thì
+     chủ động nâng preload + load(), vì gán src suông sẽ không tải gì cả.
+     File -loop = bản đã bake crossfade đuôi→đầu trong Blender VSE (8.5s,
+     điểm nối là 2 frame liên tiếp của nguồn → không còn giật mây). */
+  video.src='./videos/hero-dandelion-loop.mp4';
+  video.preload='auto';
+  video.load();
+
+  const blocked=()=>document.hidden
+    || video.dataset.sleep==='1'
+    || document.body.classList.contains('no-motion');
+
+  /* watchdog: trình duyệt tiết kiệm pin có thể tự pause video-only media —
+     debounce 800ms play lại, trừ khi mình chủ động cho ngủ */
+  let kickT=0;
+  video.addEventListener('pause', ()=>{
+    if(blocked()) return;
+    clearTimeout(kickT);
+    kickT=setTimeout(()=>{ if(!blocked()) video.play().catch(()=>{}); }, 800);
+  });
+
+  video.addEventListener('canplay', ()=>{
+    hero.classList.add('video-on');                              /* cảnh tĩnh nhường chỗ, fade sang video */
+    if(freezeHero){
+      video.dataset.sleep='1';
+      video.pause();
+      return;
+    }
+    video.play().catch(()=>{});
+  }, {once:true});
+
+  /* ngủ khi cuộn qua hero (rect check — không phụ thuộc IO, tab nền vẫn đúng) */
+  function wake(){
+    const off=scrollY > innerHeight*1.2;
+    if(off && video.dataset.sleep!=='1'){ video.dataset.sleep='1'; video.pause(); }
+    else if(!off && video.dataset.sleep==='1'){ delete video.dataset.sleep; if(!blocked()) video.play().catch(()=>{}); }
+  }
+  addEventListener('scroll', wake, {passive:true});
+  document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) wake(); });
+
+  /* nút "Giảm chuyển động" của trang: bật → dừng video, tắt → chạy lại */
+  new MutationObserver(()=>{
+    if(document.body.classList.contains('no-motion')) video.pause();
+    else if(!blocked()) video.play().catch(()=>{});
+  }).observe(document.body, {attributes:true, attributeFilter:['class']});
+})();
+</script>
+
+<!-- ĐĨA SỐNG — định vị overlay bìa trên mặt đĩa video + bìa album bay vào đĩa -->
+<script id="hero-disc-live-js">
+(function(){
+  const hero=document.getElementById('home');
+  const video=document.getElementById('heroVideo');
+  const disc=document.getElementById('hgvDisc');
+  const face=document.getElementById('hgvDiscFace');
+  if(!hero || !video || !disc) return;
+
+  /* Toạ độ đĩa đo trực tiếp từ frame video (camera khoá cứng, đã kiểm bằng
+     cross-correlation giữa frame đầu/giữa/cuối: lệch 0,0px). Nếu Ali render
+     video mới với bố cục khác → đo lại 4 tiếp tuyến như quy trình cũ.
+     Bản này ưu tiên lọt trong rim/perspective của CD thật: tâm bám lỗ đĩa,
+     radius thu nhẹ để không lấn ra ngoài vành trong suốt của case. */
+  const F={ W:1920, H:1080, cx:1540, cy:696, r:178 };
+  const VIDEO_CSS_SCALE=1.05; /* khớp transform:scale của .hero-video */
+
+  function placeDisc(){
+    const cw=hero.clientWidth, ch=hero.clientHeight;
+    if(!cw || !ch) return;
+    const s=Math.max(cw/F.W, ch/F.H)*VIDEO_CSS_SCALE;
+    const cx=cw/2 + (F.cx - F.W/2)*s;
+    const cy=ch/2 + (F.cy - F.H/2)*s;
+    const d=F.r*2*s;
+    disc.style.left=(cx - d/2).toFixed(1)+'px';
+    disc.style.top =(cy - d/2).toFixed(1)+'px';
+    disc.style.width=d.toFixed(1)+'px';
+    disc.style.height=d.toFixed(1)+'px';
+    disc.classList.add('ready');
+    return {cx, cy, d};
+  }
+  addEventListener('resize', placeDisc, {passive:true});
+  placeDisc();
+
+  function setCover(url){
+    face.style.setProperty('--hgv-cover', `url("${url}")`);
+    disc.classList.remove('gulp');
+    void disc.offsetWidth; /* restart keyframe */
+    disc.classList.add('gulp');
+  }
+
+  /* đọc cover từ prop (--cover do makeHeroSupportCase gán inline trên .hga-prop) */
+  function propCover(prop){
+    const v=prop.style.getPropertyValue('--cover') || getComputedStyle(prop).getPropertyValue('--cover');
+    const m=v && v.match(/url\(["']?(.*?)["']?\)/);
+    return m ? m[1] : null;
+  }
+
+  let flying=false;
+  function flyFrom(prop){
+    const url=propCover(prop);
+    if(!url || flying) return;
+    flying=true;
+    const rect=placeDisc();
+    const heroRect=hero.getBoundingClientRect();
+    const from=prop.getBoundingClientRect();
+    const ghost=document.createElement('div');
+    ghost.className='hgv-fly';
+    ghost.style.setProperty('--cover', `url("${url}")`);
+    const gw=Math.max(60, from.width*0.72);
+    ghost.style.left=(from.left - heroRect.left + from.width/2 - gw/2)+'px';
+    ghost.style.top =(from.top - heroRect.top + from.height/2 - gw/2)+'px';
+    ghost.style.width=gw+'px';
+    ghost.style.height=gw+'px';
+    hero.appendChild(ghost);
+    requestAnimationFrame(()=>{ requestAnimationFrame(()=>{
+      const dx=(rect.cx - (from.left - heroRect.left + from.width/2));
+      const dy=(rect.cy - (from.top - heroRect.top + from.height/2));
+      ghost.style.transform=`translate(${dx.toFixed(1)}px, ${dy.toFixed(1)}px) scale(${(rect.d/gw*0.92).toFixed(2)}) rotate(200deg)`;
+      ghost.classList.add('go');
+    }); });
+    setTimeout(()=>{ setCover(url); }, 860);
+    setTimeout(()=>{ ghost.remove(); flying=false; }, 1350);
+  }
+
+  /* bấm prop → bìa đó bay vào đĩa */
+  const stage=document.getElementById('heroAlbumStage');
+  if(stage) stage.addEventListener('click', e=>{
+    const prop=e.target.closest ? e.target.closest('.hga-prop') : null;
+    if(prop){ flyFrom(prop); resetCycle(); }
+  });
+
+  /* tự xoay vòng: lần lượt từng album trên đồng cỏ bay vào đĩa. 35s một lần —
+     đủ thưa để là "khoảnh khắc" chứ không phải slideshow (Ali chê 14s dồn dập) */
+  let idx=0, cycleT=0;
+  function tick(){
+    if(document.hidden
+      || document.body.classList.contains('no-motion')
+      || !hero.classList.contains('video-on')
+      || video.dataset.sleep==='1'){ return; }
+    const props=[...document.querySelectorAll('#heroAlbumStage .hga-prop')].filter(p=>p.offsetParent && propCover(p));
+    if(!props.length) return;
+    idx=(idx+1) % props.length;
+    flyFrom(props[idx]);
+  }
+  function resetCycle(){ clearInterval(cycleT); cycleT=setInterval(tick, 35000); }
+  resetCycle();
+})();
+</script>
+
+<!-- VINYL 3D — three.js decor cho section nhạc (lazy, desktop-only, tự tắt êm nếu lỗi) -->
+<script id="vinyl3d-js">
+(function(){
+  const host=document.getElementById('vinyl3d');
+  if(!host) return;
+  if(innerWidth<=1100) return;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let started=false;
+  function boot(){
+    if(started) return;
+    started=true;
+    bootIO.disconnect();
+    removeEventListener('scroll', scrollBoot);
+    import('https://unpkg.com/three@0.160.0/build/three.module.js')
+      .then(init)
+      .catch(()=>{ /* CDN lỗi → bỏ qua, section giữ nguyên */ });
+  }
+  const bootIO=new IntersectionObserver(es=>{ if(es[0].isIntersecting) boot(); },{rootMargin:'640px'});
+  bootIO.observe(host);
+  /* dự phòng khi IO bị throttle (tab nền/che khuất): kiểm tra rect lúc cuộn */
+  function scrollBoot(){
+    const r=host.getBoundingClientRect();
+    if(r.top < innerHeight+640 && r.bottom > -640) boot();
+  }
+  addEventListener('scroll', scrollBoot, {passive:true});
+  scrollBoot();
+
+  /* Bìa hiển thị = bài ĐANG PHÁT (#playerCover do syncTrackUI cập nhật);
+     chưa phát bài nào → bìa album promote của hero. */
+  function coverURL(){
+    const img=document.querySelector('#playerCover img');
+    if(img && img.src) return img.src;
+    const home=document.getElementById('home');
+    const id=home && home.dataset.promotedAlbum;
+    const list=(window.PORTFOLIO_MUSIC && window.PORTFOLIO_MUSIC.albums) || [];
+    const hit=id && list.find(a=>a.id===id);
+    return (hit && hit.cover) || 'uploads/My-vi-nhan-sinh.jpg';
+  }
+
+  /* rãnh đĩa: texture canvas đồng tâm, dùng làm bump + roughness */
+  function grooveCanvas(){
+    const c=document.createElement('canvas'); c.width=c.height=1024;
+    const x=c.getContext('2d');
+    x.fillStyle='#808080'; x.fillRect(0,0,1024,1024);
+    x.translate(512,512);
+    for(let r=190;r<500;r+=2.6){
+      x.beginPath(); x.arc(0,0,r,0,Math.PI*2);
+      x.strokeStyle='rgba(0,0,0,'+(0.16+Math.random()*0.22)+')';
+      x.lineWidth=1.15; x.stroke();
+    }
+    return c;
+  }
+
+  function init(THREE){
+    let W=host.clientWidth||300, H=host.clientHeight||300;
+    const renderer=new THREE.WebGLRenderer({antialias:true, alpha:true, powerPreference:'low-power'});
+    if(!renderer.getContext()) return;
+    renderer.setPixelRatio(Math.min(devicePixelRatio||1, 1.75));
+    renderer.setSize(W,H);
+    renderer.outputColorSpace=THREE.SRGBColorSpace;
+    host.appendChild(renderer.domElement);
+
+    const scene=new THREE.Scene();
+    const cam=new THREE.PerspectiveCamera(30, W/H, 0.1, 60);
+    /* box nhỏ trong player → khung gần hơn, nhìn hơi từ trên xuống */
+    cam.position.set(0,1.35,3.7); cam.lookAt(0,0,0);
+
+    scene.add(new THREE.AmbientLight(0xfff3d8, 0.7));
+    const key=new THREE.DirectionalLight(0xfff8ec, 1.6); key.position.set(2.4,3.2,2.2); scene.add(key);
+    const rim=new THREE.PointLight(0xcc9f4a, 1.2, 12); rim.position.set(-2.4,1.2,-1.6); scene.add(rim);
+
+    const g=new THREE.Group(); scene.add(g);
+    const grooves=new THREE.CanvasTexture(grooveCanvas());
+
+    const disc=new THREE.Mesh(
+      new THREE.CylinderGeometry(1,1,0.035,96),
+      new THREE.MeshStandardMaterial({
+        color:0x0c0b12, roughness:0.34, metalness:0.5,
+        bumpMap:grooves, bumpScale:0.9, roughnessMap:grooves
+      })
+    );
+    g.add(disc);
+
+    const texLoader=new THREE.TextureLoader();
+    let coverSrc=coverURL();
+    const coverTex=texLoader.load(coverSrc);
+    coverTex.colorSpace=THREE.SRGBColorSpace;
+    const label=new THREE.Mesh(
+      new THREE.CircleGeometry(0.365, 64),
+      new THREE.MeshStandardMaterial({map:coverTex, roughness:0.62, metalness:0.05})
+    );
+    label.rotation.x=-Math.PI/2; label.position.y=0.0185;
+    g.add(label);
+    const labelBack=label.clone();
+    labelBack.rotation.x=Math.PI/2; labelBack.position.y=-0.0185;
+    g.add(labelBack);
+
+    const hole=new THREE.Mesh(
+      new THREE.CylinderGeometry(0.045,0.045,0.037,24),
+      new THREE.MeshBasicMaterial({color:0x0a0910})
+    );
+    g.add(hole);
+
+    g.rotation.x=0.52; g.rotation.z=-0.08;
+
+    /* trạng thái động */
+    let spin=0, speed=0.004, tx=0, ty=0, visible=true, t=0, coverCheck=0;
+    addEventListener('pointermove', e=>{
+      tx=(e.clientX/innerWidth-0.5); ty=(e.clientY/innerHeight-0.5);
+    }, {passive:true});
+    let lastScroll=scrollY, scrollKick=0;
+    addEventListener('scroll', ()=>{
+      scrollKick+=Math.min(30, Math.abs(scrollY-lastScroll))*0.00022;
+      lastScroll=scrollY;
+    }, {passive:true});
+    new IntersectionObserver(es=>{ visible=es[0].isIntersecting; if(visible) loop(); },{threshold:0.02}).observe(host);
+    addEventListener('resize', ()=>{
+      W=host.clientWidth||W; H=host.clientHeight||H;
+      renderer.setSize(W,H); cam.aspect=W/H; cam.updateProjectionMatrix();
+    }, {passive:true});
+
+    let running=false;
+    function frame(){
+      if(!visible || document.hidden || document.body.classList.contains('no-motion')){ running=false; return; }
+      running=true; t+=0.016;
+      const playing=document.body.classList.contains('playing');
+      /* đang phát → quay nhanh dần như motor thật; dừng → chậm lại */
+      speed+=((playing?0.02:0.004)-speed)*0.03;
+      spin+=speed+scrollKick; scrollKick*=0.9;
+      g.rotation.y=spin;
+      /* nghiêng theo con trỏ, lướt mượt (biên độ nhỏ — đĩa nằm trong player) */
+      g.rotation.x+= (0.52+ty*0.18 - g.rotation.x)*0.05;
+      g.rotation.z+= (-0.08-tx*0.2 - g.rotation.z)*0.05;
+      /* bồng bềnh rất nhẹ + đèn amber thở theo khi đang phát */
+      g.position.y=Math.sin(t*0.8)*0.02;
+      rim.intensity=playing ? 1.35+Math.sin(t*3.1)*0.5 : 1.2;
+      /* bám theo bài đang phát: ~0.7s kiểm tra bìa một lần, đổi bài → đổi mặt đĩa */
+      if(++coverCheck>=45){
+        coverCheck=0;
+        const src=coverURL();
+        if(src!==coverSrc){
+          coverSrc=src;
+          texLoader.load(src, tex=>{
+            tex.colorSpace=THREE.SRGBColorSpace;
+            label.material.map=tex;
+            label.material.needsUpdate=true;
+          });
+        }
+      }
+      renderer.render(scene, cam);
+      requestAnimationFrame(frame);
+    }
+    function loop(){ if(!running) requestAnimationFrame(frame); }
+    document.addEventListener('visibilitychange', ()=>{ if(!document.hidden && visible) loop(); });
+    host.classList.add('on');
+    loop();
+  }
 })();
 </script>
 
