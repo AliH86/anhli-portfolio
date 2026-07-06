@@ -475,68 +475,28 @@ window.PORTFOLIO_MUSIC = {
       "tracks": []
     },
     {
-      "id": "c6d1b392-c21b-4d47-9e67-1687cae2a955",
-      "playlistUrl": "https://suno.com/playlist/c6d1b392-c21b-4d47-9e67-1687cae2a955",
-      "name": "Lạ mà Quen",
-      "sub": "Cover Remix · Ký ức cũ phối lại · Cái Sạp Nhạc của Li",
-      "cover": "uploads/la-ma-quen.svg",
-      "desc": "Quen từ một câu hát. Lạ từ một cách kể. Những bản cover được phối lại theo tinh thần riêng của Cái Sạp Nhạc, giữ lại ký ức của giai điệu cũ nhưng mở ra một màu sắc mới qua nhiều lát cắt âm thanh.",
-      "count": 13,
-      "tracks": [],
-      "pendingTracks": [
-        {
-          "name": "Mưa vương bụi sầu...",
-          "dur": "4:22"
-        },
-        {
-          "name": "Sao chỉ là...(nửa trái tim)",
-          "dur": "4:12"
-        },
-        {
-          "name": "Quá khứ",
-          "dur": "3:18"
-        },
-        {
-          "name": "Rực rỡ đến tàn phai.",
-          "dur": "4:14"
-        },
-        {
-          "name": "Lời Dối Gian Đó",
-          "dur": "4:19"
-        },
-        {
-          "name": "Chiếc lá cuốn bay",
-          "dur": "3:54"
-        },
-        {
-          "name": "Biển Xanh Sâu Thẳm...",
-          "dur": "4:57"
-        },
-        {
-          "name": "Mưa Giỗ...Đời Ta",
-          "dur": "3:53"
-        },
-        {
-          "name": "Ai sẽ đưa em về...",
-          "dur": "3:04"
-        },
-        {
-          "name": "Xin cứ làm ngơ...[Ft D'Li]",
-          "dur": "4:26"
-        },
-        {
-          "name": "Mất Đi Màu Xanh...",
-          "dur": "3:34"
-        },
-        {
-          "name": "Tan",
-          "dur": "2:56"
-        },
-        {
-          "name": "TRAP*KIMLANG*",
-          "dur": "3:21"
-        }
-      ]
+            "id": "c6d1b392-c21b-4d47-9e67-1687cae2a955",
+            "playlistUrl": "https://suno.com/playlist/c6d1b392-c21b-4d47-9e67-1687cae2a955",
+            "name": "Lạ mà Quen",
+            "sub": "Cover Remix · Ký ức cũ phối lại · Cái Sạp Nhạc của Li",
+            "cover": "uploads/la-ma-quen.jpg",
+            "desc": "Quen từ một câu hát. Lạ từ một cách kể. Những bản cover được phối lại theo tinh thần riêng của Cái Sạp Nhạc, giữ lại ký ức của giai điệu cũ nhưng mở ra một màu sắc mới qua nhiều lát cắt âm thanh.",
+            "count": 13,
+            "tracks": [
+              { "id": "891bc6cb-0ed4-4939-b413-5ea3fb2dcc91", "name": "Mưa vương bụi sầu...", "dur": "4:22" },
+              { "id": "9c3b3a4c-d710-43c2-85be-d9d636420b96", "name": "Sao chỉ là... (nửa trái tim)", "dur": "4:12" },
+              { "id": "f6830484-2824-4b3b-b76b-50771a2d930b", "name": "Quá khó", "dur": "3:18" },
+              { "id": "6147634e-5d55-42bf-9249-3bce315965a2", "name": "Rực rỡ đến tàn phai.", "dur": "4:14" },
+              { "id": "39ce9834-36c4-4e80-8990-0913a7044b49", "name": "Lời Dối Gian Đó", "dur": "4:19" },
+              { "id": "b697089e-8efe-4258-85a3-2ca8d2584671", "name": "Chiếc lá cuốn bay", "dur": "3:54" },
+              { "id": "6047e2be-51ae-4d2a-b512-fd87b7c23038", "name": "Biển Xanh Sâu Thẳm...", "dur": "4:57" },
+              { "id": "9d24c3ac-67a1-4a1e-99dd-3ff5cc20571b", "name": "Mưa Gió.... Đời Ta", "dur": "3:53" },
+              { "id": "33b91a57-2539-4676-8456-1244768f013c", "name": "Ai sẽ đưa em về...", "dur": "3:04" },
+              { "id": "ccc0c475-717b-4b80-bca1-015994ea834b", "name": "Xin cứ làm ngơ...[Ft D'Li]", "dur": "4:26" },
+              { "id": "e2aeff99-60d6-4485-9c05-964baef488ed", "name": "Mất Đi Màu Xanh..", "dur": "3:34" },
+              { "id": "5c3caace-9305-4ee4-8d1a-be6042305ffe", "name": "Tan", "dur": "2:56" },
+              { "id": "df4057e6-1272-4d67-8837-b7f49e9b3535", "name": "TRAP*KIMLANG*", "dur": "3:21" }
+                    ]
     },
     {
       "id": "8f2c17b4-cb70-46e1-9f2e-464ccadaf1ab",
@@ -545,8 +505,18 @@ window.PORTFOLIO_MUSIC = {
       "sub": "Vietnam Travel · Folk Pop · Anh Li",
       "cover": "uploads/di-khap-mot-day-non-song.jpg",
       "desc": "Một hành trình âm nhạc đi qua những miền non sông Việt Nam — gom phong cảnh, ký ức và tình quê thành một dải thanh âm.",
-      "count": 0,
-      "tracks": []
+      "count": 9,
+            "tracks": [
+              { "id": "2096197a-b0a3-4fba-89d2-d654b2f1188e", "name": "Việt Nam Ta Yêu", "dur": "3:54" },
+              { "id": "b8f7a3ec-5e4d-4d15-b0cc-53ceee89cf16", "name": "Chất-Việt-Chất!", "dur": "2:44" },
+              { "id": "f595f503-1399-4f0b-800c-07cf0503153e", "name": "Khát Vọng Sông Vàm", "dur": "4:47" },
+              { "id": "222f5fdc-1516-40c4-ba37-cb41685c4758", "name": "Vươn Cao Long An", "dur": "4:04" },
+              { "id": "2cf71f83-6d84-4abb-a241-123e19dea645", "name": "Dưới Bầu Trời Ta Yêu", "dur": "3:11" },
+              { "id": "38a81c22-bfe4-48a4-991c-5a4b65322d0f", "name": "Tôi Yêu Lâm Đồng", "dur": "3:29" },
+              { "id": "6f1de184-72ab-4078-8a1e-112bbd09aa41", "name": "Lâm Đồng Ngày Mới", "dur": "3:02" },
+              { "id": "976a442f-08d6-4dee-92ed-f84e60045b6d", "name": "Đi nhớ trở về", "dur": "3:17" },
+              { "id": "e5fcd0cc-9be3-47b5-86ff-56f7bc2afbed", "name": "Cho tất cả Chúng Ta", "dur": "4:00" }
+                    ]
     },
     {
       "id": "549189a6-43bd-4112-b3cc-f6a05105b082",
@@ -598,6 +568,158 @@ window.PORTFOLIO_MUSIC = {
           "dur": "3:17"
         }
       ]
+    },
+    {
+            "id": "443d7aad-1161-4de3-b1ca-79b8646f4cb8",
+            "playlistUrl": "https://suno.com/playlist/443d7aad-1161-4de3-b1ca-79b8646f4cb8",
+            "name": "Thơ Ru Em Ngủ",
+            "sub": "Ru Ca Thơ Việt · Mộc Mạc Trữ Tình · Hoài Niệm Đêm Trăng",
+            "cover": "uploads/tho-ru-em-ngu.jpg",
+            "desc": "Một tập thơ biết hát — Anh Li cảm tác từ những bài thơ Việt cũ, giữ hồn thơ nhưng viết lại bằng giọng hát hôm nay.",
+            "count": 10,
+            "tracks": [
+              {
+                          "id": "fba3bdc4-4168-4b42-a6df-c19ce7d4ba8f",
+                          "name": "[Interlude] Khúc dạo thơ đầu anh kể em nghe",
+                          "dur": "1:11"
+              },
+              {
+                          "id": "5d394e86-38de-467b-98fa-f7a20b54af93",
+                          "name": "DẪU XA ANH CŨNG TÌM VỀ - [Theo thơ Nguyễn Bính]",
+                          "dur": "5:39"
+              },
+              {
+                          "id": "bbd75a95-016a-4ad9-925f-cc894606d2b6",
+                          "name": "CÓT CA CÓT KÉT - [Cảm tác từ \"Tiếng Võng Đưa\" - Bàng Bá Lân]",
+                          "dur": "5:27"
+              },
+              {
+                          "id": "873f6093-8fc2-4f4b-a838-a8f12e794282",
+                          "name": "DẶM LIỄU MÂY BAY - [Cảm tác từ \"Đường Về Quê Mẹ\" - Đoàn Văn Cừ]",
+                          "dur": "3:49"
+              },
+              {
+                          "id": "7a5b3654-f198-4329-bae5-7598e4cb5fc9",
+                          "name": "NẮNG CHÍN BÊN ĐỒI - [Cảm tác từ \"Mùa Xuân Chín\" - Hàn Mặc Tử]",
+                          "dur": "3:59"
+              },
+              {
+                          "id": "c01b616f-ab30-4f98-80e2-63b45d41ca73",
+                          "name": "CHIỀU CŨ KHÔNG TÊN [Cảm tác từ \"Tình già\" — Phan Khôi]",
+                          "dur": "4:51"
+              },
+              {
+                          "id": "2201907e-abbe-4731-a487-ba58baa30718",
+                          "name": "VŨ KHÚC TA VỚI TA - [Cảm tác từ \"Qua Đèo Ngang\" - Bà Huyện Thanh Quan]",
+                          "dur": "3:42"
+              },
+              {
+                          "id": "ccaa90f1-8dd3-468a-af84-e2cae5f5083f",
+                          "name": "TIẾNG TỲ BÀ TRONG TRĂNG - [Cảm tác từ \"Tỳ Bà\" - Bích Khê]",
+                          "dur": "4:24"
+              },
+              {
+                          "id": "79bdaacc-e20a-4770-8ffc-6eac9ccd2a25",
+                          "name": "NHÀ ƠI, BẠN ĐẾN CHƠI - [Cảm tác từ \"Bạn Đến Chơi Nhà\" - Nguyễn Khuyến]",
+                          "dur": "4:14"
+              },
+              {
+                          "id": "f1f4f628-9875-4f8f-8c59-98e636e0b11d",
+                          "name": "Ả À ƠI, THƠ RU EM NGỦ - [Sáng tác gốc - Anh Li]",
+                          "dur": "4:43"
+              }
+                    ]
+    },
+    {
+            "id": "c6d1b392-c21b-4d47-9e67-1687cae2a955",
+            "playlistUrl": "https://suno.com/playlist/c6d1b392-c21b-4d47-9e67-1687cae2a955",
+            "name": "Lạ mà Quen",
+            "sub": "Hoài Niệm Remix · Tình Khúc Xưa Khoác Áo Mới · Neo-Soul Việt",
+            "cover": "uploads/la-ma-quen.jpg",
+            "desc": "Quen từ một câu hát. Lạ từ một cách kể. Những bản cover được phối lại theo tinh thần riêng của Cái Sạp Nhạc, giữ lại ký ức của giai điệu cũ, nhưng mở ra một màu sắc mới qua nhiều lát cắt âm thanh.",
+            "count": 13,
+            "tracks": [
+              {
+                          "id": "891bc6cb-0ed4-4939-b413-5ea3fb2dcc91",
+                          "name": "Mưa vương bụi sầu...",
+                          "dur": "4:22"
+              },
+              {
+                          "id": "9c3b3a4c-d710-43c2-85be-d9d636420b96",
+                          "name": "Sao chỉ là... (nửa trái tim)",
+                          "dur": "4:12"
+              },
+              {
+                          "id": "f6830484-2824-4b3b-b76b-50771a2d930b",
+                          "name": "Quá khó",
+                          "dur": "3:18"
+              },
+              {
+                          "id": "6147634e-5d55-42bf-9249-3bce315965a2",
+                          "name": "Rực rỡ đến tàn phai.",
+                          "dur": "4:14"
+              },
+              {
+                          "id": "39ce9834-36c4-4e80-8990-0913a7044b49",
+                          "name": "Lời Dối Gian Đó",
+                          "dur": "4:19"
+              },
+              {
+                          "id": "b697089e-8efe-4258-85a3-2ca8d2584671",
+                          "name": "Chiếc lá cuốn bay",
+                          "dur": "3:54"
+              },
+              {
+                          "id": "6047e2be-51ae-4d2a-b512-fd87b7c23038",
+                          "name": "Biển Xanh Sâu Thẳm...",
+                          "dur": "4:57"
+              },
+              {
+                          "id": "9d24c3ac-67a1-4a1e-99dd-3ff5cc20571b",
+                          "name": "Mưa Gió.... Đời Ta",
+                          "dur": "3:53"
+              },
+              {
+                          "id": "33b91a57-2539-4676-8456-1244768f013c",
+                          "name": "\"Ai sẽ đưa em về...\"",
+                          "dur": "3:04"
+              },
+              {
+                          "id": "ccc0c475-717b-4b80-bca1-015994ea834b",
+                          "name": "Xin cứ làm ngơ...[Ft D'Li]",
+                          "dur": "4:26"
+              },
+              {
+                          "id": "e2aeff99-60d6-4485-9c05-964baef488ed",
+                          "name": "Mất Đi Màu Xanh..",
+                          "dur": "3:34"
+              },
+              {
+                          "id": "5c3caace-9305-4ee4-8d1a-be6042305ffe",
+                          "name": "Tan",
+                          "dur": "2:56"
+              },
+              {
+                          "id": "df4057e6-1272-4d67-8837-b7f49e9b3535",
+                          "name": "TRAP*KIMLANG*",
+                          "dur": "3:21"
+              }
+                    ]
+    },
+    {
+            "id": "ee01969a-6e94-4b7e-8b93-69d0be8aa866",
+            "playlistUrl": "https://suno.com/playlist/ee01969a-6e94-4b7e-8b93-69d0be8aa866",
+            "name": "Sau Một Mùa Sóng",
+            "sub": "Mini Deluxe Album · Biển Lặng Sau Bão · Tự Sự Nội Tâm",
+            "cover": "uploads/sau-mot-mua-song.jpg",
+            "desc": "Một mini deluxe album về biển, im lặng, những điều chưa kịp nói, và hành trình dịu lại sau một mùa sóng.",
+            "count": 4,
+            "tracks": [
+              { "id": "97edf55c-f92c-4e49-b100-5e1ba5da11b5", "name": "Cả biển trời trong", "dur": "4:52" },
+              { "id": "cd255d0c-1091-4302-a67a-ee33fd783116", "name": "Có Một Tiếng Thở Dài Giữa Biển", "dur": "5:01" },
+              { "id": "3b60b43c-2640-4293-9938-9c6393e27725", "name": "Một Ngày Sóng Không Về", "dur": "3:34" },
+              { "id": "a9fd3296-d400-4039-9977-92618c5b3240", "name": "Sau cùng, Trời vẫn thênh thang", "dur": "4:38" }
+                    ]
     }
   ]
 };
