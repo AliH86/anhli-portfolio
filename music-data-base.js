@@ -598,6 +598,67 @@ window.PORTFOLIO_MUSIC = {
           "dur": "3:17"
         }
       ]
+    },
+    {
+            "id": "443d7aad-1161-4de3-b1ca-79b8646f4cb8",
+            "playlistUrl": "https://suno.com/playlist/443d7aad-1161-4de3-b1ca-79b8646f4cb8",
+            "name": "Thơ Ru Em Ngủ",
+            "sub": "Ru Ca Thơ Việt · Mộc Mạc Trữ Tình · Hoài Niệm Đêm Trăng",
+            "cover": "uploads/tho-ru-em-ngu.jpg",
+            "desc": "Một tập thơ biết hát — Anh Li cảm tác từ những bài thơ Việt cũ, giữ hồn thơ nhưng viết lại bằng giọng hát hôm nay.",
+            "count": 10,
+            "tracks": [
+              {
+                          "id": "fba3bdc4-4168-4b42-a6df-c19ce7d4ba8f",
+                          "name": "[Interlude] Khúc dạo thơ đầu anh kể em nghe",
+                          "dur": "1:11"
+              },
+              {
+                          "id": "5d394e86-38de-467b-98fa-f7a20b54af93",
+                          "name": "DẪU XA ANH CŨNG TÌM VỀ - [Theo thơ Nguyễn Bính]",
+                          "dur": "5:39"
+              },
+              {
+                          "id": "bbd75a95-016a-4ad9-925f-cc894606d2b6",
+                          "name": "CÓT CA CÓT KÉT - [Cảm tác từ \"Tiếng Võng Đưa\" - Bàng Bá Lân]",
+                          "dur": "5:27"
+              },
+              {
+                          "id": "873f6093-8fc2-4f4b-a838-a8f12e794282",
+                          "name": "DẶM LIỄU MÂY BAY - [Cảm tác từ \"Đường Về Quê Mẹ\" - Đoàn Văn Cừ]",
+                          "dur": "3:49"
+              },
+              {
+                          "id": "7a5b3654-f198-4329-bae5-7598e4cb5fc9",
+                          "name": "NẮNG CHÍN BÊN ĐỒI - [Cảm tác từ \"Mùa Xuân Chín\" - Hàn Mặc Tử]",
+                          "dur": "3:59"
+              },
+              {
+                          "id": "c01b616f-ab30-4f98-80e2-63b45d41ca73",
+                          "name": "CHIỀU CŨ KHÔNG TÊN [Cảm tác từ \"Tình già\" — Phan Khôi]",
+                          "dur": "4:51"
+              },
+              {
+                          "id": "2201907e-abbe-4731-a487-ba58baa30718",
+                          "name": "VŨ KHÚC TA VỚI TA - [Cảm tác từ \"Qua Đèo Ngang\" - Bà Huyện Thanh Quan]",
+                          "dur": "3:42"
+              },
+              {
+                          "id": "ccaa90f1-8dd3-468a-af84-e2cae5f5083f",
+                          "name": "TIẾNG TỲ BÀ TRONG TRĂNG - [Cảm tác từ \"Tỳ Bà\" - Bích Khê]",
+                          "dur": "4:24"
+              },
+              {
+                          "id": "79bdaacc-e20a-4770-8ffc-6eac9ccd2a25",
+                          "name": "NHÀ ƠI, BẠN ĐẾN CHƠI - [Cảm tác từ \"Bạn Đến Chơi Nhà\" - Nguyễn Khuyến]",
+                          "dur": "4:14"
+              },
+              {
+                          "id": "f1f4f628-9875-4f8f-8c59-98e636e0b11d",
+                          "name": "Ả À ƠI, THƠ RU EM NGỦ - [Sáng tác gốc - Anh Li]",
+                          "dur": "4:43"
+              }
+                    ]
     }
   ]
 };
