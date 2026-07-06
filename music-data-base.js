@@ -659,6 +659,82 @@ window.PORTFOLIO_MUSIC = {
                           "dur": "4:43"
               }
                     ]
+    },
+    {
+            "id": "c6d1b392-c21b-4d47-9e67-1687cae2a955",
+            "playlistUrl": "https://suno.com/playlist/c6d1b392-c21b-4d47-9e67-1687cae2a955",
+            "name": "Lạ mà Quen",
+            "sub": "Hoài Niệm Remix · Tình Khúc Xưa Khoác Áo Mới · Neo-Soul Việt",
+            "cover": "uploads/la-ma-quen.jpg",
+            "desc": "Quen từ một câu hát. Lạ từ một cách kể. Những bản cover được phối lại theo tinh thần riêng của Cái Sạp Nhạc, giữ lại ký ức của giai điệu cũ, nhưng mở ra một màu sắc mới qua nhiều lát cắt âm thanh.",
+            "count": 13,
+            "tracks": [
+              {
+                          "id": "891bc6cb-0ed4-4939-b413-5ea3fb2dcc91",
+                          "name": "Mưa vương bụi sầu...",
+                          "dur": "4:22"
+              },
+              {
+                          "id": "9c3b3a4c-d710-43c2-85be-d9d636420b96",
+                          "name": "Sao chỉ là... (nửa trái tim)",
+                          "dur": "4:12"
+              },
+              {
+                          "id": "f6830484-2824-4b3b-b76b-50771a2d930b",
+                          "name": "Quá khó",
+                          "dur": "3:18"
+              },
+              {
+                          "id": "6147634e-5d55-42bf-9249-3bce315965a2",
+                          "name": "Rực rỡ đến tàn phai.",
+                          "dur": "4:14"
+              },
+              {
+                          "id": "39ce9834-36c4-4e80-8990-0913a7044b49",
+                          "name": "Lời Dối Gian Đó",
+                          "dur": "4:19"
+              },
+              {
+                          "id": "b697089e-8efe-4258-85a3-2ca8d2584671",
+                          "name": "Chiếc lá cuốn bay",
+                          "dur": "3:54"
+              },
+              {
+                          "id": "6047e2be-51ae-4d2a-b512-fd87b7c23038",
+                          "name": "Biển Xanh Sâu Thẳm...",
+                          "dur": "4:57"
+              },
+              {
+                          "id": "9d24c3ac-67a1-4a1e-99dd-3ff5cc20571b",
+                          "name": "Mưa Gió.... Đời Ta",
+                          "dur": "3:53"
+              },
+              {
+                          "id": "33b91a57-2539-4676-8456-1244768f013c",
+                          "name": "\"Ai sẽ đưa em về...\"",
+                          "dur": "3:04"
+              },
+              {
+                          "id": "ccc0c475-717b-4b80-bca1-015994ea834b",
+                          "name": "Xin cứ làm ngơ...[Ft D'Li]",
+                          "dur": "4:26"
+              },
+              {
+                          "id": "e2aeff99-60d6-4485-9c05-964baef488ed",
+                          "name": "Mất Đi Màu Xanh..",
+                          "dur": "3:34"
+              },
+              {
+                          "id": "5c3caace-9305-4ee4-8d1a-be6042305ffe",
+                          "name": "Tan",
+                          "dur": "2:56"
+              },
+              {
+                          "id": "df4057e6-1272-4d67-8837-b7f49e9b3535",
+                          "name": "TRAP*KIMLANG*",
+                          "dur": "3:21"
+              }
+                    ]
     }
   ]
 };
