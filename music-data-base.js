@@ -705,6 +705,21 @@ window.PORTFOLIO_MUSIC = {
                           "dur": "3:21"
               }
                     ]
+    },
+    {
+            "id": "ee01969a-6e94-4b7e-8b93-69d0be8aa866",
+            "playlistUrl": "https://suno.com/playlist/ee01969a-6e94-4b7e-8b93-69d0be8aa866",
+            "name": "Sau Một Mùa Sóng",
+            "sub": "Mini Deluxe Album · Biển Lặng Sau Bão · Tự Sự Nội Tâm",
+            "cover": "uploads/sau-mot-mua-song.jpg",
+            "desc": "Một mini deluxe album về biển, im lặng, những điều chưa kịp nói, và hành trình dịu lại sau một mùa sóng.",
+            "count": 4,
+            "tracks": [
+              { "id": "97edf55c-f92c-4e49-b100-5e1ba5da11b5", "name": "Cả biển trời trong", "dur": "4:52" },
+              { "id": "cd255d0c-1091-4302-a67a-ee33fd783116", "name": "Có Một Tiếng Thở Dài Giữa Biển", "dur": "5:01" },
+              { "id": "3b60b43c-2640-4293-9938-9c6393e27725", "name": "Một Ngày Sóng Không Về", "dur": "3:34" },
+              { "id": "a9fd3296-d400-4039-9977-92618c5b3240", "name": "Sau cùng, Trời vẫn thênh thang", "dur": "4:38" }
+                    ]
     }
   ]
 };
