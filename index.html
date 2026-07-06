@@ -876,6 +876,10 @@ section { padding:5.25rem 4rem; position:relative; }
 @keyframes swPulse { 0%,100%{ transform:scaleY(0.32); opacity:0.55; } 50%{ transform:scaleY(1); opacity:1; } }
 
 /* DECOR — diagonal flowing genre text */
+/* 2026-07-07 (v2): Ali xác nhận vị trí absolute/inset:0 cũ là đúng ý — vấn đề
+   chỉ là bị các lớp gradient tối che mất, không phải do bị crop/zoom. Revert
+   lại sticky-pin (v1, thử nghiệm), quay về absolute như bản gốc; giữ lại phần
+   hạ opacity overlay + đổi video nguồn khác. */
 #music { position:relative; overflow:hidden; }
 .music-scroll-bg {
   position:absolute;
@@ -897,22 +901,27 @@ section { padding:5.25rem 4rem; position:relative; }
      (Ali chê mờ/tối quá). Nâng brightness trước đây làm ám xanh dương — bù lại
      bằng lớp gradient xanh lá sậm ở ::before dưới, không cần hue-rotate mạnh tay. */
   filter:saturate(0.72) contrast(1.03) brightness(0.94) sepia(0.1) hue-rotate(14deg);
-  opacity:0.9;
   transform:scale(1.04);
+  /* 2026-07-07: opacity giờ điều khiển bởi trạng thái active/hidden (crossfade
+     JS) thay vì cố định — 0.9 là mức "hiện" (giữ nguyên độ sáng cũ), 0 là
+     "ẩn" khi video kia đang lên. */
+  opacity:0;
+  transition:opacity 1s ease;
 }
+.music-scroll-video.msv-active { opacity:0.9; }
 .music-scroll-bg::before {
   content:'';
   position:absolute;
   inset:0;
   z-index:1;
-  /* Lớp gradient xanh lá sậm (rgba(20,42,18,…)) chặn giữa — trung hoà ám xanh
-     dương sinh ra khi nâng brightness ở trên, đồng thời hạ độ tối tổng thể
-     (0.36/0.62/0.58 → 0.26/0.48/0.42) để cảnh nền lộ ra rõ hơn thay vì bị nuốt. */
+  /* 2026-07-07: giờ video đã hiện đúng cảnh (không còn bị crop nát), hạ tiếp
+     độ tối các lớp gradient (so với bản 0.26/0.48/0.42 hôm trước) — video là
+     một khung tĩnh lặp lại theo viewport nên không cần dồn tối ở đáy nữa. */
   background:
     radial-gradient(72% 55% at 50% 24%, rgba(232,200,112,0.11), transparent 62%),
-    linear-gradient(155deg, rgba(22,46,20,0.28), transparent 46%, rgba(9,8,14,0.2) 100%),
-    linear-gradient(180deg, rgba(9,8,14,0.26), rgba(20,29,14,0.14) 34%, rgba(9,8,14,0.48) 100%),
-    linear-gradient(90deg, rgba(9,8,14,0.42), rgba(68,70,36,0.14) 46%, rgba(9,8,14,0.42));
+    linear-gradient(155deg, rgba(22,46,20,0.22), transparent 46%, rgba(9,8,14,0.16) 100%),
+    linear-gradient(180deg, rgba(9,8,14,0.2), rgba(20,29,14,0.1) 34%, rgba(9,8,14,0.34) 100%),
+    linear-gradient(90deg, rgba(9,8,14,0.32), rgba(68,70,36,0.12) 46%, rgba(9,8,14,0.32));
 }
 .music-scroll-bg::after {
   content:'';
@@ -1236,11 +1245,16 @@ body.no-motion .np-viz { display:none; }
   z-index:30; display:flex; align-items:center; justify-content:center;
   padding:clamp(2.5rem,6vw,5rem) clamp(1.25rem,4vw,3rem);
   border-radius:18px;
+  /* 2026-07-07 (v2): "vẫn đặc kẹo" — blur(18px) mạnh làm nhoè hết video thành
+     1 màu phẳng, cộng thêm gradient tối thì gần như đen dù opacity đã hạ.
+     Hạ blur 18→8px (giữ đủ để chữ đọc rõ, nhưng không nuốt hết chi tiết/màu
+     video) + hạ tiếp opacity 0.5/0.6 → 0.3/0.4 + bỏ saturate(0.9) (không cần
+     giảm màu thêm vì blur đã tự làm dịu). */
   background:
     radial-gradient(120% 80% at 50% -10%, rgba(204,159,74,0.11), transparent 58%),
-    linear-gradient(180deg, rgba(11,10,17,0.86) 0%, rgba(9,8,14,0.96) 100%);
-  -webkit-backdrop-filter:blur(18px) saturate(0.9);
-  backdrop-filter:blur(18px) saturate(0.9);
+    linear-gradient(180deg, rgba(11,10,17,0.3) 0%, rgba(9,8,14,0.4) 100%);
+  -webkit-backdrop-filter:blur(8px);
+  backdrop-filter:blur(8px);
   border:0.5px solid var(--border2);
   box-shadow:inset 0 1px 0 rgba(232,200,112,0.08), 0 30px 80px rgba(0,0,0,0.5);
   overflow:hidden; text-align:center;
@@ -1926,7 +1940,9 @@ html.intro-lock { overflow:hidden; }
   position:relative; overflow:hidden; margin-top:2.25rem;
   border:0.5px solid var(--border2); border-radius:18px;
   padding:1.35rem 1.6rem 1.5rem;
-  background:linear-gradient(150deg, rgba(24,20,32,0.72), rgba(12,11,18,0.88));
+  /* 2026-07-07: thanh Now Playing cũng là 1 lớp "đặc" che video — hạ từ
+     0.72/0.88 xuống 0.34/0.44 cùng đợt với .drawer-inner. */
+  background:linear-gradient(150deg, rgba(24,20,32,0.34), rgba(12,11,18,0.44));
 }
 .np-z { position:relative; z-index:1; }
 .np-head { display:flex; justify-content:space-between; align-items:center; gap:1rem; margin-bottom:0.3rem; }
@@ -2299,7 +2315,10 @@ body.no-motion .photo-stack .ps-card { transition:opacity 0.3s; }
 
 .drawer-inner {
   border-radius: 24px;
-  background: radial-gradient(65% 90% at 88% 20%, rgba(204,159,74,0.10), transparent 58%), linear-gradient(135deg, rgba(20,18,28,0.88), rgba(10,9,16,0.78));
+  /* 2026-07-07 (v3): "vẫn rất đặc" — hạ tiếp từ 0.4/0.32 xuống 0.24/0.18. Đây
+     là mức khá mỏng; nếu chữ track-list bắt đầu khó đọc trên nền video sáng,
+     nâng lại 1 nấc thay vì quay lại mức cũ. */
+  background: radial-gradient(65% 90% at 88% 20%, rgba(204,159,74,0.10), transparent 58%), linear-gradient(135deg, rgba(20,18,28,0.24), rgba(10,9,16,0.18));
   box-shadow: 0 24px 90px rgba(0,0,0,0.42), inset 0 1px 0 rgba(255,255,255,0.04);
   overflow: hidden;
 }
@@ -3701,8 +3720,14 @@ body.theme-dandelion:not(.no-season) footer::after {
 <!-- MUSIC -->
 <section id="music">
   <div class="music-scroll-bg" id="musicScrollBg" aria-hidden="true">
-    <video class="music-scroll-video" id="musicScrollVideo" muted playsinline loop preload="none"
-      data-src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4"></video>
+    <!-- 2026-07-07: 2 video chồng nhau để crossfade qua điểm lặp (loop) — video
+         gốc không được dựng để loop liền mạch nên "loop" thô của <video> gây
+         giật khung hình ở điểm nối. JS bên dưới fade cái B lên ngay trước khi
+         A hết, rồi đổi vai, tránh cắt cứng. -->
+    <video class="music-scroll-video msv-active" id="musicScrollVideoA" muted playsinline preload="none"
+      data-src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260604_125109_19424216-4e2a-4560-b9f2-f1b5f6eb2c2e.mp4"></video>
+    <video class="music-scroll-video" id="musicScrollVideoB" muted playsinline preload="none"
+      data-src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260604_125109_19424216-4e2a-4560-b9f2-f1b5f6eb2c2e.mp4"></video>
   </div>
   <div class="music-decor" id="musicDecor" aria-hidden="true"></div>
   <div class="music-head">
@@ -6899,36 +6924,68 @@ if(MOBILE){
 })();
 </script>
 
-<!-- MUSIC VINYL BACKGROUND — video nền autoplay, fade mượt khi vào section -->
+<!-- MUSIC VINYL BACKGROUND — video nền autoplay, crossfade qua điểm lặp để không giật khung -->
 <script id="music-scroll-bg-js">
 (function(){
   const music=document.getElementById('music');
   const bg=document.getElementById('musicScrollBg');
-  const video=document.getElementById('musicScrollVideo');
-  if(!music || !bg || !video) return;
+  const vA=document.getElementById('musicScrollVideoA');
+  const vB=document.getElementById('musicScrollVideoB');
+  if(!music || !bg || !vA || !vB) return;
   if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   if(navigator.connection && navigator.connection.saveData) return;
-  let loaded=false;
+
+  const CROSSFADE=1; // giây — độ dài fade qua điểm nối, chỉnh nếu vẫn thấy giật/quá dài
+  let loaded=false, active=vA, standby=vB, swapping=false;
+
+  function primeStandby(){
+    if(!standby.src){ standby.src=standby.dataset.src; standby.load(); }
+  }
   function load(){
     if(loaded) return;
     loaded=true;
-    const src=video.dataset.src;
+    const src=vA.dataset.src;
     if(!src) return;
-    video.src=src;
-    video.preload='auto';
-    video.load();
-    video.addEventListener('canplay', ()=>{
+    vA.src=src;
+    vA.preload='auto';
+    vA.load();
+    vA.addEventListener('canplay', ()=>{
       bg.classList.add('ready');
-      video.play().catch(()=>{});
+      vA.play().catch(()=>{});
+      primeStandby();
     }, {once:true});
   }
+  // Ngay trước khi `active` chạm hết bài, fade `standby` (đã tua về 0, chạy
+  // song song im lặng từ trước) lên thay — không seek/cắt cứng nên không giật.
+  function onTime(e){
+    const v=e.target;
+    if(v!==active || swapping) return;
+    if(!isFinite(v.duration) || v.duration<=CROSSFADE) return;
+    if(v.duration - v.currentTime <= CROSSFADE){
+      swapping=true;
+      standby.currentTime=0;
+      standby.play().catch(()=>{});
+      standby.classList.add('msv-active');
+      active.classList.remove('msv-active');
+      const finishedVideo=active;
+      active=standby; standby=finishedVideo;
+      setTimeout(()=>{
+        finishedVideo.pause();
+        finishedVideo.currentTime=0;
+        swapping=false;
+      }, CROSSFADE*1000+80);
+    }
+  }
+  vA.addEventListener('timeupdate', onTime);
+  vB.addEventListener('timeupdate', onTime);
+
   if('IntersectionObserver' in window){
     const io=new IntersectionObserver(es=>{
       if(es[0].isIntersecting){
         load();
-        if(loaded) video.play().catch(()=>{});
+        if(loaded){ active.play().catch(()=>{}); }
       } else if(loaded) {
-        video.pause();
+        vA.pause(); vB.pause();
       }
     }, {rootMargin:'640px'});
     io.observe(music);
@@ -6937,8 +6994,8 @@ if(MOBILE){
   }
   document.addEventListener('visibilitychange', ()=>{
     if(!loaded) return;
-    if(document.hidden) video.pause();
-    else video.play().catch(()=>{});
+    if(document.hidden){ vA.pause(); vB.pause(); }
+    else active.play().catch(()=>{});
   });
 })();
 </script>
