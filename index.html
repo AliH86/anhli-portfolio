@@ -893,8 +893,11 @@ section { padding:5.25rem 4rem; position:relative; }
   width:108%;
   height:112%;
   object-fit:cover;
-  filter:saturate(0.74) contrast(1.02) brightness(0.78) sepia(0.12) hue-rotate(16deg);
-  opacity:0.78;
+  /* 2026-07: nâng brightness 0.78→0.94 + opacity 0.78→0.9 để thấy rõ cảnh nền hơn
+     (Ali chê mờ/tối quá). Nâng brightness trước đây làm ám xanh dương — bù lại
+     bằng lớp gradient xanh lá sậm ở ::before dưới, không cần hue-rotate mạnh tay. */
+  filter:saturate(0.72) contrast(1.03) brightness(0.94) sepia(0.1) hue-rotate(14deg);
+  opacity:0.9;
   transform:scale(1.04);
 }
 .music-scroll-bg::before {
@@ -902,10 +905,14 @@ section { padding:5.25rem 4rem; position:relative; }
   position:absolute;
   inset:0;
   z-index:1;
+  /* Lớp gradient xanh lá sậm (rgba(20,42,18,…)) chặn giữa — trung hoà ám xanh
+     dương sinh ra khi nâng brightness ở trên, đồng thời hạ độ tối tổng thể
+     (0.36/0.62/0.58 → 0.26/0.48/0.42) để cảnh nền lộ ra rõ hơn thay vì bị nuốt. */
   background:
     radial-gradient(72% 55% at 50% 24%, rgba(232,200,112,0.11), transparent 62%),
-    linear-gradient(180deg, rgba(9,8,14,0.36), rgba(20,29,14,0.18) 34%, rgba(9,8,14,0.62) 100%),
-    linear-gradient(90deg, rgba(9,8,14,0.58), rgba(68,70,36,0.16) 46%, rgba(9,8,14,0.62));
+    linear-gradient(155deg, rgba(22,46,20,0.28), transparent 46%, rgba(9,8,14,0.2) 100%),
+    linear-gradient(180deg, rgba(9,8,14,0.26), rgba(20,29,14,0.14) 34%, rgba(9,8,14,0.48) 100%),
+    linear-gradient(90deg, rgba(9,8,14,0.42), rgba(68,70,36,0.14) 46%, rgba(9,8,14,0.42));
 }
 .music-scroll-bg::after {
   content:'';
@@ -2298,8 +2305,10 @@ body.no-motion .photo-stack .ps-card { transition:opacity 0.3s; }
 }
 
 .gallery {
-  columns: 6 200px;   /* màn to: nhiều cột hơn → ảnh nhỏ lại; màn nhỏ tự co + media query 700px ép 2 cột */
-  column-gap: 1rem;
+  columns: 8 160px;   /* 2026-07: thu nhỏ scale theo yêu cầu Ali — cột hẹp hơn (200→160px)
+                         + trần cột cao hơn (6→8) nên ảnh nhỏ & dày hơn trên màn to;
+                         màn nhỏ tự co + media query 700px ép 2 cột */
+  column-gap: 0.85rem;
 }
 
 .g-item {
@@ -4380,6 +4389,92 @@ const GALLERY = [
       { tag:'Khoảnh khắc', type:'img', src:'images/lab/m78.jpg', ar:'886/886' },
       { tag:'Khoảnh khắc', type:'img', src:'images/lab/m79.jpg', ar:'360/526' },
       { tag:'Khoảnh khắc', type:'img', src:'images/lab/m80.jpg', ar:'1182/665' },
+      // ---- 2026-07 batch: Thiết kế (agency KV + soundtrack-style covers) ----
+      { tag:'Thiết kế', type:'img', src:'uploads/My-vi-nhan-sinh.jpg', ar:'1000/1000' },
+      { tag:'Thiết kế', type:'img', src:'images/lab/d16.jpg', ar:'1254/1254' },
+      { tag:'Thiết kế', type:'img', src:'images/lab/d17.jpg', ar:'1254/1254' },
+      { tag:'Thiết kế', type:'img', src:'images/lab/d18.jpg', ar:'1254/1254' },
+      { tag:'Thiết kế', type:'img', src:'images/lab/d19.jpg', ar:'1254/1254' },
+      { tag:'Thiết kế', type:'img', src:'images/lab/d20.jpg', ar:'1254/1254' },
+      { tag:'Thiết kế', type:'img', src:'images/lab/d21.jpg', ar:'1254/1254' },
+      { tag:'Thiết kế', type:'img', src:'images/lab/d22.jpg', ar:'1254/1254' },
+      { tag:'Thiết kế', type:'img', src:'images/lab/d23.jpg', ar:'1254/1254' },
+      { tag:'Thiết kế', type:'img', src:'images/lab/d24.jpg', ar:'1254/1254' },
+      { tag:'Thiết kế', type:'img', src:'images/lab/d25.jpg', ar:'1254/1254' },
+      { tag:'Thiết kế', type:'img', src:'images/lab/d26.jpg', ar:'1254/1254' },
+      { tag:'Thiết kế', type:'img', src:'images/lab/d27.jpg', ar:'1254/1254' },
+      { tag:'Thiết kế', type:'img', src:'images/lab/d28.jpg', ar:'1800/1012' },
+      { tag:'Thiết kế', type:'img', src:'images/lab/d29.jpg', ar:'1672/941' },
+      { tag:'Thiết kế', type:'img', src:'images/lab/d30.jpg', ar:'1800/1399' },
+      { tag:'Thiết kế', type:'img', src:'images/lab/d31.jpg', ar:'1800/810' },
+      // ---- 2026-07 batch: Khoảnh khắc ----
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m81.webp', ar:'1360/1700' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m82.webp', ar:'360/650' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m83.webp', ar:'805/978' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m84.webp', ar:'724/1086' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m85.webp', ar:'1086/724' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m86.webp', ar:'886/886' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m87.webp', ar:'1182/665' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m88.webp', ar:'1182/665' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m89.webp', ar:'665/1182' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m90.webp', ar:'665/1182' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m91.webp', ar:'1182/665' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m92.webp', ar:'1182/665' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m93.webp', ar:'673/673' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m94.webp', ar:'769/1022' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m95.webp', ar:'1182/665' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m96.webp', ar:'886/886' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m97.webp', ar:'886/886' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m98.webp', ar:'886/886' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m99.webp', ar:'829/829' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m100.webp', ar:'1700/1700' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m101.webp', ar:'360/360' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m102.webp', ar:'718/957' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m103.webp', ar:'886/886' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m104.webp', ar:'1262/1700' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m105.webp', ar:'1700/1700' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m106.webp', ar:'360/360' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m107.webp', ar:'886/886' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m108.webp', ar:'1360/1700' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m109.webp', ar:'974/807' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m110.webp', ar:'1440/1440' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m111.webp', ar:'736/736' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m112.webp', ar:'1182/665' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m113.webp', ar:'1024/768' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m114.webp', ar:'602/1304' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m115.webp', ar:'1182/665' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m116.webp', ar:'665/1182' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m117.webp', ar:'1182/665' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m118.webp', ar:'410/519' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m119.webp', ar:'1024/768' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m120.webp', ar:'1182/665' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m121.webp', ar:'928/1232' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m122.webp', ar:'783/1004' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m123.webp', ar:'1024/767' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m124.webp', ar:'1700/1700' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m125.webp', ar:'736/736' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m126.webp', ar:'1170/567' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m127.webp', ar:'1182/665' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m128.webp', ar:'928/1232' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m129.webp', ar:'886/886' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m130.webp', ar:'1700/1700' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m131.webp', ar:'1086/724' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m132.webp', ar:'1182/665' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m133.webp', ar:'788/998' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m134.webp', ar:'1086/724' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m135.webp', ar:'360/450' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m136.webp', ar:'1182/665' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m137.webp', ar:'886/886' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m138.webp', ar:'664/1182' },
+      { tag:'Khoảnh khắc', type:'img', src:'images/lab/m139.webp', ar:'1672/941' },
+      // ---- 2026-07 batch: Motion ----
+      { tag:'Motion', type:'video', src:'images/lab/vid4.mp4', poster:'images/lab/vid4.jpg', ar:'522/960' },
+      { tag:'Motion', type:'video', src:'images/lab/vid5.mp4', poster:'images/lab/vid5.jpg', ar:'400/736' },
+      { tag:'Motion', type:'video', src:'images/lab/vid6.mp4', poster:'images/lab/vid6.jpg', ar:'720/900' },
+      { tag:'Motion', type:'video', src:'images/lab/vid7.mp4', poster:'images/lab/vid7.jpg', ar:'960/546' },
+      { tag:'Motion', type:'video', src:'images/lab/vid8.mp4', poster:'images/lab/vid8.jpg', ar:'540/960' },
+      { tag:'Motion', type:'video', src:'images/lab/vid9.mp4', poster:'images/lab/vid9.jpg', ar:'540/960' },
+      { tag:'Motion', type:'video', src:'images/lab/vid10.mp4', poster:'images/lab/vid10.jpg', ar:'540/960' },
 ];
 
 const EVENTS = [
@@ -5159,6 +5254,20 @@ function renderHashtags(){
    RENDER GALLERY (Visual Lab)
 ============================================================ */
 let galleryExpanded=false, gMoreWrap=null;
+/* Xáo thứ tự mỗi lần vào trang — trước đây GALLERY render đúng thứ tự khai báo
+   nên bị "neo cố định", quen mắt mãi cũng thấy cũ. Fisher–Yates trên BẢN SAO,
+   không đụng GALLERY gốc (thứ tự chip lọc lấy từ mảng gốc, không xáo, để filter
+   không nhảy lộn xộn). Chỉ xáo thứ tự hiển thị + cụm 18 ảnh đầu (GAL_INIT), mỗi
+   lần tải trang lại là một cụm khác — không cần persist vì "mỗi lần vào" đã tự
+   nhiên đổi theo mỗi lần reload. */
+function shuffledGallery(){
+  const a=[...GALLERY];
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
 function renderGallery(){
   const grid=document.getElementById('galleryGrid');
   const filt=document.getElementById('gFilters');
@@ -5172,7 +5281,8 @@ function renderGallery(){
     filt.appendChild(b);
   });
   const GAL_INIT=18;
-  GALLERY.forEach((g,i)=>{
+  const galleryOrder=shuffledGallery();
+  galleryOrder.forEach((g,i)=>{
     const d=document.createElement('div');
     d.className='g-item g-'+g.type;
     d.dataset.tag=g.tag;
