@@ -15,6 +15,23 @@ window.PORTFOLIO_MUSIC = {
   "source": "Playlists curated by Anh Li",
   "albums": [
     {
+            "id": "f5fc153c-51b8-4583-bfe9-1fcc872aab85",
+            "playlistUrl": "https://suno.com/playlist/f5fc153c-51b8-4583-bfe9-1fcc872aab85",
+            "name": "Một Tần Số Khác",
+            "sub": "Indie Folk · Ambient Poetic EP",
+            "cover": "uploads/mot-tan-so-khac.jpg",
+            "desc": "Không ai nghe không nghĩa là mình sai. Có khi mình chỉ đang ở một tần số khác...",
+            "count": 6,
+            "tracks": [
+              { "id": "a236c5a1-948e-45c0-a981-3fb91ac85878", "name": "Có Ai Nghe Không", "dur": "4:37" },
+              { "id": "eeb9e276-2109-49d4-9347-7548ff0165f1", "name": "Ngọn Đèn Ngoài Xa", "dur": "4:34" },
+              { "id": "a0656e42-b5f5-4d12-9de9-e7e89f25bb02", "name": "Con Chim Bay Sai Mùa", "dur": "4:37" },
+              { "id": "7276a14c-3725-42a7-9550-dba200a0fa85", "name": "Cái Cây Cuối Cùng Trên Đồi", "dur": "5:44" },
+              { "id": "1b35de43-1e7e-44a0-b8aa-9f5dfd11f7b4", "name": "Tín Hiệu Từ Một Vì Sao Cũ", "dur": "4:52" },
+              { "id": "0f7b36ce-5eef-4cdf-9e4a-a079362867cd", "name": "Tần Số Riêng", "dur": "4:52" }
+                    ]
+    },
+    {
       "id": "c6672b33-6803-4fa3-8c9d-900d15dfaf2d",
       "playlistUrl": "https://suno.com/playlist/c6672b33-6803-4fa3-8c9d-900d15dfaf2d",
       "name": "01KhoảngLặng",
