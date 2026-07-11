@@ -15,6 +15,23 @@ window.PORTFOLIO_MUSIC = {
   "source": "Playlists curated by Anh Li",
   "albums": [
     {
+                "id": "30456da3-d6e4-4f3b-babd-a30056ad23d1",
+                "playlistUrl": "https://suno.com/playlist/30456da3-d6e4-4f3b-babd-a30056ad23d1",
+                "name": "Tôi Muốn Ôm Trọn Di Sản Quê Hương Mình Vào Lòng",
+                "sub": "Dân ca ba miền · Heritage Folk Series",
+                "cover": "uploads/toi-muon-om-tron-di-san.jpg",
+                "desc": "Những câu chuyện từ làng nghề thủ công, di sản văn hoá và làn điệu dân gian Việt Nam, kể lại theo một hơi thở mới.",
+                "count": 6,
+                "tracks": [
+                  { "id": "69ede1f4-3725-467f-b424-beed636dabc1", "name": "IN MỘT NÉT TRANH", "dur": "4:54" },
+                  { "id": "b6902a96-b14b-4317-80d7-fd9d78dcae05", "name": "VŨ ĐIỆU ĐẤT", "dur": "4:13" },
+                  { "id": "de139955-724b-4ce5-a96a-7074eb5a4cde", "name": "CON CHI VỪA LÓ RA NÌ?", "dur": "4:14" },
+                  { "id": "05a1cbff-5616-4190-bf73-cb62fd85a0d6", "name": "BUÔNG CÂU ĐỜN CA", "dur": "5:02" },
+                  { "id": "99ecde35-d33e-4f83-ba1c-19cacad9ff8e", "name": "BÀI THƠ BỒNG BỀNH", "dur": "4:24" },
+                  { "id": "dd2d5a9c-424d-4605-9544-24818bdd5e35", "name": "Ơ LÚA RÃY ƠI", "dur": "3:43" }
+                            ]
+    },
+    {
             "id": "f5fc153c-51b8-4583-bfe9-1fcc872aab85",
             "playlistUrl": "https://suno.com/playlist/f5fc153c-51b8-4583-bfe9-1fcc872aab85",
             "name": "Một Tần Số Khác",
