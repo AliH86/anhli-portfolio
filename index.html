@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Anh Li — Sạp Âm Nhạc</title>
 <meta name="description" content="Anh Li · Creative Producer · Show Director · Songwriter · Saigon Vietnam"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2309080E'/%3E%3Cpath d='M32 9l3.8 14.8L51 28l-15.2 4.2L32 47l-3.8-14.8L13 28l15.2-4.2z' fill='%23E8C870'/%3E%3C/svg%3E"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <!-- hero LCP images: desktop tải 2 tầng parallax, mobile chỉ tải ảnh master phẳng -->
 <link rel="preload" as="image" href="./images/hero/dandelion-garden/plane-far.webp" media="(min-width: 621px)"/>
@@ -967,9 +968,10 @@ section { padding:5.25rem 4rem; position:relative; }
 .np-vinyl:has(.vinyl3d.on) .vinyl-disc { visibility:hidden; }
 .vinyl3d canvas { width:100% !important; height:100% !important; display:block; }
 .nowplaying .np-viz {
-  z-index:4;
-  mix-blend-mode:screen;
-  filter:drop-shadow(0 0 10px rgba(204,159,74,0.22));
+  /* 2026-07-11: disabled. The circular equalizer canvas can lose its local
+     coordinate scale while playing and paint an amber rectangle over the
+     player. Audio controls and the rotating CSS vinyl remain unchanged. */
+  display:none !important;
 }
 .np-vinyl::after { z-index:5; }
 @media (max-width:1100px) { .vinyl3d { display:none; } }
@@ -3541,9 +3543,988 @@ body.theme-dandelion:not(.no-season) footer::after {
     margin:1rem 0 2.5rem;
   }
 }
+
+/* PERFORMANCE LEVELS — preserve the art direction while avoiding expensive
+   compositing on coarse-pointer/mobile devices. The user can still choose the
+   stronger no-motion mode from the existing accessibility control. */
+body.perf-lite #siteSeeds,
+body.perf-lite .hero-wind { display:none !important; }
+body.perf-lite .section-wm,
+body.perf-lite .contact-wm,
+body.perf-lite .music-decor { animation:none !important; translate:none !important; }
+body.perf-lite .season-layer { position:absolute; }
+body.perf-lite .music-gate,
+body.perf-lite .vinyl-dock,
+body.perf-lite nav.solid,
+body.perf-lite .momo-modal { -webkit-backdrop-filter:none !important; backdrop-filter:none !important; }
+body.perf-lite .g-item { content-visibility:auto; contain-intrinsic-size:320px 420px; }
+body.wheel-input .section-wm,
+body.wheel-input .contact-wm,
+body.wheel-input .marquee-wrap { transition:none !important; }
+
+/* CHECKPOINT 2 — editorial About + a deliberate threshold into Music. */
+.about-career {
+  margin-top:2.2rem; padding:1.4rem 0 0;
+  border-top:1px solid color-mix(in srgb, var(--theme-leaf, var(--amber)) 24%, transparent);
+}
+.ac-kicker {
+  margin-bottom:0.8rem; font-size:0.58rem; letter-spacing:0.28em;
+  text-transform:uppercase; color:var(--amber2);
+}
+.ac-row {
+  display:grid; grid-template-columns:88px minmax(190px,0.9fr) 1.1fr;
+  gap:1rem; align-items:baseline; padding:0.85rem 0;
+  border-top:1px solid rgba(81,106,57,0.14);
+  font-size:0.72rem; line-height:1.55; color:var(--text2);
+}
+.ac-row strong { color:var(--text); font-size:0.82rem; font-weight:500; }
+.ac-now { color:var(--amber2); }
+.ac-link {
+  display:inline-flex; margin-top:0.8rem; color:var(--text);
+  font-size:0.68rem; letter-spacing:0.11em; text-transform:uppercase; text-decoration:none;
+}
+.creative-pillars {
+  width:min(1320px,calc(100% - 8rem)); margin:5rem auto 0;
+  display:grid; grid-template-columns:repeat(4,minmax(0,1fr));
+  border-top:1px solid rgba(81,106,57,0.22); border-bottom:1px solid rgba(81,106,57,0.22);
+}
+.cp-card { min-height:210px; padding:1.6rem 1.5rem 1.8rem; border-right:1px solid rgba(81,106,57,0.18); }
+.cp-card:last-child { border-right:0; }
+.cp-card > span { font-size:0.56rem; letter-spacing:0.2em; color:var(--amber2); }
+.cp-card h3 {
+  margin:2.4rem 0 0.8rem; font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.35rem,2vw,1.8rem); font-weight:400; color:var(--text);
+}
+.cp-card p { max-width:27ch; font-size:0.78rem; line-height:1.7; color:var(--text2); }
+
+.music-threshold {
+  min-height:78svh; position:relative; z-index:2; display:grid; place-items:center; overflow:hidden;
+  padding:7rem 1.5rem; text-align:center; isolation:isolate;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(205,194,137,0.13), transparent 24%),
+    linear-gradient(180deg, #1a2818 0%, #152015 30%, #0b0d0b 72%, var(--ink) 100%);
+}
+.music-threshold::after { display:none !important; }
+.music-threshold::before {
+  content:''; position:absolute; inset:0; z-index:-1; opacity:0.24;
+  background:repeating-radial-gradient(circle at 50% 46%, transparent 0 20px, rgba(232,200,112,0.16) 21px 22px, transparent 23px 34px);
+  -webkit-mask-image:radial-gradient(circle, #000 0 38%, transparent 70%); mask-image:radial-gradient(circle, #000 0 38%, transparent 70%);
+}
+.mt-copy { position:relative; z-index:2; color:var(--text); }
+.mt-copy > span { font-size:0.58rem; letter-spacing:0.32em; text-transform:uppercase; color:rgba(232,200,112,0.7); }
+.mt-copy p { margin:2.2rem 0 0.4rem; font-size:0.86rem; letter-spacing:0.06em; color:rgba(237,230,220,0.52); }
+.mt-copy h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(3rem,6.8vw,7rem); line-height:0.92; font-weight:300; letter-spacing:-0.035em; }
+.mt-copy h2 em { color:var(--amber2); font-weight:300; }
+.mt-copy button {
+  display:inline-flex; margin-top:2.6rem; padding:0.75rem 1.1rem;
+  border:0; border-bottom:1px solid rgba(232,200,112,0.52); background:transparent; color:var(--amber3);
+  font-family:inherit; font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; cursor:pointer;
+}
+.mt-orbit { position:absolute; width:min(72vw,680px); aspect-ratio:1; opacity:0.48; }
+.mt-orbit i { position:absolute; inset:0; border:1px solid rgba(232,200,112,0.13); border-radius:50%; }
+.mt-orbit i:nth-child(2){ inset:14%; }
+.mt-orbit i:nth-child(3){ inset:31%; background:radial-gradient(circle,rgba(232,200,112,0.12),transparent 58%); }
+.mt-shutter {
+  position:absolute; left:0; right:0; height:50.2%; z-index:0; pointer-events:none;
+  background:
+    linear-gradient(90deg,transparent,rgba(232,200,112,0.055),transparent),
+    repeating-linear-gradient(90deg,rgba(255,255,255,0.018) 0 1px,transparent 1px 9vw),
+    #111a11;
+  transition:transform 0.95s cubic-bezier(.76,0,.24,1), opacity 0.7s ease;
+  box-shadow:inset 0 0 80px rgba(0,0,0,0.42);
+}
+.mt-shutter-top { top:0; transform-origin:50% 0; border-bottom:1px solid rgba(232,200,112,0.2); }
+.mt-shutter-bottom { bottom:0; transform-origin:50% 100%; border-top:1px solid rgba(232,200,112,0.2); }
+.music-threshold.is-opening .mt-shutter-top { transform:translateY(-102%); }
+.music-threshold.is-opening .mt-shutter-bottom { transform:translateY(102%); }
+.music-threshold.is-opening .mt-copy { opacity:0 !important; transform:scale(0.97); transition:opacity 0.35s ease,transform 0.55s ease; }
+.music-threshold.is-opening .mt-orbit { transform:scale(1.18); opacity:0; transition:transform 1s ease,opacity 0.7s ease; }
+.music-threshold.is-open { min-height:0; height:0; padding-block:0; opacity:0; pointer-events:none; }
+body:not(.music-unlocked) #music { display:none !important; }
+body.music-unlocked #music { animation:musicWorldReveal 0.8s ease both; }
+@keyframes musicWorldReveal { from{opacity:0;} to{opacity:1;} }
+
+/* FIVE-SLOT LISTENING GALLERY — only five covers exist in the DOM. */
+.album-stage {
+  min-height:clamp(500px,62vw,650px); position:relative; margin:1.5rem 0 2.5rem;
+  overflow:hidden; border:1px solid rgba(168,198,105,0.13); border-radius:32px;
+  background:
+    radial-gradient(52% 74% at 50% 42%,rgba(232,200,112,0.11),transparent 68%),
+    linear-gradient(180deg,rgba(9,14,9,0.38),rgba(7,10,7,0.68));
+  isolation:isolate;
+}
+.album-stage::before {
+  content:''; position:absolute; inset:-12%; z-index:-1; opacity:0.16;
+  background-image:var(--focus-cover); background-position:center; background-size:cover;
+  filter:blur(60px) saturate(0.8); transform:scale(1.12);
+  transition:background-image 0.5s ease;
+}
+.album-carousel { position:absolute; inset:0; padding:0; overflow:hidden; -webkit-mask-image:none; mask-image:none; perspective:1500px; }
+.album-track {
+  position:relative; display:block; width:100%; height:100%; transform:none !important; padding:0;
+  transition:translate .18s ease,opacity .17s ease,filter .17s ease;
+}
+.album-track.cf-leave-next { translate:-48px 0; opacity:0; filter:blur(2px); }
+.album-track.cf-leave-prev { translate:48px 0; opacity:0; filter:blur(2px); }
+.album-track.cf-enter-next { translate:48px 0; opacity:0; filter:blur(2px); }
+.album-track.cf-enter-prev { translate:-48px 0; opacity:0; filter:blur(2px); }
+.album.cf-slot {
+  position:absolute; left:50%; top:57%; width:clamp(220px,25vw,330px); margin:0;
+  opacity:1; transform-style:preserve-3d; transform-origin:center;
+  transition:transform 0.72s cubic-bezier(.2,.8,.18,1),opacity 0.5s ease,filter 0.5s ease;
+  will-change:transform; cursor:pointer;
+}
+.album.cf-slot .album-cover { border-radius:22px; margin:0; overflow:visible; box-shadow:0 30px 80px rgba(0,0,0,0.56); }
+.album.cf-slot .album-cover > img,.album.cf-slot .album-cover-blank { border-radius:inherit; overflow:hidden; }
+.album.cf-pos-p0 { transform:translate(-50%,-53%) translateZ(120px) scale(1); z-index:10; }
+.album.cf-pos-m1 { transform:translate(-146%,-51%) translateZ(-80px) rotateY(38deg) scale(.76); z-index:6; opacity:.62; filter:saturate(.66) brightness(.7); }
+.album.cf-pos-p1 { transform:translate(46%,-51%) translateZ(-80px) rotateY(-38deg) scale(.76); z-index:6; opacity:.62; filter:saturate(.66) brightness(.7); }
+.album.cf-pos-m2 { transform:translate(-232%,-49%) translateZ(-180px) rotateY(48deg) scale(.56); z-index:3; opacity:.22; filter:saturate(.4) brightness(.48); }
+.album.cf-pos-p2 { transform:translate(132%,-49%) translateZ(-180px) rotateY(-48deg) scale(.56); z-index:3; opacity:.22; filter:saturate(.4) brightness(.48); }
+.album.cf-slot:not(.cf-focus) .album-copy { opacity:.4; }
+.album.cf-slot .album-copy { margin-top:1rem; text-align:center; transition:opacity .35s ease; }
+.album.cf-focus .album-name { font-size:clamp(1.35rem,2.2vw,1.9rem); }
+.album.cf-focus .album-sub { color:var(--text2); }
+.album.cf-focus .album-cover { box-shadow:0 34px 100px rgba(0,0,0,.68),0 0 0 1px rgba(232,200,112,.32); }
+.album.cf-focus .album-cover img { filter:none; }
+.album.cf-slot .album-play {
+  width:auto; min-width:64px; height:34px; padding:0 .8rem; border-radius:999px;
+  font-family:inherit; font-size:.56rem; letter-spacing:.13em; text-transform:uppercase;
+}
+.cf-vinyl {
+  position:absolute; width:84%; aspect-ratio:1; right:-30%; top:8%; z-index:-1;
+  border-radius:50%; opacity:0; transform:translateX(-18%) rotate(-12deg);
+  background:repeating-radial-gradient(circle,#111 0 2px,#080808 3px 5px);
+  box-shadow:0 24px 55px rgba(0,0,0,.62),inset 0 0 0 1px rgba(232,200,112,.18);
+  transition:opacity .45s ease,transform .72s cubic-bezier(.2,.8,.18,1);
+}
+.cf-vinyl::after { content:''; position:absolute; inset:0; border-radius:50%; background:linear-gradient(125deg,rgba(255,255,255,.18),transparent 30% 65%,rgba(232,200,112,.08)); }
+.cf-vinyl i { position:absolute; width:34%; aspect-ratio:1; left:33%; top:33%; border-radius:50%; background-position:center; background-size:cover; }
+.album.cf-focus .cf-vinyl { opacity:.88; transform:translateX(0) rotate(8deg); }
+.album.cf-focus:hover .cf-vinyl { transform:translateX(7%) rotate(16deg); }
+.album-carousel.dragging .album.cf-slot { transition-duration:.18s; }
+.album-tools {
+  position:absolute; top:1.3rem; left:1.5rem; right:1.5rem; z-index:30;
+  display:flex; align-items:center; justify-content:space-between; gap:1rem; margin:0;
+  padding:.7rem 1rem; border:1px solid rgba(168,198,105,.18); border-radius:16px;
+  background:linear-gradient(100deg,rgba(9,14,9,.84),rgba(20,31,17,.72));
+  box-shadow:0 14px 42px rgba(0,0,0,.24);
+}
+.album-tools .albums-label { margin:0; }
+.album-stage > .pick-suggest {
+  position:absolute; top:5.85rem; left:50%; z-index:30; margin:0;
+  transform:translateX(-50%); white-space:nowrap;
+  background:linear-gradient(100deg,rgba(154,183,99,.24),rgba(204,159,74,.13));
+  border-color:rgba(225,236,173,.52); color:var(--text);
+  box-shadow:0 16px 44px rgba(0,0,0,.28),0 0 28px rgba(168,198,105,.08);
+}
+.album-stage > .pick-suggest:hover { transform:translateX(-50%) translateY(-2px); }
+.album-explore-btn {
+  border:1px solid rgba(232,200,112,.32); border-radius:999px; background:rgba(232,200,112,.08);
+  color:var(--amber3); padding:.5rem .8rem; font-family:inherit; font-size:.62rem;
+  letter-spacing:.13em; text-transform:uppercase; cursor:pointer;
+}
+.album-explore-btn:hover { color:var(--amber2); border-color:var(--amber2); }
+.album-explore[hidden] { display:none; }
+.album-explore {
+  position:fixed; inset:0; z-index:10020; padding:clamp(1rem,4vw,3.5rem);
+  display:grid; place-items:center; background:rgba(5,7,5,.92); backdrop-filter:blur(10px);
+}
+.ae-panel {
+  width:min(1180px,100%); max-height:88svh; overflow:auto; padding:clamp(1.2rem,3vw,2.5rem);
+  border:1px solid rgba(168,198,105,.2); border-radius:28px;
+  background:linear-gradient(160deg,#172116,#0b0f0b 62%); box-shadow:0 40px 120px rgba(0,0,0,.65);
+}
+.ae-head { display:flex; align-items:flex-start; justify-content:space-between; gap:2rem; margin-bottom:2rem; }
+.ae-head span { color:var(--amber2); font-size:.56rem; letter-spacing:.26em; text-transform:uppercase; }
+.ae-head h3 { margin:.45rem 0 0; color:var(--text); font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,4vw,3.6rem); font-weight:300; }
+.ae-head button { width:42px;height:42px;border-radius:50%;border:1px solid var(--border2);background:transparent;color:var(--text);cursor:pointer; }
+.ae-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:1.2rem; }
+.ae-card { border:0; background:transparent; color:inherit; text-align:left; cursor:pointer; min-width:0; }
+.ae-card img { display:block; width:100%; aspect-ratio:1; object-fit:cover; border-radius:14px; box-shadow:0 14px 38px rgba(0,0,0,.38); transition:transform .3s ease,box-shadow .3s ease; }
+.ae-card:hover img { transform:translateY(-5px); box-shadow:0 24px 55px rgba(0,0,0,.58),0 0 0 1px rgba(232,200,112,.28); }
+.ae-card strong { display:block; margin-top:.75rem; font-family:'Cormorant Garamond',serif; font-size:1.08rem; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.ae-card span { display:block; margin-top:.22rem; color:var(--text3); font-size:.58rem; letter-spacing:.05em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+body.explore-open { overflow:hidden; }
+body.explore-open .momo-btn,body.explore-open .cta-float,body.explore-open .motion-toggle { opacity:0 !important; pointer-events:none !important; }
+body:not(.has-track) .nowplaying { display:none; }
+body.has-track .nowplaying { animation:playerContextIn .55s ease both; }
+.album-drawer { scroll-margin-top:86px; }
+@keyframes playerContextIn { from{opacity:0;transform:translateY(14px);} to{opacity:1;transform:none;} }
+
+/* CHECKPOINT 4 — Visual Lab reads as a curated room, not an asset dump. */
+.gallery-curator {
+  display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:end; gap:2rem;
+  margin:0 0 1.3rem; padding-bottom:1.35rem; border-bottom:1px solid rgba(168,198,105,.13);
+}
+.gallery-curator p {
+  max-width:680px; margin:0; color:var(--text2); font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.12rem,1.8vw,1.45rem); line-height:1.45;
+}
+.gallery-status {
+  color:var(--amber3); font-size:.58rem; letter-spacing:.16em; line-height:1.45;
+  text-transform:uppercase; text-align:right; white-space:nowrap;
+}
+.g-filters {
+  position:relative; align-items:center; margin-bottom:2rem; padding:.25rem 0;
+}
+.g-chip { border-radius:999px; }
+.g-chip.active { box-shadow:0 0 0 1px rgba(232,200,112,.08),0 8px 24px rgba(0,0,0,.18); }
+.g-item::after {
+  content:''; position:absolute; inset:auto 0 0; height:38%; pointer-events:none; opacity:0;
+  background:linear-gradient(transparent,rgba(4,6,4,.56)); transition:opacity .35s ease;
+}
+.g-item:hover::after { opacity:1; }
+.g-item:hover .g-tag { transform:translateY(-2px); border-color:rgba(232,200,112,.38); }
+.g-tag { z-index:3; transition:transform .3s ease,border-color .3s ease; }
+.ali-lb .lb-meta {
+  position:absolute; left:50%; bottom:1.2rem; z-index:3; transform:translateX(-50%);
+  display:flex; align-items:center; gap:.8rem; max-width:calc(100vw - 11rem); padding:.55rem .85rem;
+  border:1px solid rgba(232,200,112,.22); border-radius:999px; color:var(--text2);
+  background:rgba(8,11,8,.72); backdrop-filter:blur(12px); font-size:.58rem;
+  letter-spacing:.14em; text-transform:uppercase; white-space:nowrap;
+}
+.ali-lb .lb-meta b { color:var(--amber2); font-weight:500; }
+.ali-lb .lb-like { left:auto; right:1.2rem; transform:none; }
+
+@media(max-width:700px){
+  .gallery-curator { grid-template-columns:1fr; align-items:start; gap:.75rem; }
+  .gallery-status { text-align:left; }
+  .g-filters { flex-wrap:nowrap; overflow-x:auto; margin-inline:-1rem; padding:.25rem 1rem .65rem; scrollbar-width:none; }
+  .g-filters::-webkit-scrollbar { display:none; }
+  .ali-lb .lb-meta { bottom:.8rem; max-width:calc(100vw - 2rem); }
+  .ali-lb .lb-like { top:.8rem; bottom:auto; left:1rem; right:auto; }
+}
+
+/* CHECKPOINT 5 — career proof as an editorial timeline. */
+.about-wrap { grid-template-columns:minmax(260px,.68fr) minmax(0,1.32fr); gap:clamp(2rem,4vw,4rem); margin-top:1.4rem; }
+.photo-stack { max-height:600px; aspect-ratio:4/5; }
+.about-quote { margin-bottom:1.5rem; font-size:clamp(1.45rem,2.55vw,2.55rem); }
+.about-eyebrow { display:none; }
+.about-desc p:first-child { margin:0 0 1rem; font-size:clamp(1.15rem,1.8vw,1.45rem); line-height:1.45; }
+.about-punch { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); max-width:none; margin-top:.35rem; border-block:1px solid var(--border); }
+.ap-line { display:block; min-height:122px; padding:1rem .9rem; border-top:0; border-right:1px solid var(--border); font-size:clamp(.95rem,1.25vw,1.15rem); }
+.ap-line:last-child { border-right:0; border-bottom:0; }
+.ap-line:hover { padding-left:1.1rem; }
+.ap-n { display:block; margin-bottom:.65rem; }
+.creative-pillars { width:min(1180px,calc(100% - 8rem)); margin-top:2.8rem; }
+.cp-card { min-height:138px; padding:1.1rem 1.2rem 1.25rem; }
+.cp-card h3 { margin:.9rem 0 .4rem; font-size:clamp(1.1rem,1.55vw,1.4rem); }
+.cp-card p { font-size:.68rem; line-height:1.55; }
+
+.work-proof {
+  display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); max-width:840px;
+  margin:0 0 3rem; border-block:1px solid rgba(168,198,105,.15);
+}
+.work-proof > div { display:flex; align-items:baseline; gap:.7rem; padding:1.05rem 1.1rem; border-right:1px solid rgba(168,198,105,.13); }
+.work-proof > div:first-child { padding-left:0; }
+.work-proof > div:last-child { border-right:0; }
+.work-proof strong { color:var(--amber2); font-family:'Cormorant Garamond',serif; font-size:clamp(1.35rem,2.2vw,1.9rem); font-weight:400; line-height:1; white-space:nowrap; }
+.work-proof span { color:var(--text3); font-size:.56rem; letter-spacing:.12em; line-height:1.35; text-transform:uppercase; }
+#workList { position:relative; counter-reset:career; }
+#workList::before { content:''; position:absolute; top:0; bottom:0; left:111px; width:1px; background:linear-gradient(var(--amber),rgba(168,198,105,.08)); opacity:.35; }
+.work-item {
+  counter-increment:career; position:relative; grid-template-columns:88px minmax(0,1fr) minmax(180px,.52fr);
+  gap:2.4rem; min-height:142px; padding:1.6rem 0; transition:padding .35s ease,background .35s ease;
+}
+.work-item::before {
+  content:''; position:absolute; left:106px; top:2rem; width:9px; height:9px; z-index:2;
+  border:2px solid var(--ink2); border-radius:50%; background:var(--text3); box-shadow:0 0 0 1px rgba(232,200,112,.2);
+}
+.work-item.is-current::before { background:var(--amber2); box-shadow:0 0 18px rgba(232,200,112,.55),0 0 0 1px rgba(232,200,112,.25); }
+.work-item:hover { padding-left:.6rem; padding-right:.6rem; background:linear-gradient(90deg,rgba(168,198,105,.055),transparent 68%); }
+.work-yr { padding-top:.12rem; color:var(--amber3); line-height:1.45; }
+.work-main { min-width:0; }
+.work-kicker { margin-bottom:.55rem; color:var(--text3); font-size:.52rem; letter-spacing:.18em; text-transform:uppercase; }
+.work-role { font-family:'Cormorant Garamond',serif; font-size:clamp(1.35rem,2.2vw,1.8rem); line-height:1.05; }
+.work-co { margin-top:.35rem; }
+.work-desc { max-width:760px; margin-top:.85rem; color:rgba(243,236,221,.67); font-size:.77rem; line-height:1.72; }
+.work-side { align-self:center; }
+.work-badges { justify-content:flex-start; }
+.wbadge { border-radius:999px; background:rgba(168,198,105,.035); }
+.work-now { display:inline-block; margin-top:.75rem; color:var(--amber2); font-size:.53rem; letter-spacing:.16em; text-transform:uppercase; }
+
+@media(max-width:760px){
+  .work-proof { grid-template-columns:1fr; }
+  .work-proof > div { padding:.8rem 0; border-right:0; border-bottom:1px solid rgba(168,198,105,.1); }
+  .work-proof > div:last-child { border-bottom:0; }
+  #workList::before { left:5px; }
+  .work-item { grid-template-columns:1fr; gap:.65rem; min-height:0; padding:1.55rem 0 1.55rem 1.7rem; }
+  .work-item::before { left:0; top:1.9rem; }
+  .work-item:hover { padding-left:1.7rem; padding-right:0; }
+  .work-yr { font-size:.58rem; }
+  .work-side { margin-top:.3rem; }
+}
+
+/* THE QUIET HOUSE — an architectural cutaway of accumulated inner worlds. */
+.career-house {
+  --room-line:rgba(198,218,157,.19); position:relative; min-height:610px; margin-top:.5rem;
+  overflow:hidden; border:1px solid rgba(168,198,105,.17); border-radius:34px;
+  background:
+    linear-gradient(rgba(168,198,105,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(168,198,105,.035) 1px,transparent 1px),
+    radial-gradient(48% 62% at 72% 60%,rgba(171,120,58,.11),transparent 72%),
+    linear-gradient(155deg,#101710,#070a08 68%);
+  background-size:48px 48px,48px 48px,auto,auto;
+  box-shadow:0 50px 130px rgba(0,0,0,.45),inset 0 0 100px rgba(0,0,0,.28);
+  isolation:isolate;
+}
+.career-house::before {
+  content:''; position:absolute; inset:7% 5% 8%; z-index:-1; opacity:.52;
+  border:1px solid rgba(168,198,105,.13); border-top:0;
+  clip-path:polygon(0 20%,13% 20%,13% 10%,29% 10%,29% 0,48% 0,48% 15%,68% 15%,68% 7%,84% 7%,84% 20%,100% 20%,100% 100%,0 100%);
+  background:linear-gradient(180deg,rgba(168,198,105,.035),transparent 60%);
+}
+.career-house::after {
+  content:''; position:absolute; left:5%; right:5%; bottom:8%; height:1px;
+  background:linear-gradient(90deg,transparent,var(--amber),rgba(168,198,105,.2),transparent); opacity:.45;
+}
+.ch-blueprint { position:absolute; inset:1.15rem 1.35rem auto; z-index:5; display:flex; justify-content:space-between; color:rgba(198,218,157,.42); font:500 .48rem/1.2 'SF Mono',ui-monospace,monospace; letter-spacing:.16em; }
+.ch-sky { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+.ch-sky i { position:absolute; width:3px; aspect-ratio:1; border-radius:50%; background:var(--amber2); box-shadow:0 0 14px rgba(232,200,112,.75); animation:houseFloat 9s ease-in-out infinite; }
+.ch-sky i:nth-child(1){left:14%;top:17%;}.ch-sky i:nth-child(2){left:64%;top:10%;animation-delay:-3s}.ch-sky i:nth-child(3){right:12%;top:29%;animation-delay:-6s}
+@keyframes houseFloat{50%{transform:translateY(-16px);opacity:.35}}
+.ch-axis { position:absolute; left:49.8%; top:7%; bottom:8%; width:1px; opacity:.2; background:repeating-linear-gradient(to bottom,var(--amber) 0 5px,transparent 5px 11px); }
+.ch-figure { position:absolute; z-index:6; left:49.8%; bottom:8%; width:34px; height:112px; transform:translateX(-50%); pointer-events:none; }
+.ch-figure::before { content:''; position:absolute; left:9px; top:0; width:16px; height:16px; border-radius:50%; background:#050705; border:1px solid rgba(232,200,112,.38); }
+.ch-figure i { position:absolute; left:7px; top:18px; width:20px; height:72px; clip-path:polygon(30% 0,70% 0,100% 100%,0 100%); background:linear-gradient(#080b08,#020302); border-inline:1px solid rgba(232,200,112,.2); }
+.ch-figure span { position:absolute; left:50%; bottom:0; transform:translateX(-50%); color:rgba(232,200,112,.45); font-size:.42rem; letter-spacing:.16em; }
+.career-rooms { position:absolute; inset:7% 5% 8%; display:grid; grid-template-columns:repeat(12,1fr); grid-template-rows:repeat(8,1fr); }
+.career-room {
+  position:relative; overflow:hidden; padding:1.1rem 1.15rem; color:var(--text); text-align:left;
+  border:0; border-right:1px solid var(--room-line); border-bottom:1px solid var(--room-line);
+  background:linear-gradient(140deg,rgba(20,29,18,.78),rgba(7,10,7,.64)); cursor:pointer;
+  transition:background .55s ease,box-shadow .55s ease,filter .55s ease; isolation:isolate;
+}
+.career-room:nth-child(1){grid-area:2/1/6/5}.career-room:nth-child(2){grid-area:1/5/4/9}.career-room:nth-child(3){grid-area:2/10/7/13}.career-room:nth-child(4){grid-area:6/1/9/5}.career-room:nth-child(5){grid-area:4/5/9/10}
+.career-room::before { content:''; position:absolute; inset:0; z-index:-1; opacity:.18; transition:opacity .55s ease,transform .8s ease; background:var(--room-art); }
+.career-room:nth-child(1){--room-art:linear-gradient(90deg,transparent 48%,rgba(232,200,112,.32) 49% 50%,transparent 51%),linear-gradient(rgba(232,200,112,.18) 1px,transparent 1px);background-size:auto,100% 28px}
+.career-room:nth-child(2){--room-art:radial-gradient(circle at 22% 30%,rgba(232,200,112,.8) 0 2px,transparent 3px),linear-gradient(115deg,transparent 45%,rgba(232,200,112,.4) 46% 47%,transparent 48%)}
+.career-room:nth-child(3){--room-art:repeating-radial-gradient(ellipse at 50% 100%,transparent 0 20px,rgba(232,200,112,.16) 21px 22px)}
+.career-room:nth-child(4){--room-art:repeating-linear-gradient(125deg,transparent 0 28px,rgba(168,198,105,.14) 29px 30px)}
+.career-room:nth-child(5){--room-art:radial-gradient(circle at 70% 35%,rgba(232,200,112,.24),transparent 28%),repeating-radial-gradient(circle at 70% 35%,transparent 0 22px,rgba(232,200,112,.13) 23px 24px)}
+.career-room:hover,.career-room.is-open { background:linear-gradient(140deg,rgba(38,48,27,.94),rgba(13,17,12,.92)); box-shadow:inset 0 0 60px rgba(232,200,112,.07),0 0 45px rgba(0,0,0,.3); z-index:4; }
+.career-room:hover::before,.career-room.is-open::before { opacity:.62; transform:scale(1.04); }
+.cr-no { color:rgba(232,200,112,.48); font-size:.48rem; letter-spacing:.18em; }
+.cr-word { position:absolute; right:.6rem; bottom:-.15em; z-index:-1; color:rgba(232,200,112,.065); font-family:'Cormorant Garamond',serif; font-size:clamp(3.2rem,7vw,7rem); font-style:italic; line-height:.8; white-space:nowrap; }
+.cr-door { position:absolute; right:1rem; top:1rem; width:20px; height:32px; border:1px solid rgba(232,200,112,.25); border-bottom-color:rgba(232,200,112,.5); }
+.cr-door::after { content:''; position:absolute; right:3px; top:50%; width:2px; height:2px; border-radius:50%; background:var(--amber2); box-shadow:0 0 8px var(--amber2); }
+.cr-title { max-width:85%; margin:.7rem 0 .35rem; font-family:'Cormorant Garamond',serif; font-size:clamp(1.2rem,2.2vw,1.9rem); font-weight:400; line-height:1; }
+.cr-thought { max-width:38ch; margin:0; color:rgba(243,236,221,.58); font-size:.68rem; line-height:1.6; }
+.cr-depth { max-height:0; overflow:hidden; opacity:0; transform:translateY(8px); transition:max-height .6s ease,opacity .45s ease,transform .45s ease; }
+.career-room.is-open .cr-depth { max-height:170px; margin-top:.8rem; opacity:1; transform:none; }
+.cr-depth p { margin:0 0 .6rem; color:rgba(243,236,221,.78); font-size:.7rem; line-height:1.65; }
+.cr-meta { color:var(--amber3); font-size:.48rem; letter-spacing:.12em; line-height:1.5; text-transform:uppercase; }
+.ch-hint { position:absolute; left:1.35rem; bottom:1rem; z-index:7; color:rgba(198,218,157,.48); font-size:.5rem; letter-spacing:.14em; text-transform:uppercase; }
+.ch-hint span { color:var(--amber2); }
+.career-epilogue { max-width:900px; margin:2.7rem auto 0; text-align:center; font-family:'Cormorant Garamond',serif; font-size:clamp(1.5rem,3vw,2.7rem); line-height:1.25; }
+.career-epilogue span,.career-epilogue em { display:block; }
+.career-epilogue span { color:rgba(243,236,221,.52); }
+.career-epilogue em { color:var(--amber2); font-weight:300; }
+
+@media(max-width:760px){
+  .about-wrap { grid-template-columns:1fr; gap:1.8rem; }
+  .photo-stack { width:min(70vw,290px); max-height:none; margin-inline:auto; }
+  .about-quote { margin-bottom:1.15rem; }
+  .about-punch { grid-template-columns:1fr; }
+  .ap-line { min-height:0; border-right:0; border-bottom:1px solid var(--border); }
+  .creative-pillars { width:calc(100% - 2rem); margin-top:2rem; grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .cp-card { min-height:140px; }
+  .career-house { min-height:auto; padding:4.2rem 1rem 4rem; border-radius:22px; }
+  .career-house::before,.ch-axis,.ch-figure { display:none; }
+  .career-rooms { position:relative; inset:auto; display:grid; grid-template-columns:1fr; grid-template-rows:none; gap:1px; }
+  .career-room:nth-child(n){ grid-area:auto; min-height:132px; border:1px solid var(--room-line); padding:1.05rem 1.1rem; }
+  .career-room.is-open { min-height:225px; }
+  .cr-title { font-size:1.55rem; }
+  .ch-blueprint span:nth-child(2){display:none}
+  .ch-hint { left:1.1rem; bottom:1.15rem; }
+  .career-epilogue { margin-top:3rem; }
+}
+body.no-motion .ch-sky i { animation:none; }
+
+/* FINAL POLISH — motion proof and contact stay concise after the dense story sections. */
+#videos .sec-bar { margin-bottom:2rem; }
+.vid-stage { max-width:760px; margin-bottom:2rem; }
+.vid-stage-frame { aspect-ratio:16/9; min-height:0; }
+.vid-stage-cap .vs-title { font-size:clamp(1.2rem,2vw,1.55rem); }
+.vid-info { padding:.85rem 1rem; }
+.vid-title { font-size:1rem; line-height:1.25; }
+#contact { padding-block:clamp(4.5rem,8vw,7rem); }
+.contact-deck { margin-top:2rem; }
+footer { padding-top:3.5rem; }
+.f-disc { margin-bottom:1.8rem; }
+
+@media (max-width:700px){
+  .album-stage { min-height:540px; border-radius:22px; }
+  .album.cf-slot { top:61%; width:min(64vw,250px); }
+  .album.cf-pos-p0 { transform:translate(-50%,-55%) scale(1); }
+  .album.cf-pos-m1 { transform:translate(-126%,-53%) rotateY(32deg) scale(.7); opacity:.5; }
+  .album.cf-pos-p1 { transform:translate(26%,-53%) rotateY(-32deg) scale(.7); opacity:.5; }
+  .album.cf-pos-m2,.album.cf-pos-p2 { opacity:0; pointer-events:none; }
+  .album.cf-slot:not(.cf-focus) .album-copy { opacity:0; }
+  .cf-vinyl { right:-25%; }
+  .cf-nav { top:50%; }
+  .album-tools { top:.75rem; left:.75rem; right:.75rem; align-items:center; padding:.6rem .7rem; }
+  .album-tools .albums-label { font-size:.55rem; }
+  .album-explore-btn { max-width:160px; text-align:center; line-height:1.35; font-size:.55rem; }
+  .album-stage > .pick-suggest { top:5.25rem; width:calc(100% - 2.2rem); justify-content:center; white-space:normal; text-align:center; }
+  .album-explore { padding:.6rem; }
+  .ae-panel { max-height:94svh; border-radius:20px; }
+  .ae-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; }
+}
+body:not(.past-hero) .momo-btn,
+body:not(.past-hero) .cta-float,
+body:not(.past-hero) .motion-toggle { opacity:0; pointer-events:none; transform:translateY(10px); }
+.momo-btn,.cta-float,.motion-toggle { transition:opacity 0.35s ease, transform 0.35s ease, border-color 0.3s, color 0.3s !important; }
+
+@media (max-width:900px){
+  .creative-pillars { width:calc(100% - 3rem); grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .cp-card:nth-child(2){ border-right:0; }
+  .cp-card:nth-child(-n+2){ border-bottom:1px solid rgba(81,106,57,0.18); }
+  .ac-row { grid-template-columns:72px 1fr; }
+  .ac-row > span:last-child { grid-column:2; }
+}
+@media (max-width:620px){
+  .creative-pillars { width:calc(100% - 2rem); margin-top:1.6rem; grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .cp-card { min-height:132px; padding:.9rem; border-bottom:1px solid rgba(81,106,57,0.18); }
+  .cp-card:nth-child(odd) { border-right:1px solid rgba(81,106,57,0.18); }
+  .cp-card h3 { margin-top:.65rem; font-size:1rem; }
+  .cp-card p { font-size:.62rem; line-height:1.45; }
+  .music-threshold { min-height:68svh; padding-block:5rem; }
+  .mt-orbit { width:110vw; }
+  .mt-copy p { margin-top:1.6rem; }
+}
+</style>
+<style id="music-artist-portraits">
+/* Music key-visual detail: compact living portraits, existing UX preserved. */
+#music { padding-bottom:clamp(4rem,7vw,6rem); }
+#music .artist-strip {
+  position:relative; display:flex; justify-content:center; align-items:flex-start;
+  gap:clamp(2.5rem,9vw,9rem); max-width:880px; margin:0 auto 3.25rem;
+  padding:1rem 0 1.5rem;
+}
+#music .artist-strip::before {
+  content:''; position:absolute; left:12%; right:12%; top:67px; height:1px;
+  background:linear-gradient(90deg,transparent,rgba(168,198,105,.2),rgba(232,200,112,.22),rgba(168,198,105,.2),transparent);
+}
+#music .artist {
+  width:min(290px,38vw); padding:0; border:0; border-radius:0; text-align:center;
+  background:transparent; box-shadow:none; transform:none;
+}
+#music .artist:hover { border:0; transform:none; }
+#music .artist-trigger {
+  position:relative; display:flex; flex-direction:column; align-items:center; width:100%;
+  padding:0; border:0; background:transparent; color:inherit; cursor:pointer; font-family:inherit;
+}
+#music .artist-photo {
+  position:relative; width:clamp(104px,12vw,132px); height:clamp(104px,12vw,132px);
+  border:1px solid rgba(225,236,173,.28); border-radius:50%; overflow:visible;
+  background:var(--ink3); box-shadow:0 20px 55px rgba(0,0,0,.44),0 0 0 10px rgba(168,198,105,.025);
+  transition:transform .55s cubic-bezier(.2,.8,.18,1),box-shadow .55s ease,border-color .4s ease;
+}
+#music .artist-photo::before,#music .artist-photo::after {
+  content:''; position:absolute; inset:-12px; border:1px solid rgba(168,198,105,.14); border-radius:50%;
+  transition:transform .8s ease,opacity .5s ease; pointer-events:none;
+}
+#music .artist-photo::after { inset:-22px; border-style:dotted; opacity:.45; animation:artistOrbit 24s linear infinite; }
+#music .artist-photo img { width:100%; height:100%; border-radius:50%; object-fit:cover; filter:none !important; }
+#music .artist.real .artist-photo img { object-position:center 30%; }
+#music .artist.virtual .artist-photo img { object-position:center 28%; }
+#music .artist-trigger:hover .artist-photo,#music .artist.is-open .artist-photo {
+  transform:translateY(-5px) scale(1.035); border-color:rgba(232,200,112,.55);
+  box-shadow:0 28px 70px rgba(0,0,0,.52),0 0 38px rgba(232,200,112,.1);
+}
+#music .artist-trigger:hover .artist-photo::before,#music .artist.is-open .artist-photo::before { transform:scale(1.12); }
+#music .artist-compact { display:flex; flex-direction:column; align-items:center; margin-top:1.45rem; }
+#music .artist-compact .artist-type { margin-bottom:.4rem; }
+#music .artist-compact .artist-name { margin:0; font-size:clamp(1.45rem,2.4vw,2rem); }
+#music .artist-open-mark {
+  position:absolute; right:calc(50% - 82px); top:86px; display:grid; place-items:center;
+  width:28px; height:28px; border:1px solid rgba(168,198,105,.32); border-radius:50%;
+  background:rgba(10,17,10,.9); color:var(--amber2); font-size:1rem; line-height:1;
+  transition:transform .45s ease,background .35s ease;
+}
+#music .artist.is-open .artist-open-mark { transform:rotate(45deg); background:rgba(49,70,34,.92); }
+#music .artist-info {
+  max-height:0; overflow:hidden; opacity:0; transform:translateY(-8px);
+  transition:max-height .55s cubic-bezier(.2,.8,.18,1),opacity .35s ease,transform .45s ease;
+}
+#music .artist-info > .artist-type,#music .artist-info > .artist-name { display:none; }
+#music .artist-info .artist-desc {
+  margin:1.2rem auto 0; padding-top:1rem; max-width:34ch;
+  border-top:1px solid rgba(168,198,105,.16); color:rgba(220,209,170,.72); line-height:1.7;
+}
+#music .artist.is-open .artist-info { max-height:220px; opacity:1; transform:none; }
+@keyframes artistOrbit { to{ transform:rotate(360deg); } }
+body.no-motion #music .artist-photo::after { animation:none; }
+
+/* Keep the ending of Music visually intentional and remove dead air. */
+#music .track-embed:not(.open) { display:none; }
+#music .gate-zone:not(.gated) { margin-bottom:0; }
+#music .nowplaying { margin-bottom:0; }
+
+@media(max-width:620px){
+  #music .artist-strip { display:grid; grid-template-columns:1fr 1fr; gap:1.35rem; margin-bottom:2.25rem; }
+  #music .artist-strip::before { left:20%; right:20%; top:57px; }
+  #music .artist { width:auto; padding:0; }
+  #music .artist-photo { width:94px; height:94px; }
+  #music .artist-open-mark { right:calc(50% - 65px); top:62px; width:26px; height:26px; }
+  #music .artist-compact { margin-top:1.1rem; }
+  #music .artist-compact .artist-type { font-size:.48rem; }
+  #music .artist-compact .artist-name { font-size:1.35rem; }
+  #music .artist-info .artist-desc { font-size:.66rem; line-height:1.6; }
+  #music .artist.is-open .artist-info { max-height:260px; }
+}
+</style>
+<style id="music-muse-motion">
+/* Music Muse motion package — decorative only, no layout or controls changed. */
+#music .music-muse-world { position:absolute; inset:0; z-index:0; overflow:hidden; pointer-events:none; }
+#music .music-muse-world::before {
+  content:''; position:absolute; left:50%; top:7%; width:min(920px,86vw); aspect-ratio:1;
+  transform:translateX(-50%); border-radius:50%; opacity:.32;
+  background:radial-gradient(circle,rgba(232,200,112,.08),transparent 54%);
+  animation:mmBreathe 8s ease-in-out infinite;
+}
+#music .mm-stem {
+  position:absolute; left:8%; top:9%; width:1px; height:82%; opacity:.36;
+  background:linear-gradient(transparent,rgba(168,198,105,.55) 14%,rgba(232,200,112,.34) 52%,rgba(168,198,105,.15) 88%,transparent);
+  transform:rotate(2deg); transform-origin:bottom;
+}
+#music .mm-stem::before,#music .mm-stem::after {
+  content:''; position:absolute; width:74px; height:28px; border:1px solid rgba(168,198,105,.24);
+  border-left:0; border-bottom:0; border-radius:0 100% 0 0;
+}
+#music .mm-stem::before { left:0; top:29%; transform:rotate(-16deg); }
+#music .mm-stem::after { right:0; top:56%; transform:scaleX(-1) rotate(-12deg); }
+#music .mm-bloom {
+  position:absolute; left:calc(8% - 31px); top:7%; width:64px; height:64px; border-radius:50%; opacity:.5;
+  background:
+    radial-gradient(circle,rgba(232,200,112,.65) 0 2px,transparent 3px),
+    repeating-conic-gradient(from 2deg,rgba(225,236,173,.4) 0 1deg,transparent 1deg 13deg);
+  -webkit-mask:radial-gradient(circle,transparent 0 14%,#000 15% 47%,transparent 49%);
+  mask:radial-gradient(circle,transparent 0 14%,#000 15% 47%,transparent 49%);
+  animation:mmBloom 18s linear infinite;
+}
+#music .mm-seed {
+  position:absolute; color:rgba(232,220,172,.56); font:400 .72rem/1 Georgia,serif;
+  text-shadow:0 0 14px rgba(232,200,112,.24); opacity:.32;
+  animation:mmSeed 11s ease-in-out infinite;
+}
+#music .mm-seed::after { content:''; position:absolute; left:50%; top:11px; width:1px; height:22px; background:linear-gradient(rgba(168,198,105,.48),transparent); transform:rotate(-22deg); transform-origin:top; }
+#music .mm-s1 { left:15%; top:11%; --dx:35px; --dy:-24px; animation-delay:-1s; }
+#music .mm-s2 { left:27%; top:18%; --dx:52px; --dy:-18px; animation-delay:-7s; }
+#music .mm-s3 { right:16%; top:14%; --dx:-38px; --dy:32px; animation-delay:-4s; }
+#music .mm-s4 { right:8%; top:41%; --dx:-50px; --dy:-28px; animation-delay:-8s; }
+#music .mm-s5 { left:13%; top:68%; --dx:46px; --dy:-36px; animation-delay:-5s; }
+#music .mm-s6 { right:20%; top:78%; --dx:-24px; --dy:-30px; animation-delay:-10s; }
+#music .mm-lyric {
+  position:absolute; color:rgba(220,209,170,.15); font:italic 300 clamp(1rem,1.6vw,1.35rem)/1.2 'Cormorant Garamond',serif;
+  letter-spacing:.04em; white-space:nowrap; writing-mode:vertical-rl;
+}
+#music .mm-l1 { right:2.3%; top:18%; }
+#music .mm-l2 { left:2.2%; bottom:8%; transform:rotate(180deg); }
+
+/* The existing album stage becomes the illuminated clearing, without moving it. */
+#music .album-stage::after {
+  content:''; position:absolute; left:8%; right:8%; bottom:4%; height:22%; z-index:-1;
+  border-radius:50%; pointer-events:none; opacity:.42;
+  background:radial-gradient(ellipse,rgba(232,200,112,.18),rgba(96,126,68,.08) 42%,transparent 70%);
+  filter:blur(10px); animation:mmGround 7s ease-in-out infinite;
+}
+#music .album.cf-focus .album-cover::before {
+  content:''; position:absolute; inset:-1px; z-index:3; pointer-events:none; border-radius:inherit;
+  box-shadow:inset 0 0 0 1px rgba(239,222,168,.22),inset 0 -50px 75px rgba(9,17,10,.18);
+}
+
+/* Playback does not create new UI; it wakes the garden. */
+body.playing #music .music-muse-world::before { opacity:.52; animation-duration:4.8s; }
+body.playing #music .mm-bloom { opacity:.76; animation-duration:11s; }
+body.playing #music .mm-seed { opacity:.68; animation-duration:7s; }
+body.playing #music .album-stage::after { opacity:.7; animation-duration:4s; }
+
+/* Album shrine: enrich the existing carousel without changing its geometry. */
+#music .album-stage {
+  overflow-anchor:none;
+  border-color:rgba(168,198,105,.2);
+  background:
+    url('./images/themes/dandelion/seed.svg') 14% 24%/13px auto no-repeat,
+    url('./images/themes/dandelion/seed.svg') 88% 39%/10px auto no-repeat,
+    url('./images/themes/dandelion/corner-meadow.svg') center bottom/100% auto no-repeat,
+    radial-gradient(48% 64% at 50% 54%,rgba(232,200,112,.12),transparent 70%),
+    linear-gradient(180deg,rgba(9,18,10,.52),rgba(5,10,6,.8));
+  box-shadow:inset 0 -80px 130px rgba(0,0,0,.34),0 38px 110px rgba(0,0,0,.32);
+}
+#music .album-carousel::before,#music .album-carousel::after {
+  content:''; position:absolute; top:17%; bottom:12%; width:1px; z-index:2; pointer-events:none;
+  background:linear-gradient(transparent,rgba(168,198,105,.22) 28%,rgba(232,200,112,.15) 68%,transparent);
+}
+#music .album-carousel::before { left:12%; transform:rotate(4deg); }
+#music .album-carousel::after { right:12%; transform:rotate(-4deg); }
+#music .album-tools {
+  border-color:rgba(168,198,105,.2);
+  background:linear-gradient(100deg,rgba(7,14,8,.88),rgba(22,37,18,.7));
+  box-shadow:0 16px 48px rgba(0,0,0,.26),inset 0 1px rgba(243,232,189,.035);
+}
+#music .album.cf-focus .album-cover {
+  box-shadow:0 36px 105px rgba(0,0,0,.7),0 0 0 1px rgba(232,200,112,.36),0 0 48px rgba(232,200,112,.1);
+}
+#music .album-drawer { overflow-anchor:none; }
+#music .drawer-inner {
+  border-color:rgba(168,198,105,.2);
+  box-shadow:0 28px 90px rgba(0,0,0,.42),inset 0 1px rgba(243,232,189,.04);
+}
+#music .drawer-head { border-bottom-color:rgba(168,198,105,.15); }
+#music .trow { border-bottom:1px solid rgba(168,198,105,.07); }
+#music .trow:hover { background:linear-gradient(90deg,rgba(232,200,112,.07),transparent); }
+
+@keyframes mmBreathe { 50%{ transform:translateX(-50%) scale(1.08); opacity:.5; } }
+@keyframes mmBloom { to{ transform:rotate(360deg); } }
+@keyframes mmSeed { 50%{ transform:translate(var(--dx),var(--dy)) rotate(18deg); opacity:.72; } }
+@keyframes mmGround { 50%{ transform:scaleX(1.08); filter:blur(14px); } }
+
+body.no-motion #music .music-muse-world *,body.no-motion #music .music-muse-world::before,
+body.no-motion #music .album-stage::after { animation:none !important; }
+body.perf-lite #music .mm-seed,body.perf-lite #music .mm-bloom { animation:none !important; }
+
+@media(max-width:700px){
+  #music .music-muse-world::before { width:120vw; top:18%; opacity:.22; }
+  #music .mm-stem { left:4%; opacity:.2; }
+  #music .mm-bloom { left:calc(4% - 24px); width:50px; height:50px; opacity:.32; }
+  #music .mm-seed { font-size:.58rem; opacity:.24; }
+  #music .mm-s2,#music .mm-s4,#music .mm-s6,#music .mm-lyric { display:none; }
+  #music .album-stage::after { left:2%; right:2%; bottom:2%; }
+}
+</style>
+<style id="music-listening-room">
+/* One stable listening surface: album, information and player share a frame. */
+#music .listening-room {
+  position:relative; display:grid;
+  grid-template-columns:minmax(0,1.08fr) minmax(340px,.92fr);
+  grid-template-rows:minmax(580px,68svh) auto;
+  gap:1rem; padding:1rem;
+  border:1px solid rgba(168,198,105,.18); border-radius:30px;
+  background:linear-gradient(145deg,rgba(12,23,13,.7),rgba(5,10,6,.72));
+  box-shadow:0 42px 130px rgba(0,0,0,.4),inset 0 1px rgba(243,232,189,.035);
+  overflow:hidden; isolation:isolate;
+}
+#music .listening-room::before {
+  content:''; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(54% 74% at 29% 48%,rgba(232,200,112,.09),transparent 70%),
+    radial-gradient(42% 64% at 82% 45%,rgba(102,135,75,.1),transparent 72%);
+}
+#music .listening-room .album-stage {
+  grid-column:1; grid-row:1; width:100%; height:100%; min-height:0; margin:0;
+  border-radius:22px 4px 4px 22px; box-shadow:inset 0 -70px 120px rgba(0,0,0,.3);
+}
+#music .listening-room .album-drawer {
+  grid-column:2; grid-row:1; display:block; height:100%; min-height:0;
+  max-height:none; margin:0; overflow:hidden; opacity:1;
+  border:1px solid rgba(168,198,105,.16); border-radius:4px 22px 22px 4px;
+  background:linear-gradient(155deg,rgba(19,32,17,.78),rgba(7,13,8,.88));
+}
+#music .listening-room .album-drawer:empty {
+  display:grid; place-items:center; padding:2rem; text-align:center;
+}
+#music .listening-room .album-drawer:empty::before {
+  content:'CHỌN MỘT ALBUM\A để mở lyric sheet và danh sách bài';
+  white-space:pre; color:rgba(220,209,170,.42);
+  font:500 .62rem/1.9 'Instrument Sans',sans-serif; letter-spacing:.16em; text-transform:uppercase;
+}
+#music .listening-room .drawer-inner {
+  height:100%; max-height:none; padding:1.35rem; border:0; border-radius:inherit;
+  background:transparent; box-shadow:none; overflow:hidden;
+}
+#music .listening-room .drawer-z { display:flex; flex-direction:column; height:100%; min-height:0; }
+#music .listening-room .drawer-head { flex:0 0 auto; }
+#music .listening-room .tlist {
+  flex:1 1 auto; min-height:0; overflow-y:auto; overscroll-behavior:contain;
+  padding-right:.35rem; scrollbar-width:thin; scrollbar-color:rgba(232,200,112,.35) transparent;
+}
+#music .listening-room .drawer-more { flex:0 0 auto; }
+#music .listening-room .nowplaying {
+  grid-column:1/-1; grid-row:2; margin:0; border-radius:18px;
+  background:linear-gradient(100deg,rgba(18,31,17,.9),rgba(7,13,8,.88));
+}
+#music .listening-room .album-explore { grid-column:1/-1; }
+
+/* Album switching only replaces the right-hand sheet; it never changes room height. */
+#music .listening-room .album-drawer.open { max-height:none; margin:0; opacity:1; }
+#music .listening-room .drawer-title { font-size:clamp(1.6rem,2.5vw,2.25rem); }
+#music .listening-room .drawer-desc { max-width:46ch; }
+#music .listening-room .trow { grid-template-columns:26px 36px minmax(0,1fr) auto; gap:.75rem; padding:.62rem .35rem; }
+
+@media(max-width:980px){
+  #music .listening-room { grid-template-columns:1fr; grid-template-rows:540px minmax(280px,48svh) auto; }
+  #music .listening-room .album-stage { grid-column:1; grid-row:1; border-radius:20px 20px 4px 4px; }
+  #music .listening-room .album-drawer { grid-column:1; grid-row:2; border-radius:4px; }
+  #music .listening-room .nowplaying { grid-column:1; grid-row:3; }
+}
+@media(max-width:620px){
+  #music .listening-room { grid-template-rows:520px minmax(260px,46svh) auto; gap:.65rem; padding:.65rem; border-radius:22px; }
+  #music .listening-room .drawer-inner { padding:1rem; }
+  #music .listening-room .drawer-head { gap:.7rem; }
+  #music .listening-room .drawer-actions { width:100%; justify-content:flex-start; }
+  #music .listening-room .trow { grid-template-columns:22px 32px minmax(0,1fr) auto; gap:.55rem; }
+}
+</style>
+<style id="music-intro-compact">
+/* Compact Music intro: preserve the artwork, remove the oversized empty stage. */
+@media(min-width:901px){
+  #music { padding-top:clamp(4.5rem,7vw,7rem); }
+  #music .music-head {
+    display:grid; grid-template-columns:minmax(0,1fr) minmax(260px,.42fr);
+    align-items:end; gap:2rem; margin-bottom:1rem;
+  }
+  #music .music-head .sec-label { margin-bottom:.45rem; }
+  #music .music-head .sec-h { font-size:clamp(3rem,5.4vw,5.8rem); line-height:.9; }
+  #music .music-head .sec-bar { width:min(220px,28vw); margin:.9rem 0 0; height:12px; }
+  #music .music-meta { max-width:34ch; padding-bottom:.6rem; line-height:1.65; text-align:right; }
+  #music .music-dli-note {
+    max-width:760px; margin:.25rem 0 1.5rem; font-size:.9rem; line-height:1.65;
+  }
+  #music > .albums-label { margin:0 0 .4rem; font-size:.54rem; }
+  #music .artist-strip {
+    gap:clamp(3rem,8vw,8rem); max-width:620px; margin:0 auto 2.25rem;
+    padding:.25rem 0 .75rem;
+  }
+  #music .artist-strip::before { top:48px; left:17%; right:17%; }
+  #music .artist { width:min(220px,26vw); }
+  #music .artist-photo { width:88px; height:88px; }
+  #music .artist-photo::before { inset:-8px; }
+  #music .artist-photo::after { inset:-15px; }
+  #music .artist-compact { margin-top:.95rem; }
+  #music .artist-compact .artist-type { margin-bottom:.22rem; font-size:.48rem; }
+  #music .artist-compact .artist-name { font-size:1.45rem; }
+  #music .artist-open-mark { right:calc(50% - 58px); top:59px; width:24px; height:24px; font-size:.85rem; }
+  #music .artist-info .artist-desc { margin-top:.8rem; padding-top:.75rem; font-size:.7rem; line-height:1.55; }
+  #music .artist.is-open .artist-info { max-height:150px; }
+  #music .mm-l1 { top:10%; }
+  #music .mm-bloom { top:5%; transform:scale(.8); }
+}
+@media(max-width:900px){
+  #music .music-head { margin-bottom:1.2rem; }
+  #music .music-head .sec-h { font-size:clamp(2.8rem,11vw,5rem); }
+  #music .music-dli-note { margin:0 0 1.4rem; }
+  #music > .albums-label { margin-bottom:.5rem; }
+}
+</style>
+<style id="music-density-pass">
+/* Final density pass: one intro band, smaller albums, compact player. */
+@media(min-width:901px){
+  #music .music-intro-band {
+    display:grid; grid-template-columns:minmax(0,1fr) auto; grid-template-rows:auto auto;
+    align-items:center; gap:.5rem clamp(2rem,6vw,6rem); margin-bottom:1.5rem;
+  }
+  #music .music-intro-band .music-head {
+    grid-column:1; grid-row:1; display:flex; align-items:flex-end; gap:clamp(1.5rem,4vw,4rem);
+    margin:0;
+  }
+  #music .music-head > div:first-child { flex:1 1 auto; min-width:0; }
+  #music .music-head .sec-h { font-size:clamp(2.8rem,4.6vw,4.8rem); white-space:nowrap; }
+  #music .music-head .sec-bar { margin:.65rem 0 0; height:10px; }
+  #music .music-meta { flex:0 0 29ch; padding:0 0 .35rem; text-align:left; font-size:.68rem; }
+  #music .music-intro-band .music-dli-note {
+    grid-column:1; grid-row:2; margin:.35rem 0 0; max-width:720px; font-size:.82rem; line-height:1.55;
+  }
+  #music .music-intro-band > .albums-label { display:none; }
+  #music .music-intro-band .artist-strip {
+    grid-column:2; grid-row:1/3; align-self:center; display:flex; gap:2rem;
+    width:auto; max-width:none; margin:0; padding:.2rem .5rem;
+  }
+  #music .music-intro-band .artist-strip::before { display:none; }
+  #music .music-intro-band .artist { position:relative; width:92px; }
+  #music .music-intro-band .artist-photo { width:64px; height:64px; }
+  #music .music-intro-band .artist-photo::before { inset:-6px; }
+  #music .music-intro-band .artist-photo::after { inset:-11px; }
+  #music .music-intro-band .artist-compact { margin-top:.7rem; }
+  #music .music-intro-band .artist-compact .artist-type { display:none; }
+  #music .music-intro-band .artist-compact .artist-name { font-size:1.05rem; white-space:nowrap; }
+  #music .music-intro-band .artist-open-mark { right:6px; top:43px; width:20px; height:20px; font-size:.7rem; }
+  #music .music-intro-band .artist-info {
+    position:absolute; right:0; top:100%; z-index:50; width:min(360px,34vw);
+    padding:0 1rem; border-radius:12px; background:rgba(8,15,9,.96); box-shadow:0 20px 60px rgba(0,0,0,.45);
+  }
+  #music .music-intro-band .artist.is-open .artist-info { max-height:180px; padding-bottom:1rem; }
+}
+
+#music .listening-room { grid-template-rows:minmax(480px,58svh) auto; }
+#music .listening-room .album.cf-slot { width:clamp(190px,19vw,265px); }
+#music .listening-room .album.cf-focus .album-name { font-size:clamp(1.15rem,1.7vw,1.5rem); }
+#music .listening-room .album.cf-slot .album-copy { margin-top:.7rem; }
+
+#music .listening-room .nowplaying {
+  min-height:0; padding:.8rem 1rem 1rem; border-radius:14px;
+}
+#music .listening-room .nowplaying .np-vinyl { display:none !important; }
+#music .listening-room .nowplaying .np-z { padding-right:0; }
+#music .listening-room .nowplaying .np-head { margin-bottom:.55rem; }
+#music .listening-room .nowplaying .player { gap:.8rem; align-items:center; }
+#music .listening-room .nowplaying .player-cover { width:52px; height:52px; }
+#music .listening-room .nowplaying .player-top { margin-bottom:.45rem; }
+#music .listening-room .nowplaying .player-title { font-size:1.05rem; }
+#music .listening-room .nowplaying .pc-btn { width:36px; height:36px; }
+#music .listening-room .nowplaying .pc-play { width:42px; height:42px; }
+
+@media(max-width:980px){
+  #music .listening-room { grid-template-rows:480px minmax(260px,42svh) auto; }
+}
+@media(max-width:900px){
+  #music .music-intro-band { margin-bottom:1.4rem; }
+  #music .music-intro-band > .albums-label { display:none; }
+  #music .music-intro-band .artist-strip { margin-bottom:1rem; }
+}
+@media(max-width:620px){
+  #music .listening-room { grid-template-rows:450px minmax(250px,40svh) auto; }
+  #music .listening-room .album.cf-slot { width:min(58vw,220px); }
+  #music .listening-room .nowplaying { padding:.8rem; }
+}
+</style>
+<style id="music-identity-final">
+/* Identity row: title + two portrait signatures, no duplicate biography. */
+#music .music-intro-band {
+  display:flex; align-items:center; justify-content:space-between;
+  gap:clamp(1.5rem,5vw,5rem); margin-bottom:1.35rem;
+}
+#music .music-intro-band .music-head { flex:1 1 auto; display:block; margin:0; }
+#music .music-intro-band .music-meta,
+#music .music-intro-band .music-dli-note,
+#music .music-intro-band > .albums-label { display:none !important; }
+#music .music-head .sec-bar { margin:.65rem 0 0; }
+#music .music-intro-band .artist-strip {
+  flex:0 0 auto; display:flex; align-items:center; gap:1.2rem;
+  width:auto; max-width:none; margin:0; padding:.35rem .5rem;
+}
+#music .music-intro-band .artist-strip::before { display:none; }
+#music .music-intro-band .artist {
+  display:flex; flex-direction:column; align-items:center; width:auto; margin:0; padding:0;
+  border:0; background:transparent; box-shadow:none;
+}
+#music .music-intro-band .artist-photo { width:58px; height:58px; }
+#music .music-intro-band .artist-photo::before { inset:-5px; }
+#music .music-intro-band .artist-photo::after { inset:-9px; }
+#music .music-intro-band .artist-name {
+  margin:.55rem 0 0; color:var(--text2); font-family:'Cormorant Garamond',serif;
+  font-size:.92rem; line-height:1; white-space:nowrap;
+}
+
+/* Return the 3D vinyl as a small object inside the compact player. */
+#music .listening-room .nowplaying .np-vinyl,
+#music .listening-room .nowplaying .vinyl-bg.np-vinyl {
+  display:block !important; top:50%; right:1rem !important;
+  width:96px !important; height:96px !important; aspect-ratio:1;
+  border-radius:50%; overflow:hidden; opacity:1 !important;
+  transform:translateY(-50%) perspective(500px) rotateY(-8deg) !important;
+  filter:drop-shadow(0 14px 30px rgba(0,0,0,.5));
+}
+#music .listening-room .nowplaying .np-z { padding-right:112px; }
+#music .listening-room .nowplaying .vinyl3d { inset:2%; border-radius:50%; overflow:hidden; }
+#music .listening-room .nowplaying .vinyl3d canvas { border-radius:50%; }
+
+/* Adapted glow/glass language: sage + aged amber, restrained and selective. */
+nav.solid,
+#music .listening-room .nowplaying,
+#music .listening-room .drawer-inner {
+  -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+  background:
+    linear-gradient(rgba(14,25,14,.86),rgba(7,13,8,.82)) padding-box,
+    linear-gradient(135deg,rgba(168,198,105,.34),rgba(232,200,112,.2),rgba(168,198,105,.08)) border-box;
+  border:1px solid transparent;
+  box-shadow:inset 0 1px rgba(243,236,201,.055),0 20px 65px rgba(0,0,0,.34);
+}
+#music .album.cf-focus .album-cover,
+.career-room.is-open {
+  border:1px solid transparent;
+  background:
+    linear-gradient(var(--ink2),var(--ink2)) padding-box,
+    linear-gradient(137deg,rgba(168,198,105,.72),rgba(232,200,112,.58),rgba(204,159,74,.2)) border-box;
+  box-shadow:0 28px 80px rgba(0,0,0,.48),0 0 40px rgba(232,200,112,.08);
+}
+.vid-card img,.vid-card iframe { transition:transform .7s cubic-bezier(.2,.8,.18,1); }
+.vid-card:hover img,.vid-card:hover iframe { transform:scale(1.025); }
+
+@media(max-width:700px){
+  #music .music-intro-band { align-items:flex-end; gap:1rem; }
+  #music .music-intro-band .artist-strip { gap:.8rem; padding:0 .25rem .25rem; }
+  #music .music-intro-band .artist-photo { width:46px; height:46px; }
+  #music .music-intro-band .artist-name { font-size:.74rem; }
+  #music .listening-room .nowplaying .np-vinyl { display:none !important; }
+  #music .listening-room .nowplaying .np-z { padding-right:0; }
+  nav.solid,#music .listening-room .nowplaying,#music .listening-room .drawer-inner {
+    -webkit-backdrop-filter:none; backdrop-filter:none;
+  }
+}
+</style>
+<style id="site-background-rhythm">
+/* Background rhythm: Hero/Music are the rich garden; story sections breathe. */
+body.theme-dandelion:not(.no-season) #welcome,
+body.theme-dandelion:not(.no-season) #about {
+  background:
+    radial-gradient(44% 36% at 82% 14%,rgba(225,236,173,.035),transparent 72%),
+    linear-gradient(180deg,#111a10,#0d140d) !important;
+}
+body.theme-dandelion:not(.no-season) #gallery {
+  background:
+    radial-gradient(42% 34% at 12% 8%,rgba(139,174,84,.055),transparent 72%),
+    linear-gradient(180deg,#111a10,#0b110c) !important;
+}
+body.theme-dandelion:not(.no-season) #work {
+  background:
+    linear-gradient(rgba(168,198,105,.022) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(168,198,105,.022) 1px,transparent 1px),
+    radial-gradient(48% 38% at 76% 28%,rgba(204,159,74,.045),transparent 72%),
+    #0e160f !important;
+  background-size:56px 56px,56px 56px,auto,auto !important;
+}
+body.theme-dandelion:not(.no-season) #videos {
+  background:
+    radial-gradient(50% 40% at 88% 10%,rgba(225,236,173,.045),transparent 72%),
+    linear-gradient(180deg,#0d150e,#0a100b) !important;
+}
+body.theme-dandelion:not(.no-season) #contact {
+  background:
+    radial-gradient(62% 48% at 50% 34%,rgba(225,236,173,.075),transparent 68%),
+    linear-gradient(180deg,#0b120c,#111d12) !important;
+}
+body.theme-dandelion:not(.no-season) #welcome::after,
+body.theme-dandelion:not(.no-season) #about::after,
+body.theme-dandelion:not(.no-season) #gallery::after,
+body.theme-dandelion:not(.no-season) #work::after,
+body.theme-dandelion:not(.no-season) #videos::after {
+  opacity:.16;
+  filter:saturate(.72) brightness(.78);
+}
+body.theme-dandelion:not(.no-season) #music::after { opacity:.34; }
+body.theme-dandelion:not(.no-season) #contact::after { opacity:.48; }
+
+@media(max-width:700px){
+  body.theme-dandelion:not(.no-season) #welcome::after,
+  body.theme-dandelion:not(.no-season) #about::after,
+  body.theme-dandelion:not(.no-season) #gallery::after,
+  body.theme-dandelion:not(.no-season) #work::after,
+  body.theme-dandelion:not(.no-season) #videos::after { opacity:.1; }
+  body.music-in-view .cta-float,body.music-in-view .momo-btn {
+    opacity:0 !important; pointer-events:none !important; transform:translateY(10px) !important;
+  }
+}
 </style>
 </head>
 <body data-theme="dandelion">
+<script id="performance-mode-bootstrap">
+(function(){
+  const coarse=matchMedia('(pointer:coarse)').matches;
+  const noHover=matchMedia('(hover:none)').matches;
+  const compact=matchMedia('(max-width:700px)').matches;
+  const lowMemory=typeof navigator.deviceMemory==='number' && navigator.deviceMemory<=4;
+  if(compact||(coarse&&noHover)||lowMemory) document.body.classList.add('perf-lite');
+  let wheelTimer=0;
+  addEventListener('wheel',()=>{
+    document.body.classList.add('wheel-input');
+    clearTimeout(wheelTimer);
+    wheelTimer=setTimeout(()=>document.body.classList.remove('wheel-input'),140);
+  },{passive:true});
+})();
+</script>
 <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
 <!-- CUSTOM CURSOR -->
@@ -3634,10 +4615,6 @@ body.theme-dandelion:not(.no-season) footer::after {
         Tạo giá trị thật.<br/>
         Đó là cách Anh Li làm nghề."
       </p>
-      <div class="hero-counter">
-        <span class="counter-num" id="visit-count">—</span>
-        lượt ghé thăm
-      </div>
     </div>
     <p class="hero-manifesto">Đợt này khu vườn đang mở bằng Mỹ Vị Nhân Sinh — album nổi bật nằm trong jewel case lớn, cùng những lát nhạc khác trôi giữa đồng bồ công anh.</p>
   </div>
@@ -3657,14 +4634,14 @@ body.theme-dandelion:not(.no-season) footer::after {
 <section id="welcome" class="welcome" data-screen-label="Lời chủ nhà">
   <div class="welcome-inner">
     <!-- lời chủ nhà hiện từng nhịp (d1→d3) thay vì cả khối fade một lượt -->
-    <div class="sec-label reveal">Trước khi bước vào</div>
+    <div class="sec-label reveal">Một lời chào</div>
     <p class="welcome-lead reveal d1">
-      Có những thế giới phải nghe mới thấy.<br/>
-      Đây là <em>một trong số đó.</em>
+      Không cần đi theo một lối cố định.<br/>
+      Cứ bắt đầu từ điều khiến bạn <em>dừng lại.</em>
     </p>
     <p class="welcome-sub reveal d3">
-      Đừng vội tìm điểm bắt đầu — cứ để một bài hát, một khung hình,
-      hay một thoáng tò mò dẫn bạn đi.
+      Một bài hát, một khung hình, một câu chuyện nghề —
+      phần còn lại cứ để sự tò mò dẫn đường.
     </p>
   </div>
 </section>
@@ -3699,23 +4676,35 @@ body.theme-dandelion:not(.no-season) footer::after {
       </blockquote>
       <div class="about-eyebrow reveal">Chân dung</div>
       <div class="about-desc reveal d1">
-        <p class="about-lead" id="aboutLead" style="font-size: 33px">Mình là Anh Li — creative producer, show director &amp; songwriter, sống và làm nghề ở Sài Gòn.</p>
+        <p class="about-lead" id="aboutLead">Mình là Anh Li — creative producer, show director &amp; songwriter, sống và làm nghề ở Sài Gòn.</p>
       </div>
       <div class="about-punch reveal d2">
-        <div class="ap-line"><span class="ap-n">01</span><span>15 năm — từ nét phác thảo đến đêm diễn <em>nghìn người</em>.</span></div>
-        <div class="ap-line"><span class="ap-n">02</span><span>Tự viết, tự phối, tự phát hành. Cả cái sạp này — <em>một tay</em>.</span></div>
-        <div class="ap-line"><span class="ap-n">03</span><span>Nhạc sĩ độc lập "tự phong" — tự do, và <em>hạnh phúc</em> với điều đó.</span></div>
-        <div class="ap-line"><span class="ap-n">04</span><span>Đứng lớp ở AIM Academy. Truyền nghề, <em>không giấu nghề</em>.</span></div>
+        <div class="ap-line"><span class="ap-n">01</span><span>Cả Cái Sạp nhạc — tự viết, tự phối, <em>một tay</em> dựng nên.</span></div>
+        <div class="ap-line"><span class="ap-n">02</span><span>Nhạc sĩ độc lập “tự phong” — tự do và <em>hạnh phúc</em>.</span></div>
+        <div class="ap-line"><span class="ap-n">03</span><span>Đứng lớp ở AIM Academy — truyền nghề, <em>không giấu nghề</em>.</span></div>
       </div>
     </div>
   </div>
 
-  <div class="htag-band reveal" aria-label="Kỹ năng">
-    <div class="htag-track" id="htagTrack"></div>
+  <div class="creative-pillars reveal" aria-label="Bốn trụ cột sáng tạo">
+    <article class="cp-card"><span>01</span><h3>Show Direction</h3><p>Dựng cảm xúc thành câu chuyện, không gian và nhịp diễn.</p></article>
+    <article class="cp-card"><span>02</span><h3>Music &amp; Songwriting</h3><p>Viết, sản xuất và xây thế giới âm nhạc độc lập.</p></article>
+    <article class="cp-card"><span>03</span><h3>Creative Production</h3><p>Giữ ý tưởng đi trọn đường từ bản phác đến khoảnh khắc thật.</p></article>
+    <article class="cp-card"><span>04</span><h3>Visual &amp; AI Craft</h3><p>Dùng công nghệ như một chất liệu, không thay thế chủ thể sáng tạo.</p></article>
   </div>
 </section>
 
-<div class="divider"></div>
+<section class="music-threshold" id="listening-threshold" aria-label="Lối vào thế giới âm nhạc">
+  <div class="mt-shutter mt-shutter-top" aria-hidden="true"></div>
+  <div class="mt-shutter mt-shutter-bottom" aria-hidden="true"></div>
+  <div class="mt-orbit" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="mt-copy reveal">
+    <span>Chapter II · The Listening World</span>
+    <p>Có một phần công việc được nhìn thấy.</p>
+    <h2>Và một thế giới<br/><em>chỉ có thể nghe.</em></h2>
+    <button type="button" id="enterMusicWorld" aria-controls="music" aria-expanded="false">Bước vào Cái Sạp nhạc ↓</button>
+  </div>
+</section>
 
 <!-- MUSIC -->
 <section id="music">
@@ -3730,18 +4719,30 @@ body.theme-dandelion:not(.no-season) footer::after {
       data-src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260604_125109_19424216-4e2a-4560-b9f2-f1b5f6eb2c2e.mp4"></video>
   </div>
   <div class="music-decor" id="musicDecor" aria-hidden="true"></div>
+  <div class="music-muse-world" aria-hidden="true">
+    <span class="mm-stem"></span>
+    <span class="mm-bloom"></span>
+    <span class="mm-seed mm-s1">♪</span>
+    <span class="mm-seed mm-s2">·</span>
+    <span class="mm-seed mm-s3">✦</span>
+    <span class="mm-seed mm-s4">♫</span>
+    <span class="mm-seed mm-s5">·</span>
+    <span class="mm-seed mm-s6">✦</span>
+    <span class="mm-lyric mm-l1">một giọng hát mọc lên từ khoảng lặng</span>
+    <span class="mm-lyric mm-l2">the muse keeps the garden listening</span>
+  </div>
+  <div class="music-intro-band">
   <div class="music-head">
     <div>
       <div class="sec-label reveal">Discography</div>
       <h2 class="sec-h reveal">Cái Sạp <em>nhạc của Li</em></h2>
       <div class="sec-bar reveal"></div>
     </div>
-    <div class="music-meta reveal">Nhạc gốc tiếng Việt · Viết, sản xuất &amp; phát hành bởi Anh Li</div>
+    <div class="music-meta reveal">Nhạc gốc tiếng Việt · Anh Li viết, sản xuất &amp; phát hành</div>
   </div>
 
   <p class="music-dli-note reveal">
-    Sau mỗi bài là Anh Li: người viết, người chọn hướng, người giữ cảm xúc.
-    <em>D'Li</em> là phần giọng mình mơ thêm — một nhân vật ảo, sinh ra để hát những điều mình chưa hát được.
+    Anh Li viết và giữ cảm xúc; <em>D'Li</em> là phần giọng ảo được sinh ra để hát những điều mình chưa hát được.
   </p>
   <style>
     .music-dli-note { max-width:680px; margin:-0.5rem 0 2.5rem; font-size:0.98rem; line-height:1.75; color:rgba(243,236,221,0.6); }
@@ -3751,22 +4752,34 @@ body.theme-dandelion:not(.no-season) footer::after {
   <!-- ARTISTS (info — không phải album) -->
   <div class="albums-label reveal">Nghệ sĩ</div>
   <div class="artist-strip reveal" id="artistStrip"></div>
+  </div><!-- /music-intro-band -->
 
   <!-- ALBUMS -->
   <div class="gate-zone gated" id="gateZone">
-  <div class="albums-label reveal" id="playlistLabel">Playlist</div>
-  <!-- Gợi ý cho người chưa biết chọn gì — hiện sau khi qua cửa cảm xúc -->
-  <button class="pick-suggest" id="npSuggest" type="button">
-    <span class="ps-spark" aria-hidden="true">✨</span>
-    <span>Chưa biết nghe gì? <em>Để Li bốc cho bạn một bài</em></span>
-    <span class="ps-icon" aria-hidden="true">⇄</span>
-  </button>
+  <div class="listening-room" id="listeningRoom">
   <div class="album-stage reveal">
+    <div class="album-tools">
+      <div class="albums-label" id="playlistLabel">Playlist</div>
+      <button class="album-explore-btn" id="albumExploreBtn" type="button" aria-haspopup="dialog" aria-controls="albumExplore">Khám phá toàn bộ 23 album ↗</button>
+    </div>
+    <!-- Gợi ý cho người chưa biết chọn gì — nằm trong sân khấu album -->
+    <button class="pick-suggest" id="npSuggest" type="button">
+      <span class="ps-spark" aria-hidden="true">✨</span>
+      <span>Chưa biết nghe gì? <em>Để Li bốc cho bạn một bài</em></span>
+      <span class="ps-icon" aria-hidden="true">⇄</span>
+    </button>
     <button class="cf-nav cf-prev" id="cfPrev" type="button" aria-label="Album trước">‹</button>
     <div class="album-carousel" id="albumCarousel"><div class="album-track" id="albumGrid"></div></div>
     <button class="cf-nav cf-next" id="cfNext" type="button" aria-label="Album sau">›</button>
   </div>
   <div class="album-drawer" id="albumDrawer" aria-live="polite"></div>
+
+  <div class="album-explore" id="albumExplore" role="dialog" aria-modal="true" aria-label="Khám phá toàn bộ album" hidden>
+    <div class="ae-panel">
+      <div class="ae-head"><div><span>Discography archive</span><h3>Đi dọc Cái Sạp nhạc</h3></div><button type="button" id="albumExploreClose" aria-label="Đóng">✕</button></div>
+      <div class="ae-grid" id="albumExploreGrid"></div>
+    </div>
+  </div>
 
   <!-- NOW PLAYING — soundwave + dĩa than + player: một khối liền mạch -->
   <div class="nowplaying reveal" id="nowplaying">
@@ -3806,14 +4819,15 @@ body.theme-dandelion:not(.no-season) footer::after {
   </div>
     </div>
   </div>
+  </div><!-- /listening-room -->
 
     <!-- EMOTIONAL GATE — cửa cảm xúc, chỉ phủ playlist + Now Playing -->
     <div class="music-gate" id="musicGate" role="dialog" aria-label="Trước khi bạn nghe">
       <div class="mg-leak" aria-hidden="true"></div>
       <div class="mg-inner">
         <div class="mg-eyebrow">Trước khi bạn nghe</div>
-        <p class="mg-line"><span class="ai-hl">AI</span> không thay thế trái tim.<br/>Nó chỉ là một <em>nhạc cụ khác</em> — người nghệ sĩ vẫn là một con người.</p>
-        <p class="mg-sub">Không gian này không trưng bày công cụ. Nó trưng bày cách một người tạo ra cảm xúc. Mỗi bài ở đây là một lần thử thành thật.</p>
+        <p class="mg-line"><span class="ai-hl">AI</span> không thay thế trái tim.<br/>Nó chỉ là một <em>nhạc cụ khác</em> — chủ thể sáng tạo vẫn là con người.</p>
+        <p class="mg-sub">Anh Li viết, chọn hướng, sản xuất và chịu trách nhiệm cho từng tác phẩm. Công nghệ tham gia vào âm thanh; quyết định thẩm mỹ và cảm xúc vẫn thuộc về người nghệ sĩ.</p>
         <div class="mg-actions">
           <button class="mg-btn mg-go" id="mgGo" type="button">Tôi đã sẵn sàng nghe</button>
           <button class="mg-btn mg-skip" id="mgSkip" type="button">Tôi chưa sẵn sàng</button>
@@ -3827,32 +4841,10 @@ body.theme-dandelion:not(.no-season) footer::after {
   <audio id="audioEl" preload="none" controlsList="nodownload noplaybackrate" oncontextmenu="return false"></audio>
 </section>
 
-<!-- MARQUEE ngăn cách Nhạc / Videos -->
+<!-- MARQUEE ngăn cách Nhạc / Visual Lab -->
 <div class="marquee-wrap">
   <div class="marquee-track" id="marqueeTrack3"></div>
 </div>
-
-<!-- VIDEOS -->
-<section id="videos">
-  <div class="section-wm tr" aria-hidden="true">VIDEO</div>
-  <div class="sec-label reveal">Visual Works</div>
-  <h2 class="sec-h reveal">Videos · <em>Sạp Âm Nhạc</em></h2>
-  <div class="sec-bar reveal"></div>
-  <div class="vid-stage reveal" id="vidStageWrap">
-    <div class="vid-stage-frame" id="vidStage"><span class="vid-stage-ph">Đang tải…</span></div>
-    <div class="vid-stage-cap" id="vidStageCap"></div>
-  </div>
-  <p class="vid-status" id="yt-status">Đang tải video…</p>
-  <div class="vid-grid" id="yt-grid"></div>
-  <div style="margin-top:2.5rem;text-align:center;" class="reveal">
-    <a href="https://www.youtube.com/@caisapamnhaccuaLine" target="_blank"
-       style="font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--amber);text-decoration:none;">
-      Xem kênh YouTube →
-    </a>
-  </div>
-</section>
-
-<div class="divider"></div>
 
 <!-- GALLERY -->
 <section id="gallery">
@@ -3860,6 +4852,10 @@ body.theme-dandelion:not(.no-season) footer::after {
   <div class="sec-label reveal">Visual Lab</div>
   <h2 class="sec-h reveal">Tác phẩm <em>thị giác</em> — Nguồn cảm hứng tổng hợp</h2>
   <div class="sec-bar reveal"></div>
+  <div class="gallery-curator reveal">
+    <p>Một phòng thử thị giác đang tiếp tục lớn lên — từ thiết kế, motion đến những khoảnh khắc được nhặt lại trong quá trình làm nghề.</p>
+    <div class="gallery-status" id="galleryStatus" aria-live="polite"></div>
+  </div>
   <div class="g-filters reveal" id="gFilters"></div>
   <div class="gallery" id="galleryGrid"></div>
 </section>
@@ -3876,10 +4872,10 @@ body.theme-dandelion:not(.no-season) footer::after {
   </div>
 
   <p class="work-method reveal">
-    Anh Li không bắt đầu một show từ sân khấu. Anh bắt đầu từ <em>cảm xúc lõi</em>:
-    người xem cần mang điều gì về sau khoảnh khắc đó? Từ đó, câu chuyện được dựng thành
-    mạch chương trình, âm nhạc, visual, nhịp cue, và những điểm chạm đủ rõ
-    để một sự kiện không chỉ diễn ra — mà còn <em>ở lại</em>.
+    Anh Li xuất phát từ <em>Thiết kế Nội thất</em> — nơi học cách nhìn không gian, tỷ lệ
+    và con người sống bên trong một ý tưởng. Rồi nghề mở ra nhiều cánh cửa: thiết kế,
+    client service, sáng tạo, sân khấu, sản xuất và âm nhạc. Có những con đường đã khép lại,
+    nhưng không lớp kinh nghiệm nào mất đi; tất cả cùng tích lũy thành cách Anh Li làm nghề hôm nay.
   </p>
 
   <style>
@@ -3887,13 +4883,49 @@ body.theme-dandelion:not(.no-season) footer::after {
     .work-method em { font-style:italic; color:var(--amber2); }
   </style>
 
-  <div id="workList"></div>
+  <div class="career-house reveal" aria-label="Ngôi nhà nhiều lớp — hành trình nghề nghiệp của Anh Li">
+    <div class="ch-sky" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="ch-blueprint" aria-hidden="true">
+      <span>SECTION A—A</span><span>NOT TO SCALE</span><span>ANH LI · INNER WORLD</span>
+    </div>
+    <div class="ch-axis" aria-hidden="true"></div>
+    <div class="ch-figure" aria-hidden="true"><i></i><span>AL</span></div>
+    <div class="career-rooms" id="workList"></div>
+    <div class="ch-hint">Chạm vào một căn phòng để nhìn sâu hơn <span>↗</span></div>
+  </div>
 
-  <a class="aim-badge reveal" href="https://aimacademy.vn/giang-vien/huynh-chi-lap/" target="_blank">
+  <blockquote class="career-epilogue reveal">
+    <span>Bên ngoài, một người làm nghề lặng lẽ.</span>
+    <em>Bên trong, nhiều thế giới vẫn đang cùng lúc sáng đèn.</em>
+  </blockquote>
+
+  <a class="aim-badge reveal" href="https://aimacademy.vn/giang-vien/huynh-chi-lap/" target="_blank" rel="noopener noreferrer">
     <div class="aim-dot"></div>
     Giảng viên tại AIM Academy · Event & Activation Management
     <span style="margin-left:auto;font-size:0.8rem;">→</span>
   </a>
+</section>
+
+<div class="divider"></div>
+
+<!-- VIDEOS — bằng chứng chuyển động sau phần kinh nghiệm nổi bật -->
+<section id="videos">
+  <div class="section-wm tr" aria-hidden="true">VIDEO</div>
+  <div class="sec-label reveal">Visual Works</div>
+  <h2 class="sec-h reveal">Videos · <em>Sạp Âm Nhạc</em></h2>
+  <div class="sec-bar reveal"></div>
+  <div class="vid-stage reveal" id="vidStageWrap">
+    <div class="vid-stage-frame" id="vidStage"><span class="vid-stage-ph">Đang tải…</span></div>
+    <div class="vid-stage-cap" id="vidStageCap"></div>
+  </div>
+  <p class="vid-status" id="yt-status">Đang tải video…</p>
+  <div class="vid-grid" id="yt-grid"></div>
+  <div style="margin-top:2.5rem;text-align:center;" class="reveal">
+    <a href="https://www.youtube.com/@caisapamnhaccuaLine" target="_blank" rel="noopener noreferrer"
+       style="font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--amber);text-decoration:none;">
+      Xem kênh YouTube →
+    </a>
+  </div>
 </section>
 
 <div class="divider"></div>
@@ -3940,7 +4972,7 @@ body.theme-dandelion:not(.no-season) footer::after {
   </div>
 
   <div class="f-update">
-    Cập nhật tháng 6/2026 · Cái Sạp vẫn đang mở, vẫn đang viết thêm nhạc mới.
+    Cập nhật tháng 7/2026 · Cái Sạp vẫn đang mở, vẫn đang viết thêm nhạc mới.
   </div>
 
   <div class="f-bottom">
@@ -4025,11 +5057,58 @@ body.theme-dandelion:not(.no-season) footer::after {
 <div class="cta-float">
   <a class="cta-float-btn"
      href="mailto:ali.readytostart@gmail.com?subject=Liên hệ hợp tác với Anh Li&body=Xin chào Anh Li,%0A%0AMình tên là [Tên bạn], liên hệ về [chủ đề].%0A%0A[Nội dung]%0A%0AThân mến."
-     target="_blank">
+     target="_blank" rel="noopener noreferrer">
     <span class="cta-float-dot"></span>
     Liên hệ ngay →
   </a>
 </div>
+
+<script id="music-portal-js">
+(function(){
+  const portal=document.getElementById('listening-threshold');
+  const enter=document.getElementById('enterMusicWorld');
+  const music=document.getElementById('music');
+  if(!portal||!enter||!music) return;
+  const KEY='anhli_music_world_open';
+  const remember=()=>{ try{ sessionStorage.setItem(KEY,'1'); }catch(e){} };
+  const remembered=()=>{ try{ return sessionStorage.getItem(KEY)==='1'; }catch(e){ return false; } };
+  function unlock(opts={}){
+    if(document.body.classList.contains('music-unlocked')){
+      if(opts.scroll!==false) music.scrollIntoView({behavior:'smooth',block:'start'});
+      return;
+    }
+    document.body.classList.add('music-unlocked');
+    enter.setAttribute('aria-expanded','true');
+    remember();
+    if(opts.animate===false){
+      portal.classList.add('is-opening','is-open');
+      if(opts.scroll!==false){
+        const settle=()=>music.scrollIntoView({block:'start'});
+        requestAnimationFrame(settle);
+        setTimeout(settle,420);
+        addEventListener('load',()=>setTimeout(settle,260),{once:true});
+      }
+      return;
+    }
+    portal.classList.add('is-opening');
+    setTimeout(()=>{
+      portal.classList.add('is-open');
+      try{ history.replaceState(null,'','#music'); }catch(e){}
+      if(opts.scroll!==false) music.scrollIntoView({behavior:'smooth',block:'start'});
+    },980);
+  }
+  enter.addEventListener('click',()=>unlock({animate:true,scroll:true}));
+  document.querySelectorAll('a[href="#music"]').forEach(link=>{
+    link.addEventListener('click',e=>{
+      if(document.body.classList.contains('music-unlocked')) return;
+      e.preventDefault();
+      unlock({animate:true,scroll:true});
+    });
+  });
+  if(location.hash==='#music' || remembered()) unlock({animate:false,scroll:location.hash==='#music'});
+  window.unlockMusicWorld=unlock;
+})();
+</script>
 
 <script>
 /* ============================================================
@@ -4056,7 +5135,7 @@ const TRACKS = [
    Đủ 9 album. Thêm album mới: copy 1 khối { } và dán id bài. */
 const ARTISTS = [
   { name:'Anh Li', type:'Indie Artist', kind:'real',
-    img:'images/portraits/about-bw.jpg',
+    img:'images/portraits/cinematic.jpg',
     desc:'Nghệ sĩ indie tại Sài Gòn — tự viết, tự sản xuất và phát hành toàn bộ tác phẩm. Hát bằng màu giọng nhân bản mang cá tính riêng của chính mình: mộc khi cần thủ thỉ, dày và phiêu khi cần bùng nổ.' },
   { name:'D\'Li', type:'Virtual Artist', kind:'virtual',
     img:'images/portraits/dli.jpg',
@@ -4513,9 +5592,9 @@ const EVENTS = [
 const WORK = [
   { yr:'2025 – nay', role:'Creative Services Producer', co:'Freelance · Independent', desc:'Dẫn dắt đội ngũ sáng tạo, chỉ đạo nghệ thuật và quản lý dự án đa lĩnh vực. Tích hợp AI workflow vào quy trình sản xuất sáng tạo.', badges:['Creative','AI','Management'] },
   { yr:'Mar – Nov 2025', role:'Associate Producer', co:'2RES', desc:'Sản xuất nội dung sáng tạo, kịch bản biểu diễn và phối hợp vận hành đội ngũ đa môn.', badges:['Production','Performing Arts'] },
-  { yr:'2016 – 2021', role:'Director of Client Services', co:'White Lion Communication', desc:'Quản lý tài khoản 20 tỷ VND/năm: Vingroup, Vinpearl, VinFast, HoaSenGroup, Manulife, VN Grand Prix, PHENIKAA Uni, Becamex IDC.', badges:['Event','Brand','Leadership'] },
+  { yr:'2016 – 2021', role:'Director of Client Services', co:'White Lion Communication', desc:'Tích lũy năng lực dẫn dắt client service, kết nối thương hiệu với đội ngũ sáng tạo và đưa những dự án quy mô lớn từ kỳ vọng đến trải nghiệm thật.', badges:['Event','Brand','Leadership'] },
   { yr:'2014 – 2016', role:'Creative Specialist', co:'Yan Live · Yan Group', desc:'Phối hợp bộ phận sáng tạo, multimedia và truyền thông doanh nghiệp. Triển khai các chiến dịch lớn tạo thương hiệu đáng nhớ.', badges:['Show','Music','Brand'] },
-  { yr:'2010 – 2014', role:'Account Supervisor', co:'Gamma Production · SquareGroup', desc:'Phát triển ý tưởng sáng tạo từ brief, điều phối đội ngũ đa phòng ban, đảm bảo chất lượng và tiến độ trong môi trường áp lực cao.', badges:['Creative','Design','Account'] },
+  { yr:'2010 – 2014', role:'Account Supervisor', co:'Gamma Production · SquareGroup', desc:'Mang tư duy không gian từ nền tảng Thiết kế Nội thất bước vào agency; học cách biến brief thành ý tưởng, kết nối nhiều phòng ban và giữ một dự án đi đến cùng.', badges:['Creative','Design','Account'] },
 ];
 
 const CONTACTS = [
@@ -4573,13 +5652,6 @@ function animCursor(){
 animCursor();
 
 /* ============================================================
-   NAV SCROLL
-============================================================ */
-addEventListener('scroll',()=>{
-  document.getElementById('nav').classList.toggle('solid',scrollY>60);
-});
-
-/* ============================================================
    MOBILE MENU (hamburger)
 ============================================================ */
 (function(){
@@ -4627,6 +5699,12 @@ setTimeout(type,1200);
 const revObs = new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
 },{threshold:0, rootMargin:'0px 0px 12% 0px'});
+const musicViewEl=document.getElementById('music');
+if(musicViewEl && 'IntersectionObserver' in window){
+  new IntersectionObserver(entries=>{
+    document.body.classList.toggle('music-in-view',entries.some(e=>e.isIntersecting));
+  },{threshold:0.12}).observe(musicViewEl);
+}
 function revealInView(){
   document.querySelectorAll('.reveal:not(.in)').forEach(el=>{
     const r=el.getBoundingClientRect();
@@ -4643,7 +5721,6 @@ function observe(){
   document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
   revealInView();
 }
-addEventListener('scroll', revealInView, {passive:true});
 addEventListener('load', revealInView);
 
 /* GALLERY WIPE-REVEAL — gRise được đặt paused trong CSS; thêm .gin khi item
@@ -4668,9 +5745,23 @@ function updProg(){
   const m=document.documentElement.scrollHeight-innerHeight;
   sprog.style.transform=`scaleX(${m>0?Math.min(1, scrollY/m).toFixed(4):0})`;
 }
-addEventListener('scroll', updProg, {passive:true});
-addEventListener('resize', updProg, {passive:true});
-updProg();
+let scrollFramePending=false;
+function runScrollFrame(){
+  scrollFramePending=false;
+  const nav=document.getElementById('nav');
+  if(nav) nav.classList.toggle('solid',scrollY>60);
+  document.body.classList.toggle('past-hero',scrollY>innerHeight*0.72);
+  updProg();
+  revealInView();
+}
+function scheduleScrollFrame(){
+  if(scrollFramePending) return;
+  scrollFramePending=true;
+  requestAnimationFrame(runScrollFrame);
+}
+addEventListener('scroll', scheduleScrollFrame, {passive:true});
+addEventListener('resize', scheduleScrollFrame, {passive:true});
+runScrollFrame();
 
 // Safety net: never leave content hidden if observers/scroll don't fire
 [300,1000,2500].forEach(t=>setTimeout(()=>{
@@ -4765,14 +5856,24 @@ function renderArtists(){
   const el=document.getElementById('artistStrip');
   if(!el) return;
   el.innerHTML=ARTISTS.map(a=>`
-    <div class="artist ${a.kind}">
-      <div class="artist-photo"><img src="${a.img}" alt="${a.name}" loading="lazy" oncontextmenu="return false" onerror="this.parentElement.classList.add('blank')"/></div>
-      <div class="artist-info">
-        <div class="artist-type">${a.type}</div>
-        <div class="artist-name">${a.name}</div>
-        <p class="artist-desc">${a.desc}</p>
-      </div>
-    </div>`).join('');
+    <figure class="artist ${a.kind}">
+      <span class="artist-photo"><img src="${a.img}" alt="${a.name}" loading="lazy" oncontextmenu="return false" onerror="this.parentElement.classList.add('blank')"/></span>
+      <figcaption class="artist-name">${a.name}</figcaption>
+    </figure>`).join('');
+}
+
+function toggleArtist(i){
+  const card=document.querySelector(`.artist[data-artist-index="${i}"]`);
+  if(!card) return;
+  const willOpen=!card.classList.contains('is-open');
+  document.querySelectorAll('#artistStrip .artist').forEach(item=>{
+    item.classList.remove('is-open');
+    item.querySelector('.artist-trigger')?.setAttribute('aria-expanded','false');
+  });
+  if(willOpen){
+    card.classList.add('is-open');
+    card.querySelector('.artist-trigger')?.setAttribute('aria-expanded','true');
+  }
 }
 
 function renderMusic(){
@@ -4790,25 +5891,12 @@ function renderMusic(){
     sw.innerHTML=bars;
   }
 
-  // Album cards (duplicated for a seamless auto-scrolling carousel)
+  // Five reusable album slots — cinematic depth without duplicating the DOM.
   const grid=document.getElementById('albumGrid');
   if(grid){
-    const card=(a,i)=>{
-      const likeN=parseInt(localStorage.getItem('album_likes_'+a.id)||'0');
-      return `<div class="album" data-aidx="${i}" onclick="cfClick(${i})">
-        <div class="album-cover">
-          <img src="${coverUrl(a.cover)}" alt="${a.name}" loading="lazy" oncontextmenu="return false" onerror="this.outerHTML='<div class=album-cover-blank>♪</div>'"/>
-          <div class="album-play">⌄</div>
-          <span class="album-badge">${a.count||0} bài</span>
-          <button class="album-like${likeN>0?' liked':''}" data-aidx="${i}" onclick="likeAlbum(${i},event)" aria-label="Thích">♥<span class="like-n">${likeN>0?' '+likeN:''}</span></button>
-        </div>
-        <div class="album-name">${a.name}</div>
-        <div class="album-sub">${a.sub||''}</div>
-      </div>`;
-    };
-    const seq=ALBUMS.map(card).join('');
-    grid.innerHTML=seq+seq; // 2 bản để coverflow trôi vô tận, liền mạch
     initCoverflow();
+    initAlbumExplore();
+    if(curAlbum<0) selectAlbum(cfFocus,true);
   }
   const pl=document.getElementById('playlistLabel');
   if(pl) pl.textContent=`Playlist · ${ALBUMS.length} album`;
@@ -4831,115 +5919,125 @@ function renderMusic(){
   // (carousel runs freely until the user clicks an album)
 }
 
-/* ===== COVERFLOW tự trôi + vuốt mượt + magnetic zoom ở tâm ===== */
-let cfCards=[], cfOffset=0, cfSetW=0, cfDragging=false, cfHover=false,
-    cfMomentum=0, cfGlide=null, cfLastX=0, cfMoved=0, cfRunning=false;
-const CF_AUTO=0.35; // tốc độ tự trôi (px / frame)
-
-function initCoverflow(){
-  const track=document.getElementById('albumGrid');
-  const car=document.getElementById('albumCarousel');
-  if(!track||!car) return;
-  cfCards=[...track.children];
-  if(!cfCards.length) return;
-  measureCF();
-  document.getElementById('cfPrev')?.addEventListener('click', ()=>cfNudge(-1));
-  document.getElementById('cfNext')?.addEventListener('click', ()=>cfNudge(1));
-  // dừng tự trôi khi rê chuột vào (để xem kỹ)
-  car.addEventListener('pointerenter', ()=>{ cfHover=true; });
-  car.addEventListener('pointerleave', ()=>{ if(!cfDragging) cfHover=false; });
-  // kéo / vuốt lướt ngang + quán tính
-  car.addEventListener('pointerdown', cfDown);
-  window.addEventListener('pointermove', cfMove, {passive:true});
-  window.addEventListener('pointerup', cfUp);
-  window.addEventListener('pointercancel', cfUp);
-  // lăn chuột ngang / trackpad
-  car.addEventListener('wheel', e=>{
-    if(Math.abs(e.deltaX) > Math.abs(e.deltaY)){ cfOffset += e.deltaX; cfGlide=null; cfMomentum=0; e.preventDefault(); }
-  }, {passive:false});
-  // bàn phím
-  car.setAttribute('tabindex','0');
-  car.addEventListener('keydown', e=>{
-    if(e.key==='ArrowLeft'){ cfNudge(-1); e.preventDefault(); }
-    else if(e.key==='ArrowRight'){ cfNudge(1); e.preventDefault(); }
-  });
-  window.addEventListener('resize', measureCF);
-  if(!cfRunning){ cfRunning=true; requestAnimationFrame(cfFrame); }
-}
-function measureCF(){
-  const half=cfCards.length/2;
-  if(half>=1 && cfCards[half]){ cfSetW = cfCards[half].offsetLeft - cfCards[0].offsetLeft; }
-}
-function cfStep(){ const half=cfCards.length/2; return half ? cfSetW/half : 220; }
-function cfNudge(dir){ cfGlide = (cfGlide==null?cfOffset:cfGlide) + dir*cfStep(); cfMomentum=0; }
-function cfDown(e){
-  cfDragging=true; cfHover=true; cfMomentum=0; cfGlide=null;
-  cfLastX=e.clientX; cfMoved=0;
-  document.getElementById('albumCarousel')?.classList.add('dragging');
-}
-function cfMove(e){
-  if(!cfDragging) return;
-  const dx=e.clientX-cfLastX; cfLastX=e.clientX; cfMoved+=Math.abs(dx);
-  cfOffset -= dx; cfMomentum = -dx;
-}
-function cfUp(){
-  if(!cfDragging) return;
-  cfDragging=false;
-  document.getElementById('albumCarousel')?.classList.remove('dragging');
-}
-function cfClick(i){
-  if(cfMoved>6){ cfMoved=0; return; } // vừa kéo → bỏ qua click
-  selectAlbum(i);
-}
-function glideToAlbum(i){
-  const car=document.getElementById('albumCarousel');
-  if(!car||!cfSetW) return;
-  const center=car.clientWidth/2;
-  let off=cfOffset % cfSetW; if(off<0) off+=cfSetW;
-  const half=cfCards.length/2;
-  let bestDelta=1e9;
-  [i, i+half].forEach(k=>{ const el=cfCards[k]; if(!el) return;
-    const cx=el.offsetLeft + el.offsetWidth/2 - off;
-    const delta=cx - center;
-    if(Math.abs(delta)<Math.abs(bestDelta)) bestDelta=delta;
-  });
-  if(Math.abs(bestDelta)<1e8){ cfGlide=cfOffset + bestDelta; cfMomentum=0; }
-}
-function cfFrame(){
-  if(cfDragging){ /* offset do cfMove điều khiển */ }
-  else if(cfGlide!=null){
-    cfOffset += (cfGlide-cfOffset)*0.14;
-    if(Math.abs(cfGlide-cfOffset)<0.4){ cfOffset=cfGlide; cfGlide=null; }
-  } else if(Math.abs(cfMomentum)>0.06){
-    cfOffset += cfMomentum; cfMomentum *= 0.93;
-  } else if(!cfHover){
-    cfOffset += CF_AUTO;
-  }
-  cfRender();
-  requestAnimationFrame(cfFrame);
+/* ===== FIVE-SLOT 3D LISTENING GALLERY ===== */
+let cfFocus=0, cfStartX=0, cfDeltaX=0, cfDragging=false, cfWheelSum=0,
+    cfWheelArmed=true, cfWheelQuietTimer=0, cfMoving=false;
+const CF_POSITIONS=[-2,-1,0,1,2];
+function cfWrap(i){ const n=ALBUMS.length; return ((i%n)+n)%n; }
+function albumCardHTML(a,i,pos){
+  const likeN=parseInt(localStorage.getItem('album_likes_'+a.id)||'0');
+  return `<div class="album cf-slot cf-pos-${pos<0?'m'+Math.abs(pos):'p'+pos}${pos===0?' cf-focus':''}" data-aidx="${i}" data-pos="${pos}" onclick="cfClick(${i})">
+    <div class="album-cover">
+      <img src="${coverUrl(a.cover)}" alt="${a.name}" loading="${pos===0?'eager':'lazy'}" decoding="async" oncontextmenu="return false" onerror="this.outerHTML='<div class=album-cover-blank>♪</div>'"/>
+      <div class="cf-vinyl" aria-hidden="true"><i style="background-image:url('${coverUrl(a.cover)}')"></i></div>
+      <div class="album-play">${pos===0?'Mở bìa':'⌄'}</div>
+      <span class="album-badge">${a.count||0} bài</span>
+      <button class="album-like${likeN>0?' liked':''}" data-aidx="${i}" onclick="likeAlbum(${i},event)" aria-label="Thích">♥<span class="like-n">${likeN>0?' '+likeN:''}</span></button>
+    </div>
+    <div class="album-copy">
+      <div class="album-name">${a.name}</div>
+      <div class="album-sub">${a.sub||''}</div>
+    </div>
+  </div>`;
 }
 function cfRender(){
-  if(!cfSetW){ measureCF(); if(!cfSetW) return; }
-  const car=document.getElementById('albumCarousel');
   const track=document.getElementById('albumGrid');
-  if(!car||!track) return;
-  let off=cfOffset % cfSetW; if(off<0) off+=cfSetW;
-  track.style.transform=`translate3d(${(-off).toFixed(2)}px,0,0)`;
-  const center=car.clientWidth/2;
-  const reach=Math.max(center,1);
-  cfCards.forEach(el=>{
-    const cx=el.offsetLeft + el.offsetWidth/2 - off;
-    const d=cx - center, ad=Math.abs(d);
-    const t=Math.min(1, ad/(reach*0.92));
-    const scale=1.14 - 0.46*t;                 // ở tâm to nhất, ra rìa nhỏ dần
-    const rot=Math.max(-40, Math.min(40, (d/reach)*-34));
-    const op=1 - 0.72*t;
-    el.style.setProperty('--cf-scale', scale.toFixed(3));
-    el.style.setProperty('--cf-rot', rot.toFixed(1)+'deg');
-    el.style.opacity=op.toFixed(2);
-    el.style.zIndex=String(200-Math.round(ad));
-    el.classList.toggle('cf-focus', ad < el.offsetWidth*0.5);
+  if(!track||!ALBUMS.length) return;
+  track.innerHTML=CF_POSITIONS.map(pos=>{
+    const i=cfWrap(cfFocus+pos);
+    return albumCardHTML(ALBUMS[i],i,pos);
+  }).join('');
+  const focus=ALBUMS[cfFocus];
+  const stage=document.querySelector('.album-stage');
+  if(stage&&focus){
+    stage.style.setProperty('--focus-cover',`url("${coverUrl(focus.cover).replace(/"/g,'\\"')}")`);
+    stage.dataset.focusAlbum=focus.name||'';
+  }
+}
+function cfNudge(dir){
+  if(cfMoving) return;
+  const track=document.getElementById('albumGrid');
+  if(!track) return;
+  cfMoving=true;
+  track.classList.add(dir>0?'cf-leave-next':'cf-leave-prev');
+  setTimeout(()=>{
+    cfFocus=cfWrap(cfFocus+dir);
+    cfRender();
+    track.classList.remove('cf-leave-next','cf-leave-prev');
+    track.classList.add(dir>0?'cf-enter-next':'cf-enter-prev');
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      track.classList.remove('cf-enter-next','cf-enter-prev');
+      setTimeout(()=>{ cfMoving=false; },220);
+    }));
+  },170);
+}
+function initCoverflow(){
+  const car=document.getElementById('albumCarousel');
+  if(!car) return;
+  if(car.dataset.ready==='1'){ cfFocus=cfWrap(cfFocus); cfRender(); return; }
+  car.dataset.ready='1'; car.setAttribute('tabindex','0');
+  document.getElementById('cfPrev')?.addEventListener('click',()=>cfNudge(-1));
+  document.getElementById('cfNext')?.addEventListener('click',()=>cfNudge(1));
+  car.addEventListener('pointerdown',e=>{ cfDragging=true; cfStartX=e.clientX; cfDeltaX=0; car.classList.add('dragging'); car.setPointerCapture?.(e.pointerId); });
+  car.addEventListener('pointermove',e=>{ if(cfDragging) cfDeltaX=e.clientX-cfStartX; },{passive:true});
+  const end=()=>{ if(!cfDragging) return; cfDragging=false; car.classList.remove('dragging'); if(Math.abs(cfDeltaX)>42) cfNudge(cfDeltaX<0?1:-1); };
+  car.addEventListener('pointerup',end); car.addEventListener('pointercancel',end);
+  // Perspective transforms can make a side cover's painted area differ from its
+  // browser hit box. Recover clicks that land on the track but visually sit on
+  // a cover, so every visible album remains directly selectable.
+  car.addEventListener('click',e=>{
+    if(e.target.closest('.album') || Math.abs(cfDeltaX)>8) return;
+    const cards=[...car.querySelectorAll('.album.cf-slot')];
+    const hit=cards.find(card=>{
+      const r=card.getBoundingClientRect();
+      return e.clientX>=r.left && e.clientX<=r.right && e.clientY>=r.top && e.clientY<=r.bottom;
+    });
+    if(hit) cfClick(+hit.dataset.aidx);
   });
+  car.addEventListener('wheel',e=>{
+    const delta=Math.abs(e.deltaX)>Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+    if(Math.abs(delta)<2) return;
+    e.preventDefault();
+    clearTimeout(cfWheelQuietTimer);
+    cfWheelQuietTimer=setTimeout(()=>{ cfWheelArmed=true; cfWheelSum=0; },240);
+    if(!cfWheelArmed) return;
+    cfWheelSum+=delta;
+    if(Math.abs(cfWheelSum)>=24){
+      cfNudge(cfWheelSum>0?1:-1);
+      cfWheelSum=0; cfWheelArmed=false;
+    }
+  },{passive:false});
+  car.addEventListener('keydown',e=>{ if(e.key==='ArrowLeft'){e.preventDefault();cfNudge(-1);} if(e.key==='ArrowRight'){e.preventDefault();cfNudge(1);} if(e.key==='Enter'){e.preventDefault();selectAlbum(cfFocus);} });
+  cfRender();
+}
+function cfClick(i){
+  if(Math.abs(cfDeltaX)>8){ cfDeltaX=0; return; }
+  if(i!==cfFocus){ cfFocus=i; cfRender(); }
+  selectAlbum(i);
+}
+function glideToAlbum(i){ cfFocus=cfWrap(i); cfRender(); }
+
+function initAlbumExplore(){
+  const dialog=document.getElementById('albumExplore');
+  const grid=document.getElementById('albumExploreGrid');
+  const open=document.getElementById('albumExploreBtn');
+  const close=document.getElementById('albumExploreClose');
+  if(!dialog||!grid||!open||!close) return;
+  grid.innerHTML=ALBUMS.map((a,i)=>`<button class="ae-card" type="button" data-aidx="${i}">
+    <img src="${coverUrl(a.cover)}" alt="${a.name}" loading="lazy" decoding="async"/>
+    <strong>${a.name}</strong><span>${a.sub||`${a.count||0} bài`}</span>
+  </button>`).join('');
+  if(dialog.dataset.ready==='1') return;
+  dialog.dataset.ready='1';
+  const hide=()=>{ dialog.hidden=true; document.body.classList.remove('explore-open'); open.focus(); };
+  const show=()=>{ dialog.hidden=false; document.body.classList.add('explore-open'); close.focus(); };
+  open.addEventListener('click',show); close.addEventListener('click',hide);
+  dialog.addEventListener('click',e=>{ if(e.target===dialog) hide(); });
+  grid.addEventListener('click',e=>{
+    const card=e.target.closest('.ae-card'); if(!card) return;
+    const i=+card.dataset.aidx; hide(); cfFocus=cfWrap(i); cfRender(); selectAlbum(i);
+  });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&!dialog.hidden) hide(); });
 }
 
 /* ===== ALBUM DRAWER (sổ danh sách bài) ===== */
@@ -4964,10 +6062,7 @@ function selectAlbum(i, silent){
   const drawer=document.getElementById('albumDrawer');
   const carousel=document.getElementById('albumCarousel');
   if(curAlbum===i && drawer.classList.contains('open') && !silent){
-    drawer.classList.remove('open');
-    if(carousel) carousel.classList.remove('paused');
-    document.querySelectorAll('.album[data-aidx]').forEach(a=>a.classList.remove('selected'));
-    curAlbum=-1; curTracks=[]; return;
+    return;
   }
   curAlbum=i; curTracks=ALBUMS[i].tracks||[];
   glideToAlbum(i);
@@ -5114,6 +6209,7 @@ function playAt(j){
   if(j>=curTracks.length) j=0;
   if(j===activeIdx){ if(audio.paused) audio.play().catch(()=>{}); else audio.pause(); return; }
   activeIdx=j;
+  document.body.classList.add('has-track');
   const t=curTracks[j];
   markPlaying(j);
   hideEmbed();
@@ -5275,7 +6371,8 @@ function renderHashtags(){
 /* ============================================================
    RENDER GALLERY (Visual Lab)
 ============================================================ */
-let galleryExpanded=false, gMoreWrap=null;
+const GAL_BATCH=18;
+let galleryExpanded=false, gMoreWrap=null, galleryOrder=[], galleryView=[], galleryShown=0, activeGalleryTag='Tất cả';
 /* Xáo thứ tự mỗi lần vào trang — trước đây GALLERY render đúng thứ tự khai báo
    nên bị "neo cố định", quen mắt mãi cũng thấy cũ. Fisher–Yates trên BẢN SAO,
    không đụng GALLERY gốc (thứ tự chip lọc lấy từ mảng gốc, không xáo, để filter
@@ -5290,6 +6387,70 @@ function shuffledGallery(){
   }
   return a;
 }
+function makeGalleryItem(g,i){
+  const d=document.createElement('div');
+  d.className='g-item g-'+g.type;
+  d.dataset.tag=g.tag;
+  d.style.setProperty('--gd', (i%4*0.06)+'s');
+  const phLabel=`${g.tag} · ${g.type==='img'?'drop image':'drop video'}`;
+  let media='', play='';
+  if(g.type==='img'){
+    media=`<img src="${g.src}" alt="" loading="lazy" decoding="async"
+        onload="this.closest('.g-frame').style.aspectRatio=(this.naturalWidth/this.naturalHeight)||'${g.ar}'; this.closest('.g-item').classList.add('g-real');"
+        oncontextmenu="return false" onerror="this.style.display='none'"/>`;
+  } else if(g.type==='video'){
+    media=`<video ${g.poster?`poster="${g.poster}"`:''} muted loop playsinline preload="none"
+        data-src="${g.src}" oncontextmenu="return false"
+        onloadeddata="this.closest('.g-item').classList.add('g-real')"
+        onmouseenter="if(!this.src){this.src=this.dataset.src;} this.play().catch(()=>{})" onmouseleave="this.pause()"></video>`;
+    play=`<div class="g-play"></div>`;
+  } else if(g.type==='yt'){
+    const poster=g.poster||(g.yt?`https://img.youtube.com/vi/${g.yt}/hqdefault.jpg`:'');
+    media=poster?`<img src="${poster}" alt="" loading="lazy" decoding="async" oncontextmenu="return false"
+        onload="this.closest('.g-item').classList.add('g-real')" onerror="this.style.display='none'"/>`:'';
+    play=g.yt?`<div class="g-play" style="pointer-events:auto;cursor:pointer" onclick="openVideo('https://www.youtube.com/embed/${g.yt}')"></div>`:`<div class="g-play"></div>`;
+  }
+  d.innerHTML=`
+    <div class="g-tag">${g.tag}</div>
+    <div class="g-frame" style="aspect-ratio:${g.ar};">
+      <div class="g-ph"><span class="g-ph-label">${phLabel}</span></div>
+      ${media}
+      ${play}
+    </div>`;
+  return d;
+}
+function updateGalleryMore(){
+  const left=Math.max(0,galleryView.length-galleryShown);
+  const status=document.getElementById('galleryStatus');
+  if(status) status.innerHTML=`<span>${activeGalleryTag}</span><br>${galleryShown} / ${galleryView.length} tác phẩm`;
+  if(!gMoreWrap) return;
+  gMoreWrap.style.display=left?'':'none';
+  const btn=gMoreWrap.querySelector('.g-more');
+  if(btn) btn.textContent=left?`Xem thêm ${Math.min(GAL_BATCH,left)} / ${left} tác phẩm ↓`:'';
+}
+function appendGalleryBatch(){
+  const grid=document.getElementById('galleryGrid');
+  if(!grid) return;
+  const next=galleryView.slice(galleryShown,galleryShown+GAL_BATCH);
+  const frag=document.createDocumentFragment();
+  next.forEach((g,i)=>frag.appendChild(makeGalleryItem(g,galleryShown+i)));
+  grid.appendChild(frag);
+  galleryShown+=next.length;
+  galleryExpanded=galleryShown>GAL_BATCH;
+  if(typeof armGallery==='function') armGallery();
+  window.dispatchEvent(new CustomEvent('anhli:gallery-batch'));
+  updateGalleryMore();
+}
+function setGalleryView(tag){
+  const grid=document.getElementById('galleryGrid');
+  if(!grid) return;
+  activeGalleryTag=tag;
+  galleryView=tag==='Tất cả' ? galleryOrder : galleryOrder.filter(g=>g.tag===tag);
+  galleryShown=0; galleryExpanded=false;
+  grid.replaceChildren();
+  window.dispatchEvent(new CustomEvent('anhli:gallery-reset'));
+  appendGalleryBatch();
+}
 function renderGallery(){
   const grid=document.getElementById('galleryGrid');
   const filt=document.getElementById('gFilters');
@@ -5302,61 +6463,20 @@ function renderGallery(){
     b.onclick=()=>filterGallery(t,b);
     filt.appendChild(b);
   });
-  const GAL_INIT=18;
-  const galleryOrder=shuffledGallery();
-  galleryOrder.forEach((g,i)=>{
-    const d=document.createElement('div');
-    d.className='g-item g-'+g.type;
-    d.dataset.tag=g.tag;
-    if(i>=GAL_INIT) d.classList.add('g-extra');
-    d.style.setProperty('--gd', (i%4*0.06)+'s');
-    const phLabel=`${g.tag} · ${g.type==='img'?'drop image':'drop video'}`;
-    let media='', play='';
-    if(g.type==='img'){
-      media=`<img src="${g.src}" alt="" loading="lazy"
-          onload="this.closest('.g-frame').style.aspectRatio=(this.naturalWidth/this.naturalHeight)||'${g.ar}'; this.closest('.g-item').classList.add('g-real');"
-          oncontextmenu="return false" onerror="this.style.display='none'"/>`;
-    } else if(g.type==='video'){
-      media=`<video ${g.poster?`poster="${g.poster}"`:''} muted loop playsinline preload="none"
-          data-src="${g.src}" oncontextmenu="return false"
-          onloadeddata="this.closest('.g-item').classList.add('g-real')"
-          onmouseenter="if(!this.src){this.src=this.dataset.src;} this.play().catch(()=>{})" onmouseleave="this.pause()"></video>`;
-      play=`<div class="g-play"></div>`;
-    } else if(g.type==='yt'){
-      const poster=g.poster||(g.yt?`https://img.youtube.com/vi/${g.yt}/hqdefault.jpg`:'');
-      media=poster?`<img src="${poster}" alt="" loading="lazy" oncontextmenu="return false"
-          onload="this.closest('.g-item').classList.add('g-real')" onerror="this.style.display='none'"/>`:'';
-      play=g.yt?`<div class="g-play" style="pointer-events:auto;cursor:pointer" onclick="openVideo('https://www.youtube.com/embed/${g.yt}')"></div>`:`<div class="g-play"></div>`;
-    }
-    d.innerHTML=`
-      <div class="g-tag">${g.tag}</div>
-      <div class="g-frame" style="aspect-ratio:${g.ar};">
-        <div class="g-ph"><span class="g-ph-label">${phLabel}</span></div>
-        ${media}
-        ${play}
-      </div>`;
-    grid.appendChild(d);
-  });
-  if(GALLERY.length>GAL_INIT){
-    grid.classList.add('g-collapsed');
+  galleryOrder=shuffledGallery();
+  if(GALLERY.length>GAL_BATCH){
     gMoreWrap=document.createElement('div'); gMoreWrap.className='g-more-wrap';
     const mb=document.createElement('button'); mb.type='button'; mb.className='g-more';
-    mb.textContent='Xem thêm '+(GALLERY.length-GAL_INIT)+' tác phẩm ↓';
-    mb.onclick=()=>{ grid.classList.remove('g-collapsed'); galleryExpanded=true; gMoreWrap.style.display='none'; };
+    mb.onclick=appendGalleryBatch;
     gMoreWrap.appendChild(mb);
     grid.after(gMoreWrap);
   }
+  setGalleryView('Tất cả');
 }
 function filterGallery(tag,btn){
   document.querySelectorAll('.g-chip').forEach(c=>c.classList.remove('active'));
   btn.classList.add('active');
-  const all=tag==='Tất cả';
-  const grid=document.getElementById('galleryGrid');
-  if(all && !galleryExpanded){ grid&&grid.classList.add('g-collapsed'); if(gMoreWrap) gMoreWrap.style.display=''; }
-  else { grid&&grid.classList.remove('g-collapsed'); if(gMoreWrap) gMoreWrap.style.display='none'; }
-  document.querySelectorAll('.g-item').forEach(it=>{
-    it.classList.toggle('g-hide', !all && it.dataset.tag!==tag);
-  });
+  setGalleryView(tag);
 }
 
 /* ============================================================
@@ -5364,17 +6484,34 @@ function filterGallery(tag,btn){
 ============================================================ */
 function renderWork(){
   const el=document.getElementById('workList');
-  WORK.forEach(w=>{
+  const career=[...WORK].reverse();
+  const rooms=[
+    {word:'Không gian',title:'Cánh cửa của Không gian',thought:'Mọi thứ bắt đầu từ một bản vẽ — và câu hỏi con người sẽ sống thế nào bên trong nó.'},
+    {word:'Ý tưởng',title:'Cánh cửa của Ý tưởng',thought:'Một ý tưởng đẹp chưa đủ. Nó phải đi được qua brief, giới hạn và rất nhiều con người.'},
+    {word:'Sân khấu',title:'Cánh cửa của Sân khấu',thought:'Không gian bắt đầu có nhịp, ánh sáng, âm thanh — và một khoảnh khắc chỉ xảy ra đúng một lần.'},
+    {word:'Dẫn dắt',title:'Cánh cửa của Dẫn dắt',thought:'Không đứng ở trung tâm. Chỉ giữ cho những quỹ đạo rất khác nhau không rơi khỏi nhau.'},
+    {word:'Tự do',title:'Cánh cửa tự mình mở',thought:'Những lớp nghề cũ gặp lại nhau trong âm nhạc, hình ảnh và một thế giới mang tên riêng.'}
+  ];
+  career.forEach((w,i)=>{
+    const room=rooms[i];
     el.innerHTML+=`
-      <div class="work-item reveal">
-        <div class="work-yr">${w.yr}</div>
-        <div>
-          <div class="work-role">${w.role}</div>
-          <div class="work-co">${w.co}</div>
+      <article class="career-room" role="button" tabindex="0" aria-expanded="false" onclick="toggleCareerRoom(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCareerRoom(this)}">
+        <span class="cr-no">ROOM ${String(i+1).padStart(2,'0')}</span>
+        <span class="cr-door" aria-hidden="true"></span>
+        <span class="cr-word" aria-hidden="true">${room.word}</span>
+        <h3 class="cr-title">${room.title}</h3>
+        <p class="cr-thought">${room.thought}</p>
+        <div class="cr-depth">
+          <p>${w.desc}</p>
+          <div class="cr-meta">${w.yr} · ${w.role}<br>${w.co}</div>
         </div>
-        <div class="work-badges">${w.badges.map(b=>`<span class="wbadge">${b}</span>`).join('')}</div>
-      </div>`;
+      </article>`;
   });
+}
+function toggleCareerRoom(room){
+  const willOpen=!room.classList.contains('is-open');
+  document.querySelectorAll('.career-room.is-open').forEach(r=>{ r.classList.remove('is-open'); r.setAttribute('aria-expanded','false'); });
+  if(willOpen){ room.classList.add('is-open'); room.setAttribute('aria-expanded','true'); }
 }
 
 /* ============================================================
@@ -5384,7 +6521,7 @@ function renderContacts(){
   const el=document.getElementById('contactDeck');
   CONTACTS.forEach(c=>{
     el.innerHTML+=`
-      <a href="${c.url}" target="_blank" class="clink reveal">
+      <a href="${c.url}" target="_blank" rel="noopener noreferrer" class="clink reveal">
         <div class="cl-label">${c.label}</div>
         <div class="cl-val">${c.val}</div>
         <div class="cl-arr">→</div>
@@ -5507,7 +6644,7 @@ async function loadYT(){
     });
     observe();
   } catch(e) {
-    status.innerHTML='Chưa tải được danh sách tự động. <a href="https://www.youtube.com/@caisapamnhaccuaLine" target="_blank" style="color:var(--amber);">Xem kênh YouTube →</a>';
+    status.innerHTML='Chưa tải được danh sách tự động. <a href="https://www.youtube.com/@caisapamnhaccuaLine" target="_blank" rel="noopener noreferrer" style="color:var(--amber);">Xem kênh YouTube →</a>';
   }
 }
 
@@ -5819,7 +6956,7 @@ observe();
   function frame(now){
     requestAnimationFrame(frame);
     if(!visible || document.hidden) return;
-    if(document.body.classList.contains('no-motion') || document.body.classList.contains('no-season')){
+    if(document.body.classList.contains('no-motion') || document.body.classList.contains('no-season') || document.body.classList.contains('perf-lite')){
       ctx.clearRect(0,0,W,H);
       last=now;
       return;
@@ -5877,7 +7014,7 @@ observe();
    Pauses when the hero is offscreen or the tab is hidden (perf-friendly). */
 (function () {
   const host = document.getElementById('shaderHost');
-  if (!host) return;
+  if (!host || document.body.classList.contains('perf-lite')) return;
 
   const canvas = document.createElement('canvas');
   canvas.id = 'shaderCanvas';
@@ -6130,6 +7267,7 @@ observe();
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const MOBILE  = matchMedia('(max-width: 900px)').matches;
 const HOVER   = matchMedia('(hover: hover)').matches;
+const PERF_LITE = document.body.classList.contains('perf-lite');
 const $ = s => document.querySelector(s);
 function el(h){ const t=document.createElement('template'); t.innerHTML=h.trim(); return t.content.firstElementChild; }
 const store = {
@@ -6176,17 +7314,11 @@ function toast(msg){
   setTimeout(out, 3400);
 })();
 
-/* ── 2 · HERO QUOTE — đổi mỗi lần ghé ───────────────────── */
-(function vary(){
+/* ── 2 · HERO QUOTE — một tuyên ngôn cố định, không trùng About ── */
+(function heroQuote(){
   const q=document.querySelector('.hero-quote');
   if(!q) return;
-  const pool=[
-    '"Tử tế. Tinh tế.<br/>Tạo giá trị thật.<br/>Đó là cách Anh Li làm nghề."',
-    '"Mình không làm sự kiện.<br/>Mình dựng những khoảnh khắc<br/>người ta mang về nhà."',
-    '"Gửi đến những giá trị nguyên bản —<br/>từ quê hương<br/>đến trái tim."',
-    '"Chạm được cảm xúc thật<br/>của khán giả —<br/>mới gọi là làm nghề."',
-  ];
-  q.innerHTML=pool[Math.floor(Math.random()*pool.length)];
+  q.innerHTML='"Tử tế. Tinh tế.<br/>Tạo giá trị thật.<br/>Đó là cách Anh Li làm nghề."';
 })();
 
 /* ── 3 · PARALLAX + TILT (một vòng rAF duy nhất) ───────── */
@@ -6200,7 +7332,7 @@ const heroLine1=$('.hero-name .line1'), heroLine2=$('.hero-name .line2');
    tạo chiều sâu. Chỉ đụng thuộc tính `translate` — `transform` thuộc CSS. */
 const planeFar=$('.hga-plane-far'), planeMid=$('.hga-plane-mid'), albumStage=$('#heroAlbumStage');
 const pxTargets=[];
-if(!REDUCED){
+if(!REDUCED && !PERF_LITE){
   document.querySelectorAll('.section-wm').forEach(e=>pxTargets.push({e, s:36}));
   const cw=$('.contact-wm'); if(cw) pxTargets.push({e:cw, s:28});
   const af=$('.about-figure'); if(af) pxTargets.push({e:af, s:-14});
@@ -6222,7 +7354,7 @@ function startGyro(){
     fx.nx=g/56; fx.ny=b/56; fx.dirty=true;
   }, {passive:true});
 }
-if(MOBILE && !REDUCED && typeof DeviceOrientationEvent!=='undefined'){
+if(MOBILE && !REDUCED && !PERF_LITE && typeof DeviceOrientationEvent!=='undefined'){
   if(typeof DeviceOrientationEvent.requestPermission==='function'){
     const ask=()=>{ DeviceOrientationEvent.requestPermission().then(s=>{ if(s==='granted') startGyro(); }).catch(()=>{}); };
     addEventListener('touchend', ask, {once:true, passive:true});
@@ -6234,6 +7366,10 @@ function applyFx(){
   const vh=innerHeight;
   if(heroSec && scrollY < vh*1.15){
     const s=Math.min(scrollY, vh);
+    if(PERF_LITE){
+      if(heroContent) heroContent.style.opacity=Math.max(0, 1-(s/vh)*1.1).toFixed(3);
+      return;
+    }
     if(heroContent){
       heroContent.style.transform=`perspective(1100px) rotateX(${(-fx.ny*1.8).toFixed(2)}deg) rotateY(${(fx.nx*2.4).toFixed(2)}deg)`;
       heroContent.style.opacity=Math.max(0, 1-(s/vh)*1.1).toFixed(3);
@@ -6442,8 +7578,6 @@ function drawVinylRing(){
 
 /* ── 8 · GALLERY — thả tim + double-tap + lightbox ──────── */
 (function gallery(){
-  const items=[...document.querySelectorAll('.g-item')];
-  if(!items.length) return;
   const imgs=[]; let burstAt=0;
 
   function setBtn(btn, src){
@@ -6466,7 +7600,10 @@ function drawVinylRing(){
     setTimeout(()=>h.remove(), 900);
   }
 
+  function enhanceItems(items){
   items.forEach((it,idx)=>{
+    if(it.dataset.galleryEnhanced==='1') return;
+    it.dataset.galleryEnhanced='1';
     const img=it.querySelector('.g-frame img');
     const vid=it.querySelector('.g-frame video');
     const src=img ? img.getAttribute('src') : (vid ? (vid.dataset.src||'v'+idx) : 'g'+idx);
@@ -6491,7 +7628,7 @@ function drawVinylRing(){
       lastTap=now;
     });
     if(img){
-      const rec={src, img, btn};
+      const rec={src, img, btn, tag:it.dataset.tag||'Visual Lab'};
       imgs.push(rec);
       it.addEventListener('click', e=>{
         if(e.target.closest('.g-like')) return;
@@ -6500,6 +7637,12 @@ function drawVinylRing(){
       });
     }
   });
+  }
+  enhanceItems([...document.querySelectorAll('.g-item')]);
+  addEventListener('anhli:gallery-reset', ()=>{ imgs.length=0; cur=-1; });
+  addEventListener('anhli:gallery-batch', ()=>{
+    enhanceItems([...document.querySelectorAll('.g-item:not([data-gallery-enhanced="1"])')]);
+  });
 
   /* lightbox */
   const lb=el(`<div class="ali-lb" aria-modal="true" role="dialog">
@@ -6507,6 +7650,7 @@ function drawVinylRing(){
       <button class="lb-nav lb-prev" aria-label="Ảnh trước">←</button>
       <img class="lb-img" id="lbImg" alt="" oncontextmenu="return false"/>
       <button class="lb-nav lb-next" aria-label="Ảnh sau">→</button>
+      <div class="lb-meta"><b id="lbTag">Visual Lab</b><span id="lbCount">01 / 01</span></div>
       <button class="lb-like" id="lbLike"></button>
     </div>`);
   document.body.appendChild(lb);
@@ -6517,6 +7661,8 @@ function drawVinylRing(){
   function renderLb(){
     const o=imgs[cur]; if(!o) return;
     $('#lbImg').src=o.img.currentSrc||o.src;
+    $('#lbTag').textContent=o.tag;
+    $('#lbCount').textContent=`${String(cur+1).padStart(2,'0')} / ${String(imgs.length).padStart(2,'0')}`;
     syncLb();
   }
   function syncLb(){
@@ -6544,6 +7690,12 @@ function drawVinylRing(){
     syncLb();
   });
   lb.addEventListener('click', e=>{ if(e.target===lb) closeLb(); });
+  let lbStartX=0;
+  lb.addEventListener('pointerdown',e=>{ lbStartX=e.clientX; });
+  lb.addEventListener('pointerup',e=>{
+    const dx=e.clientX-lbStartX;
+    if(Math.abs(dx)>48) step(dx<0?1:-1);
+  });
   document.addEventListener('keydown', e=>{
     if(!lb.classList.contains('open')) return;
     if(e.key==='Escape') closeLb();
@@ -6742,7 +7894,7 @@ function drawVinylRing(){
 })();
 
 /* ── 16 · MARQUEE — nghiêng theo đà cuộn ── */
-if(!REDUCED){
+if(!REDUCED && !PERF_LITE){
   const mWraps=[...document.querySelectorAll('.marquee-wrap')];
   let lastY=scrollY, lastT=performance.now();
   addEventListener('scroll', ()=>{
@@ -6929,6 +8081,7 @@ if(MOBILE){
   const vA=document.getElementById('musicScrollVideoA');
   const vB=document.getElementById('musicScrollVideoB');
   if(!music || !bg || !vA || !vB) return;
+  if(document.body.classList.contains('perf-lite')) return;
   if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   if(navigator.connection && navigator.connection.saveData) return;
 
@@ -7002,7 +8155,7 @@ if(MOBILE){
 (function(){
   const hero=document.getElementById('home');
   const video=document.getElementById('heroVideo');
-  if(!hero || !video) return;
+  if(!hero || !video || document.body.classList.contains('perf-lite')) return;
   const heroParams=new URLSearchParams(location.search);
   const freezeHero=heroParams.has('pauseHero');
   if(heroParams.has('debugDisc')) document.body.classList.add('debug-disc');
@@ -7270,6 +8423,7 @@ if(MOBILE){
     }, {passive:true});
     let lastScroll=scrollY, scrollKick=0;
     addEventListener('scroll', ()=>{
+      if(document.body.classList.contains('wheel-input')){ lastScroll=scrollY; return; }
       scrollKick+=Math.min(30, Math.abs(scrollY-lastScroll))*0.00022;
       lastScroll=scrollY;
     }, {passive:true});
