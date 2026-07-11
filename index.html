@@ -4508,6 +4508,53 @@ body.theme-dandelion:not(.no-season) #contact::after { opacity:.48; }
   }
 }
 </style>
+<style id="music-nowplaying-mobile-floating">
+/* 2026-07-12 (Ali: "chỗ đĩa/play lỗi trên mobile, đơn giản thành 1 cái
+   floating gọn đẹp là được"). Root cause của lỗi: #music .listening-room ép
+   .player-cover xuống còn 52px (dòng ~4363) nhưng viền đồng tâm "dĩa than"
+   (box-shadow 8/9/16/17px, dòng ~2402) vẫn được tính theo cỡ dĩa to cũ
+   (150-176px) -> viền amber phồng to hơn hẳn tấm ảnh, đè lên nút điều khiển.
+   Thay vì vá viền, bỏ hẳn kiểu "dĩa than" trên mobile — thu về 1 thanh
+   player ngang gọn, cùng ngôn ngữ với .vinyl-dock (đĩa nhỏ + tên bài +
+   nút điều khiển), nằm ngay trong section thay vì phải cuộn ra mới gọn. */
+@media (max-width:700px){
+  #music .listening-room .nowplaying{ padding:.65rem .85rem; border-radius:20px; }
+  #music .listening-room .nowplaying .np-head{ display:none; }
+  #music .listening-room .nowplaying .player{
+    flex-direction:row; align-items:center; gap:.65rem;
+  }
+  #music .listening-room .nowplaying .player-cover{
+    width:46px !important; height:46px !important; margin:0 !important;
+    border-radius:50% !important; overflow:hidden !important; flex-shrink:0;
+    box-shadow:0 0 0 2px rgba(204,159,74,.42), 0 6px 16px rgba(0,0,0,.4) !important;
+  }
+  #music .listening-room .nowplaying .player-cover::after{ content:none !important; box-shadow:none !important; }
+  #music .listening-room .nowplaying .player-cover img{ border-radius:50%; }
+  #music .listening-room .nowplaying.playing .player-cover img{ animation:vinylSpin 9s linear infinite; }
+  body.no-motion #music .listening-room .nowplaying.playing .player-cover img{ animation:none !important; }
+
+  #music .listening-room .nowplaying .player-main{ flex:1; min-width:0; }
+  #music .listening-room .nowplaying .player-top{
+    flex-direction:row !important; align-items:center !important; text-align:left !important;
+    margin-bottom:.35rem !important; gap:.5rem;
+  }
+  #music .listening-room .nowplaying .player-meta{ text-align:left !important; min-width:0; flex:1; }
+  #music .listening-room .nowplaying .player-title{
+    font-size:.9rem; white-space:nowrap !important; overflow:hidden; text-overflow:ellipsis;
+  }
+  #music .listening-room .nowplaying .player-sub{ font-size:.58rem; margin-top:.1rem; }
+
+  #music .listening-room .nowplaying .player-controls{
+    justify-content:flex-start !important; flex-wrap:wrap !important; width:100% !important; gap:.5rem !important;
+  }
+  #music .listening-room .nowplaying #pcShuffle,
+  #music .listening-room .nowplaying .pc-share,
+  #music .listening-room .nowplaying .pc-time{ display:none !important; }
+  #music .listening-room .nowplaying .pc-btn{ width:30px !important; height:30px !important; font-size:.62rem; }
+  #music .listening-room .nowplaying .pc-play{ width:36px !important; height:36px !important; font-size:.72rem; }
+  #music .listening-room .nowplaying .pc-bar{ order:5; flex-basis:100%; height:4px; }
+}
+</style>
 </head>
 <body data-theme="dandelion">
 <script id="performance-mode-bootstrap">
