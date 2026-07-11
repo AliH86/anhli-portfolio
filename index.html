@@ -4562,6 +4562,33 @@ body.theme-dandelion:not(.no-season) #contact::after { opacity:.48; }
   #music .listening-room .nowplaying .pc-btn{ width:30px !important; height:30px !important; font-size:.62rem; }
   #music .listening-room .nowplaying .pc-play{ width:36px !important; height:36px !important; font-size:.72rem; }
   #music .listening-room .nowplaying .pc-bar{ order:5; flex-basis:100%; height:4px; }
+
+  /* 2026-07-12 v2 (Ali: "đĩa bên phải" vẫn còn) — .np-vinyl (dĩa 3D/CSS to
+     bên phải, ~96px, dùng cho bản listening-room desktop) đáng lẽ đã bị ẩn
+     ở khối "music-identity-final" (@media max-width:700), nhưng để chắc ăn
+     tuyệt đối (đây là block CUỐI CÙNG trong <head> đụng tới .nowplaying nên
+     thắng mọi tranh chấp cascade) — ẩn lại lần nữa ở đây, không nương nhờ
+     rule cũ nữa. */
+  #music .listening-room .nowplaying .np-vinyl,
+  #music .listening-room .nowplaying .vinyl-bg.np-vinyl{
+    display:none !important; width:0 !important; height:0 !important;
+    opacity:0 !important; pointer-events:none !important;
+  }
+  #music .listening-room .nowplaying .np-z{ padding-right:0 !important; }
+
+  /* 2026-07-12 v2 (Ali: cuộn xem bài trong album — title dài (vd "Tôi Muốn
+     Ôm Trọn Di Sản Quê Hương Mình Vào Lòng") wrap 3 dòng ở cỡ chữ desktop
+     (clamp 1.6-2.25rem, dòng ~4253) chiếm gần hết chiều cao khung .album-drawer
+     trên mobile (~40svh) -> .tlist chỉ còn hở đúng 1 hàng bài, trông như kẹt/lỗi.
+     Thu nhỏ + giới hạn 2 dòng cho tên album, gọn phần đầu để nhường chỗ cho
+     danh sách bài thực sự cuộn được. */
+  #music .listening-room .drawer-head{ margin-bottom:.55rem; padding-bottom:.55rem; gap:.5rem; }
+  #music .listening-room .drawer-title{
+    font-size:1.05rem !important; line-height:1.25; display:-webkit-box;
+    -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+  }
+  #music .listening-room .drawer-title span{ display:block; margin-left:0; margin-top:.2rem; font-size:.64rem; }
+  #music .listening-room .drawer-desc{ -webkit-line-clamp:1; margin-top:.25rem; }
 }
 </style>
 </head>
