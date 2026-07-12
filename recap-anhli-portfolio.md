@@ -1,5 +1,39 @@
 # Recap — anhli-portfolio (cập nhật 12/7/2026, khuya)
 
+## Oracle — schema câu chuyện lõi + hồ sơ nghĩa, 5 hạt mẫu (12/7/2026, khuya)
+
+- Bước 2 của trình tự triển khai trong `ORACLE-CONTENT-SYSTEM.md` §7: "Chốt
+  schema mới bằng 3–5 hạt mẫu; chưa viết cả 78 ngay". File mới, không đụng
+  `garden-oracle-data.js` / `garden-oracle-synthesis.js` / `index.html`.
+- File mới `garden-oracle-profiles.js` (DRAFT, chưa nạp vào `index.html`):
+  định nghĩa schema cho `coreStory` (đoạn kể chuyện sâu hơn bloom/closed hiện
+  có, không copy nguyên văn) và `visualMotif`, cộng hồ sơ nghĩa có cấu trúc
+  `profile.{domain, movement, storyStage, need, gift, risk, action}` để engine
+  tổng hợp sau này đọc quan hệ giữa 3 hạt mà không cần NLP hay copy câu chữ.
+  `domain` tái dùng đúng 5 giá trị đã có trong `garden-oracle-synthesis.js`
+  (love/work/decision/action/inner) để không phải viết lại engine hiện có.
+  `movement`/`storyStage` là vocabulary mới, có ghi rõ trong file để 73 hạt
+  còn lại theo cùng quy tắc (storyStage suy từ rank: Ace→spark…King→mastery,
+  Major gán tay).
+- 5 hạt mẫu đã viết đầy đủ: `The Fool`/id 0 (Major, Air) — trùng đúng hạt
+  trong ảnh reference "Hạt gieo vào gió" Ali đã chọn; `Three of Wands`/id 24
+  (Lửa); `Eight of Cups`/id 43 (Nước); `Six of Swords`/id 55 (Khí); `Seven of
+  Pentacles`/id 70 (Đất). Cố tình không chọn toàn lá Ace — chọn rank khác nhau
+  (Ace/3/6/7/8) để test schema có generalize được không, không chỉ đúng với
+  trường hợp dễ nhất.
+- File mới `ORACLE-ASSET-SAMPLES.md`: điền sẵn 5 master prompt đầy đủ (theo
+  đúng khung câu của `ORACLE-ASSET-PROMPT.md`, không đổi cấu trúc prompt gốc)
+  cho 5 hạt trên, kèm tên file gợi ý và checklist duyệt contact-sheet 0°/180°.
+  Sẵn sàng để Ali hoặc một phiên tạo ảnh khác chạy từng request riêng.
+- Nghệ thuật: dùng art direction đã chốt — botanical 3D huyền ảo, card 4:5,
+  cân hai đầu, không chữ; Nở dùng ảnh thẳng, Khép xoay cùng ảnh 180°.
+- Chưa làm: chưa generate ảnh thật (cần Ali đính kèm card "Hạt gieo vào gió"
+  v2 làm style reference cho phiên tạo ảnh), chưa mở rộng ra 78, chưa nối
+  `garden-oracle-profiles.js` vào engine tổng hợp hay `index.html`. Đây vẫn là
+  bước schema + mẫu, chờ Ali duyệt độ rõ trước khi đi tiếp theo trình tự ở
+  `ORACLE-CONTENT-SYSTEM.md` §7 (bước 3: prototype artwork → bước 4: Ali
+  duyệt → bước 5: mở rộng theo đợt 22 + 4×14).
+
 ## Chốt đặc tả mở rộng Garden Oracle (12/7/2026)
 
 - Nguồn sự thật mới: `ORACLE-CONTENT-SYSTEM.md`; Claude/Codex phải đọc trước
