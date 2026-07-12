@@ -5267,9 +5267,10 @@ body.no-motion #music .listening-room .album-drawer .np-vinyl{ display:none !imp
     <div class="hero-bottom">
       <img class="quote-sprinkle" src="./images/oracle/seed-sprinkle.webp" alt="" aria-hidden="true" loading="lazy" decoding="async"/>
       <p class="hero-quote">
-        “Chào bạn, mình là Anh Li.<br/>
-        Đây là khu vườn của những điều mình đã làm,<br/>
-        đã nghe — và vẫn đang trở thành.”
+        “Xin chào đằng ấy ơi, mình là Anh Li — cảm ơn bạn đã ghé thăm,<br/>
+        ngẫu nhiên hay từ một lời mời nè?<br/>
+        Giới thiệu với đằng ấy, đây là khu vườn của những điều mình đã làm,<br/>
+        đã nghe, và vẫn đang trở thành. Cứ tự nhiên trải nghiệm nha.”
       </p>
     </div>
     <p class="hero-manifesto">Đợt này khu vườn đang mở bằng Mỹ Vị Nhân Sinh — album nổi bật nằm trong jewel case lớn, cùng những lát nhạc khác trôi giữa đồng bồ công anh.</p>
@@ -5292,8 +5293,8 @@ body.no-motion #music .listening-room .album-drawer .np-vinyl{ display:none !imp
     <!-- lời chủ nhà hiện từng nhịp (d1→d3) thay vì cả khối fade một lượt -->
     <div class="sec-label reveal">Một lời chào</div>
     <p class="welcome-lead reveal d1">
-      Một portfolio không nhất thiết phải bắt đầu bằng thành tích.<br/>
-      Mình muốn bắt đầu bằng một lời <em>mời ở lại.</em>
+      Mình muốn mở đầu bằng một lời <em>mời ở lại,</em><br/>
+      còn thành tích thì để kể sau cũng được.
     </p>
     <p class="welcome-sub reveal d3">
       Bạn có thể đi qua một khung hình, dừng ở một bài hát,
@@ -5319,7 +5320,7 @@ body.no-motion #music .listening-room .album-drawer .np-vinyl{ display:none !imp
     </div>
     <div class="gc-week" aria-hidden="true"><span>T2</span><span>T3</span><span>T4</span><span>T5</span><span>T6</span><span>T7</span><span>CN</span></div>
     <div class="gc-days" id="gcDays" role="grid" aria-label="Lịch tháng hiện tại"></div>
-    <p class="gc-hint">Có một lời nhắn đang nằm dưới vòng tròn ấy.</p>
+    <p class="gc-hint">Mỗi ngày, mình đều có sẵn một thông điệp chờ bạn — khám phá nhé.</p>
   </div>
 </section>
 
@@ -5347,7 +5348,9 @@ body.no-motion #music .listening-room .album-drawer .np-vinyl{ display:none !imp
     <div class="go-message" id="goMessage">
       <h2 id="goTitle">Một lời từ khu vườn</h2>
       <div class="go-seeds" id="goSeeds"></div>
+      <section class="go-synthesis" id="goSynthesis" aria-live="polite"></section>
       <p class="go-disclaimer">Khu vườn gửi một năng lượng ngẫu nhiên, không gửi điều bạn muốn nghe. Nếu lời này không thuộc về bạn, cứ để nó bay đi — đừng hái thêm chỉ để tìm một câu chuyện dễ tin hơn.</p>
+      <a class="go-guide" href="https://tiktok.com/@guidetheheart" target="_blank" rel="noopener noreferrer"><svg class="go-guide-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2z" fill="currentColor"/></svg><span>Muốn nhìn sâu hơn? Có một người đọc những vì sao rất gần khu vườn này · @guidetheheart ↗</span></a>
       <footer>— Anh Li gửi bạn một lời từ khu vườn ✦</footer>
     </div>
   </article>
@@ -5406,7 +5409,7 @@ button.gc-day{ cursor:pointer; }
 .garden-oracle{ position:fixed; inset:0; z-index:10040; display:grid; place-items:center; padding:1rem; }
 .garden-oracle[hidden]{ display:none; }
 body.oracle-open{ overflow:hidden; }
-.go-backdrop{ position:absolute; inset:0; border:0; background:rgba(3,7,3,.76); backdrop-filter:blur(7px); cursor:pointer; }
+.go-backdrop{ position:absolute; inset:0; border:0; background:rgba(3,7,3,.88); -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px); cursor:pointer; }
 .go-letter{
   position:relative; z-index:1; width:min(620px,100%); max-height:min(86svh,760px); overflow:auto;
   padding:clamp(1.6rem,5vw,3.3rem); border:1px solid rgba(168,198,105,.3); border-radius:28px;
@@ -5420,15 +5423,22 @@ body.oracle-open{ overflow:hidden; }
 .go-numbers span{ display:grid; place-items:center; width:42px; height:42px; border:1px solid rgba(225,236,173,.3); border-radius:50%; color:var(--amber2); font-family:'Cormorant Garamond',serif; font-size:1.15rem; }
 .go-letter h2{ margin:0 0 1.4rem; color:var(--text); font:400 clamp(2rem,5vw,3.2rem)/1 'Cormorant Garamond',serif; }
 .go-sensing{ position:relative; overflow:hidden; border-radius:22px; min-height:400px; display:grid; place-items:center; align-content:center; gap:1.5rem; text-align:center; }
-.go-sensing p,.go-whisper{ color:rgba(225,236,173,.64); font:italic 1.08rem/1.7 'Cormorant Garamond',serif; }
+.go-sensing p,.go-whisper{ color:rgba(238,243,201,.94); font:italic 1.08rem/1.7 'Cormorant Garamond',serif; }
 .go-sensing p em{ color:var(--text); font-size:1.16em; }
 .bag-video{
   position:absolute; inset:0; z-index:0; width:100%; height:100%; object-fit:cover; pointer-events:none;
   -webkit-mask-image:radial-gradient(closest-side, #000 66%, transparent 100%);
   mask-image:radial-gradient(closest-side, #000 66%, transparent 100%);
 }
+/* Dark scrim sitting between the video and the text/button so the message
+   stays readable no matter how bright the video frame is underneath —
+   video keeps showing at the feathered edges, center is reliably darkened. */
+.go-sensing::after{
+  content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
+  background:radial-gradient(ellipse 70% 62% at 50% 52%, rgba(4,7,4,.58) 0%, rgba(4,7,4,.24) 55%, transparent 80%);
+}
 .go-sensing > *:not(.bag-video){ position:relative; z-index:1; }
-.go-sensing p{ text-shadow:0 2px 10px rgba(0,0,0,.85), 0 1px 3px rgba(0,0,0,.9); }
+.go-sensing p{ text-shadow:0 2px 12px rgba(0,0,0,.92), 0 1px 4px rgba(0,0,0,.95); }
 .go-bag{
   border:0; background:none; color:var(--amber2); cursor:pointer; font:inherit;
   font-size:.62rem; letter-spacing:.13em; text-transform:uppercase;
@@ -5456,6 +5466,21 @@ body.oracle-open{ overflow:hidden; }
 .go-seed h3{ margin:.35rem 0 .45rem; color:var(--text); font:400 1.25rem/1.15 'Cormorant Garamond',serif; }
 .go-seed p{ margin:0; color:var(--text2); font-size:.86rem; line-height:1.75; }
 .go-seed p em{ color:rgba(225,236,173,.72); font-style:italic; }
+.go-synthesis{ margin-top:1.25rem; padding:1.2rem 1.15rem; border:1px solid rgba(225,236,173,.16); border-radius:16px; background:rgba(168,198,105,.055); }
+.go-synthesis p{ margin:0; color:var(--text2); font-size:.86rem; line-height:1.75; }
+.go-synth-intro{ margin-bottom:.7rem !important; }
+.go-synth-list{ margin:0 0 .9rem; padding-left:1.15rem; color:var(--text2); font-size:.86rem; line-height:1.7; }
+.go-synth-list li{ margin-bottom:.45rem; }
+.go-synth-list li:last-child{ margin-bottom:0; }
+.go-synth-outro{ margin-bottom:.35rem !important; }
+.go-synthesis .go-carry{ display:block; margin:0; color:var(--amber2); font-style:italic; font-size:.98rem; line-height:1.6; }
+.go-guide{
+  display:flex; align-items:flex-start; gap:.5rem; margin-top:1.1rem; padding:.7rem .85rem;
+  border:1px solid rgba(225,236,173,.18); border-radius:12px; background:rgba(168,198,105,.06);
+  color:rgba(225,236,173,.78); font-size:.71rem; line-height:1.55; text-decoration:none; transition:border-color .2s,background .2s,color .2s;
+}
+.go-guide-icon{ flex:none; margin-top:.15rem; color:var(--amber2); }
+.go-guide:hover{ color:var(--amber2); border-color:rgba(232,200,112,.4); background:rgba(168,198,105,.11); }
 .go-letter footer{ margin-top:1.25rem; color:rgba(225,236,173,.55); font:italic .85rem 'Cormorant Garamond',serif; text-align:right; }
 .go-disclaimer{ margin:1.4rem 0 0; padding-top:1rem; border-top:1px solid rgba(168,198,105,.13); color:rgba(243,236,221,.42); font-size:.68rem; line-height:1.65; }
 @keyframes goLetterIn{ from{opacity:0;transform:translateY(18px) scale(.98)} to{opacity:1;transform:none} }
@@ -5474,11 +5499,23 @@ body.no-motion .go-letter{ animation:goLetterFade .35s ease both; }
 body.no-motion .go-bag{ transition:none; }
 </style>
 
+<script src="./garden-oracle-data.js"></script>
+<script>
+(function(){
+  // Tách riêng như music-data.js: cache-bust mỗi lần tải, để sửa
+  // garden-oracle-synthesis.js xong push là lên ngay, không cần bump version.
+  var s=document.createElement('script');
+  s.src='garden-oracle-synthesis.js?v='+Date.now();
+  s.onerror=function(){ console.warn('[Anh Li Portfolio] garden-oracle-synthesis.js could not load; tổng hợp 3 hạt sẽ dùng câu dự phòng đơn giản.'); };
+  document.head.appendChild(s);
+})();
+</script>
 <script id="garden-calendar-js">
 (function(){
   const daysEl=document.getElementById('gcDays'),monthEl=document.getElementById('gcMonth');
   const oracle=document.getElementById('gardenOracle'),numbersEl=document.getElementById('goNumbers'),seedsEl=document.getElementById('goSeeds');
-  if(!daysEl||!monthEl||!oracle||!numbersEl||!seedsEl) return;
+  const synthesisEl=document.getElementById('goSynthesis'),deck=window.GARDEN_ORACLE_CARDS||[];
+  if(!daysEl||!monthEl||!oracle||!numbersEl||!seedsEl||!synthesisEl) return;
   const calendar=document.getElementById('gardenCalendar'),hero=document.getElementById('home');
   const heroContent=hero&&hero.querySelector('.hero-content'),heroName=hero&&hero.querySelector('.hero-name');
   if(calendar&&heroContent&&heroName) heroContent.insertBefore(calendar,heroName);
@@ -5511,7 +5548,7 @@ body.no-motion .go-bag{ transition:none; }
   const light=[
     'Có điều đang lớn lên dù hôm nay bạn chưa nhìn thấy. Đừng đào hạt giống lên chỉ để kiểm tra nó đã bén rễ chưa.',
     'Một hướng khác không có nghĩa là bạn đã đi sai. Đôi khi đó là cách con đường tự chỉnh lại để gặp đúng mình.',
-    'Sự chậm rãi hôm nay không phải trì hoãn. Nó đang trả lại cho bạn độ sâu mà vội vàng đã lấy mất.',
+    'Sự chậm rãi hôm nay đang trả lại cho bạn độ sâu mà vội vàng đã lấy mất.',
     'Bạn không cần giải quyết toàn bộ bầu trời. Chỉ cần chăm sóc khoảng đất đang ở ngay dưới chân.',
     'Có một câu trả lời đang đến bằng cảm giác trước khi thành lời. Hãy tin phần cơ thể đã hiểu sớm hơn lý trí.',
     'Điều phù hợp sẽ không luôn dễ dàng, nhưng nó thường khiến bạn được là mình nhiều hơn sau mỗi bước.',
@@ -5521,11 +5558,11 @@ body.no-motion .go-bag{ transition:none; }
     'Đừng nhầm im lặng với trống rỗng. Có những khoảng lặng đang âm thầm sắp xếp lại cả một bản nhạc.'
   ];
   const shadow=[
-    'Điều làm bạn mệt có thể không phải công việc, mà là việc liên tục chứng minh mình xứng đáng với nó.',
+    'Điều làm bạn mệt có thể là việc phải liên tục chứng minh mình xứng đáng với công việc đó.',
     'Có một cánh cửa bạn vẫn lay vì quen tay, dù căn phòng phía sau đã không còn dành cho mình.',
     'Bạn đang cố đọc suy nghĩ của người khác trong khi bỏ quên tiếng nói rõ ràng nhất ở bên trong.',
     'Sự hoàn hảo đang giả làm tiêu chuẩn, nhưng thật ra chỉ là nỗi sợ bị nhìn thấy khi còn dang dở.',
-    'Không phải mọi điều từng cứu mình đều cần đi cùng mình đến chặng tiếp theo.',
+    'Một vài điều từng cứu mình đã hoàn thành vai trò của nó ở chặng trước — chặng tiếp theo có thể cần một điều khác.',
     'Một lời từ chối bị trì hoãn thường biến thành nhiều ngày miễn cưỡng. Hãy thành thật sớm hơn một chút.',
     'Bạn không cần biến mọi cảm xúc thành quyết định. Một số cảm xúc chỉ cần được đi qua.',
     'Đừng dùng tốc độ của người khác để kết luận về mùa của mình.',
@@ -5559,12 +5596,55 @@ body.no-motion .go-bag{ transition:none; }
   function reading(){
     const dateKey=year+'-'+String(month+1).padStart(2,'0')+'-'+String(today).padStart(2,'0');
     const random=rng(hash('anhli-garden-'+dateKey+'-'+deviceSeed())),nums=[];
-    while(nums.length<3){ const n=Math.floor(random()*79); if(!nums.includes(n)) nums.push(n); }
+    const deckSize=deck.length===78?78:79;
+    while(nums.length<3){ const n=Math.floor(random()*deckSize); if(!nums.includes(n)) nums.push(n); }
+    if(deck.length===78){
+      return nums.map(n=>{
+        const card=deck[n],closed=random()<.32;
+        return {n,card,closed,title:closed?card.gardenClosed:card.gardenOpen,theme:closed?card.closed:card.bloom,message:closed?card.closed:card.bloom};
+      });
+    }
     const pools=[light,shadow,carry];
     return nums.map((n,i)=>{
       const symbol=symbols[n%symbols.length];
       return {n:n,title:symbol[0],theme:symbol[1],message:pools[i][(n+Math.floor(n/symbols.length)+i)%pools[i].length]};
     });
+  }
+  function positionMessage(x,i){
+    const state=x.closed?'Khép':'Nở';
+    return `<section class="go-seed"><span>${positions[i]} · Hạt ${state}</span><h3>${x.title}</h3><p>${x.message} <em>${x.card.tarot} · ${x.card.element}${x.card.astro?' · '+x.card.astro:''}</em></p></section>`;
+  }
+  function goSplitSentences(msg){ return (msg||'').split(/(?<=[.?!])\s+/).filter(Boolean); }
+  /* Dự phòng nếu garden-oracle-synthesis.js chưa tải kịp/lỗi mạng — vẫn dựa
+     trên tỷ lệ Nở/Khép thật của lần rút, chỉ là không có tầng "vùng đời sống". */
+  const GO_CARRY_BY_CLOSED_COUNT={
+    0:'Cả ba hạt hôm nay đều đang mở, nên năng lượng đã sẵn sàng — chọn một việc cụ thể và bắt đầu thử, đừng chỉ nghĩ về nó.',
+    1:'Phần lớn câu chuyện hôm nay đang mở, chỉ một phần còn khép lại — đừng để phần chưa sẵn sàng đó cản bạn khỏi những phần đã sẵn sàng, cứ bắt đầu từ chỗ dễ trước.',
+    2:'Phần lớn câu chuyện hôm nay đang khép lại, chỉ một phần đang mở — trước khi làm thêm điều gì mới, hãy dành thời gian thành thật nhìn vào phần đang bị giữ lại, câu trả lời có lẽ nằm ở đó.',
+    3:'Cả ba hạt hôm nay đều đang khép lại — hôm nay có lẽ là ngày để dừng lại và thành thật với điều đang bị giữ trong lòng.'
+  };
+  function synthesis(result){
+    /* Personal-narrator template, per Ali: mở đầu 1 câu -> 3 bullet gọn (chỉ nêu
+       tình huống, không kèm lời khuyên riêng) -> 1 câu khuyên/nhắc nhở cuối duy
+       nhất. Bullet tái dùng câu đầu (tình huống) của mỗi hạt. Câu khuyên cuối
+       là tổng hợp THẬT từ cả ba hạt (không quote lại một hạt cụ thể) — ưu tiên
+       garden-oracle-synthesis.js (đọc theo vùng đời sống + tỷ lệ Nở/Khép, xoay
+       biến thể theo tuần); nếu file đó chưa tải kịp thì rơi về bản dự phòng
+       chỉ dựa trên tỷ lệ Nở/Khép. */
+    const bullets=result.map(x=>{
+      const s=goSplitSentences(x.message);
+      return `<li>${s[0]||x.message}</li>`;
+    }).join('');
+    const closedCount=result.filter(x=>x.closed).length;
+    const dateKey=year+'-'+String(month+1).padStart(2,'0')+'-'+String(today).padStart(2,'0');
+    const engine=window.GARDEN_ORACLE_SYNTHESIS;
+    let carry;
+    try{ carry = engine ? engine.buildSynthesisLine(result, dateKey) : null; }catch(e){ carry = null; }
+    if(!carry) carry = GO_CARRY_BY_CLOSED_COUNT[closedCount];
+    return `<p class="go-synth-intro">Với ba hạt bay trong gió hôm nay, mình nhìn thấy câu chuyện và thông điệp thế này:</p>
+<ul class="go-synth-list">${bullets}</ul>
+<p class="go-synth-outro">Sau cùng, điều mình muốn nhắc bạn là:</p>
+<p class="go-carry">"${carry}"</p>`;
   }
   function resetBag(bagBtn){
     bagBtn.classList.remove('bursting'); bagBtn.disabled=false;
@@ -5576,13 +5656,20 @@ body.no-motion .go-bag{ transition:none; }
     const bagBtn=document.getElementById('goBag');
     resetBag(bagBtn);
     oracle.hidden=false; document.body.classList.add('oracle-open');
+    /* Modal sits over a full-viewport blurred backdrop while the Hero shader
+       keeps rendering underneath — that combo is the known biggest GPU/compositor
+       cost on this page (see #music backdrop-filter perf fix). Pause it for the
+       life of the modal so hover/scroll inside stays smooth and the OS cursor
+       doesn't stutter from a starved compositor thread. */
+    if(window.shaderSetPaused) window.shaderSetPaused(true);
     requestAnimationFrame(()=>bagBtn?.focus());
   }
   function chooseBag(){
     const result=reading();
     numbersEl.innerHTML=result.map(x=>'<span>'+String(x.n).padStart(2,'0')+'</span>').join('');
     document.getElementById('goSymbols').innerHTML=result.map(x=>'<span><b>'+String(x.n).padStart(2,'0')+'</b>'+x.title+'</span>').join('');
-    seedsEl.innerHTML=result.map((x,i)=>'<section class="go-seed"><span>'+positions[i]+'</span><h3>'+x.title+'</h3><p>'+x.message+' <em>Hôm nay, khu vườn nhắc bạn '+x.theme+'.</em></p></section>').join('');
+    seedsEl.innerHTML=deck.length===78?result.map(positionMessage).join(''):result.map((x,i)=>'<section class="go-seed"><span>'+positions[i]+'</span><h3>'+x.title+'</h3><p>'+x.message+' <em>Hôm nay, khu vườn nhắc bạn '+x.theme+'.</em></p></section>').join('');
+    synthesisEl.innerHTML=deck.length===78?synthesis(result):'';
     oracle.classList.add('drawn');
     requestAnimationFrame(()=>document.getElementById('goReveal')?.focus());
   }
@@ -5602,6 +5689,7 @@ body.no-motion .go-bag{ transition:none; }
   function closeOracle(){
     oracle.hidden=true; oracle.classList.remove('drawn','revealed'); document.body.classList.remove('oracle-open');
     resetBag(document.getElementById('goBag'));
+    if(window.shaderSetPaused) window.shaderSetPaused(false);
     daysEl.querySelector('.today')?.focus();
   }
   daysEl.querySelector('.today')?.addEventListener('click',openOracle);
@@ -5664,10 +5752,10 @@ body.no-motion .go-bag{ transition:none; }
           <source src="./images/oracle/bag-burst.mp4" type="video/mp4"/>
         </video>
         <span class="aq-mark" style="font-size: 120px; line-height: 0">“</span>
-        <span class="aq-l1">Mình không làm</span>
-        <span class="aq-l2" style="font-weight: 700">sự kiện.</span>
-        <span class="aq-l3">Mình dựng những <em>khoảnh khắc</em></span>
-        <span class="aq-l4" style="font-weight: 700">người ta mang về nhà.</span>
+        <span class="aq-l1">Mình thích dựng nên</span>
+        <span class="aq-l2" style="font-weight: 700">khoảnh khắc.</span>
+        <span class="aq-l3">Những điều người ta mang về nhà,</span>
+        <span class="aq-l4" style="font-weight: 700">lâu hơn một sự kiện.</span>
       </blockquote>
       <div class="about-eyebrow reveal">Chân dung</div>
       <div class="about-desc reveal d1">
@@ -6694,7 +6782,7 @@ const EVENTS = [
 ];
 
 const WORK = [
-  { yr:'2025 – nay', role:'Creative Services Producer', co:'Freelance · Independent', desc:'Sau nhiều năm đi qua agency và sân khấu, mình chọn đứng ở giao điểm: dẫn dắt sáng tạo, chỉ đạo nghệ thuật, quản lý sản xuất và dùng AI như một chất liệu mới — không phải một lối tắt.', badges:['Creative','AI','Management'] },
+  { yr:'2025 – nay', role:'Creative Services Producer', co:'Freelance · Independent', desc:'Sau nhiều năm đi qua agency và sân khấu, mình chọn đứng ở giao điểm: dẫn dắt sáng tạo, chỉ đạo nghệ thuật, quản lý sản xuất và dùng AI như một chất liệu mới trong quy trình sáng tạo của mình.', badges:['Creative','AI','Management'] },
   { yr:'Mar – Nov 2025', role:'Associate Producer', co:'2RES', desc:'Một chặng ngắn nhưng đậm đặc: kịch bản biểu diễn, nội dung sáng tạo và những đội ngũ nhiều chuyên môn cùng phải thở theo một nhịp.', badges:['Production','Performing Arts'] },
   { yr:'2016 – 2021', role:'Director of Client Services', co:'White Lion Communication', desc:'Năm năm học cách đứng giữa kỳ vọng thương hiệu và tham vọng sáng tạo — dịch hai ngôn ngữ ấy cho nhau, rồi giữ cả tập thể đi đến khoảnh khắc sân khấu sáng đèn.', badges:['Event','Brand','Leadership'] },
   { yr:'2014 – 2016', role:'Creative Specialist', co:'Yan Live · Yan Group', desc:'Âm nhạc và sân khấu bước vào nghề từ đây. Mỗi chiến dịch là một lần học cách biến văn hóa đại chúng, hình ảnh và nhịp sống thành trải nghiệm có thể nhớ.', badges:['Show','Music','Brand'] },
@@ -7635,7 +7723,7 @@ function renderWork(){
     {word:'Không gian',title:'Nơi đường nét dạy mình quan sát',thought:'Mọi thứ bắt đầu từ một bản vẽ — và câu hỏi con người sẽ cảm thấy gì khi bước vào bên trong.'},
     {word:'Ý tưởng',title:'Nơi ý tưởng học cách sống sót',thought:'Một ý tưởng đẹp chưa đủ; nó phải đi qua brief, giới hạn và rất nhiều con người mà không đánh mất linh hồn.'},
     {word:'Sân khấu',title:'Nơi khoảnh khắc chỉ đến một lần',thought:'Ánh sáng bật lên, âm thanh bắt đầu, và hàng nghìn chi tiết phải cùng đúng vào một giây không thể làm lại.'},
-    {word:'Dẫn dắt',title:'Nơi mình học cách đứng giữa',thought:'Không cần đứng ở trung tâm — chỉ cần giữ cho những quỹ đạo rất khác nhau cùng đi về một hướng.'},
+    {word:'Dẫn dắt',title:'Nơi mình học cách đứng giữa',thought:'Giữ cho những quỹ đạo rất khác nhau cùng đi về một hướng, quan trọng hơn việc phải đứng ở trung tâm.'},
     {word:'Tự do',title:'Nơi những lớp nghề gặp lại nhau',thought:'Âm nhạc, hình ảnh, công nghệ và sản xuất cuối cùng trở về chung trong một thế giới mang tên riêng.'}
   ];
   career.forEach((w,i)=>{
@@ -8460,12 +8548,8 @@ function toast(msg){
   setTimeout(out, 3400);
 })();
 
-/* ── 2 · HERO QUOTE — một tuyên ngôn cố định, không trùng About ── */
-(function heroQuote(){
-  const q=document.querySelector('.hero-quote');
-  if(!q) return;
-  q.innerHTML='“Chào bạn, mình là Anh Li.<br/>Đây là khu vườn của những điều mình đã làm,<br/>đã nghe — và vẫn đang trở thành.”';
-})();
+/* ── 2 · HERO QUOTE — text đã cố định thẳng trong HTML (.hero-quote), không override bằng JS nữa
+   để tránh bị đè mất bản wording mới nhất mỗi lần load trang. ── */
 
 /* ── 3 · PARALLAX + TILT (một vòng rAF duy nhất) ───────── */
 const fx={ nx:0, ny:0, dirty:true };
