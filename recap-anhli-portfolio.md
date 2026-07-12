@@ -13,6 +13,9 @@
   lượng ba hạt; tuyệt đối không giả làm bản đồ sao cá nhân.
 - Trình tự triển khai được chia thành commit nhỏ có điểm dừng an toàn để agent
   khác có thể tiếp tục khi một phiên chạm giới hạn.
+- Art direction sau prototype: card 4:5 botanical 3D; chỉ 78 artwork không chữ,
+  bố cục cân hai đầu. Nở dùng ảnh thẳng, Khép xoay cùng ảnh 180°; số, tên và
+  trạng thái do HTML phủ lên. Prompt bàn giao nằm ở `ORACLE-ASSET-PROMPT.md`.
 
 ## Chốt guồng Garden Oracle qua các session (12/7/2026)
 

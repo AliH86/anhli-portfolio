@@ -23,14 +23,20 @@
 ### 2.1. 78 hình mẫu hạt
 
 - Đây là 78 sinh thể của cùng một khu vườn, không phải 78 lá Tarot thay áo.
-- Mỗi hạt có một SVG nhận diện riêng, tạo từ cùng một ngôn ngữ hình: lõi hạt,
-  tán lông, thân, hướng gió, nguyên tố, dấu chiêm tinh nhẹ và một chi tiết kể
-  chuyện riêng.
+- Art direction đã chọn: botanical 3D huyền ảo, nền vườn xanh đen, amber/sage,
+  vật liệu hữu cơ và đường viền thực vật kim loại mảnh.
+- Tỷ lệ master là **4:5 dọc**. Mỗi hạt chỉ có **một artwork raster không chữ**
+  (ưu tiên WebP khi đưa lên site), không tạo hai ảnh Nở/Khép.
+- Bố cục artwork cân trên/dưới như lá bài hai đầu. Khi hạt Khép, UI xoay chính
+  artwork đó `180deg`; tên hạt và trạng thái là text HTML riêng phủ lên card,
+  không được bake vào ảnh. Nhờ vậy 78 hình phục vụ đủ 156 tên/trạng thái.
+- Artwork không chứa số, tên, chữ, logo hoặc watermark. Chừa safe zone cho UI
+  đặt số ở đầu card và cụm tên/trạng thái ở chân card ở cả hai hướng xoay.
+- Mỗi hạt có nhận diện riêng từ lõi, tán, thân, hướng gió và một chi tiết kể
+  chuyện; vẫn phải nhận ra là hạt bồ công anh trước khi đọc tên.
 - 22 hạt lớn có silhouette độc bản mạnh. 56 hạt còn lại cùng họ hình theo bốn
   nguyên tố nhưng vẫn phải phân biệt được từng hạt.
-- Nở/Khép là hai trạng thái của cùng một hình, không phải 156 hình độc lập:
-  Nở mở/tiến/sáng; Khép co/vào trong/chậm hoặc đứt nhịp.
-- Ưu tiên SVG nhẹ, đổi trạng thái bằng class/CSS; không tạo 78 ảnh raster nặng.
+- Không preload cả bộ: mỗi lượt chỉ tải ba WebP; gallery 78 hạt lazy-load.
 
 ### 2.2. 78 câu chuyện lõi
 
@@ -134,7 +140,8 @@ và đơn giản; không bịa chiều sâu.
 
 1. Khoá tài liệu này và commit riêng.
 2. Chốt schema mới bằng 3–5 hạt mẫu; chưa viết cả 78 ngay.
-3. Làm prototype SVG cho cùng nhóm mẫu, gồm cả Nở/Khép.
+3. Làm prototype artwork 4:5 không chữ cho cùng nhóm mẫu; test cùng một ảnh ở
+   hướng Nở và xoay 180° ở hướng Khép với text HTML đối ứng.
 4. Ali duyệt độ rõ của chữ và ngôn ngữ hình.
 5. Mở rộng lần lượt 22 + 14 + 14 + 14 + 14, mỗi nhóm một commit có thể review.
 6. Xây engine tổng hợp trên semantic profile và test ma trận tổ hợp đại diện.
