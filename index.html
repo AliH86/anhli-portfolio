@@ -3665,10 +3665,12 @@ body.wheel-input .marquee-wrap { transition:none !important; }
 }
 .mt-video-bg{
   position:absolute; inset:0; z-index:1; width:100%; height:100%; object-fit:cover; pointer-events:none;
-  transform:scale(.8); opacity:.82;
+  transform:scale(.8); opacity:0;
+  transition:opacity .9s cubic-bezier(.2,.72,.2,1);
   -webkit-mask-image:radial-gradient(ellipse 58% 54% at 50% 46%, #000 42%, transparent 100%);
   mask-image:radial-gradient(ellipse 58% 54% at 50% 46%, #000 42%, transparent 100%);
 }
+.music-threshold.video-playing .mt-video-bg{ opacity:.82; }
 .music-threshold.is-opening .mt-video-bg{ opacity:0; transition:opacity .6s ease; }
 body.no-motion .mt-video-bg{ display:none; }
 .mt-copy { position:relative; z-index:2; color:var(--text); text-shadow:0 2px 14px rgba(0,0,0,.7), 0 1px 3px rgba(0,0,0,.8); }
@@ -4413,9 +4415,23 @@ body.perf-lite #music .mm-seed,body.perf-lite #music .mm-bloom { animation:none 
 @supports (height:1svh){
   #music .listening-room { grid-template-rows:minmax(480px,58svh) auto; }
 }
-#music .listening-room .album.cf-slot { width:clamp(190px,19vw,265px); }
+#music .listening-room .album.cf-slot { width:clamp(238px,25vw,350px); }
 #music .listening-room .album.cf-focus .album-name { font-size:clamp(1.15rem,1.7vw,1.5rem); }
 #music .listening-room .album.cf-slot .album-copy { margin-top:.7rem; }
+@media(min-width:981px){
+  #music .listening-room .album.cf-focus .album-copy{
+    width:min(390px,calc(100% + 72px)); margin:.9rem 0 0 50%;
+    transform:translateX(-50%);
+  }
+  #music .listening-room .album.cf-focus .album-name{
+    font-size:clamp(1.35rem,1.85vw,1.75rem); line-height:1.12;
+    margin-bottom:.5rem; text-wrap:balance;
+  }
+  #music .listening-room .album.cf-focus .album-sub{
+    max-width:42ch; margin:0 auto; font-size:.74rem; line-height:1.55;
+    letter-spacing:.035em; text-wrap:balance;
+  }
+}
 
 #music .listening-room .nowplaying {
   min-height:0; padding:.8rem 1rem 1rem; border-radius:14px;
@@ -5087,10 +5103,10 @@ body.docked #music .listening-room .nowplaying{
 #music .listening-room .album-drawer .np-vinyl,
 #music .listening-room .album-drawer .vinyl-bg.np-vinyl{
   display:block !important; position:absolute; z-index:1;
-  left:50% !important; right:auto !important; top:56% !important;
-  width:min(330px,62%) !important; height:auto !important; aspect-ratio:1;
-  transform:translate(-50%,-50%) perspective(700px) rotateY(-10deg) !important;
-  opacity:.16 !important; overflow:visible; border-radius:50%;
+  left:56% !important; right:auto !important; top:61% !important;
+  width:min(390px,72%) !important; height:auto !important; aspect-ratio:1;
+  transform:translate(-50%,-50%) perspective(700px) rotateY(-10deg) rotateZ(-18deg) !important;
+  opacity:.25 !important; overflow:visible; border-radius:50%;
   filter:drop-shadow(0 22px 42px rgba(0,0,0,.38)); pointer-events:none;
 }
 #music .listening-room .album-drawer .vinyl3d{
@@ -5099,6 +5115,24 @@ body.docked #music .listening-room .nowplaying{
 #music .listening-room .album-drawer .vinyl-disc{ opacity:.65; }
 #music .listening-room .album-drawer .drawer-z{ position:relative; z-index:2; }
 body.no-motion #music .listening-room .album-drawer .np-vinyl{ display:none !important; }
+
+/* Let the record read against the lyric sheet without turning the sheet into
+   a bright card: thin the dark veils and place a restrained sage lift behind it. */
+#music .listening-room .album-drawer{
+  background:
+    radial-gradient(58% 52% at 61% 61%,rgba(168,198,105,.11),transparent 74%),
+    linear-gradient(155deg,rgba(19,32,17,.66),rgba(7,13,8,.7));
+}
+#music .listening-room .drawer-inner{
+  background:
+    radial-gradient(52% 48% at 62% 61%,rgba(225,236,173,.075),transparent 74%),
+    linear-gradient(rgba(14,25,14,.66),rgba(7,13,8,.62)) padding-box,
+    linear-gradient(135deg,rgba(168,198,105,.34),rgba(232,200,112,.2),rgba(168,198,105,.08)) border-box;
+}
+#music .listening-room .drawer-bg-img{ opacity:.46; }
+#music .listening-room .drawer-bg::after{
+  background:linear-gradient(102deg,rgba(8,16,9,.82) 0%,rgba(8,16,9,.58) 44%,rgba(8,16,9,.18) 100%);
+}
 
 @keyframes onePlayerDockIn{
   from{ opacity:0; transform:translate(-50%,22px); }
@@ -5726,7 +5760,7 @@ body.no-motion .go-bag{ transition:none; }
   <div class="album-stage reveal">
     <div class="album-tools">
       <div class="albums-label" id="playlistLabel">Playlist</div>
-      <button class="album-explore-btn" id="albumExploreBtn" type="button" aria-haspopup="dialog" aria-controls="albumExplore">Khám phá toàn bộ 23 album ↗</button>
+      <button class="album-explore-btn" id="albumExploreBtn" type="button" aria-haspopup="dialog" aria-controls="albumExplore">Khám phá toàn bộ album ↗</button>
     </div>
     <!-- Gợi ý cho người chưa biết chọn gì — nằm trong sân khấu album -->
     <button class="pick-suggest" id="npSuggest" type="button">
@@ -6082,7 +6116,7 @@ body.no-motion .go-bag{ transition:none; }
     max-width:720px; margin:.9rem 0 2rem; color:var(--text2); font-size:.92rem; line-height:1.75;
   }
   @media(min-width:901px) and (hover:hover){
-    body:not(.no-motion) #music .album.cf-focus:not(:hover) .album-cover{
+    body:not(.no-motion).playing #music .album.cf-focus.is-playing-album:not(:hover) .album-cover{
       animation:albumIdle3D 8.5s ease-in-out infinite;
       transform-origin:50% 55%;
     }
@@ -6157,6 +6191,7 @@ body.no-motion .go-bag{ transition:none; }
     if(bloomVideo && !document.body.classList.contains('no-motion')){
       bloomVideo.preload='auto'; bloomVideo.load();
       try{ bloomVideo.currentTime=0; }catch(e){}
+      portal.classList.add('video-playing');
       const bp=bloomVideo.play(); if(bp&&bp.catch) bp.catch(()=>{});
       setTimeout(proceedOpen,4000);            /* để hoa nở trọn ~4s trước khi cổng đóng lại */
     } else {
@@ -6969,6 +7004,8 @@ function renderMusic(){
   }
   const pl=document.getElementById('playlistLabel');
   if(pl) pl.textContent=`Playlist · ${ALBUMS.length} album`;
+  const exploreLabel=document.getElementById('albumExploreBtn');
+  if(exploreLabel) exploreLabel.textContent=`Khám phá toàn bộ ${ALBUMS.length} album ↗`;
   renderHeroGarden(ALBUMS);
 
   // Decorative diagonal genre text
@@ -7046,7 +7083,13 @@ function initCoverflow(){
   car.dataset.ready='1'; car.setAttribute('tabindex','0');
   document.getElementById('cfPrev')?.addEventListener('click',()=>cfNudge(-1));
   document.getElementById('cfNext')?.addEventListener('click',()=>cfNudge(1));
-  car.addEventListener('pointerdown',e=>{ cfDragging=true; cfStartX=e.clientX; cfDeltaX=0; car.classList.add('dragging'); car.setPointerCapture?.(e.pointerId); });
+  car.addEventListener('pointerdown',e=>{
+    /* While music is running the playing sleeve stays planted. The dedicated
+       arrow buttons remain the deliberate override; pausing restores swipe. */
+    if(document.body.classList.contains('playing')) return;
+    cfDragging=true; cfStartX=e.clientX; cfDeltaX=0;
+    car.classList.add('dragging'); car.setPointerCapture?.(e.pointerId);
+  });
   car.addEventListener('pointermove',e=>{ if(cfDragging) cfDeltaX=e.clientX-cfStartX; },{passive:true});
   const end=()=>{ if(!cfDragging) return; cfDragging=false; car.classList.remove('dragging'); if(Math.abs(cfDeltaX)>42) cfNudge(cfDeltaX<0?1:-1); };
   car.addEventListener('pointerup',end); car.addEventListener('pointercancel',end);
@@ -7063,6 +7106,7 @@ function initCoverflow(){
     if(hit) cfClick(+hit.dataset.aidx);
   });
   car.addEventListener('wheel',e=>{
+    if(document.body.classList.contains('playing')) return;
     const delta=Math.abs(e.deltaX)>Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
     if(Math.abs(delta)<2) return;
     e.preventDefault();
@@ -7287,6 +7331,9 @@ function playAt(j, albumIndex){
   if(j===activeIdx&&playAlbum===activeAlbum){ if(audio.paused) audio.play().catch(()=>{}); else audio.pause(); return; }
   activeAlbum=playAlbum;
   activeIdx=j;
+  /* A track starts with its own sleeve in the centre. From then on passive
+     sweep is locked; only pause or an explicit carousel arrow can move it. */
+  cfFocus=activeAlbum;
   document.body.classList.add('has-track');
   const t=playTracks[j];
   document.querySelectorAll('.trow').forEach(r=>r.classList.remove('playing'));
@@ -8510,8 +8557,8 @@ if(HOVER && !REDUCED){
     if(document.body.classList.contains('no-motion')){ tEl.style.transform=''; tEl=null; return; }
     const r=tEl.getBoundingClientRect();
     const x=(e.clientX-r.left)/r.width-0.5, y=(e.clientY-r.top)/r.height-0.5;
-    // magnetic zoom: bìa phóng to & trượt nhẹ về phía con trỏ
-    tEl.style.transform=`perspective(720px) rotateX(${(-y*10).toFixed(2)}deg) rotateY(${(x*13).toFixed(2)}deg) translate3d(${(x*18).toFixed(1)}px, ${(y*14).toFixed(1)}px, 38px) scale(1.14)`;
+    // The sleeve is already large at rest; hover only adds a quiet tactile lift.
+    tEl.style.transform=`perspective(720px) rotateX(${(-y*7).toFixed(2)}deg) rotateY(${(x*9).toFixed(2)}deg) translate3d(${(x*10).toFixed(1)}px, ${(y*8).toFixed(1)}px, 22px) scale(1.045)`;
   }, {passive:true});
   document.addEventListener('pointerout', e=>{
     const c=e.target.closest ? e.target.closest('.album-cover') : null;
