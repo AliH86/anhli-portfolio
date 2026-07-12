@@ -4,12 +4,12 @@
    ORACLE-CONTENT-SYSTEM.md §7 bước 5, mỗi khối một commit riêng để review):
      - majors (22 Major)              → ĐỦ 22/22, khối này đã hoàn tất.
      - suits.Wands  (Lửa, 14)          → ĐỦ 14/14, khối này đã hoàn tất.
-     - suitSamples.Cups   (Nước, 14)   → mới 1/14 (mẫu schema ban đầu).
+     - suits.Cups   (Nước, 14)         → ĐỦ 14/14, khối này đã hoàn tất.
      - suitSamples.Swords (Khí, 14)    → mới 1/14 (mẫu schema ban đầu).
      - suitSamples.Pentacles (Đất, 14) → mới 1/14 (mẫu schema ban đầu).
-   Ba khối Minor còn lại (13 hạt/nguyên tố) là công việc của các checkpoint
-   kế tiếp, mỗi khối một phiên/commit riêng — không gộp chung theo đúng
-   nguyên tắc "không gộp toàn bộ Oracle vào một phiên hoặc một commit lớn".
+   Hai khối Minor còn lại (Khí, Đất) là công việc của các checkpoint kế tiếp,
+   mỗi khối một phiên/commit riêng — không gộp chung theo đúng nguyên tắc
+   "không gộp toàn bộ Oracle vào một phiên hoặc một commit lớn".
 
    File này KHÔNG được nạp vào index.html ở bước này và không đụng tới
    garden-oracle-data.js hay garden-oracle-synthesis.js. `domain` của 22 Major
@@ -55,7 +55,9 @@
                   dùng danh sách trên trước, chỉ thêm khi thật sự cần một sắc
                   thái mới): listening, choosing, steering, turning,
                   balancing, suspending, entangling. Mở rộng thêm khi làm 14
-                  Lửa: lifting, racing, carrying, radiating, guiding.
+                  Lửa: lifting, racing, carrying, radiating, guiding. Mở rộng
+                  thêm khi làm 14 Nước: sharing, gathering, noticing,
+                  remembering, savoring.
 
      storyStage — vị trí trong một vòng cung tự sự. Với 56 hạt Minor, suy từ
                   rank để nhất quán: Ace→'spark', 2→'choice', 3→'connection',
@@ -456,22 +458,154 @@
     ]
   };
 
-  // Mẫu schema ban đầu cho 3 nguyên tố Minor còn lại — 1/14 mỗi nguyên tố,
-  // PENDING. Mở rộng đủ 14/nguyên tố là việc của 3 checkpoint kế tiếp (mỗi
+  // Khối Nước (Cups) — ĐỦ 14/14, đã hoàn tất theo trình tự rank Ace→King.
+  suits.Cups = [
+    {
+      id: 36, tarot: 'Ace of Cups', openName: 'Hạt hứng giọt sương đầu tiên', closedName: 'Hạt khô vì tự chối giọt sương',
+      element: 'Water', family: 'Cups',
+      coreStory: 'Hạt này vừa hứng được giọt sương đầu tiên rơi xuống lõi mình — hình ảnh của việc trái tim đang mở ra với một tình cảm, một mối quan hệ, hay một cảm xúc mới. Khi hạt để mình nhận giọt sương đó, nó cho phép cảm xúc chảy vào, không chỉ chảy ra. Khi nó tự khô đi vì chối từ giọt sương đang rơi xuống, cho đi nhiều mà không dám nhận lại gì, cần nhớ rằng nhận một điều tốt không làm mình yếu đi.',
+      visualMotif: 'Một giọt sương lớn, trong suốt, vừa chạm và đọng lại ngay tại lõi hạt, gợn sóng nhẹ như vừa rơi xuống; phần tán tơ phía trên hơi cúi xuống đón giọt sương thay vì xoè ngang như các hạt khác.',
+      profile: { domain: 'love', movement: 'opening', storyStage: 'spark',
+        need: 'cần cho phép mình nhận một tình cảm hay cảm xúc mới, không chỉ cho đi',
+        gift: 'trái tim đang mở ra với một cảm xúc hay mối quan hệ mới, thật và tự nhiên',
+        risk: 'tự chặn cảm xúc của chính mình, cho đi nhiều mà không dám nhận lại gì',
+        action: 'nhận một điều tốt ai đó đang trao cho mình hôm nay, đừng vội từ chối' } },
+    {
+      id: 37, tarot: 'Two of Cups', openName: 'Hai hạt chung một giọt sương', closedName: 'Hai hạt lệch nhịp rơi',
+      element: 'Water', family: 'Cups',
+      coreStory: 'Hai hạt đang cùng chia một giọt sương duy nhất, nhịp rơi gần như khớp nhau — hình ảnh của một sự kết nối chân thành, ngang hàng đang diễn ra giữa bạn và một người khác. Khi cả hai cùng giữ đúng nhịp tự nhiên của mình, kết nối đó cứ thế mà tiếp tục. Khi nhịp giữa hai bên lệch nhau, có thể một người đang nhường nhịn quá nhiều để giữ mối quan hệ, cần nhớ rằng kết nối thật không cần một người phải nhỏ lại.',
+      visualMotif: 'Hai hạt bay sát nhau, cùng chung một giọt sương lớn treo giữa hai lõi hạt như một cầu nối trong suốt; nhịp rung của hai tán tơ gần như đồng bộ, chỉ lệch nhau một khoảnh khắc rất nhỏ.',
+      profile: { domain: 'love', movement: 'sharing', storyStage: 'choice',
+        need: 'cần một kết nối ngang hàng, nơi cả hai bên đều giữ đúng nhịp của mình',
+        gift: 'một sự kết nối chân thành, ngang hàng đang diễn ra tự nhiên',
+        risk: 'nhường nhịn quá nhiều để giữ một mối quan hệ, khiến nhịp hai bên lệch nhau',
+        action: 'nói thật với người kia về một điều mình đang nhường quá nhiều' } },
+    {
+      id: 38, tarot: 'Three of Cups', openName: 'Hạt cùng hạt mừng dưới mưa', closedName: 'Hạt vui mà vẫn lạc giữa đàn',
+      element: 'Water', family: 'Cups',
+      coreStory: 'Nhiều hạt đang cùng nhau mừng dưới một cơn mưa nhẹ — hình ảnh của việc dành thời gian cho bạn bè, ăn mừng cùng nhau, để niềm vui từ những người xung quanh thật sự nâng đỡ mình. Khi hạt hoà vào giữa những người bạn thật, niềm vui đó chạm được tới nó. Khi nó vẫn thấy lạc lõng giữa một nhóm đông vui, hoặc mải chú ý những điều không quan trọng thay vì kết nối thật, cần tìm lại đúng người mình thật sự muốn ở cạnh.',
+      visualMotif: 'Nhiều hạt cùng bay quây quần trong một khoảng không gian nhỏ dưới những giọt mưa lấp lánh rơi đều, tạo thành một vòng tròn không chính thức; một hạt trong nhóm hơi lệch ra ngoài vòng, khoảng cách nhỏ nhưng rõ.',
+      profile: { domain: 'love', movement: 'gathering', storyStage: 'connection',
+        need: 'cần dành thời gian thật với những người mang lại niềm vui thật cho mình',
+        gift: 'niềm vui từ bạn bè xung quanh đang thật sự nâng đỡ mình',
+        risk: 'thấy lạc lõng giữa một nhóm đông vui vì đang chú ý những điều không quan trọng',
+        action: 'tìm và nhắn cho đúng người mình thật sự muốn ở cạnh lúc này' } },
+    {
+      id: 39, tarot: 'Four of Cups', openName: 'Hạt nhận ra giọt mưa đang mời', closedName: 'Hạt ngoảnh mặt trước giọt mưa mời',
+      element: 'Water', family: 'Cups',
+      coreStory: 'Có một giọt mưa mới đang mời gọi ngay trước mặt hạt này, dù trước đây nó từng lướt qua không để ý — hình ảnh của một cơ hội hay lời mời bạn từng bỏ qua. Khi hạt bắt đầu để ý và cho giọt mưa đó một cơ hội nhìn lại, cánh cửa mở ra. Khi nó ngoảnh mặt trước giọt mưa đang mời vì nó không đến đúng như mong đợi, cần nhớ rằng một cơ hội tốt không cần đến đúng hình dạng mới đáng nhận.',
+      visualMotif: 'Một giọt mưa mới, sáng và trong, đang lơ lửng ngay trước mặt hạt, gần đến mức gần chạm vào tán tơ; nhưng hạt hơi nghiêng đầu ra một chút, chưa hoàn toàn quay về phía giọt mưa đó.',
+      profile: { domain: 'love', movement: 'noticing', storyStage: 'foundation',
+        need: 'cần để ý một cơ hội hay lời mời đang thật sự ở ngay trước mặt mình',
+        gift: 'bắt đầu nhận ra và cho một cơ hội từng bỏ qua một cái nhìn mới',
+        risk: 'thờ ơ với một điều tốt đang thật sự chờ vì nó không đến đúng như mong đợi',
+        action: 'quay lại nhìn kỹ một lời mời hay cơ hội mình vừa bỏ qua gần đây' } },
+    {
+      id: 40, tarot: 'Five of Cups', openName: 'Hạt khóc thật với giọt đã mất', closedName: 'Hạt mãi nhìn giọt đã rơi',
+      element: 'Water', family: 'Cups',
+      coreStory: 'Hạt này đang khóc thật với một giọt sương đã rơi mất, không cố che giấu nỗi buồn — hình ảnh của việc cho phép mình buồn thật với một điều đã mất: một mối quan hệ, một cơ hội. Khi hạt thành thật với nỗi buồn đó, đó là bước đầu để vượt qua nó. Khi nó cứ mãi nhìn về giọt đã rơi mà quên ngẩng lên, mắc kẹt trong tiếc nuối, cần nhớ rằng phần còn lại của khu vườn vẫn ở đó.',
+      visualMotif: 'Hạt cúi đầu nhìn xuống một vệt nước đã khô loang trên mặt đất bên dưới, nơi từng có một giọt sương lớn; phía sau hạt, một vài giọt sương khác vẫn còn nguyên và sáng, nhưng nằm ngoài tầm nhìn hiện tại của nó.',
+      profile: { domain: 'love', movement: 'releasing', storyStage: 'friction',
+        need: 'cần được phép buồn thật với một điều đã mất, không phải vội vượt qua ngay',
+        gift: 'thành thật với nỗi buồn là bước đầu để thật sự vượt qua nó',
+        risk: 'mắc kẹt trong tiếc nuối về điều đã mất, quên nhìn những gì mình vẫn còn',
+        action: 'ngẩng lên nhìn một điều mình vẫn còn, dù chỉ trong chốc lát' } },
+    {
+      id: 41, tarot: 'Six of Cups', openName: 'Hạt nhớ về cơn mưa đầu đời', closedName: 'Hạt mắc lại trong cơn mưa cũ',
+      element: 'Water', family: 'Cups',
+      coreStory: 'Hạt này nhớ về cơn mưa đầu đời của mình, một kỷ niệm đẹp đang quay lại đúng lúc cần — hình ảnh của một người quen cũ hay ký ức đẹp trở lại. Khi hạt đón nhận kỷ niệm đó nhẹ nhàng rồi tiếp tục bay, nó được sưởi ấm mà không mắc kẹt. Khi nó cứ mắc lại trong cơn mưa cũ, sống trong ký ức nhiều hơn sống với hiện tại, cần nhớ rằng kỷ niệm đẹp không cần phải thay thế cho cuộc sống bây giờ.',
+      visualMotif: 'Hạt bay giữa những giọt mưa có ánh sáng ấm hoài cổ khác hẳn tông lạnh của mưa hiện tại xung quanh, như một vệt ký ức chồng lên khung cảnh thật; một phần tán tơ vẫn hướng về phía sau, về phía vệt sáng ấm đó.',
+      profile: { domain: 'love', movement: 'remembering', storyStage: 'recovery',
+        need: 'cần được ôm lấy một kỷ niệm đẹp mà không phải sống mãi trong đó',
+        gift: 'một kỷ niệm đẹp hay người quen cũ quay lại đúng lúc mình cần',
+        risk: 'sống trong ký ức về một thời đã qua nhiều hơn là sống với hiện tại',
+        action: 'đón nhận kỷ niệm đó, rồi quay mặt về phía hiện tại đang chờ' } },
+    {
+      id: 42, tarot: 'Seven of Cups', openName: 'Hạt mơ giữa trăm giọt mây', closedName: 'Hạt lạc giữa quá nhiều giọt mơ',
+      element: 'Water', family: 'Cups',
+      coreStory: 'Hạt này đang mơ giữa hàng trăm giọt mây, mỗi giọt là một khả năng khác nhau đang mở ra — hình ảnh của việc có nhiều lựa chọn trước mắt. Khi hạt cho mình thời gian tưởng tượng rồi chọn một giọt cụ thể để bay tới, những khả năng đó trở thành thật. Khi nó cứ lạc giữa quá nhiều giọt mơ, thích tưởng tượng hơn là bắt tay làm thật, cần chọn một điều, thử nó thật, thay vì cân nhắc mãi.',
+      visualMotif: 'Hạt lơ lửng giữa vô số giọt mây mờ ảo trôi nổi khắp khung hình, mỗi giọt phản chiếu một màu ánh sáng hơi khác nhau như từng khả năng riêng; hạt chưa nghiêng hẳn về phía giọt nào, vẫn đang lơ lửng giữa tất cả.',
+      profile: { domain: 'love', movement: 'choosing', storyStage: 'patience',
+        need: 'cần thời gian tưởng tượng nhưng cũng cần chọn một điều cụ thể để thử',
+        gift: 'nhiều lựa chọn và khả năng đang mở ra trước mắt để cân nhắc',
+        risk: 'lạc giữa quá nhiều giọt mơ, thích tưởng tượng hơn là bắt tay làm thật',
+        action: 'chọn một khả năng cụ thể trong số đó và thử nó thật, dù nhỏ' } },
+    {
+      id: 43, tarot: 'Eight of Cups', openName: 'Hạt rời vũng nước đã cạn nghĩa', closedName: 'Hạt quay lại vũng nước đã cạn',
+      element: 'Water', family: 'Cups',
+      coreStory: 'Hạt này đứng ở mép một vũng nước đã cạn nghĩa — nơi từng đủ để nuôi nó nhưng giờ không còn đủ, dù nhìn ngoài vẫn còn nước. Đó là hình ảnh của một công việc, một mối quan hệ, hay một thói quen bạn biết đã hết vừa với mình. Khi hạt thật sự quay lưng bước đi dù chưa hiểu hết mọi lý do, đó là can đảm chứ không phải bỏ cuộc. Khi nó cứ quay đầu lại chỗ cũ vì sợ chỗ mới, nó mắc kẹt ở một nơi đã không còn đủ từ lâu.',
+      visualMotif: 'Hạt ở mép một vũng nước nhỏ tối màu phản chiếu ánh sáng yếu, viền đất quanh vũng đã khô nứt nhẹ; thân hạt nghiêng giữa chừng một cú quay người, một bên tán tơ còn nặng ẩm hướng về vũng nước, bên còn lại đã xoè khô nhẹ như vừa bắt được gió mới.',
+      profile: { domain: 'love', movement: 'releasing', storyStage: 'momentum',
+        need: 'cần được phép rời đi dù chưa hiểu hết mọi lý do',
+        gift: 'đủ can đảm bước đi trước khi có sự chắc chắn tuyệt đối',
+        risk: 'quay lại điều cũ vì sợ cái chưa biết, dù biết nó không còn đủ',
+        action: 'gọi tên một điều cụ thể đã không còn phù hợp và định ngày để bắt đầu buông' } },
+    {
+      id: 44, tarot: 'Nine of Cups', openName: 'Hạt đủ đầy sau cơn mưa dài', closedName: 'Hạt uống mãi mà không thấy no',
+      element: 'Water', family: 'Cups',
+      coreStory: 'Hạt này đã đủ đầy sau một cơn mưa dài, gần chạm tới một điều mình từng mong ước — hình ảnh của việc ở gần một điều mình mong muốn. Khi hạt cho phép mình cảm thấy đủ mà không cần thêm nữa mới hài lòng, sự đủ đầy đó là thật. Khi nó cứ uống mãi mà không thấy no, liên tục tìm thêm để lấp một khoảng trống cảm xúc mà không thứ nào lấp được, khoảng trống đó có thể đang cần một điều khác, không phải thêm nữa.',
+      visualMotif: 'Hạt được bao quanh bởi nhiều giọt sương lấp lánh no đầy bám quanh tán tơ, ánh sáng ấm phản chiếu qua từng giọt; nhưng có một giọt cuối cùng vẫn đang được hạt cố vươn tới thêm, dù xung quanh đã đủ đầy.',
+      profile: { domain: 'love', movement: 'savoring', storyStage: 'momentum',
+        need: 'cần cho phép mình cảm thấy đủ, không cần thêm nữa mới hài lòng',
+        gift: 'đang ở gần một điều mình từng mong ước, đủ đầy và thật',
+        risk: 'liên tục tìm thêm để lấp một khoảng trống cảm xúc mà không thứ nào lấp được',
+        action: 'dừng lại và gọi tên điều mình đang thật sự cần, thay vì tìm thêm nữa' } },
+    {
+      id: 45, tarot: 'Ten of Cups', openName: 'Hạt thấy cầu vồng trên cả khu vườn', closedName: 'Hạt giấu vết nứt dưới cầu vồng',
+      element: 'Water', family: 'Cups',
+      coreStory: 'Hạt này thấy một cầu vồng trải trên cả khu vườn, một sự hoà hợp thật sự với gia đình hay người thân xung quanh — hình ảnh của niềm vui có thật, không cần nghi ngờ. Khi hạt để mình tin vào cầu vồng đó, niềm vui trở nên trọn vẹn. Khi nó giấu một vết nứt dưới cầu vồng, cố giữ hình ảnh hoàn hảo trước mặt người khác trong khi vấn đề thật vẫn còn đó, cần nhớ rằng hạnh phúc không cần giống nhau giữa mọi người mới là thật.',
+      visualMotif: 'Một dải cầu vồng mảnh, nhẹ, trải cong phía trên toàn bộ khu vườn trong khung hình, ánh sáng ấm áp bao trùm; nhưng ngay dưới lớp đất gần chân hạt, có một đường nứt rất nhỏ, gần như bị che khuất bởi ánh sáng cầu vồng phía trên.',
+      profile: { domain: 'love', movement: 'integrating', storyStage: 'threshold',
+        need: 'cần tin vào một sự hoà hợp thật đang có với gia đình hay người thân',
+        gift: 'một niềm vui và sự hoà hợp thật sự đang ở quanh mình, không cần nghi ngờ',
+        risk: 'giữ hình ảnh một gia đình hoàn hảo trong khi vấn đề thật vẫn còn đó',
+        action: 'nói thật về một vết nứt nhỏ đang bị giấu dưới lớp hình ảnh hoàn hảo' } },
+    {
+      id: 46, tarot: 'Page of Cups', openName: 'Người nghe được tiếng nước thì thầm', closedName: 'Người sợ nói ra điều nước thầm',
+      element: 'Water', family: 'Cups',
+      coreStory: 'Người này nghe được tiếng nước thì thầm điều gì đó về cảm xúc của chính mình hoặc người khác — còn non nhưng đúng. Khi họ tin vào điều mình nghe thấy dù chưa giải thích được bằng lời, cảm nhận đó được sống. Khi họ sợ nói ra điều nước thầm vì ngại nó chưa đủ chín chắn hay hợp lý, cần nhớ rằng nói ra không cần phải hoàn hảo trước.',
+      visualMotif: 'Một hình dáng nhỏ, trẻ hơn, nghiêng tai lại gần một dòng nước mảnh đang chảy quanh chân mình, như đang cố nghe rõ một điều thì thầm; miệng hơi hé mở như chuẩn bị nói ra điều vừa nghe được.',
+      profile: { domain: 'love', movement: 'listening', storyStage: 'curiosity',
+        need: 'cần tin vào một cảm nhận về cảm xúc dù chưa giải thích được bằng lời',
+        gift: 'cảm nhận được điều gì đó thật về cảm xúc của mình hay người khác, còn non nhưng đúng',
+        risk: 'ngại nói ra một cảm nhận vì sợ nó chưa đủ chín chắn hay hợp lý',
+        action: 'nói ra điều mình đang cảm nhận, dù chưa chắc nó đã đủ rõ ràng' } },
+    {
+      id: 47, tarot: 'Knight of Cups', openName: 'Kỵ sĩ mang mưa đến hẹn', closedName: 'Kỵ sĩ hứa mưa mà trời vẫn hạn',
+      element: 'Water', family: 'Cups',
+      coreStory: 'Một kỵ sĩ mang theo cơn mưa đến đúng buổi hẹn — hình ảnh của một lời mời chân thành, một cơ hội tình cảm đang đến. Khi cơn mưa họ mang tới thật sự rơi xuống, lời mời đó đáng để theo. Khi họ hứa mưa mà trời vẫn hạn, đưa ra lời hứa bằng cảm xúc nhiều hơn hành động thật, cần nhìn vào điều người đó đã làm, không chỉ điều họ đã nói.',
+      visualMotif: 'Một hình dáng cưỡi ngựa nhỏ tạo từ vật liệu thực vật ẩm, mang theo một vệt mưa nhẹ phía trên đầu như một chiếc lọng nước di động; phía trước mặt, mặt đất vẫn còn khô, chưa chạm được giọt mưa nào từ vệt đó.',
+      profile: { domain: 'love', movement: 'arriving', storyStage: 'pursuit',
+        need: 'cần một lời mời hay cơ hội tình cảm đi kèm hành động thật, không chỉ lời nói',
+        gift: 'một lời mời chân thành, một cơ hội tình cảm đang đến đúng lúc',
+        risk: 'đưa ra lời hứa bằng cảm xúc nhiều hơn là bằng hành động thật sự',
+        action: 'nhìn vào điều người đó đã thật sự làm, không chỉ điều họ đã nói' } },
+    {
+      id: 48, tarot: 'Queen of Cups', openName: 'Người giữ hồ nước cho cả khu vườn', closedName: 'Người để hồ mình tràn vì nước người',
+      element: 'Water', family: 'Cups',
+      coreStory: 'Người này giữ một hồ nước đủ sâu để chứa cho cả khu vườn — hình ảnh của khả năng thấu hiểu cảm xúc đang giúp ích rất nhiều cho người xung quanh. Khi hồ nước đó có bờ vững, người này chứa được cảm xúc của người khác mà không mất mình. Khi hồ để tràn vì nước của người khác, ngập trong cảm xúc hay vấn đề của người khác đến mức quên mất ranh giới bản thân, cần nhớ rằng quan tâm người khác không có nghĩa là gánh hết nỗi buồn của họ.',
+      visualMotif: 'Hạt trung tâm đứng cạnh một mặt hồ nhỏ phẳng lặng phản chiếu cả khu vườn xung quanh, bờ hồ được viền rõ và vững; nhưng ở một góc, mực nước hồ đang dâng cao gần sát bờ, như sắp tràn ra ngoài.',
+      profile: { domain: 'love', movement: 'tending', storyStage: 'nurture',
+        need: 'cần đủ vững để chứa được cảm xúc của người khác mà không mất chính mình',
+        gift: 'khả năng thấu hiểu cảm xúc đang giúp ích rất nhiều cho người xung quanh',
+        risk: 'ngập trong cảm xúc hay vấn đề của người khác đến mức quên mất ranh giới bản thân',
+        action: 'đặt lại một ranh giới cụ thể trước khi tiếp tục chứa đựng cảm xúc của người khác' } },
+    {
+      id: 49, tarot: 'King of Cups', openName: 'Người ngồi yên giữa cơn mưa lớn', closedName: 'Người khoá cơn mưa trong lòng mình',
+      element: 'Water', family: 'Cups',
+      coreStory: 'Người này ngồi yên giữa một cơn mưa lớn mà không hề nao núng — hình ảnh của việc giữ được bình tĩnh về cảm xúc ngay giữa hoàn cảnh khó khăn. Khi họ quan tâm người khác mà vẫn giữ ranh giới riêng, đó là sức mạnh thật. Khi họ khoá cơn mưa trong lòng mình, nén cảm xúc lại và giữ khoảng cách bằng vẻ ngoài điềm tĩnh thay vì thật sự gần gũi, cần nhớ rằng cảm xúc bị giấu đi vẫn còn đó, chỉ là không ai thấy được.',
+      visualMotif: 'Hạt trung tâm ngồi vững giữa một trận mưa dày đặc đổ quanh khắp khung hình mà không hề lung lay, tư thế điềm tĩnh rõ rệt; nhưng ngay bên trong lõi hạt có một lớp ánh sáng bị nén chặt lại, không toả ra ngoài như các hạt khác.',
+      profile: { domain: 'love', movement: 'holding', storyStage: 'mastery',
+        need: 'cần giữ bình tĩnh về cảm xúc ngay giữa một hoàn cảnh khó khăn',
+        gift: 'biết quan tâm người khác mà vẫn giữ ranh giới riêng của mình, đó là sức mạnh thật',
+        risk: 'nén cảm xúc của mình lại, giữ khoảng cách bằng vẻ ngoài điềm tĩnh thay vì thật sự gần gũi',
+        action: 'chia sẻ một cảm xúc thật của mình với một người thân cận, thay vì giữ kín' } }
+  ];
+
+  // Mẫu schema ban đầu cho 2 nguyên tố Minor còn lại — 1/14 mỗi nguyên tố,
+  // PENDING. Mở rộng đủ 14/nguyên tố là việc của 2 checkpoint kế tiếp (mỗi
   // khối một commit riêng), không viết dồn trong lần này.
   const suitSamples = {
-    Cups: [
-      {
-        id: 43, tarot: 'Eight of Cups', openName: 'Hạt rời vũng nước đã cạn nghĩa', closedName: 'Hạt quay lại vũng nước đã cạn',
-        element: 'Water', family: 'Cups',
-        coreStory: 'Hạt này đứng ở mép một vũng nước đã cạn nghĩa — nơi từng đủ để nuôi nó nhưng giờ không còn đủ, dù nhìn ngoài vẫn còn nước. Đó là hình ảnh của một công việc, một mối quan hệ, hay một thói quen bạn biết đã hết vừa với mình. Khi hạt thật sự quay lưng bước đi dù chưa hiểu hết mọi lý do, đó là can đảm chứ không phải bỏ cuộc. Khi nó cứ quay đầu lại chỗ cũ vì sợ chỗ mới, nó mắc kẹt ở một nơi đã không còn đủ từ lâu.',
-        visualMotif: 'Hạt ở mép một vũng nước nhỏ tối màu phản chiếu ánh sáng yếu, viền đất quanh vũng đã khô nứt nhẹ; thân hạt nghiêng giữa chừng một cú quay người, một bên tán tơ còn nặng ẩm hướng về vũng nước, bên còn lại đã xoè khô nhẹ như vừa bắt được gió mới.',
-        profile: { domain: 'love', movement: 'releasing', storyStage: 'momentum',
-          need: 'cần được phép rời đi dù chưa hiểu hết mọi lý do',
-          gift: 'đủ can đảm bước đi trước khi có sự chắc chắn tuyệt đối',
-          risk: 'quay lại điều cũ vì sợ cái chưa biết, dù biết nó không còn đủ',
-          action: 'gọi tên một điều cụ thể đã không còn phù hợp và định ngày để bắt đầu buông' } }
-    ],
     Swords: [
       {
         id: 55, tarot: 'Six of Swords', openName: 'Hạt theo gió sang bờ yên hơn', closedName: 'Hạt mang gió cũ sang bờ mới',

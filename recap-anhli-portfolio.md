@@ -1,5 +1,20 @@
 # Recap — anhli-portfolio (cập nhật 13/7/2026)
 
+## Oracle — hoàn tất core-story 14 Nước (13/7/2026)
+
+- **Khối Nước (Cups) hoàn tất 14/14** trong `garden-oracle-profiles.js`
+  (`GARDEN_ORACLE_PROFILES.suits.Cups`), theo đúng trình tự rank Ace→King.
+  Verify bằng script: domain khớp 100% `SUIT_DOMAIN.Cups` ('love') đã khoá
+  trong `garden-oracle-synthesis.js`; dữ liệu khớp 100% `GARDEN_ORACLE_CARDS`;
+  không trùng id/visualMotif với 36 hạt đã có (50/78 hạt đã xong).
+- movement vocabulary mở rộng thêm 5 giá trị: sharing, gathering, noticing,
+  remembering, savoring.
+- Ali yêu cầu viết prompt Imagen cho cả 2 khối Lửa + Nước cùng lúc (28 ảnh),
+  chia 4 batch ~7 ảnh để giữ nhất quán phong cách khi generate — xem file
+  `ORACLE-ASSET-PROMPTS-FIRE-WATER.md`.
+- Việc kế tiếp (chưa làm): checkpoint 14 Khí, 14 Đất — vẫn mỗi khối một
+  commit riêng.
+
 ## Oracle — rename 22 ảnh Major + hoàn tất core-story 14 Lửa (13/7/2026)
 
 - Ali tạo 22 ảnh (qua ChatGPT image, không phải Google Imagen — filename gốc
