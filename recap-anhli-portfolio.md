@@ -1,5 +1,34 @@
 # Recap — anhli-portfolio (cập nhật 13/7/2026)
 
+## Oracle — sửa lại lần 2: bớt nhân cách hoá Kỵ sĩ + khoá đúng khung viền (13/7/2026)
+
+- Ali tạo thử 2 ảnh Kỵ sĩ Lửa/Nước theo prompt fix lần 1 (bỏ ngựa) — phản
+  hồi: (1) "nhân cách hoá 1 cách quá mức rồi" — ảnh ra hẳn một sinh vật
+  hình người/côn trùng với tay chân, khớp nối rõ, tư thế hành động quá
+  kịch tính, không còn đọc ra là hạt bồ công anh; (2) "sai cấu trúc" —
+  khung viền hoa văn góc thẻ bài đổi hẳn kiểu (bùng sáng/vỏ sò) khác với
+  hoa văn dây-lá kim tuyến dùng xuyên suốt bộ.
+- Bài học: lần fix 1 dùng cụm "puffed pappus head and two slender
+  fiber-limbs" — quá cụ thể về giải phẫu, khiến model vẽ hẳn tay chân có
+  khớp. Fix lần 2: quay về MỘT hạt bồ công anh duy nhất, KHÔNG nhân hoá
+  (no visible limbs/arms/legs/joints), chỉ nghiêng/gập thân + vệt mờ
+  chuyển động để gợi tốc độ — giống cách các lá số (không nhân hoá) trong
+  bộ đã truyền tải chuyển động mà không cần cho hạt "cơ thể". Đồng thời
+  thêm câu khoá khung viền: "same fine gold vine-and-leaf corner
+  scrollwork frame used throughout this deck — do not invent a different
+  border pattern" vào mọi prompt Kỵ sĩ.
+- Sửa lại `visualMotif` cho cả 4 lá Kỵ sĩ (id 33, 47, 61, 75) trong
+  `garden-oracle-profiles.js`, đồng bộ cả 2 file prompt
+  (`ORACLE-ASSET-PROMPTS-FIRE-WATER.md`, `ORACLE-ASSET-PROMPTS-AIR-EARTH.md`).
+  Lưu ý Page/Queen/King (đã nhân hoá nhẹ, có ảnh Ali khen) GIỮ NGUYÊN,
+  không đụng — vấn đề chỉ ở Kỵ sĩ.
+- Đã cập nhật ghi nhớ dài hạn `oracle-court-card-no-horse` với bài học lần
+  2 này (tránh lặp lại việc over-personify khi làm Kỵ sĩ Khí/Đất hoặc bất
+  kỳ lá nào sau này).
+- Việc kế tiếp: Ali tạo lại ảnh Kỵ sĩ Lửa (seed-33) và Kỵ sĩ Nước (seed
+  Cups Knight, id47, chưa generate) bằng prompt mới nhất; Khí/Đất Kỵ sĩ
+  (id61, 75) áp dụng luôn từ đầu.
+
 ## Oracle — sửa design 4 lá Kỵ sĩ: bỏ ngựa, giữ hạt bồ công anh là chủ thể (13/7/2026)
 
 - Ali review ảnh Kỵ sĩ Lửa (seed-33) đã tạo: prompt cũ mô tả "a small
