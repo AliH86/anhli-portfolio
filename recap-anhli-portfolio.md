@@ -516,6 +516,39 @@ toàn ngoài 2 mục cố ý giữ untracked (`.claude/launch.json`,
 - **Kiến trúc dữ liệu album có 3 tầng, dễ gây bug "hero không cập nhật":** `ALBUMS` viết cứng trong `index.html` (render ngay lúc tải, `renderHeroGarden()` CHỈ chạy 1 lần dùng mảng này) → `music-data.js` (loader) → `music-data-base.js` (kho dữ liệu thật, nạp async qua XHR đồng bộ rồi `merge()` vào `ALBUMS`, nhưng `merge()` không gọi lại `renderHeroGarden()`). Hệ quả: thêm album mới vào `music-data-base.js` là đủ cho Playlist/Discography, nhưng **hero sẽ không thấy** trừ khi album đó cũng được thêm tay vào `ALBUMS` tĩnh trong `index.html`. Nhớ điều này mỗi lần đổi hero album.
 - Không có cách emulate viewport mobile đáng tin cậy qua claude-in-chrome trong môi trường này (`resize_window` không đổi viewport thật; same-origin iframe bị GitHub Pages chặn qua header chống frame). Muốn xác minh CSS mobile phải nhờ Ali chụp màn hình thiết bị thật hoặc đọc cascade cẩn thận.
 
+## Chốt phiên Oracle 13/7/2026 — trạng thái tới thời điểm hiện tại
+
+- **Nội dung + hồ sơ nghĩa:** đủ 78/78 hạt (22 Major + 4 suit × 14) có
+  `coreStory`/`visualMotif`/`profile` trong `garden-oracle-profiles.js`,
+  khớp domain với `garden-oracle-synthesis.js` (không đổi file này).
+- **Ảnh:** đủ 78/78 đã sinh và đổi tên đúng convention
+  `seed-{id}-{slug}-v01.png` trong từng thư mục con của
+  `AnhLi_Dandelion Oracle` (Major/Wands/Cups/Swords/Pentacles) — riêng
+  `seed-47-ky-si-mang-mua-den-hen-NEEDS-REDO-v01.png` (Knight of Cups)
+  vẫn đang treo ở bản cũ kiểu ngựa-người-cưỡi, chờ Ali tạo lại theo prompt
+  đã fix trong `ORACLE-ASSET-PROMPTS-FIRE-WATER.md`.
+- **Tên ngắn (`gardenOpen`/`gardenClosed`/`openName`/`closedName`):** đã
+  qua 2 vòng chỉnh — (1) rút toàn bộ 156 tên về ≤4 âm tiết; (2) soát và
+  sửa 16 lá dính lỗi logic chủ thể (hạt không tay chân) hoặc tên nhắc vật
+  không có trong ảnh (Moon), cộng 1 lần chỉnh riêng cho Hermit. Verify
+  node xác nhận: 78/78 khớp giữa `garden-oracle-data.js` và
+  `garden-oracle-profiles.js`, không tên nào >4 âm tiết, không trùng tên.
+- **Còn treo lại cho phiên sau (nếu Ali muốn tiếp tục):**
+  - Regenerate ảnh Knight of Cups (id47) rồi đổi tên file theo đúng
+    convention.
+  - Rà nốt phần còn lại của 78 ảnh để tìm thêm trường hợp "tên nhắc vật
+    không có trong hình" giống lỗi Moon (mới spot-check Star/Rainbow/
+    Ace of Wands, cả 3 đều ổn — chưa xem hết).
+  - `index.html` (UI hiển thị) chưa được rà lại sau đợt đổi tên này —
+    nên grep nhanh `gardenOpen`/`gardenClosed` một lần nữa trước khi coi
+    Oracle là "xong hẳn", dù lần đổi tên trước đã xác nhận UI đọc field
+    động, không hardcode.
+- **Commit đã tạo trong phiên này (chưa push — cần Ali chạy `.command`):**
+  `13a1dba fix(oracle): sửa tên lá theo đúng logic hạt (không tay chân) + fix Moon/Hermit`,
+  `afea277 feat(oracle): đổi tên ngắn cho toàn bộ 78 lá (tối đa 4 âm tiết)`,
+  cùng các commit nội dung/prompt/Kỵ sĩ trước đó cùng phiên (xem `git log`
+  phía trên các mục này).
+
 ## Commit chính liên quan
 - [feat: seed-bag oracle video reveal + Chapter II bloom background on enter](https://github.com/AliH86/anhli-portfolio/commit/95d55c7)
 - [fix(music): mobile — ẩn dứt điểm dĩa 3D bên phải + gọn tên album dài](https://github.com/AliH86/anhli-portfolio/commit/532269c)
