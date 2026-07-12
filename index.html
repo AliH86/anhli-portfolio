@@ -823,6 +823,20 @@ section { padding:5.25rem 4rem; position:relative; }
 .about-quote .aq-l3 { margin-top:0.6rem; }
 .about-quote .aq-l3 em { font-style:italic; color:var(--amber2); }
 .about-quote .aq-l4 { color:var(--taupe2); padding-left:1.5rem; }
+.about-quote > *:not(.aq-decor){ position:relative; z-index:1; }
+.aq-decor{ display:none; }
+@media(min-width:901px){
+  /* About's bg (var(--ink2) under the dandelion skin) is a near-flat dark green that
+     already matches this clip's own background, so it needs no card/box — just a soft
+     feathered mask so the rectangle edge melts in. Plays once when scrolled into view. */
+  .aq-decor{
+    display:block; position:absolute; right:-2.75rem; bottom:-1.5rem; z-index:0;
+    width:190px; height:190px; object-fit:contain; opacity:.5; pointer-events:none;
+    -webkit-mask-image:radial-gradient(closest-side, #000 55%, transparent 100%);
+    mask-image:radial-gradient(closest-side, #000 55%, transparent 100%);
+  }
+}
+body.no-motion .aq-decor{ display:none; }
 
 .about-eyebrow { font-size:0.6rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--amber); margin-bottom:1.25rem; padding-top:2rem; border-top:0.5px solid var(--border); }
 .about-desc { font-size:1.02rem; line-height:1.9; color:var(--text2); max-width:60ch; }
@@ -974,8 +988,8 @@ section { padding:5.25rem 4rem; position:relative; }
   display:none !important;
 }
 .np-vinyl::after { z-index:5; }
-@media (max-width:1100px) { .vinyl3d { display:none; } }
 body.no-motion .vinyl3d { display:none; }
+body.no-motion .album-cover { transform:none !important; transition:none !important; }
 
 /* ALBUMS CAROUSEL + DRAWER */
 .albums-label { font-size:0.62rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--text3); margin-bottom:1.5rem; }
@@ -2500,6 +2514,45 @@ body.no-motion .album-track {
     width:min(34vw, 560px);
   }
 }
+/* Canonical Hero placement: participate in layout, never overlay artwork. */
+@media(min-width:901px){
+  .hero .hero-content:has(#gardenCalendar){
+    width:min(700px,calc(100vw - 8rem)); max-width:700px;
+    display:grid; grid-template-columns:minmax(0,1fr) minmax(280px,320px);
+    grid-template-rows:auto auto auto auto auto; column-gap:clamp(1.25rem,2.5vw,2.25rem); align-items:start;
+  }
+  .hero .hero-content:has(#gardenCalendar) > :not(#gardenCalendar){ grid-column:1; }
+  .hero #gardenCalendar{
+    position:relative !important; inset:auto !important; width:100% !important;
+    grid-column:2; grid-row:2/4; align-self:start; transform:none !important;
+  }
+}
+@media(max-width:900px){
+  .hero.poster-hero:has(#gardenCalendar){ padding-top:6.5rem; padding-bottom:4rem; }
+  .hero .hero-content:has(#gardenCalendar){ display:flex; flex-direction:column; width:100%; max-width:none; }
+  .hero #gardenCalendar{
+    position:relative !important; inset:auto !important; width:100% !important;
+    order:1; transform:none !important; margin:0 0 1.6rem;
+  }
+  .hero .hero-eyebrow{ order:0; }
+  .hero .hero-name{ order:2; }
+  .hero .hero-roles{ order:3; }
+  .hero .hero-bottom{ order:4; }
+  .hero .hero-manifesto{ order:5; }
+}
+
+/* Quote seed-sprinkle decor — subtle ambient art behind the hero quote, desktop only (the source
+   asset only reads clean over light/warm backgrounds, which is what the meadow photo provides here). */
+.quote-sprinkle{ display:none; }
+@media(min-width:901px){
+  .hero-bottom{ position:relative; }
+  .quote-sprinkle{
+    display:block; position:absolute; left:-2.6rem; top:-3.4rem; width:190px; height:auto;
+    opacity:.22; pointer-events:none; z-index:0; mix-blend-mode:multiply; filter:saturate(.85);
+  }
+  .hero-quote{ position:relative; z-index:1; }
+}
+body.no-motion .quote-sprinkle{ transform:none !important; }
 
 @media (max-width: 1100px) {
   .hero.poster-hero {
@@ -3610,7 +3663,15 @@ body.wheel-input .marquee-wrap { transition:none !important; }
   background:repeating-radial-gradient(circle at 50% 46%, transparent 0 20px, rgba(232,200,112,0.16) 21px 22px, transparent 23px 34px);
   -webkit-mask-image:radial-gradient(circle, #000 0 38%, transparent 70%); mask-image:radial-gradient(circle, #000 0 38%, transparent 70%);
 }
-.mt-copy { position:relative; z-index:2; color:var(--text); }
+.mt-video-bg{
+  position:absolute; inset:0; z-index:1; width:100%; height:100%; object-fit:cover; pointer-events:none;
+  transform:scale(.8); opacity:.82;
+  -webkit-mask-image:radial-gradient(ellipse 58% 54% at 50% 46%, #000 42%, transparent 100%);
+  mask-image:radial-gradient(ellipse 58% 54% at 50% 46%, #000 42%, transparent 100%);
+}
+.music-threshold.is-opening .mt-video-bg{ opacity:0; transition:opacity .6s ease; }
+body.no-motion .mt-video-bg{ display:none; }
+.mt-copy { position:relative; z-index:2; color:var(--text); text-shadow:0 2px 14px rgba(0,0,0,.7), 0 1px 3px rgba(0,0,0,.8); }
 .mt-copy > span { font-size:0.58rem; letter-spacing:0.32em; text-transform:uppercase; color:rgba(232,200,112,0.7); }
 .mt-copy p { margin:2.2rem 0 0.4rem; font-size:0.86rem; letter-spacing:0.06em; color:rgba(237,230,220,0.52); }
 .mt-copy h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(3rem,6.8vw,7rem); line-height:0.92; font-weight:300; letter-spacing:-0.035em; }
@@ -4463,6 +4524,65 @@ nav.solid,
     -webkit-backdrop-filter:none; backdrop-filter:none;
   }
 }
+
+/* Floating state of the SAME player after it is moved to <body>.
+   Keeping it outside #music prevents section overflow from clipping it below. */
+body > #nowplaying.is-docked{
+  display:block !important; position:fixed; left:50%; bottom:1.1rem; top:auto; right:auto;
+  z-index:320; width:min(600px,calc(100vw - 2rem)); height:78px; min-height:78px;
+  margin:0; padding:.55rem 1rem .72rem .55rem; box-sizing:border-box;
+  transform:translateX(-50%); overflow:hidden; border-radius:18px;
+  background:rgba(12,22,12,.94); border:1px solid rgba(168,198,105,.38);
+  box-shadow:0 18px 56px rgba(0,0,0,.58),0 0 24px rgba(190,214,116,.1);
+  animation:onePlayerDockIn .45s cubic-bezier(.2,.72,.2,1) both;
+}
+body > #nowplaying.is-docked::before,body > #nowplaying.is-docked::after,
+body > #nowplaying.is-docked .np-head,body > #nowplaying.is-docked .soundwave,
+body > #nowplaying.is-docked .np-vinyl,body > #nowplaying.is-docked .player-eq,
+body > #nowplaying.is-docked .pc-time,body > #nowplaying.is-docked .pc-share{ display:none !important; }
+body > #nowplaying.is-docked .np-z{ padding:0 !important; }
+body > #nowplaying.is-docked .player{
+  display:grid; grid-template-columns:50px minmax(0,1fr) auto;
+  align-items:center; gap:.85rem; width:100%; min-width:0; padding:0; margin:0; border:0; background:none;
+}
+body > #nowplaying.is-docked .player-cover{
+  grid-column:1; position:relative; width:50px !important; height:50px !important;
+  border-radius:50% !important; overflow:hidden; border:1px solid rgba(168,198,105,.34);
+}
+body > #nowplaying.is-docked .player-cover img{ width:100%; height:100%; object-fit:cover; border-radius:50%; }
+body > #nowplaying.is-docked .player-main{ display:contents; }
+body > #nowplaying.is-docked .player-top{ grid-column:2; display:block; min-width:0; margin:0 !important; }
+body > #nowplaying.is-docked .player-title,body > #nowplaying.is-docked .player-sub{
+  white-space:nowrap !important; overflow:hidden; text-overflow:ellipsis;
+}
+body > #nowplaying.is-docked .player-title{ font-size:1.05rem; line-height:1.15; }
+body > #nowplaying.is-docked .player-sub{ font-size:.6rem; margin-top:.12rem; }
+body > #nowplaying.is-docked .player-controls{
+  grid-column:3; display:flex; flex-wrap:nowrap !important; align-items:center;
+  justify-content:flex-end; width:auto !important; gap:.38rem !important;
+}
+body > #nowplaying.is-docked .pc-btn{
+  display:flex !important; width:34px !important; height:34px !important; border-radius:50%;
+  align-items:center; justify-content:center; font-size:.68rem;
+}
+body > #nowplaying.is-docked .pc-play{ width:38px !important; height:38px !important; font-size:.8rem; }
+body > #nowplaying.is-docked .pc-bar{
+  display:block !important; position:absolute; left:70px; right:1rem; bottom:5px;
+  width:auto; min-width:0; height:3px;
+}
+@media(max-width:700px){
+  body > #nowplaying.is-docked{
+    bottom:.75rem; width:calc(100vw - 1.5rem); height:72px; min-height:72px;
+    padding:.48rem .65rem .7rem .48rem;
+  }
+  body > #nowplaying.is-docked .player{ grid-template-columns:46px minmax(0,1fr) auto; gap:.5rem; }
+  body > #nowplaying.is-docked .player-cover{ width:46px !important; height:46px !important; }
+  body > #nowplaying.is-docked .player-title{ font-size:.88rem; }
+  body > #nowplaying.is-docked .player-sub{ font-size:.54rem; }
+  body > #nowplaying.is-docked .pc-btn{ width:30px !important; height:30px !important; }
+  body > #nowplaying.is-docked .pc-play{ width:34px !important; height:34px !important; }
+  body > #nowplaying.is-docked .pc-bar{ left:62px; right:.75rem; }
+}
 </style>
 <style id="site-background-rhythm">
 /* Background rhythm: Hero/Music are the rich garden; story sections breathe. */
@@ -4527,6 +4647,29 @@ body.theme-dandelion:not(.no-season) #contact::after { opacity:.48; }
    player ngang gọn, cùng ngôn ngữ với .vinyl-dock (đĩa nhỏ + tên bài +
    nút điều khiển), nằm ngay trong section thay vì phải cuộn ra mới gọn. */
 @media (max-width:700px){
+  /* Mobile drawer ergonomics: keep a useful scroll viewport on short webviews,
+     make vertical gestures unambiguous, and expose that more tracks continue. */
+  #music .listening-room{
+    grid-template-rows:520px minmax(330px,56svh) auto;
+  }
+  #music .listening-room .drawer-z{ position:relative; }
+  #music .listening-room .tlist{
+    -webkit-overflow-scrolling:touch;
+    touch-action:pan-y;
+    overscroll-behavior-y:contain;
+    scrollbar-gutter:stable;
+    padding-bottom:1.25rem;
+  }
+  #music .listening-room .drawer-z::after{
+    content:''; position:absolute; z-index:3; left:0; right:.35rem; bottom:0;
+    height:1.5rem; pointer-events:none;
+    background:linear-gradient(to bottom,transparent,rgba(7,13,8,.88));
+  }
+  #music .listening-room .trow{
+    min-height:48px;
+    touch-action:pan-y;
+    -webkit-tap-highlight-color:rgba(232,200,112,.12);
+  }
   #music .listening-room .nowplaying{ padding:.65rem .85rem; border-radius:20px; }
   #music .listening-room .nowplaying .np-head{ display:none; }
   #music .listening-room .nowplaying .player{
@@ -4591,6 +4734,398 @@ body.theme-dandelion:not(.no-season) #contact::after { opacity:.48; }
   #music .listening-room .drawer-desc{ -webkit-line-clamp:1; margin-top:.25rem; }
 }
 </style>
+<style id="music-dandelion-player-frame">
+/* Player belongs to the album presentation, while the lyric sheet keeps the
+   right column. Browsing another cover no longer displaces the playing album. */
+#music .listening-room{
+  grid-template-columns:minmax(0,1.08fr) minmax(340px,.92fr);
+  grid-template-rows:minmax(480px,58svh) auto;
+}
+#music .listening-room .album-stage{ grid-column:1; grid-row:1; }
+#music .listening-room .album-drawer{ grid-column:2; grid-row:1/3; }
+#music .listening-room .nowplaying{
+  grid-column:1; grid-row:2; position:relative; isolation:isolate;
+  margin:0; padding:1rem 1.15rem; overflow:hidden;
+  border-radius:4px 4px 18px 18px;
+  border:1px solid transparent;
+  background:
+    linear-gradient(112deg,rgba(16,31,16,.94),rgba(7,14,8,.93)) padding-box,
+    linear-gradient(115deg,rgba(225,236,173,.82),rgba(232,200,112,.64),rgba(104,145,76,.3)) border-box;
+  box-shadow:
+    0 0 0 1px rgba(225,236,173,.04),
+    0 0 34px rgba(190,214,116,.13),
+    0 22px 55px rgba(0,0,0,.36),
+    inset 0 1px rgba(255,248,214,.08);
+}
+#music .listening-room .nowplaying::before,
+#music .listening-room .nowplaying::after{
+  content:'✣'; position:absolute; z-index:-1; pointer-events:none;
+  color:rgba(225,236,173,.16); font-size:4.8rem; line-height:1;
+  text-shadow:0 0 24px rgba(232,200,112,.14);
+}
+#music .listening-room .nowplaying::before{ left:-1rem; bottom:-1.6rem; transform:rotate(-18deg); }
+#music .listening-room .nowplaying::after{ content:'·  ·  ✦  ·'; right:1.25rem; top:.35rem; font-size:.68rem; letter-spacing:.35em; }
+#music .listening-room .nowplaying .player{
+  display:grid; grid-template-columns:88px minmax(0,1fr); align-items:center;
+  gap:1rem; padding:0; margin:0; border:0; background:none;
+}
+#music .listening-room .nowplaying .player-cover{
+  width:88px; height:88px; border-radius:12px;
+  box-shadow:0 12px 30px rgba(0,0,0,.48),0 0 0 1px rgba(232,200,112,.3),0 0 24px rgba(232,200,112,.1);
+}
+#music .listening-room .nowplaying .player-controls{ gap:.65rem; }
+#music .listening-room .nowplaying .pc-btn{ width:38px; height:38px; }
+#music .listening-room .nowplaying .pc-play{
+  width:46px; height:46px;
+  box-shadow:0 0 0 5px rgba(232,200,112,.07),0 0 24px rgba(232,200,112,.18);
+}
+#music .album.is-playing-album .album-cover{
+  box-shadow:0 26px 75px rgba(0,0,0,.5),0 0 0 1px rgba(225,236,173,.68),0 0 32px rgba(190,214,116,.2) !important;
+}
+#music .album.is-playing-album .album-badge{
+  color:#e1ecad; border-color:rgba(225,236,173,.42); background:rgba(10,22,10,.88);
+}
+
+@media(max-width:980px){
+  #music .listening-room{
+    grid-template-columns:1fr;
+    grid-template-rows:480px auto minmax(300px,48svh);
+  }
+  #music .listening-room .album-stage{ grid-column:1; grid-row:1; }
+  #music .listening-room .nowplaying{ grid-column:1; grid-row:2; border-radius:4px; }
+  #music .listening-room .album-drawer{ grid-column:1; grid-row:3; }
+}
+@media(max-width:700px){
+  #music .listening-room{ grid-template-rows:450px auto minmax(330px,56svh); }
+  #music .listening-room .nowplaying{ padding:.7rem .8rem; border-radius:4px; }
+  #music .listening-room .nowplaying .player{
+    display:flex; grid-template-columns:none; gap:.7rem;
+  }
+  #music .listening-room .nowplaying .player-cover{
+    width:48px !important; height:48px !important; border-radius:50%;
+  }
+  #music .listening-room .nowplaying::before{ font-size:3.2rem; opacity:.6; }
+  #music .listening-room .nowplaying::after{ display:none; }
+}
+
+/* OCD-safe gate: the content panel owns its padding and border, so the credit
+   can never visually fall outside a prematurely cropped background. */
+#music .music-gate{
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  scrollbar-width:thin;
+  box-sizing:border-box;
+}
+#music .music-gate .mg-inner{
+  width:min(760px,100%); max-width:760px;
+  box-sizing:border-box;
+  padding:clamp(2rem,4vw,3.25rem) clamp(1.25rem,4.5vw,3.5rem) clamp(1.8rem,3.5vw,2.75rem);
+  border:1px solid rgba(168,198,105,.16);
+  border-radius:clamp(20px,3vw,30px);
+  background:
+    radial-gradient(70% 44% at 50% 0,rgba(225,236,173,.065),transparent 72%),
+    linear-gradient(145deg,rgba(18,31,17,.9),rgba(7,14,8,.88));
+  box-shadow:inset 0 1px rgba(255,248,214,.045),0 22px 70px rgba(0,0,0,.3);
+}
+#music .music-gate .mg-eyebrow{ margin-top:0; }
+#music .music-gate .mg-foot{
+  margin:1.8rem 0 0;
+  padding-top:1rem;
+  border-top:1px solid rgba(168,198,105,.1);
+  line-height:1.6;
+}
+@media(max-height:760px){
+  #music .music-gate{ align-items:flex-start; }
+  #music .music-gate .mg-inner{ margin:auto 0; }
+}
+@media(max-width:640px){
+  #music .music-gate{ padding:1rem .75rem; }
+  #music .music-gate .mg-inner{ padding:1.65rem 1rem 1.5rem; border-radius:20px; }
+  #music .music-gate .mg-foot{ margin-top:1.35rem; padding:.85rem .25rem 0; }
+}
+
+/* Threshold -> Gate: dandelion bloom masks the change of frame geometry. */
+.mt-bloom{ position:absolute; inset:0; z-index:4; pointer-events:none; opacity:0; }
+.mt-bloom i{
+  position:absolute; left:50%; top:48%; width:13px; height:42px;
+  border-radius:70% 20% 70% 20%; transform-origin:50% 100%;
+  background:linear-gradient(to top,rgba(225,236,173,.08),rgba(243,236,201,.88));
+  filter:drop-shadow(0 0 10px rgba(225,236,173,.32));
+}
+.mt-bloom i:nth-child(1){--x:-38vw;--y:-32vh;--r:-66deg}
+.mt-bloom i:nth-child(2){--x:-24vw;--y:-46vh;--r:-42deg}
+.mt-bloom i:nth-child(3){--x:-8vw;--y:-52vh;--r:-18deg}
+.mt-bloom i:nth-child(4){--x:13vw;--y:-48vh;--r:16deg}
+.mt-bloom i:nth-child(5){--x:34vw;--y:-35vh;--r:52deg}
+.mt-bloom i:nth-child(6){--x:-42vw;--y:24vh;--r:-118deg}
+.mt-bloom i:nth-child(7){--x:-18vw;--y:43vh;--r:-154deg}
+.mt-bloom i:nth-child(8){--x:17vw;--y:42vh;--r:154deg}
+.mt-bloom i:nth-child(9){--x:40vw;--y:22vh;--r:112deg}
+.music-threshold.is-opening .mt-bloom{ opacity:1; animation:thresholdBloomFade 1.05s ease both; }
+.music-threshold.is-opening .mt-bloom i{ animation:thresholdSeedOut .95s cubic-bezier(.2,.72,.2,1) both; }
+@keyframes thresholdSeedOut{
+  0%{ opacity:0; transform:translate(-50%,-50%) scale(.3) rotate(0); }
+  18%{ opacity:1; }
+  100%{ opacity:0; transform:translate(var(--x),var(--y)) scale(1.25) rotate(var(--r)); }
+}
+@keyframes thresholdBloomFade{ 0%,65%{opacity:1} 100%{opacity:0} }
+.music-threshold.is-opening{ transition:opacity .85s ease .18s; }
+body.music-unlocked #music{ animation:musicWorldReveal 1.05s ease both; }
+body.no-motion .mt-bloom{ display:none !important; }
+body.no-motion .music-threshold.is-opening .mt-shutter-top,
+body.no-motion .music-threshold.is-opening .mt-shutter-bottom{ transform:none; opacity:0; transition:opacity .65s ease; }
+body.no-motion .music-threshold.is-opening .mt-copy,
+body.no-motion .music-threshold.is-opening .mt-orbit{ transform:none; opacity:0; transition:opacity .55s ease; }
+
+/* The player is visually inset into the album stage, not a third outer frame. */
+#music .listening-room{
+  grid-template-rows:minmax(560px,68svh);
+  column-gap:1rem; row-gap:0;
+}
+#music .listening-room .album-stage{
+  grid-column:1; grid-row:1; margin:0; padding-bottom:132px;
+}
+#music .listening-room .album-drawer{ grid-column:2; grid-row:1; }
+#music .listening-room .nowplaying{
+  grid-column:1; grid-row:1; align-self:end; z-index:40;
+  width:auto; margin:0 .7rem .7rem; border-radius:16px;
+}
+#music .listening-room .nowplaying .player-controls{ justify-content:center; }
+#music .listening-room .nowplaying .player-top{ align-items:center; }
+#music .listening-room .nowplaying .player-meta{ text-align:left; }
+#music .listening-room .nowplaying .pc-bar{ min-width:80px; }
+
+/* A quiet album disc behind the lyric sheet; motion preference removes it. */
+#music .listening-room .drawer-inner::after{
+  content:''; position:absolute; z-index:0; right:-8%; bottom:-10%;
+  width:min(310px,72%); aspect-ratio:1; border-radius:50%; pointer-events:none;
+  background:
+    radial-gradient(circle,rgba(7,12,7,.96) 0 5%,transparent 5.5% 16%,rgba(4,7,4,.78) 16.5% 19%,transparent 19.5%),
+    var(--drawer-cover) center/cover;
+  opacity:.14; transform:perspective(620px) rotateY(-16deg) rotate(0);
+  box-shadow:inset 0 0 0 22px rgba(4,7,4,.2),0 24px 65px rgba(0,0,0,.42);
+  animation:drawerDiscTurn 18s linear infinite;
+}
+#music .listening-room .drawer-z{ z-index:2; }
+@keyframes drawerDiscTurn{ to{ transform:perspective(620px) rotateY(-16deg) rotate(360deg); } }
+body.no-motion #music .listening-room .drawer-inner::after{ display:none; }
+
+.drawer-more button{
+  border:1px solid rgba(168,198,105,.26); border-radius:999px;
+  padding:.48rem .9rem; background:rgba(13,25,13,.72); color:var(--amber2);
+  font:inherit; font-size:.68rem; letter-spacing:.06em; cursor:pointer;
+}
+
+/* Once-only random suggestion: a quiet clickable text line under album tools. */
+.album-stage > .pick-suggest{
+  top:5.15rem; bottom:auto; left:1.65rem; width:auto; margin:0; padding:.2rem 0;
+  transform:none; justify-content:flex-start; gap:.5rem;
+  border:0; border-radius:0; background:none; box-shadow:none;
+  color:rgba(225,236,173,.82); font-size:.78rem; font-weight:500;
+  letter-spacing:.035em; text-align:left; white-space:nowrap;
+  animation:none;
+}
+.album-stage > .pick-suggest:hover{
+  transform:none; border:0; background:none; color:#eef3c9;
+}
+.album-stage > .pick-suggest .ps-spark{ font-size:.72rem; color:var(--amber2); }
+.album-stage > .pick-suggest .ps-icon{ font-size:.72rem; opacity:.7; }
+.album-stage > .pick-suggest:hover .ps-icon{ transform:translate(2px,-2px); }
+
+@media(max-width:980px){
+  #music .listening-room{ grid-template-rows:520px auto; }
+  #music .listening-room .album-stage{ grid-column:1; grid-row:1; padding-bottom:116px; }
+  #music .listening-room .nowplaying{ grid-column:1; grid-row:1; }
+  #music .listening-room .album-drawer{ grid-column:1; grid-row:2; }
+}
+@media(max-width:700px){
+  #music .listening-room{ grid-template-rows:500px auto; }
+  #music .listening-room .album-stage{ padding-bottom:104px; }
+  #music .listening-room .nowplaying{ margin:0 .45rem .45rem; }
+  #music .listening-room .nowplaying .player-controls{
+    display:grid; grid-template-columns:30px 36px 30px; justify-content:center;
+    column-gap:.7rem; row-gap:.55rem;
+  }
+  #music .listening-room .nowplaying #pcPrev{ grid-column:1; grid-row:1; }
+  #music .listening-room .nowplaying #pcPlay{ grid-column:2; grid-row:1; }
+  #music .listening-room .nowplaying #pcNext{ grid-column:3; grid-row:1; }
+  #music .listening-room .nowplaying .pc-bar{ grid-column:1/4; grid-row:2; width:100%; min-width:150px; }
+  #music .listening-room .album-drawer{ height:auto; min-height:0; }
+  #music .listening-room .drawer-inner,#music .listening-room .drawer-z{ height:auto; }
+  #music .listening-room .tlist{ overflow:visible; padding-bottom:.4rem; }
+  #music .listening-room .drawer-z::after{ display:none; }
+  #music .listening-room .drawer-inner::after{ width:72%; opacity:.1; }
+  .album-stage > .pick-suggest{
+    top:4.8rem; bottom:auto; left:1rem; width:auto; padding:.2rem 0;
+    justify-content:flex-start; font-size:.76rem; text-align:left;
+  }
+}
+
+/* One player component, two placements: inline under the album and floating. */
+#music .listening-room .nowplaying{
+  min-height:0; padding:.55rem 1.1rem .8rem .55rem;
+  border-radius:100px; overflow:visible;
+  background:rgba(12,22,12,.9);
+  border:1px solid rgba(168,198,105,.34);
+  box-shadow:0 16px 48px rgba(0,0,0,.48),0 0 24px rgba(190,214,116,.1);
+}
+#music .listening-room .nowplaying .np-head,
+#music .listening-room .nowplaying .soundwave,
+#music .listening-room .nowplaying .np-vinyl,
+#music .listening-room .nowplaying .player-eq,
+#music .listening-room .nowplaying .pc-time,
+#music .listening-room .nowplaying .pc-share{ display:none !important; }
+#music .listening-room .nowplaying .np-z{ padding:0 !important; }
+#music .listening-room .nowplaying .player{
+  display:flex; align-items:center; gap:.85rem; padding:0; margin:0;
+}
+#music .listening-room .nowplaying .player-cover{
+  position:relative; width:50px !important; height:50px !important;
+  flex:0 0 50px; border-radius:50% !important; overflow:hidden;
+  border:1px solid rgba(168,198,105,.34);
+  box-shadow:none !important;
+}
+#music .listening-room .nowplaying .player-cover img{
+  width:100%; height:100%; object-fit:cover; border-radius:50%;
+  animation:vinylSpin 7s linear infinite; animation-play-state:paused;
+}
+#music .listening-room .nowplaying.playing .player-cover img{ animation-play-state:running; }
+#music .listening-room .nowplaying .player-cover::after{
+  content:'' !important; display:block !important; position:absolute;
+  left:50%; top:50%; width:10px; height:10px; border-radius:50%;
+  transform:translate(-50%,-50%); background:#0a100a;
+  box-shadow:0 0 0 2px rgba(168,198,105,.45) !important;
+}
+#music .listening-room .nowplaying .player-main{ display:flex; align-items:center; gap:.85rem; min-width:0; }
+#music .listening-room .nowplaying .player-top{ flex:1; min-width:0; margin:0 !important; }
+#music .listening-room .nowplaying .player-title{ font-size:1.05rem; line-height:1.15; }
+#music .listening-room .nowplaying .player-sub{ font-size:.6rem; letter-spacing:.08em; margin-top:.12rem; }
+#music .listening-room .nowplaying .player-controls{
+  display:flex; align-items:center; justify-content:flex-end; gap:.4rem; flex:0 0 auto;
+}
+#music .listening-room .nowplaying .pc-btn{
+  width:34px !important; height:34px !important; border-radius:50%;
+  font-size:.68rem; background:rgba(255,255,255,.04);
+}
+#music .listening-room .nowplaying .pc-play{
+  width:38px !important; height:38px !important; font-size:.8rem;
+  background:linear-gradient(135deg,#e9efb7,#93b668);
+}
+#music .listening-room .nowplaying .pc-bar{
+  position:absolute; left:70px; right:1.5rem; bottom:5px;
+  width:auto; min-width:0; height:3px; order:initial;
+}
+
+/* Apply the same dandelion material to the floating instance as well. */
+.vinyl-dock{
+  background:rgba(12,22,12,.9);
+  border-color:rgba(168,198,105,.34);
+  box-shadow:0 16px 48px rgba(0,0,0,.48),0 0 24px rgba(190,214,116,.1);
+}
+.vd-play{ background:linear-gradient(135deg,#e9efb7,#93b668); border-color:#b8d486; color:#10160f; }
+
+@media(max-width:700px){
+  #music .listening-room .nowplaying{ padding:.55rem .8rem .8rem .55rem; }
+  #music .listening-room .nowplaying .player-main{ gap:.55rem; }
+  #music .listening-room .nowplaying .player-controls{
+    display:flex; grid-template-columns:none; gap:.3rem;
+  }
+  #music .listening-room .nowplaying #pcShuffle{ display:flex !important; }
+  #music .listening-room .nowplaying .pc-bar{
+    position:absolute; left:68px; right:1rem; bottom:5px; width:auto; min-width:0;
+  }
+  #music .listening-room .nowplaying #pcPrev,
+  #music .listening-room .nowplaying #pcPlay,
+  #music .listening-room .nowplaying #pcNext{ grid-column:auto; grid-row:auto; }
+}
+
+/* The exact same #nowplaying node becomes the dock outside its home stage. */
+body.docked #music .listening-room .nowplaying{
+  position:fixed; left:50%; right:auto; bottom:1.1rem; top:auto;
+  z-index:320; width:min(600px,calc(100vw - 2rem)); margin:0;
+  transform:translateX(-50%); opacity:1; pointer-events:auto;
+  border-radius:100px;
+  animation:onePlayerDockIn .45s cubic-bezier(.2,.72,.2,1) both;
+}
+
+/* Final aesthetic pass: compact, disciplined, no duplicate visual objects. */
+#music .listening-room .nowplaying{
+  height:78px; min-height:78px; max-height:78px;
+  padding:.55rem 1rem .72rem .55rem; overflow:hidden;
+  border-radius:18px; box-sizing:border-box;
+}
+#music .listening-room .nowplaying::before,
+#music .listening-room .nowplaying::after{ display:none !important; }
+#music .listening-room .nowplaying .player{
+  display:grid; grid-template-columns:50px minmax(0,1fr) auto;
+  align-items:center; gap:.85rem; width:100%; min-width:0;
+}
+#music .listening-room .nowplaying .player-cover{ grid-column:1; }
+#music .listening-room .nowplaying .player-main{ display:contents; }
+#music .listening-room .nowplaying .player-top{
+  grid-column:2; display:block; min-width:0; margin:0 !important;
+}
+#music .listening-room .nowplaying .player-meta{ min-width:0; }
+#music .listening-room .nowplaying .player-title{
+  white-space:nowrap !important; overflow:hidden; text-overflow:ellipsis;
+  font-size:1.05rem; line-height:1.15;
+}
+#music .listening-room .nowplaying .player-sub{
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+#music .listening-room .nowplaying .player-controls{
+  grid-column:3; display:flex; flex-wrap:nowrap !important;
+  align-items:center; justify-content:flex-end; width:auto !important; gap:.38rem !important;
+}
+#music .listening-room .nowplaying .pc-bar{
+  position:absolute; left:70px; right:1rem; bottom:5px;
+  width:auto; min-width:0; height:3px; flex-basis:auto;
+}
+
+/* Original Three.js vinyl, now centered behind the playlist. */
+#music .listening-room .drawer-inner::after{ display:none !important; }
+#music .listening-room .album-drawer .np-vinyl,
+#music .listening-room .album-drawer .vinyl-bg.np-vinyl{
+  display:block !important; position:absolute; z-index:1;
+  left:50% !important; right:auto !important; top:56% !important;
+  width:min(330px,62%) !important; height:auto !important; aspect-ratio:1;
+  transform:translate(-50%,-50%) perspective(700px) rotateY(-10deg) !important;
+  opacity:.16 !important; overflow:visible; border-radius:50%;
+  filter:drop-shadow(0 22px 42px rgba(0,0,0,.38)); pointer-events:none;
+}
+#music .listening-room .album-drawer .vinyl3d{
+  display:block; position:absolute; inset:0; opacity:1;
+}
+#music .listening-room .album-drawer .vinyl-disc{ opacity:.65; }
+#music .listening-room .album-drawer .drawer-z{ position:relative; z-index:2; }
+body.no-motion #music .listening-room .album-drawer .np-vinyl{ display:none !important; }
+
+@keyframes onePlayerDockIn{
+  from{ opacity:0; transform:translate(-50%,22px); }
+  to{ opacity:1; transform:translate(-50%,0); }
+}
+@media(max-width:700px){
+  #music .listening-room .nowplaying{
+    height:72px; min-height:72px; max-height:72px;
+    padding:.48rem .65rem .7rem .48rem;
+  }
+  #music .listening-room .nowplaying .player{
+    grid-template-columns:46px minmax(70px,1fr) auto; gap:.5rem;
+  }
+  #music .listening-room .nowplaying .player-cover{
+    width:46px !important; height:46px !important; flex-basis:46px;
+  }
+  #music .listening-room .nowplaying .player-title{ font-size:.88rem; }
+  #music .listening-room .nowplaying .player-sub{ font-size:.54rem; }
+  #music .listening-room .nowplaying .pc-btn{ width:30px !important; height:30px !important; }
+  #music .listening-room .nowplaying .pc-play{ width:34px !important; height:34px !important; }
+  #music .listening-room .nowplaying #pcShuffle{ display:flex !important; }
+  #music .listening-room .nowplaying .pc-bar{ left:62px; right:.75rem; }
+  body.docked #music .listening-room .nowplaying{
+    bottom:.75rem; width:calc(100vw - 1.5rem);
+  }
+}
+</style>
 </head>
 <body data-theme="dandelion">
 <script id="performance-mode-bootstrap">
@@ -4619,6 +5154,9 @@ body.theme-dandelion:not(.no-season) #contact::after { opacity:.48; }
 <!-- NAV -->
 <nav id="nav">
   <a class="nav-logo" href="#">ANH LI ✦</a>
+  <button class="motion-toggle nav-motion" id="motionToggle" type="button" aria-pressed="false" aria-label="Giảm chuyển động">
+    <span class="mt-ico" aria-hidden="true">✦</span><span class="mt-label">Giảm chuyển động</span>
+  </button>
   <button class="nav-burger" id="navBurger" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="navLinks">
     <span></span><span></span><span></span>
   </button>
@@ -4693,10 +5231,11 @@ body.theme-dandelion:not(.no-season) #contact::after { opacity:.48; }
       <span id="typewriter"></span><span id="typewriter-cursor"></span>
     </div>
     <div class="hero-bottom">
+      <img class="quote-sprinkle" src="./images/oracle/seed-sprinkle.webp" alt="" aria-hidden="true" loading="lazy" decoding="async"/>
       <p class="hero-quote">
-        "Tử tế. Tinh tế.<br/>
-        Tạo giá trị thật.<br/>
-        Đó là cách Anh Li làm nghề."
+        “Chào bạn, mình là Anh Li.<br/>
+        Đây là khu vườn của những điều mình đã làm,<br/>
+        đã nghe — và vẫn đang trở thành.”
       </p>
     </div>
     <p class="hero-manifesto">Đợt này khu vườn đang mở bằng Mỹ Vị Nhân Sinh — album nổi bật nằm trong jewel case lớn, cùng những lát nhạc khác trôi giữa đồng bồ công anh.</p>
@@ -4719,12 +5258,12 @@ body.theme-dandelion:not(.no-season) #contact::after { opacity:.48; }
     <!-- lời chủ nhà hiện từng nhịp (d1→d3) thay vì cả khối fade một lượt -->
     <div class="sec-label reveal">Một lời chào</div>
     <p class="welcome-lead reveal d1">
-      Không cần đi theo một lối cố định.<br/>
-      Cứ bắt đầu từ điều khiến bạn <em>dừng lại.</em>
+      Một portfolio không nhất thiết phải bắt đầu bằng thành tích.<br/>
+      Mình muốn bắt đầu bằng một lời <em>mời ở lại.</em>
     </p>
     <p class="welcome-sub reveal d3">
-      Một bài hát, một khung hình, một câu chuyện nghề —
-      phần còn lại cứ để sự tò mò dẫn đường.
+      Bạn có thể đi qua một khung hình, dừng ở một bài hát,
+      rồi lần theo những căn phòng nghề nghiệp đã làm nên con người đứng phía sau chúng.
     </p>
   </div>
 </section>
@@ -4737,7 +5276,342 @@ body.theme-dandelion:not(.no-season) #contact::after { opacity:.48; }
   .welcome-sub { font-size:clamp(0.95rem,1.6vw,1.1rem); line-height:1.8; color:rgba(243,236,221,0.62); max-width:560px; margin:0 auto; }
 </style>
 
+<!-- BA HẠT TỪ KHU VƯỜN — calendar easter egg / daily reflection -->
+<section class="garden-calendar reveal" id="gardenCalendar" aria-labelledby="gcTitle">
+  <div class="gc-paper">
+    <div class="gc-head">
+      <div><span class="gc-kicker">Một khoảng dừng nhỏ</span><h2 id="gcTitle">Tháng này trong khu vườn</h2></div>
+      <span class="gc-month" id="gcMonth"></span>
+    </div>
+    <div class="gc-week" aria-hidden="true"><span>T2</span><span>T3</span><span>T4</span><span>T5</span><span>T6</span><span>T7</span><span>CN</span></div>
+    <div class="gc-days" id="gcDays" role="grid" aria-label="Lịch tháng hiện tại"></div>
+    <p class="gc-hint">Có một lời nhắn đang nằm dưới vòng tròn ấy.</p>
+  </div>
+</section>
+
+<div class="garden-oracle" id="gardenOracle" role="dialog" aria-modal="true" aria-labelledby="goTitle" hidden>
+  <button class="go-backdrop" type="button" aria-label="Đóng lời nhắn"></button>
+  <article class="go-letter">
+    <button class="go-close" type="button" aria-label="Đóng">×</button>
+    <span class="go-kicker">Ba hạt hôm nay</span>
+    <div class="go-sensing" id="goSensing">
+      <video class="bag-video" id="bagVideo" muted playsinline preload="none" poster="./images/oracle/bag-poster.jpg" aria-hidden="true">
+        <source src="./images/oracle/bag-burst.webm" type="video/webm"/>
+        <source src="./images/oracle/bag-burst.mp4" type="video/mp4"/>
+      </video>
+      <p>Hít một hơi thật chậm…<br/><em>Khi bạn sẵn sàng, hãy chạm vào túi hạt.</em></p>
+      <button class="go-bag" id="goBag" type="button" aria-label="Chạm vào túi hạt để khu vườn chọn ba hạt">
+        <span>Chạm vào túi hạt</span>
+      </button>
+    </div>
+    <div class="go-draw" id="goDraw">
+      <p class="go-whisper">Gió đã chọn xong.<br/><em>À… ba hạt của bạn là…</em></p>
+      <div class="go-numbers" id="goNumbers" hidden></div>
+      <div class="go-symbols" id="goSymbols"></div>
+      <button class="go-reveal" id="goReveal" type="button">Gieo ba hạt vào gió để thông điệp đến tay bạn ✦</button>
+    </div>
+    <div class="go-message" id="goMessage">
+      <h2 id="goTitle">Một lời từ khu vườn</h2>
+      <div class="go-seeds" id="goSeeds"></div>
+      <p class="go-disclaimer">Khu vườn gửi một năng lượng ngẫu nhiên, không gửi điều bạn muốn nghe. Nếu lời này không thuộc về bạn, cứ để nó bay đi — đừng hái thêm chỉ để tìm một câu chuyện dễ tin hơn.</p>
+      <footer>— Anh Li gửi bạn một lời từ khu vườn ✦</footer>
+    </div>
+  </article>
+</div>
+
+<style id="garden-calendar-style">
+.garden-calendar{ position:relative; padding:clamp(4rem,8vw,7rem) 1.5rem; background:var(--ink); }
+.hero .garden-calendar{
+  position:absolute; z-index:8; right:clamp(1rem,5vw,6rem); top:clamp(8rem,18vh,12rem); bottom:auto;
+  width:min(360px,34vw); padding:0; background:transparent;
+}
+.hero .gc-paper{
+  padding:1.1rem 1.2rem 1.2rem; border-radius:20px;
+  border-color:rgba(32,70,44,.18); background:rgba(245,248,225,.34);
+  -webkit-backdrop-filter:blur(10px) saturate(.86); backdrop-filter:blur(10px) saturate(.86);
+  box-shadow:0 18px 48px rgba(35,55,32,.1),inset 0 1px rgba(255,255,245,.42);
+}
+.hero .gc-head{ margin-bottom:1rem; }
+.hero .gc-head h2{ font-size:1.5rem; color:#173527; }
+.hero .gc-kicker{ font-size:.52rem; color:#557548; }
+.hero .gc-month,.hero .gc-week{ color:rgba(23,53,39,.56); }
+.hero .gc-day{ color:rgba(23,53,39,.82); }
+.hero .gc-day.muted{ opacity:.2; }
+.hero .gc-day.today{ color:#173527; }
+.hero .gc-day.today::before,.hero .gc-day.today::after{ border-color:rgba(75,112,45,.72); }
+.hero .gc-week,.hero .gc-days{ gap:.22rem; }
+.hero .gc-day{ aspect-ratio:1.45; font-size:.78rem; }
+.hero .gc-hint{ margin-top:.75rem; font-size:.76rem; color:rgba(23,53,39,.58); }
+.gc-paper{
+  width:min(760px,100%); margin:auto; padding:clamp(1.35rem,4vw,2.6rem);
+  border:1px solid rgba(168,198,105,.22); border-radius:28px;
+  background:linear-gradient(145deg,rgba(21,33,18,.88),rgba(10,16,10,.94));
+  box-shadow:0 28px 80px rgba(0,0,0,.32),inset 0 1px rgba(255,247,205,.04);
+}
+.gc-head{ display:flex; justify-content:space-between; align-items:end; gap:1rem; margin-bottom:1.6rem; }
+.gc-kicker,.go-kicker{ color:var(--amber2); font-size:.55rem; letter-spacing:.24em; text-transform:uppercase; }
+.gc-head h2{ margin:.35rem 0 0; font:400 clamp(1.7rem,4vw,2.7rem)/1 'Cormorant Garamond',serif; color:var(--text); }
+.gc-month{ color:var(--text3); font-size:.66rem; letter-spacing:.14em; text-transform:uppercase; white-space:nowrap; }
+.gc-week,.gc-days{ display:grid; grid-template-columns:repeat(7,1fr); gap:.35rem; }
+.gc-week{ margin-bottom:.45rem; color:var(--text3); font-size:.54rem; letter-spacing:.12em; text-align:center; }
+.gc-day{
+  position:relative; display:grid; place-items:center; aspect-ratio:1.18; min-width:0;
+  border:0; background:none; color:var(--text2); font:500 .76rem/1 'Instrument Sans',sans-serif;
+}
+button.gc-day{ cursor:pointer; }
+.gc-day.muted{ opacity:.2; }
+.gc-day.today{ color:#eef3c9; font-weight:700; }
+.gc-day.today::before,.gc-day.today::after{
+  content:''; position:absolute; left:50%; top:50%; width:70%; height:70%; border-radius:48% 54% 46% 56%;
+  transform:translate(-50%,-50%) rotate(-8deg); border:2px solid rgba(203,224,135,.78);
+  filter:url(#none); pointer-events:none;
+}
+.gc-day.today::after{ width:66%; height:76%; transform:translate(-50%,-50%) rotate(7deg); border-width:1px; opacity:.5; }
+.gc-day.today:hover::before{ box-shadow:0 0 24px rgba(203,224,135,.18); }
+.gc-hint{ margin:1.25rem 0 0; text-align:center; color:rgba(225,236,173,.48); font:italic .76rem/1.6 'Cormorant Garamond',serif; letter-spacing:.035em; }
+.garden-oracle{ position:fixed; inset:0; z-index:10040; display:grid; place-items:center; padding:1rem; }
+.garden-oracle[hidden]{ display:none; }
+body.oracle-open{ overflow:hidden; }
+.go-backdrop{ position:absolute; inset:0; border:0; background:rgba(3,7,3,.76); backdrop-filter:blur(7px); cursor:pointer; }
+.go-letter{
+  position:relative; z-index:1; width:min(620px,100%); max-height:min(86svh,760px); overflow:auto;
+  padding:clamp(1.6rem,5vw,3.3rem); border:1px solid rgba(168,198,105,.3); border-radius:28px;
+  background:radial-gradient(70% 40% at 50% 0,rgba(225,236,173,.09),transparent 70%),linear-gradient(150deg,#182316,#0b120c);
+  box-shadow:0 35px 120px rgba(0,0,0,.65),inset 0 1px rgba(255,247,205,.07);
+  animation:goLetterIn .6s cubic-bezier(.2,.75,.2,1) both;
+}
+.go-close{ position:absolute; right:1rem; top:1rem; width:36px; height:36px; border-radius:50%; border:1px solid var(--border2); background:rgba(8,15,8,.65); color:var(--text2); cursor:pointer; }
+.go-numbers{ display:flex; gap:.55rem; margin:1rem 0 1.2rem; }
+.go-numbers[hidden]{ display:none !important; }
+.go-numbers span{ display:grid; place-items:center; width:42px; height:42px; border:1px solid rgba(225,236,173,.3); border-radius:50%; color:var(--amber2); font-family:'Cormorant Garamond',serif; font-size:1.15rem; }
+.go-letter h2{ margin:0 0 1.4rem; color:var(--text); font:400 clamp(2rem,5vw,3.2rem)/1 'Cormorant Garamond',serif; }
+.go-sensing{ position:relative; overflow:hidden; border-radius:22px; min-height:400px; display:grid; place-items:center; align-content:center; gap:1.5rem; text-align:center; }
+.go-sensing p,.go-whisper{ color:rgba(225,236,173,.64); font:italic 1.08rem/1.7 'Cormorant Garamond',serif; }
+.go-sensing p em{ color:var(--text); font-size:1.16em; }
+.bag-video{
+  position:absolute; inset:0; z-index:0; width:100%; height:100%; object-fit:cover; pointer-events:none;
+  -webkit-mask-image:radial-gradient(closest-side, #000 66%, transparent 100%);
+  mask-image:radial-gradient(closest-side, #000 66%, transparent 100%);
+}
+.go-sensing > *:not(.bag-video){ position:relative; z-index:1; }
+.go-sensing p{ text-shadow:0 2px 10px rgba(0,0,0,.85), 0 1px 3px rgba(0,0,0,.9); }
+.go-bag{
+  border:0; background:none; color:var(--amber2); cursor:pointer; font:inherit;
+  font-size:.62rem; letter-spacing:.13em; text-transform:uppercase;
+  padding:.55rem 1rem; border-radius:999px;
+  text-shadow:0 2px 8px rgba(0,0,0,.85), 0 1px 3px rgba(0,0,0,.9);
+  transition:transform .3s ease;
+}
+.go-bag:hover{ transform:translateY(-2px); }
+.go-bag[disabled]{ cursor:default; }
+.go-draw,.go-message{ display:none; }
+.garden-oracle.drawn .go-sensing{ display:none; }
+.garden-oracle.drawn .go-draw{ display:block; animation:goLetterIn .55s ease both; }
+.go-whisper{ margin:.8rem 0 1.2rem; }
+.go-whisper em{ color:var(--text); font-size:1.28em; }
+.go-symbols{ display:grid; grid-template-columns:repeat(3,1fr); gap:.55rem; margin:0 0 1.4rem; }
+.go-symbols span{ position:relative; min-height:108px; display:grid; place-items:center; align-content:center; gap:.45rem; padding:.7rem .45rem; border:1px solid rgba(168,198,105,.16); border-radius:48% 48% 42% 42% / 34% 34% 55% 55%; color:var(--text2); font:.9rem/1.2 'Cormorant Garamond',serif; text-align:center; background:rgba(168,198,105,.045); }
+.go-symbols b{ display:grid; place-items:center; width:34px; height:34px; border-radius:50%; border:1px solid rgba(225,236,173,.32); color:var(--amber2); font-size:1rem; font-weight:400; }
+.go-reveal{ width:100%; padding:.8rem 1rem; border:1px solid rgba(225,236,173,.3); border-radius:999px; background:rgba(168,198,105,.08); color:var(--amber2); font:inherit; font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; cursor:pointer; }
+.garden-oracle.revealed .go-draw{ display:none; }
+.garden-oracle.revealed .go-message{ display:block; animation:goLetterIn .55s ease both; }
+@keyframes goSense{ 0%,100%{transform:scale(.86);opacity:.35} 50%{transform:scale(1.08);opacity:1} }
+.go-seed{ padding:1rem 0; border-top:1px solid rgba(168,198,105,.12); }
+.go-seed:first-child{ border-top:0; }
+.go-seed span{ color:var(--amber3); font-size:.53rem; letter-spacing:.2em; text-transform:uppercase; }
+.go-seed h3{ margin:.35rem 0 .45rem; color:var(--text); font:400 1.25rem/1.15 'Cormorant Garamond',serif; }
+.go-seed p{ margin:0; color:var(--text2); font-size:.86rem; line-height:1.75; }
+.go-seed p em{ color:rgba(225,236,173,.72); font-style:italic; }
+.go-letter footer{ margin-top:1.25rem; color:rgba(225,236,173,.55); font:italic .85rem 'Cormorant Garamond',serif; text-align:right; }
+.go-disclaimer{ margin:1.4rem 0 0; padding-top:1rem; border-top:1px solid rgba(168,198,105,.13); color:rgba(243,236,221,.42); font-size:.68rem; line-height:1.65; }
+@keyframes goLetterIn{ from{opacity:0;transform:translateY(18px) scale(.98)} to{opacity:1;transform:none} }
+body.no-motion .go-letter{ animation:goLetterFade .35s ease both; }
+@keyframes goLetterFade{ from{opacity:0} to{opacity:1} }
+@media(max-width:700px){
+  .hero.poster-hero:has(.garden-calendar){ padding-top:25rem; padding-bottom:5rem; }
+  .hero .garden-calendar{ position:absolute; left:.75rem; right:.75rem; top:5.8rem; bottom:auto; width:auto; padding:0; }
+  .gc-paper{ border-radius:22px; padding:1.2rem .9rem 1.35rem; }
+  .hero .gc-paper{ padding:.8rem .85rem .9rem; }
+  .hero .gc-day{ aspect-ratio:1.35; }
+  .gc-head{ align-items:start; }
+  .gc-day{ aspect-ratio:1; font-size:.7rem; }
+  .go-letter{ border-radius:22px; padding:1.5rem 1.15rem; }
+}
+body.no-motion .go-bag{ transition:none; }
+</style>
+
+<script id="garden-calendar-js">
+(function(){
+  const daysEl=document.getElementById('gcDays'),monthEl=document.getElementById('gcMonth');
+  const oracle=document.getElementById('gardenOracle'),numbersEl=document.getElementById('goNumbers'),seedsEl=document.getElementById('goSeeds');
+  if(!daysEl||!monthEl||!oracle||!numbersEl||!seedsEl) return;
+  const calendar=document.getElementById('gardenCalendar'),hero=document.getElementById('home');
+  const heroContent=hero&&hero.querySelector('.hero-content'),heroName=hero&&hero.querySelector('.hero-name');
+  if(calendar&&heroContent&&heroName) heroContent.insertBefore(calendar,heroName);
+  const now=new Date(),year=now.getFullYear(),month=now.getMonth(),today=now.getDate();
+  const monthNames=['Tháng Một','Tháng Hai','Tháng Ba','Tháng Tư','Tháng Năm','Tháng Sáu','Tháng Bảy','Tháng Tám','Tháng Chín','Tháng Mười','Tháng Mười Một','Tháng Mười Hai'];
+  monthEl.textContent=monthNames[month]+' · '+year;
+  const first=(new Date(year,month,1).getDay()+6)%7;
+  const total=new Date(year,month+1,0).getDate();
+  const prevTotal=new Date(year,month,0).getDate();
+  let html='';
+  for(let i=first-1;i>=0;i--) html+='<span class="gc-day muted" aria-hidden="true">'+(prevTotal-i)+'</span>';
+  for(let d=1;d<=total;d++){
+    if(d===today) html+='<button class="gc-day today" type="button" role="gridcell" aria-label="Hôm nay, '+d+' '+monthNames[month]+' — mở lời nhắn">'+d+'</button>';
+    else html+='<span class="gc-day" role="gridcell">'+d+'</span>';
+  }
+  const used=first+total,tail=(7-used%7)%7;
+  for(let d=1;d<=tail;d++) html+='<span class="gc-day muted" aria-hidden="true">'+d+'</span>';
+  daysEl.innerHTML=html;
+
+  const symbols=[
+    ['Hạt ngủ trong đất','kiên nhẫn với điều chưa lộ hình'],['Cánh cửa hé sáng','cho phép một khả năng mới bước vào'],
+    ['Đĩa nhạc mặt B','lắng nghe phần mình thường bỏ qua'],['Bồ công anh ngược gió','buông nhu cầu kiểm soát hướng đi'],
+    ['Căn phòng còn đèn','trở về với điều vẫn âm thầm nuôi mình'],['Mặt hồ sau mưa','để cảm xúc lắng trước khi gọi tên'],
+    ['Sân khấu trước giờ diễn','tin vào phần chuẩn bị mà chưa ai nhìn thấy'],['Chiếc ghế trống','chừa một khoảng cho điều mới'],
+    ['Đường chỉ trên bản vẽ','nhìn lại cấu trúc thay vì cố trang trí bề mặt'],['Ngọn đèn hậu trường','ghi nhận công sức không cần đứng giữa ánh nhìn'],
+    ['Cánh hoa ép trong sách','giữ ký ức mà không giữ mình ở lại'],['Chuyến tàu chậm','đi đúng nhịp của mình thay vì nhịp của đám đông'],
+    ['Khung cửa có gió','đón một thay đổi nhỏ trước khi cần thay đổi lớn'],['Nốt lặng giữa bài','nghe điều chỉ xuất hiện khi mình ngừng nói'],
+    ['Mầm cây sát đá','tin vào sức sống đang tìm đường rất riêng'],['Tấm rèm vừa mở','bước ra khi đã sẵn sàng, không khi bị thúc giục']
+  ];
+  const light=[
+    'Có điều đang lớn lên dù hôm nay bạn chưa nhìn thấy. Đừng đào hạt giống lên chỉ để kiểm tra nó đã bén rễ chưa.',
+    'Một hướng khác không có nghĩa là bạn đã đi sai. Đôi khi đó là cách con đường tự chỉnh lại để gặp đúng mình.',
+    'Sự chậm rãi hôm nay không phải trì hoãn. Nó đang trả lại cho bạn độ sâu mà vội vàng đã lấy mất.',
+    'Bạn không cần giải quyết toàn bộ bầu trời. Chỉ cần chăm sóc khoảng đất đang ở ngay dưới chân.',
+    'Có một câu trả lời đang đến bằng cảm giác trước khi thành lời. Hãy tin phần cơ thể đã hiểu sớm hơn lý trí.',
+    'Điều phù hợp sẽ không luôn dễ dàng, nhưng nó thường khiến bạn được là mình nhiều hơn sau mỗi bước.',
+    'Một giới hạn được đặt đúng chỗ cũng là một hình thức dịu dàng — với mình và với cả người khác.',
+    'Hôm nay không cần tạo ra điều lớn lao. Một việc nhỏ được làm bằng sự hiện diện đầy đủ đã là đủ đẹp.',
+    'Bạn có thể đổi ý mà không phản bội phiên bản cũ. Trưởng thành đôi khi chỉ là cập nhật bản đồ.',
+    'Đừng nhầm im lặng với trống rỗng. Có những khoảng lặng đang âm thầm sắp xếp lại cả một bản nhạc.'
+  ];
+  const shadow=[
+    'Điều làm bạn mệt có thể không phải công việc, mà là việc liên tục chứng minh mình xứng đáng với nó.',
+    'Có một cánh cửa bạn vẫn lay vì quen tay, dù căn phòng phía sau đã không còn dành cho mình.',
+    'Bạn đang cố đọc suy nghĩ của người khác trong khi bỏ quên tiếng nói rõ ràng nhất ở bên trong.',
+    'Sự hoàn hảo đang giả làm tiêu chuẩn, nhưng thật ra chỉ là nỗi sợ bị nhìn thấy khi còn dang dở.',
+    'Không phải mọi điều từng cứu mình đều cần đi cùng mình đến chặng tiếp theo.',
+    'Một lời từ chối bị trì hoãn thường biến thành nhiều ngày miễn cưỡng. Hãy thành thật sớm hơn một chút.',
+    'Bạn không cần biến mọi cảm xúc thành quyết định. Một số cảm xúc chỉ cần được đi qua.',
+    'Đừng dùng tốc độ của người khác để kết luận về mùa của mình.',
+    'Có thể bạn không thiếu động lực; bạn chỉ đang thiếu một lý do đủ thật để tiếp tục.',
+    'Thứ cần buông hôm nay có khi chỉ là kỳ vọng rằng mọi người đều phải hiểu lựa chọn của bạn.'
+  ];
+  const carry=[
+    'Mang theo một khoảng trống đủ rộng để điều mới có thể bay vào.',
+    'Chọn một việc quan trọng, làm nó tử tế, rồi cho phép hôm nay được khép lại.',
+    'Hỏi mình: nếu không cần gây ấn tượng với ai, mình sẽ chọn điều gì?',
+    'Nói một câu thật lòng nhưng dịu dàng — trước hết với chính mình.',
+    'Để một niềm vui nhỏ được tồn tại mà không cần biến nó thành thành tựu.',
+    'Đi chậm lại ở nơi bạn thường vội; bước dứt khoát ở nơi bạn thường chần chừ.',
+    'Giữ sự tò mò, bỏ nhu cầu phải biết chắc mọi kết quả.',
+    'Chăm sóc năng lượng trước khi quản lý thời gian.',
+    'Cho một ý tưởng dang dở thêm một cơ hội được thử, thay vì thêm một vòng phán xét.',
+    'Nhớ rằng mềm mại và rõ ràng có thể cùng tồn tại trong một lựa chọn.'
+  ];
+  const positions=['Hạt đang bén rễ','Hạt muốn rời gió','Hạt nên mang theo'];
+  function hash(s){ let h=2166136261; for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);} return h>>>0; }
+  function rng(seed){ return function(){ seed+=0x6D2B79F5; let t=seed; t=Math.imul(t^t>>>15,t|1); t^=t+Math.imul(t^t>>>7,t|61); return ((t^t>>>14)>>>0)/4294967296; }; }
+  function deviceSeed(){
+    const KEY='anhli_garden_device'; let id='';
+    try{ id=localStorage.getItem(KEY)||''; }catch(e){}
+    if(!id){
+      const raw=(globalThis.crypto&&crypto.getRandomValues)?crypto.getRandomValues(new Uint32Array(3)).join('-'):(Math.random()+'-'+Date.now());
+      id=String(raw); try{ localStorage.setItem(KEY,id); }catch(e){}
+    }
+    return id;
+  }
+  function reading(){
+    const dateKey=year+'-'+String(month+1).padStart(2,'0')+'-'+String(today).padStart(2,'0');
+    const random=rng(hash('anhli-garden-'+dateKey+'-'+deviceSeed())),nums=[];
+    while(nums.length<3){ const n=Math.floor(random()*79); if(!nums.includes(n)) nums.push(n); }
+    const pools=[light,shadow,carry];
+    return nums.map((n,i)=>{
+      const symbol=symbols[n%symbols.length];
+      return {n:n,title:symbol[0],theme:symbol[1],message:pools[i][(n+Math.floor(n/symbols.length)+i)%pools[i].length]};
+    });
+  }
+  function resetBag(bagBtn){
+    bagBtn.classList.remove('bursting'); bagBtn.disabled=false;
+    const video=document.getElementById('bagVideo');
+    if(video){ video.pause(); try{ video.currentTime=0; }catch(e){} }
+  }
+  function openOracle(){
+    oracle.classList.remove('drawn','revealed');
+    const bagBtn=document.getElementById('goBag');
+    resetBag(bagBtn);
+    oracle.hidden=false; document.body.classList.add('oracle-open');
+    requestAnimationFrame(()=>bagBtn?.focus());
+  }
+  function chooseBag(){
+    const result=reading();
+    numbersEl.innerHTML=result.map(x=>'<span>'+String(x.n).padStart(2,'0')+'</span>').join('');
+    document.getElementById('goSymbols').innerHTML=result.map(x=>'<span><b>'+String(x.n).padStart(2,'0')+'</b>'+x.title+'</span>').join('');
+    seedsEl.innerHTML=result.map((x,i)=>'<section class="go-seed"><span>'+positions[i]+'</span><h3>'+x.title+'</h3><p>'+x.message+' <em>Hôm nay, khu vườn nhắc bạn '+x.theme+'.</em></p></section>').join('');
+    oracle.classList.add('drawn');
+    requestAnimationFrame(()=>document.getElementById('goReveal')?.focus());
+  }
+  function openBag(){
+    const bagBtn=document.getElementById('goBag');
+    if(document.body.classList.contains('no-motion')){ chooseBag(); return; }
+    const video=document.getElementById('bagVideo');
+    bagBtn.classList.add('bursting'); bagBtn.disabled=true;
+    if(video){
+      try{ video.currentTime=0; }catch(e){}
+      const p=video.play();
+      if(p&&p.catch) p.catch(()=>{});
+    }
+    setTimeout(chooseBag,5100);
+  }
+  function revealMessage(){ oracle.classList.add('revealed'); oracle.querySelector('.go-message h2')?.focus?.(); }
+  function closeOracle(){
+    oracle.hidden=true; oracle.classList.remove('drawn','revealed'); document.body.classList.remove('oracle-open');
+    resetBag(document.getElementById('goBag'));
+    daysEl.querySelector('.today')?.focus();
+  }
+  daysEl.querySelector('.today')?.addEventListener('click',openOracle);
+  oracle.querySelector('.go-close').addEventListener('click',closeOracle);
+  oracle.querySelector('.go-backdrop').addEventListener('click',closeOracle);
+  document.getElementById('goBag').addEventListener('click',openBag);
+  document.getElementById('goReveal').addEventListener('click',revealMessage);
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&!oracle.hidden) closeOracle(); });
+})();
+</script>
+
+<!-- quote seed-sprinkle: gentle scroll drift, desktop only, skipped under reduced-motion -->
+<script>
+(function(){
+  const el=document.querySelector('.quote-sprinkle');
+  if(!el || innerWidth<901 || document.body.classList.contains('no-motion')) return;
+  let ticking=false;
+  function update(){
+    const y=Math.min(46, scrollY*0.05);
+    el.style.transform='translateY('+y.toFixed(1)+'px)';
+    ticking=false;
+  }
+  addEventListener('scroll',()=>{ if(!ticking){ requestAnimationFrame(update); ticking=true; } },{passive:true});
+})();
+</script>
+
 <!-- ABOUT -->
+<script>
+(function(){
+  const el=document.getElementById('aqDecor');
+  if(!el || document.body.classList.contains('no-motion') || !('IntersectionObserver' in window)) return;
+  el.preload='auto'; el.load();
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(e.isIntersecting){
+        try{ el.currentTime=0; }catch(err){}
+        const p=el.play(); if(p&&p.catch) p.catch(()=>{});
+        io.disconnect();
+      }
+    });
+  },{threshold:0.4});
+  io.observe(el);
+})();
+</script>
 <section id="about">
   <div class="sec-label reveal">About</div>
 
@@ -4751,6 +5625,10 @@ body.theme-dandelion:not(.no-season) #contact::after { opacity:.48; }
     </figure>
     <div class="about-right">
       <blockquote class="about-quote reveal d1">
+        <video class="aq-decor" id="aqDecor" muted playsinline preload="none" poster="./images/oracle/bag-poster.jpg" aria-hidden="true">
+          <source src="./images/oracle/bag-burst.webm" type="video/webm"/>
+          <source src="./images/oracle/bag-burst.mp4" type="video/mp4"/>
+        </video>
         <span class="aq-mark" style="font-size: 120px; line-height: 0">“</span>
         <span class="aq-l1">Mình không làm</span>
         <span class="aq-l2" style="font-weight: 700">sự kiện.</span>
@@ -4759,7 +5637,7 @@ body.theme-dandelion:not(.no-season) #contact::after { opacity:.48; }
       </blockquote>
       <div class="about-eyebrow reveal">Chân dung</div>
       <div class="about-desc reveal d1">
-        <p class="about-lead" id="aboutLead">Mình là Anh Li — creative producer, show director &amp; songwriter, sống và làm nghề ở Sài Gòn.</p>
+        <p class="about-lead" id="aboutLead">Mình là Anh Li — một người đi từ không gian đến sân khấu, từ brief đến cảm xúc, rồi mang tất cả những lớp nghề ấy vào âm nhạc. Sài Gòn là nơi mình sống; sự tò mò là nơi mình làm nghề.</p>
       </div>
       <div class="about-punch reveal d2">
         <div class="ap-line"><span class="ap-n">01</span><span>Cả Cái Sạp nhạc — tự viết, tự phối, <em>một tay</em> dựng nên.</span></div>
@@ -4778,13 +5656,18 @@ body.theme-dandelion:not(.no-season) #contact::after { opacity:.48; }
 </section>
 
 <section class="music-threshold" id="listening-threshold" aria-label="Lối vào thế giới âm nhạc">
+  <video class="mt-video-bg" id="mtVideoBg" muted playsinline preload="none" aria-hidden="true">
+    <source src="./images/oracle/threshold-bloom.webm" type="video/webm"/>
+    <source src="./images/oracle/threshold-bloom.mp4" type="video/mp4"/>
+  </video>
   <div class="mt-shutter mt-shutter-top" aria-hidden="true"></div>
   <div class="mt-shutter mt-shutter-bottom" aria-hidden="true"></div>
+  <div class="mt-bloom" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
   <div class="mt-orbit" aria-hidden="true"><i></i><i></i><i></i></div>
   <div class="mt-copy reveal">
     <span>Chapter II · The Listening World</span>
-    <p>Có một phần công việc được nhìn thấy.</p>
-    <h2>Và một thế giới<br/><em>chỉ có thể nghe.</em></h2>
+    <p>Phần đầu là lời chào và những điều có thể nhìn thấy.</p>
+    <h2>Phần hai bắt đầu<br/><em>khi mình nhắm mắt và nghe.</em></h2>
     <button type="button" id="enterMusicWorld" aria-controls="music" aria-expanded="false">Bước vào Cái Sạp nhạc ↓</button>
   </div>
 </section>
@@ -4847,9 +5730,9 @@ body.theme-dandelion:not(.no-season) #contact::after { opacity:.48; }
     </div>
     <!-- Gợi ý cho người chưa biết chọn gì — nằm trong sân khấu album -->
     <button class="pick-suggest" id="npSuggest" type="button">
-      <span class="ps-spark" aria-hidden="true">✨</span>
-      <span>Chưa biết nghe gì? <em>Để Li bốc cho bạn một bài</em></span>
-      <span class="ps-icon" aria-hidden="true">⇄</span>
+      <span class="ps-spark" aria-hidden="true">✦</span>
+      <span>Anh Li chọn bài cho bạn</span>
+      <span class="ps-icon" aria-hidden="true">↗</span>
     </button>
     <button class="cf-nav cf-prev" id="cfPrev" type="button" aria-label="Album trước">‹</button>
     <div class="album-carousel" id="albumCarousel"><div class="album-track" id="albumGrid"></div></div>
@@ -4955,11 +5838,16 @@ body.theme-dandelion:not(.no-season) #contact::after { opacity:.48; }
   </div>
 
   <p class="work-method reveal">
-    Anh Li xuất phát từ <em>Thiết kế Nội thất</em> — nơi học cách nhìn không gian, tỷ lệ
-    và con người sống bên trong một ý tưởng. Rồi nghề mở ra nhiều cánh cửa: thiết kế,
-    client service, sáng tạo, sân khấu, sản xuất và âm nhạc. Có những con đường đã khép lại,
-    nhưng không lớp kinh nghiệm nào mất đi; tất cả cùng tích lũy thành cách Anh Li làm nghề hôm nay.
+    Mười sáu năm trước, Anh Li bước vào nghề từ <em>Thiết kế Nội thất</em>, học cách một đường nét
+    có thể thay đổi cảm giác của con người trong không gian. Từ đó, hành trình không đi theo đường thẳng:
+    account dạy cách lắng nghe, sáng tạo dạy cách đặt câu hỏi, sân khấu dạy về nhịp và khoảnh khắc,
+    còn sản xuất dạy cách đưa một ý tưởng đi qua giới hạn mà vẫn giữ được linh hồn.
   </p>
+
+  <blockquote class="career-highlight reveal">
+    <span>Dấu mốc không nằm ở một chức danh.</span>
+    <em>Nó nằm ở khoảnh khắc mình đủ nhiều lớp nghề để dẫn một ý tưởng từ trang giấy đến ký ức của người xem.</em>
+  </blockquote>
 
   <style>
     .work-method { max-width:760px; margin:0.5rem 0 2.5rem; font-size:1.02rem; line-height:1.85; color:rgba(243,236,221,0.7); }
@@ -4997,6 +5885,7 @@ body.theme-dandelion:not(.no-season) #contact::after { opacity:.48; }
   <div class="sec-label reveal">Visual Works</div>
   <h2 class="sec-h reveal">Videos · <em>Sạp Âm Nhạc</em></h2>
   <div class="sec-bar reveal"></div>
+  <p class="video-narrative reveal">Nếu phần trước là những căn phòng đã tạo nên người làm nghề, đây là lúc các căn phòng ấy bắt đầu chuyển động — qua sân khấu, âm nhạc, thương hiệu và những khoảnh khắc chỉ tồn tại một lần.</p>
   <div class="vid-stage reveal" id="vidStageWrap">
     <div class="vid-stage-frame" id="vidStage"><span class="vid-stage-ph">Đang tải…</span></div>
     <div class="vid-stage-cap" id="vidStageCap"></div>
@@ -5098,17 +5987,13 @@ body.theme-dandelion:not(.no-season) #contact::after { opacity:.48; }
   </div>
 </div>
 
-<!-- MOTION TOGGLE — giảm chuyển động cho máy dịu, đỡ nóng -->
-<button class="motion-toggle" id="motionToggle" type="button" aria-pressed="false" aria-label="Giảm chuyển động">
-  <span class="mt-ico" aria-hidden="true">✦</span>
-  <span class="mt-label">Giảm chuyển động</span>
-</button>
+<!-- MOTION TOGGLE lives in the header so it never covers page content. -->
 <style>
   .motion-toggle{
-    position:fixed; left:1.1rem; bottom:1.2rem; z-index:330;
+    position:static; left:auto; bottom:auto; z-index:auto; margin-left:auto;
     display:inline-flex; align-items:center; gap:0.5rem;
-    padding:0.55rem 0.95rem; border-radius:100px;
-    background:rgba(12,11,18,0.9);
+    padding:0.45rem 0.72rem; border-radius:100px;
+    background:rgba(12,22,12,0.52);
     border:0.5px solid var(--border2); color:var(--text2);
     font-family:inherit; font-size:0.72rem; letter-spacing:0.04em; cursor:pointer;
     transition:border-color 0.3s, color 0.3s, background 0.3s;
@@ -5117,6 +6002,15 @@ body.theme-dandelion:not(.no-season) #contact::after { opacity:.48; }
   .motion-toggle .mt-ico{ color:var(--amber); display:inline-block; }
   body:not(.no-motion) .motion-toggle .mt-ico{ animation:vinylSpin 9s linear infinite; }
   body.no-motion .motion-toggle{ border-color:var(--amber); color:var(--amber2); }
+  .motion-nudge{ display:none !important; }
+  @media(min-width:901px){
+    .nav-motion{ order:2; margin-left:1rem; margin-right:auto; flex:0 0 auto; }
+    .nav-links{ order:3; flex:0 0 auto; }
+  }
+  @media(max-width:700px){
+    .nav-motion{ margin-left:auto; margin-right:.55rem; padding:.42rem .55rem; }
+    .nav-motion .mt-label{ display:none; }
+  }
   /* nudge — câu quan tâm giọng Anh */
   .motion-nudge{
     position:fixed; left:1.1rem; bottom:3.7rem; z-index:330; max-width:248px;
@@ -5131,8 +6025,86 @@ body.theme-dandelion:not(.no-season) #contact::after { opacity:.48; }
   .motion-nudge b{ color:var(--amber2); font-weight:600; }
   /* khi player dính đáy (docked) trên mobile thì đẩy nút lên trên dock */
   @media(max-width:700px){
-    body.docked .motion-toggle{ bottom:calc(0.9rem + 80px); }
-    body.docked .motion-nudge{ bottom:calc(0.9rem + 80px + 2.5rem); }
+    body.docked .motion-toggle{ bottom:auto; }
+  }
+
+  /* Stable CSS-only equalizer: no canvas surface can expand into a yellow panel. */
+  #npViz,.nowplaying .np-viz{ display:none !important; width:0 !important; height:0 !important; }
+  .trow-num,.num-eq{ background:transparent !important; box-shadow:none !important; }
+  .num-eq{ width:18px; min-width:18px; overflow:hidden; isolation:isolate; }
+  .num-eq i{ display:block; flex:0 0 2px; max-width:2px; background:var(--amber2) !important; }
+
+  /* Give the progress line its own breathing room below metadata and controls. */
+  #nowplaying{ height:92px !important; min-height:92px !important; max-height:92px !important; padding-bottom:1.35rem !important; }
+  #nowplaying .player{
+    height:100%; box-sizing:border-box; padding-bottom:18px !important;
+    align-items:center; background:transparent !important;
+  }
+  #nowplaying .pc-time{
+    display:block !important; position:absolute; bottom:8px; z-index:4;
+    min-width:30px; color:rgba(225,236,173,.58); font-size:.58rem; line-height:1;
+  }
+  #music #nowplaying .player-controls .pc-time,
+  body > #nowplaying.is-docked .player-controls .pc-time{ display:block !important; }
+  #nowplaying #pcCur{ left:70px; text-align:left; }
+  #nowplaying #pcDur{ right:12px; text-align:right; }
+  #nowplaying .pc-bar{ left:106px !important; right:54px !important; bottom:8px !important; }
+  #nowplaying .pc-bar::before{
+    content:''; position:absolute; inset:-7px -4px; border-radius:999px;
+    background:rgba(168,198,105,.025); pointer-events:none;
+  }
+  @media(max-width:700px){
+    #nowplaying{ height:84px !important; min-height:84px !important; max-height:84px !important; padding-bottom:1.2rem !important; }
+    #nowplaying .player{ padding-bottom:16px !important; }
+    #nowplaying .pc-time{ bottom:7px; font-size:.54rem; }
+    #nowplaying #pcCur{ left:62px; }
+    #nowplaying #pcDur{ right:9px; }
+    #nowplaying .pc-bar{ left:94px !important; right:48px !important; bottom:7px !important; }
+  }
+
+  .heart-fx .dandelion-pop{
+    color:#e1ecad !important; filter:drop-shadow(0 0 7px rgba(225,236,173,.5));
+    animation:dandelionPop 2.2s cubic-bezier(.18,.72,.24,1) forwards !important;
+  }
+  @keyframes dandelionPop{
+    0%{opacity:0;transform:translate(-50%,-50%) scale(.2) rotate(0)}
+    16%{opacity:1}
+    100%{opacity:0;transform:translate(-50%,-50%) translate(var(--dx),-130px) scale(1.15) rotate(var(--rot))}
+  }
+  .career-highlight{
+    max-width:940px; margin:0 0 2.6rem; padding:1.2rem 1.35rem 1.25rem;
+    border-left:2px solid var(--amber2); background:linear-gradient(90deg,rgba(168,198,105,.08),transparent);
+    font-family:'Cormorant Garamond',serif; font-size:clamp(1.35rem,2.4vw,2rem); line-height:1.3;
+  }
+  .career-highlight span{ display:block; color:var(--text3); font-size:.72em; margin-bottom:.35rem; }
+  .career-highlight em{ color:var(--amber2); font-weight:300; }
+  .video-narrative{
+    max-width:720px; margin:.9rem 0 2rem; color:var(--text2); font-size:.92rem; line-height:1.75;
+  }
+  @media(min-width:901px) and (hover:hover){
+    body:not(.no-motion) #music .album.cf-focus:not(:hover) .album-cover{
+      animation:albumIdle3D 8.5s ease-in-out infinite;
+      transform-origin:50% 55%;
+    }
+    body:not(.no-motion) #music .album.cf-focus:hover .album-cover{ animation:none; }
+  }
+  @keyframes albumIdle3D{
+    0%,100%{ transform:perspective(760px) rotateX(1.2deg) rotateY(-2.5deg) translate3d(-2px,1px,10px) scale(1.025); }
+    35%{ transform:perspective(760px) rotateX(-2.2deg) rotateY(3.2deg) translate3d(3px,-3px,18px) scale(1.045); }
+    68%{ transform:perspective(760px) rotateX(2.5deg) rotateY(1deg) translate3d(1px,2px,14px) scale(1.035); }
+  }
+  body.no-motion #music .album-cover{ animation:none !important; transform:none !important; }
+  #music .album.is-playing-album .album-cover{
+    outline:1px solid rgba(238,245,190,.9); outline-offset:4px;
+    box-shadow:
+      0 30px 82px rgba(0,0,0,.52),
+      0 0 0 2px rgba(225,236,173,.82),
+      0 0 22px rgba(225,236,173,.42),
+      0 0 58px rgba(147,182,104,.34),
+      0 0 96px rgba(232,200,112,.16) !important;
+  }
+  #music .album.is-playing-album .album-badge{
+    box-shadow:0 0 18px rgba(225,236,173,.24);
   }
 </style>
 
@@ -5173,12 +6145,23 @@ body.theme-dandelion:not(.no-season) #contact::after { opacity:.48; }
       }
       return;
     }
-    portal.classList.add('is-opening');
-    setTimeout(()=>{
-      portal.classList.add('is-open');
-      try{ history.replaceState(null,'','#music'); }catch(e){}
-      if(opts.scroll!==false) music.scrollIntoView({behavior:'smooth',block:'start'});
-    },980);
+    function proceedOpen(){
+      portal.classList.add('is-opening');
+      setTimeout(()=>{
+        portal.classList.add('is-open');
+        try{ history.replaceState(null,'','#music'); }catch(e){}
+        if(opts.scroll!==false) music.scrollIntoView({behavior:'smooth',block:'start'});
+      },980);
+    }
+    const bloomVideo=document.getElementById('mtVideoBg');
+    if(bloomVideo && !document.body.classList.contains('no-motion')){
+      bloomVideo.preload='auto'; bloomVideo.load();
+      try{ bloomVideo.currentTime=0; }catch(e){}
+      const bp=bloomVideo.play(); if(bp&&bp.catch) bp.catch(()=>{});
+      setTimeout(proceedOpen,4000);            /* để hoa nở trọn ~4s trước khi cổng đóng lại */
+    } else {
+      proceedOpen();
+    }
   }
   enter.addEventListener('click',()=>unlock({animate:true,scroll:true}));
   document.querySelectorAll('a[href="#music"]').forEach(link=>{
@@ -5223,6 +6206,9 @@ const ARTISTS = [
   { name:'D\'Li', type:'Virtual Artist', kind:'virtual',
     img:'images/portraits/dli.jpg',
     desc:'Mảnh ghép song hành cùng Anh Li trong Cái Sạp nhạc — màu giọng trầm cá tính được nhân bản & tổng hợp riêng cho thế giới này. D\'Li trẻ hơn, liều hơn, nhận phần nổi loạn trong những bản phối mà Anh Li muốn đẩy đi xa.' },
+  { name:'[SEN]SE Da Band', type:'Virtual Music Group', kind:'virtual',
+    img:'images/portraits/sense-da-band.jpg',
+    desc:'Nhóm nhạc ảo bước ra từ cùng thế giới sáng tạo của Cái Sạp — nơi những cá tính, màu giọng và hình ảnh khác nhau cùng gặp nhau trên một tần số.' },
 ];
 
 const ALBUMS = [
@@ -5673,11 +6659,11 @@ const EVENTS = [
 ];
 
 const WORK = [
-  { yr:'2025 – nay', role:'Creative Services Producer', co:'Freelance · Independent', desc:'Dẫn dắt đội ngũ sáng tạo, chỉ đạo nghệ thuật và quản lý dự án đa lĩnh vực. Tích hợp AI workflow vào quy trình sản xuất sáng tạo.', badges:['Creative','AI','Management'] },
-  { yr:'Mar – Nov 2025', role:'Associate Producer', co:'2RES', desc:'Sản xuất nội dung sáng tạo, kịch bản biểu diễn và phối hợp vận hành đội ngũ đa môn.', badges:['Production','Performing Arts'] },
-  { yr:'2016 – 2021', role:'Director of Client Services', co:'White Lion Communication', desc:'Tích lũy năng lực dẫn dắt client service, kết nối thương hiệu với đội ngũ sáng tạo và đưa những dự án quy mô lớn từ kỳ vọng đến trải nghiệm thật.', badges:['Event','Brand','Leadership'] },
-  { yr:'2014 – 2016', role:'Creative Specialist', co:'Yan Live · Yan Group', desc:'Phối hợp bộ phận sáng tạo, multimedia và truyền thông doanh nghiệp. Triển khai các chiến dịch lớn tạo thương hiệu đáng nhớ.', badges:['Show','Music','Brand'] },
-  { yr:'2010 – 2014', role:'Account Supervisor', co:'Gamma Production · SquareGroup', desc:'Mang tư duy không gian từ nền tảng Thiết kế Nội thất bước vào agency; học cách biến brief thành ý tưởng, kết nối nhiều phòng ban và giữ một dự án đi đến cùng.', badges:['Creative','Design','Account'] },
+  { yr:'2025 – nay', role:'Creative Services Producer', co:'Freelance · Independent', desc:'Sau nhiều năm đi qua agency và sân khấu, mình chọn đứng ở giao điểm: dẫn dắt sáng tạo, chỉ đạo nghệ thuật, quản lý sản xuất và dùng AI như một chất liệu mới — không phải một lối tắt.', badges:['Creative','AI','Management'] },
+  { yr:'Mar – Nov 2025', role:'Associate Producer', co:'2RES', desc:'Một chặng ngắn nhưng đậm đặc: kịch bản biểu diễn, nội dung sáng tạo và những đội ngũ nhiều chuyên môn cùng phải thở theo một nhịp.', badges:['Production','Performing Arts'] },
+  { yr:'2016 – 2021', role:'Director of Client Services', co:'White Lion Communication', desc:'Năm năm học cách đứng giữa kỳ vọng thương hiệu và tham vọng sáng tạo — dịch hai ngôn ngữ ấy cho nhau, rồi giữ cả tập thể đi đến khoảnh khắc sân khấu sáng đèn.', badges:['Event','Brand','Leadership'] },
+  { yr:'2014 – 2016', role:'Creative Specialist', co:'Yan Live · Yan Group', desc:'Âm nhạc và sân khấu bước vào nghề từ đây. Mỗi chiến dịch là một lần học cách biến văn hóa đại chúng, hình ảnh và nhịp sống thành trải nghiệm có thể nhớ.', badges:['Show','Music','Brand'] },
+  { yr:'2010 – 2014', role:'Account Supervisor', co:'Gamma Production · SquareGroup', desc:'Từ nền tảng Thiết kế Nội thất bước vào agency, mình học bài học đầu tiên: một ý tưởng chỉ thật sự sống khi có người hiểu nó, tin nó và cùng đưa nó đi đến cuối.', badges:['Creative','Design','Account'] },
 ];
 
 const CONTACTS = [
@@ -6003,18 +6989,17 @@ function renderMusic(){
 }
 
 /* ===== FIVE-SLOT 3D LISTENING GALLERY ===== */
-let cfFocus=0, cfStartX=0, cfDeltaX=0, cfDragging=false, cfWheelSum=0,
+let cfFocus=Math.floor(Math.random()*Math.max(1,ALBUMS.length)), cfStartX=0, cfDeltaX=0, cfDragging=false, cfWheelSum=0,
     cfWheelArmed=true, cfWheelQuietTimer=0, cfMoving=false;
 const CF_POSITIONS=[-2,-1,0,1,2];
 function cfWrap(i){ const n=ALBUMS.length; return ((i%n)+n)%n; }
 function albumCardHTML(a,i,pos){
   const likeN=parseInt(localStorage.getItem('album_likes_'+a.id)||'0');
-  return `<div class="album cf-slot cf-pos-${pos<0?'m'+Math.abs(pos):'p'+pos}${pos===0?' cf-focus':''}" data-aidx="${i}" data-pos="${pos}" onclick="cfClick(${i})">
+  return `<div class="album cf-slot cf-pos-${pos<0?'m'+Math.abs(pos):'p'+pos}${pos===0?' cf-focus':''}${i===activeAlbum?' is-playing-album':''}" data-aidx="${i}" data-pos="${pos}" onclick="cfClick(${i})">
     <div class="album-cover">
       <img src="${coverUrl(a.cover)}" alt="${a.name}" loading="${pos===0?'eager':'lazy'}" decoding="async" oncontextmenu="return false" onerror="this.outerHTML='<div class=album-cover-blank>♪</div>'"/>
       <div class="cf-vinyl" aria-hidden="true"><i style="background-image:url('${coverUrl(a.cover)}')"></i></div>
-      <div class="album-play">${pos===0?'Mở bìa':'⌄'}</div>
-      <span class="album-badge">${a.count||0} bài</span>
+      <span class="album-badge">${i===activeAlbum?'● đang phát':(a.count||0)+' bài'}</span>
       <button class="album-like${likeN>0?' liked':''}" data-aidx="${i}" onclick="likeAlbum(${i},event)" aria-label="Thích">♥<span class="like-n">${likeN>0?' '+likeN:''}</span></button>
     </div>
     <div class="album-copy">
@@ -6124,8 +7109,8 @@ function initAlbumExplore(){
 }
 
 /* ===== ALBUM DRAWER (sổ danh sách bài) ===== */
-let curAlbum=-1, curTracks=[], activeIdx=-1;
-const TRACK_PAGE=10;
+let curAlbum=-1, curTracks=[], activeAlbum=-1, activeIdx=-1;
+const trackPageSize=()=>matchMedia('(max-width:900px),(pointer:coarse)').matches?6:8;
 
 function likeAlbum(i, e){
   if(e){ e.stopPropagation(); e.preventDefault(); }
@@ -6155,12 +7140,13 @@ function selectAlbum(i, silent){
   if(carousel) carousel.classList.add('paused');
 }
 
-function showAllTracks(i){
-  if(curAlbum===i) renderDrawer(ALBUMS[i], curTracks, true);
+function showMoreTracks(i, shown){
+  if(curAlbum===i) renderDrawer(ALBUMS[i],curTracks,shown+trackPageSize());
 }
 
-function renderDrawer(a, tracks, showAll){
+function renderDrawer(a, tracks, visibleCount){
   const drawer=document.getElementById('albumDrawer');
+  const reusableVinyl=document.querySelector('.np-vinyl');
   const idx=ALBUMS.indexOf(a);
   const likeN=parseInt(localStorage.getItem('album_likes_'+a.id)||'0');
   const descHtml=a.desc?`<div class="drawer-desc">${a.desc}</div>`:'';
@@ -6170,7 +7156,8 @@ function renderDrawer(a, tracks, showAll){
   } else if(tracks==='error'){
     listHtml=`<div class="drawer-more" style="padding:1.5rem 0">Chưa tải được danh sách bài — thử lại sau nhé.</div>`;
   } else {
-    const list=showAll?tracks:tracks.slice(0,TRACK_PAGE);
+    const limit=Math.min(visibleCount||trackPageSize(),tracks.length);
+    const list=tracks.slice(0,limit);
     const rows=list.map((t,j)=>`
       <div class="trow" data-idx="${j}" onclick="userPick(${j})">
         <div class="trow-num"><span class="num-d">${String(j+1).padStart(2,'0')}</span><span class="num-eq"><i></i><i></i><i></i></span></div>
@@ -6178,7 +7165,7 @@ function renderDrawer(a, tracks, showAll){
         <div class="trow-info"><div class="trow-name">${t.name}</div></div>
         <div class="trow-dur">${t.dur||''}</div>
       </div>`).join('');
-    const more=(!showAll&&tracks.length>TRACK_PAGE)?`<div class="drawer-more"><a href="javascript:void(0)" onclick="showAllTracks(${idx})">+ ${tracks.length-TRACK_PAGE} bài nữa</a></div>`:'';
+    const more=(limit<tracks.length)?`<div class="drawer-more"><button type="button" onclick="showMoreTracks(${idx},${limit})">Hiện thêm ${Math.min(trackPageSize(),tracks.length-limit)} bài ↓</button></div>`:'';
     listHtml=`<div class="tlist">${rows}</div>${more}`;
   }
   const loading=tracks===null||tracks===undefined;
@@ -6201,7 +7188,12 @@ function renderDrawer(a, tracks, showAll){
         ${listHtml}
       </div>
     </div>`;
-  if(curAlbum===idx&&activeIdx>=0) markPlaying(activeIdx);
+  drawer.style.setProperty('--drawer-cover',`url("${coverUrl(a.cover).replace(/"/g,'\\"')}")`);
+  // Reuse the original Three.js vinyl as centered playlist atmosphere.
+  // There is only one renderer/host; move it, never clone it.
+  const drawerInner=drawer.querySelector('.drawer-inner');
+  if(reusableVinyl&&drawerInner) drawerInner.appendChild(reusableVinyl);
+  if(curAlbum===activeAlbum&&curAlbum===idx&&activeIdx>=0) markPlaying(activeIdx);
 }
 function markPlaying(idx){
   document.querySelectorAll('.trow').forEach(r=>r.classList.toggle('playing', +r.dataset.idx===idx));
@@ -6233,8 +7225,8 @@ function aliCopyFb(url,done){
   catch(e){ toast('Link: '+url); }
 }
 function shareCurrentTrack(){
-  if(activeIdx>=0&&curAlbum>=0&&ALBUMS[curAlbum]){
-    var t=(ALBUMS[curAlbum].tracks||[])[activeIdx];
+  if(activeIdx>=0&&activeAlbum>=0&&ALBUMS[activeAlbum]){
+    var t=(ALBUMS[activeAlbum].tracks||[])[activeIdx];
     if(t){ aliCopy(aliShareBase()+'?bai='+aliSlug(t.name),'Đã chép link bài <em>'+t.name+'</em> ✦'); return; }
   }
   if(curAlbum>=0&&ALBUMS[curAlbum]){ shareAlbum(curAlbum); return; }
@@ -6270,7 +7262,7 @@ function applyDeepLink(){
       for(var ti=0;ti<ts.length;ti++){
         if(aliSlug(ts[ti].name)===bai){
           aliDeepDone=true; selectAlbum(ai,true);
-          if(typeof showAllTracks==='function') showAllTracks(ai); // render hết bài để có đúng hàng (kể cả bài >10)
+          renderDrawer(ALBUMS[ai],curTracks,ti+1); // render đủ tới đúng bài deep-link
           pendingTrack=ti;
           setTimeout(function(){ aliHighlightTrack(ti); }, 400);
           return;
@@ -6286,19 +7278,23 @@ function applyDeepLink(){
 }
 function fmt(s){ s=Math.floor(s||0); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); }
 
-function playAt(j){
-  if(!curTracks.length) return;
-  if(j<0) j=curTracks.length-1;
-  if(j>=curTracks.length) j=0;
-  if(j===activeIdx){ if(audio.paused) audio.play().catch(()=>{}); else audio.pause(); return; }
+function playAt(j, albumIndex){
+  const playAlbum=albumIndex===undefined?curAlbum:albumIndex;
+  const playTracks=(ALBUMS[playAlbum]&&ALBUMS[playAlbum].tracks)||[];
+  if(!playTracks.length) return;
+  if(j<0) j=playTracks.length-1;
+  if(j>=playTracks.length) j=0;
+  if(j===activeIdx&&playAlbum===activeAlbum){ if(audio.paused) audio.play().catch(()=>{}); else audio.pause(); return; }
+  activeAlbum=playAlbum;
   activeIdx=j;
   document.body.classList.add('has-track');
-  const t=curTracks[j];
-  markPlaying(j);
+  const t=playTracks[j];
+  document.querySelectorAll('.trow').forEach(r=>r.classList.remove('playing'));
+  if(curAlbum===activeAlbum) markPlaying(j);
+  cfRender();
   hideEmbed();
-  document.getElementById('npSuggest')?.classList.add('hide'); // đã có bài → ẩn gợi ý
 
-  const al=ALBUMS[curAlbum];
+  const al=ALBUMS[activeAlbum];
   const cover=document.getElementById('playerCover');
   // Ưu tiên bìa album Anh đã upload → bìa riêng của bài → cuối cùng mới fallback ảnh Suno
   const coverSrc = coverUrl(al&&al.cover) || coverUrl(t.cover) || artUrl(t.id);
@@ -6326,7 +7322,7 @@ function heartBurst(){
   const layer=document.createElement('div'); layer.className='heart-fx';
   layer.style.left=cx+'px'; layer.style.top=cy+'px';
   const cols=['#ff5e7e','#ff86a0','#ff4d6d','#ffd1dc','#ff9eb5'];
-  for(let i=0;i<8;i++){
+  for(let i=0;i<14;i++){
     const h=document.createElement('span'); h.textContent='♥';
     h.style.setProperty('--dx',(Math.random()*170-85).toFixed(0)+'px');
     h.style.setProperty('--rot',(Math.random()*50-25).toFixed(0)+'deg');
@@ -6334,6 +7330,15 @@ function heartBurst(){
     h.style.color=cols[i%cols.length];
     h.style.animationDelay=(Math.random()*0.28).toFixed(2)+'s';
     layer.appendChild(h);
+  }
+  for(let i=0;i<7;i++){
+    const seed=document.createElement('span'); seed.className='dandelion-pop';
+    seed.textContent=i%3===0?'✣':'·';
+    seed.style.setProperty('--dx',(Math.random()*240-120).toFixed(0)+'px');
+    seed.style.setProperty('--rot',(Math.random()*220-110).toFixed(0)+'deg');
+    seed.style.fontSize=(10+Math.random()*15).toFixed(0)+'px';
+    seed.style.animationDelay=(Math.random()*.35).toFixed(2)+'s';
+    layer.appendChild(seed);
   }
   document.body.appendChild(layer);
   setTimeout(()=>layer.remove(), 2000);
@@ -6351,37 +7356,45 @@ function pickRandomTrack(exAlbum, exIdx){
 }
 // Phát một bài ngẫu nhiên xuyên album → tự trỏ/cuộn & highlight đúng album chứa bài đó.
 function shufflePlay(){
-  const p=pickRandomTrack(curAlbum, activeIdx);
+  const p=pickRandomTrack(activeAlbum, activeIdx);
   if(!p) return;
   const [ai,ti]=p;
   if(ai!==curAlbum){
     selectAlbum(ai, true); // mở & highlight đúng album (silent)
-    activeIdx=-1;          // đổi album → ép playAt phát mới (kể cả khi trùng chỉ số bài)
   }
-  playAt(ti);
+  playAt(ti,ai);
+}
+// Nút shuffle trong player chỉ đảo bài của album đang phát.
+function shuffleAlbumPlay(){
+  const ai=activeAlbum>=0?activeAlbum:curAlbum;
+  const tracks=(ALBUMS[ai]&&ALBUMS[ai].tracks)||[];
+  if(!tracks.length) return;
+  let ti=0;
+  if(tracks.length>1){ do{ ti=Math.floor(Math.random()*tracks.length); }while(ti===activeIdx); }
+  playAt(ti,ai);
 }
 function nextTrack(){
-  if(shuffleOn){ shufflePlay(); return; }   // hết bài → tự bốc bài kế xuyên album
-  if(!curTracks.length) return;
-  playAt(activeIdx<0?0:activeIdx+1);
+  if(shuffleOn){ shuffleAlbumPlay(); return; }
+  const ai=activeAlbum>=0?activeAlbum:curAlbum;
+  playAt(activeIdx<0?0:activeIdx+1,ai);
 }
-function prevTrack(){ playAt(activeIdx<0?0:activeIdx-1); }
+function prevTrack(){ playAt(activeIdx<0?0:activeIdx-1,activeAlbum>=0?activeAlbum:curAlbum); }
 function togglePlay(){
   if(activeIdx<0){ playAt(pendingTrack>=0?pendingTrack:0); pendingTrack=-1; return; }
   if(audio.paused) audio.play().catch(()=>{}); else audio.pause();
 }
 function toggleShuffle(){
   shuffleOn=!shuffleOn;
-  const btn=document.getElementById('pcShuffle');
-  if(btn){
+  [document.getElementById('pcShuffle')].forEach(btn=>{
+    if(!btn) return;
     btn.classList.toggle('on', shuffleOn);
     btn.style.color=shuffleOn?'var(--amber)':'';
     btn.style.opacity=shuffleOn?'1':'0.5';
-    btn.title=shuffleOn?'Đang phát ngẫu nhiên — bấm để nghe tuần tự trong album':'Phát ngẫu nhiên';
-  }
-  // Bật shuffle = bốc & phát ngay một bài ngẫu nhiên (cho người khó chọn bài).
+    btn.title=shuffleOn?'Đang đảo bài trong album này — bấm để nghe tuần tự':'Phát ngẫu nhiên trong album';
+  });
+  // Bật shuffle = phát ngẫu nhiên trong chính album đang nghe.
   // Tắt shuffle = giữ nguyên bài đang nghe, các bài kế sẽ phát tuần tự trong album.
-  if(shuffleOn) shufflePlay();
+  if(shuffleOn) shuffleAlbumPlay();
 }
 audio.addEventListener('play', ()=>{
   isPlaying=true;
@@ -6403,7 +7416,10 @@ audio.addEventListener('loadedmetadata', ()=>{
   if(audio.duration) document.getElementById('pcDur').textContent=fmt(audio.duration);
 });
 // If the direct stream is blocked, fall back to Suno's embed player for that track
-audio.addEventListener('error', ()=>{ if(activeIdx>=0 && curTracks[activeIdx]) showEmbed(curTracks[activeIdx].id); });
+audio.addEventListener('error', ()=>{
+  const ts=(ALBUMS[activeAlbum]&&ALBUMS[activeAlbum].tracks)||[];
+  if(activeIdx>=0&&ts[activeIdx]) showEmbed(ts[activeIdx].id);
+});
 function showEmbed(id){
   const w=document.getElementById('trackEmbed');
   if(!w) return;
@@ -6569,11 +7585,11 @@ function renderWork(){
   const el=document.getElementById('workList');
   const career=[...WORK].reverse();
   const rooms=[
-    {word:'Không gian',title:'Cánh cửa của Không gian',thought:'Mọi thứ bắt đầu từ một bản vẽ — và câu hỏi con người sẽ sống thế nào bên trong nó.'},
-    {word:'Ý tưởng',title:'Cánh cửa của Ý tưởng',thought:'Một ý tưởng đẹp chưa đủ. Nó phải đi được qua brief, giới hạn và rất nhiều con người.'},
-    {word:'Sân khấu',title:'Cánh cửa của Sân khấu',thought:'Không gian bắt đầu có nhịp, ánh sáng, âm thanh — và một khoảnh khắc chỉ xảy ra đúng một lần.'},
-    {word:'Dẫn dắt',title:'Cánh cửa của Dẫn dắt',thought:'Không đứng ở trung tâm. Chỉ giữ cho những quỹ đạo rất khác nhau không rơi khỏi nhau.'},
-    {word:'Tự do',title:'Cánh cửa tự mình mở',thought:'Những lớp nghề cũ gặp lại nhau trong âm nhạc, hình ảnh và một thế giới mang tên riêng.'}
+    {word:'Không gian',title:'Nơi đường nét dạy mình quan sát',thought:'Mọi thứ bắt đầu từ một bản vẽ — và câu hỏi con người sẽ cảm thấy gì khi bước vào bên trong.'},
+    {word:'Ý tưởng',title:'Nơi ý tưởng học cách sống sót',thought:'Một ý tưởng đẹp chưa đủ; nó phải đi qua brief, giới hạn và rất nhiều con người mà không đánh mất linh hồn.'},
+    {word:'Sân khấu',title:'Nơi khoảnh khắc chỉ đến một lần',thought:'Ánh sáng bật lên, âm thanh bắt đầu, và hàng nghìn chi tiết phải cùng đúng vào một giây không thể làm lại.'},
+    {word:'Dẫn dắt',title:'Nơi mình học cách đứng giữa',thought:'Không cần đứng ở trung tâm — chỉ cần giữ cho những quỹ đạo rất khác nhau cùng đi về một hướng.'},
+    {word:'Tự do',title:'Nơi những lớp nghề gặp lại nhau',thought:'Âm nhạc, hình ảnh, công nghệ và sản xuất cuối cùng trở về chung trong một thế giới mang tên riêng.'}
   ];
   career.forEach((w,i)=>{
     const room=rooms[i];
@@ -6621,7 +7637,7 @@ function renderVideos(){
   if(!grid) return;
   if(!VIDEOS.length){ loadYT(); return; }
   if(status) status.style.display='none';
-  var VID_INIT=8;
+  var VID_INIT=matchMedia('(max-width:700px)').matches?4:8;
   grid.innerHTML=VIDEOS.map(function(v,i){
     var safe=(v.title||'').replace(/"/g,'');
     var thumb = v.fb
@@ -6792,7 +7808,7 @@ document.getElementById('pcShare')?.addEventListener('click', shareCurrentTrack)
 (()=>{ const b=document.getElementById('pcShuffle'); if(b) b.style.opacity='0.5'; })();
 // Gợi ý "bốc cho tôi một bài" — bật shuffle + phát ngay một bài ngẫu nhiên
 document.getElementById('npSuggest')?.addEventListener('click', ()=>{
-  if(!shuffleOn) toggleShuffle(); else shufflePlay();
+  shufflePlay();
 });
 renderContacts();
 renderVideos();
@@ -7401,7 +8417,7 @@ function toast(msg){
 (function heroQuote(){
   const q=document.querySelector('.hero-quote');
   if(!q) return;
-  q.innerHTML='"Tử tế. Tinh tế.<br/>Tạo giá trị thật.<br/>Đó là cách Anh Li làm nghề."';
+  q.innerHTML='“Chào bạn, mình là Anh Li.<br/>Đây là khu vườn của những điều mình đã làm,<br/>đã nghe — và vẫn đang trở thành.”';
 })();
 
 /* ── 3 · PARALLAX + TILT (một vòng rAF duy nhất) ───────── */
@@ -7485,15 +8501,17 @@ function applyFx(){
 if(HOVER && !REDUCED){
   let tEl=null;
   document.addEventListener('pointerover', e=>{
+    if(document.body.classList.contains('no-motion')) return;
     const c=e.target.closest ? e.target.closest('.album-cover') : null;
     if(c) tEl=c;
   });
   document.addEventListener('pointermove', e=>{
     if(!tEl) return;
+    if(document.body.classList.contains('no-motion')){ tEl.style.transform=''; tEl=null; return; }
     const r=tEl.getBoundingClientRect();
     const x=(e.clientX-r.left)/r.width-0.5, y=(e.clientY-r.top)/r.height-0.5;
     // magnetic zoom: bìa phóng to & trượt nhẹ về phía con trỏ
-    tEl.style.transform=`perspective(680px) rotateX(${(-y*8).toFixed(2)}deg) rotateY(${(x*10).toFixed(2)}deg) translate3d(${(x*14).toFixed(1)}px, ${(y*11).toFixed(1)}px, 30px) scale(1.08)`;
+    tEl.style.transform=`perspective(720px) rotateX(${(-y*10).toFixed(2)}deg) rotateY(${(x*13).toFixed(2)}deg) translate3d(${(x*18).toFixed(1)}px, ${(y*14).toFixed(1)}px, 38px) scale(1.14)`;
   }, {passive:true});
   document.addEventListener('pointerout', e=>{
     const c=e.target.closest ? e.target.closest('.album-cover') : null;
@@ -7514,58 +8532,33 @@ function syncTrackUI(){
   const img=$('#playerCover img');
   const art=img ? img.src : '';
   if(npVinyl && art) npVinyl.style.backgroundImage=`url('${art}')`;
-  const t=$('#playerTitle'), s=$('#playerSub');
-  const vt=$('#vdTitle'), vs=$('#vdSub'), va=$('#vdArt');
-  if(vt && t) vt.textContent=t.textContent;
-  if(vs && s) vs.textContent=s.textContent;
-  if(va && art) va.src=art;
 }
 if(sw) sw.addEventListener('click', ()=>{ try{ togglePlay(); }catch(e){} });
 
-/* ── 6 · VINYL DOCK — trình phát dính đáy ──────────────── */
-const dock=el(`<div class="vinyl-dock" role="region" aria-label="Đang phát">
-    <button class="vd-disc" id="vdDisc" aria-label="Phát / dừng"><img id="vdArt" alt=""/><i class="vd-hole"></i></button>
-    <div class="vd-info" id="vdInfo" title="Về khu nghe nhạc">
-      <div class="vd-title" id="vdTitle">—</div>
-      <div class="vd-sub" id="vdSub">Cái Sạp nhạc</div>
-    </div>
-    <div class="vd-ctrl">
-      <button class="vd-btn" id="vdPrev" aria-label="Bài trước">⏮</button>
-      <button class="vd-btn vd-play" id="vdPlay" aria-label="Phát / dừng">▶</button>
-      <button class="vd-btn" id="vdNext" aria-label="Bài sau">⏭</button>
-    </div>
-    <div class="vd-bar" id="vdBar"><i id="vdFill"></i></div>
-  </div>`);
-document.body.appendChild(dock);
-$('#vdPrev').addEventListener('click', ()=>prevTrack());
-$('#vdNext').addEventListener('click', ()=>nextTrack());
-$('#vdPlay').addEventListener('click', ()=>togglePlay());
-$('#vdDisc').addEventListener('click', ()=>togglePlay());
-$('#vdInfo').addEventListener('click', ()=>{
-  if(!np) return;
-  const y=np.getBoundingClientRect().top + scrollY - 110;
-  scrollTo({top:y, behavior:'smooth'});
-});
-$('#vdBar').addEventListener('click', e=>{
-  const r=e.currentTarget.getBoundingClientRect();
-  if(audio.duration) audio.currentTime=((e.clientX-r.left)/r.width)*audio.duration;
-});
+/* ── 6 · ONE PLAYER — inline trong album, fixed khi rời sân khấu ── */
 let npInView=true;
-if(np){
-  new IntersectionObserver(es=>{ npInView=es[0].isIntersecting; updateDock(); }, {threshold:0.05}).observe(np);
+const playerHome=document.querySelector('#music .album-stage');
+const playerAnchor=document.createComment('nowplaying-home');
+if(np) np.before(playerAnchor);
+if(np&&playerHome){
+  new IntersectionObserver(es=>{ npInView=es[0].isIntersecting; updateDock(); }, {threshold:0.08}).observe(playerHome);
 }
 function updateDock(){
-  document.body.classList.toggle('docked', activeIdx>=0 && !npInView);
+  if(!np) return;
+  const shouldDock=activeIdx>=0&&!npInView;
+  document.body.classList.toggle('docked',shouldDock);
+  np.classList.toggle('is-docked',shouldDock);
+  if(shouldDock&&np.parentNode!==document.body){
+    document.body.appendChild(np);
+  }else if(!shouldDock&&playerAnchor.parentNode&&np.previousSibling!==playerAnchor){
+    playerAnchor.parentNode.insertBefore(np,playerAnchor.nextSibling);
+  }
 }
 
-/* audio events — đồng bộ mọi nơi */
-audio.addEventListener('play',  ()=>{ setPlayingUI(true); syncTrackUI(); updateDock(); const b=$('#vdPlay'); if(b) b.textContent='❚❚'; });
-audio.addEventListener('pause', ()=>{ setPlayingUI(false); const b=$('#vdPlay'); if(b) b.textContent='▶'; flattenBars(); });
+/* audio events — cùng một DOM nên không còn trạng thái player kép */
+audio.addEventListener('play',  ()=>{ setPlayingUI(true); syncTrackUI(); updateDock(); });
+audio.addEventListener('pause', ()=>{ setPlayingUI(false); flattenBars(); });
 audio.addEventListener('loadstart', ()=>{ syncTrackUI(); updateDock(); });
-audio.addEventListener('timeupdate', ()=>{
-  const d=audio.duration||0;
-  const f=$('#vdFill'); if(f) f.style.width=(d ? audio.currentTime/d*100 : 0)+'%';
-});
 setPlayingUI(false);
 
 /* ── 7 · EQUALIZER THEO NHẠC THẬT (Web Audio + fallback) ── */
@@ -8099,6 +9092,7 @@ if(MOBILE){
 
   function apply(r){
     b.classList.toggle('no-motion', r);
+    if(r) document.querySelectorAll('.album-cover').forEach(function(c){ c.style.transform=''; });
     var shaderOff = r || mobile;                    // mobile luôn tắt nền shader
     b.classList.toggle('no-shader', shaderOff);
     if(window.shaderSetPaused) window.shaderSetPaused(shaderOff); // tắt hẳn vòng lặp WebGL
@@ -8399,7 +9393,6 @@ if(MOBILE){
 (function(){
   const host=document.getElementById('vinyl3d');
   if(!host) return;
-  if(innerWidth<=1100) return;
   if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   let started=false;
   function boot(){
@@ -8549,6 +9542,9 @@ if(MOBILE){
     }
     function loop(){ if(!running) requestAnimationFrame(frame); }
     document.addEventListener('visibilitychange', ()=>{ if(!document.hidden && visible) loop(); });
+    new MutationObserver(()=>{
+      if(!document.body.classList.contains('no-motion')&&visible) loop();
+    }).observe(document.body,{attributes:true,attributeFilter:['class']});
     host.classList.add('on');
     loop();
   }
