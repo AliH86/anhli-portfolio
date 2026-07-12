@@ -1,5 +1,22 @@
 # Recap — anhli-portfolio (cập nhật 13/7/2026)
 
+## Oracle — 28 prompt Imagen cho khối Khí + Đất (13/7/2026)
+
+- Viết `ORACLE-ASSET-PROMPTS-AIR-EARTH.md`: 28 prompt tự nhiên (id 50-77,
+  14 Khí + 14 Đất), chia 4 batch ~7 ảnh/batch, cùng văn phong với
+  `ORACLE-ASSET-PROMPTS-MAJOR.md` và `ORACLE-ASSET-PROMPTS-FIRE-WATER.md`.
+- Dựng trực tiếp từ `visualMotif`/`coreStory` đã có trong
+  `GARDEN_ORACLE_PROFILES.suits.Swords`/`.Pentacles`. Ánh sáng đặc trưng
+  nguyên tố giữ nhất quán xuyên suốt mỗi khối: Khí = "pale silver-blue
+  wind-trail lighting with warm amber accents" (đã dùng cho các lá Air trong
+  Major); Đất = "deep mossy green-brown undertones with warm amber lighting"
+  (đã dùng cho các lá Earth trong Major).
+- Đây là 2 khối prompt cuối cùng — cùng với 22 Major + 28 Lửa/Nước đã có,
+  tổng cộng đủ 78/78 prompt ảnh cho toàn bộ Garden Oracle.
+- Việc kế tiếp: Ali tạo ảnh (qua ChatGPT), gửi lại để soát trùng
+  silhouette/an toàn safe-zone, sau đó rename theo quy ước
+  `seed-{id}-{slug}-v01.png`.
+
 ## Oracle — hoàn tất core-story 14 Khí + 14 Đất, ĐỦ 78/78 hạt (13/7/2026)
 
 - **Khối Khí (Swords) hoàn tất 14/14** và **khối Đất (Pentacles) hoàn tất
