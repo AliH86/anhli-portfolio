@@ -1,5 +1,216 @@
 # Dandelion Garden Hero Handoff
 
+> **Ghi chú (12/7/2026):** file này giữ lại làm tham chiếu kỹ thuật cho các phiên
+> hero/dandelion trước đó (toạ độ đĩa sống, video nền, v.v. — vẫn đúng, còn dùng
+> được). Từ nay theo `AGENT-RULES.md` §6, mọi cập nhật/log phiên mới đi vào
+> `recap-anhli-portfolio.md` (nguồn sự thật chung), **không** thêm mục mới vào
+> file này nữa để tránh rải rác nhiều bản recap.
+
+## 2026-07-05 — LIVE PUSHED: dandelion hero video + music background polish
+
+**Trạng thái cuối phiên**: ĐÃ PUSH LIVE lên `origin/main`.
+- Commit live: `0ead184 Update dandelion hero and music section`
+- Trước khi push có remote mới hơn local 4 commit (`622300d` là remote tip lúc
+  fetch), đã `git fetch`, stash tạm `DANDELION_HERO_HANDOFF.md` + `tweaks-app.jsx`,
+  rebase commit lên `origin/main`, pop stash lại, rồi push thành công.
+- Staged/pushed đúng 8 file live: `index.html`, `experience.js`,
+  `images/lab/d01.jpg`, `images/portraits/dli.jpg`,
+  `images/hero/dandelion-garden/bg-meadow.webp`,
+  `images/hero/dandelion-garden/plane-far.webp`,
+  `images/hero/dandelion-garden/plane-mid.webp`,
+  `videos/hero-dandelion-loop.mp4`.
+- KHÔNG push scratch/demo/handoff/command files. Sau push vẫn còn local modified:
+  `DANDELION_HERO_HANDOFF.md`, `tweaks-app.jsx`; và untracked scratch/demo như
+  `hero-vinyl-live.html`, `hero-video-garden-preview.html`, `videos/hero-dandelion.mp4`,
+  `videos/hero-dandelion-1080.mp4`, các `.command`, v.v.
+
+**Hero hiện tại**:
+- Hero dùng `videos/hero-dandelion-loop.mp4` (loop bake 15MB) qua `#hero-video-js`.
+- Overlay đĩa sống cuối cùng trong `#hero-disc-live-js`:
+  `const F={ W:1920, H:1080, cx:1540, cy:696, r:178 };`
+  Ali chốt: size ổn, sau đó báo lệch trái nên chỉ đẩy `cx` từ 1512 lên 1540,
+  giữ `cy=696`, `r=178`.
+- Có debug/local-only query cho việc canh lần sau:
+  `?pauseHero=1&debugDisc=1` sẽ pause hero ở frame 0 và vẽ guide vòng/tâm
+  `.hgv-disc`. Query thường không bật guide và hero video play bình thường.
+- Nav đã được tăng contrast vì chữ menu bị chìm trên vùng trời sáng: nav có
+  gradient tối nhẹ + text-shadow; logo/link chuyển sang amber sáng hơn.
+
+**Music section hiện tại**:
+- `#music` có video nền mới Ali đưa:
+  `https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4`
+- Đã bỏ scroll-scrub. Video nền giờ `autoplay` bằng JS khi vào gần section,
+  `loop`, pause khi rời viewport/hidden, fade-in bằng `.music-scroll-bg.ready`.
+- Vì nền xanh dương quá bật, đã hạ tone bằng CSS:
+  `.music-scroll-video { filter:saturate(0.74) contrast(1.02) brightness(0.78) sepia(0.12) hue-rotate(16deg); opacity:0.78; }`
+  và thêm gradient ấm/tối trong `.music-scroll-bg::before`.
+- Album gate bị background giành spotlight nên đã tăng blur/tối:
+  `.music-gate` dùng `blur(18px) saturate(0.9)` và background gần đen hơn;
+  nội dung phía sau gate filter `blur(14px) brightness(0.34) saturate(0.48)`.
+
+**Validation cuối phiên**:
+- JS syntax check sạch bằng bundled Node.
+- Browser local check: hero video play, music background `paused:false`, `loop:true`,
+  console không error/warn.
+- Live URL vẫn là GitHub Pages repo hiện tại; GitHub Pages có thể cần vài phút/cache.
+
+## 2026-07-05 — WRAP UP phiên motion/video. Việc kế tiếp cho session mới
+
+**Trạng thái**: mọi thứ LOCAL, CHƯA COMMIT/PUSH, Ali đã duyệt các phần chính
+(hero video + đĩa sống đã "done" sau khi cân lại size). Chờ Ali chốt push.
+
+**Chốt cuối phiên này**: đĩa sống thu về r=174 (94% của tiếp tuyến đo được —
+bìa nằm lọt trong vành đĩa như nhãn thật, bản r=185 Ali chê to). Verify ở
+viewport 1440: width 309→291px, tâm không đổi.
+
+**VIỆC KẾ TIẾP Ali đặt cho session mới**: "ghép cái phần chỗ cái gốc cây có
+cái đĩa vinyl" — composite cảnh GỐC CÂY RÊU có ĐĨA VINYL nằm trên (tham khảo
+aesthetic footage quietpress: đĩa than trên gốc cây phủ rêu giữa thiên nhiên,
+cánh hoa bay). Ngữ cảnh sẵn có cho việc này:
+- Footage tham khảo: video CloudFront trong `quietpress/src/components/
+  BoomerangVideoBg.tsx` và `hero-vinyl-live.html` (bản cũ trước khi thay bằng
+  video của Ali) — chính là cảnh gốc cây + vinyl.
+- Blender đang có trên máy, pipeline headless đã dựng sẵn (bake_loop.py trong
+  scratchpad phiên trước — nhớ API Blender 5: se.strips, media_type='VIDEO').
+  Addon MCP chạy tốt qua socket 127.0.0.1:9876 (MCP bridge của app hay treo —
+  nói chuyện thẳng bằng python socket).
+- PSD gốc + asset cutout trong ~/Downloads/anhli_dli_web_assets_4k_cutout/.
+- Chưa rõ Ali muốn ghép vào ĐÂU (hero? section mới? video mới?) — HỎI TRƯỚC.
+
+**Việc còn treo khác**: (a) hỏi Ali rồi dọn videos/hero-dandelion.mp4 44MB 4K
++ hero-dandelion-1080.mp4 (bản chưa loop) trước khi push — GH Pages không nên
+chứa file 4K; (b) tối ưu video hơn nữa nếu cần (15MB → có thể re-render bitrate
+thấp); (c) quietpress/ + hero-vinyl-live.html là demo/scratch, không thuộc site.
+
+## 2026-07-05 (sáng) — Fix đĩa sống trôi góc + giãn nhịp thay bìa. LOCAL, CHƯA PUSH
+
+Ali báo 2 bug từ bản 04/07: (a) đĩa hero thay bìa liên tục, (b) đĩa trôi lệch
+lên góc trên-trái. Nguyên nhân (b) và một phần (a) là MỘT bug: `.hgv-disc-face`
+mượn keyframe `hgaDiscSpin` của đĩa tĩnh cũ — keyframe đó có
+`translate(-50%,-50%)` (đĩa cũ cần để canh giữa), còn face mới dùng inset:0.
+Keyframe chỉ có `to` nên from = identity → animation NỘI SUY translate từ
+0→-50% suốt 36s: mặt đĩa bò dần lên góc trên-trái rồi giật về, lặp mãi.
+Fix: keyframe riêng `hgvSpin` (rotate thuần), và chuyển nhịp "nuốt" `hgvGulp`
+lên wrapper `.hgv-disc` (nếu để trên face sẽ giành thuộc tính transform với
+hgvSpin làm vòng xoay khựng). Auto-cycle giãn 14s→35s (Ali chê dồn dập).
+Đã verify bằng Web Animations API (tua currentTime=9s → rotate đúng 90°,
+translate luôn (0,0)); tab preview document.hidden nên đồng hồ animation bị
+đóng băng — đừng tưởng nhầm là animation hỏng.
+Launch config đổi port 8753→8754 (8753 bị server phiên chat cũ giữ).
+
+## 2026-07-05 — Loop bake bằng Blender headless + "ĐĨA SỐNG" (bìa bay vào đĩa video). LOCAL, CHƯA COMMIT/PUSH
+
+1. **Hết giật mây ở điểm nối video**: bake crossfade 1.5s đuôi→đầu bằng Blender
+   HEADLESS (`/Applications/Blender.app/Contents/MacOS/Blender -b --factory-startup
+   -P bake_loop.py` — không đụng session Blender đang mở). Blender 5.1 API mới:
+   `se.strips` (không phải sequences), `new_effect(name,type,channel,frame_start,
+   length,input1,input2)`, và PHẢI `image_settings.media_type='VIDEO'` trước khi
+   set `file_format='FFMPEG'`. Output `videos/hero-dandelion-loop.mp4` (8.5s,
+   điểm nối = 2 frame nguồn liên tiếp → liền mạch tuyệt đối). #hero-video-js
+   đã trỏ sang file này.
+2. **ĐĨA SỐNG (#hgvDisc + #hero-disc-live-js)**: overlay bìa album lên mặt đĩa
+   trong video. Toạ độ đo từ frame render: tâm (1540,700) r185 trong khung
+   1920×1080 — camera khoá cứng (kiểm bằng cross-correlation frame 1/127/255:
+   lệch 0,0). JS quy đổi theo object-fit:cover + scale 1.05, re-place khi resize.
+   Đáy overlay fade (mask 78%→96%) vì cỏ video che rim dưới. Album props giữ
+   lại trên video (bỏ khỏi rule ẩn video-on), prop bấm được (pointer-events chỉ
+   trên .hga-prop, KHÔNG trên stage inset:0 kẻo chặn click nút). Bìa bay vào
+   đĩa: click prop hoặc auto-cycle 14s (bỏ qua khi hidden/no-motion/video ngủ).
+   `--cover` nằm inline trên .hga-prop (không phải .hga-prop-cover).
+   Nếu video đổi bố cục → đo lại 4 tiếp tuyến (script dump frame trong scratchpad
+   transcript 05/07).
+3. **Videos folder**: dùng hero-dandelion-loop.mp4 (15MB). hero-dandelion.mp4
+   (44MB 4K gốc) + hero-dandelion-1080.mp4 (13.7MB, bản chưa loop) — CÂN NHẮC
+   không push file 4K lên GH Pages (nặng repo); hỏi Ali trước khi xoá.
+
+## 2026-07-04 (khuya) — VIDEO VÀO HERO THẬT của index.html. LOCAL, CHƯA COMMIT/PUSH
+
+Ali hỏi "sao không trực tiếp ở hero portfolio" → tích hợp thẳng vào #home:
+- `<video id="heroVideo">` (z2, sau poster-atmosphere, DƯỚI tint/vignette để
+  chữ dễ đọc, dưới hạt heroWind z8). `preload="none"` + JS gán src rồi PHẢI
+  gọi `video.load()` (bug đã gặp: gán src suông với preload=none thì trình
+  duyệt không tải gì, canplay không bắn).
+- `.video-on` trên .poster-hero khi canplay → `.hga-master-scene` +
+  `.hero-album-stage` ẩn (opacity+visibility); cảnh tĩnh 2.5D = poster/fallback
+  trong lúc tải và cho mobile/no-motion/reduced/saveData (các guard trong
+  #hero-video-js; mobile ≤620px không tải video 13.7MB).
+- Tự ngủ khi cuộn quá innerHeight*1.2 (rect check không IO), watchdog debounce
+  800ms chống Chrome "save power" pause, MutationObserver theo nút no-motion.
+- Preview-env note: guard chạy lúc load — tab preview mở viewport hẹp rồi mới
+  resize sẽ bị guard chặn (reload sau khi resize là được). Trình duyệt thật OK.
+- `hero-vinyl-live.html` giờ chỉ là scratch/reference phong cách quietpress
+  (không còn là đường chính); có thể xoá khi Ali không cần nữa.
+- Blender: addon CHẠY TỐT (socket 127.0.0.1:9876 trả lời get_scene_info),
+  KHÔNG cần cài lại — chỉ MCP bridge của app treo (nó giữ connection nhưng
+  tool call timeout). Khi cần Blender: nói chuyện THẲNG qua socket bằng
+  python (json {"type":..., "params":...}), đừng chờ MCP tool.
+
+## 2026-07-04 (tối) — Video hero của Ali + vinyl 3D chuyển vào player. LOCAL, CHƯA COMMIT/PUSH
+
+1. **Ali render video cảnh dandelion** (Downloads/anhli-dandelion-vid2.mp4, 10s 4K
+   44.5MB) — đã copy vào `videos/hero-dandelion.mp4` và transcode 1080p bằng
+   `avconvert` (macOS built-in, KHÔNG có ffmpeg/node-brew trên máy) →
+   `videos/hero-dandelion-1080.mp4` (13.7MB). `hero-vinyl-live.html` (trang
+   preview riêng, không đụng index.html) đang dùng bản 1080p, loop thẳng
+   (video ≥9s hoặc ≥2560px thì bỏ boomerang — bắt frame 4K/10s ngốn ~600MB RAM).
+   Có watchdog debounce 800ms play lại khi bị pause ngoài ý muốn.
+   Style trang này = ngôn ngữ quietpress (glass/fade-up/widget) + brand Anh Li.
+   TODO trước khi ship thật: 13.7MB vẫn hơi nặng (cân nhắc Ali re-render 1080p
+   bitrate thấp từ Blender, hoặc thêm poster + lazy phát khi vào viewport).
+2. **Vinyl 3D "dung hoà" vào player** (Ali yêu cầu): #vinyl3d chuyển từ đầu
+   #music vào TRONG `.np-vinyl` của #nowplaying, thế chỗ `.vinyl-disc` CSS
+   phẳng qua `:has(.vinyl3d.on)` (không :has → canvas phủ lên trên, vẫn ổn).
+   Texture bám bài ĐANG PHÁT (poll #playerCover img mỗi 45 frame, fallback
+   album promote), camera kéo gần (0,1.35,3.7), tilt/bob giảm cho hợp box nhỏ.
+3. **Chống đói IntersectionObserver**: preview tab bị che khuất thì IO không
+   fire (đã xác minh: cả observe(body) cũng câm), Chrome còn pause video-only
+   media ("save power") và screenshot đen — TOÀN BỘ là quirk môi trường preview,
+   trình duyệt thật không bị. Dù vậy đã gia cố cho user thật: bootIO vinyl3d
+   thêm fallback rect-check khi scroll; revealInView() giờ nhặt cả
+   `.g-item:not(.gin)` (không để gallery kẹt vô hình nếu IO bị throttle).
+4. **Blender MCP timed out** dù Ali đã mở app — addon server chưa start
+   (cần bật trong sidebar addon > Start MCP server, port 9876). Việc dựng
+   jewel case glTF thật vẫn treo chờ kết nối.
+
+## 2026-07-04 — Hero tách 2 tầng parallax (2.5D) + motion/perf pass toàn trang. LOCAL, CHƯA COMMIT/PUSH
+
+Ali yêu cầu nâng cấp "3D motion, art, tối ưu" (cảm hứng motionsites.ai). Bốn việc, tất cả local:
+
+1. **Hero 2.5D**: master scene tách thành 2 plane cùng khung 2600×1462, export lại
+   từ chính PSD nguồn bằng psd-tools (pipeline giống hệt bản master đang live, diff
+   trung bình 0.26/255):
+   - `plane-far.webp` = layer Background (đồng cỏ NGUYÊN VẸN phía sau case — parallax
+     không lộ lỗ trống), scale:1.018 gốc bottom để có biên dịch chuyển.
+   - `plane-mid.webp` = case + 2 nhân vật + cỏ chân case, alpha thật, KHÔNG scale
+     (giữ đúng tỉ lệ Ali đã chốt). `.hga-feature-disc` chuyển vào TRONG plane-mid
+     → đĩa và case không bao giờ lệch nhau được nữa.
+   - JS: chỉ thêm ĐỘ LỆCH giữa tầng trong applyFx (bản inline #experience-js-inline
+     là bản chạy thật; file experience.js rời chỉ là bản nguồn — đã sync cả hai).
+     Cả cụm #heroGardenScene vẫn được dịch chung như cũ.
+   - Mobile (≤620px): giữ nguyên ảnh phẳng master.jpg + mask như bản live, plane
+     chỉ tắt background-image (KHÔNG display:none vì đĩa nằm trong plane-mid).
+   - Nếu regenerate master: chạy lại script export plane (xem transcript 04/07)
+     và đo lại đĩa như quy trình cũ.
+2. **Perf**: preload hero theo media query (desktop 2 webp / mobile jpg),
+   bg-meadow.jpg→webp (2 ref: --dandelion-bg + theme heroBg), nén tại chỗ
+   images/lab/d01.jpg (1.35MB→254KB) + portraits/dli.jpg (1.29MB→101KB),
+   lazy-load 4 ảnh ps-card + momo-qr. Lưu ý: #shaderHost không tồn tại trong DOM
+   → shader nebula đang ngủ, không phải nguồn nóng máy.
+3. **Scroll storytelling**: gallery gRise đổi sang `paused` + IO thêm `.gin` khi
+   cuộn tới (armGallery() gọi SAU renderGallery() trong INIT — items render bằng JS);
+   thêm wipe clip-path vào keyframe; welcome tách reveal từng dòng d1/d3;
+   thanh scroll-progress amber trên cùng (#scrollProgress, update trong script chính).
+4. **Vinyl 3D three.js** (#vinyl3d trong #music): decor góc phải, lazy import
+   three@0.160 từ unpkg khi cuộn gần, desktop >1100px only, texture = cover album
+   promote (đọc window.PORTFOLIO_MUSIC + #home dataset), quay nhanh khi
+   body.playing, nghiêng theo con trỏ, CDN/WebGL lỗi → biến mất êm, section như cũ.
+   Ali chưa duyệt aesthetic khối này — hỏi trước khi push. Blender MCP lúc đó
+   không chạy; nếu Ali mở Blender có thể thay bằng asset glTF xịn hơn.
+
+Đã verify preview localhost: desktop 1816×867 + 1440×860, tablet 900×1180,
+mobile 390×844, console sạch, network đúng (desktop không tải master.jpg nữa).
+
+
 ## 2026-07-01 PART 6 — Pushed live
 
 Ali confirmed the visual and said to push. `finish-push.command` first failed:
