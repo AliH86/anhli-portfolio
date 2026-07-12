@@ -1,5 +1,36 @@
 # Recap — anhli-portfolio (cập nhật 12/7/2026, khuya)
 
+## Oracle — 22 Major hoàn tất core-story + hồ sơ nghĩa (12/7/2026, khuya)
+
+- Ali xem 5 ảnh mẫu (Imagen) → duyệt: 2 card (Lửa/Nước) có vùng sáng chạm safe
+  zone, nhưng Ali quyết xử lý bằng shadow/glow overlay ở lớp HTML UI thay vì
+  regenerate ảnh — không cần sửa prompt/ảnh ở bước này.
+- Ali chọn đi thẳng vào bước 5 của trình tự (`ORACLE-CONTENT-SYSTEM.md` §7):
+  viết đủ **văn bản** (không phải ảnh) cho 22 Major + 56 Minor. Đã hoàn tất
+  khối đầu tiên — **22/22 Major** — trong `garden-oracle-profiles.js`
+  (`GARDEN_ORACLE_PROFILES.majors`), mỗi lá đủ `coreStory`, `visualMotif`,
+  `profile.{domain, movement, storyStage, need, gift, risk, action}`.
+- Đã verify bằng script (node, không chỉ đọc mắt): domain của cả 22 Major khớp
+  100% với `MAJOR_DOMAIN` đã khoá trong `garden-oracle-synthesis.js` (0
+  mismatch); `tarot`/`openName`/`closedName`/`element` của cả 22 khớp 100%
+  với `GARDEN_ORACLE_CARDS` trong `garden-oracle-data.js` (0 mismatch).
+- 4 mẫu Minor cũ (Wands id24, Cups id43, Swords id55, Pentacles id70) giữ
+  nguyên trong `suitSamples`, đánh dấu rõ PENDING 1/14 — **chưa** viết đủ 56
+  Minor, đây là việc của 4 checkpoint kế tiếp (mỗi nguyên tố 14 hạt, một
+  commit riêng), đúng nguyên tắc không gộp cả Oracle vào một phiên.
+- storyStage cho Major dùng vocabulary riêng theo hành trình Fool's Journey
+  (activation, intuition, growth, structure, tradition, choice, drive,
+  composure, withdrawal, turning, reckoning, suspension, ending, balance,
+  entanglement, collapse, hope, uncertainty, joy, awakening), cố tình tái
+  dùng 'spark' (lá 0) và 'culmination' (lá 21) làm hai đầu nối với vocabulary
+  numerology của Minor. movement mở rộng thêm 7 giá trị mới so với 5 mẫu ban
+  đầu (listening, choosing, steering, turning, balancing, suspending,
+  entangling) — đều ghi rõ trong header file để 56 hạt Minor còn lại tái dùng
+  trước khi thêm mới.
+- Việc kế tiếp (checkpoint riêng, chưa làm): 14 Lửa, 14 Nước, 14 Khí, 14 Đất
+  theo cùng schema; sau đó mới tính nối `garden-oracle-profiles.js` vào engine
+  tổng hợp hoặc `index.html`.
+
 ## Oracle — schema câu chuyện lõi + hồ sơ nghĩa, 5 hạt mẫu (12/7/2026, khuya)
 
 - Bước 2 của trình tự triển khai trong `ORACLE-CONTENT-SYSTEM.md` §7: "Chốt

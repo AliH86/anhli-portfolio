@@ -1,21 +1,28 @@
-/* Garden Oracle — core-story & semantic-profile SCHEMA DRAFT (5-seed sample).
+/* Garden Oracle — core-story & semantic-profile data.
 
-   TRẠNG THÁI: DRAFT — chờ Ali duyệt trước khi mở rộng lên 78 hạt theo đợt
-   22 Major + 14 Lửa + 14 Nước + 14 Khí + 14 Đất (ORACLE-CONTENT-SYSTEM.md §7,
-   bước 2: "Chốt schema mới bằng 3–5 hạt mẫu; chưa viết cả 78 ngay").
+   TRẠNG THÁI THEO KHỐI (đúng trình tự "22 + 14 + 14 + 14 + 14" của
+   ORACLE-CONTENT-SYSTEM.md §7 bước 5, mỗi khối một commit riêng để review):
+     - majors (22 Major)              → ĐỦ 22/22, khối này đã hoàn tất.
+     - suitSamples.Wands  (Lửa, 14)    → mới 1/14 (mẫu schema ban đầu).
+     - suitSamples.Cups   (Nước, 14)   → mới 1/14 (mẫu schema ban đầu).
+     - suitSamples.Swords (Khí, 14)    → mới 1/14 (mẫu schema ban đầu).
+     - suitSamples.Pentacles (Đất, 14) → mới 1/14 (mẫu schema ban đầu).
+   Bốn khối Minor còn lại (13 hạt/nguyên tố) là công việc của các checkpoint
+   kế tiếp, mỗi khối một phiên/commit riêng — không gộp chung theo đúng
+   nguyên tắc "không gộp toàn bộ Oracle vào một phiên hoặc một commit lớn".
 
    File này KHÔNG được nạp vào index.html ở bước này và không đụng tới
-   garden-oracle-data.js hay garden-oracle-synthesis.js — đúng ranh giới ba
-   lớp file đã chốt trong AGENT-RULES.md §7 / ORACLE-CONTENT-SYSTEM.md §6.
-
-   Phạm vi 5 mẫu: 1 Major + 1 hạt mỗi nguyên tố Lửa/Nước/Khí/Đất. Cố tình
-   không chọn toàn lá Ace để test schema trên nhiều rank khác nhau (Ace, 3, 6,
-   7, 8) — xem rationale trong recap-anhli-portfolio.md, mục Oracle hôm nay.
+   garden-oracle-data.js hay garden-oracle-synthesis.js. `domain` của 22 Major
+   tái dùng CHÍNH XÁC mapping đã khoá trong garden-oracle-synthesis.js
+   (MAJOR_DOMAIN) — không tự suy diễn lại.
 
    ------------------------------------------------------------------------
    SCHEMA — mỗi bản ghi hạt gồm:
 
    id           — number, khớp id trong GARDEN_ORACLE_CARDS (garden-oracle-data.js).
+   tarot        — tên Tarot nội bộ, chỉ để đối chiếu khi review; KHÔNG phải
+                  field mới của schema, KHÔNG bao giờ hiển thị UI (garden-oracle-data.js
+                  vẫn là nguồn sự thật cho field `tarot`).
    openName     — tên Nở, tham chiếu ý nghĩa; KHÔNG render vào ảnh.
    closedName   — tên Khép, tham chiếu ý nghĩa; KHÔNG render vào ảnh.
    element      — 'Fire' | 'Water' | 'Air' | 'Earth'.
@@ -23,162 +30,338 @@
 
    coreStory    — 1 đoạn ~45–70 chữ, hiểu được không cần biết Tarot. Nêu MỘT
                   chuyển động đời thường cụ thể mà cả Nở và Khép đều là hai
-                  lối ra của cùng một tình huống đó (không phải hai câu chuyện
-                  tách rời). Ẩn dụ vườn/hạt/gió chỉ là lớp hình ảnh nhẹ, không
-                  phải nội dung chính. Không copy nguyên văn trường `bloom`/
-                  `closed` đã có trong garden-oracle-data.js — coreStory là
-                  lớp kể chuyện SÂU hơn, bloom/closed vẫn là lời ritual gọn
-                  hiển thị mặc định.
+                  lối ra của cùng một tình huống đó. Ẩn dụ vườn/hạt/gió chỉ là
+                  lớp hình ảnh nhẹ. Không copy nguyên văn `bloom`/`closed` đã
+                  có trong garden-oracle-data.js — coreStory là lớp kể chuyện
+                  sâu hơn, được viết lại thành một mạch mới.
 
-   visualMotif  — 1 chi tiết hình ảnh độc bản cho artwork (dáng hạt, cử động,
-                  chi tiết kể chuyện). Dùng trực tiếp cho biến {VISUAL_MOTIF}
-                  trong ORACLE-ASSET-PROMPT.md — xem bản điền sẵn cho 5 hạt
-                  này ở ORACLE-ASSET-SAMPLES.md.
+   visualMotif  — 1 chi tiết hình ảnh độc bản cho artwork, dùng trực tiếp cho
+                  biến {VISUAL_MOTIF} trong ORACLE-ASSET-PROMPT.md khi tới
+                  lượt sinh ảnh cho từng khối.
 
-   profile      — hồ sơ nghĩa có cấu trúc, để engine tổng hợp 3 hạt đọc được
-                  QUAN HỆ giữa các hạt mà không cần hiểu tiếng Việt tự nhiên
-                  hay copy/paste câu chữ của từng hạt. Field:
+   profile      — hồ sơ nghĩa có cấu trúc để engine tổng hợp 3 hạt đọc quan hệ
+                  mà không cần NLP hay copy câu chữ. Field:
 
-     domain     — vùng đời sống: 'love' | 'work' | 'decision' | 'action' |
-                  'inner'. Giữ đúng 5 giá trị đã dùng trong
-                  garden-oracle-synthesis.js (SUIT_DOMAIN/MAJOR_DOMAIN) để
-                  không phải viết lại engine hiện có khi nối dữ liệu này vào
-                  sau; suit Wands/Cups/Swords/Pentacles mặc định
-                  action/love/decision/work, 22 Major gán tay từng lá.
+     domain     — 'love' | 'work' | 'decision' | 'action' | 'inner'. 22 Major
+                  lấy nguyên mapping MAJOR_DOMAIN đã khoá trong
+                  garden-oracle-synthesis.js; Minor sẽ lấy theo SUIT_DOMAIN
+                  (Wands→action, Cups→love, Swords→decision, Pentacles→work).
 
-     movement   — kiểu chuyển động của câu chuyện, DÙNG CHUNG cho cả Nở lẫn
-                  Khép (hai trạng thái là hai kết quả của cùng một chuyển
-                  động, không phải hai chuyển động khác nhau). Vocabulary đề
-                  xuất — ưu tiên tái dùng trước khi thêm giá trị mới khi viết
-                  73 hạt còn lại:
-                    opening, scanning, releasing, crossing, holding, tending,
-                    colliding, arriving, resting, defending, integrating,
-                    calling.
+     movement   — kiểu chuyển động, dùng chung cho cả Nở lẫn Khép (hai trạng
+                  thái là hai kết quả của cùng một chuyển động). Vocabulary
+                  gốc (5 mẫu ban đầu): opening, scanning, releasing, crossing,
+                  holding, tending, colliding, arriving, resting, defending,
+                  integrating, calling. Mở rộng khi làm 22 Major (ưu tiên tái
+                  dùng danh sách trên trước, chỉ thêm khi thật sự cần một sắc
+                  thái mới): listening, choosing, steering, turning,
+                  balancing, suspending, entangling.
 
-     storyStage — vị trí trong một vòng cung tự sự chung, suy chủ yếu từ rank
-                  (để nhất quán khi viết tiếp 56 hạt Minor theo cùng quy tắc):
-                    Ace→'spark', 2→'choice', 3→'connection', 4→'foundation',
-                    5→'friction', 6→'recovery', 7→'patience', 8→'momentum',
-                    9→'threshold', 10→'culmination', Page→'curiosity',
-                    Knight→'pursuit', Queen→'nurture', King→'mastery'.
-                  22 hạt Major gán tay theo vị trí riêng của từng lá — hạt số
-                  0 "Hạt gieo vào gió" = 'spark' vì đây là điểm mở đầu của
-                  toàn bộ hành trình 78 hạt, không suy từ rank vì Major không
-                  có rank theo nghĩa đó.
+     storyStage — vị trí trong một vòng cung tự sự. Với 56 hạt Minor, suy từ
+                  rank để nhất quán: Ace→'spark', 2→'choice', 3→'connection',
+                  4→'foundation', 5→'friction', 6→'recovery', 7→'patience',
+                  8→'momentum', 9→'threshold', 10→'culmination',
+                  Page→'curiosity', Knight→'pursuit', Queen→'nurture',
+                  King→'mastery'. Với 22 Major, KHÔNG có rank để suy — gán tay
+                  theo vị trí riêng của từng lá trong hành trình Fool's
+                  Journey truyền thống (xem bảng bên dưới); hai đầu hành trình
+                  cố tình tái dùng 'spark' (lá 0, mở đầu) và 'culmination'
+                  (lá 21, khép hành trình) để nối liền ẩn dụ với vòng cung
+                  Minor, 20 lá còn lại dùng nhãn riêng của Major:
+                  activation, intuition, growth, structure, tradition, choice,
+                  drive, composure, withdrawal, turning, reckoning,
+                  suspension, ending, balance, entanglement, collapse, hope,
+                  uncertainty, joy, awakening.
 
      need       — 1 cụm ngắn: nhu cầu con người thật đứng sau câu chuyện,
                   viết trung tính, không phán xét.
-
-     gift       — 1 cụm ngắn: điều tốt đang có khi hạt Nở — rút gọn ý chính
-                  từ trường `bloom` hiện có, không copy nguyên câu.
-
-     risk       — 1 cụm ngắn: điều cần chú ý khi hạt Khép — rút gọn ý chính
-                  từ trường `closed` hiện có, không copy nguyên câu.
-
+     gift       — 1 cụm ngắn: điều tốt khi hạt Nở (rút gọn ý `bloom`, không
+                  copy nguyên câu).
+     risk       — 1 cụm ngắn: điều cần chú ý khi hạt Khép (rút gọn ý `closed`,
+                  không copy nguyên câu).
      action     — 1 gợi ý nhỏ, cụ thể, vừa sức — nguyên liệu cho bước 5 của
-                  engine tổng hợp ("một gợi ý nhỏ, cụ thể và vừa sức").
-
-   Mục đích tách domain/movement/storyStage riêng: engine so sánh QUAN HỆ giữa
-   3 hạt (trùng domain, chuỗi storyStage, quan hệ nguyên tố...) bằng field có
-   cấu trúc, không cần đọc lại coreStory bằng NLP. need/gift/risk/action là
-   nguyên liệu ngôn ngữ NGẮN — không phải câu hoàn chỉnh — để tránh lặp
-   nguyên văn khi ghép vào lời tổng hợp cuối cùng.
+                  engine tổng hợp.
    ------------------------------------------------------------------------ */
 (function(root){
   'use strict';
 
-  const GARDEN_ORACLE_PROFILES_SAMPLE = [
+  const majors = [
     {
-      id: 0,
-      openName: 'Hạt gieo vào gió',
-      closedName: 'Hạt bay vô hướng',
-      element: 'Air',
-      family: 'Major',
+      id: 0, tarot: 'The Fool', openName: 'Hạt gieo vào gió', closedName: 'Hạt bay vô hướng',
+      element: 'Air', family: 'Major',
       coreStory: 'Trước mọi khởi đầu có một khoảnh khắc hạt đã rời cành nhưng gió chưa định hướng đi. Bạn đang ở đó — trước một công việc, một mối quan hệ, một quyết định — chưa biết điểm đến, chỉ biết mình đã buông tay khỏi chỗ cũ. Cú buông thật lòng hướng tới điều mới là một khởi đầu đáng tin; cú buông chỉ để né tránh điều đang ở lại phía sau lại thành một chuyến bay không phương hướng.',
       visualMotif: 'Giọt sương vàng ánh kim đọng ở lõi hạt, ngay nơi thân vừa tách khỏi vỏ quả khô; hạt nghiêng là là như vừa rời cành, chưa ngả hẳn theo một hướng gió, đuôi tơ phía sau vẫn xoè ngược như dấu vết của cú buông vừa xảy ra.',
-      profile: {
-        domain: 'action',
-        movement: 'opening',
-        storyStage: 'spark',
+      profile: { domain: 'action', movement: 'opening', storyStage: 'spark',
         need: 'cần được phép bắt đầu mà không cần biết trước kết quả',
         gift: 'dám bước đi dù chưa chắc điểm đến',
         risk: 'lao vào cái mới chỉ để né tránh một điều ở hiện tại',
-        action: 'chọn một bước nhỏ đầu tiên và thật sự làm, thay vì chờ chắc chắn hơn'
-      }
-    },
+        action: 'chọn một bước nhỏ đầu tiên và thật sự làm, thay vì chờ chắc chắn hơn' } },
     {
-      id: 24,
-      openName: 'Hạt thấy gió mang tin về',
-      closedName: 'Hạt đợi tin mà quên nhìn xa',
-      element: 'Fire',
-      family: 'Wands',
-      coreStory: 'Hạt này đứng trên một cành cao, nhìn ra vùng trời rộng nơi những luồng gió đang mang tin từ xa về — kết quả của một điều bạn đã bỏ công gieo trồng từ lâu: một dự án, một mối quan hệ, một kế hoạch dài hơi. Khi tầm nhìn còn mở, bạn thấy được cả tin đang tới lẫn những cơ hội khác đang hình thành quanh mình. Khi tầm nhìn hẹp lại chỉ còn một điểm chờ, bạn dễ bỏ lỡ mọi thứ khác đang mở ra ngay bên cạnh.',
-      visualMotif: 'Hạt đậu ở đầu một cọng thân cao mảnh, nghiêng hẳn ra một vùng chân trời có các luồng ánh sáng vàng nhạt và hạt bụi phấn trôi xa như tín hiệu đang tới; nửa tán tơ phía trước xoè rộng như đang quét tầm nhìn, nửa phía sau khép gọn hơn.',
-      profile: {
-        domain: 'action',
-        movement: 'scanning',
-        storyStage: 'connection',
-        need: 'cần nhìn xa hơn một kết quả cụ thể đang chờ',
-        gift: 'thấy được cả tín hiệu xa và cơ hội gần cùng lúc',
-        risk: 'chăm chăm một kết quả mà bỏ lỡ cơ hội khác đang mở quanh mình',
-        action: 'ngẩng lên nhìn quanh và ghi ra một cơ hội khác đang có mà chưa để ý tới'
-      }
-    },
+      id: 1, tarot: 'The Magician', openName: 'Người thổi gọi gió', closedName: 'Bàn tay giữ gió trong tay',
+      element: 'Air', family: 'Major',
+      coreStory: 'Người này đã có đủ trong tay — thời gian, kỹ năng, hoặc điều kiện — để biến một ý định thành việc thật: một dự án, một cuộc trò chuyện cần có từ lâu, một thứ vẫn định làm mà chưa làm. Khi bàn tay thả gió ra đúng lúc, ý định trở thành hành động cụ thể ngay hôm nay. Khi bàn tay cứ giữ chặt lấy gió — vì ngại bắt đầu hoặc muốn kiểm soát mọi chi tiết trước — khả năng đó chỉ nằm yên, không biến thành gì cả.',
+      visualMotif: 'Một quầng xoáy gió nhỏ phát sáng dịu ngay trong lòng thân hạt, như đang được nén giữ có chủ đích thay vì trôi tự do; các sợi tơ phía trước đã hơi tách ra như sắp được thả, sợi phía sau vẫn cuộn chặt quanh một điểm sáng trung tâm.',
+      profile: { domain: 'action', movement: 'calling', storyStage: 'activation',
+        need: 'cần đủ tin tưởng để dùng khả năng mình đang có ngay bây giờ, không chờ thêm dấu hiệu',
+        gift: 'đủ điều kiện để biến ý định thành việc thật ngay lúc này',
+        risk: 'giữ khả năng lại vì ngại bắt đầu hoặc muốn kiểm soát mọi chi tiết trước',
+        action: 'chọn phần nhỏ nhất của việc định làm và bắt tay vào ngay hôm nay' } },
     {
-      id: 43,
-      openName: 'Hạt rời vũng nước đã cạn nghĩa',
-      closedName: 'Hạt quay lại vũng nước đã cạn',
-      element: 'Water',
-      family: 'Cups',
-      coreStory: 'Hạt này đứng ở mép một vũng nước đã cạn nghĩa — nơi từng đủ để nuôi nó nhưng giờ không còn đủ, dù nhìn ngoài vẫn còn nước. Đó là hình ảnh của một công việc, một mối quan hệ, hay một thói quen bạn biết đã hết vừa với mình. Khi hạt thật sự quay lưng bước đi dù chưa hiểu hết mọi lý do, đó là can đảm chứ không phải bỏ cuộc. Khi nó cứ quay đầu lại chỗ cũ vì sợ chỗ mới, nó mắc kẹt ở một nơi đã không còn đủ từ lâu.',
-      visualMotif: 'Hạt ở mép một vũng nước nhỏ tối màu phản chiếu ánh sáng yếu, viền đất quanh vũng đã khô nứt nhẹ; thân hạt nghiêng giữa chừng một cú quay người, một bên tán tơ còn nặng ẩm hướng về vũng nước, bên còn lại đã xoè khô nhẹ như vừa bắt được gió mới.',
-      profile: {
-        domain: 'love',
-        movement: 'releasing',
-        storyStage: 'momentum',
-        need: 'cần được phép rời đi dù chưa hiểu hết mọi lý do',
-        gift: 'đủ can đảm bước đi trước khi có sự chắc chắn tuyệt đối',
-        risk: 'quay lại điều cũ vì sợ cái chưa biết, dù biết nó không còn đủ',
-        action: 'gọi tên một điều cụ thể đã không còn phù hợp và định ngày để bắt đầu buông'
-      }
-    },
+      id: 2, tarot: 'The High Priestess', openName: 'Hạt nghe ra điều gió giấu', closedName: 'Hạt tự bịt tai trước gió',
+      element: 'Water', family: 'Major',
+      coreStory: 'Hạt này nghe được những điều gió mang theo mà chưa ai nói thành lời — một linh cảm về một người, một tình huống, một quyết định, đã có từ trước dù chưa giải thích được bằng lý lẽ. Khi hạt lắng tai và tin vào điều mình nghe thấy, nó không cần chứng minh gì cả. Khi hạt tự bịt tai vì sợ linh cảm đó không đủ hợp lý, nó bỏ lỡ một điều mình đã biết rất rõ từ bên trong.',
+      visualMotif: 'Vài sợi tơ ở giữa tán hạt cong nhẹ về phía trong như đang lắng nghe một luồng gió rất khẽ chỉ nó mới cảm được; một quầng sáng bạc mờ ẩn hiện quanh lõi hạt, dịu hơn hẳn quầng vàng ấm ở các hạt khác.',
+      profile: { domain: 'inner', movement: 'listening', storyStage: 'intuition',
+        need: 'cần tin vào một cảm giác đúng dù chưa giải thích được bằng lời',
+        gift: 'nghe ra được điều đang thật sự diễn ra trước khi có bằng chứng rõ ràng',
+        risk: 'tự nghi ngờ và bịt tai trước linh cảm của chính mình vì thấy nó chưa đủ hợp lý',
+        action: 'ghi lại cảm giác đó ra giấy, không cần hành động ngay, chỉ cần không phủ nhận nó' } },
     {
-      id: 55,
-      openName: 'Hạt theo gió sang bờ yên hơn',
-      closedName: 'Hạt mang gió cũ sang bờ mới',
-      element: 'Air',
-      family: 'Swords',
-      coreStory: 'Hạt này đang băng qua một khoảng gió động để sang một bờ yên hơn — hình ảnh của việc chuyển sang một giai đoạn mới: công việc mới, chỗ ở mới, một nhịp sống ổn định hơn. Chuyến đi chậm nhưng chắc, không có gì kịch tính. Khi hạt bay nhẹ, chỉ mang đúng phần cần thiết, nó thật sự đang tới bờ mới. Khi nó còn vướng những sợi tơ cũ — tổn thương hay thói quen chưa buông — nó chỉ đang mang gió cũ sang một chỗ mới mà chưa thật sự rời khỏi chỗ cũ.',
-      visualMotif: 'Hạt bay là là ngang một mặt nước tối phẳng lặng như gương, quỹ đạo phía trước êm với các vệt gió mảnh song song; vài sợi tơ phía sau vướng nhẹ một lớp sợi tối màu mảnh như đang bị kéo lê theo, tương phản với phần tán phía trước gọn và sạch.',
-      profile: {
-        domain: 'decision',
-        movement: 'crossing',
-        storyStage: 'recovery',
-        need: 'cần được phép chuyển sang giai đoạn yên ổn hơn mà không phải dứt khoát ngay lập tức',
-        gift: 'đang chuyển động đúng hướng, chậm nhưng chắc, về phía yên ổn hơn',
-        risk: 'mang tổn thương hay thói quen cũ sang hoàn cảnh mới mà chưa thật sự để lại phía sau',
-        action: 'chọn một thói quen hay cảm xúc cụ thể để chủ động để lại trước khi bước tiếp'
-      }
-    },
+      id: 3, tarot: 'The Empress', openName: 'Vườn ươm đầy hạt', closedName: 'Vườn cạn vì cho hết',
+      element: 'Earth', family: 'Major',
+      coreStory: 'Đây là một khu vườn đang được chăm sóc tốt — một người, một dự định, một điều bạn đang nuôi lớn bằng thời gian và sự quan tâm của mình, và nó đang lớn lên đúng hướng. Khi vườn còn đủ để tưới cho cả người khác lẫn chính mình, sự chăm sóc đó là món quà thật sự. Khi bạn đã cho đi đến mức đất trong vườn cạn khô, kiệt sức không còn gì để tự nuôi, thì cần dừng lại chăm cho chính mảnh đất đó trước.',
+      visualMotif: 'Hạt được bao quanh bởi một quầng phấn hoa mịn như sương ấm áp toả ra từ chính nó, vài mầm cây rất nhỏ mọc quanh chân hạt như đang được nuôi dưỡng trực tiếp từ nó; đất quanh chân hạt tươi ẩm, ngụ ý sự cho đi đang diễn ra.',
+      profile: { domain: 'love', movement: 'tending', storyStage: 'growth',
+        need: 'cần cảm thấy điều mình chăm sóc đang lớn lên đúng hướng',
+        gift: 'khả năng nuôi dưỡng người khác hoặc một dự định đang phát huy đúng lúc',
+        risk: 'cho đi đến mức kiệt sức, không còn gì để tự nuôi chính mình',
+        action: 'dành một phần nhỏ thời gian hôm nay để chăm lại cho chính mình trước khi chăm tiếp cho người khác' } },
     {
-      id: 70,
-      openName: 'Hạt kiên nhẫn chờ luống đất chín',
-      closedName: 'Hạt sốt ruột đào lại luống chưa chín',
-      element: 'Earth',
-      family: 'Pentacles',
-      coreStory: 'Hạt này nằm im trong một luống đất mà nó đã tự tay vun trồng, chờ đúng thời điểm để lớn lên — hình ảnh của một việc cần thời gian dài mới ra quả: một công việc, một kỹ năng, một mối quan hệ đang xây dần. Khi hạt đủ kiên nhẫn ở yên, rễ vẫn đang âm thầm lớn dù mắt thường chưa thấy gì. Khi nó sốt ruột tự đào luống đất lên để kiểm tra, nó chỉ đang phá vỡ chính quá trình mình cần chờ, khiến mọi thứ phải bắt đầu lại.',
-      visualMotif: 'Hạt lún một nửa vào lớp đất sẫm màu giàu mùn, vài sợi tơ mảnh trong suốt hướng ngược xuống dưới như rễ non thay vì xoè lên trên; một quầng sáng vàng nhạt phát nhẹ ngay dưới bề mặt đất gợi ý sự lớn lên chưa thấy được, lấm tấm rêu và khoáng chất li ti quanh đó.',
-      profile: {
-        domain: 'work',
-        movement: 'tending',
-        storyStage: 'patience',
-        need: 'cần tin rằng công sức âm thầm vẫn đang tích luỹ dù chưa thấy kết quả',
-        gift: 'đủ kiên nhẫn để công sức dài hạn có thời gian ra quả',
-        risk: 'sốt ruột đào xới lại một việc chưa kịp chín, khiến nó phải bắt đầu lại',
-        action: 'chọn tiếp tục thêm một mốc thời gian cụ thể trước khi đánh giá lại có nên đổi hướng'
-      }
-    }
+      id: 4, tarot: 'The Emperor', openName: 'Thân cây giữ chiều gió', closedName: 'Cành cứng chặn đường bay',
+      element: 'Fire', family: 'Major',
+      coreStory: 'Một thân cây vững đang giữ đúng chiều cho luồng gió đi qua nó — hình ảnh của những quy tắc hay giới hạn rõ ràng bạn đang đặt ra trong công việc hay một mối quan hệ. Khi thân cây đủ chắc mà vẫn để gió lách qua, sự ổn định đó là thật, giúp mọi thứ đi đúng hướng. Khi cành cây cứng đến mức chặn hết đường bay của mọi luồng gió khác, quy tắc đó không còn phục vụ ai, chỉ còn vì bạn đã quen kiểm soát như vậy.',
+      visualMotif: 'Một thân/cọng cây thẳng, chắc, có vân gỗ rõ nét chạy dọc như những đường luật lệ được khắc sẵn; hạt tựa vào đó ở một góc ổn định, vài luồng gió mảnh lách qua khe giữa các cành thay vì bị chặn đứng hoàn toàn.',
+      profile: { domain: 'work', movement: 'defending', storyStage: 'structure',
+        need: 'cần một cấu trúc hay giới hạn rõ ràng để mọi thứ ổn định',
+        gift: 'đặt ra quy tắc giúp công việc hoặc mối quan hệ đi đúng hướng',
+        risk: 'kiểm soát quá chặt đến mức không ai còn thấy thoải mái',
+        action: 'xem lại một quy tắc mình đang giữ và hỏi nó còn thật sự cần thiết không' } },
+    {
+      id: 5, tarot: 'The Hierophant', openName: 'Mùa xưa gieo lại', closedName: 'Khuôn cũ giữ chân',
+      element: 'Earth', family: 'Major',
+      coreStory: 'Mùa cũ đang gieo lại vào mùa này — hình ảnh của một lời khuyên từ người đi trước, một cách làm quen thuộc, hay một truyền thống gia đình đang chỉ ra một hướng đi. Khi bạn thật sự chọn lại điều đó cho chính mình, nó trở thành nền tảng đáng tin. Khi bạn chỉ đang làm theo vì khuôn cũ giữ chân, không phải vì tin nó đúng với mình, thì đó không còn là lựa chọn, chỉ còn là thói quen.',
+      visualMotif: 'Hạt tựa nhẹ lên một cụm hạt giống cũ hơn, sẫm màu và có vân nứt như đã qua một mùa, đang nảy ra vài sợi tơ mới nối tiếp từ đó; đường viền quanh hạt lặp lại hoa văn cổ điển hơn so với các hạt khác trong bộ.',
+      profile: { domain: 'inner', movement: 'integrating', storyStage: 'tradition',
+        need: 'cần một điểm tựa hay lời khuyên đáng tin từ điều đã được kiểm chứng trước',
+        gift: 'biết chọn lọc một cách làm quen thuộc thật sự phù hợp với hoàn cảnh của mình',
+        risk: 'làm theo một khuôn mẫu chỉ vì mọi người xung quanh vẫn làm vậy',
+        action: 'hỏi thẳng mình: đây là điều mình tự chọn, hay chỉ vì đã quen làm vậy' } },
+    {
+      id: 6, tarot: 'The Lovers', openName: 'Đôi hạt cùng bay', closedName: 'Hai hạt lạc chiều',
+      element: 'Air', family: 'Major',
+      coreStory: 'Hai hạt đang bay cùng một hướng, hoặc lạc mất nhau giữa chừng — hình ảnh của một lựa chọn quan trọng liên quan tới một người, một công việc, hay một giá trị sống của bạn. Khi bạn chọn theo điều mình thật sự tin, dù khó hơn, hai hạt vẫn cùng bay đúng hướng. Khi bạn để người khác quyết định thay mình, hoặc cứ phân vân mãi không dám chốt, hai hướng bay lệch nhau dần — và điều khó nhất không phải là chọn sai, mà là không dám chọn.',
+      visualMotif: 'Hai hạt bồ công anh bay gần nhau trong cùng một khung hình, quỹ đạo của chúng gần như song song nhưng có một khoảng lệch nhỏ dần hiện rõ ở nửa dưới khung, như đang trên bờ tách hướng.',
+      profile: { domain: 'love', movement: 'choosing', storyStage: 'choice',
+        need: 'cần đủ can đảm để chọn theo điều mình thật sự tin, không phải điều dễ hơn',
+        gift: 'chọn đúng hướng dù khó, giữ được sự đồng hành thật sự với người kia',
+        risk: 'để người khác quyết định thay mình hoặc cứ phân vân mãi không dám chốt',
+        action: 'chọn một điều cụ thể hôm nay, dù nhỏ, thay vì tiếp tục cân nhắc' } },
+    {
+      id: 7, tarot: 'The Chariot', openName: 'Hạt cưỡi luồng gió', closedName: 'Hạt bị gió kéo đi',
+      element: 'Water', family: 'Major',
+      coreStory: 'Hạt này đang cưỡi trên một luồng gió mạnh, cố giữ vững một hướng đi dù nhiều thứ khác — công việc, cảm xúc, người xung quanh — đang kéo nó lệch hướng. Khi hạt thật sự đang lái, nó tự quyết định tốc độ và điểm đến của mình. Khi hạt chỉ đang bị gió kéo đi, lao rất nhanh mà không chắc mình đang tiến tới đâu, nó cần chậm lại và hỏi: đây có phải hướng mình chọn, hay chỉ là đang chạy trốn một cảm giác nào đó?',
+      visualMotif: 'Hạt nghiêng mình rõ rệt theo một trục chuyển động mạnh, các sợi tơ ép sát về phía sau như đang chịu lực gió lớn; hai luồng ánh sáng mảnh chạy song song hai bên thân hạt như hai vệt kéo vô hình.',
+      profile: { domain: 'action', movement: 'steering', storyStage: 'drive',
+        need: 'cần giữ vững hướng đi của mình dù nhiều thứ đang kéo mình lệch hướng',
+        gift: 'vẫn hoàn thành được mục tiêu dù có nhiều lực cản khác nhau',
+        risk: 'lao đi rất nhanh theo một kế hoạch mà không chắc mình đang đi đúng hướng',
+        action: 'chậm lại một nhịp và tự hỏi mình đang tiến tới, hay đang chạy trốn điều gì' } },
+    {
+      id: 8, tarot: 'Strength', openName: 'Hạt mềm qua được gió dữ', closedName: 'Hạt gồng mình chống gió dữ',
+      element: 'Fire', family: 'Major',
+      coreStory: 'Hạt này đi qua một cơn gió dữ mà không gãy, nhờ mềm dẻo chứ không phải nhờ cứng lại — hình ảnh của việc đối mặt một người hay một tình huống khó khăn bằng sự bình tĩnh và kiên nhẫn thay vì phản ứng gay gắt. Khi hạt thật sự mềm, nó uốn theo gió mà vẫn nguyên vẹn. Khi nó gồng mình chống lại để tỏ ra mạnh mẽ trước mặt người khác, bên trong lại đang rất căng thẳng — và không sao nếu cho phép mình yếu đuối một chút với người mình tin tưởng.',
+      visualMotif: 'Thân hạt uốn cong mềm mại theo một luồng gió mạnh thấy rõ qua các vệt chuyển động, nhưng toàn bộ tán tơ vẫn nguyên vẹn không rối; một sợi tơ duy nhất run nhẹ khác biệt với phần còn lại, gợi ý một chút căng thẳng ẩn bên trong sự bình tĩnh.',
+      profile: { domain: 'inner', movement: 'holding', storyStage: 'composure',
+        need: 'cần đối mặt với khó khăn bằng bình tĩnh thay vì phải tỏ ra mạnh mẽ',
+        gift: 'giữ được sự mềm dẻo, kiên nhẫn ngay giữa một tình huống dữ dội',
+        risk: 'gồng mình tỏ ra ổn trong khi bên trong đang rất căng thẳng hoặc sợ hãi',
+        action: 'cho phép mình yếu đuối một chút với chính mình hoặc một người mình tin tưởng' } },
+    {
+      id: 9, tarot: 'The Hermit', openName: 'Ngọn đèn gọi từ xa', closedName: 'Cô tĩnh không lối ra',
+      element: 'Earth', family: 'Major',
+      coreStory: 'Một ngọn đèn nhỏ đang gọi từ xa trong đêm tĩnh — hình ảnh của việc cần một khoảng thời gian ở một mình để suy nghĩ rõ ràng hơn về một quyết định. Khi khoảng lặng đó có giới hạn và mục đích, nó là điều nên làm, không phải trốn tránh. Khi bạn đã tự cô lập mình quá lâu đến mức khoảng tĩnh đó không còn lối ra, sự yên tĩnh biến thành cô đơn — lúc đó chỉ cần nhắn một câu ngắn cho người mình tin tưởng.',
+      visualMotif: 'Một đốm sáng nhỏ, ấm, đơn độc lơ lửng cách xa hạt trong không gian tối, như một ngọn đèn ở cuối một hành lang gió dài; hạt đứng yên gần như bất động, tán tơ khép nhẹ lại thay vì xoè rộng như các hạt khác.',
+      profile: { domain: 'inner', movement: 'resting', storyStage: 'withdrawal',
+        need: 'cần một khoảng thời gian ở một mình để suy nghĩ rõ ràng hơn',
+        gift: 'biết dùng sự tĩnh lặng để nhìn rõ một quyết định, không phải để trốn tránh',
+        risk: 'tự cô lập mình quá lâu đến mức thấy cô đơn thay vì yên tĩnh',
+        action: 'nhắn một câu ngắn cho một người mình tin tưởng, dù chỉ để biết mình không một mình' } },
+    {
+      id: 10, tarot: 'Wheel of Fortune', openName: 'Vòng gió cuốn hạt sang mùa', closedName: 'Mùa cũ giữ hạt lại',
+      element: 'Fire', family: 'Major',
+      coreStory: 'Một vòng gió lớn đang cuốn hạt sang một mùa khác — hình ảnh của một điều đang thay đổi trong công việc, một mối quan hệ, hay hoàn cảnh sống của bạn, mà không cần hiểu hết lý do mới có thể chấp nhận nó. Khi hạt để vòng gió cuốn mình đi, nó bước sang mùa mới đúng nhịp tự nhiên. Khi nó cố bám lại mùa cũ vì quen thuộc dù đã không còn phù hợp, cần tự hỏi: đang sợ thay đổi, hay đang thật sự tiếc cái cũ?',
+      visualMotif: 'Hạt nằm giữa một vòng xoáy gió lớn hình tròn mờ ảo bao quanh toàn khung hình, một nửa vòng xoáy mang màu ấm của mùa mới, nửa còn lại vẫn vương chút màu úa của mùa cũ đang dần mờ đi.',
+      profile: { domain: 'action', movement: 'turning', storyStage: 'turning',
+        need: 'cần chấp nhận một sự thay đổi đang diễn ra mà không cần hiểu hết lý do',
+        gift: 'đón nhận sự thay đổi đúng nhịp, không cưỡng lại vòng xoay tự nhiên của hoàn cảnh',
+        risk: 'cố giữ mọi thứ y như cũ dù nó không còn phù hợp, chỉ vì quen thuộc',
+        action: 'tự hỏi mình đang sợ thay đổi, hay đang thật sự tiếc điều cũ — rồi chọn một hướng' } },
+    {
+      id: 11, tarot: 'Justice', openName: 'Hạt về đúng phần đất của mình', closedName: 'Hạt đứng trên cán cân nghiêng',
+      element: 'Air', family: 'Major',
+      coreStory: 'Hạt này đang về đúng phần đất của mình — hình ảnh của một kết quả công bằng đang đến từ một quyết định hay một việc bạn đã làm trước đó, không phải hình phạt, chỉ là hệ quả tự nhiên. Khi hạt đứng vững trên cán cân đã cân bằng, nó chấp nhận kết quả một cách rõ ràng. Khi cán cân nghiêng vì bạn quá khắt khe với bản thân về một lỗi đã qua, hoặc đang né tránh trách nhiệm, cần nhìn lại thật công bằng, đừng quá nặng nề với chính mình.',
+      visualMotif: 'Hạt đứng cân bằng trên một cọng thân mảnh ngang như đòn cân, hai bên tán tơ xoè đối xứng gần như tuyệt đối; một vệt sáng mảnh chạy ngang qua chính giữa khung hình như đường thăng bằng.',
+      profile: { domain: 'decision', movement: 'balancing', storyStage: 'reckoning',
+        need: 'cần một cái nhìn công bằng, không quá khắt khe cũng không né tránh trách nhiệm',
+        gift: 'chấp nhận một kết quả tự nhiên đến từ chính quyết định của mình, rõ ràng và bình thản',
+        risk: 'quá khắt khe với bản thân về một lỗi đã qua hoặc né tránh trách nhiệm',
+        action: 'nhìn lại một việc đã qua một cách công bằng, không thêm cũng không bớt' } },
+    {
+      id: 12, tarot: 'The Hanged Man', openName: 'Cành giữ hạt lơ lửng', closedName: 'Cành níu mãi không buông',
+      element: 'Water', family: 'Major',
+      coreStory: 'Một cành cây đang giữ hạt lơ lửng, không rơi cũng không bay đi — hình ảnh của việc tạm dừng lại một quyết định hay một kế hoạch, và khoảng dừng đó giúp bạn nhìn mọi thứ theo một cách mới. Khi khoảng lơ lửng này có chủ đích và có hạn, nó là một góc nhìn quý giá. Khi cành cứ níu mãi không buông, bạn đang chịu đựng một tình huống — một công việc, một mối quan hệ — lâu hơn cần thiết, trong khi thật ra có thể thay đổi nó bất cứ lúc nào.',
+      visualMotif: 'Hạt treo lơ lửng ngược đầu xuống dưới một cành cong nhẹ, tán tơ xoè ngược xuống phía dưới thay vì lên trên như các hạt khác; một giọt sương duy nhất sắp rơi nhưng vẫn còn treo nguyên ở đầu tán tơ.',
+      profile: { domain: 'inner', movement: 'suspending', storyStage: 'suspension',
+        need: 'cần một khoảng dừng có chủ đích để nhìn tình huống theo cách khác',
+        gift: 'biết tạm dừng lại đúng lúc để thấy rõ hơn trước khi quyết định tiếp',
+        risk: 'chịu đựng một tình huống lâu hơn cần thiết dù có thể thay đổi nó bất cứ lúc nào',
+        action: 'đặt một giới hạn thời gian cụ thể cho khoảng dừng này, thay vì để nó kéo dài vô hạn' } },
+    {
+      id: 13, tarot: 'Death', openName: 'Bông cũ buông hạt', closedName: 'Mùa tàn giữ xác',
+      element: 'Water', family: 'Major',
+      coreStory: 'Một bông hoa cũ đang buông hạt của mình ra — hình ảnh của một giai đoạn, một công việc, hay một mối quan hệ trong cuộc sống bạn đang thật sự kết thúc, điều cần thiết để một điều mới có thể bắt đầu. Khi bông hoa buông hạt trọn vẹn, sự kết thúc đó mở đường cho mùa sau. Khi nó cố giữ lại phần đã tàn, chỉ thay đổi bề ngoài mà không thật sự buông bỏ, cần cho phép mình buồn về điều đã mất trước khi cố thay thế bằng thứ khác.',
+      visualMotif: 'Hạt vừa tách khỏi một bông hoa đã khô sẫm màu phía sau nó, đường tách rời hiện rõ như một vết cắt nhẹ nhàng chứ không phải đứt gãy dữ dội; phía sau hạt, cánh hoa cũ đang rơi rụng nhẹ nhàng theo một hướng khác với hạt.',
+      profile: { domain: 'action', movement: 'releasing', storyStage: 'ending',
+        need: 'cần chấp nhận một giai đoạn đã thật sự kết thúc để điều mới có chỗ bắt đầu',
+        gift: 'để một điều không còn phù hợp kết thúc trọn vẹn, mở đường cho mùa sau',
+        risk: 'cố giữ lại một điều đã không còn nữa, chỉ thay đổi bề ngoài mà không buông bỏ thật sự',
+        action: 'cho phép mình buồn về điều đã mất, trước khi cố thay thế nó bằng thứ khác' } },
+    {
+      id: 14, tarot: 'Temperance', openName: 'Hai luồng gió hòa nhau', closedName: 'Gió chọi gió, hạt chênh chao',
+      element: 'Fire', family: 'Major',
+      coreStory: 'Hai luồng gió đang hoà vào nhau quanh hạt này — hình ảnh của việc cân bằng tốt giữa hai điều khác nhau trong cuộc sống: công việc và nghỉ ngơi, hai người, hai lựa chọn. Khi hai luồng gió thật sự hoà nhau, đó là một kỹ năng, không phải sự thỏa hiệp yếu đuối. Khi hai luồng gió chọi nhau khiến hạt chênh chao, có hai điều hoặc hai người đang không ăn khớp và chưa ai chịu nhường — lúc này đừng vội thêm bất cứ cam kết mới nào.',
+      visualMotif: 'Hai luồng ánh sáng mảnh, một ấm một mát, uốn quanh hạt và hoà vào nhau ngay tại lõi hạt thành một màu trung tính duy nhất; tán tơ hai bên hạt xoè đối xứng như đang giữ nhịp cho cả hai luồng.',
+      profile: { domain: 'inner', movement: 'balancing', storyStage: 'balance',
+        need: 'cần giữ nhịp cân bằng giữa hai điều khác nhau mà không phải hy sinh cái nào',
+        gift: 'biết dung hoà hai điều khác biệt thành một nhịp sống ổn định',
+        risk: 'để hai điều hoặc hai người không ăn khớp kéo mình chênh chao mà chưa ai chịu nhường',
+        action: 'tạm ngưng thêm cam kết mới cho tới khi hai luồng đang chọi nhau tìm được nhịp chung' } },
+    {
+      id: 15, tarot: 'The Devil', openName: 'Hạt nhìn thấy rễ trói', closedName: 'Hạt tự buộc vào đất tối',
+      element: 'Earth', family: 'Major',
+      coreStory: 'Hạt này nhìn thấy chính những sợi rễ đang trói mình lại — hình ảnh của một thói quen, một mối quan hệ, hay một nỗi sợ đang giữ chân bạn. Nhìn thấy nó rõ ràng đã là bước đầu để thay đổi. Nhưng khi hạt coi những sợi rễ đó là số phận, tự buộc mình chặt hơn vào vùng đất tối để khỏi phải cố thay đổi, nó quên mất rằng vẫn có thể chọn khác — chỉ cần bắt đầu bằng một bước rất nhỏ.',
+      visualMotif: 'Vài sợi rễ mảnh, sẫm màu quấn quanh phần thân dưới của hạt như dây trói, nhưng một đầu rễ đã lỏng ra và có thể tháo được; ánh sáng ấm vẫn chiếu rõ vào lõi hạt dù phần chân đang bị quấn.',
+      profile: { domain: 'inner', movement: 'entangling', storyStage: 'entanglement',
+        need: 'cần nhìn thẳng vào một thói quen hay nỗi sợ đang trói buộc mình để thấy nó rõ ràng',
+        gift: 'nhận ra rõ điều gì đang giữ chân mình — bước đầu tiên để thật sự thay đổi',
+        risk: 'coi một tình huống không lành mạnh là số phận để khỏi phải cố thay đổi nó',
+        action: 'chọn một bước rất nhỏ để nới lỏng sợi rễ đang trói mình, thay vì chấp nhận nó là mãi mãi' } },
+    {
+      id: 16, tarot: 'The Tower', openName: 'Tháp gãy tung hạt bay', closedName: 'Tường nứt giữ hạt lại',
+      element: 'Fire', family: 'Major',
+      coreStory: 'Một tòa tháp gãy tung, hất hạt bay ra khỏi nơi nó từng đứng — hình ảnh của một điều bạn từng nghĩ là chắc chắn, một kế hoạch, một mối quan hệ, một niềm tin, đang sụp đổ rất nhanh. Khi cú sụp đổ diễn ra trọn vẹn, hạt được giải thoát khỏi thứ vốn dĩ không còn vững từ trước, dù đau. Khi bức tường chỉ nứt mà cứ được cố che giấu, giữ hạt lại bên trong, bạn đang sống trong lo sợ chờ nó sụp — điều đó thường nặng nề hơn để nó sụp hẳn.',
+      visualMotif: 'Hạt bị hất văng khỏi một cấu trúc dạng tháp/cành gãy vụn phía sau, các mảnh vỡ nhỏ lấp lánh bay theo cùng hướng; tán tơ hạt xoè bung mạnh bất đối xứng như vừa trải qua một cú va chạm dữ dội.',
+      profile: { domain: 'action', movement: 'colliding', storyStage: 'collapse',
+        need: 'cần để một điều không còn vững thật sự sụp đổ thay vì cố giữ nó',
+        gift: 'được giải thoát khỏi một kế hoạch, mối quan hệ hay niềm tin vốn dĩ đã không còn chắc',
+        risk: 'cố che giấu một điều đã rạn nứt từ lâu, sống trong lo sợ chờ nó sụp',
+        action: 'ngừng cố cứu vãn một điều đã rạn nứt rõ ràng và để nó kết thúc theo cách của nó' } },
+    {
+      id: 17, tarot: 'The Star', openName: 'Hạt bay theo ánh sao', closedName: 'Hạt quên đường sao chỉ',
+      element: 'Air', family: 'Major',
+      coreStory: 'Hạt này bay theo ánh sáng của một vì sao xa — hình ảnh của một niềm hy vọng thật sự về tương lai, không viển vông, miễn là bạn thành thật với điều mình thật sự mong muốn. Khi hạt còn nhìn thấy ánh sao và bay theo nó, hy vọng đó dẫn đường rõ ràng. Khi hạt quên mất đường sao từng chỉ, có thể vì đã thất vọng quá nhiều lần, nó cần chọn một điều nhỏ, thật, để bắt đầu tin trở lại.',
+      visualMotif: 'Một điểm sáng nhỏ, lấp lánh như sao, nằm ở góc xa của khung hình, nối với lõi hạt bằng một vệt sáng mảnh gần như vô hình; tán tơ hạt nghiêng nhẹ về phía điểm sáng đó như đang được dẫn đường.',
+      profile: { domain: 'inner', movement: 'opening', storyStage: 'hope',
+        need: 'cần giữ được một niềm hy vọng thật, không viển vông, về điều mình thật sự mong muốn',
+        gift: 'có một niềm tin rõ ràng về tương lai đang dẫn đường cho mình',
+        risk: 'thất vọng nhiều lần đến mức không còn dám mơ hay hy vọng nữa',
+        action: 'chọn một điều nhỏ, thật, để bắt đầu tin trở lại' } },
+    {
+      id: 18, tarot: 'The Moon', openName: 'Hạt qua miền sương trăng', closedName: 'Hạt lạc trong trăng giả',
+      element: 'Water', family: 'Major',
+      coreStory: 'Hạt này đang đi qua một miền sương dưới ánh trăng — hình ảnh của một giai đoạn mọi thứ chưa rõ ràng: một mối quan hệ, một quyết định, mà bạn không cần hiểu hết mới có thể tiếp tục đi qua. Khi hạt cứ đi dù sương còn dày, nó vẫn đang tiến đúng hướng. Khi nó lạc trong ánh trăng giả — những hình dạng mơ hồ do sương tạo ra — nỗi lo lắng đang khiến nó nhìn tình huống tệ hơn thực tế, và cần tự hỏi: điều mình đang sợ có thật sự đúng, hay chỉ do lo lắng?',
+      visualMotif: 'Hạt bay giữa một lớp sương mờ ảo bao phủ gần hết khung hình, chỉ lõi hạt và một phần tán tơ gần đó còn rõ nét; một vài hình dạng mờ ảo phía xa gợi bóng dáng không rõ ràng, có thể là ảo giác của sương chứ không phải vật thể thật.',
+      profile: { domain: 'inner', movement: 'crossing', storyStage: 'uncertainty',
+        need: 'cần được phép tiếp tục đi qua một giai đoạn mơ hồ mà không cần hiểu hết mọi thứ',
+        gift: 'vẫn tiến đúng hướng dù mọi thứ quanh mình chưa rõ ràng',
+        risk: 'để lo lắng khiến mình nhìn một tình huống tệ hơn thực tế nó đang có',
+        action: 'tự hỏi điều mình đang sợ có thật sự đúng, hay chỉ là do lo lắng đang phóng đại nó' } },
+    {
+      id: 19, tarot: 'The Sun', openName: 'Nắng mới đánh thức hạt sáng', closedName: 'Nắng gắt ép hạt khép lại',
+      element: 'Fire', family: 'Major',
+      coreStory: 'Một tia nắng mới đánh thức hạt, khiến nó sáng lên rõ rệt — hình ảnh của một giai đoạn vui vẻ, rõ ràng, tích cực trong cuộc sống bạn, mà bạn được phép tận hưởng trọn vẹn không cần giấu bớt. Khi hạt đón trọn ánh nắng, niềm vui đó là thật và không cần biện minh. Khi nắng bị coi là quá gắt khiến hạt tự khép lại, có thể bạn đang cố tỏ ra ổn hơn thực tế, ngại để người khác thấy mình thật sự vui — trong khi cứ vui thật vẫn ổn hơn phải diễn.',
+      visualMotif: 'Toàn bộ hạt được bao phủ bởi ánh sáng vàng ấm rực rỡ hơn hẳn các hạt khác trong bộ, tán tơ xoè rộng hết cỡ đón ánh sáng; một vài giọt sương lấp lánh như đang phản chiếu ánh nắng trực tiếp, khác với dewdrop mờ hơn ở các hạt khác.',
+      profile: { domain: 'inner', movement: 'arriving', storyStage: 'joy',
+        need: 'cần được phép tận hưởng một niềm vui thật mà không cần giấu bớt hay biện minh',
+        gift: 'sống trọn một giai đoạn vui vẻ, rõ ràng, tích cực mà không cần diễn cho ai xem',
+        risk: 'cố tỏ ra ổn hơn thực tế, ngại để người khác thấy mình thật sự vui',
+        action: 'cho phép mình vui thật trước mặt người khác, không cần giảm bớt hay che giấu' } },
+    {
+      id: 20, tarot: 'Judgement', openName: 'Tiếng gọi đánh thức', closedName: 'Hồi chuông ngủ quên',
+      element: 'Fire', family: 'Major',
+      coreStory: 'Một tiếng gọi đang đánh thức hạt này — hình ảnh của một điều bạn biết mình cần làm hoặc cần đối diện: một cuộc nói chuyện, một quyết định đã trì hoãn quá lâu. Khi hạt nghe và đáp lại tiếng gọi, đây là lúc để hành động, dù nó đến trễ hơn bạn mong. Khi hồi chuông đó bị bỏ ngủ quên, bạn đang tránh né một điều mình biết rõ cần giải quyết, hoặc đang tự trách bản thân quá lâu vì một lỗi đã qua — trong khi tha thứ cho mình không có nghĩa là quên, chỉ là ngừng tự dằn vặt.',
+      visualMotif: 'Một vòng sóng ánh sáng lan toả từ một điểm phía trên hạt như tiếng chuông vừa vang lên, hạt nghiêng ngẩng lên đón lấy vòng sóng đó; vài sợi tơ đã rung nhẹ như vừa được đánh thức, khác biệt với phần còn lại vẫn tĩnh.',
+      profile: { domain: 'action', movement: 'calling', storyStage: 'awakening',
+        need: 'cần đáp lại một điều mình biết rõ cần làm hoặc cần đối diện, dù đã trì hoãn lâu',
+        gift: 'sẵn sàng hành động đúng lúc khi nghe ra tiếng gọi của chính mình',
+        risk: 'tránh né một điều cần giải quyết hoặc tự trách bản thân quá lâu vì lỗi đã qua',
+        action: 'chọn đối diện với điều mình vẫn tránh né, và ngừng tự dằn vặt về lỗi đã qua' } },
+    {
+      id: 21, tarot: 'The World', openName: 'Vườn nở lại quanh hạt', closedName: 'Mùa mới đứng ngoài cửa',
+      element: 'Earth', family: 'Major',
+      coreStory: 'Cả khu vườn nở lại quanh hạt này — hình ảnh của việc hoàn thành trọn vẹn một giai đoạn hay một dự định quan trọng, lúc để tự hào về điều đó. Khi hạt thật sự bước vào giữa khu vườn đã nở, nó trọn vẹn đón nhận thành quả của mình. Khi nó cứ đứng ngoài cửa một mùa mới dù việc cũ đã gần xong, có thể đang trì hoãn vì một điều còn thiếu chưa chắc đã thật sự quan trọng — chỉ là lý do để chưa phải bước vào.',
+      visualMotif: 'Hạt đứng giữa một vòng tròn hoa nhỏ đang nở rộ bao quanh toàn khung hình, đối xứng đều cả bốn phía như một khu vườn trọn vẹn; ánh sáng ấm bao trùm đều khắp, không còn vùng tối lệch về một phía như các hạt khác.',
+      profile: { domain: 'action', movement: 'integrating', storyStage: 'culmination',
+        need: 'cần cho phép mình tự hào về một giai đoạn đã hoàn thành trọn vẹn',
+        gift: 'hoàn tất một dự định quan trọng và trọn vẹn đón nhận thành quả của nó',
+        risk: 'đứng ngoài một khởi đầu mới vì cảm thấy việc cũ chưa thật sự xong',
+        action: 'hỏi điều mình cho là còn thiếu có thật sự quan trọng, hay chỉ là lý do để trì hoãn' } }
   ];
 
-  root.GARDEN_ORACLE_PROFILES_SAMPLE = GARDEN_ORACLE_PROFILES_SAMPLE;
+  if (majors.length !== 22) throw new Error('Garden Oracle majors batch must contain exactly 22 seeds.');
+
+  // Mẫu schema ban đầu cho 4 nguyên tố Minor — 1/14 mỗi nguyên tố, PENDING.
+  // Mở rộng đủ 14/nguyên tố là việc của 4 checkpoint kế tiếp (mỗi khối một
+  // commit riêng), không viết dồn trong lần này.
+  const suitSamples = {
+    Wands: [
+      {
+        id: 24, tarot: 'Three of Wands', openName: 'Hạt thấy gió mang tin về', closedName: 'Hạt đợi tin mà quên nhìn xa',
+        element: 'Fire', family: 'Wands',
+        coreStory: 'Hạt này đứng trên một cành cao, nhìn ra vùng trời rộng nơi những luồng gió đang mang tin từ xa về — kết quả của một điều bạn đã bỏ công gieo trồng từ lâu: một dự án, một mối quan hệ, một kế hoạch dài hơi. Khi tầm nhìn còn mở, bạn thấy được cả tin đang tới lẫn những cơ hội khác đang hình thành quanh mình. Khi tầm nhìn hẹp lại chỉ còn một điểm chờ, bạn dễ bỏ lỡ mọi thứ khác đang mở ra ngay bên cạnh.',
+        visualMotif: 'Hạt đậu ở đầu một cọng thân cao mảnh, nghiêng hẳn ra một vùng chân trời có các luồng ánh sáng vàng nhạt và hạt bụi phấn trôi xa như tín hiệu đang tới; nửa tán tơ phía trước xoè rộng như đang quét tầm nhìn, nửa phía sau khép gọn hơn.',
+        profile: { domain: 'action', movement: 'scanning', storyStage: 'connection',
+          need: 'cần nhìn xa hơn một kết quả cụ thể đang chờ',
+          gift: 'thấy được cả tín hiệu xa và cơ hội gần cùng lúc',
+          risk: 'chăm chăm một kết quả mà bỏ lỡ cơ hội khác đang mở quanh mình',
+          action: 'ngẩng lên nhìn quanh và ghi ra một cơ hội khác đang có mà chưa để ý tới' } }
+    ],
+    Cups: [
+      {
+        id: 43, tarot: 'Eight of Cups', openName: 'Hạt rời vũng nước đã cạn nghĩa', closedName: 'Hạt quay lại vũng nước đã cạn',
+        element: 'Water', family: 'Cups',
+        coreStory: 'Hạt này đứng ở mép một vũng nước đã cạn nghĩa — nơi từng đủ để nuôi nó nhưng giờ không còn đủ, dù nhìn ngoài vẫn còn nước. Đó là hình ảnh của một công việc, một mối quan hệ, hay một thói quen bạn biết đã hết vừa với mình. Khi hạt thật sự quay lưng bước đi dù chưa hiểu hết mọi lý do, đó là can đảm chứ không phải bỏ cuộc. Khi nó cứ quay đầu lại chỗ cũ vì sợ chỗ mới, nó mắc kẹt ở một nơi đã không còn đủ từ lâu.',
+        visualMotif: 'Hạt ở mép một vũng nước nhỏ tối màu phản chiếu ánh sáng yếu, viền đất quanh vũng đã khô nứt nhẹ; thân hạt nghiêng giữa chừng một cú quay người, một bên tán tơ còn nặng ẩm hướng về vũng nước, bên còn lại đã xoè khô nhẹ như vừa bắt được gió mới.',
+        profile: { domain: 'love', movement: 'releasing', storyStage: 'momentum',
+          need: 'cần được phép rời đi dù chưa hiểu hết mọi lý do',
+          gift: 'đủ can đảm bước đi trước khi có sự chắc chắn tuyệt đối',
+          risk: 'quay lại điều cũ vì sợ cái chưa biết, dù biết nó không còn đủ',
+          action: 'gọi tên một điều cụ thể đã không còn phù hợp và định ngày để bắt đầu buông' } }
+    ],
+    Swords: [
+      {
+        id: 55, tarot: 'Six of Swords', openName: 'Hạt theo gió sang bờ yên hơn', closedName: 'Hạt mang gió cũ sang bờ mới',
+        element: 'Air', family: 'Swords',
+        coreStory: 'Hạt này đang băng qua một khoảng gió động để sang một bờ yên hơn — hình ảnh của việc chuyển sang một giai đoạn mới: công việc mới, chỗ ở mới, một nhịp sống ổn định hơn. Chuyến đi chậm nhưng chắc, không có gì kịch tính. Khi hạt bay nhẹ, chỉ mang đúng phần cần thiết, nó thật sự đang tới bờ mới. Khi nó còn vướng những sợi tơ cũ — tổn thương hay thói quen chưa buông — nó chỉ đang mang gió cũ sang một chỗ mới mà chưa thật sự rời khỏi chỗ cũ.',
+        visualMotif: 'Hạt bay là là ngang một mặt nước tối phẳng lặng như gương, quỹ đạo phía trước êm với các vệt gió mảnh song song; vài sợi tơ phía sau vướng nhẹ một lớp sợi tối màu mảnh như đang bị kéo lê theo, tương phản với phần tán phía trước gọn và sạch.',
+        profile: { domain: 'decision', movement: 'crossing', storyStage: 'recovery',
+          need: 'cần được phép chuyển sang giai đoạn yên ổn hơn mà không phải dứt khoát ngay lập tức',
+          gift: 'đang chuyển động đúng hướng, chậm nhưng chắc, về phía yên ổn hơn',
+          risk: 'mang tổn thương hay thói quen cũ sang hoàn cảnh mới mà chưa thật sự để lại phía sau',
+          action: 'chọn một thói quen hay cảm xúc cụ thể để chủ động để lại trước khi bước tiếp' } }
+    ],
+    Pentacles: [
+      {
+        id: 70, tarot: 'Seven of Pentacles', openName: 'Hạt kiên nhẫn chờ luống đất chín', closedName: 'Hạt sốt ruột đào lại luống chưa chín',
+        element: 'Earth', family: 'Pentacles',
+        coreStory: 'Hạt này nằm im trong một luống đất mà nó đã tự tay vun trồng, chờ đúng thời điểm để lớn lên — hình ảnh của một việc cần thời gian dài mới ra quả: một công việc, một kỹ năng, một mối quan hệ đang xây dần. Khi hạt đủ kiên nhẫn ở yên, rễ vẫn đang âm thầm lớn dù mắt thường chưa thấy gì. Khi nó sốt ruột tự đào luống đất lên để kiểm tra, nó chỉ đang phá vỡ chính quá trình mình cần chờ, khiến mọi thứ phải bắt đầu lại.',
+        visualMotif: 'Hạt lún một nửa vào lớp đất sẫm màu giàu mùn, vài sợi tơ mảnh trong suốt hướng ngược xuống dưới như rễ non thay vì xoè lên trên; một quầng sáng vàng nhạt phát nhẹ ngay dưới bề mặt đất gợi ý sự lớn lên chưa thấy được, lấm tấm rêu và khoáng chất li ti quanh đó.',
+        profile: { domain: 'work', movement: 'tending', storyStage: 'patience',
+          need: 'cần tin rằng công sức âm thầm vẫn đang tích luỹ dù chưa thấy kết quả',
+          gift: 'đủ kiên nhẫn để công sức dài hạn có thời gian ra quả',
+          risk: 'sốt ruột đào xới lại một việc chưa kịp chín, khiến nó phải bắt đầu lại',
+          action: 'chọn tiếp tục thêm một mốc thời gian cụ thể trước khi đánh giá lại có nên đổi hướng' } }
+    ]
+  };
+
+  root.GARDEN_ORACLE_PROFILES = { majors, suitSamples };
 })(window);
