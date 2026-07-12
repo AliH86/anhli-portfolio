@@ -1,5 +1,44 @@
 # Recap — anhli-portfolio (cập nhật 13/7/2026)
 
+## Oracle — duyệt 78 artwork thành phẩm và chốt cách đặt tên theo thần thái riêng (13/7/2026)
+
+- Ali bổ sung nguyên lý sáng tạo cần giữ cho mọi phiên sau: 78 lá đi đúng
+  cảm hứng nguyên thủy của hệ 78, nhưng nhân vật thật là Hạt bồ công anh và
+  hành trình của Hạt qua 78 nội dung. Prompt là điểm khởi hành; nếu artwork
+  thành phẩm hữu duyên mở ra một cảm nhận mới mà vẫn giữ bản chất Hạt, độ lệch
+  đó được coi là thần thái riêng của Dandelion Oracle, không phải lỗi cần ép
+  quay về khuôn Tarot/prompt ban đầu.
+- Số, tên và trạng thái Nở/Khép (xuôi/ngược) do HTML render riêng; artwork
+  raster vẫn không chữ và dùng chung cho hai hướng xoay. Khi đặt tên, xem đồng
+  thời mô tả gốc + hình thành phẩm + chuyển động thật của Hạt. Tên tối đa 4
+  tiếng, ưu tiên bỏ “Hạt”/“Người”/“Kỵ sĩ”, có thể là một hành động; không gọi
+  tay/chân/mắt/tai hoặc vật thể không có trong hình.
+- Đã xem đủ 78/78 PNG theo 5 khối Major 22 + Lửa/Nước/Khí/Đất mỗi khối 14,
+  đối chiếu trực tiếp artwork với `openName`/`closedName`, `coreStory` và
+  `visualMotif`. Kết luận: phần lớn tên đã chốt giữ đúng năng lượng và hình;
+  không đổi hàng loạt chỉ để đồng bộ slug filename hoặc giọng văn.
+- Chỉ sửa 3 lá có lệch hình–tên rõ ràng, đồng bộ cả
+  `garden-oracle-data.js` và `garden-oracle-profiles.js`:
+  - id62 Queen of Swords: `Cắt Cành Che Nắng / Cắt Cành Cần Nắng` →
+    `Rạch Gió Mở Lối / Rạch Gió Thành Vách` (ảnh không có cành; có một đường
+    gió sáng sắc, mở lối hoặc thành vách ngăn).
+  - id66 Three of Pentacles: `Nhiều Hạt Vun Luống` →
+    `Chung Rễ Vun Luống` (ảnh chỉ có một Hạt trên mạng rễ hội tụ; tên Khép
+    `Tự Vun Một Mình` giữ nguyên).
+  - id74 Page of Pentacles: `Tập Nâng Từng Đồng / Muốn Quả Chưa Gieo` →
+    `Chạm Mầm Hiện Thực / Mơ Quả Chưa Gieo` (ảnh không có tay/chân hay động
+    tác nâng; Hạt đang chạm tới một mầm/khoáng sáng nằm trong rễ đất).
+- Rà lại riêng id47 Knight of Cups: file hiện tại vẽ một Hạt nguyên vẹn dưới
+  vòm mưa, không có ngựa/người cưỡi và rất hợp `Mang Mưa Đến Hẹn`. Vì vậy giữ
+  artwork, bỏ cờ lỗi cũ bằng cách đổi tên
+  `seed-47-ky-si-mang-mua-den-hen-NEEDS-REDO-v01.png` thành
+  `seed-47-ky-si-mang-mua-den-hen-v01.png`. Bộ nguồn trong Downloads vẫn đủ
+  78/78; thao tác này ở ngoài repo nên không nằm trong commit Git.
+- Không đổi `bloom`/`closed`, `coreStory`, `visualMotif`, semantic profile,
+  `garden-oracle-synthesis.js`, prompt ảnh hay `index.html` trong pass này.
+  Filename nguồn tiếp tục là nhãn vận hành theo convention
+  `seed-{id}-{slug}-v01.png`; không ép slug cũ chạy theo tên HTML mới.
+
 ## Oracle — đổi tên ngắn cho toàn bộ 78 lá, tối đa 4 âm tiết (13/7/2026)
 
 - Sau khi hoàn tất nội dung + ảnh cho đủ 78/78 hạt, Ali quyết định đặt lại
