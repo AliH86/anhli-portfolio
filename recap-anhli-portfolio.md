@@ -1,5 +1,34 @@
 # Recap — anhli-portfolio (cập nhật 13/7/2026)
 
+## Oracle — đổi tên ngắn cho toàn bộ 78 lá, tối đa 4 âm tiết (13/7/2026)
+
+- Sau khi hoàn tất nội dung + ảnh cho đủ 78/78 hạt, Ali quyết định đặt lại
+  tên bài (`openName`/`closedName`, tức `gardenOpen`/`gardenClosed` trong
+  `garden-oracle-data.js`) — vì số thứ tự và trạng thái Nở/Khép sẽ do lớp
+  HTML tự render riêng, tên không cần mang cả câu mô tả dài như trước
+  (vd "Hạt để gió xuyên qua nỗi đau thật" → "Gió Xuyên Nỗi Đau").
+- Quy tắc chốt cùng Ali: tối đa **4 âm tiết** (đếm theo mỗi tiếng Việt,
+  không phải cụm từ), có thể bỏ chữ "Hạt" hoặc chuyển hẳn sang tên dạng
+  hành động; dùng tên dài hiện tại làm cảm hứng, không bịa ý mới.
+- Đã đổi tên cho toàn bộ 156 tên (78 Nở + 78 Khép), đồng bộ ở CẢ 2 nơi:
+  `garden-oracle-data.js` (nguồn sự thật, field `gardenOpen`/`gardenClosed`)
+  và `garden-oracle-profiles.js` (field `openName`/`closedName`, phải khớp
+  chính xác). Thực hiện bằng script Python thay thế theo từng cặp
+  (id, tên cũ, tên mới) — verify đối chiếu chuỗi cũ xuất hiện đúng 1 lần
+  trước khi ghi, tránh thay nhầm/sót.
+- Verify script node: 78 cards, 0 sai khác giữa 2 file, không tên nào vượt
+  quá 4 âm tiết, không trùng tên mới. Grep xác nhận `index.html` chỉ đọc
+  tên qua field động (`gardenOpen`/`gardenClosed`/`GARDEN_ORACLE_CARDS`),
+  không hardcode chuỗi tên cũ nào — đổi tên không phá vỡ gì đang chạy.
+  Bloom/closed (câu ritual dài) và coreStory/visualMotif/profile GIỮ
+  NGUYÊN, chỉ đổi 2 field tên.
+- Vì đây là một pass kỹ thuật áp dụng đồng loạt lên cả 2 file cho toàn bộ
+  5 khối cùng lúc (không tách được theo suit như lúc viết nội dung), gộp
+  thành 1 commit duy nhất thay vì 5 commit riêng.
+- Cập nhật docblock đầu file của cả `garden-oracle-data.js` và
+  `garden-oracle-profiles.js` ghi rõ quy tắc ≤4 âm tiết cho các lần đổi
+  tên sau này.
+
 ## Oracle — sửa lại lần 2: bớt nhân cách hoá Kỵ sĩ + khoá đúng khung viền (13/7/2026)
 
 - Ali tạo thử 2 ảnh Kỵ sĩ Lửa/Nước theo prompt fix lần 1 (bỏ ngựa) — phản
