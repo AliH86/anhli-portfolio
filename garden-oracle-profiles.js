@@ -734,7 +734,7 @@
         risk: 'hành động quá vội, đúng về lý lẽ nhưng thiếu tử tế trong cách nói ra',
         action: 'nói điều mình tin là đúng, nhưng chọn cách nói tử tế hơn' } },
     {
-      id: 62, tarot: 'Queen of Swords', openName: 'Cắt Cành Che Nắng', closedName: 'Cắt Cành Cần Nắng',
+      id: 62, tarot: 'Queen of Swords', openName: 'Rạch Gió Mở Lối', closedName: 'Rạch Gió Thành Vách',
       element: 'Air', family: 'Swords',
       coreStory: 'Người này cắt gọn một cành cây đang che khuất ánh nắng — hình ảnh của việc đặt ra một ranh giới rõ ràng bằng lời nói thẳng thắn, sự độc lập và sáng suốt là sức mạnh của bạn. Khi nhát cắt đó chỉ gọn đúng phần cần cắt, ánh nắng chiếu vào trở lại cho mọi người. Khi họ cắt cả cành đang cần nắng, dùng sự sắc bén trong lời nói để giữ khoảng cách, tránh phải gần gũi thật sự, cần nhớ rằng ranh giới vững không cần phải lạnh lùng mới hiệu quả.',
       visualMotif: 'Một hình dáng đứng cạnh một nhánh cây vừa được cắt gọn gàng, đường cắt sắc và sạch; nhưng một nhánh nhỏ khác gần đó, vẫn còn xanh và cần ánh sáng, cũng đã bị cắt đi cùng lúc, nằm lìa cành bên cạnh.',
@@ -778,7 +778,7 @@
         risk: 'quá tải vì cố ôm đồm mọi việc cùng lúc mà mất kiểm soát',
         action: 'chọn bớt một việc để tạm gác lại, thay vì cố làm hết tất cả cùng lúc' } },
     {
-      id: 66, tarot: 'Three of Pentacles', openName: 'Nhiều Hạt Vun Luống', closedName: 'Tự Vun Một Mình',
+      id: 66, tarot: 'Three of Pentacles', openName: 'Chung Rễ Vun Luống', closedName: 'Tự Vun Một Mình',
       element: 'Earth', family: 'Pentacles',
       coreStory: 'Nhiều bàn tay cùng vun một luống đất quanh hạt này — hình ảnh của sự hợp tác giữa bạn và người khác đang tạo ra một kết quả chất lượng. Khi hạt để nhiều tay cùng vun luống, khả năng của nó được nhìn thấy và công nhận rõ hơn. Khi nó tự vun luống một mình, cố làm một việc lẽ ra cần nhiều người hơn, kết quả thiếu sự phối hợp, cần nhớ rằng mời thêm người vào không làm giảm giá trị phần mình đóng góp.',
       visualMotif: 'Hạt nằm giữa một luống đất đang được vun bởi nhiều dấu tay/rễ nhỏ khác nhau hội tụ về cùng một điểm, mỗi dấu vết mang một sắc độ ánh sáng hơi khác nhau; kết cấu đất ở đó tơi xốp và đều hơn hẳn phần đất xung quanh.',
@@ -858,7 +858,7 @@
         risk: 'gánh kỳ vọng của cả gia đình hoặc coi tiền bạc là thước đo duy nhất cho giá trị bản thân',
         action: 'chọn giữ lại phần di sản có ý nghĩa với mình, và đặt xuống phần chỉ là gánh nặng' } },
     {
-      id: 74, tarot: 'Page of Pentacles', openName: 'Tập Nâng Từng Đồng', closedName: 'Muốn Quả Chưa Gieo',
+      id: 74, tarot: 'Page of Pentacles', openName: 'Chạm Mầm Hiện Thực', closedName: 'Mơ Quả Chưa Gieo',
       element: 'Earth', family: 'Pentacles',
       coreStory: 'Người này đang tập nâng từng đồng hạt một, từng bước học một kỹ năng thực tế — hình ảnh của việc cam kết với một mục tiêu nhỏ sẽ dẫn bạn đi xa hơn bạn nghĩ. Khi người đó kiên trì tập từng bước, nền tảng vững chắc dần hình thành. Khi họ muốn quả mà chưa chịu gieo, muốn có kết quả ngay mà chưa thật sự bỏ công sức xây nền tảng, cần nhớ rằng kỹ năng nào cũng cần thời gian trước khi ra thành quả.',
       visualMotif: 'Một hình dáng nhỏ hơn, trẻ hơn, đang cố nâng một hạt giống tròn nhỏ bằng cả hai nhánh tơ, tư thế tập trung và cẩn trọng; phía trước có vài hạt giống khác đã được xếp gọn thành một hàng nhỏ như thành quả tích luỹ dần.',
