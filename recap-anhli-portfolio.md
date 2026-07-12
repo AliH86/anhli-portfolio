@@ -186,12 +186,19 @@ toàn ngoài 2 mục cố ý giữ untracked (`.claude/launch.json`,
 - [x] **Fix lag/mất con trỏ trong oracle modal:** wire `shaderSetPaused()` vào mở/đóng modal, giảm blur, tăng scrim đọc chữ.
 - [x] **Fix bug Hero quote bị JS đè về bản cũ mỗi lần tải trang:** xoá hàm `heroQuote()` ghi đè, HTML tĩnh là nguồn duy nhất.
 - [x] **Wording pass toàn trang — huỷ khung phủ định "không phải...mà là":** Hero, CTA lịch, quote About, đoạn "Một lời chào", room "Dẫn dắt".
-- [ ] Routine cập nhật hàng tuần cho `garden-oracle-synthesis.js` (mở rộng `SYNTH_BANK`) — Ali muốn bàn ở session riêng, chưa xử lý ở đây.
+- [ ] **Oracle — bàn tiếp ở session mới:** routine cập nhật hàng tuần cho
+  `garden-oracle-synthesis.js` (mở rộng `SYNTH_BANK`), có thể có phần khác của
+  oracle cũng cần bàn thêm. Ali sẽ mở session riêng cho việc này, khả năng có
+  cả Codex tham gia (2 agent cùng chạm oracle) — session đó nhớ đọc kỹ
+  `AGENT-RULES.md` trước khi sửa, đặc biệt mục "song song 2 agent" và mục
+  commit riêng file data. Chưa xử lý gì ở đây, chỉ ghi nhận.
 - [ ] Rà nốt phần wording còn lại nếu Ali phát hiện thêm (đã fix Hero/calendar/About/Một lời chào/Dẫn dắt, nhưng site còn nhiều section chưa soi hết).
 
 ## Ghi chú kỹ thuật cho phiên sau (deploy mechanics)
-- Sandbox không push/pull được (thiếu creds/mạng) nhưng COMMIT được bình thường. Deploy = viết script `.command` (`git add <file cụ thể> && git commit -m "..." && git pull --no-rebase --no-edit && git push`), `chmod +x` từ sandbox, rồi double-click qua Finder (computer-use) để chạy trên máy thật.
-- Luôn `git add` đúng file liên quan thôi (thường chỉ `index.html`) — có nhiều thay đổi cũ chưa commit (DANDELION_HERO_HANDOFF.md, experience.js, tweaks-app.jsx) không thuộc phạm vi các fix này, không đụng vào.
+- Sandbox không push/pull được (thiếu creds/mạng) nhưng COMMIT được bình thường. Deploy = viết script `.command` (`git pull --no-rebase --no-edit origin main && git push origin main`), `chmod +x` từ sandbox, rồi double-click qua Finder (computer-use) để chạy trên máy thật. Sau khi push, đợi ~30–60s rồi mới fetch lại live để verify — GitHub Pages build có độ trễ, fetch ngay sau push dễ tưởng nhầm là chưa lên.
+- Luôn `git add` đúng file liên quan thôi (thường chỉ `index.html`) — tách commit theo phạm vi (data file riêng, doc riêng, code fix riêng) để log dễ đọc.
+- **Cowork sandbox có thể chặn unlink/rename file trong thư mục đã mount** (`git commit`/`git checkout` báo `error: unable to unlink ...: Operation not permitted`, hoặc kẹt `.git/HEAD.lock` không `rm` được). Đây là khoá ghi mặc định của Cowork lên thư mục portfolio, không phải lỗi git. Cách gỡ: gọi tool `allow_cowork_file_delete` (tham số `file_path` = đường dẫn VM của file/thư mục đang kẹt) — hỏi Ali 1 lần, xong thì xoá/rename lại bình thường cho hết phiên.
+- **Kiến trúc dữ liệu album có 3 tầng, dễ gây bug "hero không cập nhật":** `ALBUMS` viết cứng trong `index.html` (render ngay lúc tải, `renderHeroGarden()` CHỈ chạy 1 lần dùng mảng này) → `music-data.js` (loader) → `music-data-base.js` (kho dữ liệu thật, nạp async qua XHR đồng bộ rồi `merge()` vào `ALBUMS`, nhưng `merge()` không gọi lại `renderHeroGarden()`). Hệ quả: thêm album mới vào `music-data-base.js` là đủ cho Playlist/Discography, nhưng **hero sẽ không thấy** trừ khi album đó cũng được thêm tay vào `ALBUMS` tĩnh trong `index.html`. Nhớ điều này mỗi lần đổi hero album.
 - Không có cách emulate viewport mobile đáng tin cậy qua claude-in-chrome trong môi trường này (`resize_window` không đổi viewport thật; same-origin iframe bị GitHub Pages chặn qua header chống frame). Muốn xác minh CSS mobile phải nhờ Ali chụp màn hình thiết bị thật hoặc đọc cascade cẩn thận.
 
 ## Commit chính liên quan
