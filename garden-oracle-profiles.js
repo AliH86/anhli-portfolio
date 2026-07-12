@@ -3,11 +3,11 @@
    TRẠNG THÁI THEO KHỐI (đúng trình tự "22 + 14 + 14 + 14 + 14" của
    ORACLE-CONTENT-SYSTEM.md §7 bước 5, mỗi khối một commit riêng để review):
      - majors (22 Major)              → ĐỦ 22/22, khối này đã hoàn tất.
-     - suitSamples.Wands  (Lửa, 14)    → mới 1/14 (mẫu schema ban đầu).
+     - suits.Wands  (Lửa, 14)          → ĐỦ 14/14, khối này đã hoàn tất.
      - suitSamples.Cups   (Nước, 14)   → mới 1/14 (mẫu schema ban đầu).
      - suitSamples.Swords (Khí, 14)    → mới 1/14 (mẫu schema ban đầu).
      - suitSamples.Pentacles (Đất, 14) → mới 1/14 (mẫu schema ban đầu).
-   Bốn khối Minor còn lại (13 hạt/nguyên tố) là công việc của các checkpoint
+   Ba khối Minor còn lại (13 hạt/nguyên tố) là công việc của các checkpoint
    kế tiếp, mỗi khối một phiên/commit riêng — không gộp chung theo đúng
    nguyên tắc "không gộp toàn bộ Oracle vào một phiên hoặc một commit lớn".
 
@@ -54,7 +54,8 @@
                   integrating, calling. Mở rộng khi làm 22 Major (ưu tiên tái
                   dùng danh sách trên trước, chỉ thêm khi thật sự cần một sắc
                   thái mới): listening, choosing, steering, turning,
-                  balancing, suspending, entangling.
+                  balancing, suspending, entangling. Mở rộng thêm khi làm 14
+                  Lửa: lifting, racing, carrying, radiating, guiding.
 
      storyStage — vị trí trong một vòng cung tự sự. Với 56 hạt Minor, suy từ
                   rank để nhất quán: Ace→'spark', 2→'choice', 3→'connection',
@@ -309,11 +310,29 @@
 
   if (majors.length !== 22) throw new Error('Garden Oracle majors batch must contain exactly 22 seeds.');
 
-  // Mẫu schema ban đầu cho 4 nguyên tố Minor — 1/14 mỗi nguyên tố, PENDING.
-  // Mở rộng đủ 14/nguyên tố là việc của 4 checkpoint kế tiếp (mỗi khối một
-  // commit riêng), không viết dồn trong lần này.
-  const suitSamples = {
+  // Khối Lửa (Wands) — ĐỦ 14/14, đã hoàn tất theo trình tự rank Ace→King.
+  const suits = {
     Wands: [
+      {
+        id: 22, tarot: 'Ace of Wands', openName: 'Hạt bén lửa đầu mùa', closedName: 'Hạt tắt lửa chưa kịp cháy',
+        element: 'Fire', family: 'Wands',
+        coreStory: 'Một đốm lửa nhỏ vừa bén lên trong hạt này — hình ảnh của một ý tưởng hay hứng thú mới vừa xuất hiện trong bạn: về công việc, một sở thích, một dự định, còn non nhưng có thật. Khi đốm lửa được để yên cho cháy lên, ý tưởng đó có cơ hội trở thành điều thật. Khi nó bị dập tắt quá sớm vì sốt ruột muốn thấy kết quả ngay, ý tưởng chưa kịp có cơ hội chứng minh gì cả.',
+        visualMotif: 'Một đốm lửa nhỏ, ấm, vừa bén sáng ngay tại lõi hạt như tia lửa đầu tiên của một que diêm, ánh sáng còn mỏng manh và hơi chập chờn; vài sợi tơ gần lõi hơi cong lại gần đốm lửa đó như đang được nó sưởi ấm.',
+        profile: { domain: 'action', movement: 'opening', storyStage: 'spark',
+          need: 'cần được phép để một ý tưởng còn non tồn tại mà không phải chứng minh ngay',
+          gift: 'có một ý tưởng hay hứng thú mới thật sự đáng để thử',
+          risk: 'dập tắt một ý tưởng mới quá nhanh vì sốt ruột muốn thấy kết quả ngay',
+          action: 'cho ý tưởng đó thêm một khoảng thời gian cụ thể trước khi quyết định bỏ hay giữ' } },
+      {
+        id: 23, tarot: 'Two of Wands', openName: 'Hạt nhìn về chân trời lạ', closedName: 'Hạt ngại bước khỏi cành quen',
+        element: 'Fire', family: 'Wands',
+        coreStory: 'Hạt này đứng ở mép cành quen, nhìn ra một chân trời lạ chưa từng tới — hình ảnh của việc cân nhắc một hướng đi mới: đổi việc, chuyển chỗ ở, bắt đầu điều gì đó khác. Khi hạt bình tĩnh nhìn xa trước khi quyết định, đó là chuẩn bị đàng hoàng. Khi nó chỉ đứng mãi ở mép cành vì sợ điều mới lạ hơn là vì thật sự thích chỗ cũ, một kế hoạch chỉ trở thành thật khi có hành động thật, không chỉ dừng ở việc nhìn.',
+        visualMotif: 'Hạt đứng chông chênh ngay tại đầu một cành quen thuộc, một bên tán tơ đã hơi nhấc khỏi điểm tựa; phía xa trước mặt là một vùng chân trời mới với ánh sáng khác hẳn màu ánh sáng quen thuộc phía sau nó.',
+        profile: { domain: 'action', movement: 'choosing', storyStage: 'choice',
+          need: 'cần thời gian nhìn xa và cân nhắc trước khi rời một chỗ quen thuộc',
+          gift: 'bình tĩnh nhìn rõ một hướng đi mới trước khi quyết định',
+          risk: 'đứng mãi ở mép cành quen vì sợ điều mới hơn là vì thật sự thích chỗ cũ',
+          action: 'làm một hành động cụ thể, dù nhỏ, để biến kế hoạch từ ý nghĩ thành thật' } },
       {
         id: 24, tarot: 'Three of Wands', openName: 'Hạt thấy gió mang tin về', closedName: 'Hạt đợi tin mà quên nhìn xa',
         element: 'Fire', family: 'Wands',
@@ -323,8 +342,124 @@
           need: 'cần nhìn xa hơn một kết quả cụ thể đang chờ',
           gift: 'thấy được cả tín hiệu xa và cơ hội gần cùng lúc',
           risk: 'chăm chăm một kết quả mà bỏ lỡ cơ hội khác đang mở quanh mình',
-          action: 'ngẩng lên nhìn quanh và ghi ra một cơ hội khác đang có mà chưa để ý tới' } }
-    ],
+          action: 'ngẩng lên nhìn quanh và ghi ra một cơ hội khác đang có mà chưa để ý tới' } },
+      {
+        id: 25, tarot: 'Four of Wands', openName: 'Hạt về dưới cổng hoa mừng', closedName: 'Hạt đứng ngoài ngày vui chung',
+        element: 'Fire', family: 'Wands',
+        coreStory: 'Hạt này bay về ngay dưới một cổng hoa đang mừng lễ — hình ảnh của một dịp vui, một cột mốc đáng ăn mừng đang đến với bạn và những người xung quanh. Khi hạt bay thẳng vào giữa cổng hoa, nó cho phép mình tận hưởng trọn vẹn niềm vui đó. Khi nó cứ đứng mãi bên ngoài dù cổng đã mở, có một mâu thuẫn nhỏ trong gia đình hay nhóm bạn đang khiến niềm vui bị hoãn lại — cần nói ra điều đang vướng, đừng đợi nó tự qua.',
+        visualMotif: 'Hạt bay ngang qua một vòm hoa nhỏ kết bằng những cành hoa dại sáng màu, đối xứng hai bên như một cổng chào; ánh sáng ấm tụ lại ngay dưới vòm cổng trong khi hạt còn cách vòm một khoảng ngắn, như vừa chuẩn bị bay vào.',
+        profile: { domain: 'action', movement: 'arriving', storyStage: 'foundation',
+          need: 'cần cho phép mình tận hưởng trọn vẹn một dịp vui đang đến',
+          gift: 'đón nhận một cột mốc đáng ăn mừng cùng những người xung quanh',
+          risk: 'để một mâu thuẫn nhỏ chưa nói ra làm hoãn lại niềm vui chung',
+          action: 'nói ra điều đang vướng với người trong nhóm, đừng đợi nó tự qua' } },
+      {
+        id: 26, tarot: 'Five of Wands', openName: 'Hạt cọ mình giữa nhiều hạt khác', closedName: 'Hạt va nhau chẳng vì lý do',
+        element: 'Fire', family: 'Wands',
+        coreStory: 'Nhiều hạt đang cọ vào nhau trong cùng một luồng gió chật — hình ảnh của sự cạnh tranh hay bất đồng ý kiến đang xảy ra ở nơi làm việc hay trong nhóm. Khi những va chạm đó giúp mọi người nói rõ ý mình hơn, chúng không xấu, chỉ là một phần của việc cùng nhau tìm ra hướng đi. Khi các hạt cứ va vào nhau chẳng vì lý do rõ ràng, có thể ai đó — kể cả bạn — đang né một cuộc nói chuyện quan trọng hơn; cần chọn đúng việc đáng để tranh luận, bỏ qua phần còn lại.',
+        visualMotif: 'Nhiều hạt bồ công anh cùng bay chen chúc trong một khoảng không gian hẹp, các tán tơ chạm và cọ vào nhau tạo thành những tia sáng nhỏ li ti tại điểm tiếp xúc; không hạt nào bị rối hay gãy, chỉ đang cọ sát qua nhau.',
+        profile: { domain: 'action', movement: 'colliding', storyStage: 'friction',
+          need: 'cần một không gian an toàn để bất đồng ý kiến được nói ra rõ ràng',
+          gift: 'cạnh tranh hay tranh luận lành mạnh giúp mọi người rõ ràng hơn',
+          risk: 'va chạm chẳng vì lý do rõ ràng vì đang né một cuộc nói chuyện quan trọng hơn',
+          action: 'chọn đúng một việc đáng để tranh luận ngay bây giờ, để phần còn lại qua sau' } },
+      {
+        id: 27, tarot: 'Six of Wands', openName: 'Hạt được gió tung lên cao', closedName: 'Hạt cao mà lòng vẫn thấp',
+        element: 'Fire', family: 'Wands',
+        coreStory: 'Một luồng gió mạnh tung hạt này lên rất cao, như một sự công nhận đến đúng lúc — hình ảnh của một thành tích hay lời khen bạn xứng đáng nhận. Khi hạt để mình bay cao mà không cần giảm nhẹ niềm tự hào đó, sự công nhận trở thành trọn vẹn. Khi hạt bay cao mà lòng vẫn thấp, luôn cần thêm lời khen mới thấy mình đủ tốt, thành tích đó dù đạt được cũng chỉ để lại cảm giác trống trải — cần học cách tin vào chính mình trước, không chỉ chờ tán thưởng từ người khác.',
+        visualMotif: 'Hạt được nâng lên rất cao trong khung hình, cao hơn hẳn vị trí thông thường của các hạt khác, một luồng gió sáng rõ đẩy nó từ phía dưới; nhưng ngay dưới lõi hạt có một vùng bóng mờ nhỏ, hơi lệch tông so với phần sáng rực phía trên.',
+        profile: { domain: 'action', movement: 'lifting', storyStage: 'recovery',
+          need: 'cần cho phép mình tự hào về một thành tích mà không giảm nhẹ nó',
+          gift: 'được công nhận đúng lúc và xứng đáng cho công sức của mình',
+          risk: 'luôn cần lời khen từ người khác mới thấy mình đủ tốt, dù đã đạt được thành tích',
+          action: 'tự nói với chính mình một câu công nhận thành tích, không chờ ai nói trước' } },
+      {
+        id: 28, tarot: 'Seven of Wands', openName: 'Hạt đứng vững giữa hàng gió công', closedName: 'Hạt gồng mình chống mọi ngọn gió',
+        element: 'Fire', family: 'Wands',
+        coreStory: 'Hạt này đứng vững một mình giữa nhiều luồng gió công dồn tới từ mọi phía — hình ảnh của việc bảo vệ một quan điểm, một quyết định, hay một ranh giới quan trọng. Khi hạt chỉ giữ vững đúng vị trí cần giữ, điều đó là đúng, không phải cứng đầu. Khi nó gồng mình chống lại mọi ngọn gió, kể cả những góp ý không thật sự đe dọa gì, nó đang lãng phí sức vào những trận không đáng — cần chọn đúng trận nào thật sự đáng giữ, còn lại có thể bỏ qua.',
+        visualMotif: 'Hạt đứng ở một vị trí cao hơn hẳn so với nhiều luồng gió nhỏ đang thổi dồn từ các hướng phía dưới, thân hạt nghiêng chống lại nhưng không gãy; một vài luồng gió ở rìa ngoài khung hình chỉ lướt nhẹ qua mà không thật sự chạm tới hạt.',
+        profile: { domain: 'action', movement: 'defending', storyStage: 'patience',
+          need: 'cần bảo vệ một ranh giới hay quan điểm quan trọng của mình',
+          gift: 'giữ vững đúng vị trí cần giữ trước áp lực từ nhiều phía',
+          risk: 'gồng mình chống lại cả những góp ý không thật sự đe dọa gì',
+          action: 'chọn đúng một điều thật sự đáng giữ vững lúc này, bỏ qua phần còn lại' } },
+      {
+        id: 29, tarot: 'Eight of Wands', openName: 'Hạt lao theo chiều gió thuận', closedName: 'Hạt vướng lại giữa đường gió',
+        element: 'Fire', family: 'Wands',
+        coreStory: 'Hạt này đang lao rất nhanh theo một chiều gió thuận, gần như không chạm cản gì — hình ảnh của việc mọi thứ đang tiến triển nhanh và thuận lợi: một tin nhắn, một quyết định, một kế hoạch đang chuyển động tốt. Khi hạt để mình lao theo đà đó, mọi việc tới đích nhanh chóng. Khi nó vướng lại giữa đường gió, bị trì hoãn hơn mong đợi hoặc đang cố làm quá nhiều việc cùng lúc, cần chọn một việc để tiến trước, phần còn lại có thể chờ.',
+        visualMotif: 'Hạt lao theo một đường chéo dài xuyên suốt gần hết khung hình với vệt sáng mảnh kéo dài phía sau như một tia lửa tốc độ; không có gì cản trên đường bay, tán tơ ép sát gọn theo hướng chuyển động.',
+        profile: { domain: 'action', movement: 'racing', storyStage: 'momentum',
+          need: 'cần để mọi việc đang thuận lợi tiếp tục chuyển động mà không cản nó lại',
+          gift: 'mọi việc đang tiến triển nhanh và thuận lợi đúng lúc',
+          risk: 'bị trì hoãn hơn mong đợi vì đang cố làm quá nhiều việc cùng lúc',
+          action: 'chọn một việc để ưu tiên hoàn thành trước, để phần còn lại chờ' } },
+      {
+        id: 30, tarot: 'Nine of Wands', openName: 'Hạt đứng gác sau trận gió tan', closedName: 'Hạt thủ mình dù gió đã ngưng',
+        element: 'Fire', family: 'Wands',
+        coreStory: 'Hạt này vẫn đứng gác cẩn trọng dù trận gió dữ vừa qua đã tan hẳn — hình ảnh của việc đã trải qua nhiều khó khăn và vẫn đang cố gắng, gần tới đích. Khi sự cảnh giác đó phản ánh đúng kinh nghiệm đã có, nó là một phần hợp lý của hành trình. Khi hạt vẫn phòng thủ như thể trận gió còn ở đó dù nó đã ngưng từ lâu, cần cho phép mình thả lỏng một chút, xem thử có thật cần cảnh giác vậy không.',
+        visualMotif: 'Hạt đứng nghiêng cảnh giác, một vài sợi tơ mang vết xước nhẹ như dấu tích còn lại từ những cơn gió đã qua; không khí xung quanh đã hoàn toàn tĩnh lặng, không còn vệt gió động nào, nhưng tư thế hạt vẫn như đang phòng bị.',
+        profile: { domain: 'action', movement: 'defending', storyStage: 'threshold',
+          need: 'cần được công nhận rằng mình đã cố gắng qua nhiều khó khăn và gần tới đích',
+          gift: 'sự cảnh giác lúc này đến từ kinh nghiệm thật, không phải vô cớ',
+          risk: 'vẫn phòng thủ như thể khó khăn còn ở đó dù nó đã qua từ lâu',
+          action: 'thử thả lỏng một chút và xem có thật cần cảnh giác nhiều như vậy không' } },
+      {
+        id: 31, tarot: 'Ten of Wands', openName: 'Hạt mang trọn mùa về đích', closedName: 'Hạt gánh hết mà không chịu buông',
+        element: 'Fire', family: 'Wands',
+        coreStory: 'Hạt này đang mang trọn cả một mùa nặng trĩu về gần tới đích — hình ảnh của việc gần hoàn tất một trách nhiệm lớn: công việc, một dự án, một cam kết. Khi hạt biết sức nặng này có ý nghĩa và sắp về tới nơi, gánh nặng đó xứng đáng. Khi nó ôm quá nhiều việc một mình, biến khả năng của mình thành gánh nặng cho chính mình, thì nhờ ai đó giúp không phải là thất bại.',
+        visualMotif: 'Hạt gập nhẹ dưới sức nặng của nhiều bó nhỏ vật liệu thực vật buộc quanh thân, tư thế hơi khom về phía trước như đang gắng bước những bước cuối; đích đến hiện lờ mờ phía xa dưới dạng một quầng sáng ấm nhỏ.',
+        profile: { domain: 'action', movement: 'carrying', storyStage: 'culmination',
+          need: 'cần biết rằng sức nặng mình đang mang có ý nghĩa và sắp về tới đích',
+          gift: 'gần hoàn tất một trách nhiệm lớn bằng chính sức của mình',
+          risk: 'ôm quá nhiều việc một mình, biến khả năng của mình thành gánh nặng cho chính mình',
+          action: 'nhờ một người cụ thể giúp một phần việc, thay vì tự ôm hết' } },
+      {
+        id: 32, tarot: 'Page of Wands', openName: 'Người đưa tin mang lửa mới', closedName: 'Người cầm lửa mà chưa dám châm',
+        element: 'Fire', family: 'Wands',
+        coreStory: 'Người này mang theo một ngọn lửa mới, còn chưa biết nó sẽ cháy thành gì — hình ảnh của một sự tò mò, một ý tưởng mới, hay một phiên bản khác của bạn đang muốn được thử. Khi người đó để ngọn lửa bắt đầu, không cần biết trước nó dẫn tới đâu, sự tò mò ấy được sống trọn. Khi họ cứ cầm lửa mà chưa dám châm, ngại vì sợ mình chưa đủ giỏi hay chưa đủ sẵn sàng, cần nhớ rằng không ai từng sẵn sàng trước khi bắt đầu cả.',
+        visualMotif: 'Một hạt nhỏ hơn, trẻ hơn về hình dáng, cầm theo một đốm lửa nhỏ lơ lửng ngay phía trước mình như một ngọn đuốc chưa châm hẳn; tư thế nghiêng người tò mò về phía trước, một nhánh tơ đưa ra như đang chuẩn bị đưa lửa đi xa hơn.',
+        profile: { domain: 'action', movement: 'calling', storyStage: 'curiosity',
+          need: 'cần được phép tò mò và thử một ý tưởng mới mà không cần biết trước kết quả',
+          gift: 'một sự tò mò hay ý tưởng mới đang muốn được sống thử',
+          risk: 'cầm lửa mà chưa dám châm vì sợ mình chưa đủ giỏi hay chưa đủ sẵn sàng',
+          action: 'bắt đầu thử phần nhỏ nhất của ý tưởng đó ngay hôm nay, dù chưa thấy chắc chắn' } },
+      {
+        id: 33, tarot: 'Knight of Wands', openName: 'Kỵ sĩ phi qua đồng gió', closedName: 'Kỵ sĩ đốt đường mà chưa tới đâu',
+        element: 'Fire', family: 'Wands',
+        coreStory: 'Một kỵ sĩ phi rất nhanh qua một cánh đồng gió lớn — hình ảnh của lúc cần hành động nhanh và dứt khoát, không nghĩ quá lâu trước khi bước vì cơ hội này cần tốc độ. Khi tốc độ đó thật sự đưa người kỵ sĩ tới một đích cụ thể, hành động dứt khoát là đúng lúc. Khi họ dồn rất nhiều năng lượng vào một việc mà chưa thật sự đi tới đâu, cần chậm một nhịp để chắc mình đang tiến tới, không phải đang chạy trốn.',
+        visualMotif: 'Một hình dáng cưỡi ngựa nhỏ được tạo hình từ vật liệu thực vật khô, phi băng qua khung hình để lại một vệt lửa mảnh phía sau như bụi đường cháy; phía trước mặt, đường chân trời vẫn còn mờ, chưa rõ điểm đến.',
+        profile: { domain: 'action', movement: 'racing', storyStage: 'pursuit',
+          need: 'cần hành động nhanh và dứt khoát khi cơ hội thật sự cần tốc độ',
+          gift: 'đủ quyết đoán để hành động ngay khi cơ hội xuất hiện',
+          risk: 'dồn rất nhiều năng lượng vào một việc mà chưa thật sự đi tới đâu',
+          action: 'chậm một nhịp để chắc mình đang tiến tới, không phải đang chạy trốn điều gì' } },
+      {
+        id: 34, tarot: 'Queen of Wands', openName: 'Người giữ lửa ấm cả khu vườn', closedName: 'Người tỏa sáng mà tự cạn mình',
+        element: 'Fire', family: 'Wands',
+        coreStory: 'Người này giữ một ngọn lửa đủ ấm để sưởi cho cả khu vườn xung quanh — hình ảnh của một sự tự tin thật, có sức hút tự nhiên với người khác. Khi ngọn lửa đó được nuôi đều, người này tỏa sáng mà không cần thu nhỏ lại để ai thấy dễ chịu hơn. Khi họ phải luôn tỏ ra rực rỡ, ổn định trước mặt người khác đến mức tự kiệt sức, cần cho phép mình có một ngày không cần tỏa sáng cũng không sao.',
+        visualMotif: 'Hạt trung tâm toả ra một quầng lửa ấm bao phủ nhẹ cả một vùng thực vật xung quanh trong khung hình, ánh sáng lan đều ra ngoài; nhưng ngay tại lõi phát sáng có một điểm nhỏ hơi mờ đi so với phần toả sáng xung quanh, như đang cạn dần từ bên trong.',
+        profile: { domain: 'action', movement: 'radiating', storyStage: 'nurture',
+          need: 'cần được là chính mình rực rỡ mà không phải thu nhỏ lại vì người khác',
+          gift: 'sự tự tin thật có sức hút tự nhiên, sưởi ấm cho cả những người xung quanh',
+          risk: 'phải luôn tỏ ra rực rỡ, ổn định trước mặt người khác đến mức tự kiệt sức',
+          action: 'cho phép mình có một ngày không cần tỏa sáng, chỉ cần là mình' } },
+      {
+        id: 35, tarot: 'King of Wands', openName: 'Người cầm đuốc dẫn đường gió', closedName: 'Người giữ đuốc mà chắn lối người',
+        element: 'Fire', family: 'Wands',
+        coreStory: 'Người này cầm một ngọn đuốc đủ sáng để dẫn đường cho cả luồng gió phía sau — hình ảnh của một tầm nhìn đủ rõ để dẫn dắt người khác, dám chịu trách nhiệm cho điều mình tin là đúng. Khi ngọn đuốc soi đường mà vẫn để người khác tự bước, đó là lãnh đạo thật. Khi họ giữ đuốc theo cách chắn luôn lối đi của người khác, áp đặt cách nghĩ của mình hoặc hứa nhiều hơn có thể giữ, cần nhớ rằng lãnh đạo thật không cần phải độc đoán.',
+        visualMotif: 'Một hình dáng cầm một ngọn đuốc lớn giơ cao phía trước, ánh sáng từ đuốc chiếu thành một vệt đường rõ ràng phía trước mặt; phía sau, nhiều luồng gió nhỏ khác đang theo sau vệt sáng đó ở một khoảng cách vừa đủ, không bị che khuất.',
+        profile: { domain: 'action', movement: 'guiding', storyStage: 'mastery',
+          need: 'cần dám chịu trách nhiệm dẫn dắt người khác theo điều mình tin là đúng',
+          gift: 'tầm nhìn đủ rõ để soi đường mà vẫn để người khác tự bước đi',
+          risk: 'áp đặt cách nghĩ của mình lên người khác hoặc hứa nhiều hơn mình có thể giữ',
+          action: 'soi đường bằng ví dụ cụ thể của mình, thay vì áp đặt cách nghĩ lên người khác' } }
+    ]
+  };
+
+  // Mẫu schema ban đầu cho 3 nguyên tố Minor còn lại — 1/14 mỗi nguyên tố,
+  // PENDING. Mở rộng đủ 14/nguyên tố là việc của 3 checkpoint kế tiếp (mỗi
+  // khối một commit riêng), không viết dồn trong lần này.
+  const suitSamples = {
     Cups: [
       {
         id: 43, tarot: 'Eight of Cups', openName: 'Hạt rời vũng nước đã cạn nghĩa', closedName: 'Hạt quay lại vũng nước đã cạn',
@@ -363,5 +498,5 @@
     ]
   };
 
-  root.GARDEN_ORACLE_PROFILES = { majors, suitSamples };
+  root.GARDEN_ORACLE_PROFILES = { majors, suits, suitSamples };
 })(window);

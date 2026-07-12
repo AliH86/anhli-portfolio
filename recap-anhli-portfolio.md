@@ -1,4 +1,29 @@
-# Recap — anhli-portfolio (cập nhật 12/7/2026, khuya)
+# Recap — anhli-portfolio (cập nhật 13/7/2026)
+
+## Oracle — rename 22 ảnh Major + hoàn tất core-story 14 Lửa (13/7/2026)
+
+- Ali tạo 22 ảnh (qua ChatGPT image, không phải Google Imagen — filename gốc
+  `ChatGPT Image ...`) trong `~/Downloads/AnhLi_Dandelion Oracle/`, đúng thứ
+  tự 22 prompt trong `ORACLE-ASSET-PROMPTS-MAJOR.md`. Claude request quyền
+  truy cập folder này (không phải workspace project), xem từng ảnh, đối
+  chiếu visual motif để xác nhận thứ tự khớp 100% với id 0–21, rồi rename
+  bằng script Python thành `seed-{id}-{slug}-v01.png` (giữ .png vì đây là
+  bản master lossless; webp xuất riêng lúc lên site, theo đúng
+  ORACLE-ASSET-PROMPT.md). Không commit ảnh vào repo — folder này nằm ngoài
+  workspace project, chỉ rename tại chỗ.
+- Ali quyết đi thẳng bước 5 (viết văn bản 22+56) mà bỏ qua lo ngại safe zone
+  ở 2/5 ảnh mẫu — xử lý bằng overlay HTML sau, không regenerate ảnh.
+- **Khối Lửa (Wands) hoàn tất 14/14** trong `garden-oracle-profiles.js`
+  (`GARDEN_ORACLE_PROFILES.suits.Wands`), theo đúng trình tự rank Ace→King.
+  Verify bằng script: domain khớp 100% `SUIT_DOMAIN.Wands` ('action') đã khoá
+  trong `garden-oracle-synthesis.js`; tarot/openName/closedName/element khớp
+  100% `GARDEN_ORACLE_CARDS`; không trùng id hay visualMotif với 22 Major đã
+  có trước đó (36 hạt đã viết / 78).
+- movement vocabulary mở rộng thêm 5 giá trị khi làm khối này: lifting,
+  racing, carrying, radiating, guiding — ghi rõ trong header file.
+- Việc kế tiếp (chưa làm): viết prompt Imagen cho 14 Lửa (nếu Ali muốn ảnh
+  ngay) và bắt đầu checkpoint 14 Nước — mỗi khối vẫn một commit riêng, không
+  gộp.
 
 ## Oracle — 22 prompt Imagen cho khối Major (12/7/2026, khuya)
 
