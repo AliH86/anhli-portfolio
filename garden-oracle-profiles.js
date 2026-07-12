@@ -5,11 +5,11 @@
      - majors (22 Major)              → ĐỦ 22/22, khối này đã hoàn tất.
      - suits.Wands  (Lửa, 14)          → ĐỦ 14/14, khối này đã hoàn tất.
      - suits.Cups   (Nước, 14)         → ĐỦ 14/14, khối này đã hoàn tất.
-     - suitSamples.Swords (Khí, 14)    → mới 1/14 (mẫu schema ban đầu).
-     - suitSamples.Pentacles (Đất, 14) → mới 1/14 (mẫu schema ban đầu).
-   Hai khối Minor còn lại (Khí, Đất) là công việc của các checkpoint kế tiếp,
-   mỗi khối một phiên/commit riêng — không gộp chung theo đúng nguyên tắc
-   "không gộp toàn bộ Oracle vào một phiên hoặc một commit lớn".
+     - suits.Swords (Khí, 14)          → ĐỦ 14/14, khối này đã hoàn tất.
+     - suits.Pentacles (Đất, 14)       → ĐỦ 14/14, khối này đã hoàn tất.
+   Toàn bộ 78/78 hạt (22 Major + 56 Minor) đã có đủ coreStory + hồ sơ nghĩa,
+   mỗi khối được viết và commit riêng theo đúng nguyên tắc "không gộp toàn bộ
+   Oracle vào một phiên hoặc một commit lớn".
 
    File này KHÔNG được nạp vào index.html ở bước này và không đụng tới
    garden-oracle-data.js hay garden-oracle-synthesis.js. `domain` của 22 Major
@@ -57,7 +57,10 @@
                   balancing, suspending, entangling. Mở rộng thêm khi làm 14
                   Lửa: lifting, racing, carrying, radiating, guiding. Mở rộng
                   thêm khi làm 14 Nước: sharing, gathering, noticing,
-                  remembering, savoring.
+                  remembering, savoring. Mở rộng thêm khi làm 14 Khí: cutting,
+                  reflecting, concealing, confessing, dawning, watching,
+                  pruning, judging. Mở rộng thêm khi làm 14 Đất: juggling,
+                  seeking, practicing, flourishing, plodding.
 
      storyStage — vị trí trong một vòng cung tự sự. Với 56 hạt Minor, suy từ
                   rank để nhất quán: Ace→'spark', 2→'choice', 3→'connection',
@@ -602,35 +605,293 @@
         action: 'chia sẻ một cảm xúc thật của mình với một người thân cận, thay vì giữ kín' } }
   ];
 
-  // Mẫu schema ban đầu cho 2 nguyên tố Minor còn lại — 1/14 mỗi nguyên tố,
-  // PENDING. Mở rộng đủ 14/nguyên tố là việc của 2 checkpoint kế tiếp (mỗi
-  // khối một commit riêng), không viết dồn trong lần này.
-  const suitSamples = {
-    Swords: [
-      {
-        id: 55, tarot: 'Six of Swords', openName: 'Hạt theo gió sang bờ yên hơn', closedName: 'Hạt mang gió cũ sang bờ mới',
-        element: 'Air', family: 'Swords',
-        coreStory: 'Hạt này đang băng qua một khoảng gió động để sang một bờ yên hơn — hình ảnh của việc chuyển sang một giai đoạn mới: công việc mới, chỗ ở mới, một nhịp sống ổn định hơn. Chuyến đi chậm nhưng chắc, không có gì kịch tính. Khi hạt bay nhẹ, chỉ mang đúng phần cần thiết, nó thật sự đang tới bờ mới. Khi nó còn vướng những sợi tơ cũ — tổn thương hay thói quen chưa buông — nó chỉ đang mang gió cũ sang một chỗ mới mà chưa thật sự rời khỏi chỗ cũ.',
-        visualMotif: 'Hạt bay là là ngang một mặt nước tối phẳng lặng như gương, quỹ đạo phía trước êm với các vệt gió mảnh song song; vài sợi tơ phía sau vướng nhẹ một lớp sợi tối màu mảnh như đang bị kéo lê theo, tương phản với phần tán phía trước gọn và sạch.',
-        profile: { domain: 'decision', movement: 'crossing', storyStage: 'recovery',
-          need: 'cần được phép chuyển sang giai đoạn yên ổn hơn mà không phải dứt khoát ngay lập tức',
-          gift: 'đang chuyển động đúng hướng, chậm nhưng chắc, về phía yên ổn hơn',
-          risk: 'mang tổn thương hay thói quen cũ sang hoàn cảnh mới mà chưa thật sự để lại phía sau',
-          action: 'chọn một thói quen hay cảm xúc cụ thể để chủ động để lại trước khi bước tiếp' } }
-    ],
-    Pentacles: [
-      {
-        id: 70, tarot: 'Seven of Pentacles', openName: 'Hạt kiên nhẫn chờ luống đất chín', closedName: 'Hạt sốt ruột đào lại luống chưa chín',
-        element: 'Earth', family: 'Pentacles',
-        coreStory: 'Hạt này nằm im trong một luống đất mà nó đã tự tay vun trồng, chờ đúng thời điểm để lớn lên — hình ảnh của một việc cần thời gian dài mới ra quả: một công việc, một kỹ năng, một mối quan hệ đang xây dần. Khi hạt đủ kiên nhẫn ở yên, rễ vẫn đang âm thầm lớn dù mắt thường chưa thấy gì. Khi nó sốt ruột tự đào luống đất lên để kiểm tra, nó chỉ đang phá vỡ chính quá trình mình cần chờ, khiến mọi thứ phải bắt đầu lại.',
-        visualMotif: 'Hạt lún một nửa vào lớp đất sẫm màu giàu mùn, vài sợi tơ mảnh trong suốt hướng ngược xuống dưới như rễ non thay vì xoè lên trên; một quầng sáng vàng nhạt phát nhẹ ngay dưới bề mặt đất gợi ý sự lớn lên chưa thấy được, lấm tấm rêu và khoáng chất li ti quanh đó.',
-        profile: { domain: 'work', movement: 'tending', storyStage: 'patience',
-          need: 'cần tin rằng công sức âm thầm vẫn đang tích luỹ dù chưa thấy kết quả',
-          gift: 'đủ kiên nhẫn để công sức dài hạn có thời gian ra quả',
-          risk: 'sốt ruột đào xới lại một việc chưa kịp chín, khiến nó phải bắt đầu lại',
-          action: 'chọn tiếp tục thêm một mốc thời gian cụ thể trước khi đánh giá lại có nên đổi hướng' } }
-    ]
-  };
+  // Khối Khí (Swords) — ĐỦ 14/14, đã hoàn tất theo trình tự rank Ace→King.
+  suits.Swords = [
+    {
+      id: 50, tarot: 'Ace of Swords', openName: 'Hạt được gió cắt rõ đường bay', closedName: 'Hạt đau vì lưỡi gió quá sắc',
+      element: 'Air', family: 'Swords',
+      coreStory: 'Một luồng gió sắc vừa cắt qua, làm rõ hẳn đường bay của hạt này — hình ảnh của một sự thật hay một quyết định đang trở nên rõ ràng với bạn. Khi hạt để luồng gió đó cắt qua và tin vào điều mình vừa nhận ra, dù hơi khó nghe, sự rõ ràng ấy là món quà. Khi lưỡi gió sắc kia gây đau nhiều hơn cần thiết — một lời nói làm ai đó tổn thương, hoặc một điều bạn biết rõ nhưng chưa dám nói ra — cần nhớ rằng sự thật không cần phải nói theo cách gây tổn thương.',
+      visualMotif: 'Một luồng ánh sáng mảnh, sắc như lưỡi dao, cắt ngang qua chính giữa khung hình ngay phía trên lõi hạt, để lại một đường viền sáng rõ nét hiếm thấy ở các hạt khác; tán tơ phía sau đường cắt đó rõ nét và gọn gàng hơn hẳn phần chưa được cắt qua.',
+      profile: { domain: 'decision', movement: 'cutting', storyStage: 'spark',
+        need: 'cần tin vào một sự thật hay nhận thức mới vừa trở nên rõ ràng',
+        gift: 'một sự thật hay quyết định đang trở nên rõ ràng, đáng để tin',
+        risk: 'nói ra sự thật theo cách gây tổn thương nhiều hơn cần thiết',
+        action: 'nói ra điều mình biết rõ, nhưng chọn cách nói không làm ai tổn thương thêm' } },
+    {
+      id: 51, tarot: 'Two of Swords', openName: 'Hạt lặng giữa hai luồng gió', closedName: 'Hạt bịt mắt giữa hai luồng gió',
+      element: 'Air', family: 'Swords',
+      coreStory: 'Hạt này đứng lặng giữa hai luồng gió ngược chiều, chưa nghiêng hẳn về bên nào — hình ảnh của việc tạm chưa quyết định giữa hai lựa chọn, và điều đó ổn. Khi hạt cho phép mình tĩnh lại một khoảng trước khi chọn, đó là chuẩn bị cần thiết. Khi nó bịt mắt giữa hai luồng gió, né tránh nhìn thẳng vào thông tin thật vì sợ phải quyết định, cần nhớ rằng sự bế tắc thường vì thiếu thông tin, không phải vì thiếu can đảm.',
+      visualMotif: 'Hạt lơ lửng đứng yên chính giữa hai luồng gió ánh sáng đối xứng thổi từ hai phía ngược nhau, cả hai luồng đều mờ nhạt như nhau; tán tơ hạt khép gọn lại, không nghiêng về bên nào.',
+      profile: { domain: 'decision', movement: 'holding', storyStage: 'choice',
+        need: 'cần một khoảng lặng để tĩnh lại trước khi chọn giữa hai điều',
+        gift: 'biết tạm dừng quyết định khi chưa đủ rõ ràng, thay vì vội chọn',
+        risk: 'né tránh nhìn thẳng vào thông tin thật vì sợ phải quyết định',
+        action: 'tìm thêm một thông tin cụ thể còn thiếu trước khi chọn tiếp' } },
+    {
+      id: 52, tarot: 'Three of Swords', openName: 'Hạt để gió xuyên qua nỗi đau thật', closedName: 'Hạt giữ mãi vết gió đã cắt',
+      element: 'Air', family: 'Swords',
+      coreStory: 'Hạt này để một luồng gió xuyên thẳng qua mình, chạm đúng vào nỗi đau thật — hình ảnh của việc cho phép mình cảm nhận trọn vẹn một nỗi đau: một chia tay, một lời nói làm tổn thương. Khi hạt để gió xuyên qua và cảm nhận trọn vẹn, đó là bước đầu để lành lại. Khi nó giữ mãi vết gió đã cắt, chưa từng gọi tên vết thương cũ ra để thật sự bắt đầu chữa lành, cần nói nó ra, dù chỉ với chính mình.',
+      visualMotif: 'Một luồng gió mảnh, sắc, xuyên thẳng qua chính giữa lõi hạt để lại một vệt sáng mờ chạy dọc thân, không phá vỡ cấu trúc hạt nhưng để lại dấu vết rõ; vài giọt sương nhỏ đọng ngay tại điểm gió xuyên qua như giọt nước mắt.',
+      profile: { domain: 'decision', movement: 'releasing', storyStage: 'connection',
+        need: 'cần được phép cảm nhận trọn vẹn một nỗi đau thật, không né tránh nó',
+        gift: 'cho phép mình cảm nhận nỗi đau trọn vẹn là bước đầu để lành lại',
+        risk: 'giữ một vết thương cũ mà chưa từng gọi tên nó ra để thật sự chữa lành',
+        action: 'nói ra vết thương đó, dù chỉ với chính mình, thành lời cụ thể' } },
+    {
+      id: 53, tarot: 'Four of Swords', openName: 'Hạt nằm yên chờ gió lặng', closedName: 'Hạt không yên dù gió đã ngưng',
+      element: 'Air', family: 'Swords',
+      coreStory: 'Hạt này nằm yên, chờ cho một cơn gió lớn lặng hẳn — hình ảnh của việc cần nghỉ ngơi sau một giai đoạn căng thẳng, và nghỉ ngơi lúc này không phải là yếu đuối. Khi hạt cho phép mình thật sự nằm yên, sức lực dần được phục hồi. Khi nó không yên dù gió đã ngưng từ lâu, kiệt sức nhưng vẫn tự trách bản thân ngay cả lúc dừng lại, cần nhớ rằng nghỉ ngơi không cần phải "xứng đáng" mới được phép.',
+      visualMotif: 'Hạt nằm ngang, bất động, giữa một khoảng không hoàn toàn tĩnh lặng không còn vệt gió nào; tán tơ khép nhẹ và đều, tư thế thư giãn rõ rệt khác hẳn dáng đứng thẳng thường thấy của các hạt khác.',
+      profile: { domain: 'decision', movement: 'resting', storyStage: 'foundation',
+        need: 'cần nghỉ ngơi thật sự sau một giai đoạn căng thẳng, không phải yếu đuối',
+        gift: 'cho phép mình nghỉ ngơi trọn vẹn để phục hồi sức lực',
+        risk: 'kiệt sức nhưng không cho phép mình thật sự nghỉ, vẫn tự trách bản thân',
+        action: 'cho phép mình nghỉ ngơi hôm nay mà không cần cảm thấy phải xứng đáng mới được nghỉ' } },
+    {
+      id: 54, tarot: 'Five of Swords', openName: 'Hạt nhìn lại trận gió vừa qua', closedName: 'Hạt thắng gió mà mất bạn đồng hành',
+      element: 'Air', family: 'Swords',
+      coreStory: 'Hạt này nhìn lại một trận gió tranh chấp vừa qua — hình ảnh của một cuộc tranh cãi hay xung đột đã kết thúc, đáng để nhìn lại xem thắng thua lúc đó có còn quan trọng như từng nghĩ. Khi hạt thật sự nhìn lại và buông bớt phần không còn quan trọng, nó nhẹ nhõm hơn. Khi nó thắng gió mà mất bạn đồng hành, giữ oán giận và lặp lại cùng một cách phản ứng mỗi lần có xung đột, cần nhớ có những trận thắng không đáng cái giá phải trả.',
+      visualMotif: 'Hạt quay đầu nhìn lại phía sau, nơi một vài sợi tơ khác đã rời xa dần theo một hướng khác; vệt gió của trận tranh chấp cũ vẫn còn lưu lại mờ nhạt phía xa, không còn động nhưng vẫn nhìn thấy được.',
+      profile: { domain: 'decision', movement: 'reflecting', storyStage: 'friction',
+        need: 'cần nhìn lại một xung đột đã qua để thấy rõ nó còn quan trọng đến đâu',
+        gift: 'biết buông bớt phần không còn quan trọng sau một cuộc tranh cãi đã qua',
+        risk: 'giữ oán giận từ một cuộc cãi vã cũ, lặp lại cùng một cách phản ứng mỗi lần xung đột',
+        action: 'tự hỏi trận thắng đó có đáng với cái giá đã mất hay không' } },
+    {
+      id: 55, tarot: 'Six of Swords', openName: 'Hạt theo gió sang bờ yên hơn', closedName: 'Hạt mang gió cũ sang bờ mới',
+      element: 'Air', family: 'Swords',
+      coreStory: 'Hạt này đang băng qua một khoảng gió động để sang một bờ yên hơn — hình ảnh của việc chuyển sang một giai đoạn mới: công việc mới, chỗ ở mới, một nhịp sống ổn định hơn. Chuyến đi chậm nhưng chắc, không có gì kịch tính. Khi hạt bay nhẹ, chỉ mang đúng phần cần thiết, nó thật sự đang tới bờ mới. Khi nó còn vướng những sợi tơ cũ — tổn thương hay thói quen chưa buông — nó chỉ đang mang gió cũ sang một chỗ mới mà chưa thật sự rời khỏi chỗ cũ.',
+      visualMotif: 'Hạt bay là là ngang một mặt nước tối phẳng lặng như gương, quỹ đạo phía trước êm với các vệt gió mảnh song song; vài sợi tơ phía sau vướng nhẹ một lớp sợi tối màu mảnh như đang bị kéo lê theo, tương phản với phần tán phía trước gọn và sạch.',
+      profile: { domain: 'decision', movement: 'crossing', storyStage: 'recovery',
+        need: 'cần được phép chuyển sang giai đoạn yên ổn hơn mà không phải dứt khoát ngay lập tức',
+        gift: 'đang chuyển động đúng hướng, chậm nhưng chắc, về phía yên ổn hơn',
+        risk: 'mang tổn thương hay thói quen cũ sang hoàn cảnh mới mà chưa thật sự để lại phía sau',
+        action: 'chọn một thói quen hay cảm xúc cụ thể để chủ động để lại trước khi bước tiếp' } },
+    {
+      id: 56, tarot: 'Seven of Swords', openName: 'Hạt lặng lẽ tìm đường riêng', closedName: 'Hạt giấu đường mà tự lạc',
+      element: 'Air', family: 'Swords',
+      coreStory: 'Hạt này lặng lẽ tìm một đường bay riêng, kín đáo tách khỏi nhóm — hình ảnh của việc cần tự xoay xở một mình để giải quyết một việc, điều đó hợp lý lúc này, không phải trốn tránh. Khi hạt thật sự cần một mình để giải quyết việc riêng, con đường kín đáo đó là hợp lý. Khi nó giấu đường mà tự lạc, giấu diếm điều gì đó kể cả với chính mình, có nguy cơ sớm bị lộ ra, cần nhớ rằng nói thật sớm còn dễ hơn để nó vỡ ra sau.',
+      visualMotif: 'Hạt tách khỏi một nhóm hạt mờ phía xa, bay theo một đường vòng khuất sau vài đám lá cây, cố tình tránh một vùng ánh sáng rõ; một vài sợi tơ khẽ vướng vào lá như dấu vết còn sót lại của đường đi.',
+      profile: { domain: 'decision', movement: 'concealing', storyStage: 'patience',
+        need: 'cần một khoảng riêng tư để tự xoay xở một việc, không phải để trốn tránh',
+        gift: 'biết khi nào cần kín đáo tự giải quyết một việc một mình',
+        risk: 'giấu diếm điều gì đó, kể cả với chính mình, có nguy cơ sớm bị lộ ra',
+        action: 'nói thật về điều đang giấu, trước khi nó tự lộ ra theo cách khó kiểm soát hơn' } },
+    {
+      id: 57, tarot: 'Eight of Swords', openName: 'Hạt thấy dây gió từng trói mình', closedName: 'Hạt tin mình mãi không gỡ được',
+      element: 'Air', family: 'Swords',
+      coreStory: 'Hạt này bắt đầu nhìn thấy chính những sợi dây gió từng trói mình lại — hình ảnh của việc nhận ra rõ điều gì thật sự đang giới hạn mình. Nhìn thấy nó là bước đầu để thoát ra. Khi hạt tin rằng mình mãi không gỡ được, coi giới hạn đó là vĩnh viễn dù phần lớn không còn chặt như tưởng, cần thử một bước nhỏ để kiểm tra xem điều đó có còn đúng không.',
+      visualMotif: 'Vài sợi dây mảnh trong suốt quấn lỏng quanh phần thân hạt, một vài đầu dây đã rơi rời ra mà hạt dường như chưa nhận ra; ánh sáng vẫn chiếu xuyên qua những sợi dây đó dễ dàng, cho thấy chúng không còn chắc như vẻ ngoài.',
+      profile: { domain: 'decision', movement: 'entangling', storyStage: 'momentum',
+        need: 'cần nhìn rõ điều gì thật sự đang giới hạn mình để bắt đầu thoát ra',
+        gift: 'nhận ra rõ giới hạn của mình — bước đầu tiên để thật sự thoát khỏi nó',
+        risk: 'tin rằng mình mãi không gỡ được một giới hạn, dù nó không còn chặt như tưởng',
+        action: 'thử một bước nhỏ để kiểm tra xem giới hạn đó có còn đúng như mình nghĩ không' } },
+    {
+      id: 58, tarot: 'Nine of Swords', openName: 'Hạt gọi tên nỗi sợ trong đêm gió', closedName: 'Hạt thức trắng cùng nỗi sợ câm',
+      element: 'Air', family: 'Swords',
+      coreStory: 'Hạt này gọi tên nỗi sợ của mình giữa một đêm gió dài không ngủ được — hình ảnh của việc gọi tên nỗi lo đang khiến mình mất ngủ, nói nó ra với ai đó để nó bớt lớn hơn thực tế. Khi hạt thật sự gọi tên nỗi sợ, nó bớt nặng nề hơn. Khi nó thức trắng cùng nỗi sợ câm, giữ một mình trong xấu hổ không dám chia sẻ, cần nhớ rằng không ai cần phải một mình với điều này.',
+      visualMotif: 'Hạt đứng giữa một khoảng tối dày đặc hơn hẳn nền chung của bộ bài, vài sợi tơ run nhẹ liên tục như đang thức trắng; một vệt sáng rất mảnh, yếu ớt cố len vào từ một góc xa như dấu hiệu của bình minh sắp tới.',
+      profile: { domain: 'decision', movement: 'confessing', storyStage: 'threshold',
+        need: 'cần gọi tên một nỗi sợ đang khiến mình mất ngủ, thay vì giữ một mình',
+        gift: 'nói ra nỗi lo với ai đó khiến nó bớt lớn hơn thực tế nó đang có',
+        risk: 'giữ một nỗi sợ hay lo lắng một mình, xấu hổ không dám chia sẻ với ai',
+        action: 'nói nỗi sợ đó ra với một người cụ thể, ngay cả khi chỉ bằng một câu ngắn' } },
+    {
+      id: 59, tarot: 'Ten of Swords', openName: 'Hạt chạm đáy, thấy bình minh sau gió', closedName: 'Hạt nằm mãi dưới trận gió đã tan',
+      element: 'Air', family: 'Swords',
+      coreStory: 'Hạt này chạm đáy của một trận gió dữ, nhưng đã bắt đầu thấy một vệt bình minh phía xa — hình ảnh của điểm thấp nhất trong một giai đoạn khó khăn đã kết thúc, và sau điểm thấp nhất chỉ còn đường đi lên. Khi hạt để mình thấy vệt sáng đó và đứng dậy, giai đoạn khó đã thật sự qua. Khi nó nằm mãi dưới trận gió đã tan, giữ vai "người bị tổn thương" lâu hơn cần thiết, cần nhớ rằng bạn được phép đứng dậy bất cứ lúc nào.',
+      visualMotif: 'Hạt nằm thấp nhất trong khung hình, gần sát viền dưới, giữa những vệt gió đã lắng hẳn; ngay phía trên nó, một vệt sáng ấm mỏng bắt đầu ló ra từ đường chân trời như tia bình minh đầu tiên.',
+      profile: { domain: 'decision', movement: 'dawning', storyStage: 'culmination',
+        need: 'cần được công nhận rằng giai đoạn khó khăn nhất đã thật sự qua',
+        gift: 'nhìn thấy tia sáng đầu tiên sau điểm thấp nhất của một giai đoạn khó khăn',
+        risk: 'giữ vai người bị tổn thương lâu hơn cần thiết, chưa cho phép mình đứng dậy',
+        action: 'cho phép mình đứng dậy hôm nay, dù chỉ bằng một bước rất nhỏ' } },
+    {
+      id: 60, tarot: 'Page of Swords', openName: 'Người canh từng cơn gió đổi chiều', closedName: 'Người nói trước khi gió kịp đổi',
+      element: 'Air', family: 'Swords',
+      coreStory: 'Người này canh từng cơn gió đổi chiều bằng một sự tò mò sắc bén — hình ảnh của khả năng quan sát nhạy bén, quan sát kỹ trước khi hành động. Khi người đó thật sự chờ quan sát đủ rồi mới lên tiếng, điểm mạnh ấy phát huy tốt. Khi họ nói trước khi gió kịp đổi, đưa ra kết luận hay phán xét trước khi thật sự hiểu hết câu chuyện, cần chờ thêm một chút thông tin trước khi lên tiếng.',
+      visualMotif: 'Một hình dáng nhỏ hơn, trẻ hơn, đứng nghiêng đầu quan sát một vùng không khí đang khẽ chuyển động phía trước, đầu hướng thẳng về phía luồng gió sắp đổi chiều; tư thế cảnh giác nhưng chưa hành động.',
+      profile: { domain: 'decision', movement: 'watching', storyStage: 'curiosity',
+        need: 'cần quan sát kỹ trước khi hành động hay lên tiếng',
+        gift: 'sự tò mò và óc quan sát nhạy bén đang là điểm mạnh lúc này',
+        risk: 'đưa ra kết luận hoặc phán xét trước khi thật sự hiểu hết câu chuyện',
+        action: 'chờ thêm một thông tin cụ thể trước khi lên tiếng về việc này' } },
+    {
+      id: 61, tarot: 'Knight of Swords', openName: 'Kỵ sĩ xé mây tìm sự thật', closedName: 'Kỵ sĩ xé mây mà chẳng kịp nhìn',
+      element: 'Air', family: 'Swords',
+      coreStory: 'Một kỵ sĩ xé toang một đám mây để tìm sự thật phía sau nó — hình ảnh của việc quyết liệt bảo vệ một điều mình tin là đúng, sự dứt khoát cần thiết lúc này. Khi hành động dứt khoát đó thật sự vì sự thật, nó có sức mạnh. Khi kỵ sĩ xé mây mà chẳng kịp nhìn, hành động quá vội, đúng về lý lẽ nhưng thiếu tử tế trong cách nói ra, cần nhớ rằng đúng và tử tế không loại trừ nhau.',
+      visualMotif: 'Một hình dáng cưỡi ngựa nhỏ xé băng qua một lớp mây mỏng, để lại một đường rách rõ nét phía sau như vết cắt giữa không trung; tốc độ chuyển động thể hiện rõ qua các vệt mờ dài phía sau kỵ sĩ.',
+      profile: { domain: 'decision', movement: 'racing', storyStage: 'pursuit',
+        need: 'cần dứt khoát bảo vệ một điều mình tin là đúng',
+        gift: 'sự dứt khoát và quyết liệt đúng lúc để bảo vệ một sự thật',
+        risk: 'hành động quá vội, đúng về lý lẽ nhưng thiếu tử tế trong cách nói ra',
+        action: 'nói điều mình tin là đúng, nhưng chọn cách nói tử tế hơn' } },
+    {
+      id: 62, tarot: 'Queen of Swords', openName: 'Người cắt gọn cành che khuất nắng', closedName: 'Người cắt cả cành đang cần nắng',
+      element: 'Air', family: 'Swords',
+      coreStory: 'Người này cắt gọn một cành cây đang che khuất ánh nắng — hình ảnh của việc đặt ra một ranh giới rõ ràng bằng lời nói thẳng thắn, sự độc lập và sáng suốt là sức mạnh của bạn. Khi nhát cắt đó chỉ gọn đúng phần cần cắt, ánh nắng chiếu vào trở lại cho mọi người. Khi họ cắt cả cành đang cần nắng, dùng sự sắc bén trong lời nói để giữ khoảng cách, tránh phải gần gũi thật sự, cần nhớ rằng ranh giới vững không cần phải lạnh lùng mới hiệu quả.',
+      visualMotif: 'Một hình dáng đứng cạnh một nhánh cây vừa được cắt gọn gàng, đường cắt sắc và sạch; nhưng một nhánh nhỏ khác gần đó, vẫn còn xanh và cần ánh sáng, cũng đã bị cắt đi cùng lúc, nằm lìa cành bên cạnh.',
+      profile: { domain: 'decision', movement: 'pruning', storyStage: 'nurture',
+        need: 'cần đặt ra một ranh giới rõ ràng bằng lời nói thẳng thắn',
+        gift: 'sự độc lập và sáng suốt trong cách đặt ranh giới là sức mạnh thật sự',
+        risk: 'dùng sự sắc bén trong lời nói để giữ khoảng cách, tránh phải gần gũi thật sự',
+        action: 'xem lại một ranh giới mình vừa đặt ra có đang cắt nhầm phần cần giữ lại không' } },
+    {
+      id: 63, tarot: 'King of Swords', openName: 'Người giữ luật công bằng cho gió', closedName: 'Người dùng luật để thay lòng mình',
+      element: 'Air', family: 'Swords',
+      coreStory: 'Người này giữ một luật công bằng cho cả luồng gió đi qua khu vườn — hình ảnh của việc đưa ra một quyết định công bằng, dựa trên sự thật hơn là cảm xúc nhất thời. Khi lý trí dẫn đường mà vẫn giữ được sự công tâm, quyết định đó đáng tin. Khi họ dùng luật để thay lòng mình, dùng lý lẽ để tránh phải thật sự cảm nhận, phán xét người khác thay vì cố hiểu họ, cần nhớ rằng đầu và tim không cần tách rời để đưa ra một quyết định đúng.',
+      visualMotif: 'Một hình dáng đứng vững giữa khu vườn, nhánh tơ giơ ra như đang cầm một cán cân vô hình cho cả luồng gió đi qua; ánh sáng chiếu đều hai bên, không thiên lệch.',
+      profile: { domain: 'decision', movement: 'judging', storyStage: 'mastery',
+        need: 'cần đưa ra một quyết định công bằng, dựa trên sự thật hơn là cảm xúc nhất thời',
+        gift: 'lý trí dẫn đường mà vẫn giữ được sự công tâm trong quyết định',
+        risk: 'dùng lý lẽ để tránh phải thật sự cảm nhận, phán xét người khác thay vì cố hiểu họ',
+        action: 'trước khi phán xét ai đó, thử hiểu góc nhìn của họ trước' } }
+  ];
 
-  root.GARDEN_ORACLE_PROFILES = { majors, suits, suitSamples };
+  // Khối Đất (Pentacles) — ĐỦ 14/14, đã hoàn tất theo trình tự rank Ace→King.
+  suits.Pentacles = [
+    {
+      id: 64, tarot: 'Ace of Pentacles', openName: 'Hạt chạm đất tốt lần đầu', closedName: 'Hạt bỏ lỡ mảnh đất đang chờ',
+      element: 'Earth', family: 'Pentacles',
+      coreStory: 'Hạt này vừa chạm vào một mảnh đất tốt lần đầu tiên — hình ảnh của một cơ hội cụ thể, hữu hình đang ở ngay trước mắt: một công việc, một khoản đầu tư, một khởi đầu mới. Khi hạt thật sự chạm đất và bắt tay vào, cơ hội đó trở thành thật. Khi nó chỉ mơ về một kết quả tốt đẹp mà chưa thật sự hành động, bỏ lỡ mảnh đất đang chờ, cần nhớ rằng một bước nhỏ thật sự đáng hơn một kế hoạch hoàn hảo trên giấy.',
+      visualMotif: 'Hạt vừa chạm chân xuống một mảnh đất màu mỡ, sẫm và ẩm, khác hẳn không gian bay lơ lửng của các hạt khác; một quầng sáng ấm nhỏ toả ra ngay điểm tiếp xúc giữa hạt và đất như dấu hiệu của một khởi đầu cụ thể.',
+      profile: { domain: 'work', movement: 'arriving', storyStage: 'spark',
+        need: 'cần nắm lấy một cơ hội cụ thể, hữu hình đang ở ngay trước mắt',
+        gift: 'một cơ hội đủ tốt và cụ thể để bắt tay vào thật ngay bây giờ',
+        risk: 'mơ về một kết quả tốt đẹp mà chưa thật sự hành động để đạt được nó',
+        action: 'làm một bước nhỏ thật sự ngay hôm nay, thay vì hoàn thiện kế hoạch thêm nữa' } },
+    {
+      id: 65, tarot: 'Two of Pentacles', openName: 'Hạt lăn nhịp nhàng theo hai luống đất', closedName: 'Hạt chao đảo giữa hai luống đất',
+      element: 'Earth', family: 'Pentacles',
+      coreStory: 'Hạt này lăn nhịp nhàng qua lại giữa hai luống đất cùng lúc — hình ảnh của việc cân đối tốt giữa nhiều việc cùng lúc: công việc, gia đình, tài chính. Khi hạt giữ được nhịp lăn đều, sự linh hoạt đó là một kỹ năng thật sự. Khi nó chao đảo giữa hai luống đất, quá tải vì cố ôm đồm mọi việc cùng lúc mà mất kiểm soát, có thể đã đến lúc chọn bớt việc, thay vì cố làm hết tất cả.',
+      visualMotif: 'Hạt lăn theo một đường cong hình số 8 mềm mại giữa hai luống đất song song, chuyển động uyển chuyển và cân bằng; một vệt bụi đất nhỏ bay lên ở một bên luống, gợi ý một chút mất cân bằng thoáng qua.',
+      profile: { domain: 'work', movement: 'juggling', storyStage: 'choice',
+        need: 'cần cân đối tốt giữa nhiều việc cùng lúc mà không mất kiểm soát',
+        gift: 'sự linh hoạt khi cân đối nhiều việc cùng lúc là một kỹ năng thật sự',
+        risk: 'quá tải vì cố ôm đồm mọi việc cùng lúc mà mất kiểm soát',
+        action: 'chọn bớt một việc để tạm gác lại, thay vì cố làm hết tất cả cùng lúc' } },
+    {
+      id: 66, tarot: 'Three of Pentacles', openName: 'Hạt cùng nhiều tay vun một luống', closedName: 'Hạt tự vun luống một mình',
+      element: 'Earth', family: 'Pentacles',
+      coreStory: 'Nhiều bàn tay cùng vun một luống đất quanh hạt này — hình ảnh của sự hợp tác giữa bạn và người khác đang tạo ra một kết quả chất lượng. Khi hạt để nhiều tay cùng vun luống, khả năng của nó được nhìn thấy và công nhận rõ hơn. Khi nó tự vun luống một mình, cố làm một việc lẽ ra cần nhiều người hơn, kết quả thiếu sự phối hợp, cần nhớ rằng mời thêm người vào không làm giảm giá trị phần mình đóng góp.',
+      visualMotif: 'Hạt nằm giữa một luống đất đang được vun bởi nhiều dấu tay/rễ nhỏ khác nhau hội tụ về cùng một điểm, mỗi dấu vết mang một sắc độ ánh sáng hơi khác nhau; kết cấu đất ở đó tơi xốp và đều hơn hẳn phần đất xung quanh.',
+      profile: { domain: 'work', movement: 'tending', storyStage: 'connection',
+        need: 'cần sự hợp tác từ người khác để tạo ra một kết quả chất lượng hơn',
+        gift: 'khả năng của mình đang được nhìn thấy và công nhận qua sự hợp tác',
+        risk: 'cố làm một mình một việc lẽ ra cần nhiều người hơn, khiến kết quả thiếu phối hợp',
+        action: 'mời cụ thể một người vào giúp phần việc mình đang tự ôm một mình' } },
+    {
+      id: 67, tarot: 'Four of Pentacles', openName: 'Hạt giữ chặt phần đất của mình', closedName: 'Hạt siết đất đến cằn cỗi',
+      element: 'Earth', family: 'Pentacles',
+      coreStory: 'Hạt này giữ chặt lấy phần đất của mình, không để một hạt bụi nào trôi đi — hình ảnh của việc giữ tiền bạc, thời gian, hay nguồn lực một cách hợp lý. Khi hạt giữ vừa đủ để đảm bảo an toàn, sự thận trọng đó là cần thiết. Khi nó siết đất đến cằn cỗi, bám giữ vì sợ thiếu đến mức không còn tận hưởng được gì, cần buông bớt một chút mới có chỗ cho điều mới vào.',
+      visualMotif: 'Hạt ôm sát một khoảnh đất nhỏ ngay dưới chân mình, rễ/tơ quấn chặt quanh khoảnh đất đó hơn mức cần thiết; đất trong khoảnh đó có dấu hiệu hơi khô cứng do bị giữ quá chặt, khác với đất tơi xốp xung quanh.',
+      profile: { domain: 'work', movement: 'holding', storyStage: 'foundation',
+        need: 'cần giữ nguồn lực của mình một cách hợp lý để cảm thấy an toàn',
+        gift: 'sự thận trọng khi giữ tiền bạc, thời gian hay nguồn lực đúng lúc là cần thiết',
+        risk: 'bám giữ vì sợ thiếu đến mức không còn tận hưởng được gì',
+        action: 'buông bớt một phần nhỏ nguồn lực mình đang giữ quá chặt để có chỗ cho điều mới' } },
+    {
+      id: 68, tarot: 'Five of Pentacles', openName: 'Hạt tìm thấy khe đất còn ấm', closedName: 'Hạt run ngoài luống đất lạnh',
+      element: 'Earth', family: 'Pentacles',
+      coreStory: 'Hạt này tìm thấy một khe đất còn ấm giữa một vùng đất lạnh — hình ảnh của việc dù đang khó khăn về tài chính hay sức khỏe, vẫn có một nguồn hỗ trợ gần hơn bạn nghĩ. Khi hạt để mình tìm và nhận khe đất ấm đó, nó không phải chịu lạnh một mình. Khi nó cứ run ngoài luống đất lạnh, tự cô lập trong khó khăn dù đã có người sẵn sàng giúp, cần nhớ rằng nhận sự giúp đỡ không phải là thất bại.',
+      visualMotif: 'Hạt run nhẹ giữa một vùng đất lạnh, sương giá phủ mờ xung quanh; nhưng ngay gần đó, cách một khoảng ngắn, có một khe đất nhỏ phát ra ánh sáng ấm mà hạt vẫn chưa hoàn toàn hướng về.',
+      profile: { domain: 'work', movement: 'seeking', storyStage: 'friction',
+        need: 'cần tìm và nhận một nguồn hỗ trợ đang ở gần hơn mình nghĩ',
+        gift: 'tìm ra được một nguồn hỗ trợ gần mình ngay giữa lúc khó khăn',
+        risk: 'tự cô lập trong khó khăn một mình, dù đã có người sẵn sàng giúp',
+        action: 'nhận một sự giúp đỡ cụ thể đang có sẵn, thay vì cố tự xoay xở một mình' } },
+    {
+      id: 69, tarot: 'Six of Pentacles', openName: 'Hạt chia đất công bằng cho hạt khác', closedName: 'Hạt cho đất mà giữ lại quyền',
+      element: 'Earth', family: 'Pentacles',
+      coreStory: 'Hạt này chia đất công bằng cho một hạt khác đang cần — hình ảnh của sự cho và nhận cân bằng: chia sẻ tiền bạc, thời gian, hay sự giúp đỡ một cách đúng đắn và tự nhiên. Khi việc cho đi đó không kèm điều kiện, nó là một sự cân bằng thật sự. Khi hạt cho đất mà giữ lại quyền, cho đi để giữ quyền kiểm soát hơn là để giúp thật lòng, cần xem lại động cơ thật sự phía sau việc cho.',
+      visualMotif: 'Hạt chia một phần đất tơi xốp của mình sang một khoảnh bên cạnh nơi một hạt khác nhỏ hơn đang cần, đường ranh giữa hai khoảnh đất mờ dần tự nhiên; nhưng có một sợi rễ mảnh vẫn nối ngược lại phía hạt cho, như một dây kiểm soát ngầm.',
+      profile: { domain: 'work', movement: 'sharing', storyStage: 'recovery',
+        need: 'cần cho và nhận một cách cân bằng, không kèm điều kiện ẩn',
+        gift: 'sự cho và nhận cân bằng, đúng đắn và tự nhiên đang diễn ra',
+        risk: 'cho đi để giữ quyền kiểm soát hơn là để giúp thật lòng',
+        action: 'xem lại động cơ thật sự của mình trước khi cho đi một điều gì đó' } },
+    {
+      id: 70, tarot: 'Seven of Pentacles', openName: 'Hạt kiên nhẫn chờ luống đất chín', closedName: 'Hạt sốt ruột đào lại luống chưa chín',
+      element: 'Earth', family: 'Pentacles',
+      coreStory: 'Hạt này nằm im trong một luống đất mà nó đã tự tay vun trồng, chờ đúng thời điểm để lớn lên — hình ảnh của một việc cần thời gian dài mới ra quả: một công việc, một kỹ năng, một mối quan hệ đang xây dần. Khi hạt đủ kiên nhẫn ở yên, rễ vẫn đang âm thầm lớn dù mắt thường chưa thấy gì. Khi nó sốt ruột tự đào luống đất lên để kiểm tra, nó chỉ đang phá vỡ chính quá trình mình cần chờ, khiến mọi thứ phải bắt đầu lại.',
+      visualMotif: 'Hạt lún một nửa vào lớp đất sẫm màu giàu mùn, vài sợi tơ mảnh trong suốt hướng ngược xuống dưới như rễ non thay vì xoè lên trên; một quầng sáng vàng nhạt phát nhẹ ngay dưới bề mặt đất gợi ý sự lớn lên chưa thấy được, lấm tấm rêu và khoáng chất li ti quanh đó.',
+      profile: { domain: 'work', movement: 'tending', storyStage: 'patience',
+        need: 'cần tin rằng công sức âm thầm vẫn đang tích luỹ dù chưa thấy kết quả',
+        gift: 'đủ kiên nhẫn để công sức dài hạn có thời gian ra quả',
+        risk: 'sốt ruột đào xới lại một việc chưa kịp chín, khiến nó phải bắt đầu lại',
+        action: 'chọn tiếp tục thêm một mốc thời gian cụ thể trước khi đánh giá lại có nên đổi hướng' } },
+    {
+      id: 71, tarot: 'Eight of Pentacles', openName: 'Hạt luyện rễ sâu mỗi ngày', closedName: 'Hạt đòi rễ hoàn hảo ngay từ đầu',
+      element: 'Earth', family: 'Pentacles',
+      coreStory: 'Hạt này luyện cho rễ mình cắm sâu hơn một chút mỗi ngày — hình ảnh của việc rèn luyện một kỹ năng qua từng ngày lặp lại, tiến bộ chậm mà chắc đang thật sự xảy ra. Khi hạt chấp nhận mỗi ngày một chút tiến bộ nhỏ, kỹ năng đó lớn lên bền vững. Khi nó đòi rễ hoàn hảo ngay từ đầu, cầu toàn đến mức mất hết hứng thú hoặc ngại bắt đầu vì sợ chưa đủ giỏi, cần cho phép mình làm chưa hoàn hảo trong lúc học hỏi.',
+      visualMotif: 'Hạt lún nhẹ vào đất, vài sợi rễ mảnh vươn xuống với độ dài hơi khác nhau như đang được luyện tập từng đợt, một số đã hoàn thiện hơn số khác; xung quanh có dấu vết những rễ tập trước đó, ngắn hơn và sẫm màu hơn.',
+      profile: { domain: 'work', movement: 'practicing', storyStage: 'momentum',
+        need: 'cần rèn luyện một kỹ năng qua từng ngày lặp lại, không đòi hỏi hoàn hảo ngay',
+        gift: 'tiến bộ chậm mà chắc đang thật sự xảy ra qua từng ngày luyện tập',
+        risk: 'cầu toàn đến mức mất hết hứng thú hoặc ngại bắt đầu vì sợ chưa đủ giỏi',
+        action: 'cho phép mình làm chưa hoàn hảo hôm nay, miễn là vẫn đang luyện tập' } },
+    {
+      id: 72, tarot: 'Nine of Pentacles', openName: 'Hạt nở một mình giữa vườn riêng', closedName: 'Hạt đủ đầy mà vẫn thấy lẻ loi',
+      element: 'Earth', family: 'Pentacles',
+      coreStory: 'Hạt này nở một mình giữa một khu vườn riêng do chính nó gây dựng — hình ảnh của việc tận hưởng thành quả do chính mình tạo ra, sự độc lập là một niềm vui thật sự không cần ai công nhận mới trọn vẹn. Khi hạt thật sự tận hưởng khu vườn riêng đó, sự đủ đầy là thật. Khi nó đủ đầy mà vẫn thấy lẻ loi, chú trọng hình thức hơn kết nối thật với người khác, cần nhớ rằng đủ đầy vật chất không tự động lấp được khoảng trống đó.',
+      visualMotif: 'Hạt đứng giữa một khu vườn nhỏ riêng biệt do chính nó tạo ra, hoa và lá xung quanh phong phú và chăm chút; nhưng khung hình xung quanh khu vườn đó hoàn toàn vắng, không một hạt hay sinh vật nào khác xuất hiện.',
+      profile: { domain: 'work', movement: 'flourishing', storyStage: 'threshold',
+        need: 'cần tận hưởng thành quả do chính mình gây dựng mà không cần ai công nhận',
+        gift: 'sự độc lập và thành quả do chính mình tạo ra là một niềm vui thật sự',
+        risk: 'đủ đầy về vật chất nhưng vẫn cảm thấy cô đơn vì thiếu kết nối thật',
+        action: 'chủ động kết nối với một người cụ thể, thay vì chỉ tận hưởng thành quả một mình' } },
+    {
+      id: 73, tarot: 'Ten of Pentacles', openName: 'Hạt nối vào cả một hàng cây tổ', closedName: 'Hạt gánh cả khu vườn của người trước',
+      element: 'Earth', family: 'Pentacles',
+      coreStory: 'Hạt này nối liền vào cả một hàng cây tổ tiên trải dài phía sau — hình ảnh của việc là một phần của điều gì đó lớn hơn và bền vững hơn chính mình: một gia đình, một truyền thống. Khi hạt để mình được nâng đỡ bởi cả hàng cây đó, nó vững vàng hơn. Khi nó gánh cả khu vườn của người trước, gánh kỳ vọng của cả gia đình hoặc coi tiền bạc là thước đo duy nhất cho giá trị bản thân, cần nhớ rằng một di sản không cần phải là gánh nặng mới có ý nghĩa.',
+      visualMotif: 'Hạt nối vào một hàng cây lớn trải dài từ gần đến xa trong khung hình, mỗi cây mang một sắc thái tuổi tác khác nhau như nhiều thế hệ; rễ của hạt hoà lẫn vào hệ rễ chung của cả hàng cây đó.',
+      profile: { domain: 'work', movement: 'integrating', storyStage: 'culmination',
+        need: 'cần cảm thấy mình là một phần của điều gì đó lớn hơn và bền vững hơn chính mình',
+        gift: 'được nâng đỡ bởi một gia đình hay truyền thống lớn hơn chính mình',
+        risk: 'gánh kỳ vọng của cả gia đình hoặc coi tiền bạc là thước đo duy nhất cho giá trị bản thân',
+        action: 'chọn giữ lại phần di sản có ý nghĩa với mình, và đặt xuống phần chỉ là gánh nặng' } },
+    {
+      id: 74, tarot: 'Page of Pentacles', openName: 'Người tập nâng từng đồng hạt', closedName: 'Người muốn quả mà chưa chịu gieo',
+      element: 'Earth', family: 'Pentacles',
+      coreStory: 'Người này đang tập nâng từng đồng hạt một, từng bước học một kỹ năng thực tế — hình ảnh của việc cam kết với một mục tiêu nhỏ sẽ dẫn bạn đi xa hơn bạn nghĩ. Khi người đó kiên trì tập từng bước, nền tảng vững chắc dần hình thành. Khi họ muốn quả mà chưa chịu gieo, muốn có kết quả ngay mà chưa thật sự bỏ công sức xây nền tảng, cần nhớ rằng kỹ năng nào cũng cần thời gian trước khi ra thành quả.',
+      visualMotif: 'Một hình dáng nhỏ hơn, trẻ hơn, đang cố nâng một hạt giống tròn nhỏ bằng cả hai nhánh tơ, tư thế tập trung và cẩn trọng; phía trước có vài hạt giống khác đã được xếp gọn thành một hàng nhỏ như thành quả tích luỹ dần.',
+      profile: { domain: 'work', movement: 'practicing', storyStage: 'curiosity',
+        need: 'cần cam kết với một mục tiêu nhỏ và học từng bước một cách thực tế',
+        gift: 'cam kết với một mục tiêu nhỏ đang dẫn mình đi xa hơn mình nghĩ',
+        risk: 'muốn có kết quả ngay mà chưa thật sự bỏ công sức xây nền tảng',
+        action: 'chọn một bước thực hành nhỏ hôm nay để xây nền tảng, thay vì chờ kết quả ngay' } },
+    {
+      id: 75, tarot: 'Knight of Pentacles', openName: 'Kỵ sĩ đi chậm mà chắc qua ruộng', closedName: 'Kỵ sĩ dừng lại giữa ruộng quen',
+      element: 'Earth', family: 'Pentacles',
+      coreStory: 'Một kỵ sĩ đi chậm mà chắc qua một cánh đồng quen thuộc — hình ảnh của sự đều đặn và đáng tin, chậm mà chắc vẫn đang đưa bạn tới đích. Khi kỵ sĩ giữ đúng nhịp đều đặn đó, hành trình chắc chắn tới nơi. Khi họ dừng lại giữa ruộng quen, bám vào thói quen đến mức trì trệ, sống như đang chạy theo một danh sách việc phải làm hơn là thật sự sống, cần thử phá vỡ lịch trình một chút để thấy mình còn năng lượng.',
+      visualMotif: 'Một hình dáng cưỡi ngựa nhỏ di chuyển chậm rãi, đều đặn qua một cánh đồng rộng với các luống đất song song trải dài; dấu vết bước đi phía sau đều tăm tắp, không có khoảng dừng nào bất thường — ngoại trừ một điểm gần cuối nơi bước chân hơi khựng lại.',
+      profile: { domain: 'work', movement: 'plodding', storyStage: 'pursuit',
+        need: 'cần sự đều đặn và đáng tin để tới đích một cách chắc chắn',
+        gift: 'sự đều đặn, chậm mà chắc của mình đang đưa mình tới đích',
+        risk: 'bám vào thói quen đến mức trì trệ, sống theo một danh sách việc phải làm hơn là thật sự sống',
+        action: 'thử phá vỡ lịch trình quen thuộc một chút để thấy mình còn bao nhiêu năng lượng' } },
+    {
+      id: 76, tarot: 'Queen of Pentacles', openName: 'Người ủ ấm đất cho cả khu vườn', closedName: 'Người ủ ấm đất mà quên ủ mình',
+      element: 'Earth', family: 'Pentacles',
+      coreStory: 'Người này ủ ấm đất cho cả một khu vườn xung quanh — hình ảnh của sự chăm sóc thiết thực, ấm áp đang nuôi dưỡng những người xung quanh, một món quà thật sự có giá trị. Khi người đó ủ ấm cho cả vườn lẫn chính mình, sự chăm sóc đó bền vững. Khi họ ủ ấm đất mà quên ủ mình, chăm sóc mọi người và mọi việc trừ chính bản thân, gắn giá trị bản thân với việc mình làm được bao nhiêu, cần nhớ rằng bản thân cũng cần được chăm sóc, không chỉ là người chăm sóc.',
+      visualMotif: 'Hạt trung tâm toả một quầng ấm dịu xuống lớp đất bên dưới, làm ấm cả một vùng rộng quanh nó với nhiều mầm cây nhỏ đang được sưởi; nhưng ngay dưới chân hạt, phần đất riêng của chính nó lại có vẻ hơi lạnh hơn phần nó đang sưởi cho xung quanh.',
+      profile: { domain: 'work', movement: 'tending', storyStage: 'nurture',
+        need: 'cần chăm sóc người khác mà không quên chăm sóc chính mình',
+        gift: 'sự chăm sóc thiết thực, ấm áp của mình đang nuôi dưỡng những người xung quanh',
+        risk: 'chăm sóc mọi người và mọi việc trừ chính mình, gắn giá trị bản thân với việc làm được bao nhiêu',
+        action: 'dành một phần sự chăm sóc đó cho chính mình hôm nay, như đã làm cho người khác' } },
+    {
+      id: 77, tarot: 'King of Pentacles', openName: 'Người giữ vườn vững qua nhiều mùa', closedName: 'Người giữ vườn mà khoá cả cổng',
+      element: 'Earth', family: 'Pentacles',
+      coreStory: 'Người này giữ khu vườn vững vàng qua nhiều mùa liên tiếp — hình ảnh của sự vững vàng và khả năng quản lý tiền bạc, công việc đang tạo ra thành quả bền vững, kết quả của thời gian và kỷ luật. Khi họ giữ vườn mà vẫn mở cổng cho người khác bước vào, sự vững vàng đó trở thành nơi nương tựa chung. Khi họ giữ vườn mà khoá cả cổng, kiểm soát chặt đến mức không ai tiếp cận được, dùng vật chất để chứng minh giá trị thay vì lòng tin, cần nhớ rằng thành công thật sự không cần phải đóng kín mới an toàn.',
+      visualMotif: 'Hạt trung tâm đứng vững giữa một khu vườn trù phú, nhiều lớp mùa nối tiếp nhau hiện diện cùng lúc quanh nó như bằng chứng của thời gian; nhưng ngay ở rìa khu vườn, có một cánh cổng nhỏ bằng cành cây đan lại, đang khép chặt.',
+      profile: { domain: 'work', movement: 'defending', storyStage: 'mastery',
+        need: 'cần sự vững vàng và kỷ luật để tạo ra thành quả bền vững',
+        gift: 'sự vững vàng và khả năng quản lý của mình đang tạo ra thành quả bền vững qua thời gian',
+        risk: 'kiểm soát chặt đến mức không ai tiếp cận được, dùng vật chất để chứng minh giá trị',
+        action: 'mở một phần nhỏ cánh cổng đang khoá chặt, để ai đó thật sự có thể bước vào' } }
+  ];
+
+  root.GARDEN_ORACLE_PROFILES = { majors, suits };
 })(window);

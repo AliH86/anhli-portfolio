@@ -1,5 +1,30 @@
 # Recap — anhli-portfolio (cập nhật 13/7/2026)
 
+## Oracle — hoàn tất core-story 14 Khí + 14 Đất, ĐỦ 78/78 hạt (13/7/2026)
+
+- **Khối Khí (Swords) hoàn tất 14/14** và **khối Đất (Pentacles) hoàn tất
+  14/14** trong `garden-oracle-profiles.js` (`GARDEN_ORACLE_PROFILES.suits.Swords`
+  và `.suits.Pentacles`), theo đúng trình tự rank Ace→King. Đã bỏ hẳn biến
+  tạm `suitSamples` (chỉ còn `{ majors, suits }` export).
+- **Toàn bộ 78/78 hạt (22 Major + 56 Minor) nay đã có đủ coreStory +
+  visualMotif + hồ sơ nghĩa** — hoàn tất giai đoạn viết văn bản theo quyết
+  định của Ali (ưu tiên viết đủ nội dung trước, xử lý an toàn vùng sáng/tối
+  ảnh bằng overlay HTML ở bước sau).
+- Verify bằng script node: 5 mảng đúng độ dài (22+14+14+14+14=78); id 0-77
+  liên tục, không trùng; domain khớp 100% `SUIT_DOMAIN`/`MAJOR_DOMAIN` đã
+  khoá trong `garden-oracle-synthesis.js` (Swords→'decision', Pentacles→'work');
+  dữ liệu tarot/gardenOpen/gardenClosed/element khớp 100% `GARDEN_ORACLE_CARDS`;
+  không trùng visualMotif trong toàn bộ 78 hạt; word-count coreStory của các
+  hạt mới trong khoảng hợp lý (~40-110 chữ).
+- movement vocabulary mở rộng thêm cho Khí: cutting, reflecting, concealing,
+  confessing, dawning, watching, pruning, judging. Cho Đất: juggling,
+  seeking, practicing, flourishing, plodding.
+- Header docblock của `garden-oracle-profiles.js` đã cập nhật bảng trạng
+  thái theo khối (tất cả ĐỦ 14/14 hoặc 22/22) và tài liệu vocabulary mới.
+- Việc kế tiếp (chưa làm, chờ Ali xác nhận): viết prompt Imagen dạng tự
+  nhiên cho 28 hạt Khí+Đất (tương tự `ORACLE-ASSET-PROMPTS-FIRE-WATER.md`),
+  có thể chia 4 batch ~7 ảnh để giữ nhất quán phong cách.
+
 ## Oracle — hoàn tất core-story 14 Nước (13/7/2026)
 
 - **Khối Nước (Cups) hoàn tất 14/14** trong `garden-oracle-profiles.js`
