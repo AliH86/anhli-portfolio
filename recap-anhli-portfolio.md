@@ -1,5 +1,53 @@
 # Recap — anhli-portfolio (cập nhật 12/7/2026, khuya)
 
+## Dọn working tree + fix hero album (12/7/2026, khuya muộn)
+
+**Dọn rác:** xoá 31 file rác đã đọng lâu — 16 `.command` deploy cũ (đã hết
+nhiệm vụ, script push 1 lần), 7 `deploy-log-*.txt`, 3 html preview/scratch
+(`preview-perf.html`, `hero-video-garden-preview.html`, `hero-vinyl-live.html`),
+5 `.md` handoff/draft rời rạc (`ART_DIRECTION.md`, `GARDEN-ORACLE-78-NAMES.md`,
+`GARDEN-ORACLE-SYSTEM.md`, `HANDOFF-2026-06-19.md`, `WORDING-DRAFTS.md`).
+Xoá thêm 5 asset dandelion-hero thừa không được `index.html` tham chiếu:
+`videos/hero-dandelion.mp4` (44MB bản gốc chưa loop), `videos/hero-dandelion-1080.mp4`
+(13.7MB), `images/hero/dandelion-video/anhli-dandelion-vid2.mp4` (44MB, trùng
+byte-for-byte với file trên), `poster.png` cùng thư mục, và `images/portraits/sense-da-band.png`
+(bản trùng, chỉ `.jpg` được site dùng). Giữ nguyên `images/hero/dandelion-scene/*.png`
+(8 file nguồn PSD, theo đúng ghi chú trong `DANDELION_HERO_HANDOFF.md`: "leave
+them alone unless Ali specifically asks") và `.claude/launch.json` (config dev
+server local, vô hại).
+
+**3 file modified xử lý xong:**
+- `experience.js`, `tweaks-app.jsx` — revert về HEAD. Xác nhận cả 2 là file
+  mồ côi: không còn `<script src>` nào trong `index.html` gọi tới, logic thật
+  đã được gộp thẳng vào `index.html` từ commit `f905c5b "feat: self-contained
+  index.html with all CSS/JS inlined"`. Kiến trúc "lớp áo CSS tách rời
+  (`portfolio-upgrade.css` bơm bởi `tweaks-app.jsx`) không đụng xương sống"
+  không còn tồn tại nữa kể từ commit đó — mọi CSS/JS đã nằm chung 1 file.
+- `DANDELION_HERO_HANDOFF.md` — commit lại (tài liệu thật, log đúng phiên hero
+  video 5/7 đã push live). Thêm ghi chú đầu file: từ nay theo `AGENT-RULES.md`
+  §6, log phiên mới đi vào file recap này, không thêm mục mới vào handoff cũ.
+
+**Bug phát hiện & fix trong lúc dọn:**
+- **Hero album lệch:** `data-promoted-album` trên `<section id="home">` trỏ
+  đúng ID "Một Tần Số Khác" (set từ commit `4291786`, 8/7) nhưng album này chỉ
+  tồn tại trong `music-data-base.js` (nạp async, sau khi `renderHeroGarden()`
+  đã chạy xong lần đầu bằng mảng `ALBUMS` tĩnh trong `index.html` — không có
+  hàm nào gọi lại `renderHeroGarden()` lần 2 sau khi merge dữ liệu async).
+  Kết quả: hero kẹt hiện "Mỹ Vị Nhân Sinh" (text tĩnh cũ) thay vì "Một Tần Số
+  Khác" như đã chốt từ 8/7. Fix: thêm entry "Một Tần Số Khác" vào `ALBUMS`
+  tĩnh + sửa text tĩnh `hero-manifesto` khớp theo — hero giờ đúng ngay từ lúc
+  tải trang, không phụ thuộc timing async nữa. Commit `7bab5e6`.
+- **Ảnh avatar vỡ trên live:** `images/portraits/sense-da-band.jpg` được
+  `index.html` tham chiếu (dòng ~6333, avatar "[SEN]SE Da Band") nhưng chưa
+  từng được commit — nghĩa là ảnh 404 trên GitHub Pages thật dù code đã đúng
+  từ lâu. Đã `git add` + commit. Commit `7101b5b`.
+
+**Trạng thái cuối phiên:** local ahead 3 commit so với `origin/main`
+(`7bab5e6`, `0c5d022`, `7101b5b`) — **chưa push**, chờ Ali duyệt qua script
+`.command` theo đúng quy trình ở `AGENT-RULES.md` §3. `git status` sạch hoàn
+toàn ngoài 2 mục cố ý giữ untracked (`.claude/launch.json`,
+`images/hero/dandelion-scene/*.png`).
+
 ## Mới trong phiên hôm nay (12/7/2026, khuya) — Ba hạt từ khu vườn: rebuild toàn bộ + wording pass toàn trang
 
 **Đổi tên 78 lá bài (Tarot) thành hệ tên hạt bồ công anh, dual Nở/Khép:**
