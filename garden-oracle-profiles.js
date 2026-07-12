@@ -118,7 +118,7 @@
         risk: 'giữ khả năng lại vì ngại bắt đầu hoặc muốn kiểm soát mọi chi tiết trước',
         action: 'chọn phần nhỏ nhất của việc định làm và bắt tay vào ngay hôm nay' } },
     {
-      id: 2, tarot: 'The High Priestess', openName: 'Nghe Gió Thầm', closedName: 'Bịt Tai Trước Gió',
+      id: 2, tarot: 'The High Priestess', openName: 'Nghe Gió Thì Thầm', closedName: 'Gió Thầm Không Nghe',
       element: 'Water', family: 'Major',
       coreStory: 'Hạt này nghe được những điều gió mang theo mà chưa ai nói thành lời — một linh cảm về một người, một tình huống, một quyết định, đã có từ trước dù chưa giải thích được bằng lý lẽ. Khi hạt lắng tai và tin vào điều mình nghe thấy, nó không cần chứng minh gì cả. Khi hạt tự bịt tai vì sợ linh cảm đó không đủ hợp lý, nó bỏ lỡ một điều mình đã biết rất rõ từ bên trong.',
       visualMotif: 'Vài sợi tơ ở giữa tán hạt cong nhẹ về phía trong như đang lắng nghe một luồng gió rất khẽ chỉ nó mới cảm được; một quầng sáng bạc mờ ẩn hiện quanh lõi hạt, dịu hơn hẳn quầng vàng ấm ở các hạt khác.',
@@ -138,7 +138,7 @@
         risk: 'cho đi đến mức kiệt sức, không còn gì để tự nuôi chính mình',
         action: 'dành một phần nhỏ thời gian hôm nay để chăm lại cho chính mình trước khi chăm tiếp cho người khác' } },
     {
-      id: 4, tarot: 'The Emperor', openName: 'Giữ Vững Chiều Gió', closedName: 'Cành Chặn Đường Bay',
+      id: 4, tarot: 'The Emperor', openName: 'Nhờ Cây Cản Gió', closedName: 'Cây Chặn Đường Bay',
       element: 'Fire', family: 'Major',
       coreStory: 'Một thân cây vững đang giữ đúng chiều cho luồng gió đi qua nó — hình ảnh của những quy tắc hay giới hạn rõ ràng bạn đang đặt ra trong công việc hay một mối quan hệ. Khi thân cây đủ chắc mà vẫn để gió lách qua, sự ổn định đó là thật, giúp mọi thứ đi đúng hướng. Khi cành cây cứng đến mức chặn hết đường bay của mọi luồng gió khác, quy tắc đó không còn phục vụ ai, chỉ còn vì bạn đã quen kiểm soát như vậy.',
       visualMotif: 'Một thân/cọng cây thẳng, chắc, có vân gỗ rõ nét chạy dọc như những đường luật lệ được khắc sẵn; hạt tựa vào đó ở một góc ổn định, vài luồng gió mảnh lách qua khe giữa các cành thay vì bị chặn đứng hoàn toàn.',
@@ -148,7 +148,7 @@
         risk: 'kiểm soát quá chặt đến mức không ai còn thấy thoải mái',
         action: 'xem lại một quy tắc mình đang giữ và hỏi nó còn thật sự cần thiết không' } },
     {
-      id: 5, tarot: 'The Hierophant', openName: 'Gieo Lại Mùa Xưa', closedName: 'Khuôn Cũ Giữ Chân',
+      id: 5, tarot: 'The Hierophant', openName: 'Gieo Lại Mùa Xưa', closedName: 'Khuôn Cũ Cản Bay',
       element: 'Earth', family: 'Major',
       coreStory: 'Mùa cũ đang gieo lại vào mùa này — hình ảnh của một lời khuyên từ người đi trước, một cách làm quen thuộc, hay một truyền thống gia đình đang chỉ ra một hướng đi. Khi bạn thật sự chọn lại điều đó cho chính mình, nó trở thành nền tảng đáng tin. Khi bạn chỉ đang làm theo vì khuôn cũ giữ chân, không phải vì tin nó đúng với mình, thì đó không còn là lựa chọn, chỉ còn là thói quen.',
       visualMotif: 'Hạt tựa nhẹ lên một cụm hạt giống cũ hơn, sẫm màu và có vân nứt như đã qua một mùa, đang nảy ra vài sợi tơ mới nối tiếp từ đó; đường viền quanh hạt lặp lại hoa văn cổ điển hơn so với các hạt khác trong bộ.',
@@ -158,7 +158,7 @@
         risk: 'làm theo một khuôn mẫu chỉ vì mọi người xung quanh vẫn làm vậy',
         action: 'hỏi thẳng mình: đây là điều mình tự chọn, hay chỉ vì đã quen làm vậy' } },
     {
-      id: 6, tarot: 'The Lovers', openName: 'Đôi Hạt Cùng Bay', closedName: 'Hai Hạt Lạc Chiều',
+      id: 6, tarot: 'The Lovers', openName: 'Cùng Bay Theo Gió', closedName: 'Ngọn Gió Rẽ Đôi',
       element: 'Air', family: 'Major',
       coreStory: 'Hai hạt đang bay cùng một hướng, hoặc lạc mất nhau giữa chừng — hình ảnh của một lựa chọn quan trọng liên quan tới một người, một công việc, hay một giá trị sống của bạn. Khi bạn chọn theo điều mình thật sự tin, dù khó hơn, hai hạt vẫn cùng bay đúng hướng. Khi bạn để người khác quyết định thay mình, hoặc cứ phân vân mãi không dám chốt, hai hướng bay lệch nhau dần — và điều khó nhất không phải là chọn sai, mà là không dám chọn.',
       visualMotif: 'Hai hạt bồ công anh bay gần nhau trong cùng một khung hình, quỹ đạo của chúng gần như song song nhưng có một khoảng lệch nhỏ dần hiện rõ ở nửa dưới khung, như đang trên bờ tách hướng.',
@@ -168,7 +168,7 @@
         risk: 'để người khác quyết định thay mình hoặc cứ phân vân mãi không dám chốt',
         action: 'chọn một điều cụ thể hôm nay, dù nhỏ, thay vì tiếp tục cân nhắc' } },
     {
-      id: 7, tarot: 'The Chariot', openName: 'Cưỡi Trên Luồng Gió', closedName: 'Bị Gió Cuốn Đi',
+      id: 7, tarot: 'The Chariot', openName: 'Lướt Đầu Ngọn Gió', closedName: 'Gió Cuốn Đi Xa',
       element: 'Water', family: 'Major',
       coreStory: 'Hạt này đang cưỡi trên một luồng gió mạnh, cố giữ vững một hướng đi dù nhiều thứ khác — công việc, cảm xúc, người xung quanh — đang kéo nó lệch hướng. Khi hạt thật sự đang lái, nó tự quyết định tốc độ và điểm đến của mình. Khi hạt chỉ đang bị gió kéo đi, lao rất nhanh mà không chắc mình đang tiến tới đâu, nó cần chậm lại và hỏi: đây có phải hướng mình chọn, hay chỉ là đang chạy trốn một cảm giác nào đó?',
       visualMotif: 'Hạt nghiêng mình rõ rệt theo một trục chuyển động mạnh, các sợi tơ ép sát về phía sau như đang chịu lực gió lớn; hai luồng ánh sáng mảnh chạy song song hai bên thân hạt như hai vệt kéo vô hình.',
@@ -178,7 +178,7 @@
         risk: 'lao đi rất nhanh theo một kế hoạch mà không chắc mình đang đi đúng hướng',
         action: 'chậm lại một nhịp và tự hỏi mình đang tiến tới, hay đang chạy trốn điều gì' } },
     {
-      id: 8, tarot: 'Strength', openName: 'Mềm Qua Gió Dữ', closedName: 'Gồng Chống Gió Dữ',
+      id: 8, tarot: 'Strength', openName: 'Cuốn Theo Chiều Gió', closedName: 'Vượt Qua Gió To',
       element: 'Fire', family: 'Major',
       coreStory: 'Hạt này đi qua một cơn gió dữ mà không gãy, nhờ mềm dẻo chứ không phải nhờ cứng lại — hình ảnh của việc đối mặt một người hay một tình huống khó khăn bằng sự bình tĩnh và kiên nhẫn thay vì phản ứng gay gắt. Khi hạt thật sự mềm, nó uốn theo gió mà vẫn nguyên vẹn. Khi nó gồng mình chống lại để tỏ ra mạnh mẽ trước mặt người khác, bên trong lại đang rất căng thẳng — và không sao nếu cho phép mình yếu đuối một chút với người mình tin tưởng.',
       visualMotif: 'Thân hạt uốn cong mềm mại theo một luồng gió mạnh thấy rõ qua các vệt chuyển động, nhưng toàn bộ tán tơ vẫn nguyên vẹn không rối; một sợi tơ duy nhất run nhẹ khác biệt với phần còn lại, gợi ý một chút căng thẳng ẩn bên trong sự bình tĩnh.',
@@ -188,7 +188,7 @@
         risk: 'gồng mình tỏ ra ổn trong khi bên trong đang rất căng thẳng hoặc sợ hãi',
         action: 'cho phép mình yếu đuối một chút với chính mình hoặc một người mình tin tưởng' } },
     {
-      id: 9, tarot: 'The Hermit', openName: 'Đèn Gọi Từ Xa', closedName: 'Cô Tĩnh Không Lối',
+      id: 9, tarot: 'The Hermit', openName: 'Bay Theo Ánh Sáng', closedName: 'Đèn Không Rọi Đến',
       element: 'Earth', family: 'Major',
       coreStory: 'Một ngọn đèn nhỏ đang gọi từ xa trong đêm tĩnh — hình ảnh của việc cần một khoảng thời gian ở một mình để suy nghĩ rõ ràng hơn về một quyết định. Khi khoảng lặng đó có giới hạn và mục đích, nó là điều nên làm, không phải trốn tránh. Khi bạn đã tự cô lập mình quá lâu đến mức khoảng tĩnh đó không còn lối ra, sự yên tĩnh biến thành cô đơn — lúc đó chỉ cần nhắn một câu ngắn cho người mình tin tưởng.',
       visualMotif: 'Một đốm sáng nhỏ, ấm, đơn độc lơ lửng cách xa hạt trong không gian tối, như một ngọn đèn ở cuối một hành lang gió dài; hạt đứng yên gần như bất động, tán tơ khép nhẹ lại thay vì xoè rộng như các hạt khác.',
@@ -208,7 +208,7 @@
         risk: 'cố giữ mọi thứ y như cũ dù nó không còn phù hợp, chỉ vì quen thuộc',
         action: 'tự hỏi mình đang sợ thay đổi, hay đang thật sự tiếc điều cũ — rồi chọn một hướng' } },
     {
-      id: 11, tarot: 'Justice', openName: 'Về Đúng Phần Đất', closedName: 'Đứng Trên Cán Cân',
+      id: 11, tarot: 'Justice', openName: 'Về Đúng Phần Đất', closedName: 'Mắc Trên Cán Cân',
       element: 'Air', family: 'Major',
       coreStory: 'Hạt này đang về đúng phần đất của mình — hình ảnh của một kết quả công bằng đang đến từ một quyết định hay một việc bạn đã làm trước đó, không phải hình phạt, chỉ là hệ quả tự nhiên. Khi hạt đứng vững trên cán cân đã cân bằng, nó chấp nhận kết quả một cách rõ ràng. Khi cán cân nghiêng vì bạn quá khắt khe với bản thân về một lỗi đã qua, hoặc đang né tránh trách nhiệm, cần nhìn lại thật công bằng, đừng quá nặng nề với chính mình.',
       visualMotif: 'Hạt đứng cân bằng trên một cọng thân mảnh ngang như đòn cân, hai bên tán tơ xoè đối xứng gần như tuyệt đối; một vệt sáng mảnh chạy ngang qua chính giữa khung hình như đường thăng bằng.',
@@ -278,7 +278,7 @@
         risk: 'thất vọng nhiều lần đến mức không còn dám mơ hay hy vọng nữa',
         action: 'chọn một điều nhỏ, thật, để bắt đầu tin trở lại' } },
     {
-      id: 18, tarot: 'The Moon', openName: 'Qua Miền Sương Trăng', closedName: 'Lạc Trong Trăng Giả',
+      id: 18, tarot: 'The Moon', openName: 'Ánh Trong Sương Bạc', closedName: 'Sương Giăng Mờ Lối',
       element: 'Water', family: 'Major',
       coreStory: 'Hạt này đang đi qua một miền sương dưới ánh trăng — hình ảnh của một giai đoạn mọi thứ chưa rõ ràng: một mối quan hệ, một quyết định, mà bạn không cần hiểu hết mới có thể tiếp tục đi qua. Khi hạt cứ đi dù sương còn dày, nó vẫn đang tiến đúng hướng. Khi nó lạc trong ánh trăng giả — những hình dạng mơ hồ do sương tạo ra — nỗi lo lắng đang khiến nó nhìn tình huống tệ hơn thực tế, và cần tự hỏi: điều mình đang sợ có thật sự đúng, hay chỉ do lo lắng?',
       visualMotif: 'Hạt bay giữa một lớp sương mờ ảo bao phủ gần hết khung hình, chỉ lõi hạt và một phần tán tơ gần đó còn rõ nét; một vài hình dạng mờ ảo phía xa gợi bóng dáng không rõ ràng, có thể là ảo giác của sương chứ không phải vật thể thật.',
@@ -355,7 +355,7 @@
           risk: 'chăm chăm một kết quả mà bỏ lỡ cơ hội khác đang mở quanh mình',
           action: 'ngẩng lên nhìn quanh và ghi ra một cơ hội khác đang có mà chưa để ý tới' } },
       {
-        id: 25, tarot: 'Four of Wands', openName: 'Về Dưới Cổng Mừng', closedName: 'Đứng Ngoài Ngày Vui',
+        id: 25, tarot: 'Four of Wands', openName: 'Về Dưới Cổng Mừng', closedName: 'Vướng Ngoài Ngày Vui',
         element: 'Fire', family: 'Wands',
         coreStory: 'Hạt này bay về ngay dưới một cổng hoa đang mừng lễ — hình ảnh của một dịp vui, một cột mốc đáng ăn mừng đang đến với bạn và những người xung quanh. Khi hạt bay thẳng vào giữa cổng hoa, nó cho phép mình tận hưởng trọn vẹn niềm vui đó. Khi nó cứ đứng mãi bên ngoài dù cổng đã mở, có một mâu thuẫn nhỏ trong gia đình hay nhóm bạn đang khiến niềm vui bị hoãn lại — cần nói ra điều đang vướng, đừng đợi nó tự qua.',
         visualMotif: 'Hạt bay ngang qua một vòm hoa nhỏ kết bằng những cành hoa dại sáng màu, đối xứng hai bên như một cổng chào; ánh sáng ấm tụ lại ngay dưới vòm cổng trong khi hạt còn cách vòm một khoảng ngắn, như vừa chuẩn bị bay vào.',
@@ -385,7 +385,7 @@
           risk: 'luôn cần lời khen từ người khác mới thấy mình đủ tốt, dù đã đạt được thành tích',
           action: 'tự nói với chính mình một câu công nhận thành tích, không chờ ai nói trước' } },
       {
-        id: 28, tarot: 'Seven of Wands', openName: 'Đứng Vững Giữa Gió', closedName: 'Gồng Mình Chống Gió',
+        id: 28, tarot: 'Seven of Wands', openName: 'Ghìm Mình Giữa Gió', closedName: 'Gồng Mình Chống Gió',
         element: 'Fire', family: 'Wands',
         coreStory: 'Hạt này đứng vững một mình giữa nhiều luồng gió công dồn tới từ mọi phía — hình ảnh của việc bảo vệ một quan điểm, một quyết định, hay một ranh giới quan trọng. Khi hạt chỉ giữ vững đúng vị trí cần giữ, điều đó là đúng, không phải cứng đầu. Khi nó gồng mình chống lại mọi ngọn gió, kể cả những góp ý không thật sự đe dọa gì, nó đang lãng phí sức vào những trận không đáng — cần chọn đúng trận nào thật sự đáng giữ, còn lại có thể bỏ qua.',
         visualMotif: 'Hạt đứng ở một vị trí cao hơn hẳn so với nhiều luồng gió nhỏ đang thổi dồn từ các hướng phía dưới, thân hạt nghiêng chống lại nhưng không gãy; một vài luồng gió ở rìa ngoài khung hình chỉ lướt nhẹ qua mà không thật sự chạm tới hạt.',
@@ -405,7 +405,7 @@
           risk: 'bị trì hoãn hơn mong đợi vì đang cố làm quá nhiều việc cùng lúc',
           action: 'chọn một việc để ưu tiên hoàn thành trước, để phần còn lại chờ' } },
       {
-        id: 30, tarot: 'Nine of Wands', openName: 'Đứng Gác Sau Trận', closedName: 'Thủ Mình Dù Ngưng',
+        id: 30, tarot: 'Nine of Wands', openName: 'Gắng Gượng Sau Trận', closedName: 'Thủ Mình Dù Ngưng',
         element: 'Fire', family: 'Wands',
         coreStory: 'Hạt này vẫn đứng gác cẩn trọng dù trận gió dữ vừa qua đã tan hẳn — hình ảnh của việc đã trải qua nhiều khó khăn và vẫn đang cố gắng, gần tới đích. Khi sự cảnh giác đó phản ánh đúng kinh nghiệm đã có, nó là một phần hợp lý của hành trình. Khi hạt vẫn phòng thủ như thể trận gió còn ở đó dù nó đã ngưng từ lâu, cần cho phép mình thả lỏng một chút, xem thử có thật cần cảnh giác vậy không.',
         visualMotif: 'Hạt đứng nghiêng cảnh giác, một vài sợi tơ mang vết xước nhẹ như dấu tích còn lại từ những cơn gió đã qua; không khí xung quanh đã hoàn toàn tĩnh lặng, không còn vệt gió động nào, nhưng tư thế hạt vẫn như đang phòng bị.',
@@ -500,7 +500,7 @@
         risk: 'thấy lạc lõng giữa một nhóm đông vui vì đang chú ý những điều không quan trọng',
         action: 'tìm và nhắn cho đúng người mình thật sự muốn ở cạnh lúc này' } },
     {
-      id: 39, tarot: 'Four of Cups', openName: 'Nhận Ra Mưa Mời', closedName: 'Ngoảnh Mặt Trước Mưa',
+      id: 39, tarot: 'Four of Cups', openName: 'Nhận Ra Mưa Mời', closedName: 'Thờ Ơ Trước Mưa',
       element: 'Water', family: 'Cups',
       coreStory: 'Có một giọt mưa mới đang mời gọi ngay trước mặt hạt này, dù trước đây nó từng lướt qua không để ý — hình ảnh của một cơ hội hay lời mời bạn từng bỏ qua. Khi hạt bắt đầu để ý và cho giọt mưa đó một cơ hội nhìn lại, cánh cửa mở ra. Khi nó ngoảnh mặt trước giọt mưa đang mời vì nó không đến đúng như mong đợi, cần nhớ rằng một cơ hội tốt không cần đến đúng hình dạng mới đáng nhận.',
       visualMotif: 'Một giọt mưa mới, sáng và trong, đang lơ lửng ngay trước mặt hạt, gần đến mức gần chạm vào tán tơ; nhưng hạt hơi nghiêng đầu ra một chút, chưa hoàn toàn quay về phía giọt mưa đó.',
@@ -550,7 +550,7 @@
         risk: 'quay lại điều cũ vì sợ cái chưa biết, dù biết nó không còn đủ',
         action: 'gọi tên một điều cụ thể đã không còn phù hợp và định ngày để bắt đầu buông' } },
     {
-      id: 44, tarot: 'Nine of Cups', openName: 'Đủ Đầy Sau Mưa', closedName: 'Uống Mãi Không No',
+      id: 44, tarot: 'Nine of Cups', openName: 'Đủ Đầy Sau Mưa', closedName: 'Hút Mãi Không No',
       element: 'Water', family: 'Cups',
       coreStory: 'Hạt này đã đủ đầy sau một cơn mưa dài, gần chạm tới một điều mình từng mong ước — hình ảnh của việc ở gần một điều mình mong muốn. Khi hạt cho phép mình cảm thấy đủ mà không cần thêm nữa mới hài lòng, sự đủ đầy đó là thật. Khi nó cứ uống mãi mà không thấy no, liên tục tìm thêm để lấp một khoảng trống cảm xúc mà không thứ nào lấp được, khoảng trống đó có thể đang cần một điều khác, không phải thêm nữa.',
       visualMotif: 'Hạt được bao quanh bởi nhiều giọt sương lấp lánh no đầy bám quanh tán tơ, ánh sáng ấm phản chiếu qua từng giọt; nhưng có một giọt cuối cùng vẫn đang được hạt cố vươn tới thêm, dù xung quanh đã đủ đầy.',
@@ -624,7 +624,7 @@
         risk: 'nói ra sự thật theo cách gây tổn thương nhiều hơn cần thiết',
         action: 'nói ra điều mình biết rõ, nhưng chọn cách nói không làm ai tổn thương thêm' } },
     {
-      id: 51, tarot: 'Two of Swords', openName: 'Lặng Giữa Hai Gió', closedName: 'Bịt Mắt Giữa Gió',
+      id: 51, tarot: 'Two of Swords', openName: 'Lặng Giữa Hai Gió', closedName: 'Mù Mờ Trước Gió',
       element: 'Air', family: 'Swords',
       coreStory: 'Hạt này đứng lặng giữa hai luồng gió ngược chiều, chưa nghiêng hẳn về bên nào — hình ảnh của việc tạm chưa quyết định giữa hai lựa chọn, và điều đó ổn. Khi hạt cho phép mình tĩnh lại một khoảng trước khi chọn, đó là chuẩn bị cần thiết. Khi nó bịt mắt giữa hai luồng gió, né tránh nhìn thẳng vào thông tin thật vì sợ phải quyết định, cần nhớ rằng sự bế tắc thường vì thiếu thông tin, không phải vì thiếu can đảm.',
       visualMotif: 'Hạt lơ lửng đứng yên chính giữa hai luồng gió ánh sáng đối xứng thổi từ hai phía ngược nhau, cả hai luồng đều mờ nhạt như nhau; tán tơ hạt khép gọn lại, không nghiêng về bên nào.',
@@ -778,7 +778,7 @@
         risk: 'quá tải vì cố ôm đồm mọi việc cùng lúc mà mất kiểm soát',
         action: 'chọn bớt một việc để tạm gác lại, thay vì cố làm hết tất cả cùng lúc' } },
     {
-      id: 66, tarot: 'Three of Pentacles', openName: 'Nhiều Tay Vun Luống', closedName: 'Tự Vun Một Mình',
+      id: 66, tarot: 'Three of Pentacles', openName: 'Nhiều Hạt Vun Luống', closedName: 'Tự Vun Một Mình',
       element: 'Earth', family: 'Pentacles',
       coreStory: 'Nhiều bàn tay cùng vun một luống đất quanh hạt này — hình ảnh của sự hợp tác giữa bạn và người khác đang tạo ra một kết quả chất lượng. Khi hạt để nhiều tay cùng vun luống, khả năng của nó được nhìn thấy và công nhận rõ hơn. Khi nó tự vun luống một mình, cố làm một việc lẽ ra cần nhiều người hơn, kết quả thiếu sự phối hợp, cần nhớ rằng mời thêm người vào không làm giảm giá trị phần mình đóng góp.',
       visualMotif: 'Hạt nằm giữa một luống đất đang được vun bởi nhiều dấu tay/rễ nhỏ khác nhau hội tụ về cùng một điểm, mỗi dấu vết mang một sắc độ ánh sáng hơi khác nhau; kết cấu đất ở đó tơi xốp và đều hơn hẳn phần đất xung quanh.',
@@ -818,7 +818,7 @@
         risk: 'cho đi để giữ quyền kiểm soát hơn là để giúp thật lòng',
         action: 'xem lại động cơ thật sự của mình trước khi cho đi một điều gì đó' } },
     {
-      id: 70, tarot: 'Seven of Pentacles', openName: 'Kiên Nhẫn Chờ Chín', closedName: 'Sốt Ruột Đào Sớm',
+      id: 70, tarot: 'Seven of Pentacles', openName: 'Kiên Nhẫn Chờ Chín', closedName: 'Bị Nhổ Lên Sớm',
       element: 'Earth', family: 'Pentacles',
       coreStory: 'Hạt này nằm im trong một luống đất mà nó đã tự tay vun trồng, chờ đúng thời điểm để lớn lên — hình ảnh của một việc cần thời gian dài mới ra quả: một công việc, một kỹ năng, một mối quan hệ đang xây dần. Khi hạt đủ kiên nhẫn ở yên, rễ vẫn đang âm thầm lớn dù mắt thường chưa thấy gì. Khi nó sốt ruột tự đào luống đất lên để kiểm tra, nó chỉ đang phá vỡ chính quá trình mình cần chờ, khiến mọi thứ phải bắt đầu lại.',
       visualMotif: 'Hạt lún một nửa vào lớp đất sẫm màu giàu mùn, vài sợi tơ mảnh trong suốt hướng ngược xuống dưới như rễ non thay vì xoè lên trên; một quầng sáng vàng nhạt phát nhẹ ngay dưới bề mặt đất gợi ý sự lớn lên chưa thấy được, lấm tấm rêu và khoáng chất li ti quanh đó.',

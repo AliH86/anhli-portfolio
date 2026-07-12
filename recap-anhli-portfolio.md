@@ -29,6 +29,44 @@
   `garden-oracle-profiles.js` ghi rõ quy tắc ≤4 âm tiết cho các lần đổi
   tên sau này.
 
+## Oracle — soát lại tên theo đúng logic "hạt không có tay chân" (13/7/2026)
+
+- Ali review danh sách 78 tên và chỉ ra: hạt bồ công anh là chủ thể xuyên
+  suốt, nó KHÔNG "đi" — chỉ có các hành động Bay/rời đi/bay đi/đáp/chạm
+  đất/vướng/cản... Mọi tên còn ngụ ý tay-chân-mắt-tai (đứng, bịt tai, bịt
+  mắt, giữ chân, nhiều tay, đào, uống, ngoảnh mặt) là sai logic chủ thể,
+  cần sửa toàn bộ 78 lá chứ không chỉ mấy lá Ali nêu ví dụ.
+- Áp dụng đúng 5 lá Ali chỉ rõ (High Priestess, Emperor, Lovers, Chariot,
+  Strength) + tự rà thêm 10 lá khác dính lỗi tay/chân/mắt/tai (Hierophant,
+  Justice, Four/Seven/Nine of Wands, Four/Nine of Cups, Two of Swords,
+  Three/Seven of Pentacles) — tổng 15 lá / 20 field đổi tên. Không đụng
+  các lá Major còn lại (10, 12–21) vì soát kỹ không thấy lỗi tương tự,
+  tránh xáo trộn không cần thiết chỉ để đổi giọng văn.
+- Ali cho thêm ví dụ The Moon (id18): tên cũ "Qua Miền Sương Trăng / Lạc
+  Trong Trăng Giả" dùng chữ "Trăng" nhưng ảnh thật KHÔNG hề vẽ mặt trăng
+  — chỉ có sương mờ, hạt phát sáng, vài bóng mờ ảo xa xa (đã xem lại ảnh
+  `seed-18-hat-qua-mien-suong-trang-v01.png` để xác nhận). Đổi thành "Ánh
+  Trong Sương Bạc / Sương Giăng Mờ Lối" — khớp đúng thứ đang hiện trên ảnh.
+  Đây là một loại lỗi khác: tên đúng ngữ pháp nhưng nhắc tới vật thể không
+  có trong hình.
+- Sau đó Ali cho thêm 1 lần sửa nữa cho The Hermit (id9): "Đèn Gọi Từ Xa /
+  Cô Tĩnh Không Lối" → "Bay Theo Ánh Sáng / Đèn Không Rọi Đến".
+- Toàn bộ áp dụng bằng script Python verify-trước-khi-ghi (đếm đúng 1 lần
+  xuất hiện chuỗi cũ) lên cả `garden-oracle-data.js` và
+  `garden-oracle-profiles.js`, sau đó verify lại bằng node: 78 cards, 0 sai
+  khác giữa 2 file, 0 tên vượt quá 4 âm tiết, 0 tên trùng.
+- Nhân dịp này Ali cũng nhắc: "cần xem đủ 78 ý, và hình" — đã tranh thủ
+  spot-check thêm vài lá dễ dính lỗi "tên nhắc vật không có trong ảnh"
+  (The Star id17 — có ánh sao thật trong ảnh, đúng; Ten of Cups id45 —
+  vòng cung giọt sương đóng vai cầu vồng, chấp nhận được; Ace of Wands
+  id22 — ngọn lửa thật sự hiện diện ở lõi hạt, đúng). Chưa soát hết 78/78
+  ảnh (chi phí lớn), nên nếu Ali muốn rà tiếp các suit còn lại thì làm tiếp
+  ở phiên sau.
+- Đồng thời hoàn tất việc còn treo từ trước: bộ Đất (Pentacles) đã có đủ
+  14 ảnh trong `Dandelion Oracle_ Pentacles`, đã xem từng ảnh đối chiếu
+  visualMotif rồi đổi tên file theo đúng convention
+  `seed-{id}-{slug}-v01.png` (Ace→King, id64–77).
+
 ## Oracle — sửa lại lần 2: bớt nhân cách hoá Kỵ sĩ + khoá đúng khung viền (13/7/2026)
 
 - Ali tạo thử 2 ảnh Kỵ sĩ Lửa/Nước theo prompt fix lần 1 (bỏ ngựa) — phản
