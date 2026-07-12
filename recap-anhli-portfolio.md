@@ -1,5 +1,18 @@
 # Recap — anhli-portfolio (cập nhật 12/7/2026, khuya)
 
+## Oracle — 22 prompt Imagen cho khối Major (12/7/2026, khuya)
+
+- File mới `ORACLE-ASSET-PROMPTS-MAJOR.md`: 22 prompt Imagen (văn phong tự
+  nhiên, không chia field — theo đúng format 5 mẫu Ali đã duyệt trước đó),
+  dựng từ `visualMotif`/`coreStory` đã viết trong `garden-oracle-profiles.js`.
+  Ali sẽ tự chạy từng prompt qua Imagen, không cần Claude generate ảnh trực
+  tiếp trong phiên này.
+- Ali quyết: bỏ qua lo ngại vùng sáng chạm safe zone ở 2/5 ảnh mẫu trước đó —
+  xử lý bằng shadow/glow overlay ở lớp HTML khi lên UI thật, không regenerate.
+- Bước kế tiếp (chưa làm): Ali chạy 22 ảnh → gửi lại contact sheet để soát
+  trùng silhouette/safe zone, song song có thể bắt đầu checkpoint văn bản cho
+  14 Lửa nếu Ali muốn tiếp tục ngay.
+
 ## Oracle — 22 Major hoàn tất core-story + hồ sơ nghĩa (12/7/2026, khuya)
 
 - Ali xem 5 ảnh mẫu (Imagen) → duyệt: 2 card (Lửa/Nước) có vùng sáng chạm safe
