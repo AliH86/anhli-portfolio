@@ -1,5 +1,32 @@
 # Recap — anhli-portfolio (cập nhật 12/7/2026, khuya)
 
+## Chốt đặc tả mở rộng Garden Oracle (12/7/2026)
+
+- Nguồn sự thật mới: `ORACLE-CONTENT-SYSTEM.md`; Claude/Codex phải đọc trước
+  mọi công việc Oracle để không suy lại sai ý từ các phiên chat rời rạc.
+- Đã chốt bốn trục: 78 hình SVG riêng, 78 câu chuyện lõi, engine tổng hợp ba
+  hạt không copy/paste, và lớp chiêm tinh chung tuần/ngày không dùng location.
+- Routine đề xuất: Chủ nhật 23:17 chuẩn bị 8 ngày + bản nháp; thứ Hai 10:00 và
+  thứ Ba 10:00 nhắc duyệt; chưa duyệt thì giữ wording pack live gần nhất.
+- Oracle là lượt trải chung. Chiêm tinh chỉ là “thời tiết” có thể khuếch đại,
+  thúc đẩy, làm rõ, làm nổi, làm dịu, làm chậm, gây ma sát hoặc ổn định năng
+  lượng ba hạt; tuyệt đối không giả làm bản đồ sao cá nhân.
+- Trình tự triển khai được chia thành commit nhỏ có điểm dừng an toàn để agent
+  khác có thể tiếp tục khi một phiên chạm giới hạn.
+
+## Chốt guồng Garden Oracle qua các session (12/7/2026)
+
+- Đã đưa guồng mặc định vào `AGENT-RULES.md` mục 7 để session/agent mới tự đọc
+  và làm tiếp, Ali không cần nhắc lại.
+- Mặc định mở rộng Oracle tại `SYNTH_BANK` trong
+  `garden-oracle-synthesis.js`; không chạm `garden-oracle-data.js` hay
+  `index.html` nếu Ali chỉ yêu cầu làm phong phú câu tổng hợp.
+- Hướng vận hành đã chốt: xây ngân hàng câu đủ lớn để tự xoay theo tuần, rồi
+  refresh theo đợt khi cần — không bắt buộc tạo commit nội dung mỗi tuần.
+- Nếu hai agent cùng làm, một agent giữ quyền sửa file synthesis tại một thời
+  điểm; agent kia review/soạn câu. Mọi lần chuyển phiên đều kiểm tra
+  status/fetch/divergence/log trước khi sửa và commit riêng đúng file.
+
 ## Dọn working tree + fix hero album (12/7/2026, khuya muộn)
 
 **Dọn rác:** xoá 31 file rác đã đọng lâu — 16 `.command` deploy cũ (đã hết
