@@ -1,5 +1,34 @@
 # Recap — anhli-portfolio (cập nhật 13/7/2026)
 
+## Oracle — sửa design 4 lá Kỵ sĩ: bỏ ngựa, giữ hạt bồ công anh là chủ thể (13/7/2026)
+
+- Ali review ảnh Kỵ sĩ Lửa (seed-33) đã tạo: prompt cũ mô tả "a small
+  horse-and-rider silhouette" khiến ảnh ra MỘT con ngựa + MỘT người cưỡi
+  tách biệt — ngựa lấn át, hạt bồ công anh không còn là chủ thể rõ ràng.
+  Ali thích cách nhân hoá ở lá King of Wands (seed-35, hạt có "đầu tơ xù +
+  hai nhánh tơ như tay chân" cầm đuốc) và muốn Kỵ sĩ theo đúng phong cách
+  đó — không tách ngựa riêng, chính hạt vừa là người cưỡi vừa là "ngựa".
+- Sửa `visualMotif` trong `garden-oracle-profiles.js` cho cả 4 lá Kỵ sĩ:
+  id 33 (Knight of Wands), 47 (Knight of Cups), 61 (Knight of Swords), 75
+  (Knight of Pentacles) — đổi "hình dáng cưỡi ngựa nhỏ..." thành "hình dáng
+  hạt bồ công anh được nhân hoá — đầu tơ xù cùng hai nhánh tơ mảnh như tay
+  chân, không có ngựa hay vật cưỡi riêng biệt" + giữ nguyên motif hành động
+  đặc trưng (lao nhanh/xé mây/bước đều...). `openName`/`closedName`/`coreStory`
+  (chữ "kỵ sĩ" chỉ là tên gọi/ẩn dụ, không phải chỉ định hình ảnh) giữ
+  nguyên, không đổi.
+- Đồng bộ sửa cả `ORACLE-ASSET-PROMPTS-FIRE-WATER.md` (id 33, 47) và
+  `ORACLE-ASSET-PROMPTS-AIR-EARTH.md` (id 61, 75): prompt tiếng Anh đổi
+  "A small horse-and-rider silhouette..." → "A dandelion seed personified
+  in the same style as the other court cards — ... no separate horse or
+  mount, the seed itself is both rider and runner/walker" + thêm câu chặn
+  rõ ở cuối "no separate horse or mount — the dandelion seed itself must
+  stay the clear, unmistakable central subject".
+- **Việc kế tiếp: ảnh seed-33 (Knight of Wands, Lửa) đã tạo cần Ali tạo lại
+  bằng prompt mới** (trong `ORACLE-ASSET-PROMPTS-FIRE-WATER.md`, batch 2)
+  trước khi rename/dùng chính thức — 13 ảnh Lửa còn lại không cần đổi. Áp
+  dụng bài học này khi tạo ảnh Khí + Đất (Kỵ sĩ Khí/Đất dùng prompt mới
+  ngay từ đầu, chưa generate nên không cần làm lại).
+
 ## Oracle — 28 prompt Imagen cho khối Khí + Đất (13/7/2026)
 
 - Viết `ORACLE-ASSET-PROMPTS-AIR-EARTH.md`: 28 prompt tự nhiên (id 50-77,
