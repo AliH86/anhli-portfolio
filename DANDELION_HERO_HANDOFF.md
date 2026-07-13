@@ -5,6 +5,13 @@
 > được). Từ nay theo `AGENT-RULES.md` §6, mọi cập nhật/log phiên mới đi vào
 > `recap-anhli-portfolio.md` (nguồn sự thật chung), **không** thêm mục mới vào
 > file này nữa để tránh rải rác nhiều bản recap.
+>
+> **Cập nhật vị trí source (13/7/2026):** 7 layer PNG cũ không dùng runtime đã
+> được chuyển khỏi repo sang
+> `/Users/alihuynh/Claude/Projects/Anh Li Portfolion/source-archive/hero/dandelion-scene/`.
+> File nền trùng byte `bg-dandelion-field.png` đã xoá; bản tracked tương ứng là
+> `images/hero/dandelion-field.png`. Site hiện tại không tham chiếu source
+> archive; không xoá hoặc add ngược archive khi Ali chưa yêu cầu.
 
 ## 2026-07-05 — LIVE PUSHED: dandelion hero video + music background polish
 

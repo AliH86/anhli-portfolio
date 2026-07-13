@@ -1,5 +1,28 @@
 # Recap — anhli-portfolio (cập nhật 13/7/2026)
 
+## DONE — dọn toàn bộ untracked cũ có chủ đích (13/7/2026)
+
+- **Đã xoá an toàn** 3 script deploy một lần đã hết nhiệm vụ:
+  `deploy-cleanup-hero-fix-july12.command`,
+  `deploy-oracle-artwork-july13.command`,
+  `deploy-oracle-spec-july12.command`.
+- **Đã xoá an toàn** log cũ `deploy-log-cleanup-hero-fix-july12.txt` (chỉ ghi
+  lần push đã hoàn tất ở commit cũ `b9a3fa8`; không còn giá trị vận hành).
+- **Đã xoá** `images/hero/dandelion-scene/bg-dandelion-field.png` sau khi
+  SHA-256 xác nhận trùng byte với file tracked `images/hero/dandelion-field.png`.
+- **Đã lưu trữ ngoài repo** 7 layer Hero độc bản thay vì xoá. Đường dẫn mới:
+  `/Users/alihuynh/Claude/Projects/Anh Li Portfolion/source-archive/hero/dandelion-scene/`.
+  Gồm: `anhli-sitting.png`, `dli-standing-back.png`, `giant-cd-case.png`,
+  `cd-loose.png`, `fg-dandelion-grass.png`, `light-haze.png`,
+  `seed-overlay.png`. Site không tham chiếu chúng; đây chỉ là source để dựng
+  lại Hero nếu cần. Thư mục untracked cũ trong repo đã được xoá sạch.
+- **Đã quyết định track** `.claude/launch.json`: cấu hình preview website tĩnh
+  bằng `python3 -m http.server 8765`, giúp agent/Cowork sau mở local nhanh;
+  không tham gia bundle hoặc ảnh hưởng GitHub Pages.
+- Sau cleanup, không còn deploy script/log/source-layer untracked trong repo.
+  Không được tạo lại các file đã xoá chỉ để deploy; Codex có thể push trực tiếp,
+  còn script một lần mới phải được dọn ngay sau khi hoàn thành nhiệm vụ.
+
 ## NEXT SESSION — đại cập nhật wording toàn website (Ali đã chốt)
 
 ### Quyết định và thứ tự
