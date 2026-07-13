@@ -63,9 +63,21 @@
     }
   };
 
+  packs['2026-W29-approved-v2']={
+    ...packs['2026-W29-approved'],
+    status:'approved',
+    label:'13–20/7/2026 · nhịp tuần được Ali duyệt',
+    week:{
+      eyebrow:'Nhịp tuần · 13–19/7',
+      title:'Dọn một khoảng đất cho điều mới',
+      body:'Tuần này đi từ khoảng lặng trước Trăng non 14/7 sang những ngày đầu của một vòng mới. Sao Thuỷ nghịch hành ở Cự Giải giữ nhịp nhìn lại: gọi đúng nhu cầu mình muốn chăm, sửa một điều từng nói chưa trọn và cho khởi đầu mới đủ thời gian bén rễ.',
+      carry:'Giữ lại cho tuần này: một khoảng trống để nghỉ, một câu cần nói lại cho rõ và một việc đủ nhỏ để làm đều.'
+    }
+  };
+
   root.GARDEN_ORACLE_WEEKLY={
     activeReviewKey:null,
-    lastApprovedKey:'2026-W29-approved',
+    lastApprovedKey:'2026-W29-approved-v2',
     packs
   };
 })(window);

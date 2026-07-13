@@ -22,6 +22,7 @@ for(const ids of cases){
     const result=ids.map((id,index)=>({n:id,card:deck[id],closed:Boolean(mask&(1<<index))}));
     const out=engine.buildSynthesis(result,'2026-07-13');
     const full=out.paragraphs.join(' ');
+    if(!out.week||out.week.packKey!=='2026-W29-approved-v2'||!out.week.body||!out.week.carry) throw new Error(`${ids}/${mask}: approved weekly context missing locally`);
     if(out.meta.wordCount<90||out.meta.wordCount>140) throw new Error(`${ids}/${mask}: ${out.meta.wordCount} words`);
     if(out.meta.astrologySignals.length>2) throw new Error(`${ids}/${mask}: too many astrology signals`);
     for(const item of result){
@@ -32,7 +33,8 @@ for(const ids of cases){
     if(out.meta.sourceProfileIds.join(',')!==ids.join(',')) throw new Error(`${ids}/${mask}: traceability mismatch`);
     window.location.hostname='alih86.github.io';
     const liveOut=engine.buildSynthesis(result,'2026-07-13');
-    if(liveOut.meta.packKey!=='2026-W29-approved'||liveOut.meta.astrologySignals.length<1||liveOut.meta.astrologySignals.length>2) throw new Error(`${ids}/${mask}: approved weekly pack missing on live`);
+    if(liveOut.meta.packKey!=='2026-W29-approved-v2'||liveOut.meta.astrologySignals.length<1||liveOut.meta.astrologySignals.length>2) throw new Error(`${ids}/${mask}: approved weekly pack missing on live`);
+    if(!liveOut.week||liveOut.week.packKey!=='2026-W29-approved-v2') throw new Error(`${ids}/${mask}: approved weekly context missing on live`);
     if(liveOut.meta.wordCount<90||liveOut.meta.wordCount>140) throw new Error(`${ids}/${mask}: live fallback ${liveOut.meta.wordCount} words`);
     window.location.hostname='localhost';
     checked++;

@@ -1,5 +1,65 @@
 # Recap — anhli-portfolio (cập nhật 13/7/2026)
 
+## Wording checkpoint 1 — Hero + About + ngưỡng Music (13/7/2026, review)
+
+- Trạng thái: **review local**, chưa commit/push/live; chờ Ali xem trên giao
+  diện trước khi chuyển sang Music.
+- Khóa hướng giọng: xưng “mình – bạn”, “đằng ấy” chỉ là dấu chào ở
+  Hero; cụ thể trước, hình ảnh sau; ấm, có duyên và hiểu ngay.
+- Hero đổi từ lời chào hỏi khách đến bằng cách nào sang lời tự giới
+  thiệu rõ việc dựng sân khấu, viết nhạc và tìm thêm người đồng hành.
+  Eyebrow chuyển sang tiếng Việt; side label rút gọn và đã sửa đồng bộ
+  cả HTML lẫn `renderHeroGarden()` để JS không ghi đè bản cũ.
+- Cầu nối “Một lời chào” đổi sang lời mời người đang ở đây ở lại
+  và chốt hình tượng Anh Li là “người làm vườn”.
+- About bỏ phần tự giới thiệu lặp lại, kể hành trình từ thiết kế không
+  gian đến âm nhạc; viết lại quote, ba nét ngắn và bốn trụ nghề theo
+  việc làm cụ thể. Giữ câu “Nhạc sĩ độc lập ‘tự phong’” theo duyệt của Ali.
+- Ngưỡng Music bỏ hoàn toàn nhãn “Chapter II”; chuyển thành lời mời
+  nghe đôi chút thanh âm tự sự. CTA “Bước vào Cái Sạp nhạc” giữ nguyên.
+- QA local đã qua ở 1440×900, 390×844 và 320×700: không tràn ngang
+  trang, Hero quote vẫn nằm trọn trong Hero, copy ngưỡng Music nằm trọn
+  trong section, nhãn Chapter không còn trong DOM và console không có lỗi.
+
+## Wording checkpoint 2 — Music (13/7/2026, review)
+
+- Trạng thái: **Ali đã duyệt wording local**, chưa commit/push/live.
+- Intro Music chuyển từ giọng giới thiệu bên ngoài sang giọng chủ sạp “mình”;
+  làm rõ D'Li là màu giọng ảo do Anh Li tạo ra để kể phần cảm xúc
+  một mình chưa kể hết.
+- Cửa AI bỏ khung phủ định “AI không thay thế… / chỉ là…”. Bản mới gọi
+  AI là một nhạc cụ trong căn phòng và nói thẳng rằng trái tim, lựa chọn,
+  trách nhiệm sáng tạo thuộc về con người. CTA đổi thành “Mở cửa
+  nghe nhạc” / “Để mình đọc lại”.
+- Toàn bộ microcopy playlist/player được đưa về ngôn ngữ Cái Sạp:
+  “Kệ nhạc”, “Để mình chọn một bài cho bạn”, “Đang nghe”, “Nghe từ
+  đầu”, cùng loading/error/share/shuffle và accessibility label tương ứng.
+- Viết lại mô tả album theo hướng cụ thể, gọn và có hình ảnh; giữ
+  nguyên ID, tên album, subgenre, cover, tên bài, thời lượng và link. Các album
+  trùng ID được sửa cả trong `index.html` fallback lẫn
+  `music-data-base.js` để không quay về wording cũ khi loader lỗi.
+- QA runtime: loader ghép đúng **25 album**; desktop và mobile 320px không
+  tràn ngang toàn trang, cửa AI mở đúng trạng thái, không có lỗi console.
+  Mô tả album một dòng trên mobile và cụm chân dung nằm ngang là hành vi
+  responsive đã có sẵn, không phải lỗi wording.
+
+## Wording checkpoint 3 — Oracle + nhịp tuần (13/7/2026, approved)
+
+- Trạng thái: **Ali đã duyệt để push live**.
+- Viết lại ritual từ lịch → túi hạt → lật hạt → kết quả theo giọng mời ở lại:
+  rõ hơn về thao tác, bớt câu phủ định/phán xét và nói thẳng rằng ba hạt được
+  chọn ngẫu nhiên nhưng giữ nguyên đến khi ngày mới sang.
+- Thêm lớp nội dung nhìn thấy được `Nhịp tuần · 13–19/7` với chủ đề
+  **“Dọn một khoảng đất cho điều mới”**. Nội dung chỉ dùng hai trục thời tiết
+  chung đã kiểm tra: Trăng non 14/7 và Sao Thuỷ nghịch hành ở Cự Giải; không
+  cá nhân hoá, không giả định hoàn cảnh người xem.
+- `garden-oracle-synthesis.js` trả thêm weekly context từ pack đã duyệt;
+  `index.html` render thành một khối riêng trước “Khi ba hạt gặp nhau”. Thêm
+  cache key cho weekly data để trình duyệt cũ nhận ngay nội dung mới.
+- QA: matrix **80 tổ hợp × local/live** qua; đủ 78 semantic profile, pack tuần
+  được nạp đúng. Ritual hoàn chỉnh qua trên 1440×900 và 390×844, ba hạt hiển
+  thị đủ, khối kết quả cuộn đúng và toàn trang không tràn ngang.
+
 ## DONE — dọn toàn bộ untracked cũ có chủ đích (13/7/2026)
 
 - **Đã xoá an toàn** 3 script deploy một lần đã hết nhiệm vụ:

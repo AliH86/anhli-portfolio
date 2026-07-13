@@ -115,6 +115,12 @@
     };
   }
 
+  function weekContext(dateKey){
+    const selected=selectPack(dateKey);
+    if(!selected?.pack?.days?.[dateKey]||!selected.pack.week) return null;
+    return { ...selected.pack.week, packKey:selected.key };
+  }
+
   function actionLine(result,dominant){
     const candidates=result.map(x=>({item:x,profile:profileOf(x)})).filter(x=>x.profile);
     const anchor=candidates.find(x=>!x.item.closed&&(!dominant||x.profile.profile.domain===dominant))
@@ -134,12 +140,14 @@
     const meaning=semanticBridge(result);
     const elements=elementLine(result);
     const astro=astrologyLine(result,dateKey);
+    const week=weekContext(dateKey);
     const guidance=actionLine(result,opening.dominant);
     const paragraphs=[opening.text,`${state} ${meaning}`,`${elements} ${astro.text}`,guidance];
     const fullText=paragraphs.join(' ');
     return {
       paragraphs,
       guidance,
+      week,
       meta:{
         wordCount:wordCount(fullText),
         domains:result.map(domainOf),

@@ -20,7 +20,7 @@ window.PORTFOLIO_MUSIC = {
                 "name": "Tôi Muốn Ôm Trọn Di Sản Quê Hương Mình Vào Lòng",
                 "sub": "Dân ca ba miền · Heritage Folk Series",
                 "cover": "uploads/toi-muon-om-tron-di-san.jpg",
-                "desc": "Những câu chuyện từ làng nghề thủ công, di sản văn hoá và làn điệu dân gian Việt Nam, kể lại theo một hơi thở mới.",
+                "desc": "Đi từ làng nghề, di sản văn hoá đến những làn điệu dân gian ba miền, album kể lại chất liệu Việt bằng một hơi thở mới.",
                 "count": 6,
                 "tracks": [
                   { "id": "69ede1f4-3725-467f-b424-beed636dabc1", "name": "IN MỘT NÉT TRANH", "dur": "4:54" },
@@ -37,7 +37,7 @@ window.PORTFOLIO_MUSIC = {
             "name": "Một Tần Số Khác",
             "sub": "Indie Folk · Ambient Poetic EP",
             "cover": "uploads/mot-tan-so-khac.jpg",
-            "desc": "Không ai nghe không nghĩa là mình sai. Có khi mình chỉ đang ở một tần số khác...",
+            "desc": "Có những tín hiệu cần đi thật xa mới gặp được người nghe. Sáu bài hát dành cho những ai đang giữ một nhịp riêng giữa thế giới quá nhiều âm thanh.",
             "count": 6,
             "tracks": [
               { "id": "a236c5a1-948e-45c0-a981-3fb91ac85878", "name": "Có Ai Nghe Không", "dur": "4:37" },
@@ -54,7 +54,7 @@ window.PORTFOLIO_MUSIC = {
       "name": "01KhoảngLặng",
       "sub": "Lo-fi Hip-hop · Vietnamese R&B · Cinematic Soul",
       "cover": "uploads/01-khoang-lang.jpg",
-      "desc": "01KhoảngLặng là góc nhỏ để ngồi lại giữa những ngày ồn ào. Từ mưa, piano cũ, boom-bap chậm, R&B khàn đến rap tự sự, playlist đi qua nhiều sắc thái cô đơn và học cách buông nhẹ. Đây là những bài hát để nghe khi cần một khoảng lặng riêng.",
+      "desc": "Một góc nhỏ để ngồi lại giữa những ngày ồn ào. Mưa, piano cũ, boom-bap chậm, R&B khàn và rap tự sự đi qua nhiều sắc thái cô đơn, rồi dẫn mình về một khoảng lặng riêng.",
       "count": 8,
       "tracks": [
         {
@@ -105,7 +105,7 @@ window.PORTFOLIO_MUSIC = {
       "name": "Chuyện Tình Này...Nó Lạ...",
       "sub": "Folk-soul Noir · Retro Pop · Anh Li & D'Li",
       "cover": "uploads/chuyen-tinh-nay-no-la.jpg",
-      "desc": "Góc nhìn mới về những câu chuyện tình....",
+            "desc": "Tình yêu trong album này vừa quen vừa lạ: có người đến, người đi và những điều chỉ hiểu ra khi câu chuyện đã qua.",
       "count": 4,
       "tracks": [
         {
@@ -206,7 +206,7 @@ window.PORTFOLIO_MUSIC = {
       "name": "Unplugged Vol.1",
       "sub": "Acoustic · Indie Folk · Hát mộc",
       "cover": "uploads/Unplugged-vol1.jpg",
-      "desc": "Hát mộc chữa lòng lành liền một mạch— qua nhiều lát cắt đời thường, bằng những cảm xúc rất riêng....",
+            "desc": "Một mạch hát mộc đi qua những lát cắt đời thường: mệt thì ngồi lại, buồn thì tựa vai, vui thì hát thêm một bài.",
       "count": 10,
       "tracks": [
         {
@@ -323,7 +323,7 @@ window.PORTFOLIO_MUSIC = {
       "name": "Mỹ Vị Nhân Sinh",
       "sub": "Alt-Indie Folk · Anh Li",
       "cover": "uploads/My-vi-nhan-sinh.jpg",
-      "desc": "Một lát cắt về cuộc đời muôn vị. Có cay để nhớ, có đắng để thấm, có ngọt để thương, có nhạt để bình yên. Với Anh Li, mỗi hương vị đi qua đời người đều là một cách thế gian kể chuyện...",
+      "desc": "Cuộc đời có cay để nhớ, đắng để thấm, ngọt để thương và nhạt để bình yên. Bốn bài hát gom những hương vị ấy thành một lát cắt nhỏ của nhân sinh.",
       "count": 7,
       "tracks": [
         {
@@ -364,7 +364,7 @@ window.PORTFOLIO_MUSIC = {
       "name": "Cả Biển Trời Trong Mắt",
       "sub": "Ballad Collection · Anh Li · Healing Pop",
       "cover": "uploads/ca-bien-troi-trong-mat.jpg",
-      "desc": "Ballad Collection dịu sâu từ Cái Sạp Nhạc của Li — nơi những câu chuyện tình, ký ức, chia xa và chữa lành được kể bằng giai điệu chậm, gần, và nhiều khoảng thở...",
+      "desc": "Những câu chuyện tình, ký ức, chia xa và những lần học cách dịu lại, được kể bằng giai điệu chậm, gần và nhiều khoảng thở.",
       "count": 9,
       "tracks": [
         {
@@ -454,7 +454,7 @@ window.PORTFOLIO_MUSIC = {
       "name": "Tôi ❤ Việt Nam",
       "sub": "Patriotic · Pop · Epic",
       "cover": "uploads/toi-yeu-vn.jpg",
-      "desc": "Yêu nước là không phải nói... Những khúc ca viết cho dải đất hình chữ S — hào sảng, tự cường và đầy thương mến.",
+      "desc": "Những khúc ca viết cho dải đất hình chữ S, mang theo niềm tự hào, tinh thần tự cường và một tình yêu rất đỗi thân quen.",
       "count": 8,
       "tracks": [
         {
@@ -514,7 +514,7 @@ window.PORTFOLIO_MUSIC = {
             "name": "Lạ mà Quen",
             "sub": "Cover Remix · Ký ức cũ phối lại · Cái Sạp Nhạc của Li",
             "cover": "uploads/la-ma-quen.jpg",
-            "desc": "Quen từ một câu hát. Lạ từ một cách kể. Những bản cover được phối lại theo tinh thần riêng của Cái Sạp Nhạc, giữ lại ký ức của giai điệu cũ nhưng mở ra một màu sắc mới qua nhiều lát cắt âm thanh.",
+            "desc": "Quen từ một câu hát, lạ từ một cách kể. Những giai điệu cũ được Cái Sạp phối lại bằng màu sắc mới, trong khi phần ký ức vẫn được giữ nguyên.",
             "count": 13,
             "tracks": [
               { "id": "891bc6cb-0ed4-4939-b413-5ea3fb2dcc91", "name": "Mưa vương bụi sầu...", "dur": "4:22" },
@@ -558,7 +558,7 @@ window.PORTFOLIO_MUSIC = {
       "name": "Tình Vuu-verse",
       "sub": "City Pop · Dream Pop · Bossa Nova · Jazz Moods",
       "cover": "uploads/tinh-vuu-verse.jpg",
-      "desc": "Một thế giới âm nhạc cho những tâm hồn mềm và những đêm chưa muốn ngủ. Tình Vuu-verse gói lại tình yêu, nỗi nhớ và chút mộng mị trong một không gian vừa cổ điển, vừa rất thành thị...",
+      "desc": "Một thế giới cho những tâm hồn mềm và những đêm chưa muốn ngủ. Tình yêu, nỗi nhớ và chút mộng mị được gói trong một không gian vừa cổ điển, vừa rất thành thị.",
       "count": 8,
       "tracks": [
         {
@@ -670,7 +670,7 @@ window.PORTFOLIO_MUSIC = {
             "name": "Lạ mà Quen",
             "sub": "Hoài Niệm Remix · Tình Khúc Xưa Khoác Áo Mới · Neo-Soul Việt",
             "cover": "uploads/la-ma-quen.jpg",
-            "desc": "Quen từ một câu hát. Lạ từ một cách kể. Những bản cover được phối lại theo tinh thần riêng của Cái Sạp Nhạc, giữ lại ký ức của giai điệu cũ, nhưng mở ra một màu sắc mới qua nhiều lát cắt âm thanh.",
+            "desc": "Quen từ một câu hát, lạ từ một cách kể. Những giai điệu cũ được Cái Sạp phối lại bằng màu sắc mới, trong khi phần ký ức vẫn được giữ nguyên.",
             "count": 13,
             "tracks": [
               {
@@ -746,7 +746,7 @@ window.PORTFOLIO_MUSIC = {
             "name": "Sau Một Mùa Sóng",
             "sub": "Mini Deluxe Album · Biển Lặng Sau Bão · Tự Sự Nội Tâm",
             "cover": "uploads/sau-mot-mua-song.jpg",
-            "desc": "Một mini deluxe album về biển, im lặng, những điều chưa kịp nói, và hành trình dịu lại sau một mùa sóng.",
+            "desc": "Bốn bài hát về biển, sự im lặng và những điều chưa kịp nói. Sau một mùa sóng, mình học cách dịu lại và nhìn bầu trời rộng thêm một chút.",
             "count": 4,
             "tracks": [
               { "id": "97edf55c-f92c-4e49-b100-5e1ba5da11b5", "name": "Cả biển trời trong", "dur": "4:52" },
