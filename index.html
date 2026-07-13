@@ -5408,12 +5408,13 @@ button.gc-day{ cursor:pointer; }
 .gc-hint{ margin:1.25rem 0 0; text-align:center; color:rgba(225,236,173,.48); font:italic .76rem/1.6 'Cormorant Garamond',serif; letter-spacing:.035em; }
 .garden-oracle{ position:fixed; inset:0; z-index:10040; display:grid; place-items:center; padding:1rem; }
 .garden-oracle[hidden]{ display:none; }
-body.oracle-open{ overflow:hidden; }
-.go-backdrop{ position:absolute; inset:0; border:0; background:rgba(3,7,3,.88); -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px); cursor:pointer; }
+body.oracle-open{ overflow:hidden; cursor:auto; }
+body.oracle-open #cursor,body.oracle-open #cursor-ring{ display:none; }
+.go-backdrop{ position:absolute; inset:0; border:0; background:radial-gradient(circle at 50% 45%,rgba(31,48,27,.26),transparent 48%),rgba(3,7,3,.9); -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px); cursor:pointer; }
 .go-letter{
   position:relative; z-index:1; width:min(620px,100%); max-height:min(86svh,760px); overflow:auto;
   padding:clamp(1.6rem,5vw,3.3rem); border:1px solid rgba(168,198,105,.3); border-radius:28px;
-  background:radial-gradient(70% 40% at 50% 0,rgba(225,236,173,.09),transparent 70%),linear-gradient(150deg,#182316,#0b120c);
+  background:radial-gradient(70% 40% at 50% 0,rgba(225,236,173,.1),transparent 70%),linear-gradient(150deg,rgba(24,35,22,.86),rgba(11,18,12,.8));
   box-shadow:0 35px 120px rgba(0,0,0,.65),inset 0 1px rgba(255,247,205,.07);
   animation:goLetterIn .6s cubic-bezier(.2,.75,.2,1) both;
 }
@@ -5454,14 +5455,20 @@ body.oracle-open{ overflow:hidden; }
 .go-whisper{ margin:.8rem 0 1.2rem; }
 .go-whisper em{ color:var(--text); font-size:1.28em; }
 .go-symbols{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.65rem; margin:0 0 1.4rem; perspective:1200px; }
-.go-card{ position:relative; aspect-ratio:4/5; min-width:0; transform-style:preserve-3d; transition:transform .75s cubic-bezier(.2,.75,.2,1); }
-.go-card:nth-child(2){ transition-delay:.12s; }
-.go-card:nth-child(3){ transition-delay:.24s; }
-.garden-oracle.revealing .go-card{ transform:rotateY(180deg); }
+.go-card{ position:relative; aspect-ratio:4/5; min-width:0; }
+.go-card-inner{ position:absolute; inset:0; transform-style:preserve-3d; transition:transform .75s cubic-bezier(.2,.75,.2,1); }
+.go-card:nth-child(2) .go-card-inner{ transition-delay:.12s; }
+.go-card:nth-child(3) .go-card-inner{ transition-delay:.24s; }
+.garden-oracle.revealing .go-card-inner{ transform:rotateY(180deg); }
+.garden-oracle.drawn:not(.revealing) .go-card,.garden-oracle.revealing:not(.revealed) .go-card{ animation:goCardBreathe 4.6s ease-in-out infinite; }
+.garden-oracle.drawn:not(.revealing) .go-card:nth-child(2),
+.garden-oracle.revealing:not(.revealed) .go-card:nth-child(2){ animation-delay:-1.35s; }
+.garden-oracle.drawn:not(.revealing) .go-card:nth-child(3),
+.garden-oracle.revealing:not(.revealed) .go-card:nth-child(3){ animation-delay:-2.7s; }
 .go-card-face{ position:absolute; inset:0; overflow:hidden; border:1px solid rgba(225,236,173,.24); border-radius:14px; backface-visibility:hidden; -webkit-backface-visibility:hidden; box-shadow:0 12px 30px rgba(0,0,0,.32); }
-.go-card-back{ display:grid; place-items:center; align-content:center; gap:.5rem; padding:.7rem .45rem; color:var(--text2); font:.86rem/1.15 'Cormorant Garamond',serif; text-align:center; background:radial-gradient(circle at 50% 42%,rgba(225,236,173,.14),transparent 28%),linear-gradient(145deg,#263820,#0c160d); }
-.go-card-back::before{ content:'✦'; color:var(--amber2); font-size:1.55rem; text-shadow:0 0 20px rgba(232,200,112,.42); }
-.go-card-back b{ color:var(--amber2); font-size:.95rem; font-weight:400; }
+.go-card-back{ background:#071009; }
+.go-card-back img{ width:100%; height:100%; object-fit:cover; display:block; animation:goCardBackBreath 5.2s ease-in-out infinite; }
+.go-card-back::after{ content:''; position:absolute; inset:-35%; pointer-events:none; background:linear-gradient(108deg,transparent 36%,rgba(232,200,112,.04) 44%,rgba(225,236,173,.26) 50%,rgba(232,200,112,.05) 56%,transparent 64%); transform:translateX(-70%) rotate(8deg); animation:goCardBackSweep 6.4s ease-in-out infinite; }
 .go-card-front{ transform:rotateY(180deg); background:#0b120c; }
 .go-card-front img{ width:100%; height:100%; object-fit:cover; display:block; }
 .go-card.closed .go-card-front img{ transform:rotate(180deg) scale(1.002); }
@@ -5482,14 +5489,11 @@ body.oracle-open{ overflow:hidden; }
 .go-seed h3{ margin:.35rem 0 .45rem; color:var(--text); font:400 1.25rem/1.15 'Cormorant Garamond',serif; }
 .go-seed p{ margin:0; color:var(--text2); font-size:.86rem; line-height:1.75; }
 .go-seed p em{ color:rgba(225,236,173,.72); font-style:italic; }
-.go-synthesis{ margin-top:1.25rem; padding:1.2rem 1.15rem; border:1px solid rgba(225,236,173,.16); border-radius:16px; background:rgba(168,198,105,.055); }
-.go-synthesis p{ margin:0; color:var(--text2); font-size:.86rem; line-height:1.75; }
-.go-synth-intro{ margin-bottom:.7rem !important; }
-.go-synth-list{ margin:0 0 .9rem; padding-left:1.15rem; color:var(--text2); font-size:.86rem; line-height:1.7; }
-.go-synth-list li{ margin-bottom:.45rem; }
-.go-synth-list li:last-child{ margin-bottom:0; }
-.go-synth-outro{ margin-bottom:.35rem !important; }
-.go-synthesis .go-carry{ display:block; margin:0; color:var(--amber2); font-style:italic; font-size:.98rem; line-height:1.6; }
+.go-synthesis{ margin-top:1.25rem; padding:1.25rem 1.2rem; border:1px solid rgba(225,236,173,.16); border-radius:16px; background:rgba(168,198,105,.055); }
+.go-synth-title{ margin:0 0 .75rem; color:var(--amber2); font:500 .58rem/1.2 'Instrument Sans',sans-serif; letter-spacing:.16em; text-transform:uppercase; }
+.go-synthesis p{ margin:0 0 .72rem; color:var(--text2); font-size:.88rem; line-height:1.75; }
+.go-synthesis p:last-child{ margin-bottom:0; }
+.go-synthesis .go-carry{ color:var(--amber2); font:italic 1rem/1.65 'Cormorant Garamond',serif; }
 .go-guide{
   display:flex; align-items:flex-start; gap:.5rem; margin-top:1.1rem; padding:.7rem .85rem;
   border:1px solid rgba(225,236,173,.18); border-radius:12px; background:rgba(168,198,105,.06);
@@ -5500,6 +5504,13 @@ body.oracle-open{ overflow:hidden; }
 .go-letter footer{ margin-top:1.25rem; color:rgba(225,236,173,.55); font:italic .85rem 'Cormorant Garamond',serif; text-align:right; }
 .go-disclaimer{ margin:1.4rem 0 0; padding-top:1rem; border-top:1px solid rgba(168,198,105,.13); color:rgba(243,236,221,.42); font-size:.68rem; line-height:1.65; }
 @keyframes goLetterIn{ from{opacity:0;transform:translateY(18px) scale(.98)} to{opacity:1;transform:none} }
+@keyframes goCardBreathe{ 0%,100%{translate:0 0} 50%{translate:0 -12px} }
+@keyframes goCardBackBreath{ 0%,100%{transform:scale(1);filter:brightness(.9) saturate(.94)} 50%{transform:scale(1.022);filter:brightness(1.08) saturate(1.08)} }
+@keyframes goCardBackSweep{ 0%,20%{transform:translateX(-72%) rotate(8deg);opacity:0} 38%{opacity:.9} 60%,100%{transform:translateX(72%) rotate(8deg);opacity:0} }
+@keyframes goCardNeon{
+  0%,100%{ box-shadow:0 0 0 1px rgba(232,200,112,.62),0 0 18px rgba(232,200,112,.2),0 18px 54px rgba(0,0,0,.5); }
+  50%{ box-shadow:0 0 0 1px rgba(204,230,143,.9),0 0 34px rgba(204,230,143,.34),0 0 70px rgba(232,200,112,.18),0 24px 66px rgba(0,0,0,.58); }
+}
 body.no-motion .go-letter{ animation:goLetterFade .35s ease both; }
 @keyframes goLetterFade{ from{opacity:0} to{opacity:1} }
 @media(max-width:700px){
@@ -5521,10 +5532,47 @@ body.no-motion .go-letter{ animation:goLetterFade .35s ease both; }
   .go-seed-art{ width:68px; }
 }
 body.no-motion .go-bag{ transition:none; }
-body.no-motion .go-card{ transition:none; }
+body.no-motion .go-card{ animation:none !important; }
+body.no-motion .go-card-inner{ transition:none; }
+body.no-motion .go-card-back img,body.no-motion .go-card-back::after{ animation:none; }
+@media(min-width:901px){
+  .garden-oracle.drawn:not(.revealed) .go-letter{
+    width:min(1680px,96vw); max-height:98svh; overflow:visible; padding:1rem 2rem 1.5rem;
+    border-color:transparent; background:transparent; box-shadow:none;
+  }
+  .garden-oracle.drawn .go-kicker{ display:block; text-align:center; text-shadow:0 2px 16px #000; }
+  .garden-oracle.drawn .go-whisper{ margin:.5rem 0 1.15rem; text-align:center; text-shadow:0 2px 18px #000; }
+  .garden-oracle.drawn .go-symbols{ width:min(1580px,92vw); margin:0 auto 1.25rem; grid-template-columns:repeat(3,minmax(280px,460px)); justify-content:center; gap:clamp(1.25rem,2.4vw,3rem); }
+  .garden-oracle.drawn .go-card{ width:clamp(290px,22vw,460px); filter:drop-shadow(0 26px 42px rgba(0,0,0,.52)); }
+  .garden-oracle.drawn .go-card-face{ border-radius:19px; }
+  .garden-oracle.drawn .go-card-front{ box-shadow:0 0 0 1px rgba(232,200,112,.62),0 0 22px rgba(232,200,112,.22),0 22px 58px rgba(0,0,0,.52); }
+  .garden-oracle.revealing:not(.revealed) .go-card-front{ animation:goCardNeon 3.8s ease-in-out infinite; }
+  .garden-oracle.drawn .go-card-back{ font-size:1.05rem; }
+  .garden-oracle.drawn .go-card-back::before{ font-size:2.1rem; }
+  .garden-oracle.drawn .go-card-label{ inset:auto .65rem .65rem; padding:.6rem .45rem; }
+  .garden-oracle.drawn .go-card-label small{ font-size:.54rem; }
+  .garden-oracle.drawn .go-card-label strong{ font-size:1.12rem; }
+  .garden-oracle.drawn .go-reveal{ display:block; width:min(520px,70vw); margin:0 auto; background:rgba(10,20,10,.78); box-shadow:0 12px 32px rgba(0,0,0,.28); }
+  .garden-oracle.revealed .go-letter{ width:min(1440px,94vw); max-height:94svh; overflow:auto; padding:clamp(1.75rem,3vw,3rem); border-color:transparent; background:transparent; box-shadow:none; }
+  .garden-oracle.revealed .go-kicker{ text-align:left; }
+  .garden-oracle.revealed .go-message{ display:grid; grid-template-columns:minmax(0,1.12fr) minmax(360px,.88fr); column-gap:clamp(2rem,5vw,5rem); align-items:start; }
+  .garden-oracle.revealed .go-message h2{ grid-column:1/-1; margin-bottom:1.6rem; font-size:clamp(3.2rem,5vw,5.7rem); text-shadow:0 4px 28px rgba(0,0,0,.72); }
+  .garden-oracle.revealed .go-seeds{ grid-column:1; grid-row:2/7; }
+  .garden-oracle.revealed .go-synthesis,
+  .garden-oracle.revealed .go-disclaimer,
+  .garden-oracle.revealed .go-guide,
+  .garden-oracle.revealed .go-message footer{ grid-column:2; }
+  .garden-oracle.revealed .go-synthesis{ margin-top:0; padding:1.4rem 0 1.35rem; border-width:1px 0; border-radius:0; background:transparent; }
+  .garden-oracle.revealed .go-seed{ grid-template-columns:110px minmax(0,1fr); gap:1.25rem; padding:1.15rem 0; }
+  .garden-oracle.revealed .go-seed-art{ width:110px; box-shadow:0 0 0 1px rgba(232,200,112,.28),0 0 24px rgba(232,200,112,.12); }
+  .garden-oracle.revealed .go-seed h3{ font-size:1.55rem; }
+  .garden-oracle.revealed .go-seed p,.garden-oracle.revealed .go-synthesis p{ font-size:.94rem; }
+}
 </style>
 
 <script src="./garden-oracle-data.js"></script>
+<script src="./garden-oracle-profiles.js"></script>
+<script src="./garden-oracle-weekly-data.js"></script>
 <script>
 (function(){
   // Tách riêng như music-data.js: cache-bust mỗi lần tải, để sửa
@@ -5640,7 +5688,6 @@ body.no-motion .go-card{ transition:none; }
     const state=x.closed?'Khép':'Nở';
     return `<section class="go-seed"><figure class="go-seed-art${x.closed?' closed':''}"><img src="${cardAsset(x.n)}" alt="Artwork ${x.title}" width="720" height="900" loading="lazy" decoding="async"></figure><div class="go-seed-copy"><span>${positions[i]} · Hạt ${state}</span><h3>${x.title}</h3><p>${x.message} <em>${x.card.element}${x.card.astro?' · '+x.card.astro:''}</em></p></div></section>`;
   }
-  function goSplitSentences(msg){ return (msg||'').split(/(?<=[.?!])\s+/).filter(Boolean); }
   /* Dự phòng nếu garden-oracle-synthesis.js chưa tải kịp/lỗi mạng — vẫn dựa
      trên tỷ lệ Nở/Khép thật của lần rút, chỉ là không có tầng "vùng đời sống". */
   const GO_CARRY_BY_CLOSED_COUNT={
@@ -5650,27 +5697,15 @@ body.no-motion .go-card{ transition:none; }
     3:'Cả ba hạt hôm nay đều đang khép lại — hôm nay có lẽ là ngày để dừng lại và thành thật với điều đang bị giữ trong lòng.'
   };
   function synthesis(result){
-    /* Personal-narrator template, per Ali: mở đầu 1 câu -> 3 bullet gọn (chỉ nêu
-       tình huống, không kèm lời khuyên riêng) -> 1 câu khuyên/nhắc nhở cuối duy
-       nhất. Bullet tái dùng câu đầu (tình huống) của mỗi hạt. Câu khuyên cuối
-       là tổng hợp THẬT từ cả ba hạt (không quote lại một hạt cụ thể) — ưu tiên
-       garden-oracle-synthesis.js (đọc theo vùng đời sống + tỷ lệ Nở/Khép, xoay
-       biến thể theo tuần); nếu file đó chưa tải kịp thì rơi về bản dự phòng
-       chỉ dựa trên tỷ lệ Nở/Khép. */
-    const bullets=result.map(x=>{
-      const s=goSplitSentences(x.message);
-      return `<li>${s[0]||x.message}</li>`;
-    }).join('');
+    /* Đây là tầng NỐI NGHĨA, không tóm tắt lại ba lá. Engine chỉ đọc quan hệ
+       vùng đời sống + thế Nở/Khép để tạo một mạch chung có mở–nối–gợi ý. */
     const closedCount=result.filter(x=>x.closed).length;
     const dateKey=year+'-'+String(month+1).padStart(2,'0')+'-'+String(today).padStart(2,'0');
     const engine=window.GARDEN_ORACLE_SYNTHESIS;
-    let carry;
-    try{ carry = engine ? engine.buildSynthesisLine(result, dateKey) : null; }catch(e){ carry = null; }
-    if(!carry) carry = GO_CARRY_BY_CLOSED_COUNT[closedCount];
-    return `<p class="go-synth-intro">Với ba hạt bay trong gió hôm nay, mình nhìn thấy câu chuyện và thông điệp thế này:</p>
-<ul class="go-synth-list">${bullets}</ul>
-<p class="go-synth-outro">Sau cùng, điều mình muốn nhắc bạn là:</p>
-<p class="go-carry">"${carry}"</p>`;
+    let joined;
+    try{ joined = engine ? engine.buildSynthesis(result, dateKey) : null; }catch(e){ joined = null; }
+    if(!joined) return `<p>Ba hạt hôm nay đang cùng kể về cách bạn phân bổ sự chú ý và năng lượng.</p><p class="go-carry">${GO_CARRY_BY_CLOSED_COUNT[closedCount]}</p>`;
+    return `<h3 class="go-synth-title">Khi ba hạt gặp nhau</h3>`+joined.paragraphs.map((paragraph,index)=>`<p${index===joined.paragraphs.length-1?' class="go-carry"':''}>${paragraph}</p>`).join('');
   }
   function resetBag(bagBtn){
     bagBtn.classList.remove('bursting'); bagBtn.disabled=false;
@@ -5693,9 +5728,12 @@ body.no-motion .go-card{ transition:none; }
   function chooseBag(){
     const result=reading();
     numbersEl.innerHTML=result.map(x=>'<span>'+String(x.n).padStart(2,'0')+'</span>').join('');
-    document.getElementById('goSymbols').innerHTML=result.map(x=>`<article class="go-card${x.closed?' closed':''}"><div class="go-card-face go-card-back"><b>${String(x.n).padStart(2,'0')}</b><span>${x.title}</span></div><figure class="go-card-face go-card-front"><img src="${cardAsset(x.n)}" alt="Artwork ${x.title}" width="720" height="900" decoding="async"><figcaption class="go-card-label"><small>Hạt ${x.closed?'Khép':'Nở'} · ${String(x.n).padStart(2,'0')}</small><strong>${x.title}</strong></figcaption></figure></article>`).join('');
+    document.getElementById('goSymbols').innerHTML=result.map(x=>`<article class="go-card${x.closed?' closed':''}" aria-label="Một hạt đang úp"><div class="go-card-inner"><div class="go-card-face go-card-back"><img src="./images/oracle/card-back-v01.webp" alt="" width="720" height="900" decoding="async"></div><figure class="go-card-face go-card-front"><img src="${cardAsset(x.n)}" alt="Artwork ${x.title}" width="720" height="900" decoding="async"><figcaption class="go-card-label"><small>Hạt ${x.closed?'Khép':'Nở'} · ${String(x.n).padStart(2,'0')}</small><strong>${x.title}</strong></figcaption></figure></div></article>`).join('');
     seedsEl.innerHTML=deck.length===78?result.map(positionMessage).join(''):result.map((x,i)=>'<section class="go-seed"><span>'+positions[i]+'</span><h3>'+x.title+'</h3><p>'+x.message+' <em>Hôm nay, khu vườn nhắc bạn '+x.theme+'.</em></p></section>').join('');
     synthesisEl.innerHTML=deck.length===78?synthesis(result):'';
+    const revealButton=document.getElementById('goReveal');
+    revealButton.textContent='Gieo ba hạt vào gió để thông điệp đến tay bạn ✦';
+    revealButton.disabled=false;
     oracle.classList.add('drawn');
     requestAnimationFrame(()=>document.getElementById('goReveal')?.focus());
   }
@@ -5714,16 +5752,24 @@ body.no-motion .go-card{ transition:none; }
   let revealTimer=0;
   function revealMessage(){
     const button=document.getElementById('goReveal');
+    if(oracle.classList.contains('revealing')){
+      oracle.classList.add('revealed');
+      oracle.querySelector('.go-message h2')?.focus?.();
+      return;
+    }
     if(button) button.disabled=true;
     oracle.classList.add('revealing');
-    const finish=()=>{ oracle.classList.add('revealed'); oracle.querySelector('.go-message h2')?.focus?.(); };
-    if(document.body.classList.contains('no-motion')) finish();
-    else revealTimer=window.setTimeout(finish,1150);
+    const ready=()=>{
+      if(button){ button.disabled=false; button.textContent='Đọc thông điệp từ khu vườn ✦'; button.focus(); }
+    };
+    if(document.body.classList.contains('no-motion')) ready();
+    else revealTimer=window.setTimeout(ready,1350);
   }
   function closeOracle(){
     window.clearTimeout(revealTimer); revealTimer=0;
     oracle.hidden=true; oracle.classList.remove('drawn','revealing','revealed'); document.body.classList.remove('oracle-open');
-    const revealButton=document.getElementById('goReveal'); if(revealButton) revealButton.disabled=false;
+    const revealButton=document.getElementById('goReveal');
+    if(revealButton){ revealButton.disabled=false; revealButton.textContent='Gieo ba hạt vào gió để thông điệp đến tay bạn ✦'; }
     resetBag(document.getElementById('goBag'));
     if(window.shaderSetPaused) window.shaderSetPaused(false);
     daysEl.querySelector('.today')?.focus();
@@ -6882,10 +6928,15 @@ const cur = document.getElementById('cursor');
 const curR = document.getElementById('cursor-ring');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{
+  if(document.body.classList.contains('oracle-open')) return;
   mx=e.clientX; my=e.clientY;
   cur.style.left=mx+'px'; cur.style.top=my+'px';
 });
 function animCursor(){
+  if(document.body.classList.contains('oracle-open')){
+    setTimeout(animCursor,120);
+    return;
+  }
   rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
   curR.style.left=rx+'px'; curR.style.top=ry+'px';
   requestAnimationFrame(animCursor);
@@ -8239,7 +8290,7 @@ observe();
   function frame(now){
     requestAnimationFrame(frame);
     if(!visible || document.hidden) return;
-    if(document.body.classList.contains('no-motion') || document.body.classList.contains('no-season') || document.body.classList.contains('perf-lite')){
+    if(document.body.classList.contains('oracle-open') || document.body.classList.contains('no-motion') || document.body.classList.contains('no-season') || document.body.classList.contains('perf-lite')){
       ctx.clearRect(0,0,W,H);
       last=now;
       return;
@@ -8827,6 +8878,7 @@ function drawVinylRing(){
 /* vòng rAF chung — EQ mỗi frame khi phát, parallax/tilt khi có thay đổi */
 (function loop(){
   requestAnimationFrame(loop);
+  if(document.body.classList.contains('oracle-open')) return;
   drawEQ();
   drawVinylRing();
   if(fx.dirty && !REDUCED) applyFx();
