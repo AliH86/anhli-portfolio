@@ -1,5 +1,73 @@
 # Recap — anhli-portfolio (cập nhật 13/7/2026)
 
+## ĐÍNH CHÍNH TRẠNG THÁI ORACLE — audit spec ↔ code (13/7/2026)
+
+- Các mục trước từng dùng chữ “đã chốt” cho cả đặc tả lẫn implementation,
+  khiến trạng thái bị hiểu sai. Tại thời điểm audit này, phần **đã hoàn tất**
+  gồm: dữ liệu tên/lời riêng 78 hạt, semantic profile 78 hạt, 78 artwork,
+  ritual rút hạt và engine prototype chỉ đọc `domain + số Nở/Khép +
+  cluster/spread`.
+- Phần **chưa được triển khai trước audit**: engine chưa đọc semantic profile;
+  chưa đọc quan hệ nguyên tố/movement/need/risk/gift/action; chưa có dữ kiện
+  chiêm tinh địa tâm 8 ngày; chưa có wording pack với `weekKey`, trạng thái
+  `approved` và fallback; chưa có routine tạo/duyệt pack; chưa đạt lời tổng hợp
+  90–140 chữ theo bốn nhịp trong `ORACLE-CONTENT-SYSTEM.md`.
+- Checklist cũ đánh dấu `[x] Tổng hợp 3 hạt` chỉ đúng với **prototype hai tín
+  hiệu**, không đồng nghĩa engine theo đặc tả đã hoàn tất. Cụm “chiêm tinh đã
+  có” ở mục artwork UI phía dưới cũng sai: field `astro` rời trên vài lá Major
+  không phải lớp thời tiết chiêm tinh ngày/tuần.
+- Bug wording live được xác nhận: `index.html` lấy câu đầu của ba lời riêng làm
+  bullet rồi gọi là tổng hợp, trái trực tiếp quy chuẩn “không copy ba lời hạt”.
+  `weekIndex` chỉ luân phiên vài câu tĩnh, không phải weekly astrology/wording
+  pipeline.
+- Đợt triển khai local kế tiếp phải hoàn thành theo thứ tự: dữ kiện 8 ngày +
+  wording pack có duyệt → engine đọc semantic profile + quan hệ nguyên tố +
+  Nở/Khép + tối đa hai tín hiệu chiêm tinh → test ma trận → UI/QA → mới commit
+  và push. Mọi mục bên dưới phải được đọc cùng đính chính này.
+
+## Oracle local rebuild — wording/astrology engine + desktop ritual (13/7/2026)
+
+- Trạng thái: **đã hoàn thành và QA ở local**. Weekly pack 13–20/7 ban đầu là
+  `review`, sau đó Ali xác nhận “tốt” và yêu cầu đẩy QA nên chuyển thành
+  `2026-W29-approved`; local/live cùng dùng đúng pack đã duyệt.
+- Thêm `garden-oracle-weekly-data.js`: dữ kiện địa tâm 8 ngày, tối đa hai tín
+  hiệu mỗi ngày, có `verb` chuẩn + domain liên quan + wording đã biên tập; ghi
+  nguồn Astrodienst Swiss Ephemeris 2026 và NASA Moon Phases. Không dùng vị
+  trí, giờ sinh, nhà hoặc cung Mọc.
+- Viết lại `garden-oracle-synthesis.js`: engine nay nạp đủ 78 semantic profile,
+  đọc domain, movement, trạng thái Nở/Khép, quan hệ nguyên tố và tối đa một tín
+  hiệu chiêm tinh phù hợp nhất. Kết quả bốn đoạn 90–140 tiếng, có metadata truy
+  vết profile/pack/signal; không lấy câu bloom/closed làm bullet.
+- Thêm `scripts/test-oracle-synthesis.mjs`: 80 tổ hợp đại diện × hai môi trường
+  review/live; xác nhận đủ 78 profile, độ dài 90–140, không copy lời riêng,
+  tối đa hai signal, đúng trace source và pack `review` không lọt ra live.
+- UI synthesis bỏ hoàn toàn ba bullet copy/paste, thay bằng bốn nhịp: trọng tâm
+  → Nở/Khép + movement → nguyên tố + thời tiết chung → một việc vừa sức.
+- Desktop drawn state thành sân khấu 1180px không khung: ba lá 250px pop-out,
+  float/thở lệch nhịp, lật tuần tự rồi đứng lại để xem artwork. Mobile giữ
+  format compact. Cả hai chỉ mở thông điệp khi người xem bấm lần hai “Đọc
+  thông điệp từ khu vườn”; hết lỗi tự chuyển quá nhanh.
+- Pass desktop-large sau feedback: sân khấu mở tối đa 1680px; ở viewport
+  2048×1152 mỗi lá đạt 451px (gần gấp đôi bản 250px), grid 1580px. Artwork sau
+  lật có neon amber–sage thở quanh viền, vẫn giữ float lệch nhịp.
+- Màn thông điệp desktop bỏ hoàn toàn panel nền/viền/shadow, trải tối đa
+  1440px trực tiếp trên backdrop; layout hai cột ~700/550px — ba lời hạt bên
+  trái, synthesis + disclaimer/CTA bên phải. H2 tăng tới 5.7rem. Mobile không
+  đổi layout vì toàn bộ pass này khoá trong breakpoint `min-width:901px`.
+- Fix performance modal: chuyển sang cursor hệ thống, tạm ngưng cursor giả,
+  shader, EQ/vinyl loop và seasonal canvas khi Oracle mở; backdrop blur giảm
+  còn 2px. QA local desktop 1440×900 + mobile 390×844: artwork lật đúng,
+  Khép xoay đúng, synthesis 4 đoạn/0 bullet, scroll mobile an toàn, console
+  không warning/error.
+- Tạo mặt lưng chung bằng image generation, style-match trực tiếp một artwork
+  trong bộ: huy chương bồ công anh đối xứng 180°, viền dây lá kim tuyến, nền
+  xanh–đen amber/sage, không chữ/logo/watermark. Bản web
+  `images/oracle/card-back-v01.webp` 720×900, quality 86, ~148KB.
+- Mặt úp không còn lộ số/tên. Ba lá float/thở lệch nhịp ngay khi xuất hiện;
+  artwork mặt lưng tự scale/brightness rất nhẹ và có dải sáng quét chậm. Reduced
+  motion tắt toàn bộ. Bảng mở hạt đổi nền sang alpha 0.86→0.80 để hòa với
+  backdrop hơn. QA desktop 2048×1152 + mobile 390×844 đều đạt.
+
 ## Oracle — đưa đủ 78 artwork vào ritual trên website (13/7/2026)
 
 - Đã giữ nguyên 78 PNG master ngoài repo và xuất riêng bản web 720×900 WebP,
