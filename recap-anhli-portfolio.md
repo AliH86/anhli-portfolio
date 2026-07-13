@@ -1,5 +1,25 @@
 # Recap — anhli-portfolio (cập nhật 13/7/2026)
 
+## Oracle — đưa đủ 78 artwork vào ritual trên website (13/7/2026)
+
+- Đã giữ nguyên 78 PNG master ngoài repo và xuất riêng bản web 720×900 WebP,
+  quality 82, tổng 5.6 MB vào `images/oracle/cards/seed-00.webp` đến
+  `seed-77.webp`. Script tái tạo có kiểm tra đủ id 0–77, không trùng và đúng
+  kích thước master 1122×1402: `scripts/build-oracle-card-assets.py`.
+- UI chỉ gắn đúng 3 ảnh của lượt rút; không preload cả bộ 78. Màn “Gió đã chọn
+  xong” hiện ba mặt lưng có số/tên. Khi bấm “Gieo ba hạt vào gió”, ba lá lật
+  tuần tự rồi mới mở thông điệp.
+- Mỗi artwork raster vẫn không chữ. Số, tên và trạng thái Hạt Nở/Hạt Khép là
+  HTML phủ riêng; lá Khép dùng đúng artwork đó xoay 180°, không tạo ảnh thứ hai.
+- Phần thông điệp có thumbnail artwork cạnh từng lời đọc để người xem còn thấy
+  hình sau animation. Bỏ tên Tarot khỏi metadata hiển thị; chỉ giữ nguyên tố và
+  chiêm tinh đã có, đúng tinh thần đây là 78 sinh thể của khu vườn.
+- QA cục bộ thực tế ở desktop và mobile 390×844: mặt lưng không tràn, nút CTA
+  không đè card, lật đúng, modal thông điệp cuộn an toàn; mỗi lượt có đúng 3
+  URL ảnh. Reduced motion bỏ thời gian chờ/lật như trước.
+- Việc push checkpoint trước khi làm bị chặn do môi trường không phân giải được
+  `github.com`; chưa có thay đổi nào được đẩy live trong phiên này.
+
 ## Oracle — duyệt 78 artwork thành phẩm và chốt cách đặt tên theo thần thái riêng (13/7/2026)
 
 - Ali bổ sung nguyên lý sáng tạo cần giữ cho mọi phiên sau: 78 lá đi đúng
