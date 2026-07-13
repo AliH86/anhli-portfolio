@@ -1,5 +1,60 @@
 # Recap — anhli-portfolio (cập nhật 13/7/2026)
 
+## NEXT SESSION — đại cập nhật wording toàn website (Ali đã chốt)
+
+### Quyết định và thứ tự
+
+- Ali đồng ý làm wording toàn website, không giới hạn ở Oracle. Thứ tự đã chốt:
+  **Hero + About + Chapter II trước** để khóa giọng chung → **Music** →
+  **Work/Career** → **Visual/Video** → **Oracle** → microcopy/fallback/footer.
+- Lý do: ba section mở đầu định nghĩa con người và nhịp kể của cả website;
+  nếu sửa Music/Work/Visual/Oracle trước khi khóa giọng, sẽ phải viết lại lần
+  hai. Không đổi thứ tự này nếu Ali chưa yêu cầu.
+- Đây là một phase nội dung riêng. Không tự ý redesign, thay asset, đổi logic
+  player/Oracle hoặc sửa dữ liệu ngoài phần wording đang duyệt.
+
+### Instruction bắt buộc cho agent/session kế tiếp
+
+1. **Preflight:** đọc `AGENT-RULES.md`, mục này và các mục wording/Oracle mới
+   nhất; chạy `git status`, fetch/so sánh `origin/main`, đọc log. Các file
+   untracked sẵn có (`.claude/`, deploy script/log cũ,
+   `images/hero/dandelion-scene/`) không được add/xoá/commit.
+2. **Audit trước khi viết:** lập inventory text hiển thị theo section và ghi
+   rõ nguồn thật của từng câu: HTML tĩnh, JS hardcode, `music-data*.js`, data
+   Oracle hoặc fallback. Nhớ regression cũ `heroQuote()` từng ghi đè HTML;
+   không coi việc sửa một chuỗi là xong trước khi kiểm tra có lớp khác override.
+3. **Voice Bible ngắn:** trước pass lớn, đề xuất 6–10 nguyên tắc giọng Anh Li
+   và 2–3 đoạn mẫu cho Hero/About/Chapter II. Ali duyệt giọng rồi mới mở rộng.
+   Giọng mục tiêu: gần, có duyên và hình ảnh nhưng hiểu ngay; cụ thể hơn thơ;
+   ấm nhưng không sáo; tránh câu AI chung chung, phán chắc, giải thích quá dài
+   và cấu trúc phủ định vòng “không phải… mà là…”.
+4. **Checkpoint 1 — Hero + About + Chapter II:** rà toàn flow lời chào → con
+   người Anh Li → ngưỡng bước vào Cái Sạp nhạc. Kiểm tra H1/H2, quote, CTA,
+   caption, mobile wrapping và mọi JS có thể ghi đè.
+5. **Checkpoint 2 — Music:** rà Music Gate, album descriptions, playlist,
+   player states, random-pick/share/loading/error. Kiểm tra đúng cả ba tầng
+   `ALBUMS` trong `index.html` → `music-data.js` → `music-data-base.js`; không
+   làm sai title/track/link/duration chỉ vì đang sửa văn phong.
+6. **Checkpoint 3 — Work + Visual/Video:** làm rõ vai trò, thành tựu, cách làm
+   nghề và nhịp kể; tránh biến portfolio thành CV khô hoặc statement mơ hồ.
+7. **Checkpoint 4 — Oracle:** chỉ làm sau khi giọng chung đã khóa. Đọc lại
+   `ORACLE-CONTENT-SYSTEM.md`. Tách rõ ritual copy, 156 lời Nở/Khép, semantic
+   profile và synthesis/weekly pack; không sửa hàng loạt 78 lá nếu chưa có
+   sample 6–9 lá được Ali duyệt. Không để wording pack `review` lọt ra live.
+8. **QA cuối:** grep text cũ/duplicate/khung phủ định; kiểm tra desktop/mobile,
+   CTA dài, line break, fallback/loading/error; test Oracle matrix và syntax
+   inline JS nếu có chạm. Commit theo checkpoint, stage đúng file, chờ Ali
+   duyệt trước mỗi lần push.
+
+### Definition of done
+
+- Một giọng nhất quán xuyên trang nhưng từng “phòng” vẫn có cá tính riêng.
+- Không còn câu cũ bị JS/data layer ghi đè lại, không còn wording fallback lệch
+  giọng, không phá dữ liệu album/Oracle và không tạo regression mobile.
+- Recap phải cập nhật sau từng checkpoint với ví dụ before/after và trạng thái
+  `draft/review/approved/live`; tuyệt đối không dùng “đã chốt” cho thứ mới chỉ
+  nằm trong đặc tả hoặc local.
+
 ## ĐÍNH CHÍNH TRẠNG THÁI ORACLE — audit spec ↔ code (13/7/2026)
 
 - Các mục trước từng dùng chữ “đã chốt” cho cả đặc tả lẫn implementation,
@@ -39,8 +94,8 @@
   hiệu chiêm tinh phù hợp nhất. Kết quả bốn đoạn 90–140 tiếng, có metadata truy
   vết profile/pack/signal; không lấy câu bloom/closed làm bullet.
 - Thêm `scripts/test-oracle-synthesis.mjs`: 80 tổ hợp đại diện × hai môi trường
-  review/live; xác nhận đủ 78 profile, độ dài 90–140, không copy lời riêng,
-  tối đa hai signal, đúng trace source và pack `review` không lọt ra live.
+  local/live; xác nhận đủ 78 profile, độ dài 90–140, không copy lời riêng,
+  tối đa hai signal, đúng trace source và pack approved được nạp đúng trên live.
 - UI synthesis bỏ hoàn toàn ba bullet copy/paste, thay bằng bốn nhịp: trọng tâm
   → Nở/Khép + movement → nguyên tố + thời tiết chung → một việc vừa sức.
 - Desktop drawn state thành sân khấu 1180px không khung: ba lá 250px pop-out,
