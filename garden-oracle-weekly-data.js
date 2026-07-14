@@ -28,11 +28,11 @@
       sourceCheckedAt:'2026-07-13',
       days:{
         '2026-07-13':{ signals:[
-          { verb:'clarify', domains:['decision','inner'], label:'Mặt Trời gặp Sao Thuỷ nghịch hành ở Cự Giải', wording:'Bối cảnh hôm nay nghiêng về việc xem lại điều mình đang nghĩ và nói, để một nhu cầu thật được gọi đúng tên trước khi quyết định.' },
+          { verb:'clarify', domains:['decision','inner'], label:'Mặt Trời gặp Sao Thuỷ nghịch hành ở Cự Giải', wording:'Hôm nay hợp để nghe lại điều mình đang nghĩ và nói, rồi gọi đúng tên nhu cầu trước khi quyết định.' },
           { verb:'slow', domains:['inner','love'], label:'Trăng tàn trước kỳ Trăng non', wording:'Nhịp Trăng cuối chu kỳ khuyến khích khép bớt việc cũ và dành khoảng trống cho điều sắp bắt đầu.' }
         ]},
         '2026-07-14':{ signals:[
-          { verb:'surface', domains:['inner','love'], label:'Trăng non ở Cự Giải', wording:'Trăng non làm nổi bật nhu cầu an toàn, sự thuộc về và cách mình chăm sóc một khởi đầu còn rất non.' },
+          { verb:'surface', domains:['inner','love'], label:'Trăng non ở Cự Giải', wording:'Trăng non làm rõ nhu cầu được an toàn, được thuộc về và chăm sóc cẩn thận một khởi đầu mới.' },
           { verb:'challenge', domains:['love','work'], label:'Sao Kim tạo góc vuông với Sao Thiên Vương', wording:'Một thay đổi bất ngờ trong giá trị, quan hệ hoặc nhịp sinh hoạt có thể buộc mình nhìn lại điều thật sự phù hợp.' }
         ]},
         '2026-07-15':{ signals:[
@@ -56,7 +56,7 @@
           { verb:'slow', domains:['decision'], label:'Sao Thuỷ vẫn trong chu kỳ xem lại', wording:'Một cuộc trao đổi quan trọng sẽ có lợi khi mỗi bên có thêm thời gian sửa cách diễn đạt.' }
         ]},
         '2026-07-20':{ signals:[
-          { verb:'clarify', domains:['love','decision'], label:'Mặt Trăng ở Thiên Bình', wording:'Nhịp ngày hỗ trợ việc nhìn một lựa chọn từ cả hai phía và gọi tên điểm cân bằng có thể sống được.' },
+          { verb:'clarify', domains:['love','decision'], label:'Mặt Trăng ở Thiên Bình', wording:'Hôm nay hợp để nhìn một lựa chọn từ hai phía và gọi tên điểm cân bằng vừa sức.' },
           { verb:'stabilize', domains:['work','action'], label:'Trăng non đang lớn dần', wording:'Một khởi đầu nhỏ có thể được giữ lại bằng nhịp đều và giới hạn rõ, thay vì mở rộng quá nhanh.' }
         ]}
       }
@@ -68,10 +68,10 @@
     status:'approved',
     label:'13–20/7/2026 · nhịp tuần được Ali duyệt',
     week:{
-      eyebrow:'Nhịp tuần · 13–19/7',
-      title:'Dọn một khoảng đất cho điều mới',
-      body:'Tuần này đi từ khoảng lặng trước Trăng non 14/7 sang những ngày đầu của một vòng mới. Sao Thuỷ nghịch hành ở Cự Giải giữ nhịp nhìn lại: gọi đúng nhu cầu mình muốn chăm, sửa một điều từng nói chưa trọn và cho khởi đầu mới đủ thời gian bén rễ.',
-      carry:'Giữ lại cho tuần này: một khoảng trống để nghỉ, một câu cần nói lại cho rõ và một việc đủ nhỏ để làm đều.'
+      eyebrow:'Bối cảnh chung · 13–19/7',
+      title:'Chậm lại để bắt đầu cho đúng',
+      body:'Trăng non ngày 14/7 mở đầu một chu kỳ mới. Cùng lúc, Sao Thuỷ nghịch hành ở Cự Giải khiến việc giao tiếp và ra quyết định dễ bị ảnh hưởng bởi cảm xúc cũ. Tuần này phù hợp để xác định điều mình thật sự cần, nói lại cho rõ một chuyện còn dang dở và thử khởi đầu ở quy mô nhỏ.',
+      carry:'Việc có thể làm trong tuần: dành một buổi tối để nghỉ cho lại sức; nói rõ một câu mình từng diễn đạt chưa trọn; và chọn một việc nhỏ để làm đều trong bảy ngày.'
     }
   };
 

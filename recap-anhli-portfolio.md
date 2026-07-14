@@ -822,3 +822,36 @@ toàn ngoài 2 mục cố ý giữ untracked (`.claude/launch.json`,
 - [feat: refine dandelion portfolio and music room](https://github.com/AliH86/anhli-portfolio/commit/6b88c17)
 - [Thêm album Di Sản](https://github.com/AliH86/anhli-portfolio/commit/8a83b11)
 - [Set hero album to Một Tần Số Khác](https://github.com/AliH86/anhli-portfolio/commit/4291786)
+
+## Chỉnh giọng Việt + nhịp mở Oracle — 14/7/2026 (Codex, chờ Ali duyệt)
+
+- Viết lại trực tiếp sáu hạt xuất hiện trong ảnh/video review, sau đó thay
+  toàn bộ 156 tên Nở/Khép bằng hệ tên tiếng Việt nói thẳng nghĩa. Bỏ giới hạn
+  bốn âm tiết vì giới hạn này từng tạo các cụm tối nghĩa như “Nhận Ra Mưa
+  Mời”; `garden-oracle-data.js` và `garden-oracle-profiles.js` vẫn đồng bộ.
+- Viết lại engine tổng hợp theo câu có chủ thể và hành động rõ; sửa lỗi cắt
+  câu ở dấu phẩy làm sinh ra “Hôm nay, chỉ cần trước khi phán xét ai đó”. Bỏ
+  nhãn nguyên tố/cung ở cuối lời riêng, đồng thời viết lại bối cảnh tuần
+  13–19/7 thành việc cụ thể, không dùng “mang theo/đủ yên/bền lòng” mơ hồ.
+- Flow lật bài giữ hai quyết định riêng: lần một chỉ lật so le 1–2–3 và đứng
+  yên ở mặt bài. Sau khi lật xong, một lời báo ngắn hiện dần dưới ba lá, nói
+  đúng số hạt Nở/Khép và gợi không khí chung; người đọc tự bấm “Mở diễn giải
+  chi tiết” mới chuyển vào phần bên trong. Trong kết quả, Nở/Khép là tag có
+  chú thích riêng và mỗi artwork có thể bấm để phóng lớn; Escape/backdrop đóng
+  lớp zoom trước khi đóng modal.
+- Màn mở đầu Oracle được art-direct lại trên chính video túi hạt: khung vườn
+  đêm nhiều lớp sáng, halo thở chậm sau túi, viền trong tiết chế, lời dẫn có
+  phân cấp, CTA dạng dấu ấn và ghi chú nghi thức. Không thêm asset mới; mobile
+  có tỷ lệ chữ/khung/CTA riêng và reduced-motion tắt nhịp halo.
+- Chốt lại ngôn ngữ nghi thức theo trục gió–hạt–bàn tay: gió đi qua túi hạt,
+  người xem “hít sâu một hơi, đón hạt”, hạt hiện vào tay; bỏ từ lật/mở trong
+  nhịp này. Lời dẫn phía trên đổi nội dung sau khi ba hạt hiện, và preview
+  Nở/Khép dùng giọng văn mềm hơn nhưng vẫn nói rõ số lượng/trạng thái.
+- Result view được nới thành hai khối thoáng hơn, seed card và synthesis hiện
+  lệch nhịp, câu chính/gợi ý quan trọng có bold chọn lọc. Zoom artwork dùng
+  layout hai cột: ảnh + core story + chỉ dẫn quan sát + giải nghĩa riêng cho
+  trạng thái Nở/Khép và hành động cụ thể; mobile xếp dọc và cuộn trong modal.
+- QA: `node --check` qua đủ bốn file Oracle + script inline calendar; ma trận
+  synthesis chuẩn qua 80 tổ hợp local/live, đủ 78 profile; kiểm tra mở rộng
+  toàn bộ ngày 13–20/7 giữ lời tổng hợp trong ngưỡng 90–140 chữ; `git diff
+  --check` sạch. Chưa commit/push theo luật repo, chờ Ali duyệt.

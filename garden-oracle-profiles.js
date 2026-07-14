@@ -178,7 +178,7 @@
         risk: 'lao đi rất nhanh theo một kế hoạch mà không chắc mình đang đi đúng hướng',
         action: 'chậm lại một nhịp và tự hỏi mình đang tiến tới, hay đang chạy trốn điều gì' } },
     {
-      id: 8, tarot: 'Strength', openName: 'Cuốn Theo Chiều Gió', closedName: 'Vượt Qua Gió To',
+      id: 8, tarot: 'Strength', openName: 'Mềm Mà Vững', closedName: 'Gồng Mình Qua Gió',
       element: 'Fire', family: 'Major',
       coreStory: 'Hạt này đi qua một cơn gió dữ mà không gãy, nhờ mềm dẻo chứ không phải nhờ cứng lại — hình ảnh của việc đối mặt một người hay một tình huống khó khăn bằng sự bình tĩnh và kiên nhẫn thay vì phản ứng gay gắt. Khi hạt thật sự mềm, nó uốn theo gió mà vẫn nguyên vẹn. Khi nó gồng mình chống lại để tỏ ra mạnh mẽ trước mặt người khác, bên trong lại đang rất căng thẳng — và không sao nếu cho phép mình yếu đuối một chút với người mình tin tưởng.',
       visualMotif: 'Thân hạt uốn cong mềm mại theo một luồng gió mạnh thấy rõ qua các vệt chuyển động, nhưng toàn bộ tán tơ vẫn nguyên vẹn không rối; một sợi tơ duy nhất run nhẹ khác biệt với phần còn lại, gợi ý một chút căng thẳng ẩn bên trong sự bình tĩnh.',
@@ -445,7 +445,7 @@
           risk: 'dồn rất nhiều năng lượng vào một việc mà chưa thật sự đi tới đâu',
           action: 'chậm một nhịp để chắc mình đang tiến tới, không phải đang chạy trốn điều gì' } },
       {
-        id: 34, tarot: 'Queen of Wands', openName: 'Giữ Lửa Ấm Vườn', closedName: 'Tỏa Sáng Tự Cạn',
+        id: 34, tarot: 'Queen of Wands', openName: 'Giữ Lửa Ấm Vườn', closedName: 'Sáng Đến Quên Mình',
         element: 'Fire', family: 'Wands',
         coreStory: 'Người này giữ một ngọn lửa đủ ấm để sưởi cho cả khu vườn xung quanh — hình ảnh của một sự tự tin thật, có sức hút tự nhiên với người khác. Khi ngọn lửa đó được nuôi đều, người này tỏa sáng mà không cần thu nhỏ lại để ai thấy dễ chịu hơn. Khi họ phải luôn tỏ ra rực rỡ, ổn định trước mặt người khác đến mức tự kiệt sức, cần cho phép mình có một ngày không cần tỏa sáng cũng không sao.',
         visualMotif: 'Hạt trung tâm toả ra một quầng lửa ấm bao phủ nhẹ cả một vùng thực vật xung quanh trong khung hình, ánh sáng lan đều ra ngoài; nhưng ngay tại lõi phát sáng có một điểm nhỏ hơi mờ đi so với phần toả sáng xung quanh, như đang cạn dần từ bên trong.',
@@ -644,7 +644,7 @@
         risk: 'giữ một vết thương cũ mà chưa từng gọi tên nó ra để thật sự chữa lành',
         action: 'nói ra vết thương đó, dù chỉ với chính mình, thành lời cụ thể' } },
     {
-      id: 53, tarot: 'Four of Swords', openName: 'Nằm Yên Chờ Lặng', closedName: 'Không Yên Dù Ngưng',
+      id: 53, tarot: 'Four of Swords', openName: 'Nghỉ Dưới Trời Yên', closedName: 'Thân Nghỉ, Lòng Chưa',
       element: 'Air', family: 'Swords',
       coreStory: 'Hạt này nằm yên, chờ cho một cơn gió lớn lặng hẳn — hình ảnh của việc cần nghỉ ngơi sau một giai đoạn căng thẳng, và nghỉ ngơi lúc này không phải là yếu đuối. Khi hạt cho phép mình thật sự nằm yên, sức lực dần được phục hồi. Khi nó không yên dù gió đã ngưng từ lâu, kiệt sức nhưng vẫn tự trách bản thân ngay cả lúc dừng lại, cần nhớ rằng nghỉ ngơi không cần phải "xứng đáng" mới được phép.',
       visualMotif: 'Hạt nằm ngang, bất động, giữa một khoảng không hoàn toàn tĩnh lặng không còn vệt gió nào; tán tơ khép nhẹ và đều, tư thế thư giãn rõ rệt khác hẳn dáng đứng thẳng thường thấy của các hạt khác.',
@@ -752,7 +752,7 @@
         need: 'cần đưa ra một quyết định công bằng, dựa trên sự thật hơn là cảm xúc nhất thời',
         gift: 'lý trí dẫn đường mà vẫn giữ được sự công tâm trong quyết định',
         risk: 'dùng lý lẽ để tránh phải thật sự cảm nhận, phán xét người khác thay vì cố hiểu họ',
-        action: 'trước khi phán xét ai đó, thử hiểu góc nhìn của họ trước' } }
+        action: 'trước khi phán xét ai đó, hãy thử hiểu góc nhìn của họ' } }
   ];
 
   // Khối Đất (Pentacles) — ĐỦ 14/14, đã hoàn tất theo trình tự rank Ace→King.
@@ -899,5 +899,14 @@
         action: 'mở một phần nhỏ cánh cổng đang khoá chặt, để ai đó thật sự có thể bước vào' } }
   ];
 
+  const allProfiles=[...majors];
+  Object.values(suits).forEach(cards=>allProfiles.push(...cards));
+  const clearNames=root.GARDEN_ORACLE_CLEAR_NAMES||[];
+  if(clearNames.length===allProfiles.length){
+    allProfiles.forEach((card,index)=>{
+      card.openName=clearNames[index][0];
+      card.closedName=clearNames[index][1];
+    });
+  }
   root.GARDEN_ORACLE_PROFILES = { majors, suits };
 })(window);

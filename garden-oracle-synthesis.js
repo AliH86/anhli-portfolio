@@ -11,11 +11,11 @@
   'use strict';
 
   const DOMAIN_VI={
-    love:'tình cảm',
+    love:'chuyện tình cảm',
     work:'công việc',
-    decision:'một lựa chọn',
-    action:'hành động',
-    inner:'đời sống nội tâm'
+    decision:'một điều còn chưa ngã ngũ',
+    action:'bước đi kế tiếp',
+    inner:'những xao động bên trong'
   };
 
   const profiles=root.GARDEN_ORACLE_PROFILES||{};
@@ -24,29 +24,29 @@
   const PROFILE_BY_ID=new Map(allProfiles.map(card=>[card.id,card]));
 
   const STATE_LINES={
-    0:'Cả ba hạt đều Nở, tạo một nhịp sẵn sàng thử.',
-    1:'Hai hạt Nở tạo đà; một hạt Khép giữ lại giới hạn.',
-    2:'Một hạt Nở làm điểm tựa; hai hạt Khép cần thêm rõ ràng.',
-    3:'Cả ba hạt đều Khép, đưa nhịp hôm nay về quan sát.'
+    0:'Cả ba hạt đều Nở, thuận để bắt đầu một việc mới.',
+    1:'Hai hạt Nở cho thấy phần đang thuận; hạt Khép chỉ ra một giới hạn cần giữ.',
+    2:'Một hạt Nở cho thấy việc có thể làm; hai hạt Khép chỉ ra điều cần xem lại.',
+    3:'Cả ba hạt đều Khép; nên quan sát hoặc tìm thêm thông tin trước khi làm.'
   };
 
   const MOVEMENT_GROUPS=[
-    { values:['arriving','calling','crossing','opening','lifting','racing','steering','turning','dawning'], open:'mở đường và đưa điều đã rõ thành chuyển động', closed:'vội tìm lối ra trước khi biết mình thật sự muốn đi đâu' },
-    { values:['listening','noticing','reflecting','remembering','watching','scanning','seeking'], open:'nhìn kỹ để nhận ra tín hiệu quan trọng', closed:'quan sát quá lâu đến mức mắc lại trong nghi ngờ' },
-    { values:['balancing','integrating','juggling','holding','resting','suspending'], open:'giữ nhiều nhu cầu trong một nhịp có thể sống được', closed:'giữ mọi thứ lơ lửng để tránh phải chọn' },
-    { values:['carrying','gathering','sharing','tending','savoring','flourishing','radiating'], open:'nuôi dưỡng điều đang có bằng sự hiện diện thực tế', closed:'cho đi hoặc ôm giữ đến mức quên phần năng lượng của mình' },
-    { values:['choosing','cutting','judging','pruning','defending','confessing','concealing'], open:'phân định điều cần giữ, nói rõ hoặc buông bớt', closed:'dùng phòng vệ hay phán xét để né phần sự thật khó chịu' },
-    { values:['guiding','practicing','plodding','carrying'], open:'đi đều bằng kỹ năng, trách nhiệm và nhịp bền', closed:'bám vào khuôn quen đến mức mất kết nối với mục đích' },
-    { values:['colliding','entangling','releasing'], open:'nhận ra điểm mắc và tạo chỗ cho một thay đổi thật', closed:'tiếp tục giằng co với điều đã cho thấy giới hạn' }
+    { values:['arriving','calling','crossing','opening','lifting','racing','steering','turning','dawning'], open:'biến điều đã rõ thành một bước đi cụ thể', closed:'đang vội tìm lối ra khi chưa biết mình thật sự muốn gì' },
+    { values:['listening','noticing','reflecting','remembering','watching','scanning','seeking'], open:'nhìn kỹ để nhận ra điều quan trọng', closed:'đang suy nghĩ quá lâu và mắc lại trong nghi ngờ' },
+    { values:['balancing','integrating','juggling','holding','resting','suspending'], open:'sắp xếp nhiều nhu cầu mà vẫn giữ được nhịp sống', closed:'đang để mọi chuyện lơ lửng vì chưa muốn chọn' },
+    { values:['carrying','gathering','sharing','tending','savoring','flourishing','radiating'], open:'chăm điều mình đang có bằng những việc cụ thể', closed:'đang cho đi hoặc ôm giữ đến mức quên chăm mình' },
+    { values:['choosing','cutting','judging','pruning','defending','confessing','concealing'], open:'phân rõ điều nên giữ, điều cần nói và điều phải buông', closed:'đang dùng sự phòng vệ để che một sự thật khó thừa nhận' },
+    { values:['guiding','practicing','plodding','carrying'], open:'tiếp tục đi đều và chắc', closed:'đang theo lối quen đến quên mục đích ban đầu' },
+    { values:['colliding','entangling','releasing'], open:'nhận ra chỗ mắc để thay đổi', closed:'đang giằng co với điều đã lộ rõ giới hạn' }
   ];
 
   const ELEMENT_LINES={
-    'Air+Fire':'Khí và Lửa nối sự sáng rõ với động lực; ý tưởng cần thành một bước làm được.',
-    'Earth+Water':'Đất và Nước nối cảm xúc với sự chăm sóc thực tế; điều được nuôi cũng cần cấu trúc.',
-    'Fire+Water':'Lửa và Nước tạo hai nhịp giữa muốn tiến nhanh và cần cảm nhận kỹ.',
-    'Air+Earth':'Khí và Đất đặt ý tưởng cạnh nguồn lực cùng giới hạn thực tế.',
-    'Air+Water':'Khí và Nước đặt suy nghĩ cạnh cảm xúc để cả hai được gọi tên.',
-    'Earth+Fire':'Đất và Lửa nối sức bật với độ bền để khởi đầu không sớm cạn.'
+    'Air+Fire':'Bộ ba này có cả suy nghĩ lẫn động lực. Điều còn thiếu là chọn một việc cụ thể và làm.',
+    'Earth+Water':'Cảm xúc cần được chăm bằng một hành động cụ thể, thay vì chỉ giữ trong đầu.',
+    'Fire+Water':'Một phần muốn tiến nhanh, một phần cần thời gian cảm nhận. Đừng ép cả hai theo cùng một tốc độ.',
+    'Air+Earth':'Hãy đặt ý tưởng cạnh thời gian, tiền bạc và sức lực mình đang thật sự có.',
+    'Air+Water':'Hãy gọi đúng tên điều mình đang cảm thấy trước khi quyết định.',
+    'Earth+Fire':'Bạn có động lực để bắt đầu; hãy chọn nhịp đủ bền để không sớm kiệt sức.'
   };
 
   function profileOf(resultItem){ return PROFILE_BY_ID.get(resultItem.n ?? resultItem.card?.id); }
@@ -57,6 +57,7 @@
     return items.slice(0,-1).join(', ')+' và '+items[items.length-1];
   }
   function trimPeriod(text){ return String(text||'').trim().replace(/[.!?]+$/,''); }
+  function capitalize(text){ return text ? text.charAt(0).toUpperCase()+text.slice(1) : ''; }
   function wordCount(text){ return String(text||'').trim().split(/\s+/).filter(Boolean).length; }
   function movementPhrase(item){
     const movement=profileOf(item)?.profile?.movement;
@@ -69,26 +70,26 @@
     const counts=domains.reduce((acc,d)=>(acc[d]=(acc[d]||0)+1,acc),{});
     const dominant=Object.keys(counts).find(d=>counts[d]>1);
     if(dominant){
-      return { dominant, text:`Trọng tâm của ba hạt hôm nay nằm ở ${DOMAIN_VI[dominant]}.` };
+      return { dominant, text:`Ba hạt tập trung vào ${DOMAIN_VI[dominant]}.` };
     }
     const labels=unique(domains).map(d=>DOMAIN_VI[d]);
-    return { dominant:null, text:`Ba hạt chạm vào ${joinVi(labels)}; chúng liên quan nhưng chưa cần xử lý cùng lúc.` };
+    return { dominant:null, text:`Ba hạt nói về ${joinVi(labels)}. Chúng liên quan nhưng không cần giải quyết cùng lúc.` };
   }
 
   function semanticBridge(result){
     const phrases=unique(result.map(movementPhrase));
-    if(phrases.length===1) return `Chuyển động được lặp lại là ${phrases[0]}.`;
-    return `Hai chuyển động gặp nhau ở đây: ${phrases[0]}; đồng thời ${phrases[1]}.`;
+    if(phrases.length===1) return `Điểm chung của ba hạt là ${phrases[0]}.`;
+    return `Hai điều cùng hiện lên: ${phrases[0]}; và ${phrases[1]}.`;
   }
 
   function elementLine(result){
     const elements=unique(result.map(x=>profileOf(x)?.element||x.card?.element).filter(Boolean));
-    if(elements.length===1) return `Cả ba cùng mang chất ${elements[0]}, khuếch đại xu hướng này và đòi hỏi một nhịp nghỉ cân bằng.`;
+    if(elements.length===1) return 'Cả ba hạt cùng nhấn mạnh một hướng, nên thông điệp này đáng được ưu tiên trước.';
     for(const [key,line] of Object.entries(ELEMENT_LINES)){
       const pair=key.split('+');
       if(pair.every(e=>elements.includes(e))) return line;
     }
-    return 'Các nguyên tố khác nhịp giúp kiểm tra chéo cảm xúc, suy nghĩ và khả năng thực hiện.';
+    return 'Ba hạt kéo về nhiều hướng. Hãy kiểm tra lại điều mình đang nghĩ, điều mình đang cảm và điều mình thật sự có thể làm.';
   }
 
   function selectPack(dateKey){
@@ -127,8 +128,8 @@
       ||candidates.find(x=>!x.item.closed)
       ||candidates.find(x=>!dominant||x.profile.profile.domain===dominant)
       ||candidates[0];
-    const action=trimPeriod(anchor?.profile?.profile?.action||'chọn một việc vừa sức cho hôm nay').split(/[,;—]/)[0];
-    return `Việc vừa sức hôm nay: ${action}.`;
+    const action=trimPeriod(anchor?.profile?.profile?.action||'chọn một việc vừa sức cho hôm nay');
+    return `Gợi ý cụ thể, có thể làm ngay hôm nay: ${capitalize(action)}.`;
   }
 
   function buildSynthesis(result,dateKey){
@@ -138,11 +139,10 @@
     const opening=domainOpening(result);
     const state=STATE_LINES[result.filter(x=>x.closed).length];
     const meaning=semanticBridge(result);
-    const elements=elementLine(result);
     const astro=astrologyLine(result,dateKey);
     const week=weekContext(dateKey);
     const guidance=actionLine(result,opening.dominant);
-    const paragraphs=[opening.text,`${state} ${meaning}`,`${elements} ${astro.text}`,guidance];
+    const paragraphs=[`${opening.text} ${state}`,`${meaning} ${astro.text}`,guidance];
     const fullText=paragraphs.join(' ');
     return {
       paragraphs,
