@@ -81,9 +81,19 @@
   5. một gợi ý nhỏ, cụ thể và vừa sức.
 - Tám động từ quan hệ chuẩn cho chiêm tinh: `amplify`, `accelerate`, `clarify`,
   `surface`, `soften`, `slow`, `challenge`, `stabilize`.
+- Trạng thái Nở/Khép đặt nhịp hành động nền, không phải nhãn tích cực/tiêu
+  cực: 3 Nở = `go`; 2 Nở/1 Khép = `guarded`; 1 Nở/2 Khép = `review`; 3 Khép
+  = `pause`. Chiêm tinh chỉ điều chỉnh nhịp nền này, không được đảo ngược nó.
+- Ma trận chuẩn có 28 policy hành động chiêm tinh: 4 nhịp × 8 động từ trừ
+  `go/surface`, `go/soften`, `pause/amplify`, `pause/accelerate`, vì các động
+  từ đó không có mục tiêu trạng thái tương thích. Ngoài ra có 4 fallback khi
+  tín hiệu yếu bị bỏ. Đặc biệt, 3 Khép luôn phải cho lời dừng/thở/nhìn lại,
+  không được kết bằng lời thúc hành động ngay.
 - Lời tổng hợp gồm bốn nhịp: chủ đề chung → chuyển động → ảnh hưởng chiêm tinh
-  → gợi ý. Mục tiêu 90–140 chữ, một ý chính mỗi câu, tối đa hai dữ kiện chiêm
-  tinh và không lặp nguyên văn lời riêng của hạt.
+  → gợi ý. Dải ưu tiên là 90–140 chữ, một ý chính mỗi câu, tối đa hai dữ kiện
+  chiêm tinh và không lặp nguyên văn lời riêng của hạt. Không tự cắt một câu rõ
+  chỉ để lọt dải chữ; biên 80–155 được chấp nhận khi mẫu biên đã được đọc tay
+  và vẫn rõ chủ thể, quan hệ, tác động cùng hành động.
 
 ### 2.4. Chiêm tinh chung theo tuần/ngày
 

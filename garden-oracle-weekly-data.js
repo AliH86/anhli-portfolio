@@ -7,7 +7,7 @@
 
    Dữ kiện 2026-07-13 → 2026-07-20 được đối chiếu từ:
    - Astrodienst Swiss Ephemeris 2026 (geocentric, 00:00 UT)
-     https://wiki.astro.com/swisseph/ahel/2000/ahel2026.pdf
+     https://www.astro.com/swisseph/ae/2000/ae_2026.pdf
    - NASA Moon Phases / SKYCAL
      https://science.nasa.gov/moon/moon-phases/
 
@@ -75,9 +75,51 @@
     }
   };
 
+  packs['2026-W30-approved']={
+    status:'approved',
+    label:'20–27/7/2026 · Ali duyệt',
+    sourceCheckedAt:'2026-07-14',
+    week:{
+      eyebrow:'Bối cảnh chung · 20–26/7',
+      title:'Mở rộng nhưng vẫn giữ đúng nhịp',
+      body:'Trăng thượng huyền ngày 21/7 đưa những khởi đầu gần đây vào giai đoạn cần làm thật và điều chỉnh thật. Các góc hợp của Sao Mộc mở rộng tầm nhìn, trong khi Mặt Trời chuyển vào Sư Tử làm nhu cầu thể hiện rõ hơn. Tuần này phù hợp để thử một hướng mới, nhưng cần phân biệt sự tự tin với việc ép mọi thứ tiến nhanh.',
+      carry:'Việc có thể làm trong tuần: chọn một ý tưởng để thử ở quy mô nhỏ; nói rõ giới hạn trước khi nhận thêm việc; và dành một lần xem lại động cơ của mình trước một quyết định lớn.'
+    },
+    days:{
+      '2026-07-20':{ signals:[
+        { verb:'amplify', domains:['action','inner'], label:'Sao Mộc tam hợp Sao Hải Vương', wording:'Một tầm nhìn rộng hơn có thể làm mạnh nhu cầu sáng tạo hoặc theo đuổi điều mình thật sự tin tưởng.' },
+        { verb:'challenge', domains:['work','decision'], label:'Sao Mộc đối đỉnh Sao Diêm Vương', wording:'Mong muốn mở rộng có thể va vào vấn đề quyền kiểm soát, nguồn lực hoặc cái giá phải trả cho một lựa chọn lớn.' }
+      ]},
+      '2026-07-21':{ signals:[
+        { verb:'stabilize', domains:['action','work'], label:'Trăng thượng huyền', wording:'Nửa đầu chu kỳ Mặt Trăng đưa một ý định tới lúc cần được thử bằng việc làm đều và có thể đo được.' },
+        { verb:'accelerate', domains:['action','decision'], label:'Sao Mộc lục hợp Sao Thiên Vương', wording:'Một cách làm mới có thể tạo đà nhanh, nhất là khi thử nghiệm đủ nhỏ để còn điều chỉnh.' }
+      ]},
+      '2026-07-22':{ signals:[
+        { verb:'amplify', domains:['inner','action'], label:'Mặt Trời chuyển vào Sư Tử', wording:'Nhu cầu thể hiện, sáng tạo và đứng ra nhận phần việc của mình trở nên nổi bật hơn.' }
+      ]},
+      '2026-07-23':{ signals:[
+        { verb:'slow', domains:['love','work'], label:'Sao Kim tạo góc điều chỉnh với Sao Thổ', wording:'Sự quan tâm và trách nhiệm đang cần một nhịp thực tế hơn để không biến chăm sóc thành gánh nặng.' },
+        { verb:'challenge', domains:['inner','action'], label:'Mặt Trời vuông góc Chiron', wording:'Một điểm thiếu tự tin có thể hiện rõ khi mình muốn bước ra, thể hiện hoặc bảo vệ điều quan trọng.' }
+      ]},
+      '2026-07-24':{ signals:[
+        { verb:'soften', domains:['love','decision'], label:'Sao Thuỷ lục hợp Sao Kim', wording:'Một cuộc trao đổi dễ bớt căng hơn khi cảm xúc được nói bằng từ ngữ cụ thể và có chỗ cho cả hai phía.' }
+      ]},
+      '2026-07-25':{ signals:[
+        { verb:'stabilize', domains:['inner','work'], label:'Sao Hải Vương lục hợp Sao Diêm Vương', wording:'Một thay đổi sâu và chậm có thể được giữ lại bằng thói quen nhỏ, thay vì chỉ tồn tại như một ý tưởng lớn.' }
+      ]},
+      '2026-07-26':{ signals:[
+        { verb:'challenge', domains:['action','decision'], label:'Sao Hoả tạo góc căng với Sao Diêm Vương', wording:'Áp lực muốn thắng hoặc đẩy nhanh kết quả có thể làm lộ nơi mình đang dùng quá nhiều sức cho một hướng.' }
+      ]},
+      '2026-07-27':{ signals:[
+        { verb:'challenge', domains:['action','work'], label:'Mặt Trời đối đỉnh Sao Diêm Vương', wording:'Nhu cầu được công nhận có thể va vào quyền kiểm soát hoặc một cấu trúc không còn cho mình đủ khoảng thở.' },
+        { verb:'slow', domains:['work','decision'], label:'Sao Thổ bắt đầu nghịch hành', wording:'Một cam kết, giới hạn hoặc kế hoạch dài hạn cần được xem lại trước khi tiếp tục tăng thêm trách nhiệm.' }
+      ]}
+    }
+  };
+
   root.GARDEN_ORACLE_WEEKLY={
     activeReviewKey:null,
-    lastApprovedKey:'2026-W29-approved-v2',
+    lastApprovedKey:'2026-W30-approved',
     packs
   };
 })(window);

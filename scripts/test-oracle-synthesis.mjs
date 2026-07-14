@@ -10,6 +10,15 @@ for(const file of ['garden-oracle-data.js','garden-oracle-profiles.js','garden-o
 const deck=window.GARDEN_ORACLE_CARDS;
 const engine=window.GARDEN_ORACLE_SYNTHESIS;
 const profiles=engine.PROFILE_BY_ID;
+const configuredReviewKey=window.GARDEN_ORACLE_WEEKLY.activeReviewKey;
+const latestApprovedKey=window.GARDEN_ORACLE_WEEKLY.lastApprovedKey;
+window.GARDEN_ORACLE_WEEKLY.activeReviewKey=null;
+const expectedRhythms=['go','guarded','review','pause'];
+if(engine.RHYTHM_BY_CLOSED.join(',')!==expectedRhythms.join(',')) throw new Error('Action rhythm registry is out of sync');
+if(engine.ASTRO_ACTION_POLICY_COUNT!==28) throw new Error(`Expected 28 astrology action policies; found ${engine.ASTRO_ACTION_POLICY_COUNT}`);
+if(Object.values(engine.ACTION_POLICIES).filter(policies=>policies.none).length!==4) throw new Error('Expected one no-signal fallback for each action rhythm');
+if(engine.ACTION_POLICIES.go.surface||engine.ACTION_POLICIES.go.soften) throw new Error('All-open rhythm cannot use closed-only verbs');
+if(engine.ACTION_POLICIES.pause.amplify||engine.ACTION_POLICIES.pause.accelerate) throw new Error('All-closed rhythm cannot use open-only verbs');
 if(deck.length!==78||profiles.size!==78) throw new Error(`Expected 78 cards/profiles; got ${deck.length}/${profiles.size}`);
 if(window.GARDEN_ORACLE_STATE_TITLES?.length!==78||window.GARDEN_ORACLE_CLEAR_NAMES!==window.GARDEN_ORACLE_STATE_TITLES) throw new Error('State-title registry or compatibility alias missing');
 const identities=window.GARDEN_ORACLE_IDENTITIES;
@@ -36,28 +45,104 @@ const cases=[
   [0,8,17],[22,24,33],[36,47,49],[50,55,62],[64,70,77],
   [6,23,69],[9,43,58],[14,37,71],[3,52,75],[18,45,66]
 ];
+const dates=['2026-07-13','2026-07-14','2026-07-15','2026-07-16','2026-07-17','2026-07-18','2026-07-19','2026-07-20'];
 let checked=0;
-for(const ids of cases){
-  for(let mask=0;mask<8;mask++){
-    const result=ids.map((id,index)=>({n:id,card:deck[id],closed:Boolean(mask&(1<<index))}));
-    const out=engine.buildSynthesis(result,'2026-07-13');
-    const full=out.paragraphs.join(' ');
-    if(!out.week||out.week.packKey!=='2026-W29-approved-v2'||!out.week.body||!out.week.carry) throw new Error(`${ids}/${mask}: approved weekly context missing locally`);
-    if(out.meta.wordCount<90||out.meta.wordCount>140) throw new Error(`${ids}/${mask}: ${out.meta.wordCount} words`);
-    if(out.meta.astrologySignals.length>2) throw new Error(`${ids}/${mask}: too many astrology signals`);
-    for(const item of result){
-      const shown=item.closed?item.card.closed:item.card.bloom;
-      const first=shown.split(/(?<=[.?!])\s+/)[0];
-      if(first.length>20&&full.includes(first)) throw new Error(`${ids}/${mask}: copied card wording`);
+const interactionKinds=new Set();
+let omittedWeakSignals=0;
+let outsidePreferredLength=0;
+for(const dateKey of dates){
+  const expectedPackKey=dateKey<'2026-07-20'?'2026-W29-approved-v2':'2026-W30-approved';
+  for(const ids of cases){
+    for(let mask=0;mask<8;mask++){
+      const result=ids.map((id,index)=>({n:id,card:deck[id],closed:Boolean(mask&(1<<index))}));
+      const out=engine.buildSynthesis(result,dateKey);
+      const full=out.paragraphs.join(' ');
+      if(out.richParagraphs.length!==out.paragraphs.length||out.paragraphMentions.length!==out.paragraphs.length) throw new Error(`${ids}/${mask}: rich paragraph structure mismatch`);
+      if(out.paragraphs.some(paragraph=>paragraph.includes('[[seed:'))) throw new Error(`${ids}/${mask}: unresolved seed token leaked into plain text`);
+      if(out.richParagraphs.map(engine.resolveSeedMentions).join('\n')!==out.paragraphs.join('\n')) throw new Error(`${ids}/${mask}: rich/plain paragraph mismatch`);
+      if(out.paragraphMentions.flat().some(id=>!ids.includes(id))) throw new Error(`${ids}/${mask}: rich paragraph mentions a seed outside draw`);
+      const permutations=[
+        [result[0],result[2],result[1]],[result[1],result[0],result[2]],
+        [result[1],result[2],result[0]],[result[2],result[0],result[1]],[result[2],result[1],result[0]]
+      ];
+      for(const permuted of permutations){
+        const permutedOut=engine.buildSynthesis(permuted,dateKey);
+        if(permutedOut.paragraphs.join('\n')!==out.paragraphs.join('\n')) throw new Error(`${ids}/${mask}: synthesis changes when draw order changes`);
+      }
+      if(!out.week||out.week.packKey!==expectedPackKey||!out.week.body||!out.week.carry) throw new Error(`${ids}/${mask}: approved weekly context missing locally`);
+      if(out.meta.wordCount<80||out.meta.wordCount>155) throw new Error(`${ids}/${mask}: hard length limit ${out.meta.wordCount} words`);
+      if(out.meta.wordCount<90||out.meta.wordCount>140) outsidePreferredLength++;
+      if(out.meta.astrologySignals.length>2) throw new Error(`${ids}/${mask}: too many astrology signals`);
+      const interaction=out.meta.astrologyInteraction;
+      const expectedRhythm=expectedRhythms[result.filter(item=>item.closed).length];
+      const expectedPolicyKey=`${expectedRhythm}/${interaction?.verb||'none'}`;
+      if(out.meta.actionRhythm!==expectedRhythm||out.meta.actionPolicyKey!==expectedPolicyKey) throw new Error(`${ids}/${mask}: action policy mismatch ${out.meta.actionPolicyKey}, expected ${expectedPolicyKey}`);
+      if(expectedRhythm==='pause'&&!/(?:chưa|dừng|hoãn)/iu.test(out.guidance)) throw new Error(`${ids}/${mask}: all-closed guidance does not clearly pause`);
+      if(out.meta.astrologySignals.length){
+        if(!interaction||!['single','pair','whole'].includes(interaction.kind)) throw new Error(`${ids}/${mask}: astrology interaction missing`);
+        interactionKinds.add(interaction.kind);
+        if(interaction.targetIds.some(id=>!ids.includes(id))) throw new Error(`${ids}/${mask}: astrology target is outside draw`);
+        if(interaction.evidence.length!==interaction.targetIds.length) throw new Error(`${ids}/${mask}: interaction evidence mismatch`);
+        if(interaction.targetIds.some(id=>!out.paragraphMentions[1].includes(id))) throw new Error(`${ids}/${mask}: relationship paragraph does not establish the astrology target`);
+        if(['amplify','accelerate'].includes(interaction.verb)&&interaction.evidence.some(item=>item.state!=='open')) throw new Error(`${ids}/${mask}: ${interaction.verb} targeted a closed seed`);
+        if(['surface','soften'].includes(interaction.verb)&&interaction.evidence.some(item=>item.state!=='closed')) throw new Error(`${ids}/${mask}: ${interaction.verb} targeted an open seed`);
+      }else{
+        if(interaction) throw new Error(`${ids}/${mask}: interaction exists without a selected signal`);
+        omittedWeakSignals++;
+      }
+      for(const item of result){
+        const shown=item.closed?item.card.closed:item.card.bloom;
+        const first=shown.split(/(?<=[.?!])\s+/)[0];
+        if(first.length>20&&full.includes(first)) throw new Error(`${ids}/${mask}: copied card wording`);
+      }
+      if(out.meta.sourceProfileIds.join(',')!==ids.join(',')) throw new Error(`${ids}/${mask}: traceability mismatch`);
+      window.location.hostname='alih86.github.io';
+      const liveOut=engine.buildSynthesis(result,dateKey);
+      if(liveOut.meta.packKey!==expectedPackKey||liveOut.meta.astrologySignals.length>2) throw new Error(`${ids}/${mask}: approved weekly pack missing on live`);
+      if(Boolean(liveOut.meta.astrologyInteraction)!==Boolean(interaction)) throw new Error(`${ids}/${mask}: local/live interaction mismatch`);
+      if(!liveOut.week||liveOut.week.packKey!==expectedPackKey) throw new Error(`${ids}/${mask}: approved weekly context missing on live`);
+      if(liveOut.meta.wordCount<80||liveOut.meta.wordCount>155) throw new Error(`${ids}/${mask}: live hard length limit ${liveOut.meta.wordCount} words`);
+      window.location.hostname='localhost';
+      checked++;
     }
-    if(out.meta.sourceProfileIds.join(',')!==ids.join(',')) throw new Error(`${ids}/${mask}: traceability mismatch`);
-    window.location.hostname='alih86.github.io';
-    const liveOut=engine.buildSynthesis(result,'2026-07-13');
-    if(liveOut.meta.packKey!=='2026-W29-approved-v2'||liveOut.meta.astrologySignals.length<1||liveOut.meta.astrologySignals.length>2) throw new Error(`${ids}/${mask}: approved weekly pack missing on live`);
-    if(!liveOut.week||liveOut.week.packKey!=='2026-W29-approved-v2') throw new Error(`${ids}/${mask}: approved weekly context missing on live`);
-    if(liveOut.meta.wordCount<90||liveOut.meta.wordCount>140) throw new Error(`${ids}/${mask}: live fallback ${liveOut.meta.wordCount} words`);
-    window.location.hostname='localhost';
-    checked++;
   }
 }
-console.log(`Oracle synthesis matrix passed: ${checked} combinations × local/live modes; 78 semantic profiles and approved weekly pack loaded.`);
+if([...interactionKinds].sort().join(',')!=='pair,single,whole') throw new Error(`Missing interaction modes: ${[...interactionKinds].join(',')}`);
+if(!omittedWeakSignals) throw new Error('Expected at least one weak astrology signal to be omitted');
+
+const actionIds=[...profiles.values()].filter(card=>card.profile.domain==='action').map(card=>card.id);
+const nonActionIds=[...profiles.values()].filter(card=>card.profile.domain!=='action').map(card=>card.id);
+window.GARDEN_ORACLE_WEEKLY.packs['test-accelerate']={
+  status:'review',days:{'2099-01-01':{signals:[{verb:'accelerate',domains:['action'],label:'Tín hiệu kiểm thử accelerate',wording:'Nhịp thử nghiệm thúc đẩy một chuyển động đã sẵn sàng'}]}}
+};
+window.GARDEN_ORACLE_WEEKLY.activeReviewKey='test-accelerate';
+const accelerateCases={
+  single:[actionIds[0],nonActionIds[0],nonActionIds[1]],
+  pair:[actionIds[0],actionIds[1],nonActionIds[0]],
+  whole:[actionIds[0],actionIds[1],actionIds[2]]
+};
+for(const [expectedKind,ids] of Object.entries(accelerateCases)){
+  const result=ids.map(id=>({n:id,card:deck[id],closed:false}));
+  const out=engine.buildSynthesis(result,'2099-01-01');
+  if(out.meta.astrologyInteraction?.verb!=='accelerate'||out.meta.astrologyInteraction.kind!==expectedKind) throw new Error(`Accelerate ${expectedKind} template is not reachable`);
+}
+window.GARDEN_ORACLE_WEEKLY.activeReviewKey=null;
+delete window.GARDEN_ORACLE_WEEKLY.packs['test-accelerate'];
+
+const latestApproved=window.GARDEN_ORACLE_WEEKLY.packs[latestApprovedKey];
+if(latestApprovedKey!=='2026-W30-approved'||latestApproved?.status!=='approved'||Object.keys(latestApproved.days||{}).length!==8) throw new Error('Latest approved pack must be W30 with 8 days');
+
+if(configuredReviewKey){
+  const reviewPack=window.GARDEN_ORACLE_WEEKLY.packs[configuredReviewKey];
+  const reviewDates=Object.keys(reviewPack?.days||{}).sort();
+  if(reviewPack?.status!=='review'||reviewDates.length!==8) throw new Error(`Configured review pack ${configuredReviewKey} must contain 8 review days`);
+  window.GARDEN_ORACLE_WEEKLY.activeReviewKey=configuredReviewKey;
+  for(const dateKey of reviewDates){
+    const result=[2,3,5].map((id,index)=>({n:id,card:deck[id],closed:Boolean(index===0)}));
+    const out=engine.buildSynthesis(result,dateKey);
+    if(out.meta.packKey!==configuredReviewKey||!out.week?.body||!out.week?.carry) throw new Error(`${dateKey}: review pack is not selected on localhost`);
+    if(out.meta.wordCount<80||out.meta.wordCount>155) throw new Error(`${dateKey}: review sample hard length limit ${out.meta.wordCount} words`);
+  }
+}
+
+console.log(`Oracle synthesis matrix passed: ${checked} combinations × local/live modes; 28 astrology action policies + 4 no-signal fallbacks locked; all 24 verb/kind templates reachable; ${omittedWeakSignals} weak-signal combinations omitted; ${outsidePreferredLength} outside preferred 90–140-word band.`);

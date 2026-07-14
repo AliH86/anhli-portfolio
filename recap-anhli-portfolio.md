@@ -938,3 +938,81 @@ toàn ngoài 2 mục cố ý giữ untracked (`.claude/launch.json`,
 - Bắt đầu phiên sau bằng audit output 10 tổ hợp đại diện: đánh dấu câu nào đang
   nói từ Hạt, câu nào từ chiêm tinh và câu nào thật sự là tương tác giữa hai
   lớp; chỉ sửa engine sau khi đã thấy rõ chỗ đang bị rời.
+
+## Oracle — prototype nối chiêm tinh vào ba Hạt (14/7/2026, local review)
+
+- Audit đúng 10 tổ hợp đại diện cho thấy 10/10 output cũ chỉ nối câu Hạt với
+  câu chiêm tinh; chưa có câu nào xác định tín hiệu đang chạm Hạt nào. Engine
+  cũ cũng luôn chọn một tín hiệu dù điểm liên quan bằng 0.
+- `garden-oracle-synthesis.js` nay tạo một interaction có truy nguyên gồm
+  `verb`, dạng `single/pair/whole`, `targetIds`, điểm liên quan và evidence
+  domain/state/movement. Tín hiệu được chấm theo domain + trạng thái + chuyển
+  động; không có liên hệ đủ rõ thì bỏ, không bịa thêm tầng chiêm tinh.
+- Khoá tương thích ngữ pháp: `amplify/accelerate` chỉ chạm Hạt Nở;
+  `surface/soften` chỉ chạm Hạt Khép; `slow` chỉ chạm nhóm chuyển động có nhịp
+  nhanh. Gợi ý cuối ưu tiên chính Hạt vừa bị thời tiết chiêm tinh tác động.
+- Phần luận giải đi theo bốn nhịp: chủ đề/trạng thái chung → quan hệ cụ thể
+  giữa hai Hạt → chiêm tinh tác động đúng Hạt/quan hệ/nhịp chung → việc có thể
+  làm. Nhãn “Nhịp tuần” trên UI được thu gọn thành nguồn bối cảnh; bỏ hai đoạn
+  tuần riêng từng đứng cạnh bài luận ba Hạt.
+- Sau vòng mẫu 640 lượt, Ali yêu cầu phải chứng minh khả thi bằng công thức và
+  routine tuần. Không gian thật được khoá ở `C(78,3) × 2³ = 608.608` lượt/ngày;
+  ba vị trí chưa có nghĩa riêng nên engine nay bất biến theo thứ tự rút, tránh
+  tăng vô cớ thành sáu hoán vị cho cùng một bộ ba.
+- Thêm `ORACLE-WEEKLY-ROUTINE.md` và
+  `scripts/audit-oracle-week.mjs`. Full audit đã quét đủ **4.868.864** lượt
+  của pack 8 ngày: single 2.222.120, pair 1.612.633, whole 127.543, bỏ tín
+  hiệu yếu 906.568 (18,62%), 21/24 ô verb/kind được kích hoạt trong pack hiện
+  tại và cả 24/24 template đều có test reachability. Full scan chạy khoảng
+  76,1 giây trên runtime local, đủ nhẹ để đưa vào routine một lần mỗi tuần.
+- Full audit cuối có 0 cờ kỹ thuật; độ dài 80–147 chữ. 322.172 lượt (6,62%)
+  nằm ngoài dải ưu tiên 90–140 nhưng trong biên cứng 80–155. Chốt nguyên tắc:
+  không cắt máy móc để đạt số chữ; routine luôn xuất mẫu ngắn nhất/dài nhất và
+  một mẫu cho mỗi ô interaction để đọc tay về chủ thể, quan hệ, tác động và
+  hành động.
+- Sửa thêm một dị biệt nghĩa do audit phát hiện: đoạn quan hệ nay bắt buộc neo
+  đúng Hạt/cặp Hạt mà chiêm tinh sắp tác động; bỏ đại từ “Nó” và các cụm giọng
+  máy như “mối nối vừa hiện ra”, “đặt nhịp xuống”. Local/live đồng nhất và
+  `git diff --check` sạch.
+- Trạng thái: thay đổi đang ở local, chưa commit/push, chờ Ali đọc và duyệt
+  giọng của các lượt mẫu trước khi publish.
+
+## Oracle — khoá ma trận hành động Nở/Khép × chiêm tinh (14/7/2026, local)
+
+- Ali chốt Nở/Khép là luật sẵn sàng hành động: 3 Nở = đi; 2 Nở/1 Khép = đi
+  trong giới hạn; 1 Nở/2 Khép = thử nhỏ và xem lại; 3 Khép = dừng, thở, nhìn
+  lại. Đây không phải thang “tích cực/tiêu cực”.
+- Chuẩn hoá thành 28 policy có chiêm tinh + 4 fallback không tín hiệu. Bốn cặp
+  không hợp lệ bị loại ngay từ schema: `go/surface`, `go/soften`,
+  `pause/amplify`, `pause/accelerate`.
+- Gợi ý cuối nay dùng `actionRhythm` và `actionPolicyKey`, nên cùng động từ
+  `surface` sẽ khác rõ: một Hạt Khép chỉ yêu cầu gọi tên giới hạn trước khi đi;
+  ba Hạt Khép yêu cầu chưa đẩy tiếp, thở một nhịp và nhìn lại điểm chung.
+- Test nhanh 640 tổ hợp đã qua, đồng thời khoá đủ 28 policy, 4 fallback và 24
+  template diễn đạt `verb/kind`. Audit tuần được bổ sung cờ tự động nếu policy
+  lệch số Hạt Khép hoặc ba Khép không nói rõ `chưa/dừng/hoãn`.
+- Full audit cuối đã quét đủ 4.868.864 lượt trong 103,7 giây: 0 cờ kỹ thuật,
+  độ dài 80–150 chữ, 546.068 lượt (11,22%) ngoài dải ưu tiên 90–140 nhưng vẫn
+  trong biên cứng. Pack hiện tại kích hoạt 29/32 policy khả dụng (28 policy có
+  chiêm tinh + 4 fallback); các policy chưa xuất hiện vẫn được khóa bằng test
+  cấu trúc và ma trận nhanh.
+- Trạng thái: local, chưa commit/push; chờ Ali duyệt câu chữ trước khi publish.
+
+## Oracle — pack nội dung 15–27/7/2026 (14/7/2026, local review)
+
+- Giữ nguyên và đưa 15–19/7 qua ma trận action policy mới; đây là dữ kiện đã có
+  trong pack W29 và đã qua full audit, không tạo bản forecast trùng.
+- Thêm `2026-W30-approved` cho 20–27/7 gồm 12 tín hiệu/8 ngày; sau khi Ali duyệt,
+  pack được chuyển sang `approved` và đặt làm `lastApprovedKey`.
+- Dữ kiện đối chiếu từ Swiss Ephemeris, NASA Moon Phases và bảng aspect UTC.
+  Các mốc chính: Mộc tam hợp Hải Vương/đối đỉnh Diêm Vương 20/7, Trăng thượng
+  huyền 21/7, Mặt Trời vào Sư Tử 22/7, Thuỷ lục hợp Kim 24/7, cụm Mặt Trời đối
+  Diêm Vương và Sao Thổ bắt đầu nghịch hành ở ngày đệm 27/7.
+- Full audit W30 đã quét 4.868.864 lượt trong 101,3 giây: 0 cờ, 80–152 chữ,
+  bỏ 1.147.896 tín hiệu yếu (23,58%), single 2.079.312, pair 1.496.967, whole
+  144.689. Pack kích hoạt 18/24 ô verb/kind và 25/32 action policy.
+- Thêm `ORACLE-CONTENT-REVIEW-2026-07-15-27.md` để Ali đọc toàn bộ forecast
+  15–27/7 theo ngày và sửa trực tiếp bằng tag `verb/domain`.
+- Engine chọn pack approved theo `dateKey`: 15–19/7 vẫn dùng W29, từ 20/7 dùng
+  W30; ngày cũ không mất forecast khi một tuần mới được publish.
+- Trạng thái: Ali đã duyệt, chuẩn bị commit/push.
