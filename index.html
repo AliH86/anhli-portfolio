@@ -5362,9 +5362,11 @@ body.no-motion #music .listening-room .album-drawer .np-vinyl{ display:none !imp
       <button class="go-zoom-close" type="button" aria-label="Đóng hình phóng lớn">×</button>
       <div class="go-zoom-art"><img id="goZoomImage" src="" alt="" width="720" height="900"></div>
       <figcaption class="go-zoom-copy">
-        <span class="go-state-tag" id="goZoomState"></span>
+        <div class="go-zoom-meta"><span id="goZoomNumber"></span><span class="go-state-tag" id="goZoomState"></span></div>
         <h3 id="goZoomTitle"></h3>
-        <section><h4>Câu chuyện của hạt</h4><p id="goZoomStory"></p></section>
+        <p class="go-zoom-state-voice" id="goZoomStateVoice" hidden></p>
+        <div class="go-keywords" id="goZoomKeywords" aria-label="Từ khóa của lá"></div>
+        <section><h4 id="goZoomStoryTitle">Câu chuyện của hạt</h4><p id="goZoomStory"></p></section>
         <section><h4>Chi tiết để quan sát</h4><p id="goZoomObserve"></p></section>
         <section class="go-zoom-state-section"><h4 id="goZoomStateTitle"></h4><p id="goZoomMeaning"></p></section>
       </figcaption>
@@ -5528,6 +5530,7 @@ body.oracle-open #cursor,body.oracle-open #cursor-ring{ display:none; }
 .go-card-label{ position:absolute; inset:auto .35rem .35rem; z-index:1; padding:.4rem .35rem; border-radius:8px; color:#fff8df; background:linear-gradient(90deg,rgba(5,9,5,.88),rgba(5,9,5,.68)); text-align:center; text-shadow:0 1px 5px #000; }
 .go-card-label small{ display:block; margin-bottom:.12rem; color:var(--amber2); font:.48rem/1 'Instrument Sans',sans-serif; letter-spacing:.12em; text-transform:uppercase; }
 .go-card-label strong{ display:block; font:400 clamp(.7rem,1.7vw,.92rem)/1.05 'Cormorant Garamond',serif; }
+.go-card-label span{ display:block; margin-top:.2rem; color:rgba(225,236,173,.72); font:italic .58rem/1.15 'Cormorant Garamond',serif; }
 .go-reveal{ width:100%; padding:.8rem 1rem; border:1px solid rgba(225,236,173,.3); border-radius:999px; background:rgba(168,198,105,.08); color:var(--amber2); font:inherit; font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; cursor:pointer; transition:opacity .45s ease,border-color .45s ease,background .45s ease; }
 .garden-oracle.revealing .go-reveal{ cursor:default; border-color:rgba(225,236,173,.12); background:rgba(168,198,105,.035); opacity:.58; }
 .garden-oracle.revealing:not(.settling) .go-reveal:not(:disabled){ cursor:pointer; border-color:rgba(225,236,173,.38); background:rgba(168,198,105,.12); opacity:1; }
@@ -5552,10 +5555,14 @@ body.oracle-open #cursor,body.oracle-open #cursor-ring{ display:none; }
 .go-seed-copy{ min-width:0; }
 .go-seed-meta{ display:flex; flex-wrap:wrap; align-items:center; gap:.42rem; }
 .go-seed-position{ color:var(--amber3); font-size:.53rem; letter-spacing:.14em; text-transform:uppercase; }
+.go-seed-family{ color:rgba(225,236,173,.48); font-size:.51rem; letter-spacing:.12em; text-transform:uppercase; }
 .go-state-tag{ display:inline-flex; align-items:center; min-height:1.35rem; padding:.22rem .48rem; border:1px solid; border-radius:999px; font:700 .48rem/1 'Instrument Sans',sans-serif; letter-spacing:.12em; text-transform:uppercase; }
 .go-state-tag.is-open{ color:#dcecab; border-color:rgba(188,219,125,.38); background:rgba(142,184,84,.13); }
 .go-state-tag.is-closed{ color:#efc77f; border-color:rgba(232,178,92,.38); background:rgba(184,116,48,.13); }
 .go-seed h3{ margin:.35rem 0 .45rem; color:var(--text); font:400 1.25rem/1.15 'Cormorant Garamond',serif; }
+.go-seed-state-title{ margin:-.08rem 0 .48rem !important; color:var(--amber2) !important; font:italic 1rem/1.3 'Cormorant Garamond',serif !important; }
+.go-keywords{ display:flex; flex-wrap:wrap; gap:.34rem; margin:.35rem 0 .72rem; }
+.go-keyword{ display:inline-flex; padding:.25rem .48rem; border:1px solid rgba(225,236,173,.16); border-radius:999px; background:rgba(168,198,105,.055); color:rgba(225,236,173,.68); font:550 .5rem/1.15 'Instrument Sans',sans-serif; letter-spacing:.045em; }
 .go-seed p{ margin:0; color:var(--text2); font-size:.86rem; line-height:1.75; }
 .go-seed p strong{ color:#f2ecd2; font-weight:650; }
 .go-seed p em{ color:rgba(225,236,173,.72); font-style:italic; }
@@ -5586,7 +5593,11 @@ body.oracle-open #cursor,body.oracle-open #cursor-ring{ display:none; }
 .go-zoom-art img{ width:100%; height:100%; object-fit:cover; display:block; }
 .go-zoom-art.closed img{ transform:rotate(180deg) scale(1.002); }
 .go-zoom-copy{ min-width:0; color:var(--cream); text-align:left; }
-.go-zoom-copy h3{ margin:.75rem 0 1.25rem; color:#f4edd4; font:400 clamp(2.2rem,4vw,3.6rem)/.98 'Cormorant Garamond',serif; text-wrap:balance; }
+.go-zoom-meta{ display:flex; flex-wrap:wrap; align-items:center; gap:.55rem; color:rgba(225,236,173,.58); font:600 .52rem/1.2 'Instrument Sans',sans-serif; letter-spacing:.15em; text-transform:uppercase; }
+.go-zoom-copy h3{ margin:.75rem 0 .45rem; color:#f4edd4; font:400 clamp(2.2rem,4vw,3.6rem)/.98 'Cormorant Garamond',serif; text-wrap:balance; }
+.go-zoom-state-voice{ margin:0 0 .7rem !important; color:var(--amber2) !important; font:italic clamp(1.15rem,1.8vw,1.45rem)/1.3 'Cormorant Garamond',serif !important; }
+.go-zoom-copy > .go-keywords{ margin:.75rem 0 .15rem; }
+.go-zoom-copy > .go-keywords .go-keyword{ padding:.32rem .58rem; font-size:.54rem; }
 .go-zoom-copy section{ margin-top:1rem; padding:1rem 0 0; border-top:1px solid rgba(225,236,173,.14); }
 .go-zoom-copy h4{ margin:0 0 .45rem; color:var(--amber2); font:650 .56rem/1.2 'Instrument Sans',sans-serif; letter-spacing:.16em; text-transform:uppercase; }
 .go-zoom-copy p{ margin:0; color:rgba(243,236,221,.74); font:400 clamp(.88rem,1.25vw,1rem)/1.8 'Instrument Sans',sans-serif; }
@@ -5649,6 +5660,7 @@ body.no-motion .go-letter{ animation:goLetterFade .35s ease both; }
   .go-card-back::before{ font-size:1.15rem; }
   .go-card-label{ inset:auto .2rem .2rem; padding:.3rem .2rem; }
   .go-card-label strong{ font-size:.66rem; }
+  .go-card-label span{ font-size:.48rem; }
   .go-seed{ grid-template-columns:68px minmax(0,1fr); gap:.8rem; }
   .go-seed-art{ width:68px; }
   .go-zoom-sheet{ grid-template-columns:1fr; gap:1.2rem; width:96vw; max-height:94svh; padding:2.8rem 1rem 1.2rem; }
@@ -5685,6 +5697,7 @@ body.no-motion .garden-oracle.revealed .go-synthesis{ animation:none; opacity:1;
   .garden-oracle.drawn .go-card-label{ inset:auto .65rem .65rem; padding:.6rem .45rem; }
   .garden-oracle.drawn .go-card-label small{ font-size:.54rem; }
   .garden-oracle.drawn .go-card-label strong{ font-size:1.12rem; }
+  .garden-oracle.drawn .go-card-label span{ font-size:.76rem; }
   .garden-oracle.drawn .go-reveal{ display:block; width:min(520px,70vw); margin:0 auto; background:rgba(10,20,10,.78); box-shadow:0 12px 32px rgba(0,0,0,.28); }
   .garden-oracle.revealed .go-letter{ width:min(1540px,96vw); max-height:96svh; overflow:auto; padding:clamp(2rem,3.5vw,3.8rem); border-color:transparent; background:radial-gradient(circle at 78% 30%,rgba(102,139,64,.07),transparent 34%); box-shadow:none; }
   .garden-oracle.revealed .go-kicker{ text-align:left; }
@@ -5708,6 +5721,7 @@ body.no-motion .garden-oracle.revealed .go-synthesis{ animation:none; opacity:1;
 
 <script src="./garden-oracle-data.js"></script>
 <script src="./garden-oracle-profiles.js"></script>
+<script src="./garden-oracle-identities.js"></script>
 <script src="./garden-oracle-weekly-data.js?v=20260713-4"></script>
 <script>
 (function(){
@@ -5728,6 +5742,7 @@ body.no-motion .garden-oracle.revealed .go-synthesis{ animation:none; opacity:1;
   const profileRows=[...(window.GARDEN_ORACLE_PROFILES?.majors||[])];
   Object.values(window.GARDEN_ORACLE_PROFILES?.suits||{}).forEach(cards=>profileRows.push(...cards));
   const profileById=new Map(profileRows.map(profile=>[profile.id,profile]));
+  const identityById=new Map((window.GARDEN_ORACLE_IDENTITIES||[]).map(identity=>[identity.id,identity]));
   const calendar=document.getElementById('gardenCalendar'),hero=document.getElementById('home');
   const heroContent=hero&&hero.querySelector('.hero-content'),heroName=hero&&hero.querySelector('.hero-name');
   if(calendar&&heroContent&&heroName) heroContent.insertBefore(calendar,heroName);
@@ -5835,10 +5850,21 @@ body.no-motion .garden-oracle.revealed .go-synthesis{ animation:none; opacity:1;
     }
     return index===0?formatCardMessage(text):text;
   }
+  function keywordHtml(identity,closed){
+    if(!identity) return '';
+    const stateWords=closed?identity.keywords.closed:identity.keywords.open;
+    return [...identity.keywords.core,...stateWords].map(word=>`<span class="go-keyword">${word}</span>`).join('');
+  }
+  function cardPresentation(x){
+    const identity=identityById.get(x.n);
+    const state=identity?.states?.[x.closed?'closed':'open'];
+    return {identity,state,name:identity?.cardName||x.title,stateTitle:state?.title||'',family:identity?.family?.publicName||''};
+  }
   function positionMessage(x,i){
     const state=x.closed?'Khép':'Nở';
     const stateHelp=x.closed?'Hạt Khép: điều đang vướng hoặc cần được nhìn lại':'Hạt Nở: điều đang thuận và có thể phát triển';
-    return `<section class="go-seed"><button class="go-seed-art${x.closed?' closed':''}" type="button" data-seed="${x.n}" data-src="${cardAsset(x.n)}" data-title="${x.title}" data-closed="${x.closed?'true':'false'}" aria-label="Xem kỹ hạt ${x.title}"><img src="${cardAsset(x.n)}" alt="" width="720" height="900" loading="lazy" decoding="async"></button><div class="go-seed-copy"><div class="go-seed-meta"><span class="go-seed-position">${positions[i]}</span><span class="go-state-tag ${x.closed?'is-closed':'is-open'}" title="${stateHelp}">Hạt ${state}</span></div><h3>${x.title}</h3><p>${formatCardMessage(x.message)}</p></div></section>`;
+    const view=cardPresentation(x);
+    return `<section class="go-seed"><button class="go-seed-art${x.closed?' closed':''}" type="button" data-seed="${x.n}" data-src="${cardAsset(x.n)}" data-title="${view.name}" data-closed="${x.closed?'true':'false'}" aria-label="Xem kỹ ${view.name}, trạng thái ${state}"><img src="${cardAsset(x.n)}" alt="" width="720" height="900" loading="lazy" decoding="async"></button><div class="go-seed-copy"><div class="go-seed-meta"><span class="go-seed-position">${positions[i]}</span>${view.family?`<span class="go-seed-family">${view.family}</span>`:''}<span class="go-state-tag ${x.closed?'is-closed':'is-open'}" title="${stateHelp}">Hạt ${state}</span></div><h3>${view.name}</h3>${view.stateTitle?`<p class="go-seed-state-title">${view.stateTitle}</p><div class="go-keywords" aria-label="Từ khóa">${keywordHtml(view.identity,x.closed)}</div>`:''}<p>${formatCardMessage(x.message)}</p></div></section>`;
   }
   /* Dự phòng nếu garden-oracle-synthesis.js chưa tải kịp/lỗi mạng — vẫn dựa
      trên tỷ lệ Nở/Khép thật của lần rút, chỉ là không có tầng "vùng đời sống". */
@@ -5897,7 +5923,7 @@ body.no-motion .garden-oracle.revealed .go-synthesis{ animation:none; opacity:1;
     if(previewEl){ previewEl.hidden=true; previewEl.innerHTML=''; }
     numbersEl.innerHTML=result.map(x=>'<span>'+String(x.n).padStart(2,'0')+'</span>').join('');
     document.querySelector('.go-whisper').innerHTML='Gió vừa đi qua túi hạt,<br><em>mang đến ba hạt bồ công anh cho riêng bạn.</em>';
-    document.getElementById('goSymbols').innerHTML=result.map(x=>`<article class="go-card${x.closed?' closed':''}" aria-label="Một hạt chưa hiện mặt"><div class="go-card-inner"><div class="go-card-face go-card-back"><img src="./images/oracle/card-back-v01.webp" alt="" width="720" height="900" decoding="async"></div><figure class="go-card-face go-card-front"><img src="${cardAsset(x.n)}" alt="Artwork ${x.title}" width="720" height="900" decoding="async"><figcaption class="go-card-label"><small>Hạt ${x.closed?'Khép':'Nở'} · ${String(x.n).padStart(2,'0')}</small><strong>${x.title}</strong></figcaption></figure></div></article>`).join('');
+    document.getElementById('goSymbols').innerHTML=result.map(x=>{ const view=cardPresentation(x); return `<article class="go-card${x.closed?' closed':''}" aria-label="Một hạt chưa hiện mặt"><div class="go-card-inner"><div class="go-card-face go-card-back"><img src="./images/oracle/card-back-v01.webp" alt="" width="720" height="900" decoding="async"></div><figure class="go-card-face go-card-front"><img src="${cardAsset(x.n)}" alt="Artwork ${view.name}" width="720" height="900" decoding="async"><figcaption class="go-card-label"><small>Hạt ${x.closed?'Khép':'Nở'} · ${String(x.n).padStart(2,'0')}${view.family?' · '+view.family:''}</small><strong>${view.name}</strong>${view.stateTitle?`<span>${view.stateTitle}</span>`:''}</figcaption></figure></div></article>`; }).join('');
     const stateLegend='<div class="go-state-legend" aria-label="Giải thích trạng thái hạt"><span><b>Nở</b> = điều đang thuận hoặc có thể phát triển</span><span><b>Khép</b> = điều đang vướng hoặc cần nhìn lại</span></div>';
     seedsEl.innerHTML=deck.length===78?stateLegend+result.map(positionMessage).join(''):result.map((x,i)=>'<section class="go-seed"><span>'+positions[i]+'</span><h3>'+x.title+'</h3><p>'+x.message+' <em>Hôm nay, khu vườn nhắc bạn '+x.theme+'.</em></p></section>').join('');
     synthesisEl.innerHTML=deck.length===78?synthesis(result):'';
@@ -5950,23 +5976,30 @@ body.no-motion .garden-oracle.revealed .go-synthesis{ animation:none; opacity:1;
     else revealTimers.push(window.setTimeout(ready,1700));
   }
   const zoom=document.getElementById('goZoom'),zoomImage=document.getElementById('goZoomImage'),zoomTitle=document.getElementById('goZoomTitle');
-  const zoomState=document.getElementById('goZoomState'),zoomStory=document.getElementById('goZoomStory'),zoomObserve=document.getElementById('goZoomObserve'),zoomStateTitle=document.getElementById('goZoomStateTitle'),zoomMeaning=document.getElementById('goZoomMeaning');
+  const zoomNumber=document.getElementById('goZoomNumber'),zoomState=document.getElementById('goZoomState'),zoomStateVoice=document.getElementById('goZoomStateVoice'),zoomKeywords=document.getElementById('goZoomKeywords'),zoomStoryTitle=document.getElementById('goZoomStoryTitle'),zoomStory=document.getElementById('goZoomStory'),zoomObserve=document.getElementById('goZoomObserve'),zoomStateTitle=document.getElementById('goZoomStateTitle'),zoomMeaning=document.getElementById('goZoomMeaning');
   let zoomReturnFocus=null;
   function capVi(text){ text=String(text||'').trim(); return text?text.charAt(0).toUpperCase()+text.slice(1):''; }
   function openZoom(button){
     if(!zoom||!zoomImage||!zoomTitle) return;
     const closed=button.dataset.closed==='true';
-    const profile=profileById.get(Number(button.dataset.seed));
+    const seedId=Number(button.dataset.seed);
+    const profile=profileById.get(seedId);
+    const identity=identityById.get(seedId);
+    const identityState=identity?.states?.[closed?'closed':'open'];
     zoomReturnFocus=button;
     zoomImage.src=button.dataset.src||'';
     zoomImage.alt='Hình phóng lớn của '+(button.dataset.title||'hạt');
     zoomImage.parentElement.classList.toggle('closed',closed);
-    zoomTitle.textContent=button.dataset.title||'';
+    zoomTitle.textContent=identity?.cardName||button.dataset.title||'';
+    if(zoomNumber) zoomNumber.textContent='Hạt số '+String(seedId).padStart(2,'0')+(identity?.family?.publicName?' · '+identity.family.publicName:'');
     if(zoomState){
       zoomState.textContent=closed?'Hạt Khép':'Hạt Nở';
       zoomState.className='go-state-tag '+(closed?'is-closed':'is-open');
     }
-    if(zoomStory) zoomStory.textContent=profile?.coreStory||'Mỗi chi tiết trong hạt đều kể về một chuyển động đang diễn ra bên trong.';
+    if(zoomStateVoice){ zoomStateVoice.textContent=identityState?.title||''; zoomStateVoice.hidden=!identityState?.title; }
+    if(zoomKeywords){ zoomKeywords.innerHTML=identity?keywordHtml(identity,closed):''; zoomKeywords.hidden=!identity; }
+    if(zoomStoryTitle) zoomStoryTitle.textContent=identity?'Linh hồn của lá':'Câu chuyện của hạt';
+    if(zoomStory) zoomStory.textContent=identity?.essence||profile?.coreStory||'Mỗi chi tiết trong hạt đều kể về một chuyển động đang diễn ra bên trong.';
     if(zoomObserve){
       const meaning=closed?profile?.profile?.risk:profile?.profile?.gift;
       const focus=closed
@@ -5974,11 +6007,13 @@ body.no-motion .garden-oracle.revealed .go-synthesis{ animation:none; opacity:1;
         : 'Hạt đang ở trạng thái Nở. Hãy nhìn phần hình ảnh đang mở ra, tìm ánh sáng hoặc chuyển động về phía trước.';
       zoomObserve.innerHTML=`${focus}${meaning?` Với hạt này, chi tiết ấy gợi <strong>${capVi(meaning)}</strong>.`:''}`;
     }
-    if(zoomStateTitle) zoomStateTitle.textContent=closed?'Hạt Khép đang nói gì?':'Hạt Nở đang nói gì?';
+    if(zoomStateTitle) zoomStateTitle.textContent=closed?'Khi hạt Khép':'Khi hạt Nở';
     if(zoomMeaning){
-      const meaning=closed?profile?.profile?.risk:profile?.profile?.gift;
+      const profileMeaning=closed?profile?.profile?.risk:profile?.profile?.gift;
       const action=profile?.profile?.action;
-      zoomMeaning.innerHTML=`${closed?'Hạt Khép đánh dấu một điểm cần nhìn lại':'Hạt Nở cho thấy một điều đang thuận'}${meaning?`: <strong>${capVi(meaning)}</strong>`:'.'}${action?`. Gợi ý dành cho bạn: ${capVi(action)}.`:''}`;
+      zoomMeaning.innerHTML=identityState
+        ? `<strong>${identityState.meaning}</strong> ${identityState.invitation}`
+        : `${closed?'Hạt Khép đánh dấu một điểm cần nhìn lại':'Hạt Nở cho thấy một điều đang thuận'}${profileMeaning?`: <strong>${capVi(profileMeaning)}</strong>`:'.'}${action?`. Gợi ý dành cho bạn: ${capVi(action)}.`:''}`;
     }
     zoom.hidden=false;
     zoom.querySelector('.go-zoom-close')?.focus();

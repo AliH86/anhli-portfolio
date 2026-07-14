@@ -23,12 +23,14 @@
    tarot        — tên Tarot nội bộ, chỉ để đối chiếu khi review; KHÔNG phải
                   field mới của schema, KHÔNG bao giờ hiển thị UI (garden-oracle-data.js
                   vẫn là nguồn sự thật cho field `tarot`).
-   openName     — tên Nở, tham chiếu ý nghĩa; KHÔNG render vào ảnh. PHẢI khớp
+   openName     — tiêu đề trạng thái Nở, tham chiếu ý nghĩa; KHÔNG phải tên lá
+                  và không render vào ảnh. PHẢI khớp
                   chính xác gardenOpen trong garden-oracle-data.js (nguồn sự
                   thật). Từ 2026-07-13: tên ngắn tối đa 4 âm tiết (Ali đổi
                   sau khi 78 lá đã xong nội dung + ảnh — số thứ tự và trạng
                   thái Nở/Khép do lớp HTML tự render riêng).
-   closedName   — tên Khép, tham chiếu ý nghĩa; KHÔNG render vào ảnh. PHẢI
+   closedName   — tiêu đề trạng thái Khép, KHÔNG phải tên lá và không render
+                  vào ảnh. PHẢI
                   khớp chính xác gardenClosed trong garden-oracle-data.js,
                   cùng quy tắc ≤4 âm tiết ở trên.
    element      — 'Fire' | 'Water' | 'Air' | 'Earth'.
@@ -901,11 +903,11 @@
 
   const allProfiles=[...majors];
   Object.values(suits).forEach(cards=>allProfiles.push(...cards));
-  const clearNames=root.GARDEN_ORACLE_CLEAR_NAMES||[];
-  if(clearNames.length===allProfiles.length){
+  const stateTitles=root.GARDEN_ORACLE_STATE_TITLES||root.GARDEN_ORACLE_CLEAR_NAMES||[];
+  if(stateTitles.length===allProfiles.length){
     allProfiles.forEach((card,index)=>{
-      card.openName=clearNames[index][0];
-      card.closedName=clearNames[index][1];
+      card.openName=stateTitles[index][0];
+      card.closedName=stateTitles[index][1];
     });
   }
   root.GARDEN_ORACLE_PROFILES = { majors, suits };

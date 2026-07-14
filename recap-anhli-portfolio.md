@@ -823,7 +823,7 @@ toàn ngoài 2 mục cố ý giữ untracked (`.claude/launch.json`,
 - [Thêm album Di Sản](https://github.com/AliH86/anhli-portfolio/commit/8a83b11)
 - [Set hero album to Một Tần Số Khác](https://github.com/AliH86/anhli-portfolio/commit/4291786)
 
-## Chỉnh giọng Việt + nhịp mở Oracle — 14/7/2026 (Codex, chờ Ali duyệt)
+## Chỉnh giọng Việt + nhịp mở Oracle — 14/7/2026 (approved/live)
 
 - Viết lại trực tiếp sáu hạt xuất hiện trong ảnh/video review, sau đó thay
   toàn bộ 156 tên Nở/Khép bằng hệ tên tiếng Việt nói thẳng nghĩa. Bỏ giới hạn
@@ -854,4 +854,87 @@ toàn ngoài 2 mục cố ý giữ untracked (`.claude/launch.json`,
 - QA: `node --check` qua đủ bốn file Oracle + script inline calendar; ma trận
   synthesis chuẩn qua 80 tổ hợp local/live, đủ 78 profile; kiểm tra mở rộng
   toàn bộ ngày 13–20/7 giữ lời tổng hợp trong ngưỡng 90–140 chữ; `git diff
-  --check` sạch. Chưa commit/push theo luật repo, chờ Ali duyệt.
+  --check` sạch. Ali duyệt, commit `6fe9e98` và đã push đồng bộ `origin/main`.
+
+## Oracle — tách tên thật của lá khỏi trạng thái Nở/Khép (14/7/2026, prototype local)
+
+- Ali xác định đúng vấn đề nền: 156 tên đang hiển thị thực chất là tiêu đề diễn
+  giải của trạng thái, không phải danh tính nguyên mẫu của 78 lá. Các cụm cụ
+  thể như “Nhìn Lại Cuộc Cãi Vã” khóa lá vào một tình huống và làm hệ bài khó
+  mở rộng thành bộ vật lý hoặc cho reader tự nội suy theo ngữ cảnh.
+- Chốt kiến trúc mới: mỗi lá có một `cardName` cố định + `essence` + keyword
+  cốt lõi; Nở/Khép chỉ là hai hướng vận động, mỗi hướng có `title`, keyword,
+  `meaning` và `invitation`. Tên Tarot vẫn chỉ là đối chiếu nội bộ.
+- Thêm `garden-oracle-identities.js` làm nguồn dữ liệu dùng chung tương lai cho
+  website, sách hướng dẫn và lá vật lý. Prototype cố ý chỉ gồm 6 lá: id 0, 26,
+  39, 54, 64, 76; trong đó 39/54/76 là đúng ba lá Ali gửi ảnh để review.
+- UI prototype hiển thị số + tên thật + tag Nở/Khép + tiêu đề trạng thái +
+  keyword. Zoom đổi “Câu chuyện của hạt” thành “Linh hồn của lá” khi đã có
+  identity, rồi tách riêng phần “Khi hạt Nở/Khép” và lời mời. 72 lá chưa có
+  identity vẫn dùng giao diện cũ, không tự suy diễn hoặc đổ dữ liệu hàng loạt.
+- Điểm dừng an toàn: chạy QA local rồi Ali duyệt hierarchy/voice của 6 lá;
+  chỉ sau đó mới mở rộng lần lượt 22 Major + bốn nhóm 14 lá.
+
+### Ali duyệt hệ họ + mở rộng 22 Hạt Hành Trình
+
+- Ali duyệt hierarchy/tên mẫu và chốt hướng Việt hoá bốn nguyên tố. Giữ
+  Fire/Water/Air/Earth cùng Wands/Cups/Swords/Pentacles làm bộ xương nội bộ,
+  nhưng người đọc chỉ thấy **Nắng – Sương – Gió – Đất**. Câu định hướng hình
+  ảnh: “Nắng đánh thức – Sương nuôi dưỡng – Gió mang đi – Đất đón lại”.
+- 22 Major gọi công khai là **Hạt Hành Trình**. Đã viết đủ 22 tên thật, essence
+  rộng và ba nhóm keyword cốt lõi/Nở/Khép; không dùng tình huống cụ thể làm
+  danh tính. Năm Minor mẫu id 26/39/54/64/76 vẫn được giữ để review xuyên họ.
+- UI thêm tên họ cạnh số hạt ở mặt lá, danh sách kết quả và zoom, ví dụ
+  `Hạt số 54 · Gió`; không lộ tên Tarot hay tên suit truyền thống.
+- Tại checkpoint đầu, identity local đạt 27: đủ id 0–21 và năm Minor mẫu. Bước kế tiếp
+  theo thứ tự là 14 Hạt của Nắng → 14 Sương → 14 Gió → 14 Đất, mỗi khối phải
+  test trùng tên/keyword và đọc biên tập trước khi sang khối sau.
+- Đã hoàn tất tiếp **14 Hạt của Nắng** (id 22–35): dùng nắng, độ ấm, sức sống
+  và chuyển động để giữ trường nghĩa sáng tạo/ý chí/hành động của Wands mà
+  không lộ Gậy/Lửa. Tại checkpoint này identity đạt 40: 22 Hành Trình + 14 Nắng +
+  bốn prototype Sương/Gió/Đất; bước tiếp theo là đủ 14 Hạt của Sương.
+- Đã hoàn tất **14 Hạt của Sương** (id 36–49): mở rộng Cups thành trường của
+  tiếp nhận, ký ức, thân mật, mất mát, trực giác và trưởng thành cảm xúc; không
+  đồng nhất toàn bộ Sương với tình yêu đôi lứa. Tại checkpoint này identity đạt 53;
+  bước tiếp theo là đủ 14 Hạt của Gió.
+- Đã hoàn tất **14 Hạt của Gió** (id 50–63): giữ chiều sâu tư tưởng, sự thật,
+  quyết định, chiến lược và xung đột của Swords nhưng không gọi thẳng
+  “cãi vã/đau khổ/lo âu” là bản chất duy nhất của lá. Tại checkpoint này identity
+  là 66; còn một khối cuối là 14 Hạt của Đất.
+- Đã hoàn tất **14 Hạt của Đất** (id 64–77): thân thể, kỹ năng, công việc,
+  nguồn lực, trao đổi, di sản và cách thành quả bén rễ. Không đồng nhất Đất với
+  tiền bạc hoặc thành công vật chất.
+- Hệ identity local nay đủ **78/78**: 22 Hành Trình + 14 Nắng + 14 Sương +
+  14 Gió + 14 Đất. Mỗi lá có tên thật cố định, essence rộng 45–70 chữ, bốn
+  keyword cốt lõi, ba keyword Nở và ba keyword Khép; UI vẫn giữ riêng tiêu đề
+  trạng thái và lời dành cho hôm nay.
+- Thêm `ORACLE-IDENTITY-REVIEW.md` làm bản đọc duyệt thuần nội dung đủ 78 lá,
+  chia năm chương, không cần đọc code. File được sinh từ nguồn runtime bằng
+  `scripts/build-oracle-identity-review.mjs`; Ali chỉ cần ghi chú theo số/tên
+  lá, sửa nội dung ở nguồn rồi sinh lại để bản duyệt không lệch website.
+- Ali bắt đầu biên tập trực tiếp bản review từ các lá 00–06. Quy luật giọng mới
+  nhận ra: ưu tiên một tiểu cảnh Hạt đang chuyển động; hình ảnh hoa/gió/thân cây
+  đi trước tầng nghĩa; Nở/Khép soi nhau trên cùng một hình ảnh; chấp nhận tên
+  dài hơn nếu có nhạc và nhìn thấy được cảnh; cứu lại tên cũ khi hình ảnh thật
+  sự đúng. Đã polish và đồng bộ ý 00–05 về source, không chép nguyên dấu `/`
+  hoặc câu còn ở dạng nháp lựa chọn của Ali.
+- Generator review nay từ chối ghi đè khi file đã tồn tại, trừ khi gọi rõ
+  `--force`, để bảo vệ mọi chỉnh sửa trực tiếp của Ali. Trước mỗi lần sinh lại
+  bắt buộc merge review → source rồi mới dùng `--force`.
+
+### NEXT SESSION — đưa chiêm tinh vào chính mạch luận giải ba hạt
+
+- Ali chốt vấn đề tiếp theo: phần chiêm tinh hiện có dữ liệu đúng nhưng cảm giác
+  đọc vẫn bị tách khỏi ba hạt trong tay. Không được giữ mô hình “một khối nhịp
+  tuần riêng + một khối ba hạt riêng” như hai bài viết đặt cạnh nhau.
+- Phiên sau cần thiết kế lại synthesis để tín hiệu chiêm tinh **tác động lên
+  quan hệ thật của ba identity/trạng thái**: nó đang khuếch đại hạt nào, làm
+  chậm chuyển động nào, khiến xung đột nguyên tố nào nổi rõ hoặc giúp hai hạt
+  nào tìm được nhịp chung. Mọi câu chiêm tinh phải truy ngược được về signal +
+  profile/identity cụ thể, không được gắn chung chung sau khi luận xong.
+- Vẫn giữ giới hạn an toàn: tối đa hai tín hiệu địa tâm chung, không cá nhân
+  hoá, không giả vờ biết hoàn cảnh người xem. UI có thể giữ nhãn “Nhịp tuần”
+  làm nguồn bối cảnh, nhưng câu chữ phải đan vào bốn nhịp luận giải của ba hạt.
+- Bắt đầu phiên sau bằng audit output 10 tổ hợp đại diện: đánh dấu câu nào đang
+  nói từ Hạt, câu nào từ chiêm tinh và câu nào thật sự là tương tác giữa hai
+  lớp; chỉ sửa engine sau khi đã thấy rõ chỗ đang bị rời.

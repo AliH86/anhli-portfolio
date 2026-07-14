@@ -36,16 +36,35 @@
   chuyện; vẫn phải nhận ra là hạt bồ công anh trước khi đọc tên.
 - 22 hạt lớn có silhouette độc bản mạnh. 56 hạt còn lại cùng họ hình theo bốn
   nguyên tố nhưng vẫn phải phân biệt được từng hạt.
+- Bốn nguyên tố và tên suit Tarot chỉ là bộ xương nội bộ cho engine/đối chiếu.
+  Ngôn ngữ công khai của khu vườn là **Nắng – Sương – Gió – Đất**:
+  Wands/Fire → Hạt của Nắng; Cups/Water → Hạt của Sương; Swords/Air → Hạt của
+  Gió; Pentacles/Earth → Hạt của Đất. Nhịp vòng đời dùng để giữ hình ảnh nhất
+  quán: “Nắng đánh thức – Sương nuôi dưỡng – Gió mang đi – Đất đón lại”.
+- 22 Major được gọi công khai là **Hạt Hành Trình**, không gán cưỡng ép vào
+  một trong bốn họ. Trên UI dùng “Hạt số XX · Hành Trình/Nắng/Sương/Gió/Đất”,
+  tuyệt đối không hiện Gậy/Cốc/Kiếm/Xu hoặc tên Tarot.
 - Không preload cả bộ: mỗi lượt chỉ tải ba WebP; gallery 78 hạt lazy-load.
 
 ### 2.2. 78 câu chuyện lõi
 
+- Mỗi hạt có **một danh tính cố định** gồm tên thật của lá, linh hồn/nguyên mẫu
+  và nhóm từ khoá cốt lõi. Tên này không đổi khi lá Nở hoặc Khép, phải đủ rộng
+  để dùng độc lập trên website, lá bài vật lý và sách hướng dẫn; không được lấy
+  một tình huống cụ thể như “một cuộc cãi vã” làm toàn bộ danh tính của lá.
+- Nở và Khép là hai hướng vận động của cùng một danh tính, không phải hai tên
+  lá khác nhau. Mỗi trạng thái có tiêu đề diễn giải, nhóm từ khoá riêng, một
+  đoạn nghĩa và một lời mời/câu hỏi. Các field `gardenOpen/gardenClosed` cũ là
+  lớp tiêu đề trạng thái, không còn được coi là tên thật của lá.
 - Mỗi hạt có đúng một câu chuyện lõi 45–70 chữ, rồi hai trạng thái ngắn Nở và
   Khép. Câu chuyện phải hiểu được khi người đọc hoàn toàn không biết Tarot.
 - Câu chuyện nêu một chuyển động đời thường cụ thể; ẩn dụ khu vườn chỉ là lớp
   hình ảnh nhẹ.
 - UI mặc định vẫn ưu tiên lời Nở/Khép gọn. Câu chuyện lõi có thể mở thêm, tránh
   đổ ba đoạn dài vào ritual.
+- Thứ tự hiển thị chi tiết: số + tên thật → tag Nở/Khép → tiêu đề trạng thái →
+  keyword cốt lõi/trạng thái → linh hồn của lá → chi tiết quan sát → nghĩa của
+  trạng thái → lời mời dành cho hôm nay. Không hiển thị tên Tarot nội bộ.
 - Viết theo năm đợt: 22 hạt lớn, 14 Lửa, 14 Nước, 14 Khí, 14 Đất. Mỗi đợt phải
   rà trùng ý, độ rõ và bản sắc trước khi sang đợt kế.
 
@@ -128,6 +147,11 @@ và đơn giản; không bịa chiều sâu.
 
 - `garden-oracle-data.js`: 78 tên và lời Nở/Khép hiện tại; chỉ sửa khi Ali yêu
   cầu hoặc trong đợt nâng schema 78 hạt đã được duyệt.
+- `garden-oracle-identities.js`: danh tính cố định, từ khoá và hai hướng
+  Nở/Khép dùng chung cho website/bộ bài vật lý. Tới 14/7/2026 đã có đủ 78 danh
+  tính: 22 Hạt Hành Trình + bốn họ Nắng/Sương/Gió/Đất, mỗi họ 14 lá. Mỗi lá
+  có tên cố định, essence rộng, keyword cốt lõi và keyword Nở/Khép; title và
+  lời trạng thái lấy từ lớp dữ liệu đã biên tập hoặc override riêng đã duyệt.
 - `garden-oracle-synthesis.js`: engine quan hệ và wording bank; ưu tiên commit
   riêng.
 - `index.html`: UI/ritual; không chạm khi chỉ làm nội dung hoặc dữ kiện.
@@ -139,7 +163,10 @@ và đơn giản; không bịa chiều sâu.
 ## 7. Trình tự triển khai và điểm dừng an toàn
 
 1. Khoá tài liệu này và commit riêng.
-2. Chốt schema mới bằng 3–5 hạt mẫu; chưa viết cả 78 ngay.
+2. Chốt schema mới bằng 6 hạt mẫu đã được Ali đồng ý ngày 14/7/2026; mẫu gồm
+   một Major và một lá từ mỗi nhóm nguyên tố, ưu tiên những lá Ali đang nhìn
+   thấy trong lượt rút để review thật. Sau khi Ali duyệt tiếp hệ ngôn ngữ
+   Nắng/Sương/Gió/Đất, mở rộng đủ 22 Hạt Hành Trình trước các nhóm Minor.
 3. Làm prototype artwork 4:5 không chữ cho cùng nhóm mẫu; test cùng một ảnh ở
    hướng Nở và xoay 180° ở hướng Khép với text HTML đối ứng.
 4. Ali duyệt độ rõ của chữ và ngôn ngữ hình.

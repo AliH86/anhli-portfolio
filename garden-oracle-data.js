@@ -1,25 +1,20 @@
 /* Ba hạt từ khu vườn — 78-card symbolic spine.
    Tarot correspondences follow the Golden Dawn / RWS family. Jyotish is added
    later as daily context; it is deliberately not presented as a Tarot mapping.
-   Naming grammar: each card carries a dandelion-seed journey moment, with two
-   names — one for Nở (bloom/upright), one for Khép (closed/reversed). Seed is
-   the default subject (its own passage); court cards (Page/Knight/Queen/King)
-   and The Magician use a personified agent as subject instead, since those
-   cards are about a force acting rather than the seed's own experience.
+   Identity architecture (2026-07-14): the stable card name and broad archetype
+   live in garden-oracle-identities.js. The two phrases here are STATE TITLES —
+   one for Nở (bloom/upright), one for Khép (closed/reversed) — never the card's
+   actual identity. Legacy field names remain for runtime compatibility.
    Reading voice (bloom/closed fields): grounded and concrete for a first-time
    reader — names a real-life situation (a job, a relationship, a habit, a
    plan) directly rather than staying in abstract/poetic register, with only a
    light touch of the seed/wind imagery, never the dominant vehicle. Tarot
    names are internal data only (see `tarot` field) — never surfaced in UI.
 
-   2026-07-13 — gardenOpen/gardenClosed renamed to short titles, MAX 4
-   syllables each (Ali's call, after all 78 art+text were done: number and
-   Nở/Khép state are rendered separately by the HTML layer, so the name
-   itself no longer needs to carry a full sentence). Drop the "Hạt" prefix
-   where it reads naturally; keep it only where the word is doing real work
-   (e.g. a card literally about two seeds). Any future rename should follow
-   this same ≤4-syllable rule and stay inspired by the card's coreStory/
-   bloom/closed content, not invent new imagery. */
+   2026-07-13 — gardenOpen/gardenClosed were shortened, then rewritten for
+   clear Vietnamese. From 2026-07-14 onward, treat them as state headlines;
+   future edits must describe how the stable archetype is moving when Nở/Khép,
+   not attempt to rename the card itself. */
 (function(root){
   'use strict';
 
@@ -284,13 +279,13 @@
 
   /* Tên hiển thị ưu tiên nghĩa rõ ràng bằng tiếng Việt. Không ép ẩn dụ
      Gió/Mưa/Đất vào mọi lá và không hy sinh nghĩa chỉ để giữ bốn âm tiết. */
-  const clearNames=[
-    ['Bắt Đầu','Chưa Biết Đi Đâu'],
-    ['Chủ Động Tạo Cơ Hội','Cố Kiểm Soát'],
+  const stateTitles=[
+    ['Bay Tìm Chân Trời Mới','Bay Vô Lối Để Trốn Chạy'],
+    ['Thuận Gió Tạo Cơ Hội','Gắng Gồng Kiểm Soát Gió'],
     ['Tin Vào Cảm Nhận','Bỏ Qua Trực Giác'],
-    ['Chăm Mình Để Chăm Người','Chăm Người Quên Mình'],
-    ['Giữ Kỷ Cương','Kiểm Soát Quá Mức'],
-    ['Học Từ Điều Xưa','Mắc Kẹt Trong Khuôn Cũ'],
+    ['Chăm Mình Để Chăm Người','Chăm Người Mà Quên Mình'],
+    ['Thân Cây Giữ Hạt Giữa Gió','Thân Cây Chặn Lối Hạt Bay'],
+    ['Mang Mùa Xưa Đi Tiếp','Mắc Trong Làn Gió Cũ'],
     ['Chọn Điều Mình Tin','Để Người Khác Chọn'],
     ['Giữ Đúng Hướng','Lao Đi Mù Quáng'],
     ['Bình Tĩnh Mà Vững','Gồng Mình Tỏ Mạnh'],
@@ -364,14 +359,17 @@
     ['Chăm Sóc Thiết Thực','Chăm Sóc Đến Cạn Sức'],
     ['Xây Nền Vững Chắc','Thành Công Nhưng Khép Kín']
   ];
-  if(clearNames.length!==cards.length) throw new Error('Clear Vietnamese names must cover all 78 seeds.');
+  if(stateTitles.length!==cards.length) throw new Error('Vietnamese state titles must cover all 78 seeds.');
   cards.forEach((card,index)=>{
-    card.garden=clearNames[index][0];
-    card.gardenOpen=clearNames[index][0];
-    card.gardenClosed=clearNames[index][1];
+    /* `garden` is a deprecated Nở-title alias retained for older renderers. */
+    card.garden=stateTitles[index][0];
+    card.gardenOpen=stateTitles[index][0];
+    card.gardenClosed=stateTitles[index][1];
   });
 
   if(cards.length!==78) throw new Error('Garden Oracle must contain exactly 78 seeds.');
-  root.GARDEN_ORACLE_CLEAR_NAMES=Object.freeze(clearNames.map(pair=>Object.freeze(pair.slice())));
+  const frozenStateTitles=Object.freeze(stateTitles.map(pair=>Object.freeze(pair.slice())));
+  root.GARDEN_ORACLE_STATE_TITLES=frozenStateTitles;
+  root.GARDEN_ORACLE_CLEAR_NAMES=frozenStateTitles; // deprecated compatibility alias
   root.GARDEN_ORACLE_CARDS=Object.freeze(cards.map(Object.freeze));
 })(window);
