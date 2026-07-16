@@ -193,7 +193,7 @@
     const firstState=first.closed?'Khép':'Nở';
     const secondState=second.closed?'Khép':'Nở';
     const relation=elementRelation(first,second);
-    return `${mentionOf(first)} đang ${firstState}, cho thấy ${compactEvidence(first)}; ${mentionOf(second)} đang ${secondState}, gợi tới ${compactEvidence(second)}. Đặt cạnh nhau, ${relation}.`;
+    return `${mentionOf(first)} đang ${firstState}: ${compactEvidence(first)}. ${mentionOf(second)} đang ${secondState}: ${compactEvidence(second)}. Khi đặt cạnh nhau, ${relation}.`;
   }
 
   function domainOpening(result){
@@ -201,10 +201,10 @@
     const counts=domains.reduce((acc,d)=>(acc[d]=(acc[d]||0)+1,acc),{});
     const dominant=Object.keys(counts).find(d=>counts[d]>1);
     if(dominant){
-      return { dominant, text:`Ba hạt tập trung vào ${DOMAIN_VI[dominant]}.` };
+      return { dominant, text:`Lượt đọc hôm nay tập trung vào ${DOMAIN_VI[dominant]}.` };
     }
     const labels=unique(domains).sort((a,b)=>DOMAIN_ORDER.indexOf(a)-DOMAIN_ORDER.indexOf(b)).map(d=>DOMAIN_SHORT[d]);
-    return { dominant:null, text:`Ba hạt chạm tới ${joinVi(labels)}.` };
+    return { dominant:null, text:`Lượt đọc hôm nay chạm tới ${joinVi(labels)}.` };
   }
 
   function selectPack(dateKey){
@@ -267,7 +267,7 @@
       stabilize:`giúp nhịp chung của cả ba thành một bước thực tế: ${wholeRhythm}`
     };
     const clause=(kind==='whole'?whole:kind==='pair'?pair:single)[signal.verb]||single.clarify;
-    return `${trimPeriod(signal.wording)}. Tín hiệu này ${clause}.`;
+    return `${trimPeriod(signal.wording)}. Trong lượt này, tín hiệu đó ${clause}.`;
   }
 
   function astrologyLine(result,dateKey){

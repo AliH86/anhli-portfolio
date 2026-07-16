@@ -48,9 +48,9 @@
 
 ### 2.2. 78 câu chuyện lõi
 
-- Mỗi hạt có **một danh tính cố định** gồm tên thật của lá, linh hồn/nguyên mẫu
-  và nhóm từ khoá cốt lõi. Tên này không đổi khi lá Nở hoặc Khép, phải đủ rộng
-  để dùng độc lập trên website, lá bài vật lý và sách hướng dẫn; không được lấy
+- Mỗi hạt có **một danh tính cố định** gồm tên thật của hạt, linh hồn/nguyên mẫu
+  và nhóm từ khoá cốt lõi. Tên này không đổi khi hạt Nở hoặc Khép, phải đủ rộng
+  để dùng độc lập trên website, bộ hạt vật lý và sách hướng dẫn; không được lấy
   một tình huống cụ thể như “một cuộc cãi vã” làm toàn bộ danh tính của lá.
 - Nở và Khép là hai hướng vận động của cùng một danh tính, không phải hai tên
   lá khác nhau. Mỗi trạng thái có tiêu đề diễn giải, nhóm từ khoá riêng, một
@@ -60,11 +60,15 @@
   Khép. Câu chuyện phải hiểu được khi người đọc hoàn toàn không biết Tarot.
 - Câu chuyện nêu một chuyển động đời thường cụ thể; ẩn dụ khu vườn chỉ là lớp
   hình ảnh nhẹ.
-- UI mặc định vẫn ưu tiên lời Nở/Khép gọn. Câu chuyện lõi có thể mở thêm, tránh
-  đổ ba đoạn dài vào ritual.
+- UI mặc định bên ngoài chỉ hiện tình huống Nở/Khép gọn dưới nhãn “Điều có thể
+  đang xảy ra”. Lời mời hành động không lặp ở danh sách ba hạt; nó chỉ xuất hiện
+  một lần trong phần xem kỹ của từng hạt dưới nhãn “Một bước nhỏ để thử”.
+- Câu chuyện lõi và hướng dẫn quan sát chỉ mở khi người xem chủ động xem kỹ.
+  Hướng dẫn quan sát phải nói cách nhìn artwork, không được lặp lại nghĩa/risk/
+  gift vừa hiển thị ngay bên dưới.
 - Thứ tự hiển thị chi tiết: số + tên thật → tag Nở/Khép → tiêu đề trạng thái →
-  keyword cốt lõi/trạng thái → linh hồn của lá → chi tiết quan sát → nghĩa của
-  trạng thái → lời mời dành cho hôm nay. Không hiển thị tên Tarot nội bộ.
+  keyword cốt lõi/trạng thái → câu chuyện của hạt → cách nhìn hình → liên hệ với
+  hôm nay → lời mời dành cho hôm nay. Không hiển thị tên Tarot nội bộ.
 - Viết theo năm đợt: 22 hạt lớn, 14 Lửa, 14 Nước, 14 Khí, 14 Đất. Mỗi đợt phải
   rà trùng ý, độ rõ và bản sắc trước khi sang đợt kế.
 
@@ -94,6 +98,9 @@
   chiêm tinh và không lặp nguyên văn lời riêng của hạt. Không tự cắt một câu rõ
   chỉ để lọt dải chữ; biên 80–155 được chấp nhận khi mẫu biên đã được đọc tay
   và vẫn rõ chủ thể, quan hệ, tác động cùng hành động.
+- Trên UI, bốn nhịp này phải có nhãn đọc rõ: “Bức tranh chung” → “Vì sao các
+  hạt liên quan” → “Chiêm tinh tác động ở đâu” → “Một bước nhỏ hôm nay”. Không
+  dồn lại thành một khối chữ dài hoặc bắt người đọc tự đoán đường suy luận.
 
 ### 2.4. Chiêm tinh chung theo tuần/ngày
 
@@ -106,6 +113,13 @@
   vào; wording diễn giải phải qua kiểm duyệt trước khi lên live.
 - Chiêm tinh chỉ mô tả nó có thể khuếch đại, thúc đẩy, làm rõ, làm nổi lên,
   làm dịu, làm chậm, gây ma sát hoặc ổn định điều gì trong ba hạt.
+- Khung bối cảnh trên UI phải hiện đủ ba lớp: bối cảnh tuần dễ hiểu; tín hiệu
+  ngày thực sự có liên hệ; và một lời giải thích tự nhiên cho biết tín hiệu đó
+  gặp hạt nào, trạng thái nào, vùng đời sống nào. Tiêu đề công khai dùng “Vì
+  sao bối cảnh này xuất hiện?”, không dùng nhãn kỹ thuật như “dữ kiện được dùng”.
+- Cỡ chữ của bối cảnh tuần/rationale nhỏ hơn phần luận giải chính một cấp, nhưng
+  vẫn đủ đọc; không để rule tăng font chung làm khung này phình, tràn hoặc lấn
+  mất bốn nhịp tổng hợp.
 
 ## 3. Quy chuẩn wording bắt buộc
 
@@ -125,6 +139,10 @@
   nhân của người xem.
 - Thuật ngữ không được giải nghĩa, khẳng định chắc chắn, câu quá thơ đến mức
   không biết đang nói về tình huống nào, hoặc cấu trúc “không phải… mà là…”.
+- Ngôn ngữ vận hành nội bộ như “dữ kiện”, “engine”, “hệ thống chọn”, “điểm liên
+  hệ”, “giữ/bỏ tín hiệu”, “gán” không được lộ thành lời nói với người xem. UI
+  phải chuyển chúng thành quan hệ đời thường: bối cảnh nào đang làm rõ điều gì,
+  gặp hạt nào và vì sao điều đó đáng được chú ý.
 - Lấy câu đầu của ba hạt làm ba bullet rồi gọi đó là tổng hợp.
 
 Mọi kết luận phải truy ngược được về ít nhất một tín hiệu hạt và, nếu có nhắc

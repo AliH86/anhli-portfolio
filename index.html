@@ -3703,6 +3703,15 @@ body.no-motion .mt-video-bg{ display:none; }
 .music-threshold.is-opening .mt-copy { opacity:0 !important; transform:scale(0.97); transition:opacity 0.35s ease,transform 0.55s ease; }
 .music-threshold.is-opening .mt-orbit { transform:scale(1.18); opacity:0; transition:transform 1s ease,opacity 0.7s ease; }
 .music-threshold.is-open { min-height:0; height:0; padding-block:0; opacity:0; pointer-events:none; }
+/* Keep the threshold as a viewport layer while the bloom plays. The Music
+   world is positioned underneath it before the shutters open, so no section
+   can fall down the page or enter as a separate third beat. */
+body.music-transitioning { overflow:hidden; }
+body.music-transitioning .music-threshold.is-staged {
+  position:fixed; inset:0; z-index:120; width:100%; height:100svh; min-height:100svh;
+  padding:clamp(4rem,8vh,7rem) 1.5rem; background-color:#111a11;
+}
+body.music-transitioning .music-threshold.is-staged.is-open { height:100svh; min-height:100svh; padding-block:clamp(4rem,8vh,7rem); }
 body:not(.music-unlocked) #music { display:none !important; }
 body.music-unlocked #music { animation:musicWorldReveal 0.8s ease both; }
 @keyframes musicWorldReveal { from{opacity:0;} to{opacity:1;} }
@@ -5365,9 +5374,9 @@ body.no-motion #music .listening-room .album-drawer .np-vinyl{ display:none !imp
         <div class="go-zoom-meta"><span id="goZoomNumber"></span><span class="go-state-tag" id="goZoomState"></span></div>
         <h3 id="goZoomTitle"></h3>
         <p class="go-zoom-state-voice" id="goZoomStateVoice" hidden></p>
-        <div class="go-keywords" id="goZoomKeywords" aria-label="Từ khóa của lá"></div>
+        <div class="go-keywords" id="goZoomKeywords" aria-label="Từ khóa của hạt"></div>
         <section><h4 id="goZoomStoryTitle">Câu chuyện của hạt</h4><p id="goZoomStory"></p></section>
-        <section><h4>Chi tiết để quan sát</h4><p id="goZoomObserve"></p></section>
+        <section><h4>Nhìn hình như thế nào?</h4><p id="goZoomObserve"></p></section>
         <section class="go-zoom-state-section"><h4 id="goZoomStateTitle"></h4><p id="goZoomMeaning"></p></section>
       </figcaption>
     </figure>
@@ -5566,9 +5575,14 @@ body.oracle-open #cursor,body.oracle-open #cursor-ring{ display:none; }
 .go-seed p{ margin:0; color:var(--text2); font-size:.86rem; line-height:1.75; }
 .go-seed p strong{ color:#f2ecd2; font-weight:650; }
 .go-seed p em{ color:rgba(225,236,173,.72); font-style:italic; }
+.go-reading-label{ display:block; margin:0 0 .34rem; color:var(--sage); font:650 .5rem/1.2 'Instrument Sans',sans-serif; letter-spacing:.14em; text-transform:uppercase; }
+.go-seed-invitation{ margin-top:.72rem !important; padding:.68rem .78rem; border-left:2px solid rgba(232,200,112,.42); background:rgba(232,200,112,.045); color:rgba(243,236,221,.84) !important; }
 .go-synthesis{ margin-top:1.25rem; padding:1.25rem 1.2rem; border:1px solid rgba(225,236,173,.16); border-radius:16px; background:rgba(168,198,105,.055); }
 .go-synth-title{ margin:0 0 .75rem; color:var(--amber2); font:500 .58rem/1.2 'Instrument Sans',sans-serif; letter-spacing:.16em; text-transform:uppercase; }
-.go-synthesis p{ margin:0 0 .72rem; color:var(--text2); font-size:.88rem; line-height:1.75; }
+.go-synth-step{ margin-top:.95rem; padding-top:.95rem; border-top:1px solid rgba(168,198,105,.11); }
+.go-synth-step:first-of-type{ margin-top:0; padding-top:0; border-top:0; }
+.go-synth-step > span{ display:block; margin-bottom:.38rem; color:var(--sage); font:650 .5rem/1.2 'Instrument Sans',sans-serif; letter-spacing:.14em; text-transform:uppercase; }
+.go-synthesis p{ margin:0 0 .72rem; color:rgba(243,236,221,.8); font-size:.92rem; line-height:1.78; }
 .go-synthesis p:last-child{ margin-bottom:0; }
 .go-inline-seed{ display:inline; padding:.06em .34em .1em; border:1px solid rgba(232,200,112,.2); border-radius:.42em; background:rgba(232,200,112,.07); color:#f2ecd2; font-weight:650; -webkit-box-decoration-break:clone; box-decoration-break:clone; }
 .go-synthesis .go-carry{ color:var(--amber2); font:italic 1rem/1.65 'Cormorant Garamond',serif; }
@@ -5576,6 +5590,10 @@ body.oracle-open #cursor,body.oracle-open #cursor-ring{ display:none; }
 .go-weekly span{ display:block; margin-bottom:.45rem; color:var(--sage); font:600 .52rem/1.2 'Instrument Sans',sans-serif; letter-spacing:.16em; text-transform:uppercase; }
 .go-weekly h4{ margin:0 0 .55rem; color:var(--cream); font:500 1.28rem/1.2 'Cormorant Garamond',serif; }
 .go-weekly p{ margin-bottom:.55rem; }
+.go-weekly .go-week-body{ color:rgba(243,236,221,.78); font-size:.86rem; line-height:1.68; }
+.go-astro-rationale{ margin-top:.85rem; padding:.78rem .85rem; border:1px solid rgba(168,198,105,.13); border-radius:12px; background:rgba(5,12,7,.3); }
+.go-astro-rationale b{ display:block; margin-bottom:.3rem; color:var(--amber2); font-size:.68rem; font-weight:650; }
+.go-astro-rationale p{ margin:0; color:rgba(243,236,221,.72); font-size:.8rem; line-height:1.65; }
 .go-weekly .go-week-carry{ color:rgba(232,200,112,.82); font-style:italic; }
 .go-guide{
   display:flex; align-items:flex-start; gap:.5rem; margin-top:1.1rem; padding:.7rem .85rem;
@@ -5593,7 +5611,7 @@ body.oracle-open #cursor,body.oracle-open #cursor-ring{ display:none; }
 .go-zoom-art{ width:100%; aspect-ratio:4/5; overflow:hidden; border:1px solid rgba(232,200,112,.55); border-radius:18px; background:#071009; box-shadow:0 34px 100px rgba(0,0,0,.72),0 0 46px rgba(232,200,112,.16); }
 .go-zoom-art img{ width:100%; height:100%; object-fit:cover; display:block; }
 .go-zoom-art.closed img{ transform:rotate(180deg) scale(1.002); }
-.go-zoom-copy{ min-width:0; color:var(--cream); text-align:left; }
+.go-zoom-copy{ min-width:0; max-width:66ch; color:var(--cream); text-align:left; }
 .go-zoom-meta{ display:flex; flex-wrap:wrap; align-items:center; gap:.55rem; color:rgba(225,236,173,.58); font:600 .52rem/1.2 'Instrument Sans',sans-serif; letter-spacing:.15em; text-transform:uppercase; }
 .go-zoom-copy h3{ margin:.75rem 0 .45rem; color:#f4edd4; font:400 clamp(2.2rem,4vw,3.6rem)/.98 'Cormorant Garamond',serif; text-wrap:balance; }
 .go-zoom-state-voice{ margin:0 0 .7rem !important; color:var(--amber2) !important; font:italic clamp(1.15rem,1.8vw,1.45rem)/1.3 'Cormorant Garamond',serif !important; }
@@ -5601,9 +5619,12 @@ body.oracle-open #cursor,body.oracle-open #cursor-ring{ display:none; }
 .go-zoom-copy > .go-keywords .go-keyword{ padding:.32rem .58rem; font-size:.54rem; }
 .go-zoom-copy section{ margin-top:1rem; padding:1rem 0 0; border-top:1px solid rgba(225,236,173,.14); }
 .go-zoom-copy h4{ margin:0 0 .45rem; color:var(--amber2); font:650 .56rem/1.2 'Instrument Sans',sans-serif; letter-spacing:.16em; text-transform:uppercase; }
-.go-zoom-copy p{ margin:0; color:rgba(243,236,221,.74); font:400 clamp(.88rem,1.25vw,1rem)/1.8 'Instrument Sans',sans-serif; }
+.go-zoom-copy p{ margin:0; color:rgba(243,236,221,.86); font:400 clamp(1rem,1.3vw,1.1rem)/1.78 'Instrument Sans',sans-serif; }
 .go-zoom-copy p strong{ color:#f4edd4; font-weight:650; }
-.go-zoom-state-section{ padding:1rem 1.05rem !important; border:1px solid rgba(225,236,173,.16) !important; border-radius:16px; background:linear-gradient(135deg,rgba(168,198,105,.09),rgba(232,200,112,.035)); }
+.go-zoom-state-section{ padding:1.15rem 1.2rem !important; border:1px solid rgba(225,236,173,.2) !important; border-radius:16px; background:linear-gradient(135deg,rgba(168,198,105,.11),rgba(232,200,112,.045)); }
+.go-zoom-state-section .go-reading-label{ margin-top:.82rem; }
+.go-zoom-state-section .go-reading-label:first-child{ margin-top:0; }
+.go-zoom-state-section strong{ display:block; margin-bottom:.15rem; }
 .go-zoom-close{ position:absolute; z-index:2; right:1rem; top:1rem; width:42px; height:42px; border:1px solid rgba(232,200,112,.45); border-radius:50%; background:#101710; color:var(--cream); font-size:1.2rem; cursor:pointer; }
 @keyframes goZoomIn{ from{opacity:0;transform:translateY(14px) scale(.94)} to{opacity:1;transform:none} }
 @keyframes goLetterIn{ from{opacity:0;transform:translateY(18px) scale(.98)} to{opacity:1;transform:none} }
@@ -5716,7 +5737,7 @@ body.no-motion .garden-oracle.revealed .go-synthesis{ animation:none; opacity:1;
   .garden-oracle.revealed .go-seed:nth-of-type(4){ animation-delay:.36s; }
   .garden-oracle.revealed .go-seed-art{ width:110px; box-shadow:0 0 0 1px rgba(232,200,112,.28),0 0 24px rgba(232,200,112,.12); }
   .garden-oracle.revealed .go-seed h3{ font-size:1.65rem; }
-  .garden-oracle.revealed .go-seed p,.garden-oracle.revealed .go-synthesis p{ font-size:1rem; line-height:1.86; }
+  .garden-oracle.revealed .go-seed p,.garden-oracle.revealed .go-synthesis > .go-synth-step > p{ font-size:1rem; line-height:1.86; }
 }
 </style>
 
@@ -5854,6 +5875,12 @@ body.no-motion .garden-oracle.revealed .go-synthesis{ animation:none; opacity:1;
   function escapeOracleText(text){
     return String(text||'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
   }
+  function joinOracleNames(items){
+    const names=items.filter(Boolean);
+    if(names.length<2) return names[0]||'hạt phù hợp';
+    if(names.length===2) return names[0]+' và '+names[1];
+    return names.slice(0,-1).join(', ')+' và '+names[names.length-1];
+  }
   function renderSynthesisParagraph(joined,index){
     const source=joined.richParagraphs?.[index]||joined.paragraphs[index]||'';
     const html=escapeOracleText(source).replace(/\[\[seed:(\d{1,2})\]\]/g,(_,rawId)=>{
@@ -5877,7 +5904,8 @@ body.no-motion .garden-oracle.revealed .go-synthesis{ animation:none; opacity:1;
     const state=x.closed?'Khép':'Nở';
     const stateHelp=x.closed?'Hạt Khép: điều đang vướng hoặc cần được nhìn lại':'Hạt Nở: điều đang thuận và có thể phát triển';
     const view=cardPresentation(x);
-    return `<section class="go-seed"><button class="go-seed-art${x.closed?' closed':''}" type="button" data-seed="${x.n}" data-src="${cardAsset(x.n)}" data-title="${view.name}" data-closed="${x.closed?'true':'false'}" aria-label="Xem kỹ ${view.name}, trạng thái ${state}"><img src="${cardAsset(x.n)}" alt="" width="720" height="900" loading="lazy" decoding="async"></button><div class="go-seed-copy"><div class="go-seed-meta"><span class="go-seed-position">${positions[i]}</span>${view.family?`<span class="go-seed-family">${view.family}</span>`:''}<span class="go-state-tag ${x.closed?'is-closed':'is-open'}" title="${stateHelp}">Hạt ${state}</span></div><h3>${view.name}</h3>${view.stateTitle?`<p class="go-seed-state-title">${view.stateTitle}</p><div class="go-keywords" aria-label="Từ khóa">${keywordHtml(view.identity,x.closed)}</div>`:''}<p>${formatCardMessage(x.message)}</p></div></section>`;
+    const meaning=view.state?.meaning||x.message;
+    return `<section class="go-seed"><button class="go-seed-art${x.closed?' closed':''}" type="button" data-seed="${x.n}" data-src="${cardAsset(x.n)}" data-title="${view.name}" data-closed="${x.closed?'true':'false'}" aria-label="Xem kỹ ${view.name}, trạng thái ${state}"><img src="${cardAsset(x.n)}" alt="" width="720" height="900" loading="lazy" decoding="async"></button><div class="go-seed-copy"><div class="go-seed-meta"><span class="go-seed-position">${positions[i]}</span>${view.family?`<span class="go-seed-family">${view.family}</span>`:''}<span class="go-state-tag ${x.closed?'is-closed':'is-open'}" title="${stateHelp}">Hạt ${state}</span></div><h3>${view.name}</h3>${view.stateTitle?`<p class="go-seed-state-title">${view.stateTitle}</p><div class="go-keywords" aria-label="Từ khóa">${keywordHtml(view.identity,x.closed)}</div>`:''}<p><span class="go-reading-label">Điều có thể đang xảy ra</span>${escapeOracleText(meaning)}</p></div></section>`;
   }
   /* Dự phòng nếu garden-oracle-synthesis.js chưa tải kịp/lỗi mạng — vẫn dựa
      trên tỷ lệ Nở/Khép thật của lần rút, chỉ là không có tầng "vùng đời sống". */
@@ -5898,8 +5926,31 @@ body.no-motion .garden-oracle.revealed .go-synthesis{ animation:none; opacity:1;
     if(!joined) return `<p>Ba hạt hôm nay đang cùng kể về cách bạn phân bổ sự chú ý và năng lượng.</p><p class="go-carry">${GO_CARRY_BY_CLOSED_COUNT[closedCount]}</p>`;
     /* Nhịp tuần chỉ còn là nhãn nguồn ngắn. Dữ kiện ngày đã được engine nối
        trực tiếp vào đúng Hạt/quan hệ trong phần luận giải bên dưới. */
-    const week=joined.week?`<section class="go-weekly" aria-label="Nguồn bối cảnh chiêm tinh"><span>${joined.week.eyebrow}</span><h4>${joined.week.title}</h4></section>`:'';
-    return week+`<h3 class="go-synth-title">Khi ba hạt gặp nhau</h3>`+joined.paragraphs.map((paragraph,index)=>`<p${index===joined.paragraphs.length-1?' class="go-carry"':''}>${renderSynthesisParagraph(joined,index)}</p>`).join('');
+    const interaction=joined.meta?.astrologyInteraction;
+    const signal=joined.meta?.astrologySignals?.[0];
+    const targetNames=(interaction?.targetIds||[]).map(id=>identityById.get(Number(id))?.cardName).filter(Boolean);
+    const domainNames={love:'chuyện tình cảm',work:'công việc',decision:'một lựa chọn',action:'bước đi kế tiếp',inner:'điều đang diễn ra bên trong'};
+    const verbPhrases={
+      amplify:'làm phần đang mở ra trở nên mạnh và dễ thấy hơn',
+      accelerate:'thúc phần đã sẵn sàng chuyển động nhanh hơn',
+      clarify:'giúp điều còn phân vân trở nên rõ hơn',
+      surface:'đưa điều đang được giữ bên dưới lên gần bề mặt',
+      soften:'làm dịu phần đang căng hoặc phòng vệ',
+      slow:'mời nhịp đang nhanh chậm lại để được nhìn kỹ',
+      challenge:'làm điểm đang vướng trở nên khó bỏ qua hơn',
+      stabilize:'giúp điều đã nhận ra tìm được một bước thực tế'
+    };
+    const evidence=(interaction?.evidence||[]).map(item=>{
+      const name=identityById.get(Number(item.id))?.cardName||'Hạt phù hợp';
+      return `${name} đang ${item.state==='closed'?'Khép':'Nở'} và nói về ${domainNames[item.domain]||'điều đang được quan tâm'}`;
+    });
+    const rationale=signal?`<div class="go-astro-rationale"><b>Vì sao bối cảnh này xuất hiện?</b><p>${escapeOracleText(signal)} ${escapeOracleText(verbPhrases[interaction?.verb]||'làm một phần của lượt đọc trở nên rõ hơn')}. Nhịp đó gặp ${escapeOracleText(evidence.length?joinOracleNames(evidence):joinOracleNames(targetNames))}. Vì vậy, bối cảnh hôm nay giúp soi rõ mối liên hệ này, đồng thời vẫn để câu chuyện riêng của người đọc được mở.</p></div>`:'';
+    const week=joined.week?`<section class="go-weekly" aria-label="Nguồn bối cảnh chiêm tinh"><span>${escapeOracleText(joined.week.eyebrow)}</span><h4>${escapeOracleText(joined.week.title)}</h4>${joined.week.body?`<p class="go-week-body">${escapeOracleText(joined.week.body)}</p>`:''}${rationale}</section>`:'';
+    const hasAstrology=Boolean(signal);
+    const stepLabels=hasAstrology
+      ? ['Bức tranh chung','Vì sao các hạt liên quan','Chiêm tinh tác động ở đâu','Một bước nhỏ hôm nay']
+      : ['Bức tranh chung','Vì sao các hạt liên quan','Một bước nhỏ hôm nay'];
+    return week+`<h3 class="go-synth-title">Đọc lượt này theo từng bước</h3>`+joined.paragraphs.map((paragraph,index)=>`<div class="go-synth-step"><span>${stepLabels[index]||'Điều cần lưu ý'}</span><p${index===joined.paragraphs.length-1?' class="go-carry"':''}>${renderSynthesisParagraph(joined,index)}</p></div>`).join('');
   }
   function previewReading(result){
     const closedCount=result.filter(x=>x.closed).length;
@@ -6012,22 +6063,20 @@ body.no-motion .garden-oracle.revealed .go-synthesis{ animation:none; opacity:1;
     }
     if(zoomStateVoice){ zoomStateVoice.textContent=identityState?.title||''; zoomStateVoice.hidden=!identityState?.title; }
     if(zoomKeywords){ zoomKeywords.innerHTML=identity?keywordHtml(identity,closed):''; zoomKeywords.hidden=!identity; }
-    if(zoomStoryTitle) zoomStoryTitle.textContent=identity?'Linh hồn của lá':'Câu chuyện của hạt';
+    if(zoomStoryTitle) zoomStoryTitle.textContent='Câu chuyện của hạt';
     if(zoomStory) zoomStory.textContent=identity?.essence||profile?.coreStory||'Mỗi chi tiết trong hạt đều kể về một chuyển động đang diễn ra bên trong.';
     if(zoomObserve){
-      const meaning=closed?profile?.profile?.risk:profile?.profile?.gift;
-      const focus=closed
-        ? 'Hình được xoay ngược vì hạt đang ở trạng thái Khép. Hãy nhìn phần hình ảnh đang níu, nén, bám chặt hoặc chệch hướng.'
-        : 'Hạt đang ở trạng thái Nở. Hãy nhìn phần hình ảnh đang mở ra, tìm ánh sáng hoặc chuyển động về phía trước.';
-      zoomObserve.innerHTML=`${focus}${meaning?` Với hạt này, chi tiết ấy gợi <strong>${capVi(meaning)}</strong>.`:''}`;
+      zoomObserve.textContent=closed
+        ? 'Hình được xoay 180° để báo trạng thái Khép; đây vẫn là cùng một hạt. Đừng cố giải nghĩa toàn bộ hình. Hãy chú ý điểm đầu tiên làm mắt bạn dừng lại — một chỗ bị níu, nén hoặc lệch hướng — rồi ghi nhận cảm giác nó gợi ra trước khi đọc phần liên hệ bên dưới.'
+        : 'Hạt đang ở trạng thái Nở. Đừng cố giải nghĩa toàn bộ hình. Hãy chú ý điểm đầu tiên làm mắt bạn dừng lại — hướng chuyển động, khoảng sáng hoặc phần đang mở ra — rồi ghi nhận cảm giác nó gợi ra trước khi đọc phần liên hệ bên dưới.';
     }
-    if(zoomStateTitle) zoomStateTitle.textContent=closed?'Khi hạt Khép':'Khi hạt Nở';
+    if(zoomStateTitle) zoomStateTitle.textContent='Liên hệ với hôm nay';
     if(zoomMeaning){
       const profileMeaning=closed?profile?.profile?.risk:profile?.profile?.gift;
       const action=profile?.profile?.action;
       zoomMeaning.innerHTML=identityState
-        ? `<strong>${identityState.meaning}</strong> ${identityState.invitation}`
-        : `${closed?'Hạt Khép đánh dấu một điểm cần nhìn lại':'Hạt Nở cho thấy một điều đang thuận'}${profileMeaning?`: <strong>${capVi(profileMeaning)}</strong>`:'.'}${action?`. Gợi ý dành cho bạn: ${capVi(action)}.`:''}`;
+        ? `<span class="go-reading-label">Điều có thể nhận ra</span><strong>${escapeOracleText(identityState.meaning)}</strong><span class="go-reading-label">Một bước nhỏ để thử</span>${escapeOracleText(identityState.invitation)}`
+        : `<span class="go-reading-label">Điều có thể nhận ra</span><strong>${closed?'Hạt Khép đánh dấu một điểm cần nhìn lại':'Hạt Nở cho thấy một điều đang thuận'}${profileMeaning?`: ${escapeOracleText(capVi(profileMeaning))}`:'.'}</strong>${action?`<span class="go-reading-label">Một bước nhỏ để thử</span>${escapeOracleText(capVi(action))}.`:''}`;
     }
     zoom.hidden=false;
     zoom.querySelector('.go-zoom-close')?.focus();
@@ -6618,10 +6667,10 @@ body.no-motion .garden-oracle.revealed .go-synthesis{ animation:none; opacity:1;
       if(opts.scroll!==false) music.scrollIntoView({behavior:'smooth',block:'start'});
       return;
     }
-    document.body.classList.add('music-unlocked');
     enter.setAttribute('aria-expanded','true');
     remember();
     if(opts.animate===false){
+      document.body.classList.add('music-unlocked');
       portal.classList.add('is-opening','is-open');
       if(opts.scroll!==false){
         const settle=()=>music.scrollIntoView({block:'start'});
@@ -6631,12 +6680,22 @@ body.no-motion .garden-oracle.revealed .go-synthesis{ animation:none; opacity:1;
       }
       return;
     }
+    /* The current threshold becomes a fixed visual layer first. Only then is
+       Music revealed and aligned behind it, preserving the intended overlap. */
+    portal.classList.add('is-staged');
+    document.body.classList.add('music-transitioning','music-unlocked');
+    music.scrollIntoView({block:'start'});
     function proceedOpen(){
       portal.classList.add('is-opening');
       setTimeout(()=>{
         portal.classList.add('is-open');
         try{ history.replaceState(null,'','#music'); }catch(e){}
-        if(opts.scroll!==false) music.scrollIntoView({behavior:'smooth',block:'start'});
+        if(opts.scroll!==false) music.scrollIntoView({block:'start'});
+        requestAnimationFrame(()=>{
+          portal.classList.remove('is-staged');
+          document.body.classList.remove('music-transitioning');
+          if(opts.scroll!==false) music.scrollIntoView({block:'start'});
+        });
       },980);
     }
     const bloomVideo=document.getElementById('mtVideoBg');

@@ -1016,3 +1016,32 @@ toàn ngoài 2 mục cố ý giữ untracked (`.claude/launch.json`,
 - Engine chọn pack approved theo `dateKey`: 15–19/7 vẫn dùng W29, từ 20/7 dùng
   W30; ngày cũ không mất forecast khi một tuần mới được publish.
 - Trạng thái: Ali đã duyệt, chuẩn bị commit/push.
+
+## Oracle — chốt cách đọc và sửa chuyển cảnh Music (16/7/2026, Ali duyệt)
+
+- Sửa luồng “Bước vào Cái Sạp nhạc”: threshold được cố định thành lớp phủ
+  toàn viewport trong lúc video bloom chạy; Music/Gate được đặt sẵn phía sau,
+  sau đó cửa trập mở để lộ cùng một khung. Không còn hiện tượng threshold rơi
+  xuống, Music xuất hiện thành nhịp rời rồi mới đẩy sang Gate. Desktop/mobile
+  đều đã kiểm tra; reduced motion vẫn dùng nhịp ngắn.
+- Oracle bên ngoài mỗi hạt chỉ còn “Điều có thể đang xảy ra”. “Một bước nhỏ để
+  thử” và câu mở “Để nuôi phần đang Nở/Để hiểu phần đang Khép” chỉ xuất hiện
+  trong phần xem kỹ của hạt, không lặp ở danh sách ba hạt.
+- Phần xem kỹ đổi toàn bộ ngôn ngữ công khai từ “lá” sang “hạt”; thứ tự đọc là
+  câu chuyện của hạt → cách nhìn hình → liên hệ với hôm nay → một bước nhỏ.
+  Hướng dẫn quan sát chỉ hướng mắt vào artwork, không copy lại nghĩa/risk/gift.
+- Tổng hợp được chia thành bốn nhãn rõ: Bức tranh chung → Vì sao các hạt liên
+  quan → Chiêm tinh tác động ở đâu → Một bước nhỏ hôm nay. Câu quan hệ được
+  chỉnh lại để không còn cấu trúc cụt “cho thấy muốn…/gợi tới muốn…”.
+- Khung chiêm tinh hiện đủ body tuần và “Vì sao bối cảnh này xuất hiện?”. Lời
+  công khai không còn lộ các từ vận hành như dữ kiện, hệ thống, giữ/bỏ hay gán;
+  thay bằng giải thích tín hiệu đang làm rõ điều gì và gặp hạt/trạng thái/vùng
+  đời sống nào. Font tuần/rationale được tách khỏi rule tăng chữ của bài luận
+  để không phình hoặc tràn khung.
+- `garden-oracle-identities.js` tạo lời mời Nở/Khép khác nhau cho 72 hạt dùng
+  profile mặc định; 6 override biên tập tay được giữ nguyên. Audit đạt 78 danh
+  tính/156 trạng thái, không còn lời mời Nở/Khép trùng, tên Tarot công khai,
+  cách gọi “Lá này” hoặc cấu trúc phủ định bị cấm.
+- Validation cuối: 640 tổ hợp synthesis × local/live qua; đủ 28 policy chiêm
+  tinh + 4 fallback và 24 template; 16 inline script parse sạch; `git diff
+  --check` sạch. Ali đã duyệt local và yêu cầu cập nhật quy ước, commit, push.
