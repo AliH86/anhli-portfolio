@@ -6064,7 +6064,7 @@ body.no-motion .garden-oracle.revealed .go-synthesis{ animation:none; opacity:1;
     if(zoomStateVoice){ zoomStateVoice.textContent=identityState?.title||''; zoomStateVoice.hidden=!identityState?.title; }
     if(zoomKeywords){ zoomKeywords.innerHTML=identity?keywordHtml(identity,closed):''; zoomKeywords.hidden=!identity; }
     if(zoomStoryTitle) zoomStoryTitle.textContent='Câu chuyện của hạt';
-    if(zoomStory) zoomStory.textContent=identity?.essence||profile?.coreStory||'Mỗi chi tiết trong hạt đều kể về một chuyển động đang diễn ra bên trong.';
+    if(zoomStory) zoomStory.textContent=profile?.coreStory||identity?.essence||'Mỗi chi tiết trong hạt đều kể về một chuyển động đang diễn ra bên trong.';
     if(zoomObserve){
       zoomObserve.textContent=closed
         ? 'Hình được xoay 180° để báo trạng thái Khép; đây vẫn là cùng một hạt. Đừng cố giải nghĩa toàn bộ hình. Hãy chú ý điểm đầu tiên làm mắt bạn dừng lại — một chỗ bị níu, nén hoặc lệch hướng — rồi ghi nhận cảm giác nó gợi ra trước khi đọc phần liên hệ bên dưới.'
