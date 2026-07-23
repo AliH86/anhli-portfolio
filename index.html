@@ -1664,11 +1664,28 @@ footer {
 .f-top { display:flex; justify-content:space-between; align-items:flex-end; padding-bottom:2.5rem; border-bottom:0.5px solid var(--border); margin-bottom:2.5rem; }
 .f-logo { font-family:'Cormorant Garamond', serif; font-size:1.9rem; color:var(--text); letter-spacing:0.01em; }
 .f-tag { font-size:0.64rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--text3); margin-top:0.45rem; }
-.f-sig {
-  font-family:'Cormorant Garamond', serif;
-  font-style:italic; font-size:2rem;
-  color:var(--amber); opacity:0.7; letter-spacing:0.04em;
+.f-sig { display:inline-flex; align-items:center; opacity:0.85; }
+.f-sig-svg { width:clamp(118px,11vw,166px); height:auto; overflow:visible; }
+.f-sig-path {
+  fill:var(--amber); fill-opacity:0.72; stroke:none;
 }
+/* Chữ ký được "viết lại" khi cuộn tới: JS đo độ dài path thật rồi bật
+   class .draw-ready để chuyển path sang chế độ nét vẽ (stroke) trước khi
+   .in (từ hạ tầng .reveal có sẵn) kích hoạt vẽ + tô mực. Nếu JS chưa kịp
+   chạy, không hỗ trợ, hoặc no-motion/prefers-reduced-motion đang bật, chữ
+   ký vẫn hiện đầy đủ dạng tô đặc ngay từ đầu — không bao giờ trống. */
+.f-sig.draw-ready .f-sig-path {
+  fill-opacity:0; stroke:var(--amber); stroke-width:15; stroke-linecap:round; stroke-linejoin:round;
+  stroke-dasharray:var(--sig-len,1); stroke-dashoffset:var(--sig-len,0);
+}
+.f-sig.draw-ready.in .f-sig-path {
+  stroke-dashoffset:0; fill-opacity:0.72;
+  transition:stroke-dashoffset 1.5s cubic-bezier(.65,0,.35,1), fill-opacity 1s ease 1.2s;
+}
+@media (prefers-reduced-motion:reduce) {
+  .f-sig.draw-ready .f-sig-path { fill-opacity:0.72 !important; stroke:none !important; stroke-dashoffset:0 !important; transition:none !important; }
+}
+body.no-motion .f-sig.draw-ready .f-sig-path { fill-opacity:0.72 !important; stroke:none !important; stroke-dashoffset:0 !important; transition:none !important; }
 .f-disc { display:grid; grid-template-columns:repeat(3,1fr); gap:2.75rem; margin-bottom:2.5rem; }
 .f-disc-h { font-size:0.58rem; letter-spacing:0.24em; text-transform:uppercase; color:var(--amber); margin-bottom:0.9rem; }
 .f-disc-col p { font-size:0.72rem; line-height:1.8; color:var(--text3); text-wrap:pretty; }
@@ -5945,7 +5962,10 @@ body.no-motion .garden-oracle.revealed .go-synthesis{ animation:none; opacity:1;
       return `${name} đang ${item.state==='closed'?'Khép':'Nở'} và nói về ${domainNames[item.domain]||'điều đang được quan tâm'}`;
     });
     const rationale=signal?`<div class="go-astro-rationale"><b>Vì sao bối cảnh này xuất hiện?</b><p>${escapeOracleText(signal)} ${escapeOracleText(verbPhrases[interaction?.verb]||'làm một phần của lượt đọc trở nên rõ hơn')}. Nhịp đó gặp ${escapeOracleText(evidence.length?joinOracleNames(evidence):joinOracleNames(targetNames))}. Vì vậy, bối cảnh hôm nay giúp soi rõ mối liên hệ này, đồng thời vẫn để câu chuyện riêng của người đọc được mở.</p></div>`:'';
-    const week=joined.week?`<section class="go-weekly" aria-label="Nguồn bối cảnh chiêm tinh"><span>${escapeOracleText(joined.week.eyebrow)}</span><h4>${escapeOracleText(joined.week.title)}</h4>${joined.week.body?`<p class="go-week-body">${escapeOracleText(joined.week.body)}</p>`:''}${rationale}</section>`:'';
+    /* week.carry (gợi ý việc-có-thể-làm-trong-tuần) đã được biên tập trong
+       garden-oracle-weekly-data.js từ lâu nhưng chưa từng được render — CSS
+       .go-week-carry đã tồn tại sẵn, chỉ thiếu chỗ gắn vào HTML. */
+    const week=joined.week?`<section class="go-weekly" aria-label="Nguồn bối cảnh chiêm tinh"><span>${escapeOracleText(joined.week.eyebrow)}</span><h4>${escapeOracleText(joined.week.title)}</h4>${joined.week.body?`<p class="go-week-body">${escapeOracleText(joined.week.body)}</p>`:''}${joined.week.carry?`<p class="go-week-carry">${escapeOracleText(joined.week.carry)}</p>`:''}${rationale}</section>`:'';
     const hasAstrology=Boolean(signal);
     const stepLabels=hasAstrology
       ? ['Bức tranh chung','Vì sao các hạt liên quan','Chiêm tinh tác động ở đâu','Một bước nhỏ hôm nay']
@@ -6437,6 +6457,33 @@ body.no-motion .garden-oracle.revealed .go-synthesis{ animation:none; opacity:1;
 
 <div class="divider"></div>
 
+<!-- Hiệu ứng chữ riêng cho tiêu đề Liên hệ + nút CTA nổi — chỉ scope trong
+     #contact / .cta-float-btn, dùng lại token --amber/--amber2 hiện có nên
+     tự đổi theo theme đang bật (kể cả dandelion), và dùng lại class
+     .reveal/.in có sẵn trên chính h2 này thay vì tạo observer mới. -->
+<style>
+  #contact .sec-h em{
+    background-image:linear-gradient(100deg, var(--amber) 25%, var(--amber2) 45%, #fff8df 50%, var(--amber2) 55%, var(--amber) 75%);
+    background-size:260% 100%; background-position:100% 0;
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    transition:background-position 1.6s cubic-bezier(.3,.7,.2,1) .2s;
+  }
+  #contact .sec-h.in em{ background-position:0% 0; }
+  @media (prefers-reduced-motion:reduce){
+    #contact .sec-h em{ transition:none; background-position:0% 0; }
+  }
+  body.no-motion #contact .sec-h em{ transition:none !important; background-position:0% 0 !important; }
+
+  .cta-float-btn{ position:relative; overflow:hidden; }
+  .cta-float-btn::after{
+    content:''; position:absolute; inset:0; pointer-events:none;
+    background:linear-gradient(115deg, transparent 34%, rgba(255,248,223,.5) 48%, rgba(232,200,112,.62) 52%, transparent 66%);
+    transform:translateX(-130%);
+  }
+  .cta-float-btn:hover::after{ transform:translateX(130%); transition:transform .85s ease; }
+  body.no-motion .cta-float-btn::after{ display:none; }
+</style>
+
 <!-- CONTACT -->
 <section id="contact">
   <div class="contact-wm" aria-hidden="true">LIÊN HỆ</div>
@@ -6460,7 +6507,11 @@ body.no-motion .garden-oracle.revealed .go-synthesis{ animation:none; opacity:1;
       <div class="f-logo">Cái Sạp nhạc ✦</div>
       <div class="f-tag">Music AILi-made · Saigon, Vietnam</div>
     </div>
-    <div class="f-sig">Anh Li</div>
+    <div class="f-sig" aria-label="Anh Li">
+      <svg class="f-sig-svg" viewBox="0 198 2753 809" preserveAspectRatio="xMinYMid meet" aria-hidden="true" focusable="false">
+        <path class="f-sig-path" d="M46 1007Q16 991 8.0 974.0Q0 957 0 945Q0 918 19.5 872.5Q39 827 72.0 768.0Q105 709 147 645Q116 643 88.0 642.0Q60 641 16 641H0Q14 605 44.5 590.5Q75 576 116 576Q133 576 151.5 578.0Q170 580 190 582Q240 510 288.5 446.0Q337 382 380.5 330.5Q424 279 458 246Q506 198 528 198Q542 198 559.5 209.0Q577 220 596 237Q586 245 570.5 278.0Q555 311 537.5 361.5Q520 412 502.5 472.0Q485 532 471.0 594.0Q457 656 448.5 712.5Q440 769 440 812Q440 852 448.0 871.5Q456 891 475 891Q498 891 532.0 856.0Q566 821 608 742L626 761Q595 843 545.5 896.0Q496 949 440 949Q392 949 372.0 907.5Q352 866 352 794Q352 771 355.0 742.0Q358 713 365 670Q321 663 287.0 659.0Q253 655 222 651Q174 736 129.0 827.0Q84 918 46 1007ZM375 621Q388 562 405.5 501.5Q423 441 442.5 385.5Q462 330 481 286Q451 310 414.0 355.0Q377 400 336.5 461.0Q296 522 254 594Q284 600 314.0 607.0Q344 614 375 621Z M968 940Q929 940 908.5 920.5Q888 901 888 871Q888 851 895.0 828.5Q902 806 909.0 783.0Q916 760 916 739Q916 717 905.5 708.5Q895 700 881 700Q851 700 819.5 724.5Q788 749 758.5 786.0Q729 823 703.0 863.0Q677 903 658 935Q639 935 622.0 928.5Q605 922 593 906Q594 901 604.5 875.5Q615 850 628.0 814.5Q641 779 651.0 740.0Q661 701 661 669Q668 661 682.5 653.0Q697 645 713 645Q748 645 748 675Q748 687 743.5 710.5Q739 734 731 764Q757 729 788.0 698.0Q819 667 852.5 647.5Q886 628 920 628Q963 628 983.5 657.0Q1004 686 1004 721Q1004 751 994.0 777.0Q984 803 974.5 826.0Q965 849 965 871Q965 887 972.5 893.5Q980 900 989 900Q1013 900 1039.0 877.0Q1065 854 1088.5 818.5Q1112 783 1130 747L1147 761Q1126 810 1099.5 850.5Q1073 891 1040.5 915.5Q1008 940 968 940Z M1150 958Q1128 958 1118.5 924.0Q1109 890 1109 845Q1109 799 1124.5 734.0Q1140 669 1166.5 597.0Q1193 525 1225.5 456.0Q1258 387 1292.5 330.5Q1327 274 1358.5 240.0Q1390 206 1414 206Q1435 206 1446.0 229.0Q1457 252 1457 277Q1457 304 1444.5 343.5Q1432 383 1410.0 428.0Q1388 473 1358.5 516.5Q1329 560 1294.5 596.0Q1260 632 1223 654Q1210 688 1202.5 717.5Q1195 747 1192.0 773.0Q1189 799 1189 824Q1189 829 1189.5 834.5Q1190 840 1190 845Q1194 839 1203.0 814.0Q1212 789 1227.5 755.5Q1243 722 1266.0 689.5Q1289 657 1320.0 635.5Q1351 614 1391 614Q1425 614 1444.0 629.5Q1463 645 1471.0 667.5Q1479 690 1479 713Q1479 745 1468.5 773.0Q1458 801 1447.5 825.5Q1437 850 1437 872Q1437 890 1445.0 897.0Q1453 904 1464 904Q1486 904 1515.5 882.0Q1545 860 1574.5 823.5Q1604 787 1625 743L1641 760Q1618 810 1587.0 852.0Q1556 894 1519.0 919.0Q1482 944 1439 944Q1401 944 1381.0 924.0Q1361 904 1361 874Q1361 853 1368.5 827.5Q1376 802 1383.0 776.0Q1390 750 1390 729Q1390 705 1379.5 696.0Q1369 687 1354 687Q1329 687 1309.0 706.5Q1289 726 1273.0 757.0Q1257 788 1243.0 822.5Q1229 857 1215.0 888.0Q1201 919 1185.5 938.5Q1170 958 1150 958ZM1244 590Q1270 567 1294.0 535.0Q1318 503 1338.5 468.5Q1359 434 1374.5 401.5Q1390 369 1399.0 343.0Q1408 317 1409 303Q1409 302 1409.0 301.5Q1409 301 1409 300Q1403 300 1383.5 324.5Q1364 349 1338.5 390.5Q1313 432 1287.5 484.0Q1262 536 1244 590Z M2295 1007Q2258 1007 2212.0 992.0Q2166 977 2117.5 956.0Q2069 935 2023 916Q1998 943 1969.0 958.0Q1940 973 1907 973Q1872 973 1846.5 957.5Q1821 942 1807.5 920.0Q1794 898 1794 880Q1794 860 1812.0 845.0Q1830 830 1876 830Q1903 830 1935.5 835.5Q1968 841 2002 850Q2025 810 2044.5 756.0Q2064 702 2083.0 642.5Q2102 583 2121 526Q2071 509 2044.0 478.5Q2017 448 2017 417Q2017 397 2027.0 377.5Q2037 358 2056.0 344.5Q2075 331 2101 331Q2088 347 2084.5 367.0Q2081 387 2081 399Q2081 432 2096.0 455.0Q2111 478 2133 491Q2152 434 2173.5 381.5Q2195 329 2221.5 288.5Q2248 248 2280.5 224.0Q2313 200 2354 200Q2377 200 2402.5 209.5Q2428 219 2446.5 242.0Q2465 265 2465 308Q2465 342 2450.5 381.0Q2436 420 2405.0 455.5Q2374 491 2325.5 514.5Q2277 538 2208 540Q2206 540 2203.5 540.0Q2201 540 2199 540Q2180 598 2159.0 657.0Q2138 716 2114.0 770.0Q2090 824 2062 866Q2101 877 2148.5 891.0Q2196 905 2243.5 914.5Q2291 924 2327 924Q2351 924 2371.5 918.5Q2392 913 2415 902Q2395 958 2365.5 982.5Q2336 1007 2295 1007ZM1897 936Q1923 936 1939.0 924.5Q1955 913 1971 896Q1940 885 1913.0 877.5Q1886 870 1866 870Q1847 870 1838.5 877.0Q1830 884 1830 894Q1830 910 1850.0 923.0Q1870 936 1897 936ZM2210 507Q2254 504 2288.0 479.0Q2322 454 2346.0 419.0Q2370 384 2382.5 347.5Q2395 311 2395 284Q2395 258 2385.0 248.5Q2375 239 2362 239Q2333 239 2307.0 276.0Q2281 313 2257.5 373.5Q2234 434 2210 507Z M2548 950Q2504 950 2482.0 924.0Q2460 898 2460 861Q2460 838 2468.0 803.0Q2476 768 2490.5 729.5Q2505 691 2524.0 657.0Q2543 623 2565.0 601.5Q2587 580 2609 580Q2621 580 2630.0 587.0Q2639 594 2639 609Q2639 622 2623.5 648.0Q2608 674 2587.5 708.0Q2567 742 2551.5 778.5Q2536 815 2536 848Q2536 880 2547.5 890.5Q2559 901 2581 901Q2615 901 2655.0 867.0Q2695 833 2738 748L2753 764Q2718 852 2664.0 901.0Q2610 950 2548 950ZM2666 499Q2647 499 2631.5 489.5Q2616 480 2616 460Q2616 436 2642.0 419.0Q2668 402 2696 402Q2714 402 2726.5 410.0Q2739 418 2739 439Q2739 460 2716.0 479.5Q2693 499 2666 499Z"/>
+      </svg>
+    </div>
   </div>
 
   <div class="f-disc">
@@ -6491,6 +6542,31 @@ body.no-motion .garden-oracle.revealed .go-synthesis{ animation:none; opacity:1;
     .f-update { text-align:center; font-size:0.86rem; line-height:1.6; color:var(--amber2); opacity:0.85; padding:1.4rem 1rem 0.4rem; }
   </style>
 </footer>
+
+<!-- Chữ ký footer tự "viết lại" một lần khi cuộn tới — dùng path SVG thật
+     (không phải chỉ hiệu ứng chữ CSS) nên cần đo độ dài đường nét bằng JS
+     trước khi bật animation. Bỏ qua hoàn toàn khi no-motion/giảm chuyển
+     động: chữ ký vẫn hiện đủ, chỉ không có nét vẽ. -->
+<script id="footer-signature-js">
+(function(){
+  const wrap=document.querySelector('.f-sig');
+  const path=wrap&&wrap.querySelector('.f-sig-path');
+  if(!wrap||!path) return;
+  const reduced=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(document.body.classList.contains('no-motion')||reduced||!('IntersectionObserver' in window)) return;
+  let len=0;
+  try{ len=path.getTotalLength(); }catch(e){ return; }
+  if(!len) return;
+  wrap.style.setProperty('--sig-len',len);
+  wrap.classList.add('draw-ready');
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){ wrap.classList.add('in'); io.disconnect(); }
+    });
+  },{threshold:0.35});
+  io.observe(wrap);
+})();
+</script>
 
 <!-- VIDEO MODAL -->
 <div class="modal-bg" id="modal" onclick="bgClose(event)">

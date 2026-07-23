@@ -117,8 +117,62 @@
     }
   };
 
+  /* Dữ kiện 2026-07-28 → 2026-08-04 đối chiếu từ:
+     - Moon phase & sign ingress: Cafe Astrology Moon Calendar 2026
+       https://cafeastrology.com/calendars/moon-calendar-2026.html
+     - Full Moon (29/7, 14:36 UTC, Bảo Bình): Star Walk
+       https://starwalk.space/en/news/full-moon-july
+     - Aspect exact dates (Mặt Trời/Sao Diêm Vương/Sao Hải Vương/Sao Thiên
+       Vương/Sao Mộc/Sao Kim/Sao Hoả): Cafe Astrology 2026 Aspects
+       https://cafeastrology.com/2026-astrological-aspects.html
+     - Sao Thuỷ trực hành 23/7 lúc 16°19' Cự Giải: Astrocalcs Mercury
+       Retrograde Dates https://astrocalcs.com/mercury-retrograde-dates/
+     Giờ ingress gốc theo Eastern Time, đã quy đổi tương đối sang giờ Việt Nam
+     (ICT = ET + 11h mùa hè) để chọn ngày lịch cho đúng; đây vẫn là thời tiết
+     chung, không dùng giờ sinh/vị trí/nhà/cung Mọc. */
+  packs['2026-W31-review']={
+    status:'review',
+    label:'28/7–4/8/2026 · nháp chờ Ali duyệt',
+    sourceCheckedAt:'2026-07-23',
+    week:{
+      eyebrow:'Bối cảnh chung · 28/7–3/8',
+      title:'Toả sáng mà không đánh mất mình',
+      body:'Trăng tròn ngày 29/7 ở Bảo Bình đối diện Mặt Trời đang hội hợp Sao Mộc ở Sư Tử, đẩy nhu cầu được thể hiện và nhu cầu thuộc về một điều lớn hơn bản thân lên cao điểm cùng lúc. Sao Kim tạo góc căng với Sao Hoả khiến cách mình muốn chăm sóc và cách người khác muốn được thúc đẩy dễ lệch nhịp. Nửa sau tuần, Mặt Trăng lần lượt đi qua Song Ngư rồi Bạch Dương, đưa nhịp ngày từ buông lỏng và lắng nghe trực giác sang một khởi đầu thẳng và nhanh hơn.',
+      carry:'Việc có thể làm trong tuần: chọn một cách cụ thể để được nhìn thấy mà không cần gồng; nói rõ một chỗ đang lệch nhịp trong một mối quan tâm gần đây; và dành riêng một buổi chỉ để nghỉ, trước khi bắt đầu việc mới vào cuối tuần.'
+    },
+    days:{
+      '2026-07-28':{ signals:[
+        { verb:'stabilize', domains:['decision','inner'], label:'Sao Thuỷ tiếp tục đi thuận ở Cự Giải', wording:'Một quyết định từng bị hoãn có thể được nối lại, miễn là đi từng bước rõ ràng.' },
+        { verb:'slow', domains:['inner','work'], label:'Trăng khuyết gần tròn ở Ma Kết', wording:'Nhịp ngày thiên về chuẩn bị có trật tự; dồn sức cho một việc cụ thể trước.' }
+      ]},
+      '2026-07-29':{ signals:[
+        { verb:'surface', domains:['inner','love'], label:'Trăng tròn ở Bảo Bình, đối diện Mặt Trời ở Sư Tử', wording:'Trăng tròn làm rõ khoảng cách giữa nhu cầu được là chính mình và nhu cầu thuộc về một nhóm hay cộng đồng lớn hơn.' },
+        { verb:'amplify', domains:['action','work'], label:'Mặt Trời hội hợp Sao Mộc ở Sư Tử', wording:'Một cơ hội thể hiện hoặc mở rộng có thể nổi rõ hơn ngày thường; điều đáng giữ lại là làm thật, không chỉ phô diễn.' }
+      ]},
+      '2026-07-30':{ signals:[
+        { verb:'soften', domains:['inner','love'], label:'Trăng khuyết đầu tiên sau kỳ Trăng tròn, vẫn ở Bảo Bình', wording:'Sau cao điểm hôm qua, hôm nay hợp để lùi lại một bước và để cảm xúc lắng xuống trước khi phản hồi ai đó.' },
+        { verb:'challenge', domains:['love','work'], label:'Sao Kim và Sao Hoả còn trong góc căng (Xử Nữ – Song Tử)', wording:'Cách mình muốn chăm sóc và cách người khác muốn được thúc đẩy có thể không khớp nhau; đừng ép cả hai giống nhau.' }
+      ]},
+      '2026-07-31':{ signals:[
+        { verb:'surface', domains:['inner','love'], label:'Mặt Trăng chuyển vào Song Ngư', wording:'Ranh giới cảm xúc giữa mình và người khác mờ hơn; đây là lúc hợp để lắng nghe bằng trực giác.' }
+      ]},
+      '2026-08-01':{ signals:[
+        { verb:'surface', domains:['inner','decision'], label:'Mặt Trăng ở Song Ngư', wording:'Một linh cảm hoặc hình ảnh còn mơ hồ có thể đang gợi ý điều lý trí chưa gọi tên được; đáng ghi lại thay vì bỏ qua.' }
+      ]},
+      '2026-08-02':{ signals:[
+        { verb:'slow', domains:['inner','work'], label:'Trăng cuối chu kỳ Song Ngư, chuẩn bị bước sang Bạch Dương', wording:'Nhịp ngày còn thiên về nghỉ và buông; giữ việc quan trọng lại cho lúc năng lượng rõ ràng hơn.' }
+      ]},
+      '2026-08-03':{ signals:[
+        { verb:'accelerate', domains:['action','inner'], label:'Mặt Trăng chuyển vào Bạch Dương', wording:'Một luồng năng lượng thẳng và nhanh quay lại; phù hợp để bắt đầu, miễn là chọn đúng một việc thay vì lao vào tất cả cùng lúc.' }
+      ]},
+      '2026-08-04':{ signals:[
+        { verb:'stabilize', domains:['action','decision'], label:'Mặt Trăng tiếp tục ở Bạch Dương', wording:'Sau cú hích ban đầu, hôm nay hợp để chọn một hướng cụ thể để giữ đà, thay vì mở rộng thêm việc mới.' }
+      ]}
+    }
+  };
+
   root.GARDEN_ORACLE_WEEKLY={
-    activeReviewKey:null,
+    activeReviewKey:'2026-W31-review',
     lastApprovedKey:'2026-W30-approved',
     packs
   };
