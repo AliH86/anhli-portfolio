@@ -45,9 +45,9 @@
   ];
 
   const ELEMENT_RELATIONS={
-    'Air+Fire':'ý nghĩ và động lực cần gặp nhau ở một việc cụ thể',
+    'Air+Fire':'ý nghĩ cần gặp động lực ở một việc cụ thể',
     'Earth+Water':'cảm xúc cần một hành động có thể nhìn thấy',
-    'Fire+Water':'động lực và cảm nhận cần hai tốc độ khác nhau',
+    'Fire+Water':'động lực và cảm nhận cần hai tốc độ khác',
     'Air+Earth':'ý tưởng cần gặp nguồn lực thật',
     'Air+Water':'cảm xúc cần được gọi tên trước khi quyết định',
     'Earth+Fire':'động lực cần một nhịp đủ bền'
@@ -153,13 +153,13 @@
       ['colliding','entangling','releasing']
     ].findIndex(values=>values.includes(movement));
     const lines=[
-      ['muốn đi thành một bước cụ thể','đang vội tìm lối ra'],
-      ['muốn nhìn kỹ điều quan trọng','đang mắc lại trong nghi ngờ'],
-      ['muốn giữ nhiều nhu cầu cùng nhịp','đang để mọi chuyện lơ lửng'],
-      ['muốn chăm điều đang có','đang ôm giữ đến quên mình'],
-      ['muốn phân rõ điều giữ và buông','đang phòng vệ trước một sự thật'],
-      ['muốn tiếp tục đều và chắc','đang theo lối quen quên mục đích'],
-      ['muốn đổi chỗ đang mắc','đang giằng co với giới hạn đã rõ']
+      ['muốn biến điều đã rõ thành hành động ngay','đang đổi hướng để né điều khó đối diện'],
+      ['muốn nhìn kỹ để nhận ra điều quan trọng','đang nghĩ lại, chưa dám tin cảm nhận'],
+      ['muốn giữ nhiều việc cùng lúc, không mất nhịp','đang để treo lơ lửng, chưa muốn chọn'],
+      ['muốn chăm điều mình có bằng việc cụ thể','đang cho đi đến mức quên chăm chính mình'],
+      ['muốn phân rõ điều nên giữ, điều phải buông','đang phòng thủ để né sự thật khó nhận'],
+      ['muốn đi đều và chắc theo hướng đã chọn','đang lặp lối quen, quên mất lý do'],
+      ['muốn gọi tên chỗ đang mắc để gỡ ra','đang giằng co với một giới hạn hiện rõ']
     ];
     return compact>-1?lines[compact][item.closed?1:0]:(group?movementPhrase(item):stateEvidence(item));
   }
@@ -167,7 +167,7 @@
   function elementRelation(a,b){
     const elements=[profileOf(a)?.element,profileOf(b)?.element].filter(Boolean).sort();
     if(elements.length===2&&elements[0]===elements[1]) return 'hai Hạt đang nhấn cùng một hướng';
-    return ELEMENT_RELATIONS[elements.join('+')]||'hai nhu cầu cần được đặt cạnh nhau trước khi chọn bước tiếp theo';
+    return ELEMENT_RELATIONS[elements.join('+')]||'hai nhu cầu cần đặt cạnh nhau trước khi chọn';
   }
 
   function strongestSeedPair(result,preferredIds=[]){
@@ -186,14 +186,33 @@
   function relationshipLine(result,interaction){
     if(interaction?.kind==='whole'){
       const ordered=[...result].sort((a,b)=>idOf(a)-idOf(b));
-      return `Trong nhịp chung này, ${mentionOf(ordered[0])} ${compactEvidence(ordered[0])}; ${mentionOf(ordered[1])} ${compactEvidence(ordered[1])}; còn ${mentionOf(ordered[2])} ${compactEvidence(ordered[2])}.`;
+      const sameDomain=domainOf(ordered[0])===domainOf(ordered[1])&&domainOf(ordered[1])===domainOf(ordered[2]);
+      const sameDirection=ordered[0].closed===ordered[1].closed&&ordered[1].closed===ordered[2].closed;
+      const lead=sameDomain
+        ?`Chạm ${DOMAIN_SHORT[domainOf(ordered[0])].replace(/^một\s+/,'')}:`
+        :sameDirection
+          ?`Cùng ${ordered[0].closed?'Khép':'Nở'}:`
+          :'Chung một nhịp:';
+      return `${lead} ${mentionOf(ordered[0])} ${compactEvidence(ordered[0])}, ${mentionOf(ordered[1])} ${compactEvidence(ordered[1])}, ${mentionOf(ordered[2])} ${compactEvidence(ordered[2])}.`;
     }
     const preferredIds=interaction?.kind==='pair'?interaction.targetIds:interaction?.kind==='single'?interaction.targetIds.slice(0,1):[];
     const {first,second}=strongestSeedPair(result,preferredIds);
     const firstState=first.closed?'Khép':'Nở';
     const secondState=second.closed?'Khép':'Nở';
     const relation=elementRelation(first,second);
-    return `${mentionOf(first)} đang ${firstState}: ${compactEvidence(first)}. ${mentionOf(second)} đang ${secondState}: ${compactEvidence(second)}. Khi đặt cạnh nhau, ${relation}.`;
+    const sameDirection=first.closed===second.closed;
+    const lead=sameDirection
+      ?`${mentionOf(first)} và ${mentionOf(second)} đều đang ${firstState}`
+      :`${mentionOf(first)} đang ${firstState}, còn ${mentionOf(second)} đang ${secondState}`;
+    let body;
+    if(sameDirection){
+      body=`bạn ${compactEvidence(first)}, và ${compactEvidence(second)}`;
+    } else {
+      const closedItem=first.closed?first:second;
+      const openItem=first.closed?second:first;
+      body=`bạn ${compactEvidence(closedItem)}, cần ${compactEvidence(openItem).replace(/^muốn\s+/,'')}`;
+    }
+    return `${lead}: ${body} — ${relation}.`;
   }
 
   function domainOpening(result){
