@@ -1045,3 +1045,37 @@ toàn ngoài 2 mục cố ý giữ untracked (`.claude/launch.json`,
 - Validation cuối: 640 tổ hợp synthesis × local/live qua; đủ 28 policy chiêm
   tinh + 4 fallback và 24 template; 16 inline script parse sạch; `git diff
   --check` sạch. Ali đã duyệt local và yêu cầu cập nhật quy ước, commit, push.
+
+## Oracle — sửa wording toàn bộ diễn giải và tái cấu trúc câu tổng hợp (23/7/2026, Ali duyệt)
+
+- Ali đọc lại toàn bộ wording diễn giải Oracle và thấy vẫn khó hiểu ("toàn bộ
+  á em"). Bắt đầu từ lỗi cụ thể nhất: panel "Câu chuyện của hạt" luôn hiện
+  `essence` (trừu tượng, thơ) thay vì `coreStory` (cụ thể, tình huống) cho cả
+  78 hạt, do thứ tự `identity?.essence||profile?.coreStory` bị đảo trong
+  `index.html`. Đổi lại thành `profile?.coreStory||identity?.essence`; commit
+  `4d02d1c`, chưa push.
+- Trọng tâm phiên: đoạn "Vì sao các hạt liên quan" trong
+  `garden-oracle-synthesis.js` (`relationshipLine`) tuy giọng văn đã ổn từ
+  trước nhưng cấu trúc câu vẫn là bưng nguyên diễn giải từng hạt rồi ghép lại
+  bằng dấu câu ("Hạt A đang X: ... Hạt B đang Y: ... Khi đặt cạnh nhau, quan
+  hệ.") — đúng điều `ORACLE-CONTENT-SYSTEM.md` cấm (không nối lại ba diễn giải
+  riêng). Ali yêu cầu sửa cấu trúc câu, không chỉ từ ngữ.
+- Bản sửa cuối (Ali duyệt): với cặp 2 hạt, liệt kê ngắn tên + trạng thái Nở/
+  Khép trước dấu `:`, sau đó là một câu diễn giải liền mạch nói thẳng với
+  người đọc ("bạn"), khép lại bằng quan hệ nguyên tố — ví dụ "Hạt Giữa Những
+  Luồng Gió đang Khép, còn Hạt Chạm Miền Đất Mới đang Nở: bạn đang giằng co
+  với một giới hạn hiện rõ, cần biến điều đã rõ thành hành động ngay — động
+  lực cần một nhịp đủ bền." Trường hợp cả ba hạt cùng domain/hướng thì mở đầu
+  bằng điểm chung (`Chạm {domain}:` / `Cùng {Nở|Khép}:`) trước khi liệt kê
+  từng hạt.
+- Trong lúc chỉnh cấu trúc, một vài câu `compactEvidence` và `ELEMENT_RELATIONS`
+  dài nhất bị gọt bớt 1-2 chữ (không đổi nghĩa) để giữ khung 80–155 chữ.
+- Full audit quét đủ 4.868.864 tổ hợp (78 chọn 3 × 8 trạng thái × 8 ngày pack
+  hiện tại) trong ~97 giây: **0 tổ hợp vượt khung 80–155 chữ**, min 83 / max
+  155 / trung bình ~128 chữ — khớp chuẩn "0 cờ kỹ thuật" cũ.
+- Còn lại cho phiên sau: xem lại wording khung chiêm tinh tuần ("Vì sao bối
+  cảnh này xuất hiện?"), thêm hiệu ứng chữ cho khối chữ ký/liên hệ
+  (@guidetheheart) cho nổi bật hơn, chuẩn bị pack chiêm tinh tuần mới cho
+  28/7/2026 trở đi (pack `2026-W30-approved` hiện chỉ phủ tới 27/7).
+- Trạng thái: Ali đã duyệt hướng và câu chữ, yêu cầu commit + push trong phiên
+  này; QA nội dung mẫu (đọc thử nhiều tổ hợp hơn) để phiên sau.
