@@ -5213,7 +5213,11 @@ body.no-motion #music .listening-room .album-drawer .np-vinyl{ display:none !imp
 
 <!-- NAV -->
 <nav id="nav">
-  <a class="nav-logo" href="#">ANH LI ✦</a>
+  <!-- ✦ cuối logo = EGG 3 (chiêm tinh Vệ Đà). Cử chỉ: DOUBLE-CLICK vào logo
+       (script #vedic-modal-js). Ký tự ✦ đặc cũ đã đổi thành sao 8 cánh
+       riêng có thở — xem <style id="egg-hints">. 1-click vẫn cuộn lên đầu
+       trang như trước (script secret()). -->
+  <a class="nav-logo" href="#">ANH LI <span class="egg-star egg-hint" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 1.6L12.77 10.15L15.82 8.18L13.85 11.23L22.4 12L13.85 12.77L15.82 15.82L12.77 13.85L12 22.4L11.23 13.85L8.18 15.82L10.15 12.77L1.6 12L10.15 11.23L8.18 8.18L11.23 10.15Z"/><circle cx="12" cy="12" r="3.1" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.55"/></svg></span></a>
   <button class="motion-toggle nav-motion" id="motionToggle" type="button" aria-pressed="false" aria-label="Giảm chuyển động">
     <span class="mt-ico" aria-hidden="true">✦</span><span class="mt-label">Giảm chuyển động</span>
   </button>
@@ -5285,7 +5289,12 @@ body.no-motion #music .listening-room .album-drawer .np-vinyl{ display:none !imp
     <div class="hero-eyebrow">Sài Gòn, Việt Nam · Làm nghề từ 2010</div>
     <h1 class="hero-name">
       <span class="line1">Anh</span>
-      <span class="line2">Li.</span>
+      <!-- Dấu chấm cuối tên = EGG 1 (nhạc). Xem <style id="egg-hints">.
+           heroKinetic (script "11 · HERO KINETIC") đã được sửa để đi theo
+           childNodes: chữ vẫn tách từng ký tự, nhưng phần tử con như cái
+           nút này được giữ nguyên (trước đây nó đọc textContent nên sẽ
+           xoá sạch mọi thẻ con). -->
+      <span class="line2">Li<button type="button" class="egg-disc" id="eggMusic" aria-label="Mặt B — phát một bản nhạc ngẫu nhiên"><span class="egg-disc-art" aria-hidden="true"></span></button></span>
     </h1>
     <div class="hero-roles">
       <span id="typewriter"></span><span id="typewriter-cursor"></span>
@@ -6120,7 +6129,12 @@ body.no-motion .garden-oracle.revealed .go-synthesis{ animation:none; opacity:1;
     if(window.shaderSetPaused) window.shaderSetPaused(false);
     daysEl.querySelector('.today')?.focus();
   }
-  daysEl.querySelector('.today')?.addEventListener('click',openOracle);
+  /* 2026-07-25: ghi nhận egg đã tìm thấy (danh bạ ANHLI_EGGS, script 9b —
+     nằm sau file này nên phải kiểm tra typeof trước khi gọi). */
+  daysEl.querySelector('.today')?.addEventListener('click',()=>{
+    if(typeof window.eggFound==='function') window.eggFound('oracle');
+    openOracle();
+  });
   oracle.querySelector('.go-close').addEventListener('click',closeOracle);
   oracle.querySelector('.go-backdrop').addEventListener('click',closeOracle);
   document.getElementById('goBag').addEventListener('click',openBag);
@@ -6457,6 +6471,753 @@ body.no-motion .garden-oracle.revealed .go-synthesis{ animation:none; opacity:1;
 
 <div class="divider"></div>
 
+<!-- ═══════════════════════════════════════════════════════════════════
+     EASTER EGGS — NGÔN NGỮ CHUNG (2026-07-25)
+     Ali muốn tiến tới ~8 egg. Để tới egg thứ 8 vẫn còn là "khu vườn" chứ
+     không thành cái chợ, mọi egg dùng CHUNG một ngữ pháp, khai báo ở đây:
+
+       1 egg  =  1 biểu tượng  +  1 cử chỉ  +  1 hint thở nhẹ
+
+     • Biểu tượng lấy từ từ vựng có sẵn của site: đĩa than = nhạc,
+       hạt/lá = tarot (Garden Oracle), sao = chiêm tinh (Vệ Đà).
+     • Hint dùng class `.egg-hint` bên dưới — KHÔNG tự phát minh hiệu ứng
+       riêng cho egg mới, chỉ gắn thêm class này (và một `--egg-glow` nếu
+       cần đổi màu quầng cho phù hợp nền).
+     • Mọi hint tự tắt dưới `prefers-reduced-motion` và `body.no-motion`,
+       giống mọi chuyển động khác trên site (xem toggle "Giảm chuyển động").
+     • Danh bạ egg + trạng thái "đã tìm thấy" nằm ở script #eggs-registry
+       (cuối file, cạnh script secret()) — thêm egg mới chỉ cần thêm 1 dòng.
+     ═══════════════════════════════════════════════════════════════════ -->
+<style id="egg-hints">
+  /* ── Hint dùng chung: thở rất chậm + quầng sáng mềm ───────────────── */
+  @keyframes eggBreath {
+    0%,100% { opacity:0.5;  filter:drop-shadow(0 0 0 transparent); }
+    50%     { opacity:1;    filter:drop-shadow(0 0 6px var(--egg-glow, rgba(232,200,112,0.6))); }
+  }
+  .egg-hint { animation:eggBreath 3.4s ease-in-out infinite; }
+  /* Chạm vào rồi thì thôi thở — nhường lại cho hiệu ứng riêng của từng egg */
+  .egg-hint:hover, .egg-hint:focus-visible,
+  a:hover .egg-hint, a:focus-visible .egg-hint,
+  button:hover .egg-hint, button:focus-visible .egg-hint {
+    animation-play-state:paused; opacity:1;
+    filter:drop-shadow(0 0 9px var(--egg-glow, rgba(232,200,112,0.75)));
+  }
+  @media (prefers-reduced-motion:reduce) { .egg-hint { animation:none; opacity:0.78; } }
+  body.no-motion .egg-hint { animation:none !important; opacity:0.78; }
+
+  /* ── EGG 1 · NHẠC — đĩa than thay dấu chấm trong "Li." ────────────── */
+  /* Dấu chấm cuối tên ở hero giờ là một cái đĩa than nhỏ: bấm vào phát
+     một bản "Mặt B" ngẫu nhiên. Trước 2026-07-25 egg này nằm ở
+     "chạm logo 3 lần" (đã rút, xem script secret()). Kích thước tính bằng
+     `em` nên tự co giãn theo font-size khổng lồ của .hero-name ở mọi
+     breakpoint — không cần media query riêng. */
+  .egg-disc {
+    -webkit-appearance:none; appearance:none; padding:0; margin:0 0 0 0.02em;
+    border:0; background:none; cursor:pointer;
+    display:inline-block; vertical-align:baseline;
+    width:0.235em; height:0.235em; line-height:0;
+    /* `font:inherit` là BẮT BUỘC: <button> không kế thừa font từ cha (UA
+       stylesheet đặt cứng ~13.3px Arial), nên nếu thiếu dòng này thì
+       0.235em tính theo 13px → cái đĩa chỉ còn 3px, coi như vô hình. */
+    font:inherit;
+    color:inherit; /* .egg-disc-art dùng currentColor → tự đổi theo theme */
+  }
+  .egg-disc-art {
+    display:block; width:100%; height:100%; border-radius:50%;
+    background:
+      radial-gradient(circle at 50% 50%, var(--egg-label, var(--amber2, #E8C870)) 0 21%, transparent 22%),
+      repeating-radial-gradient(circle at 50% 50%,
+        currentColor 0 5.5%,
+        color-mix(in srgb, currentColor 42%, transparent) 5.5% 11%);
+    box-shadow:inset 0 0 0 0.5px color-mix(in srgb, currentColor 70%, transparent);
+  }
+  @keyframes eggDiscSpin { to { transform:rotate(360deg); } }
+  .egg-disc:hover .egg-disc-art, .egg-disc:focus-visible .egg-disc-art {
+    animation:eggDiscSpin 3.6s linear infinite;
+    filter:drop-shadow(0 0 10px var(--egg-glow, rgba(232,200,112,0.8)));
+  }
+  body.no-motion .egg-disc:hover .egg-disc-art { animation:none; }
+  @media (prefers-reduced-motion:reduce) { .egg-disc:hover .egg-disc-art { animation:none; } }
+  .egg-disc:focus-visible { outline:1px solid var(--amber2, #E8C870); outline-offset:0.08em; }
+  /* Hero "poster" (theme dandelion) là nền sáng, chữ mực đậm → quầng vàng
+     bị chìm; đổi sang quầng lá đậm cho đọc được. */
+  .poster-hero .egg-disc { --egg-glow:rgba(75,112,45,0.7); --egg-label:#f3e7bd; }
+  /* Mobile: chữ hero nhỏ hơn nên (1) nới cỡ đĩa một chút cho dễ thấy,
+     (2) vùng bấm vô hình ≥34px để ngón tay không phải nhắm. */
+  .egg-disc::after {
+    content:''; position:absolute; left:50%; top:50%;
+    width:max(34px, 100%); height:max(34px, 100%);
+    transform:translate(-50%,-50%);
+  }
+  .egg-disc { position:relative; }
+  @media (max-width:700px) { .egg-disc { width:0.29em; height:0.29em; } }
+
+  /* ── EGG 3 · CHIÊM TINH — sao 8 cánh ở cuối logo "ANH LI" ─────────── */
+  /* Trước đây là ký tự ✦ tĩnh, hoà lẫn vào chữ nên không ai biết có gì ở
+     đó. Giờ là một ngôi sao 8 cánh riêng (SVG, khác hẳn ✦ đặc) có thở +
+     xoay rất chậm khi hover. Cử chỉ mở vẫn là DOUBLE-CLICK vào logo — xem
+     script #vedic-modal-js. Sao để aria-hidden vì logo đã có text "ANH LI". */
+  .egg-star {
+    display:inline-block; vertical-align:-0.04em; margin-left:0.2em;
+    width:1.05em; height:1.05em; color:var(--amber2, #E8C870);
+    --egg-glow:rgba(147,130,220,0.85); /* tím "trời đêm" của module Vệ Đà */
+  }
+  .egg-star svg { display:block; width:100%; height:100%; }
+  @keyframes eggStarTurn { to { transform:rotate(180deg); } }
+  .nav-logo:hover .egg-star, .nav-logo:focus-visible .egg-star {
+    animation:eggStarTurn 9s linear infinite;
+  }
+  body.no-motion .nav-logo:hover .egg-star { animation:none; }
+  @media (prefers-reduced-motion:reduce) { .nav-logo:hover .egg-star { animation:none; } }
+
+  /* ── EGG 2 · TAROT — ô "hôm nay" trên lịch khu vườn ───────────────── */
+  /* Đã có vòng lá ::before/::after từ trước, nhưng chỉ sáng khi hover nên
+     không mời gọi. Thêm đúng nhịp thở chung (dùng lại eggBreath) lên vòng
+     lá, không đụng gì tới màu/chữ của ô ngày. */
+  .gc-day.today::before { animation:eggBreath 3.4s ease-in-out infinite; }
+  body.no-motion .gc-day.today::before,
+  .gc-day.today:hover::before { animation:none; }
+  @media (prefers-reduced-motion:reduce) { .gc-day.today::before { animation:none; } }
+</style>
+
+<style id="vedic-chart-style">
+  /* Vedic chart giờ là easter egg ẩn (modal), không còn nằm trong hành trình
+     cuộn chính của trang — mở bằng double-click vào .nav-logo ("ANH LI ✦").
+     Một điểm nhấn duy nhất, không dùng footer nữa (footer bị player nhạc
+     đè lên, khó bấm). Xem #vedicModal + script #vedic-modal-js phía dưới. */
+  .vd-modal { position:fixed; inset:0; z-index:400; }
+  .vd-modal[hidden] { display:none; }
+  .vd-modal:not([hidden]) { display:flex; align-items:flex-start; justify-content:center; overflow-y:auto; padding:4.5rem 1rem 3rem; }
+  .vd-modal-backdrop { position:fixed; inset:0; background:rgba(9,8,14,0.86); backdrop-filter:blur(8px); border:none; padding:0; margin:0; cursor:pointer; }
+  .vd-modal-panel { position:relative; z-index:1; width:100%; max-width:900px; margin:auto; background:var(--ink); border:0.5px solid var(--border2); box-shadow:0 30px 80px rgba(0,0,0,0.5); overflow:hidden; }
+
+  /* ══ LỚP "HUYỀN HOẶC" (2026-07-25) ═══════════════════════════════════
+     Ali: "cảm thấy thiếu sự huyền hoặc". Ba lớp rất nhẹ, tất cả chỉ dùng
+     transform/opacity (không backdrop-filter, không lớp luôn-hiện — modal
+     chỉ tồn tại khi mở nên chi phí có giới hạn), và tắt sạch dưới
+     prefers-reduced-motion / body.no-motion như mọi chuyển động khác.
+     1) trời sao: hai lớp đốm radial-gradient trôi rất chậm
+     2) vòng Nakshatra: một vòng 27 vạch quay 1 vòng/4 phút sau tiêu đề
+     3) hairline tím→hổ phách dưới tiêu đề */
+  .vd-modal-panel::before, .vd-modal-panel::after {
+    content:''; position:absolute; inset:-20%; pointer-events:none; z-index:0;
+  }
+  .vd-modal-panel::before {
+    background-image:
+      radial-gradient(1.4px 1.4px at 18% 12%, rgba(255,248,223,0.55), transparent 60%),
+      radial-gradient(1.1px 1.1px at 72% 24%, rgba(184,169,240,0.5), transparent 60%),
+      radial-gradient(1.6px 1.6px at 41% 47%, rgba(255,248,223,0.4), transparent 60%),
+      radial-gradient(1.1px 1.1px at 88% 63%, rgba(232,200,112,0.45), transparent 60%),
+      radial-gradient(1.3px 1.3px at 12% 74%, rgba(184,169,240,0.4), transparent 60%),
+      radial-gradient(1px 1px at 62% 88%, rgba(255,248,223,0.35), transparent 60%),
+      radial-gradient(1.2px 1.2px at 33% 96%, rgba(232,200,112,0.3), transparent 60%);
+    animation:vdStarDrift 92s linear infinite;
+  }
+  .vd-modal-panel::after {
+    background-image:
+      radial-gradient(1px 1px at 55% 8%, rgba(255,248,223,0.3), transparent 60%),
+      radial-gradient(1px 1px at 8% 38%, rgba(184,169,240,0.28), transparent 60%),
+      radial-gradient(1px 1px at 79% 44%, rgba(255,248,223,0.24), transparent 60%),
+      radial-gradient(1px 1px at 26% 61%, rgba(232,200,112,0.24), transparent 60%),
+      radial-gradient(1px 1px at 93% 82%, rgba(184,169,240,0.22), transparent 60%);
+    animation:vdStarDrift 148s linear infinite reverse;
+  }
+  @keyframes vdStarDrift {
+    from { transform:translate3d(0,0,0); }
+    to   { transform:translate3d(-3%,4%,0); }
+  }
+  .vd-modal-panel > * { position:relative; z-index:1; }
+  body.no-motion .vd-modal-panel::before, body.no-motion .vd-modal-panel::after { animation:none; }
+  @media (prefers-reduced-motion:reduce) {
+    .vd-modal-panel::before, .vd-modal-panel::after { animation:none; }
+  }
+
+  /* Vòng 27 vạch Nakshatra — dấu chìm sau tiêu đề */
+  #vedic .vd-nak-halo {
+    position:absolute; top:-64px; right:8px; width:270px; height:270px;
+    pointer-events:none; opacity:0.16; z-index:0;
+    background:
+      repeating-conic-gradient(from 0deg, rgba(232,200,112,0.9) 0deg 0.35deg, transparent 0.35deg 13.333deg);
+    -webkit-mask:radial-gradient(circle, transparent 0 62%, #000 63%, #000 78%, transparent 79%);
+    mask:radial-gradient(circle, transparent 0 62%, #000 63%, #000 78%, transparent 79%);
+    animation:vdHaloTurn 240s linear infinite;
+  }
+  @keyframes vdHaloTurn { to { transform:rotate(360deg); } }
+  body.no-motion #vedic .vd-nak-halo { animation:none; }
+  @media (prefers-reduced-motion:reduce) { #vedic .vd-nak-halo { animation:none; } }
+  @media (max-width:640px) { #vedic .vd-nak-halo { width:168px; height:168px; top:-40px; right:-14px; opacity:0.13; } }
+
+  /* Hairline tím → hổ phách dưới tiêu đề, thay .sec-bar phẳng */
+  #vedic .sec-bar { background:linear-gradient(90deg, #9382dc, var(--amber2) 55%, transparent); height:1px; opacity:0.8; }
+
+  /* Kết quả hiện so le từng khối thay vì bật ra một lượt */
+  #vedic .vd-results:not([hidden]) > * { animation:vdRise 0.62s cubic-bezier(0.2,0.8,0.2,1) both; }
+  #vedic .vd-results:not([hidden]) > *:nth-child(2) { animation-delay:0.05s; }
+  #vedic .vd-results:not([hidden]) > *:nth-child(3) { animation-delay:0.1s; }
+  #vedic .vd-results:not([hidden]) > *:nth-child(4) { animation-delay:0.15s; }
+  #vedic .vd-results:not([hidden]) > *:nth-child(n+5) { animation-delay:0.2s; }
+  @keyframes vdRise { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
+  body.no-motion #vedic .vd-results:not([hidden]) > * { animation:none; }
+  @media (prefers-reduced-motion:reduce) { #vedic .vd-results:not([hidden]) > * { animation:none; } }
+  .vd-modal-close { position:absolute; top:0.9rem; right:0.9rem; z-index:2; width:36px; height:36px; border-radius:50%; border:0.5px solid var(--border2); background:var(--ink2); color:var(--text2); font-size:1.1rem; line-height:1; cursor:pointer; }
+  .vd-modal-close:hover { color:var(--amber2); border-color:var(--amber2); }
+  .vd-modal #vedic { padding:2.6rem 1.6rem 2.2rem; }
+  /* Trong modal thì mọi thứ nén lại một bậc so với section thường trên trang:
+     đây là một khung cửa sổ, không phải một trang để cuộn dài. */
+  .vd-modal #vedic .sec-h { font-size:clamp(1.9rem, 4.4vw, 2.7rem); margin-bottom:0.5rem; }
+  .vd-modal #vedic .vd-lede { font-size:0.92rem; line-height:1.72; margin:1rem 0 1.3rem; max-width:640px; }
+  .vd-modal #vedic .sec-bar { margin-bottom:0; }
+  .vd-modal #vedic .sec-label { margin-bottom:0.35rem; }
+  .vd-modal #vedic .vd-panel { padding:1.5rem 1.3rem; margin-bottom:1.6rem; }
+  @media (min-width:640px) { .vd-modal #vedic .vd-panel { padding:1.8rem 1.9rem; } }
+  .vd-modal #vedic .vd-steps { margin-bottom:1.5rem; }
+  .vd-modal #vedic .vd-result-card { padding:1.3rem 1.3rem 1.4rem; }
+  .vd-modal #vedic .vd-disclaimer { margin-top:1.4rem; }
+  @media (max-width:640px) {
+    .vd-modal { padding:3.5rem 0.6rem 2rem; }
+    .vd-modal #vedic { padding:2.4rem 1.1rem 2rem; }
+  }
+  #vedic { position:relative; }
+  #vedic [hidden] { display:none !important; }
+  #vedic .section-wm { color:rgba(147,130,220,0.05); }
+  #vedic .vd-lede { max-width:760px; margin:0.5rem 0 2.5rem; font-size:1.02rem; line-height:1.85; color:var(--text2); }
+  #vedic .vd-lede em { font-style:italic; color:var(--amber2); }
+
+  /* ── KHỐI MỞ-RA-ĐỌC (thay .vd-intro-grid + .vd-compare cũ) ────────── */
+  .vd-primer { border:0.5px solid var(--border2); background:rgba(147,130,220,0.035); margin:0 0 1.6rem; }
+  .vd-primer > summary {
+    list-style:none; cursor:pointer; padding:0.85rem 1.1rem;
+    display:flex; align-items:center; gap:0.6rem;
+    font-family:'Cormorant Garamond',serif; font-size:1.05rem; color:var(--text);
+  }
+  .vd-primer > summary::-webkit-details-marker { display:none; }
+  .vd-primer-ic { color:#b8a9f0; font-size:0.95rem; }
+  .vd-primer-cue { margin-left:auto; flex:0 0 auto; font-family:'Inter',sans-serif; font-size:0.64rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--text3); white-space:nowrap; }
+  /* Máy nhỏ: chỉ còn mũi ▾ cho đỡ chật, chữ "mở ra đọc" bị xuống dòng thì xấu */
+  @media (max-width:480px) { .vd-primer-cue { font-size:0; letter-spacing:0; } .vd-primer-cue::after { font-size:0.8rem; } }
+  .vd-primer[open] > summary { border-bottom:0.5px solid var(--border); }
+  .vd-primer[open] .vd-primer-cue::after { content:' ▴'; }
+  .vd-primer:not([open]) .vd-primer-cue::after { content:' ▾'; }
+  .vd-primer > summary:hover { color:var(--amber2); }
+  .vd-primer-body { padding:1.1rem 1.1rem 1.3rem; }
+  .vd-primer-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:1rem 1.6rem; }
+  .vd-primer-eyebrow { font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; color:#9382dc; margin-bottom:0.35rem; }
+  .vd-primer-grid p { margin:0; font-size:0.79rem; line-height:1.62; color:var(--text2); }
+  .vd-primer-grid strong { color:var(--amber2); font-weight:600; }
+
+  .vd-panel { background:var(--ink2); border:1px solid var(--border2); padding:2rem 1.75rem; margin-bottom:2.5rem; }
+  @media (min-width:640px) { .vd-panel { padding:2.4rem 2.4rem; } }
+
+  .vd-steps { display:flex; align-items:center; justify-content:center; margin-bottom:2rem; }
+  .vd-step { display:flex; flex-direction:column; align-items:center; gap:0.5rem; }
+  .vd-dot { width:9px; height:9px; border-radius:50%; background:var(--ink4); transition:background 0.3s, box-shadow 0.3s; }
+  .vd-dot.vd-dot-active { background:var(--amber); box-shadow:0 0 10px rgba(204,159,74,0.55); }
+  .vd-dot.vd-dot-done { background:var(--amber); }
+  .vd-step-label { font-size:0.6rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text3); }
+  .vd-step.vd-active-label .vd-step-label, .vd-dot.vd-dot-active + .vd-step-label { color:var(--amber2); }
+  .vd-steps-line { width:52px; height:1px; background:var(--border2); margin:0 8px 20px; transition:background 0.3s; }
+  .vd-steps-line.vd-line-done { background:var(--amber); }
+
+  .vd-computing { text-align:center; padding:2.5rem 0.5rem; }
+  .vd-spinner { position:relative; width:96px; height:96px; margin:0 auto 1.6rem; }
+  .vd-spinner i { position:absolute; border-radius:50%; border:1px solid rgba(204,159,74,0.5); animation:vdSpin 5s linear infinite; }
+  .vd-spinner i:nth-child(1) { inset:0; }
+  .vd-spinner i:nth-child(2) { inset:14px; border-color:rgba(147,130,220,0.5); animation-direction:reverse; animation-duration:4s; }
+  .vd-spinner i:nth-child(3) { inset:28px; border-color:rgba(204,159,74,0.7); animation-duration:3s; }
+  .vd-spinner b { position:absolute; inset:40px; border-radius:50%; background:radial-gradient(circle,var(--amber2),var(--amber)); box-shadow:0 0 18px rgba(204,159,74,0.6); }
+  @keyframes vdSpin { from{transform:rotate(0)} to{transform:rotate(360deg)} }
+  .vd-computing p { font-family:'Cormorant Garamond',serif; color:var(--amber2); font-size:1.1rem; margin:0; }
+  body.no-motion .vd-spinner i { animation:none; }
+
+  .vd-step-h { font-family:'Cormorant Garamond',serif; font-weight:400; font-size:1.5rem; color:var(--amber2); margin:0 0 0.4rem; }
+  .vd-step-sub { margin:0 0 1.4rem; color:var(--text3); font-size:0.86rem; }
+  .vd-field-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:1rem; }
+  .vd-field { display:flex; flex-direction:column; gap:0.4rem; font-size:0.82rem; font-weight:500; color:var(--text2); }
+  .vd-field input, .vd-field select { width:100%; border-radius:2px; background:rgba(255,255,255,0.04); border:0.5px solid var(--border2); padding:0.65rem 0.7rem; color:var(--text); font-family:inherit; font-size:0.92rem; outline:none; transition:border-color .2s; }
+  .vd-field input:focus, .vd-field select:focus, #vedic input:focus, #vedic select:focus { border-color:var(--amber); }
+  .vd-check { display:flex; align-items:center; gap:0.55rem; margin-top:1.1rem; font-size:0.82rem; color:var(--text2); cursor:pointer; }
+  .vd-check input { width:15px; height:15px; accent-color:var(--amber); }
+
+  .vd-loc-input-wrap { position:relative; }
+  #vdLocQuery { width:100%; border-radius:2px; background:rgba(255,255,255,0.04); border:0.5px solid var(--border2); padding:0.75rem 0.85rem; color:var(--text); font-family:inherit; font-size:0.92rem; outline:none; }
+  .vd-suggestions { position:absolute; z-index:20; top:calc(100% + 5px); left:0; right:0; background:var(--ink3); border:0.5px solid var(--border2); max-height:260px; overflow-y:auto; }
+  .vd-suggestion { padding:0.65rem 0.85rem; cursor:pointer; border-bottom:1px solid var(--border); font-size:0.86rem; }
+  .vd-suggestion:last-child { border-bottom:0; }
+  .vd-suggestion:hover { background:rgba(204,159,74,0.08); }
+  .vd-sug-city { color:var(--text); }
+  .vd-sug-meta { font-size:0.72rem; color:var(--text3); margin-top:0.15rem; }
+
+  .vd-loc-actions { display:flex; gap:0.7rem; flex-wrap:wrap; margin-top:0.8rem; align-items:center; }
+  .vd-btn-ghost { cursor:pointer; padding:0.5rem 1.05rem; border-radius:100px; border:0.5px solid var(--border2); background:rgba(147,130,220,0.06); color:#b8a9f0; font-family:inherit; font-size:0.76rem; letter-spacing:0.02em; transition:background .2s; }
+  .vd-btn-ghost:hover { background:rgba(147,130,220,0.14); }
+  .vd-btn-outline { cursor:pointer; padding:0.5rem 1.05rem; border-radius:100px; border:0.5px solid var(--border2); background:transparent; color:var(--text2); font-family:inherit; font-size:0.76rem; }
+  .vd-btn-outline:hover { background:rgba(255,255,255,0.05); }
+  .vd-loc-status { font-size:0.76rem; color:var(--text3); align-self:center; }
+
+  .vd-advanced { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:0.8rem; margin-top:1rem; padding:1rem; background:rgba(255,255,255,0.02); border:0.5px solid var(--border); }
+  .vd-advanced label { display:flex; flex-direction:column; gap:0.3rem; font-size:0.72rem; color:var(--text2); }
+  .vd-advanced input { border-radius:2px; background:rgba(255,255,255,0.04); border:0.5px solid var(--border2); padding:0.5rem 0.6rem; color:var(--text); font-family:inherit; font-size:0.82rem; outline:none; }
+  .vd-btn-solid { align-self:end; cursor:pointer; padding:0.55rem 0.9rem; border-radius:2px; border:none; background:var(--amber); color:var(--ink); font-weight:600; font-family:inherit; font-size:0.76rem; }
+  .vd-btn-solid:hover { background:var(--amber2); }
+
+  .vd-selected-loc { margin-top:1rem; padding:0.9rem 1.05rem; background:rgba(204,159,74,0.06); border:0.5px solid var(--border2); }
+  .vd-loc-eyebrow { font-size:0.6rem; letter-spacing:0.1em; text-transform:uppercase; color:#9382dc; margin-bottom:0.4rem; }
+  .vd-loc-city { color:var(--text); font-family:'Cormorant Garamond',serif; font-size:1.05rem; }
+  .vd-loc-sub { color:var(--text3); font-size:0.78rem; }
+  .vd-loc-coords { font-size:0.76rem; color:var(--text3); margin-top:0.25rem; }
+
+  .vd-system-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:0.9rem; margin-bottom:1.2rem; }
+  .vd-system-card { padding:0.9rem 1rem; background:rgba(255,255,255,0.02); border:0.5px solid var(--border); }
+  .vd-system-card .vd-sc-label { font-size:0.62rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--text3); }
+  .vd-system-card .vd-sc-val { color:var(--amber2); font-size:0.88rem; margin-top:0.3rem; }
+  .vd-select { background:rgba(255,255,255,0.04); border:0.5px solid var(--border2); color:var(--text); padding:0.4rem 0.5rem; font-family:inherit; font-size:0.82rem; border-radius:2px; }
+
+  .vd-utc-box { padding:1rem 1.1rem; background:rgba(147,130,220,0.05); border:0.5px solid var(--border2); margin-bottom:1.2rem; }
+  .vd-utc-eyebrow { font-size:0.6rem; letter-spacing:0.1em; text-transform:uppercase; color:#9382dc; margin-bottom:0.5rem; }
+  .vd-utc-row { display:flex; align-items:center; gap:0.9rem; flex-wrap:wrap; font-family:'Cormorant Garamond',serif; font-size:1.05rem; }
+  .vd-utc-row span:first-child { color:var(--text); }
+  .vd-utc-arrow { color:var(--amber); }
+  .vd-utc-row span:last-child { color:var(--amber2); }
+  .vd-utc-note { font-size:0.74rem; color:var(--text3); margin-top:0.4rem; }
+
+  .vd-form-error { color:var(--blush); font-size:0.8rem; margin:0 0 0.9rem; }
+
+  .vd-nav { display:flex; justify-content:space-between; align-items:center; margin-top:1.6rem; }
+  .vd-btn-back { visibility:visible; cursor:pointer; padding:0.65rem 1.3rem; border-radius:2px; border:0.5px solid var(--border2); background:transparent; color:var(--text2); font-family:inherit; font-size:0.82rem; }
+  .vd-btn-back:hover { background:rgba(255,255,255,0.05); }
+  .vd-btn-next { cursor:pointer; padding:0.65rem 1.5rem; border-radius:2px; border:none; background:rgba(204,159,74,0.9); color:var(--ink); font-weight:600; font-family:inherit; font-size:0.82rem; }
+  .vd-btn-next:hover { background:var(--amber2); }
+  .vd-btn-submit { cursor:pointer; border:none; padding:0.8rem 1.9rem; border-radius:2px; font-family:'Cormorant Garamond',serif; font-weight:600; font-size:1.05rem; background:linear-gradient(135deg,var(--amber2),var(--amber)); color:var(--ink); box-shadow:0 6px 20px rgba(204,159,74,0.22); transition:transform .2s; }
+  .vd-btn-submit:hover { transform:translateY(-1px); }
+
+  .vd-results { margin-top:2.5rem; }
+  .vd-diag-row { display:flex; flex-wrap:wrap; align-items:center; gap:0.6rem; margin-bottom:1rem; font-size:0.72rem; color:var(--text3); }
+  #vdDiagPills { display:contents; }
+  .vd-pill { padding:0.28rem 0.7rem; border-radius:100px; border:0.5px solid var(--border2); }
+  .vd-diag-toggle { cursor:pointer; padding:0.28rem 0.7rem; border-radius:100px; border:0.5px solid var(--border2); background:rgba(204,159,74,0.06); color:var(--amber2); font-family:inherit; font-size:0.72rem; }
+  .vd-diagnostics { font-size:0.76rem; color:var(--text3); line-height:1.9; background:rgba(0,0,0,0.22); border:0.5px solid var(--border); padding:0.9rem 1rem; margin-bottom:1.2rem; font-family:'SF Mono',ui-monospace,monospace; }
+  .vd-unknown-warning { padding:0.85rem 1.05rem; border-radius:2px; background:rgba(196,128,106,0.08); border:0.5px solid rgba(196,128,106,0.3); color:#e0a99a; font-size:0.84rem; margin-bottom:1.2rem; }
+
+  .vd-actions-row { display:flex; flex-wrap:wrap; align-items:center; gap:0.8rem; margin-bottom:1.4rem; }
+  .vd-btn-share, .vd-btn-pdf { cursor:pointer; display:inline-flex; align-items:center; gap:0.5rem; padding:0.55rem 1.2rem; border-radius:100px; border:0.5px solid var(--border2); font-family:inherit; font-weight:600; font-size:0.82rem; }
+  .vd-btn-share { background:rgba(204,159,74,0.1); color:var(--amber2); }
+  .vd-btn-share:hover { background:rgba(204,159,74,0.2); }
+  .vd-btn-pdf { background:rgba(147,130,220,0.1); color:#b8a9f0; }
+  .vd-btn-pdf:hover { background:rgba(147,130,220,0.2); }
+  .vd-share-msg { font-size:0.76rem; }
+
+  .vd-tabs { display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:1.4rem; }
+  .vd-tab { cursor:pointer; padding:0.5rem 1.05rem; border-radius:100px; border:0.5px solid var(--border2); background:transparent; color:var(--text2); font-family:inherit; font-size:0.8rem; }
+  .vd-tab.vd-tab-active { border-color:rgba(204,159,74,0.5); background:rgba(204,159,74,0.14); color:var(--amber2); }
+  .vd-legend-toggle { margin-left:auto; cursor:pointer; padding:0.5rem 1.05rem; border-radius:100px; border:0.5px solid var(--border); background:transparent; color:var(--text3); font-family:inherit; font-size:0.8rem; }
+
+  .vd-legend { font-size:0.8rem; color:var(--text2); line-height:1.9; background:rgba(255,255,255,0.02); border:0.5px solid var(--border); padding:1.05rem 1.15rem; margin-bottom:1.2rem; }
+  .vd-legend strong { color:var(--amber2); }
+
+  .vd-result-card { background:var(--ink2); border:1px solid var(--border); padding:1.5rem 1.4rem; margin-bottom:1.2rem; }
+  @media (min-width:640px) { .vd-result-card { padding:1.7rem 1.9rem; } }
+  .vd-result-h { font-family:'Cormorant Garamond',serif; font-weight:400; font-size:1.3rem; color:var(--amber2); margin:0 0 0.9rem; }
+  .vd-hint { margin:0 0 0.9rem; font-size:0.76rem; color:var(--text3); }
+  .vd-muted { opacity:0.75; font-size:0.85rem; color:var(--text2); }
+
+  .vd-kundli { display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(4,1fr); aspect-ratio:1; max-width:460px; width:100%; margin:0 auto; }
+  /* 2026-07-25: flex-direction:column — trước đây là flex-row nên nhãn cung
+     ("Kar · H12") và danh sách hành tinh nằm cạnh nhau rồi quấn vào nhau khi
+     một nhà có 3-4 hành tinh. Xếp dọc thì đọc được ở cả màn hình và bản in. */
+  .vd-house-cell { border:0.5px solid var(--border2); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; padding:4px; font-size:0.72rem; text-align:center; min-height:60px; cursor:pointer; transition:background .15s; }
+  .vd-house-cell:hover { background:rgba(204,159,74,0.06); }
+  .vd-house-lagna { background:rgba(204,159,74,0.1); }
+  .vd-house-tag { font-size:0.55rem; opacity:0.55; margin-bottom:2px; }
+  .vd-house-body { font-weight:500; }
+  .vd-house-lagna .vd-house-body { color:var(--amber2); font-weight:600; }
+  .vd-hp-planet { cursor:default; padding:1px 3px; }
+  .vd-hp-asc { color:var(--amber); font-weight:700; }
+  .vd-kundli-center { grid-column:2/4; grid-row:2/4; display:flex; flex-direction:column; align-items:center; justify-content:center; border:0.5px solid var(--amber2); color:var(--amber2); font-weight:600; font-size:0.8rem; letter-spacing:0.05em; }
+  .vd-planet-hl { filter:brightness(1.4); box-shadow:0 0 0 1px rgba(204,159,74,0.8), 0 0 12px rgba(204,159,74,0.45); }
+
+  .vd-planet-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:0.9rem; }
+  .vd-planet-card { padding:1rem 1.1rem; background:rgba(255,255,255,0.02); border:0.5px solid var(--border2); }
+  .vd-pc-top { display:flex; justify-content:space-between; align-items:baseline; }
+  .vd-pc-glyph { font-size:1.3rem; color:var(--amber); }
+  .vd-pc-sk { font-size:0.68rem; color:var(--text3); }
+  .vd-pc-name { font-family:'Cormorant Garamond',serif; font-size:1.05rem; color:var(--text); margin-top:0.4rem; }
+  .vd-pc-pos { font-size:0.82rem; color:var(--text2); margin-top:0.35rem; }
+  .vd-pc-nak { font-size:0.72rem; color:var(--text3); margin-top:0.15rem; }
+  .vd-retro { color:var(--blush); font-weight:700; }
+
+  .vd-table-wrap { overflow-x:auto; }
+  .vd-table { width:100%; border-collapse:collapse; font-size:0.86rem; }
+  .vd-table th { text-align:left; padding:0.5rem 0.4rem; color:var(--amber2); font-size:0.76rem; border-bottom:0.5px solid var(--border2); }
+  .vd-table td { padding:0.45rem 0.4rem; border-bottom:0.5px solid var(--border); color:var(--text2); }
+  .vd-retro-cell { color:var(--blush); }
+  .vd-good { color:#9ab97c; font-weight:600; }
+  .vd-bad { color:var(--blush); font-weight:600; }
+
+  .vd-nak-wrap { text-align:center; }
+  .vd-nak-ring { position:relative; width:220px; height:220px; margin:0 auto; border-radius:50%; }
+  .vd-nak-center { position:absolute; inset:30px; border-radius:50%; background:var(--ink); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:8px; }
+  .vd-nak-sub { font-size:0.68rem; color:var(--text3); }
+  .vd-nak-name { font-family:'Cormorant Garamond',serif; color:var(--amber2); font-size:1.05rem; margin:4px 0; }
+  .vd-nak-pointer { position:absolute; left:50%; top:50%; width:1.5px; height:110px; background:var(--amber2); transform-origin:top center; }
+  .vd-lunar-panel { margin-top:1.2rem; padding:1rem 1.1rem; background:rgba(147,130,220,0.06); border:0.5px solid var(--border2); text-align:left; }
+  .vd-lunar-label { font-size:0.6rem; letter-spacing:0.1em; text-transform:uppercase; color:#9382dc; margin-bottom:0.4rem; }
+  .vd-lunar-panel p { margin:0; font-size:0.82rem; color:var(--text2); line-height:1.6; }
+
+  .vd-reading-note { padding:0.9rem 1rem; border-radius:2px; background:rgba(204,159,74,0.05); border:1px dashed var(--border2); margin-bottom:1rem; font-size:0.82rem; line-height:1.6; color:var(--text2); }
+  .vd-reading-box { padding:1.1rem 1.2rem; border-left:2px solid; margin-bottom:0.9rem; background:rgba(255,255,255,0.02); }
+  .vd-reading-box h4 { font-size:0.95rem; font-weight:600; margin:0 0 0.5rem; }
+  .vd-reading-box p { margin:0 0 0.5rem; font-size:0.84rem; color:var(--text2); line-height:1.6; }
+  .vd-reading-box p:last-child { margin-bottom:0; }
+  .vd-rb-lagna { border-color:var(--amber); } .vd-rb-lagna h4 { color:var(--amber2); }
+  .vd-rb-moon { border-color:#9382dc; } .vd-rb-moon h4 { color:#b8a9f0; }
+  .vd-rb-sun { border-color:#d9a441; } .vd-rb-sun h4 { color:#f0c869; }
+  /* 2026-07-25 — ba khối mới của bản luận giải dày hơn */
+  .vd-rb-power  { border-color:#7f8fa6; } .vd-rb-power h4  { color:#a9bcd1; }
+  .vd-rb-houses { border-color:#6f9b6a; } .vd-rb-houses h4 { color:#9dc499; }
+  .vd-rb-yoga   { border-color:#b98ac4; } .vd-rb-yoga h4   { color:#d3a9dc; }
+
+  /* Dòng phụ trong luận giải: từ khoá cung, ghi chú "vì sao", câu kết */
+  .vd-r-keys { font-size:0.74rem !important; letter-spacing:0.07em; text-transform:uppercase; color:var(--amber) !important; opacity:0.85; }
+  .vd-r-nak { padding:0.7rem 0.85rem; border-left:1px solid #9382dc; background:rgba(147,130,220,0.06); }
+  .vd-r-why { font-size:0.78rem !important; color:var(--text3) !important; font-style:italic; }
+  .vd-reading-foot { margin:1.2rem 0 0; text-align:center; font-family:'Cormorant Garamond',serif; font-size:1.02rem; font-style:italic; color:var(--amber2); line-height:1.6; }
+  .vd-r-list { margin:0 0 0.7rem; padding-left:1.05rem; }
+  .vd-r-list li { font-size:0.83rem; color:var(--text2); line-height:1.62; margin-bottom:0.4rem; }
+  .vd-pl-karaka { color:var(--text3); font-size:0.95em; }
+  /* Vượng / hãm / về nhà mình — nhãn nhỏ, có màu để quét mắt nhanh */
+  .vd-dig { font-style:normal; font-size:0.72rem; letter-spacing:0.06em; text-transform:uppercase; padding:0.08em 0.42em; border:0.5px solid currentColor; border-radius:1px; }
+  .vd-dig-exalt { color:#8fd39a; } .vd-dig-mool { color:#b6d38f; }
+  .vd-dig-own   { color:var(--amber2); } .vd-dig-debil { color:#d99a9a; }
+
+  /* ── Vận hạn Daśā ─────────────────────────────────────────────────── */
+  .vd-dasha-now { margin:1rem 0 1.2rem; padding:1.1rem 1.2rem; border:0.5px solid var(--border2);
+    background:linear-gradient(160deg, rgba(147,130,220,0.09), rgba(204,159,74,0.05)); }
+  .vd-dasha-now-label { font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:#b8a9f0; }
+  .vd-dasha-now-lord { font-family:'Cormorant Garamond',serif; font-size:1.9rem; line-height:1.1; color:var(--amber2); margin:0.15rem 0 0.1rem; }
+  .vd-dasha-now-range { font-size:0.76rem; color:var(--text3); letter-spacing:0.05em; margin-bottom:0.6rem; }
+  .vd-dasha-now p { margin:0 0 0.45rem; font-size:0.84rem; color:var(--text2); line-height:1.62; }
+  .vd-dasha-now p:last-child { margin-bottom:0; }
+  .vd-dasha-sub { padding-top:0.5rem; border-top:0.5px solid var(--border); }
+  .vd-table caption { caption-side:top; text-align:left; font-size:0.7rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--text3); padding:0.9rem 0 0.4rem; }
+
+  /* Nút "Chép dữ liệu để hỏi tiếp" — cùng khuôn với 2 nút cạnh nó, viền tím
+     "trời đêm" để phân biệt là hành động khác loại (mang đi, không phải xem). */
+  /* Dùng lại đúng khuôn của hai nút cạnh nó (pill, cùng padding/kích chữ) —
+     chỉ khác màu chữ/viền để thấy đây là hành động khác loại: mang đi. */
+  .vd-btn-copy { cursor:pointer; display:inline-flex; align-items:center; gap:0.5rem;
+    padding:0.55rem 1.2rem; border-radius:100px; font-family:inherit; font-weight:600; font-size:0.82rem;
+    border:0.5px solid rgba(147,130,220,0.55); background:rgba(147,130,220,0.05); color:#c3b6f5;
+    transition:background .2s, color .2s, border-color .2s; }
+  .vd-btn-copy:hover { background:rgba(147,130,220,0.16); color:#ddd4ff; border-color:#9382dc; }
+  /* Vùng chờ dán dự phòng khi trình duyệt không cho ghi clipboard */
+  .vd-copy-fallback { width:100%; margin-top:0.7rem; min-height:120px; font-family:'SF Mono',ui-monospace,monospace;
+    font-size:0.7rem; line-height:1.5; color:var(--text2); background:var(--ink); border:0.5px solid var(--border2); padding:0.7rem; }
+  .vd-table tr.vd-row-now td { color:var(--amber2); background:rgba(204,159,74,0.07); }
+
+  .vd-house-overlay { position:fixed; inset:0; z-index:250; background:rgba(9,8,14,0.72); backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; padding:1.2rem; }
+  .vd-house-panel { max-width:440px; width:100%; max-height:78vh; overflow:auto; background:var(--ink2); border:0.5px solid var(--border2); padding:1.6rem; }
+  .vd-house-panel-head { display:flex; justify-content:space-between; align-items:start; }
+  .vd-house-panel-head h3 { font-family:'Cormorant Garamond',serif; color:var(--amber2); margin:0 0 0.3rem; font-size:1.4rem; }
+  .vd-close-panel { cursor:pointer; background:none; border:none; color:var(--text3); font-size:1.2rem; line-height:1; }
+  .vd-house-panel-sign { margin:0 0 0.9rem; color:#9382dc; font-size:0.86rem; }
+  .vd-house-panel-theme { margin:0 0 1rem; font-size:0.86rem; color:var(--text2); line-height:1.6; }
+  .vd-house-planet-row { padding:0.5rem 0; border-bottom:0.5px solid var(--border); font-size:0.86rem; }
+  .vd-house-planet-row:last-child { border-bottom:0; }
+
+  .vd-disclaimer { margin:2rem 0 0; font-size:0.74rem; color:var(--text3); line-height:1.7; text-align:center; max-width:640px; margin-left:auto; margin-right:auto; }
+
+  /* ══ BẢN IN / PDF (viết lại 2026-07-25) ═════════════════════════════
+     Khối @media print cũ được viết hồi #vedic còn là một section thường
+     trong luồng cuộn. Sau khi #vedic thành modal `position:fixed`, nó
+     không còn đúng: Chrome vẽ lại phần tử fixed trên MỌI trang giấy nên
+     PDF ra 9 trang lặp cùng một khung bị cắt, và cả trang web phía sau
+     vẫn in theo (13.6MB). Giờ JS dựng riêng #vdPrintRoot ở cấp <body>
+     (xem doPrint() trong vedic-chart.js) và ta chỉ in đúng khối đó.
+     BÀI HỌC: đổi một section thành modal fixed thì PHẢI xem lại CSS print. */
+  #vdPrintRoot { display:none; }
+
+  @media print {
+    /* Chỉ in bản in. Mọi thứ khác của trang — kể cả modal Vệ Đà đang mở —
+       biến mất, nên không còn khung fixed nào lặp lại trên từng trang. */
+    body.vd-printing > *:not(#vdPrintRoot) { display:none !important; }
+    body.vd-printing { background:#fff !important; overflow:visible !important; }
+    body.vd-printing #vdPrintRoot {
+      display:block !important; position:static !important;
+      background:#fff; color:#14120e;
+      font-family:'Inter', system-ui, sans-serif; font-size:10.5pt; line-height:1.55;
+    }
+    @page { margin:14mm 13mm; }
+
+    /* Trung hoà toàn bộ style nền tối, rồi trả lại vài điểm nhấn mực in.
+       Cách "quét sạch" này chỉ áp trong #vdPrintRoot nên không ảnh hưởng gì
+       tới giao diện trên màn hình. */
+    #vdPrintRoot *, #vdPrintRoot *::before, #vdPrintRoot *::after {
+      background:transparent !important; box-shadow:none !important;
+      text-shadow:none !important; filter:none !important; animation:none !important;
+      color:#14120e !important; border-color:#b9b2a2 !important;
+      backdrop-filter:none !important;
+    }
+    #vdPrintRoot h1, #vdPrintRoot h2, #vdPrintRoot h3, #vdPrintRoot h4,
+    #vdPrintRoot .vdp-eyebrow, #vdPrintRoot .vd-dasha-now-lord { color:#6b4c15 !important; }
+    #vdPrintRoot .vd-muted, #vdPrintRoot .vd-r-why, #vdPrintRoot .vd-hint,
+    #vdPrintRoot .vdp-foot, #vdPrintRoot .vd-pl-karaka { color:#5c574c !important; }
+
+    /* Header giữ gọn để cái Kundli còn kịp nằm cùng trang 1 — nếu nới ra
+       thì lưới 4×4 (không chẻ được) bị đẩy hẳn sang trang 2, để lại nửa
+       trang trắng. Đã đo bằng Playwright rồi mới chốt các số này. */
+    #vdPrintRoot .vdp-head { border-bottom:1.5px solid #6b4c15; padding-bottom:4mm; margin-bottom:5mm; }
+    #vdPrintRoot .vdp-eyebrow { font-size:8pt; letter-spacing:0.22em; text-transform:uppercase; }
+    #vdPrintRoot h1 { font-family:'Cormorant Garamond',serif; font-size:22pt; font-weight:400; margin:0.5mm 0 0; }
+    #vdPrintRoot .vdp-name { font-family:'Cormorant Garamond',serif; font-size:13pt; font-style:italic; margin-bottom:2mm; }
+    #vdPrintRoot .vdp-meta { width:100%; border-collapse:collapse; font-size:9pt; margin-top:2mm; }
+    #vdPrintRoot .vdp-meta th { text-align:left; width:36mm; padding:0.7mm 0; font-weight:600; vertical-align:top; }
+    #vdPrintRoot .vdp-meta td { padding:0.7mm 0; }
+    #vdPrintRoot .vdp-warn { margin:4mm 0 0; padding-left:5mm; font-size:9pt; }
+    #vdPrintRoot .vdp-warn li { margin-bottom:1.2mm; }
+
+    #vdPrintRoot .vdp-sec { margin-bottom:6mm; break-inside:auto; }
+    #vdPrintRoot .vdp-break { break-before:page; }
+    #vdPrintRoot .vdp-sec > h2 {
+      font-family:'Cormorant Garamond',serif; font-size:15pt; font-weight:400;
+      border-bottom:0.5px solid #b9b2a2; padding-bottom:1.5mm; margin:0 0 4mm;
+      break-after:avoid;
+    }
+    /* Không để bảng/khối bị chẻ ngang giữa trang một cách vô nghĩa */
+    #vdPrintRoot table { break-inside:auto; }
+    #vdPrintRoot thead { display:table-header-group; }
+    #vdPrintRoot tr, #vdPrintRoot .vd-reading-box, #vdPrintRoot .vd-dasha-now,
+    #vdPrintRoot .vd-card, #vdPrintRoot .vd-house-cell { break-inside:avoid; }
+    #vdPrintRoot .vd-table th { border-bottom:1px solid #6b4c15 !important; }
+    #vdPrintRoot .vd-table tr.vd-row-now td { font-weight:700; }
+    #vdPrintRoot .vd-kundli { max-width:118mm; }
+    #vdPrintRoot .vd-house-cell { border:0.5px solid #b9b2a2 !important; }
+    #vdPrintRoot .vd-house-tag { opacity:0.8; } /* .55 quá nhạt khi in ra giấy */
+    #vdPrintRoot .vd-reading-box { border-left:1.5px solid #6b4c15 !important; padding:3mm 4mm; }
+    #vdPrintRoot .vd-dasha-now { border:0.5px solid #b9b2a2 !important; padding:4mm; }
+    #vdPrintRoot .vd-r-nak { border-left:1px solid #b9b2a2 !important; padding:2.5mm 3mm; }
+    #vdPrintRoot .vd-actions-row, #vdPrintRoot .vd-tabs, #vdPrintRoot .vd-diag-row,
+    #vdPrintRoot .vd-hint:empty { display:none !important; }
+    /* Phụ lục "mang đi hỏi tiếp" */
+    #vdPrintRoot .vdp-lead { font-size:9.5pt; margin:0 0 4mm; }
+    #vdPrintRoot .vdp-sec h3 { font-family:'Cormorant Garamond',serif; font-size:12pt; font-weight:400; margin:5mm 0 2mm; break-after:avoid; }
+    #vdPrintRoot .vdp-qs { margin:0 0 3mm; padding-left:6mm; font-size:9.5pt; }
+    #vdPrintRoot .vdp-qs li { margin-bottom:1.8mm; break-inside:avoid; }
+    #vdPrintRoot .vdp-note { font-size:8.8pt; margin:0 0 3mm; }
+    #vdPrintRoot .vdp-caution { border-left:1.5px solid #6b4c15 !important; padding-left:3mm; font-style:italic; }
+    /* Khối số liệu: giữ nguyên khoảng trắng để chép ra vẫn thẳng cột, và cho
+       phép chẻ qua trang (bảng số dài hơn một trang là chuyện bình thường). */
+    #vdPrintRoot .vdp-pre { white-space:pre-wrap; font-family:'SF Mono',ui-monospace,monospace;
+      font-size:7.1pt; line-height:1.44; border:0.5px solid #b9b2a2 !important; padding:3mm; margin:0 0 3mm; break-inside:auto; }
+    #vdPrintRoot .vdp-pre-prompt { font-size:8pt; }
+    #vdPrintRoot .vdp-foot { border-top:0.5px solid #b9b2a2; margin-top:8mm; padding-top:4mm; font-size:8.5pt; }
+    #vdPrintRoot .vdp-foot p { margin:0 0 1.5mm; }
+  }
+</style>
+
+<!-- BẢN ĐỒ SAO VỆ ĐÀ — dựng lá số Vedic (Jyotiṣa) từ ngày/giờ/nơi sinh.
+     Tính toán 100% phía trình duyệt (Astronomy Engine, VSOP87/ELP2000),
+     không gửi dữ liệu sinh lên server nào. Xem astronomy-engine.min.js
+     + vedic-chart.js. Còn nhiều hướng để phát triển thêm (Dasha, D9/D10…).
+     ĐÃ CHUYỂN THÀNH EASTER EGG (2026-07-24): không còn nằm trong luồng cuộn
+     chính của trang (đã bỏ nav link "Vệ Đà" + divider inline cũ) — giờ là
+     modal ẩn. LỊCH SỬ đổi trigger cùng ngày: bấm-3-lần-ở-footer (v1) → xung
+     đột với easter egg có sẵn "chạm logo 3 lần → Mặt B" nên đổi thành
+     double-click-ở-footer (v2) → footer bị thanh player nhạc đè lên, khó
+     bấm, và Ali muốn CHỈ MỘT điểm nhấn duy nhất, nên (v3, bản hiện tại):
+     bỏ hẳn trigger ở footer (`.f-secret` trả về `<span>` tĩnh như nguyên
+     bản, không còn là nút bấm), dời hẳn sang **double-click vào .nav-logo**
+     ("ANH LI ✦", luôn hiện ở đầu mọi trang, không bị che). Easter egg
+     "chạm logo 3 lần → Mặt B" (random track, script `secret()` cuối file)
+     bị RÚT khỏi logo luôn (Ali: "bỏ egg click vào phát nhạc luôn") — dự
+     kiến dời sang icon đĩa than / chỗ khác ở một phiên sau ("đĩa hay cái
+     gì khác... tính sau"), CHƯA làm trong lần sửa này, chỉ tắt trên logo.
+     Xem script #vedic-modal-js (cuối file, cạnh script `secret()`) để biết
+     cơ chế mở/đóng + phím Esc. -->
+<div class="vd-modal" id="vedicModal" role="dialog" aria-modal="true" aria-labelledby="vedicModalTitle" hidden>
+  <button type="button" class="vd-modal-backdrop" id="vedicModalBackdrop" aria-label="Đóng"></button>
+  <div class="vd-modal-panel">
+    <button type="button" class="vd-modal-close" id="vedicModalClose" aria-label="Đóng">×</button>
+<section id="vedic">
+  <div class="section-wm br" aria-hidden="true">SAO</div>
+  <!-- vòng 27 vạch Nakshatra quay rất chậm — dấu chìm cho "sự huyền hoặc" -->
+  <div class="vd-nak-halo" aria-hidden="true"></div>
+  <div class="sec-label reveal">Jyotiṣa · Chiêm tinh Vệ Đà</div>
+  <h2 class="sec-h reveal" id="vedicModalTitle">Bản đồ sao <em>Vệ Đà</em></h2>
+  <div class="sec-bar reveal"></div>
+  <p class="vd-lede reveal">Nhập ngày, giờ và nơi bạn chào đời — dựng lại bầu trời tại đúng khoảnh khắc đó theo <em>Jyotiṣa</em>, hệ sidereal, ayanāṁśa Lahiri. Mọi phép tính chạy ngay trong máy bạn.</p>
+
+  <!-- 2026-07-25 — GỘP PHẦN GIẢI THÍCH VÀO MỘT KHỐI MỞ-RA-ĐỌC.
+       Trước đây trước khi tới được ô nhập, người ta phải cuộn qua 4 khối:
+       lede dài + 3 card "Vệ Đà là gì" + bảng so sánh 3 cột + wizard. Trong
+       một modal thì quá nặng (Ali: "bị chiếm dụng diện tích... đọc được
+       nhưng dài"). Giữ NGUYÊN toàn bộ chữ nghĩa cũ — chỉ xếp lại vào một
+       <details> đóng sẵn, để wizard nằm ngay dưới tiêu đề. Dùng <details>
+       thay vì JS toggle: không cần script, hoạt động cả khi JS lỗi, và tự
+       có sẵn ngữ nghĩa cho trình đọc màn hình. -->
+  <details class="vd-primer reveal">
+    <summary><span class="vd-primer-ic" aria-hidden="true">✧</span>Vệ Đà là gì, khác chiêm tinh phương Tây ở đâu<span class="vd-primer-cue">mở ra đọc</span></summary>
+    <div class="vd-primer-body">
+      <div class="vd-primer-grid">
+        <div>
+          <div class="vd-primer-eyebrow">Ánh sáng</div>
+          <p>Jyotish (nghĩa là "ánh sáng") là hệ chiêm tinh có nguồn gốc từ kinh Veda Ấn Độ hơn 3.000 năm trước. Lá số được xem như bản đồ nghiệp (karma) của một đời người — gợi ý xu hướng bẩm sinh và các giai đoạn có thể trải qua.</p>
+        </div>
+        <div>
+          <div class="vd-primer-eyebrow">Trọng tâm là cung Trăng</div>
+          <p>Khác chiêm tinh phương Tây (lấy cung Mặt Trời), Vệ Đà coi <strong>cung Mặt Trăng (Rashi)</strong> và <strong>Nakshatra</strong> là trọng tâm — được cho là phản ánh tâm trí và phản ứng cảm xúc.</p>
+        </div>
+        <div>
+          <div class="vd-primer-eyebrow">Vòng hoàng đạo lệch 24°</div>
+          <p>Vệ Đà dùng vòng <strong>Sidereal</strong> (theo sao thật), lệch khoảng <strong>24°</strong> (ayanāṁśa) so với vòng Tropical phương Tây — nên cung của bạn ở đây thường khác cung bạn vẫn quen.</p>
+        </div>
+        <div>
+          <div class="vd-primer-eyebrow">Chi tiết hơn</div>
+          <p>Ngoài 12 cung, Vệ Đà dùng <strong>27 Nakshatra</strong> và các biểu đồ phân chia (varga) để luận giải cụ thể hơn.</p>
+        </div>
+        <div>
+          <div class="vd-primer-eyebrow">Dự đoán theo Dasha</div>
+          <p>Vệ Đà có hệ chu kỳ vận hạn (<strong>Vimśottarī Daśā</strong>) chia đời người thành giai đoạn do từng hành tinh cai quản — bản này đã tính. Các biểu đồ phân chia D9/D10 thì chưa.</p>
+        </div>
+        <div>
+          <div class="vd-primer-eyebrow">Hướng thực hành</div>
+          <p>Vệ Đà thường đi kèm gợi ý thực hành (mantra, thói quen) — mang tính biểu tượng, không thay thế tư vấn chuyên môn.</p>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <div id="vdApp">
+  <div class="vd-panel reveal">
+    <div class="vd-steps">
+      <div class="vd-step"><div class="vd-dot" data-dot="0"></div><div class="vd-step-label">Thời điểm</div></div>
+      <div class="vd-steps-line" data-line="0"></div>
+      <div class="vd-step"><div class="vd-dot" data-dot="1"></div><div class="vd-step-label">Nơi chốn</div></div>
+      <div class="vd-steps-line" data-line="1"></div>
+      <div class="vd-step"><div class="vd-dot" data-dot="2"></div><div class="vd-step-label">Hệ tính</div></div>
+    </div>
+
+    <div class="vd-computing" id="vdComputing" hidden>
+      <div class="vd-spinner"><i></i><i></i><i></i><b></b></div>
+      <p id="vdStageText">Đang định vị bầu trời…</p>
+    </div>
+
+    <div class="vd-step-panel" id="vdStep0">
+      <h3 class="vd-step-h">1 · Thời điểm sinh</h3>
+      <p class="vd-step-sub">Giờ sinh càng chính xác, cung Mệnh (Lagna) và các nhà càng đáng tin cậy.</p>
+      <div class="vd-field-grid">
+        <label class="vd-field">Họ và tên (tuỳ chọn)<input id="vdName" type="text" placeholder="Nguyễn Văn A" autocomplete="off"/></label>
+        <label class="vd-field">Ngày sinh<input id="vdDate" type="date" required/></label>
+        <label class="vd-field">Giờ sinh<input id="vdTime" type="time"/></label>
+      </div>
+      <label class="vd-check"><input type="checkbox" id="vdUnknownTime"/>Không rõ giờ sinh (bỏ qua Lagna &amp; các nhà, chỉ xem vị trí hành tinh)</label>
+    </div>
+
+    <div class="vd-step-panel" id="vdStep1" hidden>
+      <h3 class="vd-step-h">2 · Nơi chốn</h3>
+      <p class="vd-step-sub">Tìm thành phố gần đúng nhất, hoặc dùng vị trí hiện tại / nhập toạ độ thủ công để có kết quả chính xác nhất.</p>
+      <div class="vd-loc-input-wrap">
+        <input id="vdLocQuery" type="text" placeholder="Nhập tên thành phố… (vd. Thủ Đức, Paris, New York)" autocomplete="off"/>
+        <div class="vd-suggestions" id="vdSuggestions" hidden></div>
+      </div>
+      <div class="vd-loc-actions">
+        <button type="button" class="vd-btn-ghost" id="vdUseCurrentLoc">📍 Dùng vị trí hiện tại</button>
+        <button type="button" class="vd-btn-outline" id="vdToggleAdvanced">Nhập toạ độ thủ công</button>
+        <span class="vd-loc-status" id="vdLocStatus"></span>
+      </div>
+      <div class="vd-advanced" id="vdAdvancedLoc" hidden>
+        <label>Latitude<input id="vdLat" type="number" step="0.0001" placeholder="10.82"/></label>
+        <label>Longitude<input id="vdLon" type="number" step="0.0001" placeholder="106.63"/></label>
+        <label>UTC offset (giờ)<input id="vdOffset" type="number" step="0.25" placeholder="7"/></label>
+        <button type="button" class="vd-btn-solid" id="vdUseManual">Dùng toạ độ này</button>
+      </div>
+      <div class="vd-selected-loc" id="vdSelectedLocation" hidden>
+        <div class="vd-loc-eyebrow">Đã chọn</div>
+        <div id="vdLocSummary"></div>
+      </div>
+    </div>
+
+    <div class="vd-step-panel" id="vdStep2" hidden>
+      <h3 class="vd-step-h">3 · Hệ tính</h3>
+      <p class="vd-step-sub">Mặc định theo chuẩn Vệ Đà phổ biến. Mọi lựa chọn được ghi vào mục "Chi tiết kỹ thuật" của lá số.</p>
+      <div class="vd-system-grid">
+        <div class="vd-system-card"><div class="vd-sc-label">Vòng hoàng đạo</div><div class="vd-sc-val">Sidereal · Ayanāṁśa Lahiri</div></div>
+        <div class="vd-system-card"><div class="vd-sc-label">Hệ nhà</div><div class="vd-sc-val">Whole Sign</div></div>
+        <div class="vd-system-card">
+          <div class="vd-sc-label">Nút giao (Node)</div>
+          <select id="vdNodeType" class="vd-select" style="margin-top:0.4rem;">
+            <option value="mean">Mean Node</option>
+            <option value="true">True Node</option>
+          </select>
+        </div>
+      </div>
+      <div class="vd-utc-box">
+        <div class="vd-utc-eyebrow">Giờ địa phương → UTC</div>
+        <div class="vd-utc-row"><span id="vdLocalTimeLabel">—</span><span class="vd-utc-arrow">→</span><span id="vdUtcTimeLabel">—</span></div>
+        <div class="vd-utc-note" id="vdUtcNote">Chọn ngày, giờ và nơi sinh để xem quy đổi.</div>
+      </div>
+      <p class="vd-form-error" id="vdFormError" hidden></p>
+    </div>
+
+    <div class="vd-nav" id="vdNav">
+      <button type="button" class="vd-btn-back" id="vdBack">← Quay lại</button>
+      <button type="button" class="vd-btn-next" id="vdNext">Tiếp theo →</button>
+      <button type="button" class="vd-btn-submit" id="vdSubmit" hidden>Tạo bản đồ sao ✦</button>
+    </div>
+  </div>
+
+  <div class="vd-results" id="vdResults" hidden>
+    <div class="vd-diag-row">
+      <span id="vdDiagPills"></span>
+      <button type="button" class="vd-diag-toggle" id="vdDiagToggle">Chi tiết kỹ thuật</button>
+    </div>
+    <div class="vd-diagnostics" id="vdDiagnostics" hidden></div>
+    <div class="vd-unknown-warning" id="vdUnknownWarning" hidden>⚠ Giờ sinh không rõ — dùng giờ quy ước 12:00 trưa. Lagna, các nhà và các chart phụ thuộc giờ không được tính. Vị trí Mặt Trăng có thể lệch nếu ngày sinh gần ranh giới đổi cung/Nakshatra.</div>
+
+    <div class="vd-actions-row">
+      <button type="button" class="vd-btn-share" id="vdShareBtn">⤴ Chia sẻ liên kết</button>
+      <button type="button" class="vd-btn-pdf" id="vdPdfBtn">⤓ Tải PDF</button>
+      <!-- 2026-07-25 (gợi ý của Ali): chép cả khối số liệu + khung câu hỏi để
+           mang đi hỏi người có nghề hoặc dán vào một trợ lý AI. Ai không muốn
+           tải file vẫn dùng được. Xem chartDataText()/aiPromptText(). -->
+      <button type="button" class="vd-btn-copy" id="vdCopyBtn">⧉ Chép dữ liệu để hỏi tiếp</button>
+      <span class="vd-share-msg" id="vdShareMsg"></span>
+    </div>
+
+    <div class="vd-tabs">
+      <button type="button" class="vd-tab vd-tab-active" data-vd-view="chart">Chart View</button>
+      <button type="button" class="vd-tab" data-vd-view="cards">Planet Cards</button>
+      <button type="button" class="vd-tab" data-vd-view="table">Planet Table</button>
+      <button type="button" class="vd-tab" data-vd-view="nak">Nakshatra View</button>
+      <button type="button" class="vd-legend-toggle" id="vdLegendToggle">Giải thích ký hiệu</button>
+    </div>
+
+    <div class="vd-legend" id="vdLegend" hidden>
+      <div><strong>☉☾♂☿♃♀♄</strong> — glyph hành tinh Sun/Moon/Mars/Mercury/Jupiter/Venus/Saturn; <strong>☊ ☋</strong> — Rahu/Ketu (điểm giao điểm quỹ đạo Mặt Trăng, luôn nghịch hành).</div>
+      <div><strong>℞</strong> — hành tinh đang nghịch hành (retrograde) theo chuyển động biểu kiến từ Trái Đất.</div>
+      <div><strong>Nhà (House)</strong> — theo hệ Whole Sign: cung chứa Lagna là Nhà 1, mỗi cung tiếp theo là một nhà trọn vẹn.</div>
+      <div><strong>Nakshatra / Pada</strong> — 27 "cung trăng" dài 13°20′, mỗi cung chia 4 pada (3°20′/pada).</div>
+    </div>
+
+    <div id="vdResultsBody"></div>
+  </div>
+
+  <div class="vd-house-overlay" id="vdHouseOverlay" hidden>
+    <div class="vd-house-panel" id="vdHousePanel"></div>
+  </div>
+  </div>
+
+  <p class="vd-disclaimer reveal">Vị trí thiên thể được tính bằng <a href="https://github.com/cosinekitty/astronomy" target="_blank" rel="noopener noreferrer">Astronomy Engine</a> (VSOP87/ELP2000) ngay trên trình duyệt của bạn — không gửi ngày giờ sinh lên máy chủ nào. Chiêm tinh là một hệ thống diễn giải biểu tượng, không thay thế tư vấn y tế, pháp lý, tài chính hoặc tâm lý chuyên môn.</p>
+</section>
+  </div>
+</div>
+
+<script src="./astronomy-engine.min.js"></script>
+<!-- 2026-07-25: nội dung luận giải tách riêng (12 cung, 12 nhà, 27 Nakshatra,
+     9 hành tinh, bảng vượng/hãm, 9 chủ vận Daśā) — sửa chữ nghĩa ở file này
+     không cần đụng code tính toán. Phải nạp TRƯỚC vedic-chart.js. -->
+<script src="./vedic-content.js"></script>
+<script src="./vedic-chart.js" defer></script>
+
 <!-- Hiệu ứng chữ riêng cho tiêu đề Liên hệ + nút CTA nổi — chỉ scope trong
      #contact / .cta-float-btn, dùng lại token --amber/--amber2 hiện có nên
      tự đổi theo theme đang bật (kể cả dandelion), và dùng lại class
@@ -6565,6 +7326,58 @@ body.no-motion .garden-oracle.revealed .go-synthesis{ animation:none; opacity:1;
     });
   },{threshold:0.35});
   io.observe(wrap);
+})();
+</script>
+
+<!-- BẢN ĐỒ SAO VỆ ĐÀ — easter egg: double-click vào .nav-logo ("ANH LI ✦")
+     để mở modal ẩn #vedicModal. MỘT điểm nhấn duy nhất (Ali: "cứ 1 điểm
+     nhấn thôi") — không còn dùng footer nữa (bị thanh player nhạc đè lên,
+     khó bấm khi đang nghe nhạc). Dùng sự kiện 'dblclick' có sẵn của trình
+     duyệt, không tự đếm click. Logo cũng có sẵn 1 easter egg KHÁC từ trước
+     (script `secret()` ngay dưới đây, đếm click riêng): 1 click = cuộn lên
+     đầu trang (giữ nguyên), 3 click từng phát nhạc ngẫu nhiên ("Mặt B") —
+     đã TẮT nhánh 3-click đó (Ali: "bỏ egg click vào phát nhạc luôn", dự
+     kiến dời sang icon đĩa than ở phiên sau). 2 click (dblclick) không đụng
+     `secret()`'s counter theo cách gây lỗi — counter vẫn nhận đủ 2 sự kiện
+     click nhưng do đã bỏ nhánh clicks>=3 nên không còn gì để kích hoạt sai.
+     Không lock scroll (đồng bộ .momo-modal/.ali-lb). Đóng qua backdrop, nút
+     ✕, phím Esc. Nếu URL có deep-link cũ (?vdbn=… hoặc #vedic) thì tự mở
+     modal để link chia sẻ trước đó vẫn hoạt động. -->
+<script id="vedic-modal-js">
+(function(){
+  const trigger=document.querySelector('.nav-logo');
+  const modal=document.getElementById('vedicModal');
+  const backdrop=document.getElementById('vedicModalBackdrop');
+  const closeBtn=document.getElementById('vedicModalClose');
+  if(!modal) return;
+  let lastFocused=null;
+  function openVedicModal(){
+    if(!modal.hidden) return;
+    lastFocused=document.activeElement;
+    modal.hidden=false;
+    modal.scrollTop=0;
+    if(closeBtn) closeBtn.focus();
+  }
+  function closeVedicModal(){
+    if(modal.hidden) return;
+    modal.hidden=true;
+    if(lastFocused&&typeof lastFocused.focus==='function') lastFocused.focus();
+  }
+  if(trigger) trigger.addEventListener('dblclick',e=>{
+    e.preventDefault();
+    if(typeof window.eggFound==='function') window.eggFound('vedic'); /* danh bạ egg, script 9b */
+    openVedicModal();
+  });
+  if(backdrop) backdrop.addEventListener('click',closeVedicModal);
+  if(closeBtn) closeBtn.addEventListener('click',closeVedicModal);
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'&&!modal.hidden) closeVedicModal();
+  });
+  // Link chia sẻ cũ (vd* params hoặc #vedic) vẫn phải mở được lá số dù
+  // tính năng giờ ẩn trong modal — vedic-chart.js tự đọc URL params này.
+  if(/[?&]vdbd=/.test(location.search)||location.hash==='#vedic'){
+    openVedicModal();
+  }
 })();
 </script>
 
@@ -9429,7 +10242,14 @@ function drawVinylRing(){
   });
 })();
 
-/* ── 9 · MẶT B — secret: chạm logo 3 lần ────────────────── */
+/* ── 9 · MẶT B — secret: chạm logo 3 lần ──────────────────
+   2026-07-24: TẮT nhánh 3-click→unlock() ở đây — logo giờ dùng double-click
+   (2 click) cho easter egg Bản Đồ Sao Vệ Đà (xem #vedic-modal-js, ngay
+   trước script này). Ali: "bỏ egg click vào phát nhạc luôn... đổi qua cái
+   đĩa hay cái gì khác, tính sau" — dự kiến dời unlock() sang icon đĩa
+   than/album cover ở một phiên sau, CHƯA làm trong lần sửa này. Hàm
+   unlock() vẫn giữ nguyên bên dưới để phiên sau gắn lại vào chỗ mới; chỉ
+   gỡ lời gọi từ logo. 1-click (cuộn lên đầu trang) vẫn giữ nguyên. */
 (function secret(){
   const logo=document.querySelector('.nav-logo');
   if(!logo) return;
@@ -9438,13 +10258,44 @@ function drawVinylRing(){
     e.preventDefault();
     clicks++;
     clearTimeout(timer);
-    if(clicks>=3){ clicks=0; unlock(); return; }
     timer=setTimeout(()=>{
       if(clicks===1) scrollTo({top:0, behavior:'smooth'});
       clicks=0;
     }, 480);
   });
-  function unlock(){
+})();
+
+/* ── 9b · EASTER EGGS — danh bạ + egg nhạc "Mặt B" ────────────────────
+   2026-07-25. Ali muốn tiến tới ~8 egg, nên gom về một chỗ: mỗi egg khai
+   báo 1 dòng trong ANHLI_EGGS (biểu tượng, cử chỉ, phần tử, mô tả), phần
+   hiệu ứng hint dùng chung class .egg-hint (xem <style id="egg-hints">).
+   Thêm egg mới ⇒ thêm 1 dòng ở đây + gắn class .egg-hint lên biểu tượng,
+   KHÔNG viết hiệu ứng riêng.
+   `eggFound(id)` ghi nhớ egg đã tìm thấy vào localStorage — hiện chỉ để
+   dành (chưa hiển thị ở đâu cả); sau này nếu Ali muốn một chỉ dấu kiểu
+   "✦ 3/8" thì đọc từ đây, không phải đi dò lại từng egg.
+   EGG 1 (nhạc) trước đây là "chạm logo 3 lần"; 2026-07-24 đã rút khỏi logo
+   để nhường logo cho egg chiêm tinh, và 2026-07-25 dời hẳn về cái đĩa than
+   thay dấu chấm trong "Li." ở hero — đúng ý Ali "đổi qua cái đĩa". */
+window.ANHLI_EGGS=[
+  { id:'music',  icon:'◉ đĩa than',   where:'#eggMusic (dấu chấm trong "Li." ở hero)', gesture:'click',    what:'Mặt B — phát một bản ngẫu nhiên' },
+  { id:'oracle', icon:'✿ vòng lá',    where:'.gc-day.today (ô hôm nay trên lịch)',     gesture:'click',    what:'Garden Oracle — rút hạt' },
+  { id:'vedic',  icon:'✵ sao 8 cánh', where:'.nav-logo (cuối chữ "ANH LI")',           gesture:'dblclick', what:'Bản Đồ Sao Vệ Đà' }
+];
+/* Gắn lên window vì cả block experience-js-inline này nằm trong một IIFE —
+   khai báo `function eggFound(){}` thường sẽ KHÔNG ra global, và hai chỗ gọi
+   nó (lịch Oracle ~dòng 6135, #vedic-modal-js ~dòng 7127) nằm ở script khác. */
+window.eggFound=function eggFound(id){
+  try{
+    const seen=JSON.parse(localStorage.getItem('anhli-eggs')||'[]');
+    if(!seen.includes(id)){ seen.push(id); localStorage.setItem('anhli-eggs', JSON.stringify(seen)); }
+  }catch(e){}
+};
+(function eggMusic(){
+  const disc=document.getElementById('eggMusic');
+  if(!disc) return;
+  disc.addEventListener('click', e=>{
+    e.preventDefault(); e.stopPropagation();
     try{
       const a=Math.floor(Math.random()*ALBUMS.length);
       const tr=ALBUMS[a].tracks||[];
@@ -9452,13 +10303,14 @@ function drawVinylRing(){
       const j=Math.floor(Math.random()*tr.length);
       selectAlbum(a, true);
       playAt(j);
+      window.eggFound('music');
       const first=store.get('ali_sideB','')!=='1';
       store.set('ali_sideB','1');
       toast(first
         ? '✦ Bạn vừa lật được <b>Mặt B</b> — một bản giấu trong sạp đang quay…'
         : '✦ <b>Mặt B</b> quay tiếp — một bản ngẫu nhiên khác cho người tò mò.');
-    }catch(e){}
-  }
+    }catch(err){}
+  });
 })();
 
 /* ── 10 · PERF — bớt lớp trang trí trên mobile ──────────── */
@@ -9468,15 +10320,29 @@ function drawVinylRing(){
   if(!name || REDUCED) return;
   name.classList.add('split');
   const letters=[];
+  /* 2026-07-25: đi theo childNodes thay vì đọc textContent.
+     Lý do: dấu chấm cuối "Li." giờ là <button class="egg-disc"> (easter egg
+     nhạc) — bản cũ đọc line.textContent rồi gán lại nên xoá sạch mọi thẻ
+     con, cái nút sẽ biến mất ngay khi hero khởi động. Giờ: node chữ vẫn
+     tách từng ký tự như trước; node phần tử được GIỮ NGUYÊN và chỉ thêm
+     class .hl để bay vào + hút nam châm cùng nhịp với các chữ. */
   [heroLine1, heroLine2].forEach(line=>{
     if(!line) return;
-    const txt=line.textContent;
+    const nodes=[...line.childNodes];
     line.textContent='';
-    [...txt].forEach(c=>{
-      if(/\s/.test(c)){ line.appendChild(document.createTextNode(c)); return; }
-      const sp=el(`<span class="hl">${c}</span>`);
-      line.appendChild(sp);
-      letters.push(sp);
+    nodes.forEach(node=>{
+      if(node.nodeType===3){
+        [...node.textContent].forEach(c=>{
+          if(/\s/.test(c)){ line.appendChild(document.createTextNode(c)); return; }
+          const sp=el(`<span class="hl">${c}</span>`);
+          line.appendChild(sp);
+          letters.push(sp);
+        });
+      } else if(node.nodeType===1){
+        node.classList.add('hl');
+        line.appendChild(node);
+        letters.push(node);
+      }
     });
   });
   letters.forEach((sp,i)=>{
