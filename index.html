@@ -6832,6 +6832,9 @@ body.no-motion .garden-oracle.revealed .go-synthesis{ animation:none; opacity:1;
   .vd-house-lagna .vd-house-body { color:var(--amber2); font-weight:600; }
   .vd-hp-planet { cursor:default; padding:1px 3px; }
   .vd-hp-asc { color:var(--amber); font-weight:700; }
+  /* 2026-07-25: Vargottama (cùng cung ở D1 và D9/D10) — chỉ báo nhẹ, tái dùng
+     màu .vd-good thay vì bịa token màu mới. */
+  .vd-hp-vargottama { color:#9ab97c; font-weight:700; }
   .vd-kundli-center { grid-column:2/4; grid-row:2/4; display:flex; flex-direction:column; align-items:center; justify-content:center; border:0.5px solid var(--amber2); color:var(--amber2); font-weight:600; font-size:0.8rem; letter-spacing:0.05em; }
   .vd-planet-hl { filter:brightness(1.4); box-shadow:0 0 0 1px rgba(204,159,74,0.8), 0 0 12px rgba(204,159,74,0.45); }
 
@@ -7188,6 +7191,10 @@ body.no-motion .garden-oracle.revealed .go-synthesis{ animation:none; opacity:1;
       <button type="button" class="vd-tab" data-vd-view="cards">Planet Cards</button>
       <button type="button" class="vd-tab" data-vd-view="table">Planet Table</button>
       <button type="button" class="vd-tab" data-vd-view="nak">Nakshatra View</button>
+      <!-- 2026-07-25: D9 Navāṁśa (hôn nhân/nội lực) + D10 Daśāṁśa (sự nghiệp) —
+           xem buildVargaChart()/vargaBlockHtml() trong vedic-chart.js. -->
+      <button type="button" class="vd-tab" data-vd-view="d9">D9 · Navāṁśa</button>
+      <button type="button" class="vd-tab" data-vd-view="d10">D10 · Daśāṁśa</button>
       <button type="button" class="vd-legend-toggle" id="vdLegendToggle">Giải thích ký hiệu</button>
     </div>
 

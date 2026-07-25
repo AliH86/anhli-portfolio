@@ -130,9 +130,9 @@
      Giờ ingress gốc theo Eastern Time, đã quy đổi tương đối sang giờ Việt Nam
      (ICT = ET + 11h mùa hè) để chọn ngày lịch cho đúng; đây vẫn là thời tiết
      chung, không dùng giờ sinh/vị trí/nhà/cung Mọc. */
-  packs['2026-W31-review']={
-    status:'review',
-    label:'28/7–4/8/2026 · nháp chờ Ali duyệt',
+  packs['2026-W31-approved']={
+    status:'approved',
+    label:'28/7–4/8/2026 · Ali duyệt',
     sourceCheckedAt:'2026-07-23',
     week:{
       eyebrow:'Bối cảnh chung · 28/7–3/8',
@@ -172,8 +172,8 @@
   };
 
   root.GARDEN_ORACLE_WEEKLY={
-    activeReviewKey:'2026-W31-review',
-    lastApprovedKey:'2026-W30-approved',
+    activeReviewKey:'',
+    lastApprovedKey:'2026-W31-approved',
     packs
   };
 })(window);

@@ -424,6 +424,8 @@
       warnings.push('Sinh tại Việt Nam trước 13/6/1975: hai miền từng dùng múi giờ khác nhau — nếu bạn biết chắc múi giờ nơi mình sinh, hãy nhập toạ độ + offset thủ công');
     }
 
+    var ascInfoForVarga = ls == null ? null : { signIndex: ls, degreeInSign: getDegInSign(lagna) };
+
     return {
       metadata: { engine: 'Astronomy Engine (VSOP87 / ELP2000)', zodiac: 'sidereal', ayanamsa: 'Lahiri', ayanamsaDegrees: ay, houseSystem: 'Whole Sign', nodeType: f.nodeType, julianDayUT: jd },
       input: { name: f.name, localDate: f.date, localTime: timeStr, location: f.location, utcOffsetUsed: tz, utcOffsetToday: tzNow, tzid: f.location.tzid || null, utcHour: utcH, dayShift: dayShift, warnings: warnings },
@@ -431,7 +433,62 @@
       planets: planets, houses: houses,
       /* Daśā chỉ cần vị trí Mặt Trăng — luôn tính được, kể cả khi không rõ
          giờ sinh (khi đó Mặt Trăng có thể lệch nên có cảnh báo riêng). */
-      dasha: calcDasha(planets[1].longitude, date)
+      dasha: calcDasha(planets[1].longitude, date),
+      /* D9/D10 (2026-07-25) — xem hàm buildVargaChart() ngay bên dưới. */
+      d9: buildVargaChart(9, ascInfoForVarga, planets),
+      d10: buildVargaChart(10, ascInfoForVarga, planets)
+    };
+  }
+
+  /* ══ VARGA (BIỂU ĐỒ PHÂN CHIA) — D9 Navāṁśa & D10 Daśāṁśa (2026-07-25) ═══
+     Quy tắc kinh điển (Parāśara). D9: chia mỗi cung 30° thành 9 phần
+     3°20′. Vì 3 nhóm cách (chuyển động/cố định/hai chiều) lặp đúng chu kỳ
+     3 cung, toàn vòng hoàng đạo hoá ra chia đều thành 108 phần liên tục kể
+     từ 0° Bạch Dương — nên công thức rút gọn đúng cho mọi cung:
+       navamsa = floor(kinh độ trong cung × 9/30) rồi cộng dồn theo cung.
+     D10: KHÔNG có tính rút gọn liên tục đó. Theo Parāśara: cung "lẻ" (số
+     thứ tự 1,3,5… tức 0-indexed CHẴN: Bạch Dương, Song Tử, Sư Tử…) đếm
+     phần từ chính cung đó; cung "chẵn" (0-indexed LẺ: Kim Ngưu, Cự Giải…)
+     đếm phần từ cung thứ 9 tính từ nó (offset +8, coi bản thân là phần 1).
+     Đã đối chiếu hai công thức với các bảng ví dụ kinh điển hay được trích
+     (vd: Kim Ngưu 0° D10 khởi ở Ma Kết) trước khi đưa vào đây. */
+  function vargaSignIndex(kind, signIndex, degInSign) {
+    if (kind === 9) {
+      var pada = Math.floor(degInSign / (30 / 9));
+      return (signIndex * 9 + pada) % 12;
+    }
+    if (kind === 10) {
+      var part = Math.floor(degInSign / 3);
+      var start = (signIndex % 2 === 0) ? signIndex : (signIndex + 8) % 12;
+      return (start + part) % 12;
+    }
+    return signIndex;
+  }
+
+  /* ascInfo: {signIndex, degreeInSign} của Lagna D1, hoặc null nếu không rõ
+     giờ sinh (khi đó biểu đồ phân chia vẫn tính được vị trí hành tinh, chỉ
+     thiếu Lagna/nhà — cùng quy ước với D1). planetsD1: mảng planets gốc. */
+  function buildVargaChart(kind, ascInfo, planetsD1) {
+    var ascSign = ascInfo == null ? null : vargaSignIndex(kind, ascInfo.signIndex, Number(ascInfo.degreeInSign));
+    var planets = planetsD1.map(function (p) {
+      var vsi = vargaSignIndex(kind, p.signIndex, Number(p.degreeInSign));
+      var house = ascSign == null ? null : ((vsi - ascSign + 12) % 12) + 1;
+      return Object.assign({}, p, {
+        d1SignIndex: p.signIndex, signIndex: vsi, signName: SIGNS[vsi],
+        house: house,
+        /* Vargottama: cùng cung ở cả D1 lẫn biểu đồ phân chia này — truyền
+           thống xem là dấu của sự ổn định/bền hơn cho chủ đề của hành tinh đó. */
+        vargottama: vsi === p.signIndex
+      });
+    });
+    var houses = ascSign == null ? null : Array.from({ length: 12 }, function (_, hIdx) {
+      var si = (ascSign + hIdx) % 12;
+      return { house: hIdx + 1, signIndex: si, signName: SIGNS[si], planets: planets.filter(function (p) { return p.house === hIdx + 1; }) };
+    });
+    return {
+      kind: kind,
+      ascendant: ascSign == null ? null : { signIndex: ascSign, signName: SIGNS[ascSign] },
+      planets: planets, houses: houses
     };
   }
 
@@ -882,13 +939,28 @@
         }
         L.push('');
       }
+      if (chart.d9 && chart.d9.ascendant) {
+        L.push('NAVĀṀŚA (D9) — Lagna: ' + SIGNS[chart.d9.ascendant.signIndex]);
+        chart.d9.planets.forEach(function (pl) {
+          L.push('  ' + (pl.viet + '                ').slice(0, 12) + ' ' + (SIGNS[pl.signIndex] + '                        ').slice(0, 24) +
+            (pl.house ? ' | nhà ' + pl.house : '') + (pl.vargottama ? ' | vargottama' : ''));
+        });
+        L.push('');
+      }
+      if (chart.d10 && chart.d10.ascendant) {
+        L.push('DAŚĀṀŚA (D10) — Lagna: ' + SIGNS[chart.d10.ascendant.signIndex]);
+        chart.d10.planets.forEach(function (pl) {
+          L.push('  ' + (pl.viet + '                ').slice(0, 12) + ' ' + (SIGNS[pl.signIndex] + '                        ').slice(0, 24) +
+            (pl.house ? ' | nhà ' + pl.house : '') + (pl.vargottama ? ' | vargottama' : ''));
+        });
+        L.push('');
+      }
       if (inp.warnings && inp.warnings.length) {
         L.push('CẢNH BÁO CẦN BIẾT KHI LUẬN');
         inp.warnings.forEach(function (w) { L.push('  - ' + w); });
         L.push('');
       }
       L.push('BẢN NÀY CHƯA TÍNH');
-      L.push('  - các biểu đồ phân chia (varga): D9 Navāṁśa, D10 Daśāṁśa…');
       L.push('  - Śoḍaśavarga, Aṣṭakavarga, các bảng điểm sức mạnh (Shadbala)');
       L.push('  - Pratyantardaśā (vận cấp 3 trở xuống)');
       L.push('  - hiệu chỉnh giờ sinh (birth-time rectification)');
@@ -972,6 +1044,8 @@
         sec('Bảng vị trí hành tinh', planetsTableHtml()) +
         sec('Thẻ hành tinh', planetCardsHtml(), true) +
         sec('Vòng Nakshatra — Mặt Trăng', nakRingHtml('moon')) +
+        sec('Navāṁśa (D9) — hôn nhân & nội lực', vargaBlockHtml(chart.d9, 9), true) +
+        sec('Daśāṁśa (D10) — sự nghiệp', vargaBlockHtml(chart.d10, 10)) +
         sec('Góc hợp (Aspects)', aspectsHtml()) +
         sec('Vận hạn — Vimśottarī Daśā', dashaHtml(), true) +
         sec('Luận giải', readingHtml(), true) +
@@ -1121,6 +1195,104 @@
       }
       var selector = '<select id="vdNakSel" class="vd-select">' + chart.planets.map(function (pl) { return '<option value="' + pl.id + '"' + (pl.id === p.id ? ' selected' : '') + '>' + esc(pl.viet) + '</option>'; }).join('') + '</select>';
       return '<div class="vd-nak-wrap">' + ring + '<div>' + selector + '</div></div>' + lunarPanel;
+    }
+
+    /* ══ D9/D10 — hiển thị (2026-07-25) ═══════════════════════════════════
+       Kundli dùng lại đúng SI_LAYOUT/CSS của D1 nhưng KHÔNG gắn data-vd-house
+       (bấm vào ô sẽ mở panel nhà của D1 nếu gắn nhầm — cố tình bỏ, tránh
+       nhầm). data-vd-planet vẫn giữ để hover vẫn highlight-chéo được sang
+       các tab khác, không cần dây thêm gì. */
+    function vargaKundliHtml(varga) {
+      if (!varga || varga.ascendant == null) {
+        return '<p class="vd-muted">Không rõ giờ sinh nên chưa dựng được Lagna của biểu đồ này — bảng vị trí bên dưới vẫn đọc được, chỉ thiếu góc nhìn theo nhà.</p>';
+      }
+      var ls = varga.ascendant.signIndex;
+      var hp = Array.from({ length: 12 }, function () { return []; });
+      varga.planets.forEach(function (p) {
+        hp[p.signIndex].push('<span class="vd-hp-planet' + (p.vargottama ? ' vd-hp-vargottama' : '') + '" data-vd-planet="' + p.id + '"' +
+          (p.vargottama ? ' title="Vargottama — cùng cung ở cả D1 và biểu đồ này, truyền thống xem là vững hơn"' : '') + '>' +
+          esc(p.viet.slice(0, 2)) + (p.vargottama ? '✦' : '') + '</span>');
+      });
+      hp[ls].unshift('<span class="vd-hp-asc">Asc</span>');
+      var cells = '', centerDone = false;
+      for (var r = 0; r < 4; r++) {
+        for (var c = 0; c < 4; c++) {
+          var si = SI_LAYOUT[r][c];
+          if (si === null) {
+            if (!centerDone) { cells += '<div class="vd-kundli-center">D' + varga.kind + '</div>'; centerDone = true; }
+            continue;
+          }
+          var isL = si === ls, houseNum = ((si - ls + 12) % 12) + 1;
+          cells += '<div class="vd-house-cell' + (isL ? ' vd-house-lagna' : '') + '">' +
+            '<div class="vd-house-tag">' + SIGNS_SHORT[si] + ' · H' + houseNum + '</div>' +
+            '<div class="vd-house-body">' + hp[si].join(' ') + '</div></div>';
+        }
+      }
+      return '<div class="vd-kundli">' + cells + '</div>';
+    }
+
+    function vargaTableHtml(varga) {
+      if (!varga) return '';
+      var rows = varga.planets.map(function (p) {
+        return '<tr data-vd-planet="' + p.id + '"><td>' + p.glyph + ' ' + esc(p.viet) + '</td><td>' + esc(SIGNS[p.signIndex]) + '</td><td>' + (p.house || '—') + '</td><td>' + (p.vargottama ? '<span class="vd-good">✦ Vargottama</span>' : '—') + '</td></tr>';
+      }).join('');
+      return '<div class="vd-table-wrap"><table class="vd-table"><thead><tr><th>Hành tinh</th><th>Cung (D' + varga.kind + ')</th><th>Nhà</th><th>Ghi chú</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
+    }
+
+    var VARGA_META = {
+      9: {
+        title: 'Navāṁśa (D9)', short: 'D9',
+        intro: '<p>Navāṁśa chia mỗi cung 30° thành 9 phần 3°20′. Truyền thống Jyotiṣa dùng biểu đồ này để soi sâu hơn về <strong>hôn nhân, sự gắn bó lâu dài, và nội lực</strong> — phần "chất" bên dưới những gì D1 (bản đồ chính) đã cho thấy. Một hành tinh mạnh ở D1 nhưng yếu ở D9 thường được đọc là hứa nhiều nhưng khó giữ trọn; ngược lại mạnh ở cả hai thường được xem là bền hơn theo thời gian.</p>',
+        lagnaLabel: 'Lagna Navāṁśa', karakaPlanets: ['venus', 'jupiter'],
+        karakaIntro: 'Sao Kim và Sao Mộc thường được xem là hai chỉ dấu cổ điển cho chuyện bạn đời (tuỳ phái, tuỳ lá số mà nhấn cái nào hơn — bản này không tự giả định giới tính hay vai trò) — vị trí của chúng ở D9:'
+      },
+      10: {
+        title: 'Daśāṁśa (D10)', short: 'D10',
+        intro: '<p>Daśāṁśa chia mỗi cung 30° thành 10 phần 3°. Truyền thống dùng biểu đồ này để soi <strong>sự nghiệp, vị trí trước công chúng, và những gì bạn để lại qua công việc</strong> — lớp chi tiết hơn so với Nhà 10 (Karma) của D1.</p>',
+        lagnaLabel: 'Lagna Daśāṁśa', karakaPlanets: ['sun', 'saturn', 'mercury'],
+        karakaIntro: 'Mặt Trời (địa vị), Sao Thổ (kỷ luật, đường dài) và Sao Thủy (giao dịch, kỹ năng) thường được xem là ba chỉ dấu cho nghề nghiệp — vị trí của chúng ở D10:'
+      }
+    };
+
+    function vargaReadingHtml(varga, kind) {
+      var meta = VARGA_META[kind];
+      var C = VC();
+      var h = meta.intro;
+      if (!varga || varga.ascendant == null) {
+        h += '<p class="vd-muted">Không rõ giờ sinh nên chưa dựng được ' + esc(meta.lagnaLabel) + ' — phần vị trí hành tinh ở ' + meta.short + ' phía trên vẫn đọc được, chỉ thiếu góc nhìn theo nhà.</p>';
+        return readingBox('vd-rb-varga vd-rb-varga-' + meta.short.toLowerCase(), '✦ ' + esc(meta.title), h);
+      }
+      var ls = varga.ascendant.signIndex;
+      var signMeta = C ? C.signs[ls] : null;
+      h += '<p><strong>' + esc(meta.lagnaLabel) + '</strong> rơi vào <strong>' + esc(SIGNS_VI[ls]) + '</strong>.' + (signMeta ? ' ' + signMeta.body : '') + '</p>';
+      var lordId = signMeta ? signMeta.lord : null;
+      if (lordId) {
+        var lordP = varga.planets.filter(function (p) { return p.id === lordId; })[0];
+        if (lordP) {
+          var d = dignityOf(lordId, lordP.signIndex);
+          h += '<p>Chủ tinh của ' + esc(meta.lagnaLabel) + ' — <strong>' + esc(lordP.viet) + '</strong> — đứng ở ' + esc(SIGNS_VI[lordP.signIndex]) +
+            (lordP.house ? ', nhà ' + lordP.house + ' của ' + meta.short : '') +
+            (d ? ' (' + d.label + ' — ' + d.note + ')' : '') +
+            (lordP.vargottama ? ' — <strong>vargottama</strong>: cùng cung với vị trí ở D1, truyền thống xem là ổn định hơn theo thời gian.' : '.') + '</p>';
+        }
+      }
+      var vargottamaList = varga.planets.filter(function (p) { return p.vargottama; }).map(function (p) { return p.viet; });
+      if (vargottamaList.length) {
+        h += '<p>Vargottama trong biểu đồ này: <strong>' + esc(vargottamaList.join(', ')) + '</strong> — cùng cung ở cả D1 lẫn ' + meta.short + ', thường được đọc là phần tính cách/chủ đề ổn định, ít đổi theo thời gian hơn các hành tinh khác.</p>';
+      }
+      var karakaLines = meta.karakaPlanets.map(function (pid) {
+        var p = varga.planets.filter(function (x) { return x.id === pid; })[0];
+        if (!p) return '';
+        var d = dignityOf(pid, p.signIndex);
+        return '<li><strong>' + esc(p.viet) + '</strong> — ' + esc(SIGNS_VI[p.signIndex]) + (p.house ? ', nhà ' + p.house : '') + (d ? ' (' + d.label + ')' : '') + (p.vargottama ? ' · vargottama' : '') + '</li>';
+      }).join('');
+      if (karakaLines) h += '<p>' + meta.karakaIntro + '</p><ul class="vd-r-list">' + karakaLines + '</ul>';
+      h += '<p class="vd-r-why">Đây là ứng dụng cơ bản của ' + esc(meta.title) + ' — dừng ở Lagna, chủ tinh Lagna, vargottama và vài chỉ dấu chính. Truyền thống còn đọc thêm nhiều lớp khác (Ṣaḍvarga, vargottama trên toàn bộ 9 hành tinh, Argala…) — nếu muốn đi sâu hơn, nên hỏi thêm người có nghề hoặc mang bản in này đi hỏi.</p>';
+      return readingBox('vd-rb-varga vd-rb-varga-' + meta.short.toLowerCase(), '✦ ' + esc(meta.title), h);
+    }
+
+    function vargaBlockHtml(varga, kind) {
+      return vargaKundliHtml(varga) + vargaTableHtml(varga) + vargaReadingHtml(varga, kind);
     }
 
     function housePanelHtml(houseNum) {
@@ -1274,7 +1446,7 @@
         var b6 = found.length
           ? '<ul class="vd-r-list">' + found.map(function (y) { return '<li><strong>' + esc(y.name) + '</strong> — ' + y.body + '</li>'; }).join('') + '</ul>'
           : '<p class="vd-muted">Không thấy tổ hợp nào trong nhóm kinh điển mà bản này kiểm — điều đó hoàn toàn bình thường; phần lớn lá số đọc bằng nhà và Daśā chứ không bằng yoga.</p>';
-        h += readingBox('vd-rb-yoga', '✦ Tổ hợp đáng chú ý', b6 + '<p class="vd-r-why">Bản này chỉ kiểm một nhóm nhỏ các tổ hợp tính được chắc chắn từ dữ liệu đang có. Jyotiṣa cổ điển có hàng trăm yoga, và nhiều cái cần thêm biểu đồ phân chia (D9/D10) mới xét được.</p>');
+        h += readingBox('vd-rb-yoga', '✦ Tổ hợp đáng chú ý', b6 + '<p class="vd-r-why">Bản này chỉ kiểm một nhóm nhỏ các tổ hợp tính được chắc chắn từ dữ liệu đang có. Jyotiṣa cổ điển có hàng trăm yoga; D9/D10 giờ đã có ở hai tab riêng phía trên (Lagna, chủ tinh, vargottama, vài chỉ dấu chính), nhưng phần dò yoga tự động ở đây chưa mở rộng sang đó.</p>');
       }
 
       h += '<p class="vd-reading-foot">Một lá số không nói bạn sẽ thành gì. Nó nói bạn được đưa cho những nguyên liệu nào. Phần còn lại là chuyện bạn nấu.</p>';
@@ -1367,7 +1539,9 @@
         chart: card(h2('Bản đồ sao (Kundli)') + chartHtml()),
         cards: card(h2('Thẻ hành tinh') + planetCardsHtml()),
         table: card(h2('Bảng vị trí hành tinh') + planetsTableHtml()),
-        nak: card(h2('Vòng Nakshatra') + nakRingHtml(state.nakPlanetId))
+        nak: card(h2('Vòng Nakshatra') + nakRingHtml(state.nakPlanetId)),
+        d9: card(h2('Navāṁśa (D9) — hôn nhân & nội lực') + vargaBlockHtml(chart.d9, 9)),
+        d10: card(h2('Daśāṁśa (D10) — sự nghiệp') + vargaBlockHtml(chart.d10, 10))
       };
       el.resultsBody.innerHTML = views[v] +
         card(h2('Góc hợp (Aspects)') + '<p class="vd-hint">Mọi hành tinh chiếu nhà 7; Sao Hỏa thêm 4 &amp; 8; Sao Mộc thêm 5 &amp; 9; Sao Thổ thêm 3 &amp; 10.</p>' + aspectsHtml()) +
