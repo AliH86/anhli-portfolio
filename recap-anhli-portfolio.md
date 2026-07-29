@@ -1079,3 +1079,102 @@ toàn ngoài 2 mục cố ý giữ untracked (`.claude/launch.json`,
   28/7/2026 trở đi (pack `2026-W30-approved` hiện chỉ phủ tới 27/7).
 - Trạng thái: Ali đã duyệt hướng và câu chữ, yêu cầu commit + push trong phiên
   này; QA nội dung mẫu (đọc thử nhiều tổ hợp hơn) để phiên sau.
+
+## Cổ tích Vườn Bồ Công Anh — Phase 0 + Phase 1 (29/7/2026, Ali duyệt)
+
+### Đã làm
+
+- Phase 0 audit toàn bộ nền website và chốt kiến trúc zero-cost:
+  JavaScript thuần, không backend, không build system mới, deploy được trên
+  GitHub Pages project site. Báo cáo nằm tại `docs/PHASE-0-AUDIT.md`.
+- Thêm world state versioned tại `js/world-state.js`, dùng key
+  `anhli.worldState`. Module chịu được storage bị chặn, JSON lỗi, schema cũ;
+  migration bổ sung field thiếu và giữ field chưa biết.
+- Daily visit dùng ngày local của thiết bị, một ngày chỉ ghi nhận một lần.
+  Foundation không đụng các key cũ của Oracle, Vệ Đà, theme, motion, likes hay
+  registry Easter Egg.
+- Phase 1 thêm Hidden Egg MVP, tách thành:
+  `data/egg-game-config.js` (microcopy), `js/egg-game.js` (transition/state),
+  `css/egg-game.css` (visual) và `scripts/test-egg-game.mjs` (test).
+- Egg có bốn stage: `0 dormant`, `1 warm`, `2 cracked`, `3 ready`. Lần đầu
+  phát hiện chuyển thẳng sang stage 1; chỉ tăng stage vào một ngày local khác;
+  nhiều click hoặc reload cùng ngày không tăng thêm; stage dừng ở 3 và chưa nở.
+- Developer helper chỉ xuất hiện trên `file:`, `localhost`, `127.0.0.1` hoặc
+  `[::1]`: `AnhLiEggDebug.getState()`, `reset()`, `setStage(n)`, `nextDay()`.
+  Production không có debug control hoặc debug UI.
+- Visual cuối đã được Ali duyệt: desktop đặt egg trong bụi cỏ ngay dưới chân
+  nhân vật đứng thứ hai, sát chân bìa album lớn; không chồng hitbox của jewel
+  case nhỏ. Shell desktop `36×45px`, hit area `56×56px`; mobile shell
+  `30×38px`, hit area `52×52px`.
+- Cỏ foreground dùng lại `grass-clump-3.png`, chỉ che nhẹ đáy egg và có
+  `pointer-events:none`. Idle movement chỉ chạy trước khi phát hiện, chu kỳ
+  9,4 giây với khoảng nghỉ dài; hover/focus phản ứng nhẹ.
+- Button semantic, focus state rõ, microcopy qua live region, không autoplay
+  âm thanh, không modal lớn, không thêm vào navigation. `prefers-reduced-motion`
+  và `body.no-motion` tắt chuyển động.
+- Desktop 1440/1024, tablet portrait 820 và mobile 390 đã được kiểm tra:
+  không overlap vùng click album, không horizontal overflow, không đè calendar
+  hoặc quote sau khi font ổn định. Album interaction, navigation, Music,
+  Garden Oracle và Vệ Đà không bị thay đổi.
+
+### Validation và commit
+
+- `node scripts/test-world-state.mjs` → pass.
+- `node scripts/test-egg-game.mjs` → pass.
+- JavaScript syntax, `git diff --check` và browser console → sạch.
+- Commit Phase 0: `2ecb474` — `feat: add versioned world state foundation`.
+- Commit Phase 1: `6c882f1` — `feat: add hidden egg MVP`.
+- Commit visual approved: `f6df84b` —
+  `fix: refine hidden egg visual placement`.
+- Các commit hiện chỉ ở local; chưa push và chưa deploy production.
+
+### Cố ý chưa làm
+
+- Không hatch và chưa tạo bé Gà.
+- Không hatch animation hoàn chỉnh hoặc final sprite/art.
+- Không food points, mood, music rewards, Daily Discovery hay collection.
+- Không tạo `garden/index.html` hoặc link `/garden/`.
+- Không backend, account, analytics mới hoặc đồng bộ đa thiết bị.
+- Không migrate registry `anhli-eggs` cũ vào `anhli.worldState`.
+
+### Brief scope tiếp theo — Phase 2: Hatch Transition & Chicken Foundation
+
+Phase này phải được Ali duyệt brief trước khi code. Scope nhỏ nhất được đề
+xuất:
+
+1. Chốt hatch rule. Khuyến nghị: egg ở stage 3 chỉ nở khi người dùng quay lại
+   và tương tác vào một ngày local mới; cùng ngày đạt stage 3 không nở ngay.
+   Đây đang là đề xuất, chưa phải luật đã khóa.
+2. Khi hatch hợp lệ, chỉ cập nhật `egg.hatched=true`,
+   `egg.hatchedAt=<ISO>` và state Gà tối thiểu cần thiết; migration phải tương
+   thích state Phase 0/1 và không làm mất field lạ.
+3. Thêm một reveal nhỏ, không chặn portfolio, không autoplay âm thanh và có
+   reduced-motion fallback. Art chỉ ở mức placeholder/sprite nhẹ để test flow.
+4. Sau khi nở, render một bé Gà tĩnh hoặc phản ứng rất nhẹ tại cùng visual
+   group. Refresh vẫn giữ đúng trạng thái.
+5. Bổ sung developer helper và test cho: cùng ngày, ngày mới, hatch một lần,
+   refresh, corrupted storage, state cũ, desktop/mobile/keyboard/reduced motion.
+6. Phase 2 không kéo theo food, Daily Discovery, collection, `/garden/` hoặc
+   hệ progression mới. Các phần này tách phase sau.
+
+### Quy ước tiếp tục giữ
+
+- `window.AnhLiWorld` và `anhli.worldState` là nguồn state duy nhất cho game.
+  Mọi schema change phải tăng `version`, có migration và giữ unknown fields.
+- Logic ngày dùng local date; một ngày tối đa một bước tiến. Không timer nền,
+  backend hoặc cơ chế chống đổi ngày hệ thống phức tạp.
+- State transition tách khỏi DOM để unit-test được. Copy nằm trong data/config;
+  visual nằm trong CSS; không nhét logic game trở lại `index.html`.
+- Game lỗi không được làm hỏng portfolio. Không dependency/animation library
+  nặng, không autoplay, không layout shift, luôn có reduced-motion.
+- Asset/link dùng đường dẫn tương đối tương thích project site. Không hard-code
+  `/garden/`; route tương lai là thư mục thật `garden/index.html`.
+- Hidden Egg không xuất hiện trong navigation và không có wording “click me”.
+  Placement desktop đã khóa tại bụi cỏ dưới chân nhân vật đứng cạnh album lớn;
+  mobile dùng mép dưới hero khi không có đủ không gian sạch.
+- Debug helper chỉ có ở local preview; production không có control debug.
+- Trước mỗi commit: fetch/so sánh `origin/main`, test, `git diff --check`, stage
+  đúng file. Không dùng `git add .`/`git add -A`; không cuốn `_to_delete/`,
+  `.command` hoặc deploy log.
+- Không push/deploy cho đến khi Ali duyệt trực tiếp. Deploy vẫn giữ luồng
+  `.command` có bước pull trước push; không tự bỏ qua điểm duyệt này.
