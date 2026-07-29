@@ -6,20 +6,37 @@
 .hidden-egg-pocket {
   position:absolute;
   z-index:16;
-  left:47vw;
-  bottom:clamp(4.5rem, 11vh, 7.5rem);
-  width:48px;
-  height:48px;
+  left:calc(70vw - clamp(71px, 4.9vw, 98px) - 4rem);
+  bottom:clamp(3.75rem, 7.2vh, 5.25rem);
+  width:56px;
+  height:56px;
   pointer-events:auto;
+  isolation:isolate;
+}
+
+.hidden-egg-pocket::after {
+  content:'';
+  position:absolute;
+  z-index:2;
+  left:-4px;
+  bottom:0;
+  width:64px;
+  height:26px;
+  background:url('../images/hero/dandelion-garden/grass-clump-3.png') center bottom/contain no-repeat;
+  opacity:.72;
+  filter:blur(.35px) saturate(.82) brightness(.98);
+  pointer-events:none;
 }
 
 .hidden-egg-trigger {
   appearance:none;
   -webkit-appearance:none;
+  position:relative;
+  z-index:1;
   display:grid;
   place-items:center;
-  width:48px;
-  height:48px;
+  width:56px;
+  height:56px;
   padding:0;
   border:0;
   border-radius:50%;
@@ -39,8 +56,8 @@
 .hidden-egg-shell {
   position:relative;
   display:block;
-  width:21px;
-  height:27px;
+  width:36px;
+  height:45px;
   border-radius:52% 48% 48% 52% / 60% 60% 40% 40%;
   transform:rotate(7deg);
   background:
@@ -73,8 +90,17 @@
 .hidden-egg-trigger:hover .hidden-egg-shell,
 .hidden-egg-trigger:focus-visible .hidden-egg-shell {
   opacity:1;
-  transform:translateY(-2px) rotate(3deg);
-  filter:brightness(1.06);
+  transform:translateY(-2px) rotate(4deg);
+  filter:brightness(1.04);
+}
+
+.hidden-egg-trigger[data-discovered='false'] .hidden-egg-shell {
+  animation:hiddenEggIdle 9.4s ease-in-out infinite;
+}
+
+.hidden-egg-trigger[data-discovered='false']:hover .hidden-egg-shell,
+.hidden-egg-trigger[data-discovered='false']:focus-visible .hidden-egg-shell {
+  animation:none;
 }
 
 .hidden-egg-trigger[data-stage='1'] .hidden-egg-shell {
@@ -102,6 +128,7 @@
 
 .hidden-egg-message {
   position:absolute;
+  z-index:3;
   left:50%;
   bottom:calc(100% + .6rem);
   width:max-content;
@@ -135,29 +162,50 @@
   50% { transform:translateY(-1px) rotate(5deg); }
 }
 
+@keyframes hiddenEggIdle {
+  0%, 54%, 73%, 100% { transform:rotate(7deg); }
+  59% { transform:translateY(-1px) rotate(5.5deg); }
+  63% { transform:translateY(-2px) rotate(8.5deg); }
+  67% { transform:translateY(-1px) rotate(6deg); }
+}
+
 @keyframes hiddenEggMessageIn {
   from { opacity:0; transform:translate(-50%, 5px); }
   to { opacity:1; transform:translate(-50%, 0); }
 }
 
-@media (max-width:900px) {
+@media (max-width:900px) and (min-width:621px) and (max-aspect-ratio:1.18) {
   .hidden-egg-pocket {
     left:auto;
-    right:8vw;
-    top:50svh;
-    bottom:auto;
+    right:calc(20vw + clamp(71px, 7.5vw, 85px) + 8.5rem);
+    bottom:clamp(1.7rem, 3.8vh, 2.8rem);
   }
 }
 
 @media (max-width:620px) {
   .hidden-egg-pocket {
-    right:5vw;
-    top:58svh;
+    left:auto;
+    right:6vw;
+    top:auto;
+    bottom:.75rem;
+    width:52px;
+    height:52px;
+  }
+
+  .hidden-egg-trigger {
+    width:52px;
+    height:52px;
   }
 
   .hidden-egg-shell {
-    width:20px;
-    height:26px;
+    width:30px;
+    height:38px;
+  }
+
+  .hidden-egg-pocket::after {
+    left:-2px;
+    width:56px;
+    height:22px;
   }
 
   .hidden-egg-message {
