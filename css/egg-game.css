@@ -1,0 +1,197 @@
+/*
+ * Hidden Egg MVP — lightweight placeholder art.
+ * Replace .hidden-egg-shell with a sprite later; the hit area and state hooks
+ * can stay unchanged.
+ */
+.hidden-egg-pocket {
+  position:absolute;
+  z-index:16;
+  left:47vw;
+  bottom:clamp(4.5rem, 11vh, 7.5rem);
+  width:48px;
+  height:48px;
+  pointer-events:auto;
+}
+
+.hidden-egg-trigger {
+  appearance:none;
+  -webkit-appearance:none;
+  display:grid;
+  place-items:center;
+  width:48px;
+  height:48px;
+  padding:0;
+  border:0;
+  border-radius:50%;
+  background:transparent;
+  color:#efe4bd;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+
+.hidden-egg-trigger:focus-visible {
+  outline:2px solid rgba(255,247,213,.95);
+  outline-offset:3px;
+  background:rgba(255,250,226,.12);
+}
+
+.hidden-egg-shell {
+  position:relative;
+  display:block;
+  width:21px;
+  height:27px;
+  border-radius:52% 48% 48% 52% / 60% 60% 40% 40%;
+  transform:rotate(7deg);
+  background:
+    radial-gradient(circle at 36% 28%, rgba(255,255,245,.9) 0 8%, transparent 9%),
+    radial-gradient(circle at 62% 58%, rgba(135,115,66,.16) 0 5%, transparent 6%),
+    linear-gradient(145deg, #fff8db 0%, #e6d39a 62%, #bda86d 100%);
+  box-shadow:
+    inset -3px -4px 6px rgba(89,72,36,.2),
+    0 4px 7px rgba(35,48,24,.28);
+  opacity:.72;
+  transition:
+    transform .28s ease,
+    opacity .28s ease,
+    filter .28s ease,
+    box-shadow .28s ease;
+}
+
+.hidden-egg-shell::after {
+  content:'';
+  position:absolute;
+  inset:4px 5px 6px;
+  opacity:0;
+  background:
+    linear-gradient(124deg, transparent 0 42%, rgba(72,61,34,.68) 43% 48%, transparent 49%),
+    linear-gradient(56deg, transparent 0 54%, rgba(72,61,34,.6) 55% 60%, transparent 61%);
+  clip-path:polygon(42% 0, 68% 28%, 49% 48%, 71% 75%, 54% 100%, 35% 73%, 49% 49%, 28% 27%);
+  transition:opacity .28s ease;
+}
+
+.hidden-egg-trigger:hover .hidden-egg-shell,
+.hidden-egg-trigger:focus-visible .hidden-egg-shell {
+  opacity:1;
+  transform:translateY(-2px) rotate(3deg);
+  filter:brightness(1.06);
+}
+
+.hidden-egg-trigger[data-stage='1'] .hidden-egg-shell {
+  opacity:.88;
+  box-shadow:
+    inset -3px -4px 6px rgba(89,72,36,.18),
+    0 4px 8px rgba(35,48,24,.24),
+    0 0 13px rgba(244,221,143,.28);
+}
+
+.hidden-egg-trigger[data-stage='2'] .hidden-egg-shell::after,
+.hidden-egg-trigger[data-stage='3'] .hidden-egg-shell::after {
+  opacity:1;
+}
+
+.hidden-egg-trigger[data-stage='3'] .hidden-egg-shell {
+  opacity:1;
+  filter:brightness(1.08);
+  box-shadow:
+    inset -3px -4px 6px rgba(89,72,36,.14),
+    0 4px 8px rgba(35,48,24,.22),
+    0 0 18px rgba(255,236,166,.5);
+  animation:hiddenEggReady 3.8s ease-in-out infinite;
+}
+
+.hidden-egg-message {
+  position:absolute;
+  left:50%;
+  bottom:calc(100% + .6rem);
+  width:max-content;
+  max-width:min(240px, 72vw);
+  padding:.72rem .85rem;
+  border:1px solid rgba(71,94,51,.22);
+  border-radius:14px;
+  background:rgba(255,249,226,.92);
+  color:#25402d;
+  box-shadow:0 12px 32px rgba(28,49,25,.16);
+  font:400 .76rem/1.48 'Instrument Sans', sans-serif;
+  text-align:left;
+  transform:translateX(-50%);
+  pointer-events:none;
+}
+
+.hidden-egg-message[hidden] {
+  display:none;
+}
+
+.hidden-egg-message span {
+  display:block;
+}
+
+.hidden-egg-message.is-visible {
+  animation:hiddenEggMessageIn .28s ease both;
+}
+
+@keyframes hiddenEggReady {
+  0%, 100% { transform:rotate(7deg); }
+  50% { transform:translateY(-1px) rotate(5deg); }
+}
+
+@keyframes hiddenEggMessageIn {
+  from { opacity:0; transform:translate(-50%, 5px); }
+  to { opacity:1; transform:translate(-50%, 0); }
+}
+
+@media (max-width:900px) {
+  .hidden-egg-pocket {
+    left:auto;
+    right:8vw;
+    top:50svh;
+    bottom:auto;
+  }
+}
+
+@media (max-width:620px) {
+  .hidden-egg-pocket {
+    right:5vw;
+    top:58svh;
+  }
+
+  .hidden-egg-shell {
+    width:20px;
+    height:26px;
+  }
+
+  .hidden-egg-message {
+    left:auto;
+    right:0;
+    transform:none;
+    text-align:right;
+  }
+
+  .hidden-egg-message.is-visible {
+    animation:hiddenEggMessageInMobile .28s ease both;
+  }
+}
+
+@keyframes hiddenEggMessageInMobile {
+  from { opacity:0; transform:translateY(5px); }
+  to { opacity:1; transform:none; }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .hidden-egg-shell,
+  .hidden-egg-shell::after {
+    transition:none;
+    animation:none !important;
+  }
+
+  .hidden-egg-message.is-visible {
+    animation:none;
+  }
+}
+
+body.no-motion .hidden-egg-shell,
+body.no-motion .hidden-egg-shell::after,
+body.no-motion .hidden-egg-message {
+  transition:none !important;
+  animation:none !important;
+}

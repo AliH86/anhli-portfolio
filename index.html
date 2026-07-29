@@ -12,7 +12,10 @@
 <link rel="preload" as="image" href="./images/hero/dandelion-garden/plane-mid.webp" media="(min-width: 621px)"/>
 <link rel="preload" as="image" href="./images/hero/dandelion-garden/dandelion-scene-master.jpg" media="(max-width: 620px)"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="./css/egg-game.css"/>
 <script src="./js/world-state.js" defer></script>
+<script src="./data/egg-game-config.js" defer></script>
+<script src="./js/egg-game.js" defer></script>
 <style>
 /* ============================================
    RESET & VARS
@@ -5280,6 +5283,12 @@ body.no-motion #music .listening-room .album-drawer .np-vinyl{ display:none !imp
       </div>
     </div>
     <div class="hga-layer hero-album-stage" id="heroAlbumStage"></div>
+  </div>
+  <div class="hidden-egg-pocket">
+    <button class="hidden-egg-trigger" id="hiddenEgg" data-testid="hidden-egg" data-stage="0" data-discovered="false" type="button" aria-label="Khám phá vật nhỏ nằm giữa cỏ" aria-describedby="hiddenEggMessage">
+      <span class="hidden-egg-shell" aria-hidden="true"></span>
+    </button>
+    <div class="hidden-egg-message" id="hiddenEggMessage" role="status" aria-live="polite" aria-atomic="true" hidden></div>
   </div>
   <div class="poster-foreground" aria-hidden="true"></div>
   <div class="hero-tint"></div>
