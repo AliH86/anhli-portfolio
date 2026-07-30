@@ -1,7 +1,6 @@
 /*
- * Hidden Egg MVP — lightweight placeholder art.
- * Replace .hidden-egg-shell with a sprite later; the hit area and state hooks
- * can stay unchanged.
+ * Hidden Egg + hatch foundation — lightweight placeholder art.
+ * Shell and chicken can become sprites later; hit area and state hooks stay.
  */
 .hidden-egg-pocket {
   position:absolute;
@@ -75,6 +74,52 @@
     box-shadow .28s ease;
 }
 
+.hidden-egg-chicken {
+  position:absolute;
+  left:50%;
+  bottom:7px;
+  width:31px;
+  height:34px;
+  border-radius:48% 52% 44% 46% / 42% 45% 55% 58%;
+  background:
+    radial-gradient(circle at 64% 31%, #302816 0 1.1px, transparent 1.5px),
+    radial-gradient(circle at 35% 28%, rgba(255,255,244,.9) 0 7%, transparent 8%),
+    linear-gradient(145deg, #fff5ba 0%, #ebcf6f 68%, #c69a43 100%);
+  box-shadow:
+    inset -3px -4px 5px rgba(119,78,23,.17),
+    0 4px 7px rgba(35,48,24,.24);
+  opacity:0;
+  transform:translate(-50%, 9px) scale(.72);
+  transition:
+    opacity .28s ease,
+    transform .28s ease,
+    filter .28s ease;
+  pointer-events:none;
+}
+
+.hidden-egg-chicken::before {
+  content:'';
+  position:absolute;
+  top:11px;
+  right:-5px;
+  width:8px;
+  height:6px;
+  background:#d97943;
+  clip-path:polygon(0 0, 100% 50%, 0 100%);
+}
+
+.hidden-egg-chicken::after {
+  content:'';
+  position:absolute;
+  left:7px;
+  top:-5px;
+  width:14px;
+  height:9px;
+  border-radius:55% 45% 48% 52%;
+  background:#e79b50;
+  clip-path:polygon(0 100%, 18% 22%, 42% 62%, 66% 0, 100% 100%);
+}
+
 .hidden-egg-shell::after {
   content:'';
   position:absolute;
@@ -126,6 +171,30 @@
   animation:hiddenEggReady 3.8s ease-in-out infinite;
 }
 
+.hidden-egg-trigger[data-hatched='true'] .hidden-egg-shell {
+  opacity:0;
+  transform:translateY(8px) rotate(14deg) scale(.78);
+  animation:none;
+}
+
+.hidden-egg-trigger[data-hatched='true'] .hidden-egg-chicken {
+  opacity:1;
+  transform:translate(-50%, 0) scale(1);
+}
+
+.hidden-egg-trigger[data-hatched='true']:hover .hidden-egg-chicken,
+.hidden-egg-trigger[data-hatched='true']:focus-visible .hidden-egg-chicken {
+  transform:translate(-50%, -2px) rotate(-2deg) scale(1.02);
+}
+
+.hidden-egg-trigger.is-hatching .hidden-egg-shell {
+  animation:hiddenEggShellOpen .72s cubic-bezier(.2,.72,.24,1) both;
+}
+
+.hidden-egg-trigger.is-hatching .hidden-egg-chicken {
+  animation:hiddenEggChickenReveal .82s .18s cubic-bezier(.18,.78,.22,1) both;
+}
+
 .hidden-egg-message {
   position:absolute;
   z-index:3;
@@ -174,6 +243,18 @@
   to { opacity:1; transform:translate(-50%, 0); }
 }
 
+@keyframes hiddenEggShellOpen {
+  0% { opacity:1; transform:rotate(7deg) scale(1); }
+  38% { opacity:1; transform:translateY(-3px) rotate(-5deg) scale(1.04); }
+  100% { opacity:0; transform:translateY(9px) rotate(15deg) scale(.76); }
+}
+
+@keyframes hiddenEggChickenReveal {
+  0% { opacity:0; transform:translate(-50%, 10px) scale(.68); }
+  58% { opacity:1; transform:translate(-50%, -3px) scale(1.05); }
+  100% { opacity:1; transform:translate(-50%, 0) scale(1); }
+}
+
 @media (max-width:900px) and (min-width:621px) and (max-aspect-ratio:1.18) {
   .hidden-egg-pocket {
     left:auto;
@@ -202,6 +283,12 @@
     height:38px;
   }
 
+  .hidden-egg-chicken {
+    bottom:7px;
+    width:27px;
+    height:30px;
+  }
+
   .hidden-egg-pocket::after {
     left:-2px;
     width:56px;
@@ -227,7 +314,8 @@
 
 @media (prefers-reduced-motion:reduce) {
   .hidden-egg-shell,
-  .hidden-egg-shell::after {
+  .hidden-egg-shell::after,
+  .hidden-egg-chicken {
     transition:none;
     animation:none !important;
   }
@@ -239,6 +327,7 @@
 
 body.no-motion .hidden-egg-shell,
 body.no-motion .hidden-egg-shell::after,
+body.no-motion .hidden-egg-chicken,
 body.no-motion .hidden-egg-message {
   transition:none !important;
   animation:none !important;

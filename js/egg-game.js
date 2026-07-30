@@ -1,5 +1,5 @@
 /*
- * Hidden Egg MVP.
+ * Hidden Egg + hatch foundation.
  * State transitions are independent of the DOM so storage failure cannot
  * interrupt the portfolio and the same rules can be unit-tested.
  */
@@ -11,6 +11,12 @@
   var trigger = root.document && root.document.getElementById('hiddenEgg');
   var message = root.document && root.document.getElementById('hiddenEggMessage');
   var messageTimer = 0;
+  var hatchTimer = 0;
+  var location = root.location || {};
+  var developmentHost = location.protocol === 'file:'
+    || location.hostname === 'localhost'
+    || location.hostname === '127.0.0.1'
+    || location.hostname === '[::1]';
 
   function clone(value) {
     return JSON.parse(JSON.stringify(value));
@@ -26,6 +32,8 @@
     var copyConfig = config.microcopy || {};
     if (result.kind === 'first-discovery') return copyConfig.firstDiscovery || [];
     if (result.kind === 'same-day') return copyConfig.sameDay || [];
+    if (result.kind === 'hatched') return copyConfig.hatched || [];
+    if (result.kind === 'chicken') return copyConfig.chicken || [];
     return (copyConfig.stages && copyConfig.stages[result.state.egg.stage])
       || copyConfig.sameDay
       || [];
@@ -46,6 +54,11 @@
 
     state.egg.stage = clampStage(state.egg.stage);
 
+    if (state.egg.hatched) {
+      state.chicken.unlocked = true;
+      return { state: state, kind: 'chicken', changed: false, dateKey: dateKey };
+    }
+
     if (!state.egg.discovered) {
       state.egg.discovered = true;
       state.egg.discoveredAt = interactionDate.toISOString();
@@ -56,6 +69,14 @@
 
     if (state.egg.lastInteractionDate === dateKey) {
       return { state: state, kind: 'same-day', changed: false, dateKey: dateKey };
+    }
+
+    if (state.egg.stage === 3) {
+      state.egg.hatched = true;
+      state.egg.hatchedAt = interactionDate.toISOString();
+      state.egg.lastInteractionDate = dateKey;
+      state.chicken.unlocked = true;
+      return { state: state, kind: 'hatched', changed: true, dateKey: dateKey };
     }
 
     var previousStage = state.egg.stage;
@@ -76,6 +97,24 @@
     var stage = clampStage(state.egg.stage);
     trigger.dataset.stage = String(stage);
     trigger.dataset.discovered = state.egg.discovered ? 'true' : 'false';
+    trigger.dataset.hatched = state.egg.hatched ? 'true' : 'false';
+    trigger.setAttribute(
+      'aria-label',
+      state.egg.hatched
+        ? (config.hatchedAriaLabel || 'Chào bé Gà trong bụi cỏ')
+        : (config.ariaLabel || 'Khám phá vật nhỏ nằm giữa cỏ')
+    );
+  }
+
+  function playHatchReveal() {
+    if (!trigger || !trigger.classList) return;
+    root.clearTimeout(hatchTimer);
+    trigger.classList.remove('is-hatching');
+    void trigger.offsetWidth;
+    trigger.classList.add('is-hatching');
+    hatchTimer = root.setTimeout(function finishHatchReveal() {
+      trigger.classList.remove('is-hatching');
+    }, 1100);
   }
 
   function showMessage(lines) {
@@ -102,6 +141,7 @@
     var result = applyInteraction(world.loadWorldState(), date);
     if (result.kind !== 'invalid-date') world.saveWorldState(result.state);
     render(result.state);
+    if (result.kind === 'hatched') playHatchReveal();
     showMessage(getCopy(result));
     return result;
   }
@@ -109,6 +149,7 @@
   function resetEggState() {
     var state = world.loadWorldState();
     state.egg = clone(world.getDefaultWorldState().egg);
+    state.chicken.unlocked = false;
     world.saveWorldState(state);
     render(state);
     if (message) message.hidden = true;
@@ -124,6 +165,7 @@
     state.egg.discovered = nextStage > 0;
     state.egg.discoveredAt = nextStage > 0 ? now.toISOString() : null;
     state.egg.lastInteractionDate = nextStage > 0 ? world.getLocalDateKey(now) : null;
+    state.chicken.unlocked = false;
     world.saveWorldState(state);
     render(state);
     return clone(state.egg);
@@ -139,17 +181,31 @@
     return next;
   }
 
+  function getInitialRenderState() {
+    var state = world.loadWorldState();
+    var hatchPreview = developmentHost
+      && /(?:^|[?&])egg-preview=hatched(?:&|$)/.test(location.search || '');
+    if (!hatchPreview) return state;
+
+    state = clone(state);
+    state.egg.discovered = true;
+    state.egg.stage = 3;
+    state.egg.hatched = true;
+    state.chicken.unlocked = true;
+    return state;
+  }
+
   var api = {
     applyInteraction: applyInteraction,
     interact: interact,
-    render: render
+    render: render,
+    playHatchReveal: playHatchReveal
   };
   root.AnhLiEggGame = api;
 
   if (!world || !trigger) return;
 
-  trigger.setAttribute('aria-label', config.ariaLabel || 'Khám phá vật nhỏ nằm giữa cỏ');
-  render(world.loadWorldState());
+  render(getInitialRenderState());
   trigger.addEventListener('click', function onEggClick(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -160,12 +216,6 @@
    * Console-only helpers are exposed on local/file previews, never on the
    * GitHub Pages production hostname. No debug controls are added to the UI.
    */
-  var location = root.location || {};
-  var developmentHost = location.protocol === 'file:'
-    || location.hostname === 'localhost'
-    || location.hostname === '127.0.0.1'
-    || location.hostname === '[::1]';
-
   if (developmentHost) {
     root.AnhLiEggDebug = {
       getState: function getEggState() {

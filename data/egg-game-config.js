@@ -7,6 +7,7 @@
 
   root.ANHLI_EGG_GAME_CONFIG = {
     ariaLabel: 'Khám phá vật nhỏ nằm giữa cỏ',
+    hatchedAriaLabel: 'Chào bé Gà trong bụi cỏ',
     microcopy: {
       firstDiscovery: [
         'Bạn vừa tìm thấy một quả trứng.',
@@ -16,6 +17,14 @@
       sameDay: [
         'Hôm nay nó đã đủ ấm rồi.',
         'Thử ghé lại vào một ngày khác nha.'
+      ],
+      hatched: [
+        'Một tiếng tách vang lên.',
+        'Xin chào, bé Gà.'
+      ],
+      chicken: [
+        'Bé Gà vẫn ở đây.',
+        'Nó nhận ra bạn rồi.'
       ],
       stages: {
         2: ['Có một tiếng tách rất khẽ.'],

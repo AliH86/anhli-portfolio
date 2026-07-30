@@ -38,7 +38,7 @@ function plain(value) {
 {
   const api = loadApi();
   const state = plain(api.loadWorldState());
-  assert.equal(state.version, 1, 'missing state uses v1 defaults');
+  assert.equal(state.version, 2, 'missing state uses v2 defaults');
   assert.deepEqual(state.player.uniqueVisitDates, []);
   assert.equal(state.egg.stage, 0);
 }
@@ -59,10 +59,23 @@ function plain(value) {
     egg: { stage: 99 },
     futureFeature: { keepsItsData: true }
   }));
-  assert.equal(migrated.version, 1);
+  assert.equal(migrated.version, 2);
   assert.deepEqual(migrated.player.uniqueVisitDates, ['2026-07-27']);
   assert.equal(migrated.egg.stage, 3);
   assert.deepEqual(migrated.futureFeature, { keepsItsData: true }, 'unknown fields survive migration');
+}
+
+{
+  const api = loadApi();
+  const migrated = api.migrateWorldState({
+    version: 1,
+    egg: { hatched: true, hatchedAt: '2026-07-30T08:00:00.000Z' },
+    chicken: { unlocked: false },
+    futureField: { keep: true }
+  });
+  assert.equal(migrated.version, 2);
+  assert.equal(migrated.chicken.unlocked, true, 'hatched v1 state unlocks its chicken');
+  assert.deepEqual(plain(migrated.futureField), { keep: true });
 }
 
 {

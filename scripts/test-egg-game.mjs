@@ -36,7 +36,7 @@ function loadGame(sharedMap = new Map()) {
   return sandbox;
 }
 
-function loadBrowserLike(hostname) {
+function loadBrowserLike(hostname, search = '') {
   const sharedMap = new Map();
   const listeners = {};
   const trigger = {
@@ -54,7 +54,7 @@ function loadBrowserLike(hostname) {
   const sandbox = {
     localStorage: makeStorage(sharedMap),
     crypto: { randomUUID: () => 'browser-like-player' },
-    location: { protocol: 'http:', hostname },
+    location: { protocol: 'http:', hostname, search },
     document,
     Date,
     Math,
@@ -95,10 +95,23 @@ function plain(value) {
   assert.equal(ready.state.egg.stage, 3);
   assert.equal(ready.state.egg.hatched, false);
 
-  const capped = app.AnhLiEggGame.applyInteraction(ready.state, new Date(2026, 6, 30, 8));
-  assert.equal(capped.kind, 'stage-ready');
-  assert.equal(capped.state.egg.stage, 3);
-  assert.equal(capped.state.egg.hatched, false);
+  const sameReadyDay = app.AnhLiEggGame.applyInteraction(ready.state, new Date(2026, 6, 29, 18));
+  assert.equal(sameReadyDay.kind, 'same-day');
+  assert.equal(sameReadyDay.state.egg.hatched, false);
+
+  const hatched = app.AnhLiEggGame.applyInteraction(ready.state, new Date(2026, 6, 30, 8));
+  assert.equal(hatched.kind, 'hatched');
+  assert.equal(hatched.changed, true);
+  assert.equal(hatched.state.egg.stage, 3);
+  assert.equal(hatched.state.egg.hatched, true);
+  assert.equal(hatched.state.egg.hatchedAt, new Date(2026, 6, 30, 8).toISOString());
+  assert.equal(hatched.state.egg.lastInteractionDate, '2026-07-30');
+  assert.equal(hatched.state.chicken.unlocked, true);
+
+  const onceOnly = app.AnhLiEggGame.applyInteraction(hatched.state, new Date(2026, 6, 31, 8));
+  assert.equal(onceOnly.kind, 'chicken');
+  assert.equal(onceOnly.changed, false);
+  assert.equal(onceOnly.state.egg.hatchedAt, hatched.state.egg.hatchedAt);
 }
 
 {
@@ -111,6 +124,25 @@ function plain(value) {
   const afterRefresh = refreshedPage.AnhLiEggGame.interact(new Date(2026, 6, 27, 14));
   assert.equal(afterRefresh.kind, 'same-day');
   assert.equal(afterRefresh.state.egg.stage, 1, 'refresh does not advance the egg');
+}
+
+{
+  const shared = new Map();
+  const app = loadGame(shared);
+  let state = app.AnhLiWorld.getDefaultWorldState();
+  state.egg.discovered = true;
+  state.egg.discoveredAt = new Date(2026, 6, 27, 9).toISOString();
+  state.egg.stage = 3;
+  state.egg.lastInteractionDate = '2026-07-29';
+  app.AnhLiWorld.saveWorldState(state);
+
+  const hatched = app.AnhLiEggGame.interact(new Date(2026, 6, 30, 9));
+  const hatchedAt = hatched.state.egg.hatchedAt;
+  const refreshed = loadGame(shared);
+  const greeting = refreshed.AnhLiEggGame.interact(new Date(2026, 6, 30, 14));
+  assert.equal(greeting.kind, 'chicken');
+  assert.equal(greeting.state.egg.hatchedAt, hatchedAt, 'refresh preserves the first hatch time');
+  assert.equal(greeting.state.chicken.unlocked, true);
 }
 
 {
@@ -150,12 +182,22 @@ function plain(value) {
   assert.equal(local.sandbox.AnhLiEggDebug.setStage(2).stage, 2);
   assert.equal(local.trigger.dataset.stage, '2');
   assert.equal(local.sandbox.AnhLiEggDebug.nextDay().state.egg.stage, 3);
+  assert.equal(local.sandbox.AnhLiEggDebug.nextDay().kind, 'hatched');
+  assert.equal(local.trigger.dataset.hatched, 'true');
+  assert.equal(local.sandbox.AnhLiEggDebug.getState().hatched, true);
   assert.equal(local.sandbox.AnhLiEggDebug.reset().stage, 0);
   assert.equal(local.trigger.dataset.stage, '0');
+  assert.equal(local.trigger.dataset.hatched, 'false');
   assert.equal(typeof local.listeners.click, 'function', 'semantic button receives one click handler');
 
   const production = loadBrowserLike('alih86.github.io');
   assert.equal(production.sandbox.AnhLiEggDebug, undefined, 'debug helpers stay off production');
+
+  const preview = loadBrowserLike('localhost', '?egg-preview=hatched');
+  assert.equal(preview.trigger.dataset.hatched, 'true', 'local hatch preview renders the chicken');
+
+  const ignoredPreview = loadBrowserLike('alih86.github.io', '?egg-preview=hatched');
+  assert.equal(ignoredPreview.trigger.dataset.hatched, 'false', 'production ignores preview flags');
 }
 
 console.log('egg-game: all tests passed');

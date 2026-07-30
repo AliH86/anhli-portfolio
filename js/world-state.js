@@ -8,7 +8,7 @@
   'use strict';
 
   var STORAGE_KEY = 'anhli.worldState';
-  var CURRENT_VERSION = 1;
+  var CURRENT_VERSION = 2;
   var DATE_KEY_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 
   function isPlainObject(value) {
@@ -105,8 +105,9 @@
     var state = mergeWithDefaults(getDefaultWorldState(), parsed);
     var sourceVersion = Number(parsed.version);
 
-    // Version 0 / unversioned data has the same known field names; filling the
-    // v1 defaults is its migration. Future versions are never downgraded.
+    // Version 0 / unversioned data and v1 use the same known field names.
+    // Filling defaults plus the hatch invariant is their v2 migration.
+    // Future versions are never downgraded.
     state.version = Number.isInteger(sourceVersion) && sourceVersion > CURRENT_VERSION
       ? sourceVersion
       : CURRENT_VERSION;
@@ -130,6 +131,7 @@
     state.egg.hatchedAt = safeDateOrNull(state.egg.hatchedAt);
 
     state.chicken.unlocked = state.chicken.unlocked === true;
+    if (state.egg.hatched) state.chicken.unlocked = true;
     state.chicken.food = Math.max(0, Number.isFinite(Number(state.chicken.food))
       ? Number(state.chicken.food)
       : 0);
