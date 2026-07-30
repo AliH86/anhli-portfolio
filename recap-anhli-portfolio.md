@@ -1178,3 +1178,62 @@ xuất:
   `.command` hoặc deploy log.
 - Không push/deploy cho đến khi Ali duyệt trực tiếp. Deploy vẫn giữ luồng
   `.command` có bước pull trước push; không tự bỏ qua điểm duyệt này.
+
+## Cổ tích Vườn Bồ Công Anh — Phase 2 (30/7/2026)
+
+### Hatch rule đã khóa
+
+- Ali duyệt tiếp Phase 2 theo rule đã đề xuất: egg ở stage 3 chỉ nở khi người
+  dùng tương tác vào một ngày local mới. Cùng ngày vừa đạt stage 3 vẫn chưa nở.
+- Lần hatch hợp lệ duy nhất ghi `egg.hatched=true`,
+  `egg.hatchedAt=<ISO>`, cập nhật `egg.lastInteractionDate` và mở
+  `chicken.unlocked=true`.
+- Sau khi đã nở, mọi lần tương tác tiếp theo chỉ là gặp lại Gà; không thay
+  `hatchedAt`, không tạo thêm progression hoặc phần thưởng.
+
+### Đã triển khai
+
+- `js/world-state.js` tăng schema từ v1 lên v2. Migration giữ unknown fields và
+  tự sửa invariant: state cũ có `egg.hatched=true` luôn mở khóa Gà.
+- `js/egg-game.js` thêm transition `hatched`/`chicken`, hatch một lần, render
+  bền qua refresh, aria label sau nở và reveal class ngắn. Logic state tiếp tục
+  tách khỏi DOM.
+- `data/egg-game-config.js` bổ sung microcopy hatch/gặp lại Gà và aria label;
+  không nhét copy vào UI logic.
+- `index.html` chỉ thêm hook `data-hatched` và một span Gà trong semantic
+  button hiện có; không thêm modal, navigation hoặc route.
+- `css/egg-game.css` thêm Gà placeholder CSS nhẹ, shell-open/chicken-reveal
+  ngắn và phản ứng hover/focus nhỏ. `prefers-reduced-motion` cùng
+  `body.no-motion` vẫn tắt transition/animation.
+- Giữ nguyên placement đã khóa của pocket, hit area desktop `56×56px` và
+  mobile `52×52px`; Gà dùng cùng visual group nên không tạo layout shift.
+- Local preview có thể mở `?egg-preview=hatched` để kiểm tra visual sau nở mà
+  không ghi state. Flag chỉ hoạt động trên `file:`, `localhost`, `127.0.0.1`
+  hoặc `[::1]`; production bỏ qua.
+
+### Validation và commit
+
+- World-state tests: pass.
+- Egg-game tests: pass, gồm cùng ngày, ngày mới, hatch một lần, refresh giữ
+  timestamp, corrupted storage, v1 migration, local preview và production
+  guard.
+- JavaScript syntax và `git diff --check`: pass.
+- Browser QA: desktop 1440/1024, tablet portrait 820 và mobile 390; không
+  horizontal overflow, hit area không đổi, aria label chuyển đúng và browser
+  console không có warning/error.
+- Trước commit đã fetch và xác nhận `origin/main` không có commit mới; local
+  `main` đang đi trước remote.
+- Commit Phase 2: `b192810` —
+  `feat: add egg hatch and chicken foundation`.
+- Chưa push và chưa deploy production.
+
+### Cố ý chưa làm / scope kế tiếp chưa khóa
+
+- Gà hiện chỉ là placeholder CSS để xác nhận flow, chưa phải final sprite/art.
+- Không food points, feeding, mood progression, music reward, Daily Discovery,
+  collection hoặc achievement.
+- Không tạo `garden/index.html`, không thêm link `/garden/`.
+- Không backend, account, analytics mới hoặc đồng bộ đa thiết bị.
+- Phase tiếp theo chưa được khóa. Trước khi code cần chọn một mục tiêu nhỏ:
+  polish final art/motion của Gà hoặc thiết kế interaction đầu tiên cho Gà;
+  không kéo nhiều hệ progression vào cùng một phase.
