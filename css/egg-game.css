@@ -1,6 +1,10 @@
 /*
- * Hidden Egg + hatch foundation — lightweight placeholder art.
- * Shell and chicken can become sprites later; hit area and state hooks stay.
+ * Hidden Egg + hatch foundation.
+ * Shell/chicken art are real PNG sprites in assets/game/egg/ (derived from
+ * Ali's pixel concept set, 31/7/2026) instead of CSS-drawn shapes. Swapping
+ * a state's art later only needs a new file at the same path — no CSS or
+ * logic change. Hit area, placement and state hooks are unchanged from the
+ * approved Phase 1/2 layout.
  */
 .hidden-egg-pocket {
   position:absolute;
@@ -57,21 +61,32 @@
   display:block;
   width:36px;
   height:45px;
-  border-radius:52% 48% 48% 52% / 60% 60% 40% 40%;
   transform:rotate(7deg);
-  background:
-    radial-gradient(circle at 36% 28%, rgba(255,255,245,.9) 0 8%, transparent 9%),
-    radial-gradient(circle at 62% 58%, rgba(135,115,66,.16) 0 5%, transparent 6%),
-    linear-gradient(145deg, #fff8db 0%, #e6d39a 62%, #bda86d 100%);
-  box-shadow:
-    inset -3px -4px 6px rgba(89,72,36,.2),
-    0 4px 7px rgba(35,48,24,.28);
+  background-image:url('../assets/game/egg/egg-dormant.png');
+  background-repeat:no-repeat;
+  background-position:center bottom;
+  background-size:contain;
+  filter:drop-shadow(0 4px 5px rgba(35,48,24,.28));
   opacity:.72;
   transition:
     transform .28s ease,
     opacity .28s ease,
-    filter .28s ease,
-    box-shadow .28s ease;
+    filter .28s ease;
+}
+
+/* Stage art is a real sprite per state (dormant/warm/cracked/ready) — swap
+   the file, no logic change. "ready" reuses the cracked crack pattern with
+   more glow/brightness so the surprise isn't spoiled before hatch. */
+.hidden-egg-trigger[data-stage='1'] .hidden-egg-shell {
+  background-image:url('../assets/game/egg/egg-warm.png');
+}
+
+.hidden-egg-trigger[data-stage='2'] .hidden-egg-shell {
+  background-image:url('../assets/game/egg/egg-cracked.png');
+}
+
+.hidden-egg-trigger[data-stage='3'] .hidden-egg-shell {
+  background-image:url('../assets/game/egg/egg-ready.png');
 }
 
 .hidden-egg-chicken {
@@ -80,14 +95,11 @@
   bottom:7px;
   width:31px;
   height:34px;
-  border-radius:48% 52% 44% 46% / 42% 45% 55% 58%;
-  background:
-    radial-gradient(circle at 64% 31%, #302816 0 1.1px, transparent 1.5px),
-    radial-gradient(circle at 35% 28%, rgba(255,255,244,.9) 0 7%, transparent 8%),
-    linear-gradient(145deg, #fff5ba 0%, #ebcf6f 68%, #c69a43 100%);
-  box-shadow:
-    inset -3px -4px 5px rgba(119,78,23,.17),
-    0 4px 7px rgba(35,48,24,.24);
+  background-image:url('../assets/game/egg/chicken.png');
+  background-repeat:no-repeat;
+  background-position:center bottom;
+  background-size:contain;
+  filter:drop-shadow(0 4px 5px rgba(35,48,24,.24));
   opacity:0;
   transform:translate(-50%, 9px) scale(.72);
   transition:
@@ -95,41 +107,6 @@
     transform .28s ease,
     filter .28s ease;
   pointer-events:none;
-}
-
-.hidden-egg-chicken::before {
-  content:'';
-  position:absolute;
-  top:11px;
-  right:-5px;
-  width:8px;
-  height:6px;
-  background:#d97943;
-  clip-path:polygon(0 0, 100% 50%, 0 100%);
-}
-
-.hidden-egg-chicken::after {
-  content:'';
-  position:absolute;
-  left:7px;
-  top:-5px;
-  width:14px;
-  height:9px;
-  border-radius:55% 45% 48% 52%;
-  background:#e79b50;
-  clip-path:polygon(0 100%, 18% 22%, 42% 62%, 66% 0, 100% 100%);
-}
-
-.hidden-egg-shell::after {
-  content:'';
-  position:absolute;
-  inset:4px 5px 6px;
-  opacity:0;
-  background:
-    linear-gradient(124deg, transparent 0 42%, rgba(72,61,34,.68) 43% 48%, transparent 49%),
-    linear-gradient(56deg, transparent 0 54%, rgba(72,61,34,.6) 55% 60%, transparent 61%);
-  clip-path:polygon(42% 0, 68% 28%, 49% 48%, 71% 75%, 54% 100%, 35% 73%, 49% 49%, 28% 27%);
-  transition:opacity .28s ease;
 }
 
 .hidden-egg-trigger:hover .hidden-egg-shell,
@@ -150,24 +127,21 @@
 
 .hidden-egg-trigger[data-stage='1'] .hidden-egg-shell {
   opacity:.88;
-  box-shadow:
-    inset -3px -4px 6px rgba(89,72,36,.18),
-    0 4px 8px rgba(35,48,24,.24),
-    0 0 13px rgba(244,221,143,.28);
+  filter:
+    drop-shadow(0 4px 5px rgba(35,48,24,.24))
+    drop-shadow(0 0 9px rgba(244,221,143,.35));
 }
 
-.hidden-egg-trigger[data-stage='2'] .hidden-egg-shell::after,
-.hidden-egg-trigger[data-stage='3'] .hidden-egg-shell::after {
-  opacity:1;
+.hidden-egg-trigger[data-stage='2'] .hidden-egg-shell {
+  opacity:.96;
 }
 
 .hidden-egg-trigger[data-stage='3'] .hidden-egg-shell {
   opacity:1;
-  filter:brightness(1.08);
-  box-shadow:
-    inset -3px -4px 6px rgba(89,72,36,.14),
-    0 4px 8px rgba(35,48,24,.22),
-    0 0 18px rgba(255,236,166,.5);
+  filter:
+    drop-shadow(0 4px 5px rgba(35,48,24,.22))
+    drop-shadow(0 0 14px rgba(255,236,166,.55))
+    brightness(1.05);
   animation:hiddenEggReady 3.8s ease-in-out infinite;
 }
 
