@@ -1237,3 +1237,67 @@ xuất:
 - Phase tiếp theo chưa được khóa. Trước khi code cần chọn một mục tiêu nhỏ:
   polish final art/motion của Gà hoặc thiết kế interaction đầu tiên cho Gà;
   không kéo nhiều hệ progression vào cùng một phase.
+
+## Cổ tích Vườn Bồ Công Anh — Hoàn thiện art thật cho trứng + bé Gà (31/7/2026)
+
+### Bối cảnh
+Ali gửi bộ concept pixel qua folder máy `Downloads/pé gà út` (4 trạng thái
+trứng, bé Gà út đầy đủ, bộ pose mở rộng, item pack khởi đầu). Hướng chọn: giữ
+nguyên cơ chế/logic Phase 2, chỉ thay art placeholder CSS bằng sprite thật.
+
+### Đã làm
+- Tách 5 sprite từ 2 sheet concept, xoá nền bằng dò viền nét pixel-art (không
+  dùng nguyên tấm concept sheet làm asset), lưu tại `assets/game/egg/`:
+  `egg-dormant.png`, `egg-warm.png`, `egg-cracked.png`, `egg-ready.png`,
+  `chicken.png`.
+- `egg-ready.png` = bản `cracked` tăng sáng/rực hơn — bộ concept không có art
+  riêng cho stage "ready"; đã báo Ali, chưa có phản hồi điều chỉnh riêng.
+- Sửa DUY NHẤT `css/egg-game.css`: thay background gradient/clip-path vẽ tay
+  bằng `background-image` theo `data-stage`/`data-hatched`; bỏ layer `::after`
+  vẽ vết nứt (đã nằm sẵn trong ảnh). Không đụng `index.html`/JS/config —
+  state logic, hit area, vị trí đã khoá giữ nguyên.
+- Test: `node scripts/test-world-state.mjs`, `test-egg-game.mjs` pass. QA hình
+  ảnh bằng Playwright headless trên `file://` ở 1440px/390px, đủ 4 stage +
+  hatched — không lỗi console, không horizontal overflow.
+- Quay GIF animation thật (idle → phát hiện → tăng stage → nở) gửi Ali xem
+  trực tiếp, kèm hướng dẫn debug console (`AnhLiEggDebug.setStage/nextDay/
+  reset`) để tự bấm thử trên `file://` thật.
+
+### Commit
+`b099f2e` — feat: finalize real pixel art for egg + chicken sprites. Ali yêu
+cầu trực tiếp sau khi xem ảnh + GIF ("xong rồi thì commit đi") — đã commit
+đúng 6 file (5 sprite mới + `css/egg-game.css`), KHÔNG dùng `git add -A`.
+Repo hiện đi trước `origin/main` 7 commit, CHƯA PUSH.
+
+### Việc dở dang — đọc kỹ trước khi làm tiếp
+- Ali phản hồi "trứng hơi nhỏ" → đã tăng size sprite ~28%, GIỮ NGUYÊN hit area
+  56×56/52×52 đã khoá (không dịch layout): `.hidden-egg-shell` 36×45→46×57
+  (mobile 30×38→39×49), `.hidden-egg-chicken` 31×34→40×43 (mobile
+  27×30→35×38), bottom offset chicken 7px→5px cho cân đối. Đã QA lại: không
+  overflow, không đè 2 "jewel case" cạnh bên.
+- Thay đổi size này ĐÃ ghi vào file thật trên máy Ali nhưng **CHƯA COMMIT** —
+  Ali chưa xác nhận size mới ổn chưa (đang hỏi thì chuyển sang yêu cầu recap
+  session mới). **Việc đầu tiên của session sau: hỏi lại Ali size đã ổn chưa,
+  rồi mới `git add css/egg-game.css` + commit riêng** (đừng gộp việc khác).
+- Sprite bé Gà còn sót vệt bóng mờ phía sau (glow nền gốc trong concept dính
+  sát viền nhân vật, xử lý ảnh thường không tách 100% sạch) — chấp nhận được
+  ở size hiển thị thật, có thể cải thiện sau nếu Ali muốn.
+- Bộ pose mở rộng (idle/nháy mắt/ngủ/ăn/ôm quà) và item pack (hạt, vàng, dâu,
+  bút, hoa bồ công anh, bản đồ, chìa khoá) trong 2 ảnh concept còn lại CHƯA
+  dùng — để dành phase sau, tránh gộp nhiều hệ vào một đợt.
+- `.git/index.lock`/`.git/HEAD.lock` tái xuất hiện sau MỖI lệnh git ghi khi
+  chạy qua cầu nối Cowork — không phải lỗi git thật, `mv` sang `_to_delete/`
+  là gỡ được ngay (xem AGENT-RULES.md mục 3). Không ảnh hưởng khi Ali tự chạy
+  git trên Terminal/Finder thật.
+- Chưa push, chưa deploy. Vẫn giữ luồng cũ: viết `.command` mới (có bước pull
+  trước push) rồi Ali tự bấm đúp — chưa làm ở phiên này.
+
+### Phase kế tiếp — vẫn chưa chốt
+Như Phase 2 đã ghi: chọn 1 trong 2 (polish art/motion thêm cho Gà, hoặc thiết
+kế tương tác đầu tiên cho Gà) — không gộp nhiều hệ vào cùng một phase.
+
+Có bàn sơ qua với Ali (CHƯA quyết, mới là ý tưởng, CHƯA thành brief đã khoá):
+mở rộng thành "nuôi gà ảo" kiểu Nhật — cho ăn, mặc đồ/nón/giáp (kiến trúc
+layer tách rời được gợi ý sẵn), nghe nhạc, easter egg, huy hiệu sưu tầm,
+daily hook để quay lại mỗi ngày. Đây là hướng dài hạn — **session sau đừng tự
+ý triển khai chỉ vì đọc thấy mục này**, phải hỏi Ali chốt phạm vi trước.
