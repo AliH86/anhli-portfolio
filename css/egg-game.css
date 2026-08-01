@@ -59,8 +59,8 @@
 .hidden-egg-shell {
   position:relative;
   display:block;
-  width:36px;
-  height:45px;
+  width:46px;
+  height:57px;
   transform:rotate(7deg);
   background-image:url('../assets/game/egg/egg-dormant.png');
   background-repeat:no-repeat;
@@ -92,9 +92,9 @@
 .hidden-egg-chicken {
   position:absolute;
   left:50%;
-  bottom:7px;
-  width:31px;
-  height:34px;
+  bottom:5px;
+  width:40px;
+  height:43px;
   background-image:url('../assets/game/egg/chicken.png');
   background-repeat:no-repeat;
   background-position:center bottom;
@@ -253,14 +253,14 @@
   }
 
   .hidden-egg-shell {
-    width:30px;
-    height:38px;
+    width:39px;
+    height:49px;
   }
 
   .hidden-egg-chicken {
-    bottom:7px;
-    width:27px;
-    height:30px;
+    bottom:5px;
+    width:35px;
+    height:38px;
   }
 
   .hidden-egg-pocket::after {
