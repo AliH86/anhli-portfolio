@@ -1301,3 +1301,54 @@ mở rộng thành "nuôi gà ảo" kiểu Nhật — cho ăn, mặc đồ/nón/
 layer tách rời được gợi ý sẵn), nghe nhạc, easter egg, huy hiệu sưu tầm,
 daily hook để quay lại mỗi ngày. Đây là hướng dài hạn — **session sau đừng tự
 ý triển khai chỉ vì đọc thấy mục này**, phải hỏi Ali chốt phạm vi trước.
+
+## Cổ tích Vườn Bồ Công Anh — Commit size tweak + chuẩn bị deploy (1/8/2026)
+
+### Bối cảnh
+Ali hỏi: nếu push bây giờ thì trang có gì, bé Gà đã hoạt động chưa, còn thiếu
+bước nào không. Trước khi trả lời, đã audit lại toàn bộ để không đoán:
+
+- Đọc lại `js/egg-game.js`, `js/world-state.js`, `data/egg-game-config.js`
+  đầy đủ — logic discover → 4 stage → hatch → unlock bé Gà, persist qua
+  `localStorage`, migration versioned, debug helper gate đúng theo
+  `file:`/`localhost` — đều đã hoàn chỉnh, không thấy lỗ hổng chức năng.
+- Grep `index.html`: `css/egg-game.css` đã link, 3 script
+  (`world-state.js`, `egg-game-config.js`, `egg-game.js`) đã include đúng
+  thứ tự với `defer`, markup `#hiddenEgg`/`#hiddenEggMessage` đã có trong
+  DOM (dòng ~5287-5292). Wiring đầy đủ, không thiếu bước tích hợp nào.
+- Chạy lại `node scripts/test-world-state.mjs` và `test-egg-game.mjs` —
+  pass cả hai.
+- Build harness Playwright riêng (không đụng file thật) render đủ 4 stage +
+  hatched với CSS size mới (46×57 / 40×43): 0 console error, số đo
+  `getBoundingClientRect` khớp đúng spec CSS, không tràn khỏi hit-area
+  56×56. Xem lại crop bé Gà: còn vệt bóng mờ nhẹ bên phải thân — đúng như
+  đã ghi nhận 31/7, chấp nhận được ở size hiển thị thật, không phải lỗi
+  mới phát sinh do tăng size.
+
+**Kết luận:** nếu push ngay, trang live sẽ có Cổ tích Vườn Bồ Công Anh chạy
+đầy đủ — tìm trứng, 4 stage ấm dần theo ngày, nở thành bé Gà, nhớ trạng thái
+qua `localStorage`. Không thiếu bước chức năng nào. Việc còn thiếu duy nhất
+trước khi push là size CSS chưa commit — đã xử lý trong phiên này (xem
+dưới).
+
+### Đã làm trong phiên này
+1. `git add css/egg-game.css` + commit riêng (`4de7cc5`) — tăng size
+   sprite trứng/gà ~28% (đã QA bằng harness ở trên), không đụng hit-area.
+2. Viết `deploy-egg-chicken-2026-08-01.command` (mới, có `git pull
+   --no-rebase --no-edit origin main` trước `git push`, đúng luật mục 3
+   AGENT-RULES.md) — **CHƯA CHẠY**, Ali tự bấm đúp để đẩy lên thật.
+3. Dọn `.git/index.lock`/`HEAD.lock` kẹt lại sau các lệnh ghi qua cầu
+   Cowork bằng cách `mv` sang `_to_delete/` (không phải lỗi git thật, xem
+   AGENT-RULES.md mục 3).
+
+### Trạng thái git sau phiên này
+`main` hiện đi trước `origin/main` **9 commit** (mới nhất `4de7cc5`), vẫn
+CHƯA PUSH, CHƯA DEPLOY — chờ Ali bấm `deploy-egg-chicken-2026-08-01.command`.
+
+### Việc dở dang — không đổi so với ghi nhận 31/7
+- Vệt bóng mờ nhẹ sau bé Gà — chấp nhận được, có thể tinh chỉnh sau.
+- Phase kế tiếp chưa chốt (polish thêm art/motion cho Gà, hay làm tương tác
+  đầu tiên cho Gà đã nở) — đừng tự chọn.
+- Ý tưởng "nuôi gà ảo kiểu Nhật" (cho ăn, mặc đồ, huy hiệu, daily hook) —
+  vẫn mới là ý tưởng, chưa phải brief đã khoá.
+- 2 sheet asset chưa dùng (pose mở rộng + item pack) — để dành phase sau.
