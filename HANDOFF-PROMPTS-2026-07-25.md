@@ -433,3 +433,75 @@ backdrop-filter vào bề mặt luôn hiện.
   bàn, nên anh cứ dán vào rồi đọc đề xuất, không mất gì.
 - Nếu một session mới đi lạc hoặc quên bối cảnh, câu nhắc luôn hiệu quả là:
   *"đọc project memory rồi làm lại"*.
+
+---
+
+## 11 · Làm asset tốt hơn cho Cổ tích Vườn Bồ Công Anh bằng Higgsfield
+
+Thêm 1/8/2026, sau khi mini-game đã LIVE. Ali muốn dùng Higgsfield (đã kết
+nối) để làm asset tốt/ổn hơn thay vì tiếp tục xử lý tay từ ảnh concept AI cũ.
+
+```
+Đọc project memory (MEMORY.md, tìm mục anhli-egg-chicken-2026-08-01 — đọc
+file đó trước, có link ngược anhli-egg-chicken-2026-07-31 nếu cần thêm chi
+tiết — và anhli-portfolio-project.md) rồi làm việc này.
+
+Repo: /Users/alihuynh/Claude/Projects/Anh Li Portfolion/anhli-portfolio
+
+Bối cảnh: Cổ tích Vườn Bồ Công Anh (trứng ẩn → 4 stage → nở → bé Gà) đã LIVE
+trên https://alih86.github.io/anhli-portfolio/. Asset hiện tại nằm ở
+assets/game/egg/{egg-dormant,egg-warm,egg-cracked,egg-ready,chicken}.png —
+pixel art, bé Gà màu kem nhạt + khăn bandana đỏ, xử lý tay từ ảnh concept AI
+gốc trong folder máy Ali Downloads/pé gà út (4 ảnh ChatGPT, đã dùng hết).
+Ali có Higgsfield đã kết nối, muốn dùng để làm asset tốt và ổn định hơn.
+
+Việc của session này: CHỈ LÀM ASSET bằng Higgsfield, KHÔNG sửa code (CSS/JS),
+KHÔNG tự quyết định phase 3 (tương tác/interactivity — vẫn đang chờ Ali
+chọn), KHÔNG commit/push gì.
+
+Làm theo đúng thứ tự ưu tiên dưới, DỪNG LẠI hỏi Ali duyệt qua chat sau mỗi
+việc trước khi làm việc tiếp theo (tiết kiệm credit, tránh generate hàng
+loạt rồi mới biết sai hướng):
+
+1. [ưu tiên cao nhất] Làm sạch nền chicken.png — sprite hiện tại còn vệt
+   bóng/viền mờ phía sau lưng do tách nền không sạch 100% từ ảnh concept AI
+   gốc (đã ghi nhận từ 31/7, chấp nhận được nhưng có thể tốt hơn). Dùng tool
+   remove_background của Higgsfield (có thể upscale_image trước nếu ảnh gốc
+   độ phân giải thấp) trên chính chicken.png hiện tại, hoặc regenerate lại
+   nếu remove_background không đủ sạch. Giữ đúng tư thế/tỷ lệ/palette hiện
+   tại (không đổi thiết kế đã duyệt) để không phải sửa CSS.
+
+2. [tuỳ chọn — hỏi Ali trước khi bắt đầu] egg-ready.png hiện đang dùng lại
+   art của egg-cracked.png tăng sáng/rực hơn (không có art riêng cho stage
+   "ready"). Hỏi Ali có muốn art riêng cho stage này không; nếu có, giữ đúng
+   phong cách pixel + palette của bộ 4 stage hiện tại.
+
+3. [phase mở rộng, CHỈ làm asset — hỏi Ali trước khi bắt đầu] Có 2 sheet
+   concept AI gốc CHƯA dùng trong Downloads/pé gà út: (a) bộ pose mở rộng —
+   idle, nháy mắt, ngủ, ngạc nhiên, ăn hạt, ôm quà (~9 pose); (b) item pack
+   — hạt, đồng vàng, dâu, bút đỏ, hoa bồ công anh, bản đồ, chìa khoá. Nếu
+   Ali đồng ý làm tiếp, dùng workflow "character-sheet" của Higgsfield (gọi
+   get_workflow_instructions({workflow:'character-sheet'}) trước, làm đúng
+   theo hướng dẫn) với chicken.png hiện tại (bản đã làm sạch ở bước 1) làm
+   ảnh tham chiếu để giữ đúng nhận diện nhân vật qua các pose.
+
+Ràng buộc bắt buộc cho MỌI asset sinh ra:
+- Pixel art, nền trong suốt (PNG có alpha), bố cục neo đáy (bottom-anchored)
+  — CSS hiện dùng background-position:center bottom nên khoảng trống phía
+  trên/hai bên không sao, nhưng đế nhân vật phải sát mép dưới khung ảnh.
+- Palette/nhận diện đã duyệt: bé Gà màu kem nhạt, khăn bandana đỏ, không đổi
+  thiết kế gốc — chỉ làm sạch/mở rộng, không "tái tạo" nhân vật khác đi.
+- Đọc rõ ở size nhỏ: hiển thị thật trên site chỉ ~40-57px. Trước khi chốt,
+  thu nhỏ ảnh xuống ~50px (resize thử bằng PIL/preview) xem còn rõ hình
+  không — chi tiết quá rối sẽ vỡ hình ở size thật.
+- Test bằng mắt xong thì GỬI ẢNH cho Ali xem trực tiếp trong chat để duyệt.
+  CHỈ SAU KHI Ali duyệt mới lưu file vào đúng đường dẫn assets/game/egg/...
+  (giữ tên file cũ nếu là swap-in-place cho #1/#2; đặt thư mục mới ví dụ
+  assets/game/egg/poses/, assets/game/items/ nếu là #3) — và dừng lại ở đó.
+  KHÔNG commit git, KHÔNG viết .command, KHÔNG push — việc wiring asset mới
+  vào code (nếu có) là quyết định code riêng, để phiên khác làm sau khi Ali
+  chốt phase 3.
+- Cập nhật project memory (tạo file mới hoặc update
+  anhli-egg-chicken-2026-08-01.md) ghi lại: đã sinh asset nào, Ali đã duyệt
+  cái nào, còn asset nào (pose/item) chưa dùng để dành phase sau.
+```
