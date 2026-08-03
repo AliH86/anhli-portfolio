@@ -11,6 +11,18 @@
    - NASA Moon Phases / SKYCAL
      https://science.nasa.gov/moon/moon-phases/
 
+   Dữ kiện 2026-08-05 → 2026-08-20 (pack W32 + W33) được tính lại bằng
+   Swiss Ephemeris qua pyswisseph (geocentric, tropical, giờ ghi trong nhãn
+   đã quy về giờ Việt Nam UTC+7): vị trí 9 hành tinh 00:00 UT mỗi ngày, thời
+   điểm chính xác của các góc chính, ingress cung và các pha Trăng.
+   Nhật thực toàn phần 12/8/2026 — pha một phần bắt đầu 15:34 UT, toàn phần
+   16:58–18:34 UT, cực đại 17:46 UT (00:46 ngày 13/8 giờ VN); dải toàn phần
+   qua Bắc Cực, Greenland, Iceland, Tây Ban Nha — KHÔNG quan sát được từ
+   Việt Nam. Trăng non đúng 17:36 UT ngày 12/8. Mưa sao băng Anh Tiên đạt
+   đỉnh đêm 12 rạng 13/8 trong điều kiện không trăng.
+   Đối chiếu: timeanddate.com/eclipse/solar/2026-august-12,
+   amsmeteors.org meteor shower calendar 2026-2027.
+
    Đây là thời tiết chung, không dùng giờ sinh, vị trí, nhà hay cung Mọc. */
 (function(root){
   'use strict';
@@ -171,9 +183,101 @@
     }
   };
 
+  packs['2026-W32-approved']={
+    status:'approved',
+    label:'5–12/8/2026 · Ali duyệt',
+    sourceCheckedAt:'2026-08-03',
+    week:{
+      eyebrow:'Bối cảnh chung · 5–12/8',
+      title:'Dọn chỗ trước một khởi đầu',
+      body:'Nửa đầu tuần, Mặt Trăng đi qua Kim Ngưu và tới kỳ Hạ huyền ngày 6/8, kéo nhịp về những việc chạm được và về câu hỏi điều gì còn được giữ chỉ vì quen tay. Ngày 7/8, Sao Kim bước vào Thiên Bình còn Mặt Trời hợp góc với Sao Thổ, thuận cho việc biến một mong muốn thành cam kết có giới hạn rõ. Tuần khép lại bằng đêm 12/8: kỳ Trăng non ở Sư Tử trùng một kỳ nhật thực toàn phần, mở một chu kỳ mới từ chỗ khuất.',
+      carry:'Việc có thể làm trong tuần: làm xong một việc còn dở thay vì mở thêm việc mới; nói rõ một giới hạn trong cam kết mình vừa nhận; và để dành đêm 12 rạng 13/8 cho một khoảng nghỉ thật. Ghi chú quan sát: dải toàn phần của nhật thực đi qua vùng Bắc Cực, Iceland và Tây Ban Nha, ở Việt Nam lúc đó là nửa đêm nên không nhìn thấy được; thứ xem được ở đây là mưa sao băng Anh Tiên rạng sáng 13/8, dưới bầu trời không trăng.'
+    },
+    days:{
+      '2026-08-05':{ signals:[
+        { verb:'stabilize', domains:['work','inner'], label:'Mặt Trăng chuyển vào Kim Ngưu', wording:'Nhịp ngày chậm lại và nghiêng về những việc chạm được: dọn một góc, làm xong một phần nhỏ, ăn ngủ cho đủ.' },
+        { verb:'slow', domains:['inner','decision'], label:'Trăng khuyết giảm dần trước kỳ Hạ huyền', wording:'Chu kỳ Trăng đang đi xuống, hợp để rà lại điều gì còn được giữ chỉ vì quen tay.' }
+      ]},
+      '2026-08-06':{ signals:[
+        { verb:'clarify', domains:['decision','inner'], label:'Trăng Hạ huyền ở Kim Ngưu (sáng 6/8)', wording:'Kỳ Hạ huyền đặt lại câu hỏi: trong nửa chu kỳ vừa qua, điều gì đáng giữ và điều gì có thể buông.' },
+        { verb:'stabilize', domains:['work','action'], label:'Mặt Trăng ở Kim Ngưu', wording:'Nhịp ngày chắc và hơi nặng; một việc được làm cho xong có ích hơn ba việc mở dở dang.' }
+      ]},
+      '2026-08-07':{ signals:[
+        { verb:'stabilize', domains:['work','decision'], label:'Mặt Trời tam hợp Sao Thổ (sáng 7/8)', wording:'Góc hoà giữa Mặt Trời và Sao Thổ hỗ trợ việc biến một mong muốn thành cam kết có giới hạn rõ.' },
+        { verb:'soften', domains:['love','inner'], label:'Sao Kim bước vào Thiên Bình', wording:'Sao Kim về đúng cung của mình làm nhu cầu hoà thuận và cân bằng nổi rõ hơn trong cách mình đối đãi với người khác.' }
+      ]},
+      '2026-08-08':{ signals:[
+        { verb:'clarify', domains:['decision','work'], label:'Mặt Trăng ở Song Tử', wording:'Nhiều luồng thông tin cùng đến; việc tách đâu là dữ kiện, đâu là phỏng đoán sẽ tiết kiệm thời gian về sau.' },
+        { verb:'accelerate', domains:['action','work'], label:'Sao Hoả đi những độ cuối Song Tử', wording:'Sao Hoả sắp khép một chặng dài ở Song Tử, thúc nốt những việc cần nói và cần gửi đi.' }
+      ]},
+      '2026-08-09':{ signals:[
+        { verb:'soften', domains:['inner','love'], label:'Mặt Trăng chuyển vào Cự Giải', wording:'Nhu cầu được ở gần người quen thuộc và được chăm sóc trở nên rõ hơn ngày thường.' },
+        { verb:'slow', domains:['inner','decision'], label:'Trăng gần cuối chu kỳ', wording:'Còn ba ngày nữa mới tới kỳ Trăng non; quãng này hợp để nghỉ và thu dọn hơn là chốt việc lớn.' }
+      ]},
+      '2026-08-10':{ signals:[
+        { verb:'amplify', domains:['action','work'], label:'Sao Thuỷ bước vào Sư Tử', wording:'Cách mình nói và trình bày trở nên ấm và có màu hơn; đây là lúc dễ được nghe nếu chịu nói thẳng điều mình cần.' },
+        { verb:'slow', domains:['inner'], label:'Mặt Trăng ở Cự Giải, cuối chu kỳ', wording:'Cảm xúc dâng nhanh hơn thường lệ; để một phản ứng đi qua một đêm rồi hãy trả lời là vừa.' }
+      ]},
+      '2026-08-11':{ signals:[
+        { verb:'challenge', domains:['love','decision'], label:'Sao Kim đối đỉnh Hải Vương (rạng sáng 11/8)', wording:'Hình dung đẹp về một mối quan tâm dễ lệch khỏi thực tế; hỏi một câu cụ thể đỡ hơn đoán.' },
+        { verb:'soften', domains:['action','inner'], label:'Sao Hoả chuyển vào Cự Giải', wording:'Sức đẩy chuyển từ lời nói sang việc giữ gìn điều mình thương; động lực đến từ cảm xúc hơn lý lẽ.' }
+      ]},
+      '2026-08-12':{ signals:[
+        { verb:'surface', domains:['inner','action'], label:'Nhật thực toàn phần trùng kỳ Trăng non ở Sư Tử', wording:'Kỳ Trăng non bị che khuất mở một chu kỳ mới từ chỗ tối: điều mình muốn được nhìn thấy có thể cần được nói lại từ đầu.' },
+        { verb:'clarify', domains:['decision','inner'], label:'Sao Thuỷ tam hợp Hải Vương', wording:'Linh cảm và lời nói dễ gặp nhau hôm nay; một điều mơ hồ đã lâu có thể gọi được thành câu.' }
+      ]}
+    }
+  };
+
+  packs['2026-W33-approved']={
+    status:'approved',
+    label:'13–20/8/2026 · Ali duyệt',
+    sourceCheckedAt:'2026-08-03',
+    week:{
+      eyebrow:'Bối cảnh chung · 13–20/8',
+      title:'Bắt đầu nhỏ sau một đêm tối trời',
+      body:'Tuần này đi ra từ kỳ nhật thực đêm 12/8. Chu kỳ Trăng mới lớn dần qua Xử Nữ, Thiên Bình rồi Bọ Cạp, đưa nhịp từ sắp xếp chi tiết sang cân bằng quan hệ rồi xuống chiều sâu. Sao Thuỷ hội hợp Sao Mộc ngày 15/8 làm ý tưởng và lời nói nở ra lớn hơn kích thước thật, còn Sao Hoả góc vuông Hải Vương ngày 17/8 dễ làm sức lực tản đi mà không rõ vì đâu. Kỳ Thượng huyền ngày 20/8 là chỗ để chọn tiếp hoặc để lại điều đã bắt đầu.',
+      carry:'Việc có thể làm trong tuần: chọn một việc nhỏ từ điều đã nhen lên quanh ngày 12/8 và làm nó đều trong bảy ngày; nói rõ phần trách nhiệm của mình trong một thoả thuận; và giữ lại một buổi trống cho ngày 17/8. Ghi chú quan sát: rạng sáng 13/8 là đêm mưa sao băng Anh Tiên đẹp nhất nhiều năm nhờ trời không trăng.'
+    },
+    days:{
+      '2026-08-13':{ signals:[
+        { verb:'clarify', domains:['decision','action'], label:'Sao Thuỷ lục hợp Thiên Vương (rạng sáng 13/8)', wording:'Một cách làm khác với thường lệ có thể chợt hiện ra; ghi lại ngay trước khi nó trôi mất.' },
+        { verb:'stabilize', domains:['work','inner'], label:'Mặt Trăng chuyển vào Xử Nữ (chiều 13/8)', wording:'Nhịp chiều tối nghiêng về sắp xếp: chia điều vừa nghĩ ra thành một bước làm được trong tuần.' }
+      ]},
+      '2026-08-14':{ signals:[
+        { verb:'stabilize', domains:['work','action'], label:'Trăng lưỡi liềm đầu chu kỳ ở Xử Nữ', wording:'Chu kỳ mới còn non; một thử nghiệm nhỏ và có thể rút lại hợp hơn một tuyên bố lớn.' },
+        { verb:'clarify', domains:['inner','decision'], label:'Mặt Trăng ở Xử Nữ', wording:'Hôm nay dễ nhìn ra chi tiết đang vướng; gọi đúng tên nó thay vì trách mình vì chưa xong.' }
+      ]},
+      '2026-08-15':{ signals:[
+        { verb:'amplify', domains:['work','decision'], label:'Sao Thuỷ hội hợp Sao Mộc ở Sư Tử', wording:'Một ý tưởng hoặc lời đề nghị dễ nở ra lớn hơn kích thước thật của nó; giữ lại phần làm được và bớt phần chỉ để nghe cho hay.' },
+        { verb:'stabilize', domains:['work','inner'], label:'Mặt Trăng cuối chặng Xử Nữ', wording:'Rà soát một lần cuối trước khi gửi đi sẽ tiết kiệm cả một vòng sửa về sau.' }
+      ]},
+      '2026-08-16':{ signals:[
+        { verb:'soften', domains:['love','decision'], label:'Mặt Trăng ở Thiên Bình', wording:'Nhịp ngày kéo về phía cân bằng: nghe cho hết ý người kia rồi hãy đặt lại ý mình.' },
+        { verb:'amplify', domains:['work','action'], label:'Sao Thuỷ và Sao Mộc còn trong vùng ảnh hưởng', wording:'Điều nói ra những ngày này dễ đi xa hơn dự tính; chọn chỗ để nói cũng quan trọng như chọn điều để nói.' }
+      ]},
+      '2026-08-17':{ signals:[
+        { verb:'challenge', domains:['action','inner'], label:'Sao Hoả góc vuông Hải Vương', wording:'Sức lực dễ tản vào việc không rõ đích; thấy mệt mà không rõ vì đâu thì nên dừng, đừng ép thêm.' },
+        { verb:'stabilize', domains:['decision','work'], label:'Sao Thuỷ tam hợp Sao Thổ', wording:'Một cuộc trao đổi hôm nay có thể chốt thành thoả thuận cụ thể, nếu mỗi bên nói rõ phần việc của mình.' }
+      ]},
+      '2026-08-18':{ signals:[
+        { verb:'amplify', domains:['love','work'], label:'Sao Kim lục hợp Sao Mộc', wording:'Thiện chí và sự rộng lượng dễ được đáp lại; đây là lúc hợp để mở lời trước.' },
+        { verb:'surface', domains:['inner','love'], label:'Mặt Trăng chuyển vào Bọ Cạp (rạng sáng 18/8)', wording:'Điều được giữ dưới bề mặt dễ nổi lên hơn; nói một nửa sự thật hôm nay khó hơn nói cả.' }
+      ]},
+      '2026-08-19':{ signals:[
+        { verb:'surface', domains:['inner','decision'], label:'Mặt Trăng ở Bọ Cạp', wording:'Động cơ thật phía sau một lựa chọn gần đây có thể lộ ra; nhìn thẳng vào nó đỡ tốn sức hơn là né.' },
+        { verb:'slow', domains:['work','inner'], label:'Trăng lớn dần về kỳ Thượng huyền', wording:'Chu kỳ sắp tới điểm căng đầu tiên; giữ lại một phần sức cho ngày mai thay vì dồn hết hôm nay.' }
+      ]},
+      '2026-08-20':{ signals:[
+        { verb:'clarify', domains:['decision','action'], label:'Trăng Thượng huyền (sáng 20/8)', wording:'Kỳ Thượng huyền đòi một quyết định giữa đường: điều bắt đầu quanh đêm nhật thực cần được chọn tiếp hay để lại.' },
+        { verb:'accelerate', domains:['action','work'], label:'Mặt Trăng chuyển vào Nhân Mã (chiều 20/8)', wording:'Nhịp cuối tuần mở ra rộng hơn; một bước đi chệch khỏi thói quen có thể có ích lúc này.' }
+      ]}
+    }
+  };
+
   root.GARDEN_ORACLE_WEEKLY={
     activeReviewKey:'',
-    lastApprovedKey:'2026-W31-approved',
+    lastApprovedKey:'2026-W33-approved',
     packs
   };
 })(window);

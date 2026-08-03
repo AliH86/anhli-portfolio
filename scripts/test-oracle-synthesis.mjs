@@ -45,13 +45,19 @@ const cases=[
   [0,8,17],[22,24,33],[36,47,49],[50,55,62],[64,70,77],
   [6,23,69],[9,43,58],[14,37,71],[3,52,75],[18,45,66]
 ];
-const dates=['2026-07-13','2026-07-14','2026-07-15','2026-07-16','2026-07-17','2026-07-18','2026-07-19','2026-07-20'];
+const dates=['2026-07-13','2026-07-14','2026-07-15','2026-07-16','2026-07-17','2026-07-18','2026-07-19','2026-07-20',
+  '2026-08-05','2026-08-08','2026-08-12','2026-08-13','2026-08-17','2026-08-20'];
+const packOfDate=dateKey=>{
+  if(dateKey>='2026-08-13') return '2026-W33-approved';
+  if(dateKey>='2026-08-05') return '2026-W32-approved';
+  return dateKey<'2026-07-20'?'2026-W29-approved-v2':'2026-W30-approved';
+};
 let checked=0;
 const interactionKinds=new Set();
 let omittedWeakSignals=0;
 let outsidePreferredLength=0;
 for(const dateKey of dates){
-  const expectedPackKey=dateKey<'2026-07-20'?'2026-W29-approved-v2':'2026-W30-approved';
+  const expectedPackKey=packOfDate(dateKey);
   for(const ids of cases){
     for(let mask=0;mask<8;mask++){
       const result=ids.map((id,index)=>({n:id,card:deck[id],closed:Boolean(mask&(1<<index))}));
@@ -130,7 +136,7 @@ window.GARDEN_ORACLE_WEEKLY.activeReviewKey=null;
 delete window.GARDEN_ORACLE_WEEKLY.packs['test-accelerate'];
 
 const latestApproved=window.GARDEN_ORACLE_WEEKLY.packs[latestApprovedKey];
-if(latestApprovedKey!=='2026-W30-approved'||latestApproved?.status!=='approved'||Object.keys(latestApproved.days||{}).length!==8) throw new Error('Latest approved pack must be W30 with 8 days');
+if(!latestApprovedKey||latestApproved?.status!=='approved'||Object.keys(latestApproved.days||{}).length!==8) throw new Error(`Latest approved pack ${latestApprovedKey} must exist, be approved and contain 8 days`);
 
 if(configuredReviewKey){
   const reviewPack=window.GARDEN_ORACLE_WEEKLY.packs[configuredReviewKey];
