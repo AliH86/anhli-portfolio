@@ -18,11 +18,12 @@
   if (!body) return;
 
   var ORACLE_URL = 'https://alih86.github.io/dandelion-oracle/';
+  var nav = root.navigator || {};
   var coarse = root.matchMedia && root.matchMedia('(pointer:coarse)').matches;
   var noHover = root.matchMedia && root.matchMedia('(hover:none)').matches;
   var compact = root.matchMedia && root.matchMedia('(max-width:700px)').matches;
-  var lowMemory = typeof root.navigator.deviceMemory === 'number' && root.navigator.deviceMemory <= 4;
-  var saveData = !!(root.navigator.connection && root.navigator.connection.saveData);
+  var lowMemory = typeof nav.deviceMemory === 'number' && nav.deviceMemory <= 4;
+  var saveData = !!(nav.connection && nav.connection.saveData);
   var constrained = compact || (coarse && noHover) || lowMemory || saveData;
   var heroVideoObserver = null;
   var heroVideoKiller = null;
@@ -56,14 +57,27 @@
     freezeShader();
   }
 
+  function ensureHeroVideoKiller(video) {
+    if (!video || heroVideoKiller || !('MutationObserver' in root)) return;
+    heroVideoKiller = new root.MutationObserver(function preventLateVideoSource() {
+      if (body.classList.contains('perf-lite') && video.getAttribute('src')) disableHeroVideo(video);
+    });
+    heroVideoKiller.observe(video, { attributes:true, attributeFilter:['src'] });
+  }
+
   function disableHeroVideo(video) {
     if (!video) return;
+    var hero = doc.getElementById('home');
+    if (hero) hero.classList.remove('video-on');
+    video.dataset.sleep = '1';
     try { video.pause(); } catch (e) {}
     if (video.getAttribute('src')) {
       video.removeAttribute('src');
+      video.preload = 'none';
       try { video.load(); } catch (e) {}
     }
     body.classList.add('hero-video-budgeted');
+    ensureHeroVideoKiller(video);
   }
 
   function installHeroVideoBudget() {
@@ -72,12 +86,6 @@
 
     if (body.classList.contains('perf-lite')) {
       disableHeroVideo(video);
-      if ('MutationObserver' in root) {
-        heroVideoKiller = new MutationObserver(function preventLateVideoSource() {
-          if (body.classList.contains('perf-lite') && video.getAttribute('src')) disableHeroVideo(video);
-        });
-        heroVideoKiller.observe(video, { attributes:true, attributeFilter:['src'] });
-      }
       return;
     }
 
@@ -90,7 +98,7 @@
     });
 
     if ('IntersectionObserver' in root) {
-      heroVideoObserver = new IntersectionObserver(function onHeroVideoVisibility(entries) {
+      heroVideoObserver = new root.IntersectionObserver(function onHeroVideoVisibility(entries) {
         var visible = entries[0] && entries[0].isIntersecting;
         if (!visible) {
           var playing = !video.paused && !video.ended;
@@ -122,6 +130,10 @@
     body.classList.add('perf-lite');
     body.dataset.perfReason = reason || 'adaptive';
     freezeShader();
+    if (heroVideoObserver) {
+      try { heroVideoObserver.disconnect(); } catch (e) {}
+      heroVideoObserver = null;
+    }
     var video = doc.getElementById('heroVideo');
     if (video) disableHeroVideo(video);
   }
@@ -132,7 +144,7 @@
     var stopped = false;
     var observer;
     try {
-      observer = new PerformanceObserver(function countLongTasks(list) {
+      observer = new root.PerformanceObserver(function countLongTasks(list) {
         list.getEntries().forEach(function (entry) {
           if (entry.duration >= 80) score += 1;
           if (entry.duration >= 160) score += 1;
