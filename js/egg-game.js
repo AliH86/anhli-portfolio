@@ -238,9 +238,15 @@
 (function loadPortfolioGovernor(root) {
   'use strict';
   if (!root.document || root.__ANHLI_PORTFOLIO_GOVERNOR_LOADER__) return;
-  root.__ANHLI_PORTFOLIO_GOVERNOR_LOADER__ = true;
 
   var doc = root.document;
+  /* Test/SSR harnesses intentionally expose only a tiny DOM surface. The
+     governor is a browser enhancement, so leave those environments untouched. */
+  if (typeof doc.querySelector !== 'function'
+      || typeof doc.createElement !== 'function'
+      || !(doc.head || doc.documentElement)) return;
+
+  root.__ANHLI_PORTFOLIO_GOVERNOR_LOADER__ = true;
   var cssId = 'portfolio-governor-css';
   if (!doc.getElementById(cssId)) {
     var link = doc.createElement('link');
