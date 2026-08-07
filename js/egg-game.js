@@ -229,3 +229,32 @@
     };
   }
 })(typeof window !== 'undefined' ? window : globalThis);
+
+/*
+ * The portfolio governor is deliberately loaded from this already-deferred
+ * entrypoint so performance work can stay modular and index.html remains
+ * untouched. Egg gameplay does not depend on the governor.
+ */
+(function loadPortfolioGovernor(root) {
+  'use strict';
+  if (!root.document || root.__ANHLI_PORTFOLIO_GOVERNOR_LOADER__) return;
+  root.__ANHLI_PORTFOLIO_GOVERNOR_LOADER__ = true;
+
+  var doc = root.document;
+  var cssId = 'portfolio-governor-css';
+  if (!doc.getElementById(cssId)) {
+    var link = doc.createElement('link');
+    link.id = cssId;
+    link.rel = 'stylesheet';
+    link.href = './css/portfolio-governor.css';
+    (doc.head || doc.documentElement).appendChild(link);
+  }
+
+  if (!doc.querySelector('script[data-portfolio-governor]')) {
+    var script = doc.createElement('script');
+    script.src = './js/portfolio-governor.js';
+    script.async = false;
+    script.dataset.portfolioGovernor = 'true';
+    (doc.head || doc.documentElement).appendChild(script);
+  }
+})(typeof window !== 'undefined' ? window : globalThis);
