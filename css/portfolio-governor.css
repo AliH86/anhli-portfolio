@@ -43,6 +43,10 @@ body.perf-lite #vedic .vd-nak-halo {
   animation:none !important;
 }
 
+/* If the adaptive budget removes hero video, force the proven static garden back. */
+body.hero-video-budgeted .hero-video,
+body.hero-video-budgeted .hgv-disc { display:none !important; }
+
 /* Let the browser skip layout/paint for long sections that are far off-screen. */
 body.perf-balanced #videos,
 body.perf-balanced #gallery,
@@ -51,7 +55,7 @@ body.perf-balanced #about,
 body.perf-balanced #contact,
 body.perf-balanced #oracle-side-quest {
   content-visibility:auto;
-  contain-intrinsic-size:1px 900px;
+  contain-intrinsic-size:auto 900px;
 }
 
 /* Dandelion Oracle CTA inside the existing Garden Oracle result. */
