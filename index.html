@@ -8147,7 +8147,9 @@ const YT_CHANNEL = 'UC2Cat4-Hl0SZqKFkRKu72zQ';
    https://www.youtube.com/watch?v=dQw4w9WgXcQ  →  id:'dQw4w9WgXcQ'
    Để trống mảng này thì web sẽ tự thử tải từ kênh (kém ổn định hơn). */
 const VIDEOS = [
-  { fb:'https://www.facebook.com/hoaithuog.phan/posts/pfbid02giNt8zp7ouhbVgL7Ro9YBjUFszPxDo7nbvw2Yv7ERugV32LS5WDwp8aw8jJ4BAk1l',
+  { vimeo:'1215092159?h=0de957cbfe', title:'Dai-Ichi GO!', meta:'Dai-Ichi Life Vietnam · Sự kiện', credits:'Sáng tác & trình bày: Anh Li · Biểu diễn: Vũ Đoàn BCA · Biên đạo: Đạt Nguyễn
+Show Director: Anh Li · Agency: ICH (indochinaheritage.com) · Logistic & Production: Bridge-way Team
+Motion Visual: sunnylab.studio/dai-ichi' }, { fb:'https://www.facebook.com/hoaithuog.phan/posts/pfbid02giNt8zp7ouhbVgL7Ro9YBjUFszPxDo7nbvw2Yv7ERugV32LS5WDwp8aw8jJ4BAk1l',
     title:'Vươn Xa Biển Lớn — Lễ kỷ niệm 25 năm Vĩnh Tân Group',
     meta:'Vĩnh Tân Group · VPRO Event',
     credits:'Sáng tác: Ali Huỳnh · VPRO Creative Director\nCa sĩ: Phạm Anh Khoa  ·  Producer: Hà Trà Đá  ·  Biên đạo: An Nguyễn' },
@@ -9127,7 +9129,7 @@ function renderVideos(){
       ? '<div class="vid-thumb"><div class="vid-overlay"><div class="vid-play">▶</div></div><span class="fb-badge">Facebook</span></div>'
       : v.drive
       ? '<div class="vid-thumb"><img src="https://drive.google.com/thumbnail?id='+v.drive+'&sz=w480" alt="'+safe+'" loading="lazy" onerror="this.style.display=\'none\'"/><div class="vid-overlay"><div class="vid-play">▶</div></div><span class="fb-badge">Drive</span></div>'
-      : '<div class="vid-thumb"><img src="https://img.youtube.com/vi/'+v.id+'/hqdefault.jpg" alt="'+safe+'" loading="lazy"/><div class="vid-overlay"><div class="vid-play">▶</div></div></div>';
+      : v.vimeo ? '<div class="vid-thumb"><div class="vid-overlay"><div class="vid-play">▶</div></div><span class="fb-badge">Vimeo</span></div>' : '<div class="vid-thumb"><img src="https://img.youtube.com/vi/'+v.id+'/hqdefault.jpg" alt="'+safe+'" loading="lazy"/><div class="vid-overlay"><div class="vid-play">▶</div></div></div>';
     return '<div class="vid-card reveal'+(v.fb?' is-fb':'')+(i>=VID_INIT?' v-extra':'')+'" data-vid="'+i+'" onclick="setFeatured('+i+',true)">'
       + thumb
       + '<div class="vid-info"><div class="vid-title">'+(v.title||'Video')+'</div><div class="vid-meta">'+(v.meta||'Sạp Âm Nhạc')+'</div></div>'
@@ -9168,7 +9170,7 @@ function setFeatured(i, play){
     frame.innerHTML='<div class="vid-stage-play" onclick="loadStage('+i+')"><span class="vp">▶</span></div>';
   } else if(v.drive){
     frame.style.height='';
-    frame.innerHTML='<img src="https://drive.google.com/thumbnail?id='+v.drive+'&sz=w800" onerror="this.style.display=\'none\'" alt=""/><div class="vid-stage-play" onclick="loadStage('+i+')"><span class="vp">▶</span></div>';
+    frame.innerHTML='<img src="https://drive.google.com/thumbnail?id='+v.drive+'&sz=w800" onerror="this.style.display=\'none\'" alt=""/><div class="vid-stage-play" onclick="loadStage('+i+')"><span class="vp">▶</span></div>'; } else if(v.vimeo){ frame.style.height=''; frame.innerHTML='<div class="vid-stage-play" onclick="loadStage('+i+')"><span class="vp">▶</span></div>';
   } else {
     frame.style.height='';
     frame.innerHTML='<img src="https://img.youtube.com/vi/'+v.id+'/maxresdefault.jpg" onerror="this.src=\'https://img.youtube.com/vi/'+v.id+'/hqdefault.jpg\'" alt=""/><div class="vid-stage-play" onclick="loadStage('+i+')"><span class="vp">▶</span></div>';
@@ -9184,7 +9186,7 @@ function loadStage(i){
     frame.innerHTML='<iframe src="'+src+'" width="'+w+'" height="'+h+'" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" title="Vươn Xa Biển Lớn"></iframe>';
   } else if(v.drive){
     var hd=Math.round(w*9/16); frame.style.height=hd+'px';
-    frame.innerHTML='<iframe src="https://drive.google.com/file/d/'+v.drive+'/preview" width="'+w+'" height="'+hd+'" style="border:none" allow="autoplay" allowfullscreen title="'+(v.title||'').replace(/"/g,'')+'"></iframe>';
+    frame.innerHTML='<iframe src="https://drive.google.com/file/d/'+v.drive+'/preview" width="'+w+'" height="'+hd+'" style="border:none" allow="autoplay" allowfullscreen title="'+(v.title||'').replace(/"/g,'')+'"></iframe>'; } else if(v.vimeo){ var hv=Math.round(w*9/16); frame.style.height=hv+'px'; frame.innerHTML='<iframe src="https://player.vimeo.com/video/'+v.vimeo+'&autoplay=1" width="'+w+'" height="'+hv+'" style="border:none" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="'+(v.title||'').replace(/"/g,'')+'"></iframe>';
   } else {
     var hy=Math.round(w*9/16); frame.style.height=hy+'px';
     frame.innerHTML='<iframe src="https://www.youtube.com/embed/'+v.id+'?autoplay=1" width="'+w+'" height="'+hy+'" style="border:none" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen title="'+(v.title||'').replace(/"/g,'')+'"></iframe>';
