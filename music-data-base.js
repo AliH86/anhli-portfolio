@@ -15,6 +15,24 @@ window.PORTFOLIO_MUSIC = {
   "source": "Playlists curated by Anh Li",
   "albums": [
     {
+      "id": "e5c30e35-b012-4fa2-86cb-14e8c334b977",
+      "playlistUrl": "https://suno.com/playlist/e5c30e35-b012-4fa2-86cb-14e8c334b977",
+      "name": "Không Có Gì!!?!",
+      "sub": "Acoustic Funk · Indie Pop · Eclectic Mood Mix",
+      "cover": "uploads/khong-co-gi.jpg",
+      "desc": "Miệng trả lời không có gì đâu, nhưng cả bầu trời drama cảm lạnh thiên hạ....",
+      "count": 7,
+      "tracks": [
+        { "id": "8ed2eec3-3dcd-44ef-aacf-2c3eed3cece6", "name": "Nhàn....", "dur": "3:29" },
+        { "id": "7fc24b26-1908-434d-b672-bb84a66286f1", "name": "Bận!", "dur": "3:56" },
+        { "id": "2db452f8-0368-499d-959d-9ccfeb538a3e", "name": "Mệth...", "dur": "3:30" },
+        { "id": "1646899f-ca67-4df6-b2bf-86fbe927f68a", "name": "Xảh...", "dur": "4:24" },
+        { "id": "a72464fd-19fe-420e-8d18-9b7a1b2c513e", "name": "Uhmmmmmmm", "dur": "5:27" },
+        { "id": "0e8cfe5c-3d7f-41c4-8fac-b95e2511b8b7", "name": "Chịu...", "dur": "4:28" },
+        { "id": "aeb95eba-96e7-4ffa-8a92-d0eba5cbc1fd", "name": "Tưởng ?!?", "dur": "3:11" }
+        ]
+    },
+    {
                 "id": "30456da3-d6e4-4f3b-babd-a30056ad23d1",
                 "playlistUrl": "https://suno.com/playlist/30456da3-d6e4-4f3b-babd-a30056ad23d1",
                 "name": "Tôi Muốn Ôm Trọn Di Sản Quê Hương Mình Vào Lòng",
