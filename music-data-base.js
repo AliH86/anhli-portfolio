@@ -15,6 +15,24 @@ window.PORTFOLIO_MUSIC = {
   "source": "Playlists curated by Anh Li",
   "albums": [
     {
+      "id": "b31825a3-7a38-4744-834a-96930f05015c",
+      "playlistUrl": "https://suno.com/playlist/b31825a3-7a38-4744-834a-96930f05015c",
+      "name": "Chuyện Của Trăng",
+      "sub": "Vietnamese Folk-Soul · Chamber Folk · Art-Pop",
+      "cover": "uploads/chuyen-cua-trang.jpg",
+      "desc": "Những câu chuyện bài ca, thơ, văn lấy trăng làm trọng tâm.",
+      "count": 7,
+      "tracks": [
+        { "id": "b811ceb4-2492-493c-8163-6efad1329da2", "name": "Quên Vầng Trăng Thề", "dur": "4:43" },
+        { "id": "c69e9887-79b2-4145-9771-e3bf722d0403", "name": "Mảnh Tình Treo Trăng", "dur": "3:42" },
+        { "id": "3e9624a7-e3c8-4a9f-9f9d-960d8a3e4589", "name": "Ánh Trăng Đôi Đường", "dur": "4:11" },
+        { "id": "5bd66ad6-cbab-4111-bbba-8442026e0919", "name": "Trăng Vén Rèm Thưa", "dur": "4:46" },
+        { "id": "083b467b-c612-4b86-951e-8a83f73d540a", "name": "Kẻ Say Trăng", "dur": "5:36" },
+        { "id": "b2135c69-5d49-4088-bfd6-6bc02fe8328b", "name": "Trăng Khuyết Trăng Tròn", "dur": "4:25" },
+        { "id": "d17a08a2-1d9e-496e-92fe-f3423e679be6", "name": "Trăng Qua Bến Cũ", "dur": "3:58" }
+        ]
+    },
+    {
       "id": "e5c30e35-b012-4fa2-86cb-14e8c334b977",
       "playlistUrl": "https://suno.com/playlist/e5c30e35-b012-4fa2-86cb-14e8c334b977",
       "name": "Không Có Gì!!?!",
