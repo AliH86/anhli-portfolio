@@ -791,6 +791,24 @@ window.PORTFOLIO_MUSIC = {
               { "id": "3b60b43c-2640-4293-9938-9c6393e27725", "name": "Một Ngày Sóng Không Về", "dur": "3:34" },
               { "id": "a9fd3296-d400-4039-9977-92618c5b3240", "name": "Sau cùng, Trời vẫn thênh thang", "dur": "4:38" }
                     ]
+    },
+    {
+      "id": "b1fe85ee-becf-464d-ab82-a5f5513d0738",
+      "playlistUrl": "https://suno.com/playlist/b1fe85ee-becf-464d-ab82-a5f5513d0738",
+      "name": "Tôi Hoạ Cả Thế Gian",
+      "sub": "Vietnamese Ink-Wash Folk · Chamber Folk · Roots Ritual",
+      "cover": "uploads/toi-hoa-ca-the-gian.jpeg",
+      "desc": "Một bức thuỷ mặc bằng âm thanh — người lữ khách đứng giữa núi sông, trăng nước, vẽ lại cả thế gian bằng những gam trầm và một vệt son.",
+      "count": 7,
+      "tracks": [
+        { "id": "7cc49535-164a-42b3-a2b3-4c98adc0e931", "name": "Ngắm Nhìn Bức Hoạ Thế Gian", "dur": "4:14" },
+        { "id": "70ccf96a-3b48-442a-a16d-af30520a0a71", "name": "Nét Đời", "dur": "3:24" },
+        { "id": "df51a475-1944-4c90-ab59-d27da515d9ab", "name": "Qua Miền Gió Bay", "dur": "4:57" },
+        { "id": "2debfb51-0310-4759-970a-33487e0bc77c", "name": "Mạch Đất", "dur": "3:57" },
+        { "id": "bb942cb4-c693-416b-a63a-5c241c66ddef", "name": "Nước Về Đâu", "dur": "4:21" },
+        { "id": "190b2560-b91a-4cdb-9d10-33e149820d63", "name": "Muôn Vạn Dấu Chân", "dur": "4:34" },
+        { "id": "fca5ff76-12ec-41ac-a229-12dc0b6f3f19", "name": "Phủ Bạc Nhân Gian", "dur": "4:27" }
+      ]
     }
   ]
 };
