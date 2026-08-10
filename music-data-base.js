@@ -800,7 +800,7 @@ window.PORTFOLIO_MUSIC = {
       "sub": "Vietnamese Ink-Wash Folk · Chamber Folk · Roots Ritual",
       "cover": "uploads/toi-hoa-ca-the-gian.jpeg",
       "desc": "Một bức thuỷ mặc bằng âm thanh — người lữ khách đứng giữa núi sông, trăng nước, vẽ lại cả thế gian bằng những gam trầm và một vệt son.",
-      "count": 7,
+      "count": 9,
       "tracks": [
         { "id": "7cc49535-164a-42b3-a2b3-4c98adc0e931", "name": "Ngắm Nhìn Bức Hoạ Thế Gian", "dur": "4:14" },
         { "id": "70ccf96a-3b48-442a-a16d-af30520a0a71", "name": "Nét Đời", "dur": "3:24" },
@@ -808,7 +808,7 @@ window.PORTFOLIO_MUSIC = {
         { "id": "2debfb51-0310-4759-970a-33487e0bc77c", "name": "Mạch Đất", "dur": "3:57" },
         { "id": "bb942cb4-c693-416b-a63a-5c241c66ddef", "name": "Nước Về Đâu", "dur": "4:21" },
         { "id": "190b2560-b91a-4cdb-9d10-33e149820d63", "name": "Muôn Vạn Dấu Chân", "dur": "4:34" },
-        { "id": "fca5ff76-12ec-41ac-a229-12dc0b6f3f19", "name": "Phủ Bạc Nhân Gian", "dur": "4:27" }
+        { "id": "fca5ff76-12ec-41ac-a229-12dc0b6f3f19", "name": "Phủ Bạc Nhân Gian", "dur": "4:27" }, { "id": "0aed4918-86b6-4d33-ad61-430d18045dfb", "name": "Sầu Thừa Vừa Một Ly", "dur": "4:27" }, { "id": "74d27a3b-f6af-4566-ad0f-8a35c3ff54c1", "name": "Chữ Tài Gánh Một Chữ Tai", "dur": "3:41" }
       ]
     }
   ]
