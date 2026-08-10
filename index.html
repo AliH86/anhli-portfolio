@@ -495,7 +495,7 @@ body.debug-disc .hgv-disc::after {
   position:absolute;
   inset:0;
   border-radius:50%;
-  background:var(--hgv-cover, var(--hero-cover, url('./uploads/My-vi-nhan-sinh.jpg'))) center/cover;
+  background:var(--hgv-cover, var(--hero-cover, url('./uploads/another-stage.jpg'))) center/cover;
   opacity:0.8;
   /* KHÔNG dùng hgaDiscSpin: keyframe đó kèm translate(-50%,-50%) cho đĩa tĩnh
      cũ — mượn nó làm mặt đĩa này trôi dần lên góc trên-trái rồi giật về
@@ -3118,7 +3118,7 @@ body.no-motion .hg-disc {
   overflow:hidden;
   background:
     radial-gradient(circle, transparent 0 10.2%, rgba(8,12,12,0.76) 10.8% 14.8%, transparent 15.4%),
-    var(--hero-cover, url('./uploads/My-vi-nhan-sinh.jpg')) center/cover;
+    var(--hero-cover, url('./uploads/another-stage.jpg')) center/cover;
   opacity:0.86;
   animation:hgaDiscSpin 30s linear infinite;
   box-shadow:inset 0 0 46px rgba(255,255,255,0.20), inset 0 0 70px rgba(0,0,0,0.22);
@@ -10956,7 +10956,7 @@ if(MOBILE){
     const id=home && home.dataset.promotedAlbum;
     const list=(window.PORTFOLIO_MUSIC && window.PORTFOLIO_MUSIC.albums) || [];
     const hit=id && list.find(a=>a.id===id);
-    return (hit && hit.cover) || 'uploads/My-vi-nhan-sinh.jpg';
+    return (hit && hit.cover) || 'uploads/another-stage.jpg';
   }
 
   /* rãnh đĩa: texture canvas đồng tâm, dùng làm bump + roughness */
