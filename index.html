@@ -8696,18 +8696,20 @@ const audio=document.getElementById('audioEl');
 let isPlaying=false;
 let pendingTrack=-1;
 
-/* ===== MEDIA SESSION — cho phép phát nền khi khoá màn hình / chuyển app ===== */
+/* ===== MEDIA SESSION — cho phép phát nền khi khoá màn hình / chuyển app =====
+   Safari/WebKit không hỗ trợ hết mọi action name; setActionHandler với action
+   lạ sẽ throw TypeError đồng bộ, có thể chặn đứng phần script phía sau (nút
+   pause/next từng bị lag/lỗi vì lý do này) — nên mỗi lệnh phải tự try/catch. */
 if('mediaSession' in navigator){
-  navigator.mediaSession.setActionHandler('play', ()=>{ audio.play().catch(()=>{}); });
-  navigator.mediaSession.setActionHandler('pause', ()=>audio.pause());
-  navigator.mediaSession.setActionHandler('previoustrack', ()=>prevTrack());
-  navigator.mediaSession.setActionHandler('nexttrack', ()=>nextTrack());
-  navigator.mediaSession.setActionHandler('stop', ()=>audio.pause());
-  try{
-    navigator.mediaSession.setActionHandler('seekto', (d)=>{
-      if(d.seekTime!=null && audio.duration) audio.currentTime=d.seekTime;
-    });
-  }catch(e){}
+  const setMSAction=(action,handler)=>{ try{ navigator.mediaSession.setActionHandler(action,handler); }catch(e){} };
+  setMSAction('play', ()=>{ audio.play().catch(()=>{}); });
+  setMSAction('pause', ()=>audio.pause());
+  setMSAction('previoustrack', ()=>prevTrack());
+  setMSAction('nexttrack', ()=>nextTrack());
+  setMSAction('stop', ()=>audio.pause());
+  setMSAction('seekto', (d)=>{
+    if(d.seekTime!=null && audio.duration) audio.currentTime=d.seekTime;
+  });
 }
 
 /* ===== SHARE — deep-link tới bài / album (cho post Threads, dẫn thẳng về chỗ nghe) ===== */
@@ -10080,10 +10082,15 @@ audio.addEventListener('pause', ()=>{ setPlayingUI(false); flattenBars(); });
 audio.addEventListener('loadstart', ()=>{ syncTrackUI(); updateDock(); });
 setPlayingUI(false);
 
-/* ── 7 · EQUALIZER THEO NHẠC THẬT (Web Audio + fallback) ── */
+/* ── 7 · EQUALIZER THEO NHẠC THẬT (Web Audio + fallback) ──
+   Bỏ qua Web Audio API trên mobile: một khi audio element bị createMediaElementSource
+   "chiếm" output, âm thanh CHỈ còn phát qua AudioContext đó — mà iOS tự suspend
+   AudioContext khi Safari ra nền/khoá máy, làm nhạc im re dù audio.paused vẫn false.
+   Trên mobile giữ luôn equalizer mô phỏng (fallback) để output âm thanh đi thẳng
+   từ <audio>, không qua tay ai, mới phát nền được. */
 let analyser=null, freq=null, eqLive=false, ctxMade=false, loadedWithCors=false, bars=null, aliCtx=null;
 const PROBE='https://cdn1.suno.ai/3e1f52a5-b6df-4723-bab3-9b6bc154809e.mp3';
-if(!REDUCED && window.fetch){
+if(!REDUCED && !MOBILE && window.fetch){
   // HEAD = simple request, không preflight — kiểm tra CDN có cho phép CORS không
   fetch(PROBE, {method:'HEAD', mode:'cors'})
     .then(r=>{ if(r.ok) audio.crossOrigin='anonymous'; })
@@ -10091,7 +10098,7 @@ if(!REDUCED && window.fetch){
 }
 audio.addEventListener('loadstart', ()=>{ loadedWithCors = audio.crossOrigin==='anonymous'; });
 audio.addEventListener('playing', ()=>{
-  if(!ctxMade && loadedWithCors && audio.crossOrigin==='anonymous'){
+  if(!ctxMade && !MOBILE && loadedWithCors && audio.crossOrigin==='anonymous'){
     try{
       const AC=window.AudioContext||window.webkitAudioContext;
       aliCtx=new AC();
