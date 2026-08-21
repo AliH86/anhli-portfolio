@@ -275,9 +275,71 @@
     }
   };
 
+  /* Dữ kiện 2026-08-21 → 2026-08-28 (pack W34) đối chiếu từ:
+     - Moon phase & sign ingress: Cafe Astrology Moon Calendar 2026
+       https://cafeastrology.com/calendars/moon-calendar-2026.html
+       (2nd Quarter 19/8 22:46 ET đã ghi trong W33; 3rd Quarter 28/8 00:18 ET;
+       Moon → Capricorn 22/8 16:59 ET; → Aquarius 25/8 05:01 ET;
+       → Pisces 27/8 15:03 ET)
+     - Aspect exact dates: Cafe Astrology 2026 Aspects
+       https://cafeastrology.com/2026-astrological-aspects.html
+       (Venus opposition Saturn 21/8; Sun trine Chiron 23/8; Mercury trine
+       Chiron 25/8; Sun conjunction Mercury 27/8 tại 4° Xử Nữ; Sun square
+       Uranus + Mercury square Uranus 28/8 tại 5° Xử Nữ/Song Tử)
+     - Sun enters Virgo: Cafe Astrology event page
+       https://cafeastrology.com/events/sun-enters-virgo-2026/ — 23/8 02:20 UT
+     Giờ nguồn ghi theo Eastern Time (EDT = UTC-4 vào tháng 8); quy đổi sang
+     giờ Việt Nam bằng ET+11h (hoặc UT+7h) chỉ để chọn đúng ngày lịch — đây
+     vẫn là thời tiết chung, không dùng giờ sinh/vị trí/nhà/cung Mọc. Trăng
+     Hạ huyền 28/8 rơi đúng ngày cuối pack, khép chu kỳ mở từ kỳ nhật thực
+     12/8 đã ghi trong W32/W33. */
+  packs['2026-W34-approved']={
+    status:'approved',
+    label:'21–28/8/2026 · Ali duyệt',
+    sourceCheckedAt:'2026-08-21',
+    week:{
+      eyebrow:'Bối cảnh chung · 21–28/8',
+      title:'Gọn lại trước khi đổi mùa',
+      body:'Đầu tuần, Sao Kim đối đỉnh Sao Thổ (21/8) đặt một mối quan tâm gần đây trước một sự thật thực tế hơn là dễ chịu. Ngày 23/8, Mặt Trời rời Sư Tử bước vào Xử Nữ đúng lúc tam hợp Chiron, đưa nhịp chung từ phô diễn sang sắp xếp. Mặt Trăng đi qua Ma Kết rồi Bảo Bình, giữ giữa tuần nghiêng về kỷ luật và nhìn việc như chuyện chung hơn là chuyện riêng. Ngày 27/8, Mặt Trời hội hợp Sao Thuỷ làm lời nói và suy nghĩ khớp nhau hơn — nhưng hôm sau cả hai cùng vuông góc Sao Thiên Vương, nên một kế hoạch vừa gọn lại có thể bị xáo bởi một thay đổi bất ngờ. Tuần khép bằng Trăng Hạ huyền ở Song Ngư (28/8), điểm cuối của chu kỳ mở từ kỳ nhật thực 12/8.',
+      carry:'Việc có thể làm trong tuần: nhìn một mối quan tâm dưới ánh sáng thực tế thay vì ánh sáng dễ chịu; gọn lại một việc đang dở trước khi mùa Xử Nữ bắt đầu; và giữ phần cốt lõi của một kế hoạch trong khi để phần còn lại linh hoạt trước biến động cuối tuần.'
+    },
+    days:{
+      '2026-08-21':{ signals:[
+        { verb:'challenge', domains:['love','decision'], label:'Sao Kim đối đỉnh Sao Thổ (đỉnh 21/8)', wording:'Sao Kim đối đỉnh Sao Thổ đưa một mối quan tâm ra khỏi vùng dễ chịu.' },
+        { verb:'amplify', domains:['action','inner'], label:'Mặt Trăng ở Nhân Mã', wording:'Mặt Trăng ở Nhân Mã giữ nhịp ngày rộng và thẳng thắn hơn thường lệ.' }
+      ]},
+      '2026-08-22':{ signals:[
+        { verb:'slow', domains:['love','decision'], label:'Sao Kim và Sao Thổ còn trong vùng ảnh hưởng', wording:'Dư âm Sao Kim và Sao Thổ vẫn còn; một quyết định tình cảm hay tiền bạc nên chờ thêm.' },
+        { verb:'stabilize', domains:['work','action'], label:'Mặt Trăng cuối chặng Nhân Mã', wording:'Hôm nay hợp để khép một việc đang dở trước khi nhịp ngày đổi hướng.' }
+      ]},
+      '2026-08-23':{ signals:[
+        { verb:'stabilize', domains:['work','decision'], label:'Mặt Trời bước vào Xử Nữ (9:20 sáng)', wording:'Mặt Trời bước vào Xử Nữ đưa nhịp chung từ phô diễn sang sắp xếp.' },
+        { verb:'soften', domains:['inner','love'], label:'Mặt Trời tam hợp Chiron', wording:'Mặt Trời tam hợp Chiron làm một vết cũ dễ được nhìn bao dung hơn.' }
+      ]},
+      '2026-08-24':{ signals:[
+        { verb:'stabilize', domains:['work','action'], label:'Mặt Trăng ở Ma Kết', wording:'Mặt Trăng ở Ma Kết giữ nhịp ngày chắc và có kỷ luật.' }
+      ]},
+      '2026-08-25':{ signals:[
+        { verb:'clarify', domains:['inner','decision'], label:'Sao Thuỷ tam hợp Chiron', wording:'Sao Thuỷ tam hợp Chiron giúp một điều khó nói tìm được từ ngữ nhẹ hơn.' },
+        { verb:'surface', domains:['inner','action'], label:'Mặt Trăng chuyển vào Bảo Bình (chiều 25/8)', wording:'Mặt Trăng chuyển vào Bảo Bình về chiều, muốn lùi lại để nhìn xa hơn.' }
+      ]},
+      '2026-08-26':{ signals:[
+        { verb:'clarify', domains:['decision','work'], label:'Mặt Trăng ở Bảo Bình', wording:'Mặt Trăng ở Bảo Bình hợp để nhìn một vấn đề như chuyện chung.' }
+      ]},
+      '2026-08-27':{ signals:[
+        { verb:'clarify', domains:['decision','work'], label:'Mặt Trời hội hợp Sao Thuỷ ở Xử Nữ', wording:'Mặt Trời hội hợp Sao Thuỷ ở Xử Nữ làm lời nói và suy nghĩ khớp nhau hơn.' },
+        { verb:'slow', domains:['inner','love'], label:'Mặt Trăng cuối chặng Bảo Bình', wording:'Trước khi nhịp đổi sang Song Ngư, hôm nay hợp để giữ khoảng cách vừa đủ.' }
+      ]},
+      '2026-08-28':{ signals:[
+        { verb:'challenge', domains:['work','action'], label:'Mặt Trời và Sao Thuỷ cùng vuông góc Sao Thiên Vương', wording:'Mặt Trời và Sao Thuỷ cùng vuông góc Sao Thiên Vương dễ làm kế hoạch gọn bị xáo bất ngờ.' },
+        { verb:'clarify', domains:['inner','decision'], label:'Trăng Hạ huyền ở Song Ngư (11:18 sáng)', wording:'Trăng Hạ huyền ở Song Ngư khép chu kỳ mở từ kỳ nhật thực 12/8.' }
+      ]}
+    }
+  };
+
   root.GARDEN_ORACLE_WEEKLY={
     activeReviewKey:'',
-    lastApprovedKey:'2026-W33-approved',
+    lastApprovedKey:'2026-W34-approved',
     packs
   };
 })(window);

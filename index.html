@@ -8684,6 +8684,20 @@ const audio=document.getElementById('audioEl');
 let isPlaying=false;
 let pendingTrack=-1;
 
+/* ===== MEDIA SESSION — cho phép phát nền khi khoá màn hình / chuyển app ===== */
+if('mediaSession' in navigator){
+  navigator.mediaSession.setActionHandler('play', ()=>{ audio.play().catch(()=>{}); });
+  navigator.mediaSession.setActionHandler('pause', ()=>audio.pause());
+  navigator.mediaSession.setActionHandler('previoustrack', ()=>prevTrack());
+  navigator.mediaSession.setActionHandler('nexttrack', ()=>nextTrack());
+  navigator.mediaSession.setActionHandler('stop', ()=>audio.pause());
+  try{
+    navigator.mediaSession.setActionHandler('seekto', (d)=>{
+      if(d.seekTime!=null && audio.duration) audio.currentTime=d.seekTime;
+    });
+  }catch(e){}
+}
+
 /* ===== SHARE — deep-link tới bài / album (cho post Threads, dẫn thẳng về chỗ nghe) ===== */
 function aliSlug(s){
   return (s||'').toString().normalize('NFD').replace(/[̀-ͯ]/g,'')
@@ -8788,6 +8802,15 @@ function playAt(j, albumIndex){
   document.getElementById('pcCur').textContent='0:00';
   document.getElementById('pcFill').style.width='0%';
 
+  if('mediaSession' in navigator){
+    navigator.mediaSession.metadata=new MediaMetadata({
+      title:t.name,
+      artist:'Anh Li',
+      album:al?al.name:'Cái Sạp nhạc',
+      artwork:[{ src:coverSrc, sizes:'512x512', type:'image/jpeg' }]
+    });
+  }
+
   audio.src=streamUrl(t.id);
   audio.play().catch(()=>{ /* autoplay blocked — user can press play */ });
   heartBurst(); // 💗 trái tim cảm xúc khi bắt đầu một bài
@@ -8883,17 +8906,22 @@ audio.addEventListener('play', ()=>{
   isPlaying=true;
   document.getElementById('player').classList.add('playing');
   document.getElementById('pcPlay').textContent='❚❚';
+  if('mediaSession' in navigator) navigator.mediaSession.playbackState='playing';
 });
 audio.addEventListener('pause', ()=>{
   isPlaying=false;
   document.getElementById('player').classList.remove('playing');
   document.getElementById('pcPlay').textContent='▶';
+  if('mediaSession' in navigator) navigator.mediaSession.playbackState='paused';
 });
 audio.addEventListener('ended', ()=>{ nextTrack(); });
 audio.addEventListener('timeupdate', ()=>{
   const d=audio.duration||0;
   document.getElementById('pcFill').style.width=(d?audio.currentTime/d*100:0)+'%';
   document.getElementById('pcCur').textContent=fmt(audio.currentTime);
+  if('mediaSession' in navigator && 'setPositionState' in navigator.mediaSession && d && isFinite(d)){
+    try{ navigator.mediaSession.setPositionState({ duration:d, playbackRate:audio.playbackRate||1, position:Math.min(audio.currentTime,d) }); }catch(e){}
+  }
 });
 audio.addEventListener('loadedmetadata', ()=>{
   if(audio.duration) document.getElementById('pcDur').textContent=fmt(audio.duration);
