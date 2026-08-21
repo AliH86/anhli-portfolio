@@ -1,0 +1,184 @@
+/*
+ * Portfolio performance governor + Dandelion Oracle portal.
+ * Loaded by js/egg-game.js so the main index.html can stay untouched.
+ */
+
+/* Low-value, full-screen SVG turbulence is expensive to repaint on some GPUs. */
+body.perf-balanced.no-grain::before { display:none !important; }
+
+/* Keep the world alive, but make compositing calmer on the default desktop path. */
+body.perf-balanced .season-layer { opacity:.46; }
+body.perf-balanced #siteSeeds { opacity:.46; }
+body.perf-balanced .hero-wind { opacity:.7; }
+
+/* During wheel input, prioritise scroll responsiveness over decorative layers. */
+body.perf-balanced.wheel-input #siteSeeds,
+body.perf-balanced.wheel-input .hero-wind,
+body.perf-balanced.wheel-input .season-layer {
+  visibility:hidden !important;
+}
+body.perf-balanced.wheel-input .egg-hint,
+body.perf-balanced.wheel-input .section-wm,
+body.perf-balanced.wheel-input .contact-wm {
+  animation-play-state:paused !important;
+}
+
+/* Adaptive lite mode: remove only ambient layers, never content or interaction. */
+body.perf-lite #siteSeeds,
+body.perf-lite .hero-wind,
+body.perf-lite .season-layer {
+  display:none !important;
+}
+body.perf-lite .section-wm,
+body.perf-lite .contact-wm,
+body.perf-lite .music-decor {
+  transform:none !important;
+  translate:0 0 !important;
+}
+body.perf-lite .egg-hint,
+body.perf-lite .gc-day.today::before,
+body.perf-lite .vd-modal-panel::before,
+body.perf-lite .vd-modal-panel::after,
+body.perf-lite #vedic .vd-nak-halo {
+  animation:none !important;
+}
+
+/* If the adaptive budget removes hero video, force the proven static garden back. */
+body.hero-video-budgeted .hero-video,
+body.hero-video-budgeted .hgv-disc { display:none !important; }
+
+/* Let the browser skip layout/paint for long sections that are far off-screen. */
+body.perf-balanced #videos,
+body.perf-balanced #gallery,
+body.perf-balanced #work,
+body.perf-balanced #about,
+body.perf-balanced #contact,
+body.perf-balanced #oracle-side-quest {
+  content-visibility:auto;
+  contain-intrinsic-size:auto 900px;
+}
+
+/* Dandelion Oracle CTA inside the existing Garden Oracle result. */
+.go-oracle-portal {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  margin:1.15rem 0 .35rem;
+  padding:.9rem 1rem;
+  border:1px solid rgba(225,236,173,.22);
+  border-radius:18px;
+  background:linear-gradient(135deg,rgba(168,198,105,.11),rgba(232,200,112,.045));
+  color:rgba(238,243,201,.9);
+  text-decoration:none;
+  transition:transform .25s ease,border-color .25s ease,background .25s ease;
+}
+.go-oracle-portal:hover,
+.go-oracle-portal:focus-visible {
+  transform:translateY(-2px);
+  border-color:rgba(225,236,173,.48);
+  background:linear-gradient(135deg,rgba(168,198,105,.17),rgba(232,200,112,.075));
+}
+.go-oracle-portal-copy { min-width:0; }
+.go-oracle-portal-kicker {
+  display:block;
+  margin-bottom:.26rem;
+  color:var(--amber2,#E8C870);
+  font:600 .52rem/1 'Instrument Sans',sans-serif;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.go-oracle-portal-title {
+  display:block;
+  color:var(--text,#EDE6DC);
+  font:400 1.15rem/1.15 'Cormorant Garamond',serif;
+}
+.go-oracle-portal-arrow {
+  flex:0 0 auto;
+  color:var(--amber2,#E8C870);
+  font-size:1.05rem;
+}
+.garden-oracle:not(.drawn) .go-oracle-portal { display:none; }
+
+/* Public but quiet portfolio placement: a side quest, not a primary nav item. */
+.oracle-side-quest {
+  position:relative;
+  overflow:hidden;
+  padding:clamp(4.5rem,9vw,7.5rem) clamp(1.5rem,6vw,5rem);
+  background:
+    radial-gradient(60% 100% at 82% 50%,rgba(123,154,76,.12),transparent 70%),
+    linear-gradient(180deg,var(--ink,#09080E),var(--ink2,#13111C));
+  border-top:1px solid var(--border,rgba(184,168,148,.1));
+  border-bottom:1px solid var(--border,rgba(184,168,148,.1));
+}
+.oracle-side-quest-inner {
+  width:min(1080px,100%);
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:end;
+  gap:clamp(1.5rem,5vw,5rem);
+}
+.oracle-side-quest-kicker {
+  margin-bottom:.8rem;
+  color:var(--amber2,#E8C870);
+  font-size:.58rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+}
+.oracle-side-quest h2 {
+  margin:0;
+  color:var(--text,#EDE6DC);
+  font:300 clamp(2.3rem,6vw,5.2rem)/.92 'Cormorant Garamond',serif;
+  letter-spacing:-.025em;
+}
+.oracle-side-quest p {
+  max-width:620px;
+  margin:1rem 0 0;
+  color:var(--text2,#B8B0A4);
+  font-size:clamp(.9rem,1.4vw,1rem);
+  line-height:1.75;
+}
+.oracle-side-quest-link {
+  display:inline-flex;
+  align-items:center;
+  gap:.8rem;
+  white-space:nowrap;
+  padding:.95rem 1.2rem;
+  border:1px solid var(--border2,rgba(204,159,74,.2));
+  border-radius:999px;
+  color:var(--amber2,#E8C870);
+  text-decoration:none;
+  font-size:.7rem;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+  transition:transform .25s ease,border-color .25s ease,background .25s ease;
+}
+.oracle-side-quest-link:hover,
+.oracle-side-quest-link:focus-visible {
+  transform:translateY(-2px);
+  border-color:rgba(232,200,112,.52);
+  background:rgba(232,200,112,.055);
+}
+.oracle-side-quest-mark {
+  position:absolute;
+  right:-.06em;
+  bottom:-.24em;
+  color:rgba(225,236,173,.035);
+  font:300 clamp(9rem,24vw,22rem)/1 'Cormorant Garamond',serif;
+  pointer-events:none;
+  user-select:none;
+}
+
+@media (max-width:700px) {
+  .oracle-side-quest-inner { grid-template-columns:1fr; align-items:start; }
+  .oracle-side-quest-link { width:max-content; max-width:100%; white-space:normal; }
+  .go-oracle-portal { padding:.82rem .9rem; }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .go-oracle-portal,
+  .oracle-side-quest-link { transition:none; }
+}
+body.no-motion .go-oracle-portal,
+body.no-motion .oracle-side-quest-link { transition:none !important; }

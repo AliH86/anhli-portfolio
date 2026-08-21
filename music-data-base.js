@@ -14,6 +14,44 @@ window.PORTFOLIO_MUSIC = {
   "version": "2026-06-30-2",
   "source": "Playlists curated by Anh Li",
   "albums": [
+    { "id": "e2a4ae09-b3d2-4421-bd45-68978bed409c", "playlistUrl": "https://suno.com/playlist/e2a4ae09-b3d2-4421-bd45-68978bed409c", "name": "Biên Niên Thất Nghiệp Ký", "sub": "Acoustic Folk · Chanson · Blues-Folk · Ritual-Folk Mixtape", "cover": "uploads/bien-nien-that-nghiep-ky.jpg", "desc": "=))) như tiêu đề, thì tui ế nên tui làm album này. =))) là vậy ó...", "count": 8, "tracks": [ { "id": "c0f86817-473e-4118-ba40-121d4de7277c", "name": "Lại Một Lần Tự Do", "dur": "3:39" }, { "id": "e5d407fc-f8e4-4007-b7eb-dad9a3d6b4e3", "name": "Chuyện Của Ngày Mai", "dur": "2:45" }, { "id": "0c65bb2a-bbfa-4318-9ed5-a93a1a3ea1ad", "name": "Đi Đâu Đây", "dur": "2:50" }, { "id": "df59fec5-db4b-4048-85d2-27e428597b85", "name": "Hôm nay Tôi là Ai?", "dur": "3:49" }, { "id": "a930b39f-7a9c-47ed-af5c-d05f7562f234", "name": "Làm Cái Gì Bây Giờ?", "dur": "2:55" }, { "id": "7220ebcf-c477-4880-95ce-2fa734a03d88", "name": "Đã Xem Lúc 14:37", "dur": "3:58" }, { "id": "4e2a6a87-04ba-460f-a9b1-7b5f0d77edad", "name": "Hổng biết nữa, hổng biết dzì hết...", "dur": "3:18" }, { "id": "c76d4498-1574-4caf-b67d-81fb0755a733", "name": "Vái Tứ Phương", "dur": "3:40" } ] },
+    { "id": "5d7b86a1-a197-402d-bfea-3184fa59f69e", "playlistUrl": "https://suno.com/playlist/5d7b86a1-a197-402d-bfea-3184fa59f69e", "name": "Another Stage", "sub": "Trap · Jersey Club · Funk · Swing-Rap Mixtape", "cover": "uploads/another-stage.jpg", "desc": "1 góc dầy thú vị - một góc phản biện, một thế giới quan, mọi sự phán xét là thừa :)", "count": 9, "tracks": [ { "id": "179697f4-621a-4dc1-b587-2af151c63e05", "name": "Gato àh, bleh~", "dur": "3:10" }, { "id": "6bb9116a-7d53-4585-9464-357713534d73", "name": "ỪH, GIỎI.", "dur": "2:57" }, { "id": "37465953-7e97-41db-9828-c87fb14d511a", "name": "Ai Hỏi?", "dur": "2:27" }, { "id": "85cae75f-3ffc-4ff2-a492-7ee8bde4995c", "name": "Ký sự Kỳ Thú", "dur": "3:53" }, { "id": "9b6105c5-e664-4338-b347-6a2b443a8dc0", "name": "Của Mày Hết", "dur": "4:22" }, { "id": "16bedbbb-d746-4785-a443-f1483016ae6b", "name": "Wow, Oai thế", "dur": "3:54" }, { "id": "df00b140-8512-4997-af33-5f7cba191ec0", "name": "OK, Sếp", "dur": "3:23" }, { "id": "e2cab1ea-3669-4100-ad16-b94e435eccf0", "name": "Quen Ăn Kẹo Huh?", "dur": "3:56" }, { "id": "31ce0e36-ec63-4cd3-b6e7-ee383f8338a3", "name": "Cái Này Dễ Mà...", "dur": "3:41" } ] },
+    {
+      "id": "b31825a3-7a38-4744-834a-96930f05015c",
+      "playlistUrl": "https://suno.com/playlist/b31825a3-7a38-4744-834a-96930f05015c",
+      "name": "Chuyện Của Trăng",
+      "sub": "Vietnamese Folk-Soul · Chamber Folk · Art-Pop",
+      "cover": "uploads/chuyen-cua-trang.jpg",
+      "desc": "Những câu chuyện bài ca, thơ, văn lấy trăng làm trọng tâm.",
+      "count": 7,
+      "tracks": [
+        { "id": "b811ceb4-2492-493c-8163-6efad1329da2", "name": "Quên Vầng Trăng Thề", "dur": "4:43" },
+        { "id": "c69e9887-79b2-4145-9771-e3bf722d0403", "name": "Mảnh Tình Treo Trăng", "dur": "3:42" },
+        { "id": "3e9624a7-e3c8-4a9f-9f9d-960d8a3e4589", "name": "Ánh Trăng Đôi Đường", "dur": "4:11" },
+        { "id": "5bd66ad6-cbab-4111-bbba-8442026e0919", "name": "Trăng Vén Rèm Thưa", "dur": "4:46" },
+        { "id": "083b467b-c612-4b86-951e-8a83f73d540a", "name": "Kẻ Say Trăng", "dur": "5:36" },
+        { "id": "b2135c69-5d49-4088-bfd6-6bc02fe8328b", "name": "Trăng Khuyết Trăng Tròn", "dur": "4:25" },
+        { "id": "d17a08a2-1d9e-496e-92fe-f3423e679be6", "name": "Trăng Qua Bến Cũ", "dur": "3:58" }
+        ]
+    },
+    {
+      "id": "e5c30e35-b012-4fa2-86cb-14e8c334b977",
+      "playlistUrl": "https://suno.com/playlist/e5c30e35-b012-4fa2-86cb-14e8c334b977",
+      "name": "Không Có Gì!!?!",
+      "sub": "Acoustic Funk · Indie Pop · Eclectic Mood Mix",
+      "cover": "uploads/khong-co-gi.jpg",
+      "desc": "Miệng trả lời không có gì đâu, nhưng cả bầu trời drama cảm lạnh thiên hạ....",
+      "count": 7,
+      "tracks": [
+        { "id": "8ed2eec3-3dcd-44ef-aacf-2c3eed3cece6", "name": "Nhàn....", "dur": "3:29" },
+        { "id": "7fc24b26-1908-434d-b672-bb84a66286f1", "name": "Bận!", "dur": "3:56" },
+        { "id": "2db452f8-0368-499d-959d-9ccfeb538a3e", "name": "Mệth...", "dur": "3:30" },
+        { "id": "1646899f-ca67-4df6-b2bf-86fbe927f68a", "name": "Xảh...", "dur": "4:24" },
+        { "id": "a72464fd-19fe-420e-8d18-9b7a1b2c513e", "name": "Uhmmmmmmm", "dur": "5:27" },
+        { "id": "0e8cfe5c-3d7f-41c4-8fac-b95e2511b8b7", "name": "Chịu...", "dur": "4:28" },
+        { "id": "aeb95eba-96e7-4ffa-8a92-d0eba5cbc1fd", "name": "Tưởng ?!?", "dur": "3:11" }
+        ]
+    },
     {
                 "id": "30456da3-d6e4-4f3b-babd-a30056ad23d1",
                 "playlistUrl": "https://suno.com/playlist/30456da3-d6e4-4f3b-babd-a30056ad23d1",
@@ -21,14 +59,15 @@ window.PORTFOLIO_MUSIC = {
                 "sub": "Dân ca ba miền · Heritage Folk Series",
                 "cover": "uploads/toi-muon-om-tron-di-san.jpg",
                 "desc": "Đi từ làng nghề, di sản văn hoá đến những làn điệu dân gian ba miền, album kể lại chất liệu Việt bằng một hơi thở mới.",
-                "count": 6,
+                "count": 7,
                 "tracks": [
                   { "id": "69ede1f4-3725-467f-b424-beed636dabc1", "name": "IN MỘT NÉT TRANH", "dur": "4:54" },
                   { "id": "b6902a96-b14b-4317-80d7-fd9d78dcae05", "name": "VŨ ĐIỆU ĐẤT", "dur": "4:13" },
                   { "id": "de139955-724b-4ce5-a96a-7074eb5a4cde", "name": "CON CHI VỪA LÓ RA NÌ?", "dur": "4:14" },
                   { "id": "05a1cbff-5616-4190-bf73-cb62fd85a0d6", "name": "BUÔNG CÂU ĐỜN CA", "dur": "5:02" },
                   { "id": "99ecde35-d33e-4f83-ba1c-19cacad9ff8e", "name": "BÀI THƠ BỒNG BỀNH", "dur": "4:24" },
-                  { "id": "dd2d5a9c-424d-4605-9544-24818bdd5e35", "name": "Ơ LÚA RÃY ƠI", "dur": "3:43" }
+                  { "id": "dd2d5a9c-424d-4605-9544-24818bdd5e35", "name": "Ơ LÚA RÃY ƠI", "dur": "3:43" },
+                  { "id": "4fec75bb-1b1b-47e3-b67e-a910881afa66", "name": "ÂN TÌNH MẸ QUÊ", "dur": "4:35" }
                             ]
     },
     {
@@ -754,6 +793,24 @@ window.PORTFOLIO_MUSIC = {
               { "id": "3b60b43c-2640-4293-9938-9c6393e27725", "name": "Một Ngày Sóng Không Về", "dur": "3:34" },
               { "id": "a9fd3296-d400-4039-9977-92618c5b3240", "name": "Sau cùng, Trời vẫn thênh thang", "dur": "4:38" }
                     ]
+    },
+    {
+      "id": "b1fe85ee-becf-464d-ab82-a5f5513d0738",
+      "playlistUrl": "https://suno.com/playlist/b1fe85ee-becf-464d-ab82-a5f5513d0738",
+      "name": "Tôi Hoạ Cả Thế Gian",
+      "sub": "Vietnamese Ink-Wash Folk · Chamber Folk · Roots Ritual",
+      "cover": "uploads/toi-hoa-ca-the-gian.jpeg",
+      "desc": "Một bức thuỷ mặc bằng âm thanh — người lữ khách đứng giữa núi sông, trăng nước, vẽ lại cả thế gian bằng những gam trầm và một vệt son.",
+      "count": 9,
+      "tracks": [
+        { "id": "7cc49535-164a-42b3-a2b3-4c98adc0e931", "name": "Ngắm Nhìn Bức Hoạ Thế Gian", "dur": "4:14" },
+        { "id": "70ccf96a-3b48-442a-a16d-af30520a0a71", "name": "Nét Đời", "dur": "3:24" },
+        { "id": "df51a475-1944-4c90-ab59-d27da515d9ab", "name": "Qua Miền Gió Bay", "dur": "4:57" },
+        { "id": "2debfb51-0310-4759-970a-33487e0bc77c", "name": "Mạch Đất", "dur": "3:57" },
+        { "id": "bb942cb4-c693-416b-a63a-5c241c66ddef", "name": "Nước Về Đâu", "dur": "4:21" },
+        { "id": "190b2560-b91a-4cdb-9d10-33e149820d63", "name": "Muôn Vạn Dấu Chân", "dur": "4:34" },
+        { "id": "fca5ff76-12ec-41ac-a229-12dc0b6f3f19", "name": "Phủ Bạc Nhân Gian", "dur": "4:27" }, { "id": "0aed4918-86b6-4d33-ad61-430d18045dfb", "name": "Sầu Thừa Vừa Một Ly", "dur": "4:27" }, { "id": "74d27a3b-f6af-4566-ad0f-8a35c3ff54c1", "name": "Chữ Tài Gánh Một Chữ Tai", "dur": "3:41" }
+      ]
     }
   ]
 };

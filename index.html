@@ -495,7 +495,7 @@ body.debug-disc .hgv-disc::after {
   position:absolute;
   inset:0;
   border-radius:50%;
-  background:var(--hgv-cover, var(--hero-cover, url('./uploads/My-vi-nhan-sinh.jpg'))) center/cover;
+  background:var(--hgv-cover, var(--hero-cover, url('./uploads/another-stage.jpg'))) center/cover;
   opacity:0.8;
   /* KHÔNG dùng hgaDiscSpin: keyframe đó kèm translate(-50%,-50%) cho đĩa tĩnh
      cũ — mượn nó làm mặt đĩa này trôi dần lên góc trên-trái rồi giật về
@@ -3118,7 +3118,7 @@ body.no-motion .hg-disc {
   overflow:hidden;
   background:
     radial-gradient(circle, transparent 0 10.2%, rgba(8,12,12,0.76) 10.8% 14.8%, transparent 15.4%),
-    var(--hero-cover, url('./uploads/My-vi-nhan-sinh.jpg')) center/cover;
+    var(--hero-cover, url('./uploads/another-stage.jpg')) center/cover;
   opacity:0.86;
   animation:hgaDiscSpin 30s linear infinite;
   box-shadow:inset 0 0 46px rgba(255,255,255,0.20), inset 0 0 70px rgba(0,0,0,0.22);
@@ -5238,7 +5238,7 @@ body.no-motion #music .listening-room .album-drawer .np-vinyl{ display:none !imp
 </nav>
 
 <!-- HERO -->
-   <section class="hero poster-hero" id="home" data-screen-label="Hero" data-hero-skin="dandelion" data-promoted-album="f5fc153c-51b8-4583-bfe9-1fcc872aab85" data-supporting-albums="ee01969a-6e94-4b7e-8b93-69d0be8aa866,c6d1b392-c21b-4d47-9e67-1687cae2a955,8f2c17b4-cb70-46e1-9f2e-464ccadaf1ab,b1021057-56bd-49e8-a1fb-5af4d69c2c0e">
+   <section class="hero poster-hero" id="home" data-screen-label="Hero" data-hero-skin="dandelion" data-promoted-album="f5fc153c-51b8-4583-bfe9-1fcc872aab85" data-supporting-albums="e5c30e35-b012-4fa2-86cb-14e8c334b977,ee01969a-6e94-4b7e-8b93-69d0be8aa866,b31825a3-7a38-4744-834a-96930f05015c,b1fe85ee-becf-464d-ab82-a5f5513d0738">
   <div class="poster-field" aria-hidden="true"></div>
   <div class="poster-grade" aria-hidden="true"></div>
   <div class="poster-atmosphere" aria-hidden="true"></div>
@@ -7665,6 +7665,18 @@ const ARTISTS = [
 ];
 
 const ALBUMS = [
+   { id:'92cb0009-596c-478a-b8c2-8a59ccc0f9dc',
+    name:'Hòa Bình Và Lặng Lẽ', sub:'Chamber-Pop · Cinematic · Anh Li',
+    cover:'uploads/hoa-binh-va-lang-le.jpg',
+    desc:'Năm bài hát đồng hành cùng hành trình 500 ngày đêm tìm Di Hài Cốt Liệt Sĩ Việt Nam — mang tâm nhạc làm ngọn đèn dẫn đường, gửi niềm hy vọng đoàn viên đến những gia đình các Anh-Chị-Em liệt sĩ. Một lời chưa nói, nở thành cả trời hoa.', count:5,
+    tracks:[
+      {id:'7ab57f1a-2129-46e6-82a3-d4276ed3b720', name:'Hoà Bình và Lặng Lẽ', dur:'5:27'},
+      {id:'773a3ba0-4550-4d85-8c49-629c7f63c01b', name:'Người Ơi, Về Thôi', dur:'5:53'},
+      {id:'1869922b-a479-4f87-9448-ba7854d258d2', name:'Tuổi Hai Mươi', dur:'6:07'},
+      {id:'8287a323-6407-4710-a490-4dbcc38a7bce', name:'Người Đi Tìm Người', dur:'5:08'},
+      {id:'dbd4166a-738b-4558-a946-0c3a833a3f47', name:'Ngày Mai Người Gửi Lại', dur:'5:37'},
+    ],
+  },
   { id:'f5fc153c-51b8-4583-bfe9-1fcc872aab85',
     name:'Một Tần Số Khác', sub:'Indie Folk · Ambient Poetic EP',
     cover:'uploads/mot-tan-so-khac.jpg',
@@ -8147,7 +8159,7 @@ const YT_CHANNEL = 'UC2Cat4-Hl0SZqKFkRKu72zQ';
    https://www.youtube.com/watch?v=dQw4w9WgXcQ  →  id:'dQw4w9WgXcQ'
    Để trống mảng này thì web sẽ tự thử tải từ kênh (kém ổn định hơn). */
 const VIDEOS = [
-  { fb:'https://www.facebook.com/hoaithuog.phan/posts/pfbid02giNt8zp7ouhbVgL7Ro9YBjUFszPxDo7nbvw2Yv7ERugV32LS5WDwp8aw8jJ4BAk1l',
+  { vimeo:'1215092159?h=0de957cbfe', title:'Dai-Ichi GO!', meta:'Dai-Ichi Life Vietnam · Sự kiện', credits:'Sáng tác & trình bày: Anh Li · Biểu diễn: Vũ Đoàn BCA · Biên đạo: Đạt Nguyễn · Show Director: Anh Li · Agency: ICH (indochinaheritage.com) · Logistic & Production: Bridge-way Team · Motion Visual: sunnylab.studio/dai-ichi' }, { fb:'https://www.facebook.com/hoaithuog.phan/posts/pfbid02giNt8zp7ouhbVgL7Ro9YBjUFszPxDo7nbvw2Yv7ERugV32LS5WDwp8aw8jJ4BAk1l',
     title:'Vươn Xa Biển Lớn — Lễ kỷ niệm 25 năm Vĩnh Tân Group',
     meta:'Vĩnh Tân Group · VPRO Event',
     credits:'Sáng tác: Ali Huỳnh · VPRO Creative Director\nCa sĩ: Phạm Anh Khoa  ·  Producer: Hà Trà Đá  ·  Biên đạo: An Nguyễn' },
@@ -8326,7 +8338,7 @@ function streamUrl(id){ return `https://cdn1.suno.ai/${id}.mp3`; }
 function embedUrl(id){ return `https://suno.com/embed/${id}`; }
 
 const HERO_GARDEN_DEFAULT = {
-  mainAlbumId:'b1021057-56bd-49e8-a1fb-5af4d69c2c0e',
+  mainAlbumId:'b1fe85ee-becf-464d-ab82-a5f5513d0738',
   supportAlbumIds:[
     'debb379c-7814-426c-8409-abe0f0a43215',
     'c6672b33-6803-4fa3-8c9d-900d15dfaf2d',
@@ -9155,7 +9167,7 @@ function renderVideos(){
       ? '<div class="vid-thumb"><div class="vid-overlay"><div class="vid-play">▶</div></div><span class="fb-badge">Facebook</span></div>'
       : v.drive
       ? '<div class="vid-thumb"><img src="https://drive.google.com/thumbnail?id='+v.drive+'&sz=w480" alt="'+safe+'" loading="lazy" onerror="this.style.display=\'none\'"/><div class="vid-overlay"><div class="vid-play">▶</div></div><span class="fb-badge">Drive</span></div>'
-      : '<div class="vid-thumb"><img src="https://img.youtube.com/vi/'+v.id+'/hqdefault.jpg" alt="'+safe+'" loading="lazy"/><div class="vid-overlay"><div class="vid-play">▶</div></div></div>';
+      : v.vimeo ? '<div class="vid-thumb"><div class="vid-overlay"><div class="vid-play">▶</div></div><span class="fb-badge">Vimeo</span></div>' : '<div class="vid-thumb"><img src="https://img.youtube.com/vi/'+v.id+'/hqdefault.jpg" alt="'+safe+'" loading="lazy"/><div class="vid-overlay"><div class="vid-play">▶</div></div></div>';
     return '<div class="vid-card reveal'+(v.fb?' is-fb':'')+(i>=VID_INIT?' v-extra':'')+'" data-vid="'+i+'" onclick="setFeatured('+i+',true)">'
       + thumb
       + '<div class="vid-info"><div class="vid-title">'+(v.title||'Video')+'</div><div class="vid-meta">'+(v.meta||'Sạp Âm Nhạc')+'</div></div>'
@@ -9196,7 +9208,7 @@ function setFeatured(i, play){
     frame.innerHTML='<div class="vid-stage-play" onclick="loadStage('+i+')"><span class="vp">▶</span></div>';
   } else if(v.drive){
     frame.style.height='';
-    frame.innerHTML='<img src="https://drive.google.com/thumbnail?id='+v.drive+'&sz=w800" onerror="this.style.display=\'none\'" alt=""/><div class="vid-stage-play" onclick="loadStage('+i+')"><span class="vp">▶</span></div>';
+    frame.innerHTML='<img src="https://drive.google.com/thumbnail?id='+v.drive+'&sz=w800" onerror="this.style.display=\'none\'" alt=""/><div class="vid-stage-play" onclick="loadStage('+i+')"><span class="vp">▶</span></div>'; } else if(v.vimeo){ frame.style.height=''; frame.innerHTML='<div class="vid-stage-play" onclick="loadStage('+i+')"><span class="vp">▶</span></div>';
   } else {
     frame.style.height='';
     frame.innerHTML='<img src="https://img.youtube.com/vi/'+v.id+'/maxresdefault.jpg" onerror="this.src=\'https://img.youtube.com/vi/'+v.id+'/hqdefault.jpg\'" alt=""/><div class="vid-stage-play" onclick="loadStage('+i+')"><span class="vp">▶</span></div>';
@@ -9212,7 +9224,7 @@ function loadStage(i){
     frame.innerHTML='<iframe src="'+src+'" width="'+w+'" height="'+h+'" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" title="Vươn Xa Biển Lớn"></iframe>';
   } else if(v.drive){
     var hd=Math.round(w*9/16); frame.style.height=hd+'px';
-    frame.innerHTML='<iframe src="https://drive.google.com/file/d/'+v.drive+'/preview" width="'+w+'" height="'+hd+'" style="border:none" allow="autoplay" allowfullscreen title="'+(v.title||'').replace(/"/g,'')+'"></iframe>';
+    frame.innerHTML='<iframe src="https://drive.google.com/file/d/'+v.drive+'/preview" width="'+w+'" height="'+hd+'" style="border:none" allow="autoplay" allowfullscreen title="'+(v.title||'').replace(/"/g,'')+'"></iframe>'; } else if(v.vimeo){ var hv=Math.round(w*9/16); frame.style.height=hv+'px'; frame.innerHTML='<iframe src="https://player.vimeo.com/video/'+v.vimeo+'&autoplay=1" width="'+w+'" height="'+hv+'" style="border:none" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="'+(v.title||'').replace(/"/g,'')+'"></iframe>';
   } else {
     var hy=Math.round(w*9/16); frame.style.height=hy+'px';
     frame.innerHTML='<iframe src="https://www.youtube.com/embed/'+v.id+'?autoplay=1" width="'+w+'" height="'+hy+'" style="border:none" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen title="'+(v.title||'').replace(/"/g,'')+'"></iframe>';
@@ -10984,7 +10996,7 @@ if(MOBILE){
     const id=home && home.dataset.promotedAlbum;
     const list=(window.PORTFOLIO_MUSIC && window.PORTFOLIO_MUSIC.albums) || [];
     const hit=id && list.find(a=>a.id===id);
-    return (hit && hit.cover) || 'uploads/My-vi-nhan-sinh.jpg';
+    return (hit && hit.cover) || 'uploads/another-stage.jpg';
   }
 
   /* rãnh đĩa: texture canvas đồng tâm, dùng làm bump + roughness */
