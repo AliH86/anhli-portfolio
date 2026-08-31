@@ -4,3 +4,4 @@
 deploy-github.sh
 deploy.command
 .git-token
+_originals/
