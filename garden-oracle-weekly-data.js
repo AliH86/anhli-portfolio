@@ -337,9 +337,72 @@
     }
   };
 
+  /* Dữ kiện 2026-08-29 → 2026-09-05 (pack W35) tính bằng astronomy-engine
+     (Don Cross, geocentric true-equinox-of-date, cùng thư viện đã dùng cho
+     hero) — vị trí 10 thiên thể 00:00 UT mỗi ngày, thời điểm chính xác các
+     góc chính và các pha Trăng; giờ trong nhãn đã quy về giờ Việt Nam UTC+7.
+     Các mốc chính:
+     - Trăng tròn 28/8 11:19 (5° Song Ngư) — ngay trước pack; Trăng khuyết
+       dần suốt tuần tới Trăng Hạ huyền 4/9 14:51 (~12° Song Tử).
+     - Mặt Trời vuông góc Sao Thiên Vương đỉnh 29/8 05:18 (Mercury vuông
+       Uranus 28/8 14:24, còn trong quỹ ngày 29–30/8).
+     - Sao Mộc tam hợp Sao Thổ đỉnh 1/9 05:05 (13° Sư Tử / 13° Bạch Dương).
+     - Sao Hoả vuông góc Sao Thổ đỉnh 1/9 16:53 (13° Cự Giải / 13° Bạch Dương).
+     - Sao Thuỷ lục hợp Sao Hoả đỉnh 1/9 20:21.
+     - Mặt Trăng đổi cung (giờ VN): → Bạch Dương 30/8 09:37; → Kim Ngưu
+       1/9 15:01; → Song Tử 3/9 18:47; → Cự Giải 5/9 21:30.
+     - Sao Thiên Vương gần như đứng yên ở 5–6° Song Tử (sắp nghịch hành ~10/9).
+     - Cả tuần: Mặt Trời & Sao Thuỷ ở Xử Nữ, Sao Kim ở Thiên Bình (đều cung
+       mạnh); Sao Hoả ở Cự Giải; Sao Thổ, Hải Vương nghịch hành ở Bạch Dương,
+       Diêm Vương nghịch hành ở Bảo Bình.
+     Không có nhật thực hay mưa sao băng đáng chú ý quan sát từ Việt Nam trong
+     tuần. Đây vẫn là thời tiết chung, không dùng giờ sinh/vị trí/nhà/cung Mọc. */
+  packs['2026-W35-approved']={
+    status:'approved',
+    label:'29/8–5/9/2026 · Ali duyệt',
+    sourceCheckedAt:'2026-08-31',
+    week:{
+      eyebrow:'Bối cảnh chung · 29/8–5/9',
+      title:'Sức bền hơn sức mạnh',
+      body:'Tuần mở bằng một cú xóc: rạng sáng 29/8 Mặt Trời vuông góc Sao Thiên Vương, dễ có tin bất ngờ hoặc một thay đổi kế hoạch sát giờ. Giữa tuần dồn vào ngày 1/9 với hai góc trái chiều cùng lúc — Sao Hoả vuông góc Sao Thổ làm mọi cách đẩy mạnh đều vấp, còn Sao Mộc tam hợp Sao Thổ lại cho một kế hoạch có nền được chống lưng thật sự. Bài học chung của tuần là dựng cấu trúc thay vì tăng lực. Mặt Trăng khuyết dần sau kỳ Trăng tròn 28/8, đi qua Bạch Dương, Kim Ngưu rồi Song Tử, tới Trăng Hạ huyền ở Song Tử chiều 4/9 — điểm giữa chu kỳ để cắt bớt việc và soát lại. Cả tuần trong mùa Xử Nữ, với Sao Kim ở Thiên Bình và Sao Thuỷ ở Xử Nữ đều đang ở cung mạnh, thuận cho việc sửa cho gọn và cư xử cho công bằng.',
+      carry:'Việc có thể làm trong tuần: đón một thay đổi sát giờ đầu tuần mà chưa đập lại ngay; ngày 1/9 chọn xếp lại thứ tự việc thay vì cố đẩy cho nhanh; và dùng quãng Trăng Hạ huyền cuối tuần để cắt bớt một việc đang gánh dở.'
+    },
+    days:{
+      '2026-08-29':{ signals:[
+        { verb:'challenge', domains:['decision','work'], label:'Mặt Trời vuông góc Sao Thiên Vương (đỉnh rạng sáng 29/8)', wording:'Một tin bất ngờ hoặc một thay đổi sát giờ có thể làm xáo kế hoạch; chưa vội chốt phản ứng trong ngày đầu.' },
+        { verb:'slow', domains:['inner','love'], label:'Mặt Trăng cuối chặng Song Ngư', wording:'Nhịp ngày mềm và dễ thấm; hợp để nghỉ và thu dọn hơn là quyết một việc lớn.' }
+      ]},
+      '2026-08-30':{ signals:[
+        { verb:'surface', domains:['action','inner'], label:'Mặt Trăng chuyển vào Bạch Dương (sáng 30/8)', wording:'Một việc mình muốn bắt tay ngay trở nên rõ hơn; thử ở quy mô nhỏ trước khi biến nó thành cam kết.' }
+      ]},
+      '2026-08-31':{ signals:[
+        { verb:'clarify', domains:['work','decision'], label:'Sao Mộc tiến tới tam hợp Sao Thổ (đỉnh rạng sáng 1/9)', wording:'Dễ nhìn ra phần kế hoạch nào có nền đủ chắc để đi tiếp và phần nào mới chỉ là ý thích.' },
+        { verb:'challenge', domains:['action','inner'], label:'Mặt Trăng vuông góc Sao Hoả', wording:'Một va chạm nhỏ dễ bị đẩy thành lớn; hạ giọng trước rồi hãy nói tiếp.' }
+      ]},
+      '2026-09-01':{ signals:[
+        { verb:'challenge', domains:['action','work'], label:'Sao Hoả vuông góc Sao Thổ (đỉnh chiều 1/9)', wording:'Mọi cách đẩy mạnh hôm nay đều dễ vấp; đổi sang xếp lại thứ tự việc thay vì tăng lực.' },
+        { verb:'stabilize', domains:['work','decision'], label:'Sao Mộc tam hợp Sao Thổ đúng ngày', wording:'Phần kế hoạch đã có cấu trúc rõ có thể tiến thêm một bước chắc, kể cả khi phần còn lại phải chờ.' }
+      ]},
+      '2026-09-02':{ signals:[
+        { verb:'clarify', domains:['decision','work'], label:'Sao Thuỷ lục hợp Sao Hoả (đỉnh tối 1/9, còn hiệu lực)', wording:'Nói thẳng một điều khó lúc này ít thành va chạm hơn thường lệ; cũng dễ ra quyết định gọn.' },
+        { verb:'stabilize', domains:['work','inner'], label:'Mặt Trăng ở Kim Ngưu', wording:'Nhịp ngày kéo về việc chạm được: làm xong một phần nhỏ, ăn ngủ cho đủ.' }
+      ]},
+      '2026-09-03':{ signals:[
+        { verb:'stabilize', domains:['work','action'], label:'Mặt Trăng cuối chặng Kim Ngưu', wording:'Trước khi nhịp đổi sang Song Tử, hôm nay hợp để khép cho xong một việc đang dở.' }
+      ]},
+      '2026-09-04':{ signals:[
+        { verb:'clarify', domains:['inner','decision'], label:'Trăng Hạ huyền ở Song Tử (chiều 4/9)', wording:'Điểm giữa chu kỳ: soát lại điều gì đáng giữ từ nửa tháng qua và điều gì có thể buông.' },
+        { verb:'slow', domains:['work','inner'], label:'Mặt Trăng ở Song Tử', wording:'Nhịp Song Tử dễ tản; chọn một hai việc làm cho xong thay vì mở thêm đầu việc mới.' }
+      ]},
+      '2026-09-05':{ signals:[
+        { verb:'slow', domains:['inner','love'], label:'Mặt Trăng chuyển vào Cự Giải (tối 5/9)', wording:'Nhu cầu được ở gần người quen thuộc lên rõ hơn; để một phản ứng qua đêm rồi hãy trả lời.' }
+      ]}
+    }
+  };
+
   root.GARDEN_ORACLE_WEEKLY={
     activeReviewKey:'',
-    lastApprovedKey:'2026-W34-approved',
+    lastApprovedKey:'2026-W35-approved',
     packs
   };
 })(window);
