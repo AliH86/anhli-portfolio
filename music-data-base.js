@@ -31,8 +31,7 @@ window.PORTFOLIO_MUSIC = {
         { "id": "5bd66ad6-cbab-4111-bbba-8442026e0919", "name": "Trăng Vén Rèm Thưa", "dur": "4:46" },
         { "id": "083b467b-c612-4b86-951e-8a83f73d540a", "name": "Kẻ Say Trăng", "dur": "5:36" },
         { "id": "b2135c69-5d49-4088-bfd6-6bc02fe8328b", "name": "Trăng Khuyết Trăng Tròn", "dur": "4:25" },
-        { "id": "d17a08a2-1d9e-496e-92fe-f3423e679be6", "name": "Trăng Qua Bến Cũ", "dur": "3:58" }
-        ]
+        { "id": "d17a08a2-1d9e-496e-92fe-f3423e679be6", "name": "Trăng Qua Bến Cũ", "dur": "3:58" }, { "id": "local-muon-trang", "name": "Mượn Trăng", "dur": "4:37" } ]
     },
     {
       "id": "e5c30e35-b012-4fa2-86cb-14e8c334b977",
@@ -67,8 +66,7 @@ window.PORTFOLIO_MUSIC = {
                   { "id": "05a1cbff-5616-4190-bf73-cb62fd85a0d6", "name": "BUÔNG CÂU ĐỜN CA", "dur": "5:02" },
                   { "id": "99ecde35-d33e-4f83-ba1c-19cacad9ff8e", "name": "BÀI THƠ BỒNG BỀNH", "dur": "4:24" },
                   { "id": "dd2d5a9c-424d-4605-9544-24818bdd5e35", "name": "Ơ LÚA RÃY ƠI", "dur": "3:43" },
-                  { "id": "4fec75bb-1b1b-47e3-b67e-a910881afa66", "name": "ÂN TÌNH MẸ QUÊ", "dur": "4:35" }
-                            ]
+                  { "id": "4fec75bb-1b1b-47e3-b67e-a910881afa66", "name": "ÂN TÌNH MẸ QUÊ", "dur": "4:35" }, { "id": "local-mong-coi-may-ngan", "name": "MỘNG CÕI MÂY NGÀN", "dur": "4:52" } ]
     },
     {
             "id": "f5fc153c-51b8-4583-bfe9-1fcc872aab85",

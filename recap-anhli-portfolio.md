@@ -1,5 +1,161 @@
 # Recap — anhli-portfolio (cập nhật 13/7/2026)
 
+## Ba lỗi của script dọn thư mục — Ali phát hiện 3/9/2026
+
+Ghi lại vì cả ba đều là script **chống lại ý người dùng**, không phải lỗi kỹ thuật:
+
+1. **Tự dựng lại folder Ali đã xoá.** Script tạo folder rỗng + `_THIẾU.txt` cho mọi
+   album còn thiếu. Ali xoá xong, chạy lại là mọc lại y cũ. → Giờ chỉ ghi `_THIẾU.txt`
+   vào folder ĐANG TỒN TẠI và còn ít nhất 1 bài; không bao giờ tạo folder mới.
+2. **Lôi file Ali đã tự tay xếp ra khỏi folder album.** Hai bài chưa có trong dữ liệu
+   trang (`Mộng Cõi Mây Ngàn`, `Mượn Trăng`) bị hốt vào `_chưa có trên trang/` dù Ali
+   đã đặt đúng chỗ. → Giờ CHỈ gom file nằm ở GỐC thư mục; file trong folder album là
+   quyết định của Ali, không đụng.
+3. **Đẻ folder trùng vì lệch dấu.** Ali tạo `Tôi Họa Cả Thế Gian/`, dữ liệu trang ghi
+   `Tôi Hoạ Cả Thế Gian` → script tạo folder thứ hai rồi bê 9 file của Ali sang, để lại
+   folder gốc rỗng. → Giờ so tên folder theo dạng bỏ dấu (`dirFor()`); có folder tương
+   đương thì DÙNG LẠI.
+
+Nguyên tắc rút ra: **script dọn được phép sắp xếp thứ nó tự nhận diện, nhưng không được
+phủ quyết vị trí do người dùng đặt.**
+
+## Tối ưu tốc độ tải — đợt 3/9/2026
+
+Đo trên bản live trước khi sửa: TTFB 305ms (ổn), **DOMContentLoaded 6 769ms**,
+**Load 20 476ms**, 41 request / 3.68MB. Thủ phạm không phải dung lượng mà là
+**script chặn render**: `vedic-chart.js` hoàn tất ở 6 767ms — DCL 6 769ms.
+
+**Bài học quan trọng: `defer` KHÔNG cứu được DCL.** Script `defer` vẫn chạy TRƯỚC
+`DOMContentLoaded`. `vedic-chart.js` đã có `defer` từ trước mà vẫn giữ chân DCL.
+Muốn thoát khỏi DCL phải dùng `async` (cho file độc lập) hoặc nạp động (khi cần).
+
+Đã làm:
+
+1. **4 file dữ liệu Oracle → `async`** (`index.html` ~5800). Chúng độc lập nhau nên
+   không cần giữ thứ tự. Kèm theo: lịch Oracle trước đây chốt cứng
+   `const deck/profileById/identityById` một lần lúc chạy — dữ liệu về sau sẽ không
+   bao giờ được dùng. Đổi sang `let` + `refreshOracleData()`, gọi lại qua `onload`
+   của từng thẻ script. Phần còn lại của lịch không phải sửa.
+2. **Bộ Vệ Đà (astronomy-engine + vedic-content + vedic-chart, ~290KB) → nạp khi cuộn
+   tới**, bằng IntersectionObserver trên `#vdApp` với `rootMargin:600px`. Nạp tuần tự
+   đúng thứ tự vì `vedic-chart` đọc `window.Astronomy` và `window.VEDIC_CONTENT`.
+   `vedic-chart.js` tự gọi `boot()` khi DOM sẵn sàng nên nạp muộn vẫn tự khởi động.
+3. **Bìa album: 30 file, 1000–1254px → 600px q80** (`sips -Z 600 -s formatOptions 80`).
+   `uploads/` **10.6MB → 4.1MB**. Bản gốc ở `_originals/covers-2026-09-03/`.
+   Thẻ hiển thị rộng 206–240px nên 600px vẫn dư cho màn Retina.
+4. **Hero → AVIF** (`sips -s format avif -s formatOptions 60`): plane-mid 732→412KB,
+   plane-far 400→344KB, bg-meadow 384→336KB, tổng **1.5MB → 1.08MB**. Dùng
+   `image-set()` với `type('image/avif')` + dòng `url(...webp)` khai TRƯỚC làm dự
+   phòng — trình duyệt không hiểu `image-set()` giữ nguyên webp, không ai mất ảnh nền.
+   `<link rel=preload>` trỏ AVIF kèm `type="image/avif"` để máy không hỗ trợ thì bỏ qua.
+
+Kết quả đo tại localhost (không phản ánh được giây thật vì không có độ trễ mạng, nhưng
+chứng minh thay đổi cấu trúc): script hoàn tất trước DCL **15 → 5**, file Vệ Đà tải lúc
+vào trang **3 → 0**. **Phải đo lại trên live sau khi deploy** để có con số giây thật.
+
+**Chưa xác minh được:** bấm nút ngày "hôm nay" trên lịch không mở được phần rút hạt
+Oracle (thử cả click tổng hợp lẫn click chuột thật). **Bản TRƯỚC khi sửa cũng y hệt**
+nên đây KHÔNG phải hồi quy do đợt này — nhưng cần kiểm riêng xem Oracle có thật sự
+hoạt động trên live không.
+
+**Chưa làm:** chuyển site sang Cloudflare Pages (miễn phí, có PoP ở VN, GitHub Pages
+đi qua Fastly gần nhất Singapore/HK) và gắn custom domain cho R2 thay `pub-*.r2.dev`
+(Cloudflare giới hạn tốc độ dev URL này). Cần Ali thao tác tài khoản.
+
+## Nhạc chuyển sang tự host trên Cloudflare R2 (3/9/2026)
+
+**Sự cố:** Suno khoá CDN. `cdn1.suno.ai/{id}.mp3` trả **403 MissingKey** — giờ mỗi
+file phải kèm chữ ký CloudFront (`Policy` + `Signature` + `Key-Pair-Id`) do server
+Suno ký tươi và hết hạn sau ít phút, không thể nhúng cố định vào trang tĩnh.
+
+Đã dò hết các đường vòng, tất cả đều chết — ghi lại để sau này khỏi thử lại:
+
+- `audiopipe.suno.ai/?item_id=` → HTTP 200 nhưng body **0 byte**.
+- `suno.com/embed/{id}` → trang tải được, nhưng thẻ audio bên trong trỏ vào
+  `studio-api.prod.suno.com/api/forbidden` (403). **Fallback iframe cũ đã vô dụng**
+  — chính nó gây cảm giác "bấm mà im".
+- `d2lwuy8qc234o3.cloudfront.net/1/clip/{id}.m4a` (lộ trong `media_urls` của trang
+  bài hát) → tải được thật, có CORS và Range, **nhưng nội dung bị mã hoá** (không có
+  box `ftyp`, byte đầu là rác) và header `x-amz-expiration` cho thấy S3 tự xoá object
+  sau ~30 ngày. Không dùng được.
+- Ảnh bìa `cdn2.suno.ai/image_*.jpeg` thì **vẫn sống** — không cần đụng tới.
+
+**Cách làm hiện tại:** nhạc nằm trên Cloudflare R2, bucket `anhli-music`, public dev
+URL `https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/`, CORS mở cho
+`alih86.github.io` (nhờ vậy equalizer Web Audio chạy theo sóng nhạc thật trở lại —
+CDN Suno trước đây không cho CORS).
+
+File xếp theo album cho dễ quản lý: `bien-nien-that-nghiep-ky/08-vai-tu-phuong.mp3`
+(tên bỏ dấu, có số thứ tự để đúng thứ tự album khi liệt kê).
+
+**Thay đổi trong code:**
+
+- `index.html`: thêm `AUDIO_BASE`; `streamUrl(id)` tra `window.AUDIO_MAP` để ra đường
+  dẫn; **bỏ hẳn `showEmbed()`** (embed Suno đã câm) thay bằng `showTrackUnavailable()`
+  báo bài chưa lên kho + link sang Suno; `PROBE` của bộ dò CORS lấy bài đầu trong
+  AUDIO_MAP thay vì id cứng.
+- `audio-map.js` (**sinh tự động, đừng sửa tay**): bảng id → đường dẫn, nạp sớm ở
+  `<head>` với `?v=Date.now()` nên thêm nhạc mới không phải đụng `index.html`.
+- `scripts/build-audio-manifest.mjs`: khớp file mp3 tải từ Suno với dữ liệu bài hát,
+  sinh `audio-map.js`, `data/audio-manifest.json` và `MISSING-TRACKS.md`.
+- `scripts/upload-audio-r2.mjs`: đẩy lên R2 qua wrangler; tự chặn file iCloud chưa
+  tải về máy để không đẩy nhầm file 0 byte.
+
+**Hai cái bẫy đã sập một lần, đừng sập lại:**
+
+1. **Trang có 245 bài / 31 album, KHÔNG phải 182.** `index.html` có sẵn mảng `ALBUMS`
+   viết thẳng trong file, `music-data-base.js` chỉ **gộp đè theo id**. Chỉ đọc file
+   dữ liệu là hụt 8 album (Dấu Ấn Thanh Âm, Vietnam Young Lions '25/'26, TẾT Ngọ Sum
+   Vầy '26, Dai-Ichi Life Vietnam…). `build-audio-manifest.mjs` đã lặp lại đúng logic
+   `merge()` — dùng nó, đừng parse tay một nguồn.
+2. **Tên file Suno tải về bị XOÁ ký tự có dấu, không phải bỏ dấu:** "Buồn Mây Bán Gió"
+   → `Bun My Bn Gi.mp3`. Muốn khớp phải áp đúng phép biến đổi mất mát đó lên tên bài.
+
+**Thư mục nhạc gốc đã được dọn** (`~/Library/Mobile Documents/…/Downloads/My Suno_music`)
+bằng `scripts/organize-source-folder.mjs`: mỗi album một folder tên tiếng Việt, file đặt
+lại `NN - Tên Bài.mp3`, album nào thiếu có `_THIẾU.txt` liệt kê bài còn thiếu kèm link
+Suno, nhạc chưa bày trên trang nằm ở `_chưa có trên trang/`, nhật ký đổi tên ở
+`_đã đổi tên.csv`. Ali thả bài mới tải vào thẳng folder album (để nguyên tên Suno cũng
+được) rồi chạy lại build + upload.
+
+**Ba cái bẫy của script dọn thư mục — đã sập rồi mới sửa, đừng lặp lại:**
+
+1. **Luôn chạy `build-audio-manifest.mjs` NGAY TRƯỚC khi dọn.** Bảng khớp cũ trỏ vào tên
+   file đã đổi → script tưởng cả 154 file là nhạc lạ và hốt sạch vào `_chưa có trên trang`.
+   Đã thêm chốt chặn: script tự dừng nếu bảng khớp cũ.
+2. **Bài nằm ở hai album** (cùng file, hai id Suno khác nhau — vd "Duyên, Hợp, Tan" ở cả
+   *Unplugged Special* lẫn *TẾT Ngọ*): chỗ đến thứ hai phải NHÂN BẢN, không được chuyển,
+   nếu không album kia mất bài.
+3. **Nhận diện "nhạc lạ" phải theo TÊN BÀI, không theo đường dẫn** — nếu không thì bản sao
+   hợp lệ của bài dùng chung bị đá vào `_chưa có trên trang`, rồi lần chạy sau lại nhân bản
+   ra, lặp vô tận và đẻ thêm file mỗi lần.
+
+**Đã ẩn 4 album nhạc job khách** (Dai-Ichi Life Vietnam, Dấu Ấn Thanh Âm, Vietnam Young
+Lions '25 và '26) bằng cờ `hidden:true` trong mảng `ALBUMS` inline — dữ liệu vẫn nằm
+nguyên trong `index.html` để bật lại sau. Lọc bằng `dropHiddenAlbums()` gọi NGAY SAU khi
+khai báo mảng và lần nữa trong `merge()`, chứ không lọc lúc render: mọi hàm dùng chỉ số
+album (selectAlbum/playAt/shuffle/deep link) phải thấy cùng một mảng, lọc lúc render là
+lệch chỉ số. Trang còn 27 album / 209 bài.
+
+**Bài chưa có file thì ẩn luôn khỏi trang** (`dropUnavailableTracks()`): lọc theo
+`window.AUDIO_MAP`, album rỗng thì bỏ luôn khỏi sạp. Tải bài về → chạy build → push
+`audio-map.js` là bài tự hiện lại, KHÔNG phải sửa `index.html`. An toàn: nếu
+`audio-map.js` lỗi không tải được thì giữ nguyên toàn bộ bài (thà vài bài câm còn hơn
+sạp trống). Chạy ở 3 chỗ: sau khai báo ALBUMS, trong `merge()` trước `renderMusic()`, và
+trong `onload` của audio-map.js (phòng khi nó về muộn hơn dữ liệu nhạc). Trang hiện bày
+**21 album / 137 bài**. Kiểm rồi: album chính của hero (`data-promoted-album` =
+Một Tần Số Khác) vẫn còn; 2 album phụ của hero bị lọc nhưng hero tự bỏ qua, không lỗi.
+
+**Đã gỡ bộ đếm lượt truy cập** — `api.counterapi.dev` trả 410 Gone (dịch vụ khai tử
+endpoint), mà trang cũng không hề có phần tử `#visit-count` để hiện số. Gỡ cả hàm
+`loadCounter()` lẫn lời gọi.
+
+**Còn dở:** 13/202 bài chưa có file (MiTek 5 + Tôi ❤ Việt Nam 8 — Ali chủ động bỏ) (xem `MISSING-TRACKS.md`, có link Suno từng bài),
+Ali tải bổ sung rồi chạy lại `build-audio-manifest.mjs` + `upload-audio-r2.mjs --skip-existing`.
+3 bài tên file lệch quá xa đã được Ali xác nhận và ghim trong `data/audio-aliases.json`
+(ghép tay luôn thắng khớp tự động).
+
+
 ## Wording checkpoint 1 — Hero + About + ngưỡng Music (13/7/2026, review)
 
 - Trạng thái: **review local**, chưa commit/push/live; chờ Ali xem trên giao

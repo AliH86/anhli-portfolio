@@ -4,12 +4,24 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Anh Li — Sạp Âm Nhạc</title>
+<!-- Bảng tra id bài hát → đường dẫn file trên kho nhạc R2 (sinh bởi
+     scripts/build-audio-manifest.mjs). Nạp sớm và tự cache-bust như music-data.js,
+     thêm nhạc mới chỉ cần push audio-map.js, không phải đụng file này. -->
+<script>(function(){var s=document.createElement('script');s.src='audio-map.js?v='+Date.now();
+  s.onload=function(){ try{
+    if(typeof dropUnavailableTracks==='function'){ dropUnavailableTracks();
+      if(typeof renderMusic==='function' && typeof ALBUMS!=='undefined' && ALBUMS.length) renderMusic(); }
+  }catch(e){} };
+  document.head.appendChild(s);})();</script>
 <meta name="description" content="Anh Li · Creative Producer · Show Director · Songwriter · Saigon Vietnam"/>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2309080E'/%3E%3Cpath d='M32 9l3.8 14.8L51 28l-15.2 4.2L32 47l-3.8-14.8L13 28l15.2-4.2z' fill='%23E8C870'/%3E%3C/svg%3E"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <!-- hero LCP images: desktop tải 2 tầng parallax, mobile chỉ tải ảnh master phẳng -->
-<link rel="preload" as="image" href="./images/hero/dandelion-garden/plane-far.webp" media="(min-width: 621px)"/>
-<link rel="preload" as="image" href="./images/hero/dandelion-garden/plane-mid.webp" media="(min-width: 621px)"/>
+<!-- Bản AVIF nhẹ hơn WebP ~45% ở cùng chất lượng (plane-mid: 732KB → 412KB).
+     type="image/avif" để trình duyệt không hỗ trợ thì bỏ qua preload này —
+     CSS image-set() bên dưới vẫn cho nó bản .webp, không ai bị mất ảnh. -->
+<link rel="preload" as="image" type="image/avif" href="./images/hero/dandelion-garden/plane-far.avif" media="(min-width: 621px)"/>
+<link rel="preload" as="image" type="image/avif" href="./images/hero/dandelion-garden/plane-mid.avif" media="(min-width: 621px)"/>
 <link rel="preload" as="image" href="./images/hero/dandelion-garden/dandelion-scene-master.jpg" media="(max-width: 620px)"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="./css/egg-game.css"/>
@@ -1203,6 +1215,11 @@ body.no-motion .np-viz { display:none; }
 .track-embed { overflow:hidden; max-height:0; transition:max-height 0.4s; margin-bottom:0; }
 .track-embed.open { max-height:200px; margin-bottom:1.5rem; }
 .track-embed iframe { width:100%; height:160px; border:none; border-radius:12px; background:var(--ink3); }
+.track-na { display:flex; flex-direction:column; gap:0.4rem; padding:0.9rem 1.1rem; border-radius:12px;
+            background:var(--ink3); border:1px solid rgba(255,255,255,0.09); font-size:0.86rem; line-height:1.5; }
+.track-na strong { font-weight:600; }
+.track-na span { opacity:0.72; }
+.track-na a { align-self:flex-start; color:var(--amber); text-decoration:none; border-bottom:1px solid currentColor; padding-bottom:1px; }
 
 /* PLAYER */
 .player {
@@ -3008,7 +3025,12 @@ body.no-motion .hg-disc {
 /* HERO COMPOSITE — real dandelion garden asset stack.
    Album covers are injected from music-data.js; theme assets stay isolated here. */
 .hero.poster-hero {
+  /* webp khai trước = nền dự phòng cho trình duyệt cũ; image-set() phía sau
+     đè lên nếu hiểu AVIF. Trình duyệt không hiểu image-set() sẽ bỏ qua cả dòng
+     thứ hai và giữ nguyên dòng webp — không có trường hợp mất ảnh nền. */
   --dandelion-bg:url('./images/hero/dandelion-garden/bg-meadow.webp');
+  --dandelion-bg:image-set(url('./images/hero/dandelion-garden/bg-meadow.avif') type('image/avif'),
+                           url('./images/hero/dandelion-garden/bg-meadow.webp') type('image/webp'));
   --dandelion-fg:url('./images/hero/dandelion-garden/foreground-dandelions.png');
 }
 .poster-field {
@@ -3098,12 +3120,16 @@ body.no-motion .hg-disc {
 }
 .hga-plane-far {
   background-image:url('./images/hero/dandelion-garden/plane-far.webp');
+  background-image:image-set(url('./images/hero/dandelion-garden/plane-far.avif') type('image/avif'),
+                             url('./images/hero/dandelion-garden/plane-far.webp') type('image/webp'));
   scale:1.018;
   transform-origin:50% 100%;
   will-change:translate;
 }
 .hga-plane-mid {
   background-image:url('./images/hero/dandelion-garden/plane-mid.webp');
+  background-image:image-set(url('./images/hero/dandelion-garden/plane-mid.avif') type('image/avif'),
+                             url('./images/hero/dandelion-garden/plane-mid.webp') type('image/webp'));
   will-change:translate;
 }
 .hga-feature-disc {
@@ -5778,10 +5804,15 @@ body.no-motion .garden-oracle.revealed .go-synthesis{ animation:none; opacity:1;
 }
 </style>
 
-<script src="./garden-oracle-data.js"></script>
-<script src="./garden-oracle-profiles.js"></script>
-<script src="./garden-oracle-identities.js"></script>
-<script src="./garden-oracle-weekly-data.js?v=20260713-4"></script>
+<!-- async: bốn file này CHỈ là dữ liệu, không phụ thuộc nhau và không cần có mặt
+     lúc dựng trang. Script async không làm trễ DOMContentLoaded (khác defer —
+     defer vẫn chạy TRƯỚC DOMContentLoaded nên vẫn giữ chân nó).
+     Lịch/Oracle bên dưới đọc dữ liệu qua refreshOracleData(), gọi lại mỗi lần
+     một file về tới, nên tải xong lúc nào là dùng được lúc đó. -->
+<script src="./garden-oracle-data.js" async onload="window.refreshOracleData&&window.refreshOracleData()"></script>
+<script src="./garden-oracle-profiles.js" async onload="window.refreshOracleData&&window.refreshOracleData()"></script>
+<script src="./garden-oracle-identities.js" async onload="window.refreshOracleData&&window.refreshOracleData()"></script>
+<script src="./garden-oracle-weekly-data.js?v=20260713-4" async></script>
 <script>
 (function(){
   // Tách riêng như music-data.js: cache-bust mỗi lần tải, để sửa
@@ -5796,12 +5827,21 @@ body.no-motion .garden-oracle.revealed .go-synthesis{ animation:none; opacity:1;
 (function(){
   const daysEl=document.getElementById('gcDays'),monthEl=document.getElementById('gcMonth');
   const oracle=document.getElementById('gardenOracle'),numbersEl=document.getElementById('goNumbers'),seedsEl=document.getElementById('goSeeds');
-  const synthesisEl=document.getElementById('goSynthesis'),previewEl=document.getElementById('goPreviewReading'),deck=window.GARDEN_ORACLE_CARDS||[];
+  const synthesisEl=document.getElementById('goSynthesis'),previewEl=document.getElementById('goPreviewReading');
   if(!daysEl||!monthEl||!oracle||!numbersEl||!seedsEl||!synthesisEl) return;
-  const profileRows=[...(window.GARDEN_ORACLE_PROFILES?.majors||[])];
-  Object.values(window.GARDEN_ORACLE_PROFILES?.suits||{}).forEach(cards=>profileRows.push(...cards));
-  const profileById=new Map(profileRows.map(profile=>[profile.id,profile]));
-  const identityById=new Map((window.GARDEN_ORACLE_IDENTITIES||[]).map(identity=>[identity.id,identity]));
+  /* Dữ liệu Oracle giờ tải async nên có thể về SAU đoạn này. Dùng biến let +
+     refreshOracleData() thay vì chốt cứng một lần: mỗi file về tới lại nạp lại,
+     phần còn lại của lịch không phải sửa gì. */
+  let deck=[], profileById=new Map(), identityById=new Map();
+  function refreshOracleData(){
+    deck = window.GARDEN_ORACLE_CARDS || [];
+    const profileRows=[...(window.GARDEN_ORACLE_PROFILES?.majors||[])];
+    Object.values(window.GARDEN_ORACLE_PROFILES?.suits||{}).forEach(cards=>profileRows.push(...cards));
+    profileById=new Map(profileRows.map(profile=>[profile.id,profile]));
+    identityById=new Map((window.GARDEN_ORACLE_IDENTITIES||[]).map(identity=>[identity.id,identity]));
+  }
+  refreshOracleData();
+  window.refreshOracleData=refreshOracleData;
   const calendar=document.getElementById('gardenCalendar'),hero=document.getElementById('home');
   const heroContent=hero&&hero.querySelector('.hero-content'),heroName=hero&&hero.querySelector('.hero-name');
   if(calendar&&heroContent&&heroName) heroContent.insertBefore(calendar,heroName);
@@ -7229,12 +7269,40 @@ body.no-motion .garden-oracle.revealed .go-synthesis{ animation:none; opacity:1;
   </div>
 </div>
 
-<script src="./astronomy-engine.min.js"></script>
-<!-- 2026-07-25: nội dung luận giải tách riêng (12 cung, 12 nhà, 27 Nakshatra,
-     9 hành tinh, bảng vượng/hãm, 9 chủ vận Daśā) — sửa chữ nghĩa ở file này
-     không cần đụng code tính toán. Phải nạp TRƯỚC vedic-chart.js. -->
-<script src="./vedic-content.js"></script>
-<script src="./vedic-chart.js" defer></script>
+<!-- Bộ lá số Vệ Đà (~290 KB thô) chỉ dùng cho đúng khu #vdApp nằm cuối trang và
+     phải thao tác mới ra kết quả. Trước đây ba file này nạp thẳng nên giữ chân
+     DOMContentLoaded tới 6.8s (đo 3/9/2026 trên bản live: vedic-chart.js xong ở
+     6767ms, DCL 6769ms). Giờ chỉ nạp khi khu đó sắp lọt vào tầm nhìn.
+     2026-07-25: nội dung luận giải tách riêng ở vedic-content.js — sửa chữ nghĩa
+     không cần đụng code tính toán. THỨ TỰ BẮT BUỘC: astronomy → content → chart
+     (chart đọc window.Astronomy và window.VEDIC_CONTENT lúc khởi động).
+     vedic-chart.js tự chạy boot() khi DOM đã sẵn sàng nên nạp muộn vẫn tự khởi động. -->
+<script>
+(function(){
+  var FILES=['./astronomy-engine.min.js','./vedic-content.js','./vedic-chart.js'];
+  var started=false;
+  function loadNext(i){
+    if(i>=FILES.length) return;
+    var el=document.createElement('script');
+    el.src=FILES[i];
+    el.onload=function(){ loadNext(i+1); };
+    el.onerror=function(){ console.warn('[Anh Li Portfolio] không tải được '+FILES[i]+' — phần lá số Vệ Đà sẽ không hoạt động.'); };
+    document.head.appendChild(el);
+  }
+  function start(){ if(started) return; started=true; loadNext(0); }
+  function arm(){
+    var host=document.getElementById('vdApp');
+    if(!host) return;                     // không có khu đó thì khỏi tải
+    if(!('IntersectionObserver' in window)) return start();
+    var io=new IntersectionObserver(function(entries){
+      if(entries.some(function(e){ return e.isIntersecting; })){ io.disconnect(); start(); }
+    },{ rootMargin:'600px' });            // nạp sớm một chút để bấm là có ngay
+    io.observe(host);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', arm, {once:true});
+  else arm();
+})();
+</script>
 
 <!-- Hiệu ứng chữ riêng cho tiêu đề Liên hệ + nút CTA nổi — chỉ scope trong
      #contact / .cta-float-btn, dùng lại token --amber/--amber2 hiện có nên
@@ -7690,7 +7758,7 @@ const ALBUMS = [
       {id:'0f7b36ce-5eef-4cdf-9e4a-a079362867cd', name:'Tần Số Riêng', dur:'4:52'},
     ],
   },
-  { id:'f821410f-651f-4aba-b620-b92e1f9b5112',
+  { id:'f821410f-651f-4aba-b620-b92e1f9b5112', hidden:true,
     name:'Dai-Ichi Life Vietnam', sub:'Corporate Anthem · Kick-off · EDM',
     cover:'uploads/Dai-ichi-life.jpg',
     desc:'Những soundtrack được viết cho nhiều mùa kick-off của Dai-ichi Life Vietnam, mang nhịp EDM, tinh thần đồng đội và năng lượng của mỗi lần cùng nhau xuất phát.', count:8,
@@ -7705,7 +7773,7 @@ const ALBUMS = [
       {id:'45d8920d-6a4c-43d5-be2b-a36f43a33546', name:'Mã Phi Nước Đại -Ichi - ANo1! (edited)', dur:'4:10'},
     ],
   },
-  { id:'4b8e4a6c-d6f0-4baf-baef-894ee0e9f41a',
+  { id:'4b8e4a6c-d6f0-4baf-baef-894ee0e9f41a', hidden:true,
     name:'Dấu Ấn Thanh Âm', sub:'Selected Event Soundtracks · Stage · Brand',
     cover:'uploads/dau-an-thanh-am.jpg',
     desc:'Những bản nhạc từ các sân khấu, thương hiệu và khoảnh khắc đã đi qua, được gom lại thành một hành trình thanh âm của nghề làm show.', count:16,
@@ -7777,7 +7845,7 @@ const ALBUMS = [
       {id:'f2dfd824-606d-4f9c-ac6c-364ff94b405d', name:'An(h) Yên, Quên Phiền', dur:'4:36'},
       {id:'aa8e1283-e121-416f-a054-c573ce0291f2', name:'Có Sao Đâu (It\'s Alright)', dur:'3:33'},
       {id:'6e96c3d7-41fc-4841-800b-b4764b862c3c', name:'Tôi yêu....', dur:'2:51'},
-      {id:'75c08a9c-2c7c-4024-9a6e-2ad25bf1fce3', name:'Con đường ta di', dur:'3:46'},
+      {id:'75c08a9c-2c7c-4024-9a6e-2ad25bf1fce3', name:'Con đường ta đi', dur:'3:46'},
       {id:'5c3f3c0d-d9f1-4e7e-b864-982832e07295', name:'Chạm vào ánh nắng.', dur:'4:38'},
       {id:'89f1c8f1-57a3-4395-8b1b-d8c755eb5909', name:'Hiên nhà của 50...', dur:'3:54'},
     ],
@@ -7855,7 +7923,7 @@ const ALBUMS = [
       {id:'b8f7a3ec-5e4d-4d15-b0cc-53ceee89cf16', name:'Chất-Việt-Chất!', dur:'2:44'},
     ],
   },
-  { id:'0bd2c183-50a7-4917-ae88-2ecdc9f0d2f3',
+  { id:'0bd2c183-50a7-4917-ae88-2ecdc9f0d2f3', hidden:true,
     name:'TẾT Ngọ Sum Vầy \'26', sub:'Tết · Folk Pop · Celebration',
     cover:'https://cdn2.suno.ai/image_11015d6d-3fc4-4aea-80f0-f889d3e06610.jpeg',
     desc:'Mùa Ngọ gõ cửa — nhạc Tết rộn ràng cho những chuyến về nhà, mâm cơm sum vầy và lời chúc đầu năm phát tài, phát lộc.', count:9,
@@ -7899,7 +7967,7 @@ const ALBUMS = [
       {id:'7eddbbb4-fbb0-47e3-a1dc-daa0cb0ec3ef', name:'Hát Ca cả Bốn Mùa', dur:'3:58'},
     ],
   },
-  { id:'c358ba32-19d4-46ef-bef9-5de138b03ea4',
+  { id:'c358ba32-19d4-46ef-bef9-5de138b03ea4', hidden:true,
     name:'Vietnam Young Lions \'26', sub:'Electropop · Anthem · Award',
     cover:'uploads/VNYL26.jpg',
     desc:'Bộ anthem viết cho đấu trường sáng tạo trẻ: gắt, rực và đầy khí thế, tiếp lửa cho những tiếng gầm đầu tiên trên hành trình làm nghề.', count:7,
@@ -7913,7 +7981,7 @@ const ALBUMS = [
       {id:'953e15f5-79f0-45ef-b013-dfcfbdcfb5d2', name:'WELCOME TO THE PRIDE', dur:'4:12'},
     ],
   },
-  { id:'12435dd8-eaf8-4046-8bee-cb0aa03533f8',
+  { id:'12435dd8-eaf8-4046-8bee-cb0aa03533f8', hidden:true,
     name:'Vietnam Young Lions \'25', sub:'Rock · Anthem · Final',
     cover:'uploads/VNYL25.jpg',
     desc:'Sáu bản rock anthem Anh Li viết cho chung kết Vietnam Young Lions 2025, mang tinh thần phá brief, bước ra sân khấu và cất tiếng gầm của mình.', count:6,
@@ -7927,6 +7995,33 @@ const ALBUMS = [
     ],
   },
 ];
+
+/* Album đánh dấu hidden:true là nhạc làm cho khách — giữ lại dữ liệu để sau này
+   cần thì bật lại, nhưng không bày ra sạp. Lọc ngay tại đây (chứ không lọc lúc
+   render) để mọi hàm dùng CHỈ SỐ album — selectAlbum, playAt, shuffle, deep link —
+   đều thấy cùng một mảng, không lệch nhau. */
+function dropHiddenAlbums(){
+  for (let i = ALBUMS.length - 1; i >= 0; i--) if (ALBUMS[i].hidden) ALBUMS.splice(i, 1);
+}
+dropHiddenAlbums();
+
+/* Bài chưa có file trên kho nhạc thì KHÔNG bày ra — bấm vào chỉ im lặng, tệ hơn là
+   không thấy. Tải bài về, chạy lại build-audio-manifest.mjs rồi push audio-map.js
+   là bài tự hiện lại, không phải sửa gì trong file này.
+   Nếu audio-map.js lỗi không tải được thì GIỮ NGUYÊN mọi bài — thà hiện đủ mà vài
+   bài câm, còn hơn cả sạp trống trơn. */
+function dropUnavailableTracks(){
+  const map = window.AUDIO_MAP;
+  if (!map || !Object.keys(map).length) return;
+  if (typeof ALBUMS === 'undefined') return;
+  for (let i = ALBUMS.length - 1; i >= 0; i--){
+    const al = ALBUMS[i];
+    al.tracks = (al.tracks || []).filter(t => map[t.id]);
+    al.count = al.tracks.length;
+    if (!al.tracks.length) ALBUMS.splice(i, 1);
+  }
+}
+dropUnavailableTracks();
 
 /* ═══════════════════ GALLERY — TÁC PHẨM THỊ GIÁC ═══════════════════
    Tất cả hình & video nằm trong images/lab/ (đã tối ưu cho web).
@@ -8334,7 +8429,25 @@ function coverUrl(c){
   return /[\/.]/.test(c) ? c : `https://cdn2.suno.ai/image_${c}.jpeg`;
 }
 function artUrl(id){ return `https://cdn2.suno.ai/image_${id}.jpeg`; }
-function streamUrl(id){ return `https://cdn1.suno.ai/${id}.mp3`; }
+
+/* ── NGUỒN NHẠC ──────────────────────────────────────────────────────────
+   Từ 9/2026 Suno khoá CDN: cdn1.suno.ai trả 403 "MissingKey" vì giờ mỗi file
+   phải có chữ ký CloudFront (Policy + Signature + Key-Pair-Id) do server Suno
+   ký tươi, hết hạn sau ít phút — không thể nhúng cố định vào trang tĩnh.
+   Trang embed của Suno cũng đã bị bịt (audio_url → /api/forbidden).
+   Nên nhạc giờ được TỰ HOST trên Cloudflare R2, xếp theo album cho dễ quản lý:
+     bien-nien-that-nghiep-ky/08-vai-tu-phuong.mp3
+   Đường dẫn tra qua window.AUDIO_MAP (audio-map.js), nên đổi AUDIO_BASE là
+   chuyển được cả kho sang chỗ khác, không phải sửa dữ liệu 245 bài.
+   Để trống → quay về CDN Suno cũ (hiện đang 403, chỉ giữ cho mục đích đối chiếu). */
+const AUDIO_BASE = 'https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/';
+function streamUrl(id){
+  if(!AUDIO_BASE) return `https://cdn1.suno.ai/${id}.mp3`;
+  const p=(window.AUDIO_MAP||{})[id];
+  // Không có trong bảng = chưa upload. Trả về đường dẫn phẳng để nó 404 gọn,
+  // rồi handler 'error' hiện đúng thông báo "bài này chưa lên kho nhạc".
+  return AUDIO_BASE + (p || `${id}.mp3`);
+}
 function embedUrl(id){ return `https://suno.com/embed/${id}`; }
 
 const HERO_GARDEN_DEFAULT = {
@@ -8940,15 +9053,22 @@ audio.addEventListener('timeupdate', ()=>{
 audio.addEventListener('loadedmetadata', ()=>{
   if(audio.duration) document.getElementById('pcDur').textContent=fmt(audio.duration);
 });
-// If the direct stream is blocked, fall back to Suno's embed player for that track
+/* Bài chưa có file trên máy chủ nhạc → nói thật cho người nghe biết.
+   KHÔNG rơi về iframe embed của Suno nữa: từ 9/2026 embed cũng câm
+   (thẻ audio bên trong nó trỏ vào /api/forbidden), hiện ra chỉ tổ khó hiểu. */
 audio.addEventListener('error', ()=>{
   const ts=(ALBUMS[activeAlbum]&&ALBUMS[activeAlbum].tracks)||[];
-  if(activeIdx>=0&&ts[activeIdx]) showEmbed(ts[activeIdx].id);
+  const t=activeIdx>=0?ts[activeIdx]:null;
+  if(t) showTrackUnavailable(t);
 });
-function showEmbed(id){
+function showTrackUnavailable(t){
   const w=document.getElementById('trackEmbed');
   if(!w) return;
-  w.innerHTML=`<iframe src="${embedUrl(id)}" allow="autoplay" loading="lazy"></iframe>`;
+  w.innerHTML=`<div class="track-na">
+      <strong>“${(t.name||'').replace(/</g,'&lt;')}” chưa lên kho nhạc.</strong>
+      <span>Li đang chuyển toàn bộ nhạc về máy chủ riêng — bài này sắp có. Nghe tạm ở đây nhé:</span>
+      <a href="https://suno.com/song/${t.id}" target="_blank" rel="noopener">Mở trên Suno →</a>
+    </div>`;
   w.classList.add('open');
 }
 function hideEmbed(){
@@ -9273,18 +9393,6 @@ async function loadYT(){
 }
 
 /* ============================================================
-   VISITOR COUNTER
-============================================================ */
-async function loadCounter(){
-  try {
-    const r=await fetch('https://api.counterapi.dev/v1/anhliportfolio26/visits/up');
-    const d=await r.json();
-    const el=document.getElementById('visit-count');
-    if(el&&d.count) el.textContent=Number(d.count).toLocaleString('vi-VN');
-  } catch(e){}
-}
-
-/* ============================================================
    VIDEO MODAL
 ============================================================ */
 function openVideo(url,title){
@@ -9337,7 +9445,6 @@ document.getElementById('npSuggest')?.addEventListener('click', ()=>{
 });
 renderContacts();
 renderVideos();
-loadCounter();
 observe();
 
 /* ============================================================
@@ -10089,8 +10196,15 @@ setPlayingUI(false);
    Trên mobile giữ luôn equalizer mô phỏng (fallback) để output âm thanh đi thẳng
    từ <audio>, không qua tay ai, mới phát nền được. */
 let analyser=null, freq=null, eqLive=false, ctxMade=false, loadedWithCors=false, bars=null, aliCtx=null;
-const PROBE='https://cdn1.suno.ai/3e1f52a5-b6df-4723-bab3-9b6bc154809e.mp3';
-if(!REDUCED && !MOBILE && window.fetch){
+/* Kho nhạc tự host bật CORS → equalizer chạy theo sóng nhạc THẬT.
+   Vẫn dò bằng HEAD chứ không bật crossOrigin thẳng: nếu CORS lỡ cấu hình sai,
+   crossOrigin='anonymous' sẽ làm file KHÔNG tải được, tức là mất luôn tiếng. */
+const PROBE = (function(){
+  if(!AUDIO_BASE) return 'https://cdn1.suno.ai/3e1f52a5-b6df-4723-bab3-9b6bc154809e.mp3';
+  const first=Object.values(window.AUDIO_MAP||{})[0];
+  return first ? AUDIO_BASE+first : '';
+})();
+if(PROBE && !REDUCED && !MOBILE && window.fetch){
   // HEAD = simple request, không preflight — kiểm tra CDN có cho phép CORS không
   fetch(PROBE, {method:'HEAD', mode:'cors'})
     .then(r=>{ if(r.ok) audio.crossOrigin='anonymous'; })
@@ -10644,6 +10758,8 @@ if(MOBILE){
         ALBUMS.push(src);
       }
     });
+    if (typeof dropHiddenAlbums === 'function') dropHiddenAlbums();
+    if (typeof dropUnavailableTracks === 'function') dropUnavailableTracks();
     renderMusic();
     try{ if(typeof applyDeepLink==='function') applyDeepLink(); }catch(e){}
   }

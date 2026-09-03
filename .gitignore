@@ -5,3 +5,6 @@ deploy-github.sh
 deploy.command
 .git-token
 _originals/
+_audio-local/
+data/audio-manifest.json
+.wrangler/
