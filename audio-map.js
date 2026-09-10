@@ -201,5 +201,7 @@ window.AUDIO_MAP = {
   "850e0cd3-8e87-4843-aeda-681b7c9da22a": "vi-muoi-man/03-ly-cuoi.mp3",
   "a9139bcc-b017-4be1-a016-85abff90437b": "vi-muoi-man/04-may-dang-ban.mp3",
   "f16e1106-c044-4500-902b-73788c6a9286": "vi-muoi-man/05-vi-muoi-man.mp3",
-  "a09bfa7a-bd45-4926-8742-bf907b8f00c9": "vi-muoi-man/06-bac-nhu-anh-trang.mp3"
+  "a09bfa7a-bd45-4926-8742-bf907b8f00c9": "vi-muoi-man/06-bac-nhu-anh-trang.mp3",
+  "21e9effc-9707-437c-a073-90c0bec1903e": "vi-muoi-man/07-du-anh.mp3",
+  "9f18cd23-7166-44e5-ab7a-c1e2b8f9c0f3": "vi-muoi-man/08-muon-lua.mp3"
 };

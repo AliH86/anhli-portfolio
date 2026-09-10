@@ -817,14 +817,16 @@ window.PORTFOLIO_MUSIC = {
       "sub": "Cantopop · City-Night Ballad · Song ngữ Quảng–Việt",
       "cover": "uploads/vi-muoi-man.jpg",
       "desc": "Những thứ đã đi qua, vẫn để lại một vị. Một chuyến đi song ngữ qua tình yêu, thành phố, và những gì còn sót lại.",
-      "count": 6,
+      "count": 8,
       "tracks": [
         { "id": "3686ee9c-b6ab-44c7-be8f-0fc99edcaa42", "name": "你係我嘅夏天 · Mùa Hè Của Anh", "dur": "4:30" },
         { "id": "ec99b8f1-732f-4266-8941-ceffb4f01932", "name": "慢半拍 · Chậm Nửa Nhịp", "dur": "3:50" },
         { "id": "850e0cd3-8e87-4843-aeda-681b7c9da22a", "name": "最後一杯 · Ly Cuối", "dur": "3:53" },
         { "id": "a9139bcc-b017-4be1-a016-85abff90437b", "name": "佔線中 · Máy Đang Bận", "dur": "5:02" },
         { "id": "f16e1106-c044-4500-902b-73788c6a9286", "name": "鹹味 · Vị Muối Mặn", "dur": "4:00" },
-        { "id": "a09bfa7a-bd45-4926-8742-bf907b8f00c9", "name": "月光薄情 · Bạc Như Ánh Trăng", "dur": "4:41" }
+        { "id": "a09bfa7a-bd45-4926-8742-bf907b8f00c9", "name": "月光薄情 · Bạc Như Ánh Trăng", "dur": "4:41" },
+        { "id": "21e9effc-9707-437c-a073-90c0bec1903e", "name": "餘像 · Dư Ảnh", "dur": "5:40" },
+        { "id": "9f18cd23-7166-44e5-ab7a-c1e2b8f9c0f3", "name": "借火 · Mượn Lửa", "dur": "3:34" }
       ]
     },
     {
