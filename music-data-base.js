@@ -11,7 +11,7 @@
 // (index.html vẫn giữ một bản dữ liệu dự phòng phòng khi file này lỗi tải.)
 // ============================================================
 window.PORTFOLIO_MUSIC = {
-  "version": "2026-06-30-2",
+  "version": "2026-09-10-1",
   "source": "Playlists curated by Anh Li",
   "albums": [
     { "id": "e2a4ae09-b3d2-4421-bd45-68978bed409c", "playlistUrl": "https://suno.com/playlist/e2a4ae09-b3d2-4421-bd45-68978bed409c", "name": "Biên Niên Thất Nghiệp Ký", "sub": "Acoustic Folk · Chanson · Blues-Folk · Ritual-Folk Mixtape", "cover": "uploads/bien-nien-that-nghiep-ky.jpg", "desc": "=))) như tiêu đề, thì tui ế nên tui làm album này. =))) là vậy ó...", "count": 8, "tracks": [ { "id": "c0f86817-473e-4118-ba40-121d4de7277c", "name": "Lại Một Lần Tự Do", "dur": "3:39" }, { "id": "e5d407fc-f8e4-4007-b7eb-dad9a3d6b4e3", "name": "Chuyện Của Ngày Mai", "dur": "2:45" }, { "id": "0c65bb2a-bbfa-4318-9ed5-a93a1a3ea1ad", "name": "Đi Đâu Đây", "dur": "2:50" }, { "id": "df59fec5-db4b-4048-85d2-27e428597b85", "name": "Hôm nay Tôi là Ai?", "dur": "3:49" }, { "id": "a930b39f-7a9c-47ed-af5c-d05f7562f234", "name": "Làm Cái Gì Bây Giờ?", "dur": "2:55" }, { "id": "7220ebcf-c477-4880-95ce-2fa734a03d88", "name": "Đã Xem Lúc 14:37", "dur": "3:58" }, { "id": "4e2a6a87-04ba-460f-a9b1-7b5f0d77edad", "name": "Hổng biết nữa, hổng biết dzì hết...", "dur": "3:18" }, { "id": "c76d4498-1574-4caf-b67d-81fb0755a733", "name": "Vái Tứ Phương", "dur": "3:40" } ] },
@@ -799,7 +799,7 @@ window.PORTFOLIO_MUSIC = {
       "sub": "Vietnamese Ink-Wash Folk · Chamber Folk · Roots Ritual",
       "cover": "uploads/toi-hoa-ca-the-gian.jpeg",
       "desc": "Một bức thuỷ mặc bằng âm thanh — người lữ khách đứng giữa núi sông, trăng nước, vẽ lại cả thế gian bằng những gam trầm và một vệt son.",
-      "count": 9,
+      "count": 8,
       "tracks": [
         { "id": "7cc49535-164a-42b3-a2b3-4c98adc0e931", "name": "Ngắm Nhìn Bức Hoạ Thế Gian", "dur": "4:14" },
         { "id": "70ccf96a-3b48-442a-a16d-af30520a0a71", "name": "Nét Đời", "dur": "3:24" },
@@ -807,7 +807,40 @@ window.PORTFOLIO_MUSIC = {
         { "id": "2debfb51-0310-4759-970a-33487e0bc77c", "name": "Mạch Đất", "dur": "3:57" },
         { "id": "bb942cb4-c693-416b-a63a-5c241c66ddef", "name": "Nước Về Đâu", "dur": "4:21" },
         { "id": "190b2560-b91a-4cdb-9d10-33e149820d63", "name": "Muôn Vạn Dấu Chân", "dur": "4:34" },
-        { "id": "fca5ff76-12ec-41ac-a229-12dc0b6f3f19", "name": "Phủ Bạc Nhân Gian", "dur": "4:27" }, { "id": "0aed4918-86b6-4d33-ad61-430d18045dfb", "name": "Sầu Thừa Vừa Một Ly", "dur": "4:27" }, { "id": "74d27a3b-f6af-4566-ad0f-8a35c3ff54c1", "name": "Chữ Tài Gánh Một Chữ Tai", "dur": "3:41" }
+        { "id": "fca5ff76-12ec-41ac-a229-12dc0b6f3f19", "name": "Phủ Bạc Nhân Gian", "dur": "4:27" },
+        { "id": "74d27a3b-f6af-4566-ad0f-8a35c3ff54c1", "name": "Chữ Tài Gánh Một Chữ Tai", "dur": "3:41" }
+      ]
+    },
+    {
+      "id": "local-vi-muoi-man",
+      "name": "Vị Muối Mặn — 鹹味未散",
+      "sub": "Cantopop · City-Night Ballad · Việt–Quảng song ngữ",
+      "cover": "uploads/vi-muoi-man.jpg",
+      "desc": "Những thứ đã đi qua, vẫn để lại một vị. Một chuyến đi song ngữ qua tình yêu, thành phố, và những gì còn sót lại — D'Li & Chị.",
+      "count": 6,
+      "tracks": [
+        { "id": "3686ee9c-b6ab-44c7-be8f-0fc99edcaa42", "name": "你係我嘅夏天 · Mùa Hè Của Anh", "dur": "4:30" },
+        { "id": "ec99b8f1-732f-4266-8941-ceffb4f01932", "name": "慢半拍 · Chậm Nửa Nhịp", "dur": "3:50" },
+        { "id": "850e0cd3-8e87-4843-aeda-681b7c9da22a", "name": "最後一杯 · Ly Cuối", "dur": "3:53" },
+        { "id": "a9139bcc-b017-4be1-a016-85abff90437b", "name": "佔線中 · Máy Đang Bận", "dur": "5:02" },
+        { "id": "f16e1106-c044-4500-902b-73788c6a9286", "name": "鹹味 · Vị Muối Mặn", "dur": "4:00" },
+        { "id": "a09bfa7a-bd45-4926-8742-bf907b8f00c9", "name": "月光薄情 · Bạc Như Ánh Trăng", "dur": "4:41" }
+      ]
+    },
+    {
+      "id": "local-cai-ban-nhau",
+      "name": "Cái Bàn Nhậu",
+      "sub": "Folk Nhậu · Acoustic Banter · Street-Table Mixtape",
+      "cover": "uploads/cai-ban-nhau.jpg",
+      "desc": "chuyện gì ở cái bàn nhậu, thì nằm ở cái bàn nhậu ^^",
+      "count": 6,
+      "tracks": [
+        { "id": "bd692a38-6568-4cc2-9195-cc1f06b4ab4c", "name": "Là Cái Gzì Nào", "dur": "4:39" },
+        { "id": "8d4dbcea-8725-4a7f-b5c9-518f2c195af7", "name": "Lo Vợ La", "dur": "3:57" },
+        { "id": "ae925461-79ec-4de8-991e-594e7b6333d7", "name": "Cái ly đá cái ly đá", "dur": "3:43" },
+        { "id": "0aed4918-86b6-4d33-ad61-430d18045dfb", "name": "Sầu Thừa Vừa Một Ly", "dur": "4:27" },
+        { "id": "40faef41-9b1c-4b25-9bbc-f49436783e56", "name": "Duyên—Hợp—Tan [Folk Remake]", "dur": "4:15" },
+        { "id": "5ee43099-6a9d-49d2-9f7c-144652da1438", "name": "Bàn Chuyện", "dur": "3:29" }
       ]
     }
   ]
