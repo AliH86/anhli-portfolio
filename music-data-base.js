@@ -813,10 +813,10 @@ window.PORTFOLIO_MUSIC = {
     },
     {
       "id": "local-vi-muoi-man",
-      "name": "Vị Muối Mặn — 鹹味未散",
-      "sub": "Cantopop · City-Night Ballad · Việt–Quảng song ngữ",
+      "name": "Vị Muối Mặn",
+      "sub": "鹹味未散 · Cantopop · City-Night Ballad · Việt–Quảng song ngữ",
       "cover": "uploads/vi-muoi-man.jpg",
-      "desc": "Những thứ đã đi qua, vẫn để lại một vị. Một chuyến đi song ngữ qua tình yêu, thành phố, và những gì còn sót lại — D'Li & Chị.",
+      "desc": "Những thứ đã đi qua, vẫn để lại một vị. Một chuyến đi song ngữ qua tình yêu, thành phố, và những gì còn sót lại.",
       "count": 6,
       "tracks": [
         { "id": "3686ee9c-b6ab-44c7-be8f-0fc99edcaa42", "name": "你係我嘅夏天 · Mùa Hè Của Anh", "dur": "4:30" },
