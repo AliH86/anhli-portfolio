@@ -23,7 +23,7 @@ window.PORTFOLIO_MUSIC = {
       "sub": "Vietnamese Folk-Soul · Chamber Folk · Art-Pop",
       "cover": "uploads/chuyen-cua-trang.jpg",
       "desc": "Những câu chuyện bài ca, thơ, văn lấy trăng làm trọng tâm.",
-      "count": 7,
+      "count": 8,
       "tracks": [
         { "id": "b811ceb4-2492-493c-8163-6efad1329da2", "name": "Quên Vầng Trăng Thề", "dur": "4:43" },
         { "id": "c69e9887-79b2-4145-9771-e3bf722d0403", "name": "Mảnh Tình Treo Trăng", "dur": "3:42" },
@@ -31,7 +31,7 @@ window.PORTFOLIO_MUSIC = {
         { "id": "5bd66ad6-cbab-4111-bbba-8442026e0919", "name": "Trăng Vén Rèm Thưa", "dur": "4:46" },
         { "id": "083b467b-c612-4b86-951e-8a83f73d540a", "name": "Kẻ Say Trăng", "dur": "5:36" },
         { "id": "b2135c69-5d49-4088-bfd6-6bc02fe8328b", "name": "Trăng Khuyết Trăng Tròn", "dur": "4:25" },
-        { "id": "d17a08a2-1d9e-496e-92fe-f3423e679be6", "name": "Trăng Qua Bến Cũ", "dur": "3:58" }, { "id": "local-muon-trang", "name": "Mượn Trăng", "dur": "4:37" } ]
+        { "id": "d17a08a2-1d9e-496e-92fe-f3423e679be6", "name": "Trăng Qua Bến Cũ", "dur": "3:58" }, { "id": "96ec7ea1-16f2-4f5a-8b24-930bd7693f1c", "name": "Mượn Trăng", "dur": "5:13" } ]
     },
     {
       "id": "e5c30e35-b012-4fa2-86cb-14e8c334b977",
@@ -244,7 +244,7 @@ window.PORTFOLIO_MUSIC = {
       "sub": "Acoustic · Indie Folk · Hát mộc",
       "cover": "uploads/Unplugged-vol1.jpg",
             "desc": "Một mạch hát mộc đi qua những lát cắt đời thường: mệt thì ngồi lại, buồn thì tựa vai, vui thì hát thêm một bài.",
-      "count": 10,
+      "count": 9,
       "tracks": [
         {
           "id": "3b949f7a-601e-4206-a610-e55ed9a03c24",
@@ -285,11 +285,6 @@ window.PORTFOLIO_MUSIC = {
           "id": "5c3f3c0d-d9f1-4e7e-b864-982832e07295",
           "name": "Chạm vào ánh nắng.",
           "dur": "4:38"
-        },
-        {
-          "id": "89f1c8f1-57a3-4395-8b1b-d8c755eb5909",
-          "name": "Hiên nhà của 50...",
-          "dur": "3:54"
         },
         {
           "id": "8e79698b-0423-46b9-8bbc-f000197d4def",
@@ -799,7 +794,7 @@ window.PORTFOLIO_MUSIC = {
       "sub": "Vietnamese Ink-Wash Folk · Chamber Folk · Roots Ritual",
       "cover": "uploads/toi-hoa-ca-the-gian.jpeg",
       "desc": "Một bức thuỷ mặc bằng âm thanh — người lữ khách đứng giữa núi sông, trăng nước, vẽ lại cả thế gian bằng những gam trầm và một vệt son.",
-      "count": 8,
+      "count": 9,
       "tracks": [
         { "id": "7cc49535-164a-42b3-a2b3-4c98adc0e931", "name": "Ngắm Nhìn Bức Hoạ Thế Gian", "dur": "4:14" },
         { "id": "70ccf96a-3b48-442a-a16d-af30520a0a71", "name": "Nét Đời", "dur": "3:24" },
@@ -808,7 +803,8 @@ window.PORTFOLIO_MUSIC = {
         { "id": "bb942cb4-c693-416b-a63a-5c241c66ddef", "name": "Nước Về Đâu", "dur": "4:21" },
         { "id": "190b2560-b91a-4cdb-9d10-33e149820d63", "name": "Muôn Vạn Dấu Chân", "dur": "4:34" },
         { "id": "fca5ff76-12ec-41ac-a229-12dc0b6f3f19", "name": "Phủ Bạc Nhân Gian", "dur": "4:27" },
-        { "id": "74d27a3b-f6af-4566-ad0f-8a35c3ff54c1", "name": "Chữ Tài Gánh Một Chữ Tai", "dur": "3:41" }
+        { "id": "74d27a3b-f6af-4566-ad0f-8a35c3ff54c1", "name": "Chữ Tài Gánh Một Chữ Tai", "dur": "3:41" },
+        { "id": "1730b98b-21b2-493d-b45a-be76b6146599", "name": "Lưng Đồi Dậy Gió", "dur": "3:31" }
       ]
     },
     {
@@ -817,11 +813,12 @@ window.PORTFOLIO_MUSIC = {
       "sub": "Cantopop · City-Night Ballad · Song ngữ Quảng–Việt",
       "cover": "uploads/vi-muoi-man.jpg",
       "desc": "Những thứ đã đi qua, vẫn để lại một vị. Một chuyến đi song ngữ qua tình yêu, thành phố, và những gì còn sót lại.",
-      "count": 8,
+      "count": 9,
       "tracks": [
         { "id": "3686ee9c-b6ab-44c7-be8f-0fc99edcaa42", "name": "你係我嘅夏天 · Mùa Hè Của Anh", "dur": "4:30" },
         { "id": "ec99b8f1-732f-4266-8941-ceffb4f01932", "name": "慢半拍 · Chậm Nửa Nhịp", "dur": "3:50" },
         { "id": "850e0cd3-8e87-4843-aeda-681b7c9da22a", "name": "最後一杯 · Ly Cuối", "dur": "3:53" },
+        { "id": "70c48887-107d-4e61-ba35-e1ea82ba965c", "name": "閉上眼就見到你 · Nhắm Mắt Là Thấy Em", "dur": "3:52" },
         { "id": "a9139bcc-b017-4be1-a016-85abff90437b", "name": "佔線中 · Máy Đang Bận", "dur": "5:02" },
         { "id": "f16e1106-c044-4500-902b-73788c6a9286", "name": "鹹味 · Vị Muối Mặn", "dur": "4:00" },
         { "id": "a09bfa7a-bd45-4926-8742-bf907b8f00c9", "name": "月光薄情 · Bạc Như Ánh Trăng", "dur": "4:41" },
