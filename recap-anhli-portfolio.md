@@ -1508,3 +1508,18 @@ CHƯA PUSH, CHƯA DEPLOY — chờ Ali bấm `deploy-egg-chicken-2026-08-01.comm
 - Ý tưởng "nuôi gà ảo kiểu Nhật" (cho ăn, mặc đồ, huy hiệu, daily hook) —
   vẫn mới là ý tưởng, chưa phải brief đã khoá.
 - 2 sheet asset chưa dùng (pose mở rộng + item pack) — để dành phase sau.
+
+
+## 2026-09-17 — Codex: Fresh release package and v1 keepsake
+
+Ali approved moving to the new look ("còn lại là triển"), requested a safe v1 archive and optionally a Vietnamese profile based on Ali_Huynh_Resume_2026.pdf. The Fresh profile now has a concise Vietnamese introduction, three capability areas, verified work history and education/teaching in the existing expandable section. The full CV, phone number and future project details are not added to the public runtime.
+
+Loading now has a lightweight dandelion interaction: tap to send a gust while a room or the scenery is actually loading. Cached/loaded content appears immediately; the scenic hint cannot block entry. Reduced-motion preferences are respected. The release base URL is preserved when changing room hashes. Tablet scenery fills its frame; the phone scene softly meets the reserved player area.
+
+V1 archive: `../website-archives/2026-09-17-v1-before-garden/ĐỌC-TRƯỚC.md`. Contains exact live origin/main ZIP at 487e4fd, complete local Git bundle, 1,666-file workspace snapshot, old hero source and URL manifest. ZIP CRC and git bundle verification pass. A supplementary 210-file audio download completed before Ali clarified that audio already exists locally. No more audio downloads; his local music archive is untouched. External video binaries are not archived, only provider URLs/metadata.
+
+Release prepared independently in `../portfolio-garden-release-2026-09-17/`, branch `codex/garden-v2-release-2026-09-17`, based on current origin/main, leaving mixed uncommitted work in the development checkout untouched. Root `index.html` loads the isolated `garden-v2/` runtime; old tracked v1 assets remain preserved. No uploaded backups, original CV or local audio files.
+
+Verification: 31 checks pass; 488 runtime files / 30,456,659 bytes; 108 literal relative references and 448 content asset references resolve. Browser release-path smoke confirms profile, 28-album shelf, album selection without autoplay, one native audio element, no broken loaded images, and close/back navigation. Profile checked on desktop and 390×844 phone; 834×1112 tablet scenery checked. Throttled local QA server exercised the interactive loading state; production has no artificial loading delay. No browser console errors captured. QA: `fresh/qa/release-2026-09-17/`.
+
+Publication status at handoff: release commit/package prepared, not yet pushed. Per AGENT-RULES.md §3, final push is delivered as a dated `.command` for Ali to double-click; this checkpoint is preserved. Script checks the expected remote revision before pulling/pushing, refuses changed release files, then checks the deployed HTML after Pages builds. Do not report live until that receipt passes. Device background/lock-screen audio remains to be validated on real iPhone/iPad/Android; public R2 playback links still have UI download deterrents only, not server-side access control.

@@ -1,0 +1,1023 @@
+{
+  "sources": {
+    "garden-oracle-data.js": "16d0758a915911b66982b7bfacfa0f86242ea012faabb8a0e62da799175fb92a",
+    "garden-oracle-profiles.js": "fdf9d65d49dde4b79223b51e540477180ab5fa385fe90b864e23bf7ffbfc76f2",
+    "garden-oracle-identities.js": "bcb906f8f2fc2646e594804e92b03fddc96ca0decdf590d1f0ea6b4ef60df522"
+  },
+  "cards": [
+    {
+      "id": 0,
+      "name": "Hạt Rời Hoa Theo Gió",
+      "open": {
+        "title": "Bay Tìm Chân Trời Mới",
+        "message": "Bạn đang đứng trước một khởi đầu mới — một công việc, một mối quan hệ, hay một quyết định — mà chưa biết chắc nó dẫn tới đâu. Điều đó bình thường, bạn không cần biết trước mới dám bắt đầu."
+      },
+      "closed": {
+        "title": "Bay Vô Lối Để Trốn Chạy",
+        "message": "Bạn đang định lao vào một điều mới mà chưa thật sự nghĩ kỹ vì sao. Dừng một nhịp, hỏi mình: đang muốn đi tới, hay đang muốn chạy khỏi một điều gì đó ở hiện tại?"
+      },
+      "image": "./assets/oracle/seed-00.webp"
+    },
+    {
+      "id": 1,
+      "name": "Hạt Gọi Vòng Gió Xoáy",
+      "open": {
+        "title": "Thuận Gió Tạo Cơ Hội",
+        "message": "Bạn đang có đủ khả năng, thời gian, hoặc điều kiện để biến một ý định thành việc thật ngay lúc này — một dự án, một cuộc trò chuyện cần có, một thứ bạn vẫn định làm. Đừng chờ thêm dấu hiệu nào nữa, bắt tay vào làm đi."
+      },
+      "closed": {
+        "title": "Gắng Gồng Kiểm Soát Gió",
+        "message": "Bạn có khả năng làm được điều này, nhưng đang giữ nó lại — có thể vì ngại bắt đầu, hoặc vì muốn kiểm soát mọi chi tiết trước khi hành động. Chọn phần nhỏ nhất, làm thử phần đó trước."
+      },
+      "image": "./assets/oracle/seed-01.webp"
+    },
+    {
+      "id": 2,
+      "name": "Hạt Nghe Thầm Thì Trong Gió",
+      "open": {
+        "title": "Tin Vào Cảm Nhận",
+        "message": "Có một cảm giác hoặc linh cảm về một người hay một tình huống mà bạn đã có từ trước, dù chưa giải thích được bằng lời. Tin nó, không cần phải chứng minh nó đúng ngay bây giờ."
+      },
+      "closed": {
+        "title": "Bỏ Qua Trực Giác",
+        "message": "Bạn đang cảm nhận được điều gì đó không ổn — trong một mối quan hệ, một quyết định — nhưng đang tự nghi ngờ và không dám tin cảm giác đó. Ghi lại nó ra giấy, không cần hành động ngay."
+      },
+      "image": "./assets/oracle/seed-02.webp"
+    },
+    {
+      "id": 3,
+      "name": "Hạt Ươm Khu Vườn",
+      "open": {
+        "title": "Chăm Mình Để Chăm Người",
+        "message": "Đây là giai đoạn bạn đang chăm sóc tốt cho ai đó, hoặc một dự định bạn đang xây, và nó đang lớn lên đúng hướng."
+      },
+      "closed": {
+        "title": "Chăm Người Mà Quên Mình",
+        "message": "Bạn đã cho đi quá nhiều — thời gian, sức lực, sự quan tâm — đến mức bản thân đang kiệt sức. Dành một chút để chăm lại cho chính mình trước khi chăm tiếp cho người khác."
+      },
+      "image": "./assets/oracle/seed-03.webp"
+    },
+    {
+      "id": 4,
+      "name": "Hạt Nương Thân Cây Vững",
+      "open": {
+        "title": "Thân Cây Giữ Hạt Giữa Gió",
+        "message": "Bạn đang đặt ra những quy tắc hoặc giới hạn rõ ràng — trong công việc, trong một mối quan hệ — và điều đó đang giúp mọi thứ ổn định hơn."
+      },
+      "closed": {
+        "title": "Thân Cây Chặn Lối Hạt Bay",
+        "message": "Bạn đang kiểm soát quá chặt một người hoặc một việc, đến mức không ai còn thấy thoải mái. Quy tắc này còn thật sự cần thiết không, hay chỉ vì bạn quen làm vậy?"
+      },
+      "image": "./assets/oracle/seed-04.webp"
+    },
+    {
+      "id": 5,
+      "name": "Hạt Theo Làn Gió Xưa",
+      "open": {
+        "title": "Mang Mùa Xưa Đi Tiếp",
+        "message": "Có một lời khuyên từ người đi trước, một cách làm quen thuộc, hoặc một truyền thống gia đình đang chỉ cho bạn một hướng đi đáng tin lúc này."
+      },
+      "closed": {
+        "title": "Mắc Trong Làn Gió Cũ",
+        "message": "Bạn đang làm theo một cách chỉ vì mọi người xung quanh vẫn làm vậy, không phải vì bạn thật sự tin nó đúng với mình. Đây có phải là điều bạn tự chọn không, hay chỉ vì quen?"
+      },
+      "image": "./assets/oracle/seed-05.webp"
+    },
+    {
+      "id": 6,
+      "name": "Đôi Hạt Chung Đường",
+      "open": {
+        "title": "Chọn Điều Mình Tin",
+        "message": "Bạn đang đứng trước một lựa chọn quan trọng liên quan đến một người, một công việc, hoặc một giá trị sống của mình. Chọn theo điều bạn thật sự tin, không phải điều dễ dàng hơn."
+      },
+      "closed": {
+        "title": "Để Người Khác Chọn",
+        "message": "Bạn đang để người khác quyết định thay mình, hoặc đang phân vân giữa hai lựa chọn mà không dám chốt. Việc khó nhất không phải là chọn sai, mà là không dám chọn."
+      },
+      "image": "./assets/oracle/seed-06.webp"
+    },
+    {
+      "id": 7,
+      "name": "Hạt Cưỡi Luồng Gió",
+      "open": {
+        "title": "Giữ Đúng Hướng",
+        "message": "Bạn đang cố gắng hoàn thành một mục tiêu dù có nhiều thứ — công việc, cảm xúc, người khác — đang kéo bạn theo hướng khác. Bạn đang làm tốt việc giữ vững hướng đi của mình."
+      },
+      "closed": {
+        "title": "Lao Đi Mù Quáng",
+        "message": "Bạn đang lao đi rất nhanh với một kế hoạch hay một quyết định mà không chắc mình đang đi đúng hướng. Chậm lại và hỏi: mình đang tiến tới, hay đang chạy trốn một cảm giác nào đó?"
+      },
+      "image": "./assets/oracle/seed-07.webp"
+    },
+    {
+      "id": 8,
+      "name": "Hạt Mềm Qua Gió Dữ",
+      "open": {
+        "title": "Bình Tĩnh Mà Vững",
+        "message": "Sự điềm tĩnh của bạn đang làm được điều mà nóng giận không thể. Cứ mềm mỏng nhưng đừng lùi bước; sức mạnh hôm nay nằm ở cách bạn giữ được mình giữa một tình huống khó."
+      },
+      "closed": {
+        "title": "Gồng Mình Tỏ Mạnh",
+        "message": "Bạn đã gồng lên quá lâu để mọi người tin rằng mình vẫn ổn. Hạ vai xuống một chút, thở sâu, và cho một người đáng tin biết rằng bạn cũng đang mỏi."
+      },
+      "image": "./assets/oracle/seed-08.webp"
+    },
+    {
+      "id": 9,
+      "name": "Hạt Theo Đốm Sáng",
+      "open": {
+        "title": "Một Mình Để Hiểu",
+        "message": "Bạn đang cần một khoảng thời gian ở một mình để suy nghĩ rõ ràng hơn về một quyết định — đây là điều nên làm, không phải trốn tránh."
+      },
+      "closed": {
+        "title": "Tự Cô Lập",
+        "message": "Bạn đã tránh mặt mọi người, hoặc tự cô lập mình quá lâu, đến mức bắt đầu thấy cô đơn thay vì yên tĩnh. Nhắn tin cho một người bạn tin tưởng, dù chỉ một câu ngắn."
+      },
+      "image": "./assets/oracle/seed-09.webp"
+    },
+    {
+      "id": 10,
+      "name": "Hạt Trong Vòng Mùa",
+      "open": {
+        "title": "Đón Nhận Thay Đổi",
+        "message": "Có một điều đang thay đổi trong công việc, một mối quan hệ, hay hoàn cảnh sống của bạn, và bạn không cần hiểu hết lý do mới có thể chấp nhận nó."
+      },
+      "closed": {
+        "title": "Bám Giữ Điều Cũ",
+        "message": "Bạn đang cố giữ mọi thứ y như cũ — một thói quen, một công việc, một mối quan hệ — vì nó quen thuộc, dù nó không còn phù hợp nữa. Đang sợ thay đổi, hay đang thật sự tiếc cái cũ?"
+      },
+      "image": "./assets/oracle/seed-10.webp"
+    },
+    {
+      "id": 11,
+      "name": "Hạt Trên Đường Cân",
+      "open": {
+        "title": "Nhìn Nhận Công Bằng",
+        "message": "Một kết quả công bằng đang đến với bạn, từ một quyết định hay một việc bạn đã làm trước đó — không phải hình phạt, chỉ là hệ quả tự nhiên."
+      },
+      "closed": {
+        "title": "Tự Trừng Phạt",
+        "message": "Bạn đang quá khắt khe với bản thân về một lỗi đã qua, hoặc đang né tránh việc phải chịu trách nhiệm cho một việc gì đó. Nhìn lại thật công bằng, đừng quá nặng nề với chính mình."
+      },
+      "image": "./assets/oracle/seed-11.webp"
+    },
+    {
+      "id": 12,
+      "name": "Hạt Treo Giữa Trời",
+      "open": {
+        "title": "Tạm Dừng Để Thấy",
+        "message": "Bạn đang tạm dừng lại một quyết định hoặc một kế hoạch, và khoảng dừng đó đang giúp bạn nhìn mọi thứ theo một cách mới."
+      },
+      "closed": {
+        "title": "Chần Chừ Quá Lâu",
+        "message": "Bạn đang chờ đợi hoặc chịu đựng một tình huống — một công việc, một mối quan hệ — lâu hơn cần thiết, trong khi thật ra bạn có thể thay đổi nó bất cứ lúc nào."
+      },
+      "image": "./assets/oracle/seed-12.webp"
+    },
+    {
+      "id": 13,
+      "name": "Hạt Qua Mùa Rụng",
+      "open": {
+        "title": "Khép Lại Để Bước Tiếp",
+        "message": "Một giai đoạn, một công việc, hoặc một mối quan hệ trong cuộc sống bạn đang thật sự kết thúc — và điều đó cần thiết để một điều mới có thể bắt đầu."
+      },
+      "closed": {
+        "title": "Không Chịu Buông",
+        "message": "Bạn đang cố giữ lại một điều đã không còn nữa — chỉ thay đổi bề ngoài mà không thật sự buông bỏ nó. Cho phép mình buồn về nó trước khi cố thay thế bằng thứ khác."
+      },
+      "image": "./assets/oracle/seed-13.webp"
+    },
+    {
+      "id": 14,
+      "name": "Hạt Giữa Hai Dòng",
+      "open": {
+        "title": "Dung Hoà Hai Phía",
+        "message": "Bạn đang cân bằng tốt giữa hai điều khác nhau trong cuộc sống — công việc và nghỉ ngơi, hai người, hai lựa chọn — đó là một kỹ năng, không phải sự thỏa hiệp yếu đuối."
+      },
+      "closed": {
+        "title": "Mất Cân Bằng",
+        "message": "Có hai điều, hoặc hai người, đang không ăn khớp với nhau, và chưa ai chịu nhường. Đừng vội thêm bất cứ cam kết mới nào vào lúc này."
+      },
+      "image": "./assets/oracle/seed-14.webp"
+    },
+    {
+      "id": 15,
+      "name": "Hạt Vướng Rễ Sâu",
+      "open": {
+        "title": "Thoát Khỏi Ràng Buộc",
+        "message": "Bạn đang nhìn thẳng vào một thói quen, một mối quan hệ, hoặc một nỗi sợ đang trói buộc mình — nhìn thấy nó rõ ràng đã là bước đầu để thay đổi."
+      },
+      "closed": {
+        "title": "Tự Trói Mình",
+        "message": "Bạn đang coi một thói quen xấu hoặc một tình huống không lành mạnh là \"số phận\" để khỏi phải cố thay đổi nó. Bạn có thể chọn khác, chỉ cần bắt đầu bằng một bước rất nhỏ."
+      },
+      "image": "./assets/oracle/seed-15.webp"
+    },
+    {
+      "id": 16,
+      "name": "Hạt Trong Vườn Sét",
+      "open": {
+        "title": "Đổ Vỡ Để Làm Lại",
+        "message": "Một điều bạn từng nghĩ là chắc chắn — một kế hoạch, một mối quan hệ, hay một niềm tin — đang sụp đổ rất nhanh. Dù đau, đây là cách để bạn thoát khỏi thứ vốn dĩ không còn vững từ trước."
+      },
+      "closed": {
+        "title": "Cố Giữ Điều Đã Vỡ",
+        "message": "Bạn đang cố gắng cứu vãn hoặc che giấu một điều đã rạn nứt từ lâu — một mối quan hệ, một lời hứa, một kế hoạch — hy vọng nó không đổ vỡ hẳn. Đôi khi để nó sụp còn nhẹ hơn là sống trong lo sợ chờ nó sụp."
+      },
+      "image": "./assets/oracle/seed-16.webp"
+    },
+    {
+      "id": 17,
+      "name": "Hạt Theo Sao Dẫn",
+      "open": {
+        "title": "Tin Lại Từ Đầu",
+        "message": "Bạn đang có một niềm hy vọng thật sự về tương lai — không viển vông — chỉ cần bạn thành thật với điều mình thật sự mong muốn."
+      },
+      "closed": {
+        "title": "Mất Niềm Tin",
+        "message": "Bạn đã thất vọng nhiều lần đến mức không dám mơ hay hy vọng nữa. Chọn một điều nhỏ, thật, để bắt đầu tin trở lại."
+      },
+      "image": "./assets/oracle/seed-17.webp"
+    },
+    {
+      "id": 18,
+      "name": "Hạt Qua Miền Sương",
+      "open": {
+        "title": "Nhìn Qua Nỗi Sợ",
+        "message": "Bạn đang đi qua một giai đoạn mọi thứ chưa rõ ràng — một mối quan hệ, một quyết định — và điều đó không sao, bạn không cần hiểu hết mới có thể tiếp tục."
+      },
+      "closed": {
+        "title": "Hoang Mang Che Lối",
+        "message": "Nỗi lo lắng đang khiến bạn nhìn một tình huống tệ hơn thực tế nó đang có. Điều mình đang sợ có thật sự đúng, hay chỉ là do lo lắng?"
+      },
+      "image": "./assets/oracle/seed-18.webp"
+    },
+    {
+      "id": 19,
+      "name": "Hạt Đón Mặt Trời",
+      "open": {
+        "title": "Cho Phép Mình Vui",
+        "message": "Đây là một giai đoạn vui vẻ, rõ ràng, tích cực trong cuộc sống bạn — bạn được phép tận hưởng nó mà không cần giấu bớt niềm vui."
+      },
+      "closed": {
+        "title": "Sợ Mình Nổi Bật",
+        "message": "Bạn đang cố tỏ ra ổn hơn thực tế trước mặt người khác, hoặc đang ngại để họ thấy mình thật sự vui. Cứ vui thật, không cần diễn."
+      },
+      "image": "./assets/oracle/seed-19.webp"
+    },
+    {
+      "id": 20,
+      "name": "Hạt Nghe Tiếng Gọi",
+      "open": {
+        "title": "Thức Tỉnh Và Đối Diện",
+        "message": "Có một điều bạn biết mình cần làm hoặc cần đối diện — một cuộc nói chuyện, một quyết định — đây là lúc để hành động, dù nó đến trễ hơn bạn mong."
+      },
+      "closed": {
+        "title": "Trốn Tránh Quá Khứ",
+        "message": "Bạn đang tránh né một điều mình biết rõ cần giải quyết, hoặc đang tự trách bản thân quá lâu vì một lỗi đã qua. Tha thứ cho mình không có nghĩa là quên, chỉ là ngừng tự dằn vặt."
+      },
+      "image": "./assets/oracle/seed-20.webp"
+    },
+    {
+      "id": 21,
+      "name": "Hạt Trong Vòng Hoa",
+      "open": {
+        "title": "Hoàn Thành Một Chặng",
+        "message": "Bạn đang hoàn thành trọn vẹn một giai đoạn hoặc một dự định quan trọng — đây là lúc để tự hào về điều đó."
+      },
+      "closed": {
+        "title": "Trì Hoãn Bước Mới",
+        "message": "Bạn đang đứng trước một khởi đầu mới nhưng chưa dám bước vào, có thể vì cảm thấy việc cũ chưa thật sự xong. Điều còn thiếu đó có thật sự quan trọng, hay chỉ là lý do để trì hoãn?"
+      },
+      "image": "./assets/oracle/seed-21.webp"
+    },
+    {
+      "id": 22,
+      "name": "Hạt Bén Tia Đầu Tiên",
+      "open": {
+        "title": "Nuôi Một Ý Tưởng",
+        "message": "Có một ý tưởng hoặc hứng thú mới vừa xuất hiện trong bạn — về công việc, một sở thích, một dự định — còn non nhưng có thật. Đừng chờ nó chắc chắn hơn mới bắt đầu thử."
+      },
+      "closed": {
+        "title": "Bỏ Cuộc Giữa Chừng",
+        "message": "Bạn đang mất hứng với một ý tưởng mới quá nhanh, có thể vì sốt ruột muốn thấy kết quả ngay. Cho nó thêm một chút thời gian trước khi bỏ cuộc."
+      },
+      "image": "./assets/oracle/seed-22.webp"
+    },
+    {
+      "id": 23,
+      "name": "Hạt Nhìn Qua Chân Trời",
+      "open": {
+        "title": "Biến Ý Định Thành Việc Làm",
+        "message": "Bạn đang cân nhắc một hướng đi mới — đổi việc, chuyển chỗ ở, bắt đầu điều gì đó khác — và đang bình tĩnh nhìn xa trước khi quyết định."
+      },
+      "closed": {
+        "title": "Sợ Rời Vùng Quen",
+        "message": "Bạn đang sợ điều mới lạ hơn là thật sự thích chỗ cũ. Một kế hoạch chỉ thật khi bạn thật sự bắt đầu làm gì đó, không chỉ nghĩ về nó."
+      },
+      "image": "./assets/oracle/seed-23.webp"
+    },
+    {
+      "id": 24,
+      "name": "Hạt Đón Tin Từ Xa",
+      "open": {
+        "title": "Nhìn Thấy Cơ Hội",
+        "message": "Điều bạn đã bỏ công gieo trồng — một dự án, một mối quan hệ, một kế hoạch — đang trên đường mang lại kết quả. Cứ kiên nhẫn thêm một chút."
+      },
+      "closed": {
+        "title": "Mải Chờ Một Tin",
+        "message": "Bạn đang chăm chăm chờ một kết quả cụ thể mà quên nhìn những cơ hội khác đang mở ra xung quanh. Ngẩng lên nhìn rộng hơn một chút."
+      },
+      "image": "./assets/oracle/seed-24.webp"
+    },
+    {
+      "id": 25,
+      "name": "Hạt Qua Cổng Hoa",
+      "open": {
+        "title": "Cùng Nhau Ăn Mừng",
+        "message": "Có một dịp vui, một cột mốc đáng ăn mừng đang đến với bạn và những người xung quanh — cho phép mình tận hưởng nó trọn vẹn."
+      },
+      "closed": {
+        "title": "Có Mặt Mà Xa Cách",
+        "message": "Có một mâu thuẫn nhỏ trong gia đình hoặc nhóm bạn đang khiến niềm vui bị hoãn lại. Nói ra điều đang vướng, đừng đợi nó tự qua."
+      },
+      "image": "./assets/oracle/seed-25.webp"
+    },
+    {
+      "id": 26,
+      "name": "Hạt Giữa Những Luồng Gió",
+      "open": {
+        "title": "Tranh Luận Để Hiểu",
+        "message": "Có sự cạnh tranh hoặc bất đồng ý kiến đang xảy ra ở nơi làm việc hay trong nhóm — điều đó không xấu, nó đang giúp mọi người rõ ràng hơn."
+      },
+      "closed": {
+        "title": "Xung Đột Vô Ích",
+        "message": "Có xung đột đang xảy ra mà không thật sự cần thiết, có thể vì có ai đó, kể cả bạn, đang né một cuộc nói chuyện quan trọng hơn. Chọn đúng việc đáng để tranh luận, bỏ qua phần còn lại."
+      },
+      "image": "./assets/oracle/seed-26.webp"
+    },
+    {
+      "id": 27,
+      "name": "Hạt Trên Vệt Nắng Cao",
+      "open": {
+        "title": "Ghi Nhận Thành Quả",
+        "message": "Có một sự công nhận, một thành tích đang đến với bạn đúng lúc — cho phép mình tự hào mà không cần giảm nhẹ nó."
+      },
+      "closed": {
+        "title": "Thành Công Mà Tự Ti",
+        "message": "Bạn đang cần được khen để thấy mình đủ tốt, nên dù đạt được thành tích cũng chỉ thấy trống trải. Bạn cần tin vào chính mình — bạn đang làm đúng, không cần lời ngợi khen hay sự tán thưởng từ người khác."
+      },
+      "image": "./assets/oracle/seed-27.webp"
+    },
+    {
+      "id": 28,
+      "name": "Hạt Giữ Sườn Nắng",
+      "open": {
+        "title": "Giữ Vững Điều Quan Trọng",
+        "message": "Bạn đang bảo vệ một quan điểm, một quyết định, hay một ranh giới quan trọng — giữ vững lúc này là đúng, không phải cứng đầu."
+      },
+      "closed": {
+        "title": "Cố Chấp Mọi Chuyện",
+        "message": "Bạn đang phòng thủ với mọi ý kiến trái chiều, kể cả những góp ý không thật sự đe dọa gì. Chọn trận nào đáng để giữ sức, phần còn lại có thể bỏ qua."
+      },
+      "image": "./assets/oracle/seed-28.webp"
+    },
+    {
+      "id": 29,
+      "name": "Đàn Hạt Theo Nắng Xiên",
+      "open": {
+        "title": "Tiến Nhanh Đúng Hướng",
+        "message": "Mọi việc đang tiến triển nhanh và thuận lợi — một tin nhắn, một quyết định, một kế hoạch đang chuyển động tốt. Đừng cản nó lại bằng cách nghĩ quá nhiều."
+      },
+      "closed": {
+        "title": "Ôm Quá Nhiều Việc",
+        "message": "Có việc gì đó đang bị trì hoãn hơn bạn mong, hoặc bạn đang cố làm quá nhiều thứ cùng lúc. Chọn một việc, để phần còn lại chờ."
+      },
+      "image": "./assets/oracle/seed-29.webp"
+    },
+    {
+      "id": 30,
+      "name": "Hạt Mang Dấu Gió Dài",
+      "open": {
+        "title": "Bền Bỉ Đến Cuối",
+        "message": "Bạn đã trải qua nhiều khó khăn và vẫn đang cố gắng — sự cảnh giác lúc này là kinh nghiệm, bạn gần tới đích rồi."
+      },
+      "closed": {
+        "title": "Luôn Trong Thế Phòng Thủ",
+        "message": "Khó khăn đã qua từ lâu nhưng bạn vẫn đang phòng thủ như thể nó còn ở đó. Cho phép mình thả lỏng một chút, xem thử có thật cần cảnh giác vậy không."
+      },
+      "image": "./assets/oracle/seed-30.webp"
+    },
+    {
+      "id": 31,
+      "name": "Hạt Cõng Cả Mùa Nắng",
+      "open": {
+        "title": "Hoàn Thành Trách Nhiệm",
+        "message": "Bạn đang gần hoàn tất một trách nhiệm lớn — công việc, một dự án, một cam kết — sức nặng này có ý nghĩa, không phải vô ích."
+      },
+      "closed": {
+        "title": "Ôm Hết Một Mình",
+        "message": "Bạn đang ôm quá nhiều việc một mình, biến khả năng của mình thành gánh nặng cho chính mình. Nhờ ai đó giúp không phải là thất bại."
+      },
+      "image": "./assets/oracle/seed-31.webp"
+    },
+    {
+      "id": 32,
+      "name": "Hạt Chạm Nắng Lạ",
+      "open": {
+        "title": "Thử Điều Mới",
+        "message": "Có một sự tò mò, một ý tưởng mới, hoặc một phiên bản khác của bạn đang muốn được thử. Cứ để nó bắt đầu, không cần biết trước nó dẫn tới đâu."
+      },
+      "closed": {
+        "title": "Có Ý Tưởng Nhưng Không Làm",
+        "message": "Bạn đang có một ý tưởng mới mà ngại không dám bắt đầu, sợ mình chưa đủ giỏi hay chưa đủ sẵn sàng. Không ai từng sẵn sàng trước khi bắt đầu cả."
+      },
+      "image": "./assets/oracle/seed-32.webp"
+    },
+    {
+      "id": 33,
+      "name": "Hạt Lao Theo Vệt Nắng",
+      "open": {
+        "title": "Hành Động Dứt Khoát",
+        "message": "Đây là lúc cho hành động nhanh và dứt khoát — đừng nghĩ quá lâu trước khi bước, cơ hội này cần tốc độ."
+      },
+      "closed": {
+        "title": "Nóng Vội Không Đích",
+        "message": "Bạn đang dồn rất nhiều năng lượng vào một việc mà chưa thật sự đi tới đâu. Chậm một nhịp để chắc mình đang tiến tới, không phải đang chạy trốn."
+      },
+      "image": "./assets/oracle/seed-33.webp"
+    },
+    {
+      "id": 34,
+      "name": "Hạt Tự Mang Ánh Nắng",
+      "open": {
+        "title": "Tự Tin Toả Sáng",
+        "message": "Bạn đang có một thứ ánh sáng rất riêng: ấm, tự tin và đủ sức kéo mọi người lại gần. Đừng thu nhỏ mình chỉ để căn phòng quanh bạn bớt chói."
+      },
+      "closed": {
+        "title": "Gắng Sáng Đến Kiệt Sức",
+        "message": "Bạn không cần lúc nào cũng là người rực rỡ nhất phòng. Nếu ngọn lửa đã mỏi, hãy lui về chăm lại mình; ánh sáng thật không mất đi chỉ vì một ngày bạn chọn nghỉ."
+      },
+      "image": "./assets/oracle/seed-34.webp"
+    },
+    {
+      "id": 35,
+      "name": "Hạt Giữ Hướng Mặt Trời",
+      "open": {
+        "title": "Dẫn Dắt Bằng Tầm Nhìn",
+        "message": "Tầm nhìn của bạn đủ rõ để dẫn dắt người khác — dám chịu trách nhiệm cho điều mình tin là đúng lúc này."
+      },
+      "closed": {
+        "title": "Áp Đặt Người Khác",
+        "message": "Bạn đang áp đặt cách nghĩ của mình lên người khác, hứa nhiều hơn mình thật sự có thể giữ. Lãnh đạo thật không cần phải độc đoán."
+      },
+      "image": "./assets/oracle/seed-35.webp"
+    },
+    {
+      "id": 36,
+      "name": "Hạt Đón Giọt Đầu Nguồn",
+      "open": {
+        "title": "Mở Lòng Đón Nhận",
+        "message": "Trái tim bạn đang mở ra với một tình cảm, một mối quan hệ, hoặc một cảm xúc mới — cho phép mình nhận, không chỉ cho đi."
+      },
+      "closed": {
+        "title": "Từ Chối Cảm Xúc",
+        "message": "Bạn đang tự chặn cảm xúc của chính mình, cho đi nhiều mà không dám nhận lại gì. Nhận một điều tốt không làm bạn yếu đi."
+      },
+      "image": "./assets/oracle/seed-36.webp"
+    },
+    {
+      "id": 37,
+      "name": "Hai Hạt Soi Chung Mặt Nước",
+      "open": {
+        "title": "Kết Nối Bình Đẳng",
+        "message": "Có một sự kết nối chân thành, ngang hàng đang diễn ra giữa bạn và một người khác — cứ để nó tự nhiên tiếp tục."
+      },
+      "closed": {
+        "title": "Một Người Cứ Nhường",
+        "message": "Nhịp giữa bạn và người kia đang lệch nhau, có thể bạn đang nhường nhịn quá nhiều để giữ mối quan hệ đó. Kết nối thật không cần một người phải nhỏ lại."
+      },
+      "image": "./assets/oracle/seed-37.webp"
+    },
+    {
+      "id": 38,
+      "name": "Đàn Hạt Trong Vòng Sương",
+      "open": {
+        "title": "Niềm Vui Bạn Bè",
+        "message": "Đây là lúc để dành thời gian cho bạn bè, ăn mừng cùng nhau — niềm vui từ những người xung quanh đang thật sự nâng đỡ bạn."
+      },
+      "closed": {
+        "title": "Đông Vui Mà Cô Đơn",
+        "message": "Bạn đang ở giữa một nhóm đông vui mà vẫn thấy lạc lõng, hoặc đang chú ý những chuyện không quan trọng thay vì kết nối thật. Tìm lại người bạn thật sự muốn ở cạnh."
+      },
+      "image": "./assets/oracle/seed-38.webp"
+    },
+    {
+      "id": 39,
+      "name": "Hạt Bên Giọt Mưa",
+      "open": {
+        "title": "Nhìn Lại Cơ Hội",
+        "message": "Bạn đang bắt đầu để ý một cơ hội hoặc một lời mời mà trước đây từng bỏ qua — cho nó một cơ hội nhìn lại."
+      },
+      "closed": {
+        "title": "Thờ Ơ Với Điều Tốt",
+        "message": "Bạn đang thờ ơ với một điều tốt đang thật sự chờ, có thể vì nó không đến đúng như bạn mong đợi. Cơ hội tốt không cần đến đúng hình dạng mới đáng nhận."
+      },
+      "image": "./assets/oracle/seed-39.webp"
+    },
+    {
+      "id": 40,
+      "name": "Hạt Bên Vũng Mưa Cũ",
+      "open": {
+        "title": "Cho Phép Mình Buồn",
+        "message": "Cho phép mình buồn thật với một điều đã mất — một mối quan hệ, một cơ hội — thành thật với nỗi buồn là bước đầu để vượt qua nó."
+      },
+      "closed": {
+        "title": "Mắc Kẹt Trong Tiếc Nuối",
+        "message": "Bạn đang mắc kẹt trong sự tiếc nuối về một điều đã qua, quên nhìn những gì mình vẫn còn. Ngẩng lên một chút, phần còn lại vẫn ở đó."
+      },
+      "image": "./assets/oracle/seed-40.webp"
+    },
+    {
+      "id": 41,
+      "name": "Hạt Trở Về Mùa Thơ",
+      "open": {
+        "title": "Trân Trọng Kỷ Niệm",
+        "message": "Một kỷ niệm đẹp, một người quen cũ đang quay lại đúng lúc bạn cần — hãy đón nhận nó nhẹ nhàng."
+      },
+      "closed": {
+        "title": "Sống Mãi Trong Quá Khứ",
+        "message": "Bạn đang sống trong ký ức về một thời đã qua nhiều hơn là sống với hiện tại. Kỷ niệm đẹp không cần phải thay thế cho cuộc sống bây giờ."
+      },
+      "image": "./assets/oracle/seed-41.webp"
+    },
+    {
+      "id": 42,
+      "name": "Hạt Giữa Ngàn Bóng Nước",
+      "open": {
+        "title": "Mở Ra Nhiều Khả Năng",
+        "message": "Có nhiều lựa chọn, nhiều khả năng đang mở ra trước bạn — cứ cho mình thời gian tưởng tượng và cân nhắc."
+      },
+      "closed": {
+        "title": "Mơ Nhiều Không Làm",
+        "message": "Quá nhiều lựa chọn đang khiến bạn thích tưởng tượng hơn là bắt tay làm thật. Chọn một điều, thử nó thật, thay vì cân nhắc mãi."
+      },
+      "image": "./assets/oracle/seed-42.webp"
+    },
+    {
+      "id": 43,
+      "name": "Hạt Rời Dòng Đã Cạn",
+      "open": {
+        "title": "Rời Điều Không Còn Hợp",
+        "message": "Bạn đang rời khỏi một điều không còn phù hợp nữa — một công việc, một mối quan hệ — để tìm điều có ý nghĩa hơn. Đây là can đảm, không phải bỏ cuộc."
+      },
+      "closed": {
+        "title": "Quay Lại Điều Đã Cạn",
+        "message": "Bạn đang sợ rời đi nên cứ quay lại điều cũ, dù biết nó không còn đủ cho mình. Rời đi trước khi hiểu hết mọi lý do cũng được, không cần chờ chắc chắn tuyệt đối."
+      },
+      "image": "./assets/oracle/seed-43.webp"
+    },
+    {
+      "id": 44,
+      "name": "Hạt Bên Hồ Đủ Đầy",
+      "open": {
+        "title": "Biết Mình Đã Đủ",
+        "message": "Một điều bạn từng mong đã ở rất gần, có khi đang hiện diện ngay trong hôm nay. Đừng vội tìm thêm; hãy ngồi lại đủ lâu để nhận ra cảm giác đủ đầy mình đã chờ bấy lâu."
+      },
+      "closed": {
+        "title": "Tìm Mãi Không No",
+        "message": "Bạn đang tìm thêm niềm vui bên ngoài để lấp một khoảng trống không gọi được tên. Trước khi mua thêm, ăn thêm hay lao vào một cuộc vui khác, thử hỏi lòng mình đang thật sự thiếu điều gì."
+      },
+      "image": "./assets/oracle/seed-44.webp"
+    },
+    {
+      "id": 45,
+      "name": "Hạt Dưới Vòm Mưa Chung",
+      "open": {
+        "title": "Hạnh Phúc Gia Đình",
+        "message": "Có một sự hòa hợp thật sự trong gia đình hay với người thân đang ở quanh bạn — niềm vui lúc này là có thật, không cần nghi ngờ."
+      },
+      "closed": {
+        "title": "Che Giấu Rạn Nứt",
+        "message": "Bạn đang cố giữ hình ảnh một gia đình hoàn hảo trước mặt người khác trong khi vấn đề thật vẫn còn đó. Hạnh phúc không cần giống nhau giữa mọi người mới là thật."
+      },
+      "image": "./assets/oracle/seed-45.webp"
+    },
+    {
+      "id": 46,
+      "name": "Hạt Nghe Giọt Nước Non",
+      "open": {
+        "title": "Lắng Nghe Cảm Xúc",
+        "message": "Bạn đang cảm nhận được một điều gì đó về cảm xúc của mình hoặc người khác — còn non nhưng đúng. Tin nó, dù chưa giải thích được bằng lời."
+      },
+      "closed": {
+        "title": "Sợ Nói Điều Mình Cảm",
+        "message": "Bạn đang cảm nhận được điều gì đó nhưng ngại nói ra vì sợ nó chưa đủ chín chắn hay hợp lý. Nói ra không cần phải hoàn hảo trước."
+      },
+      "image": "./assets/oracle/seed-46.webp"
+    },
+    {
+      "id": 47,
+      "name": "Hạt Mang Mưa Đến Hẹn",
+      "open": {
+        "title": "Lời Mời Chân Thành",
+        "message": "Có một lời mời chân thành, một cơ hội tình cảm đang đến — hãy theo điều trái tim mình tin là an toàn lúc này."
+      },
+      "closed": {
+        "title": "Hứa Nhiều Làm Ít",
+        "message": "Có một lời hứa đang được đưa ra bằng cảm xúc nhiều hơn bằng hành động thật sự. Nhìn vào điều người đó đã làm, không chỉ điều họ đã nói."
+      },
+      "image": "./assets/oracle/seed-47.webp"
+    },
+    {
+      "id": 48,
+      "name": "Hạt Giữ Hồ Sâu",
+      "open": {
+        "title": "Thấu Cảm Có Ranh Giới",
+        "message": "Khả năng thấu hiểu cảm xúc của bạn đang giúp ích rất nhiều cho người xung quanh — bạn đủ vững để chứa được cảm xúc của người khác mà không mất mình."
+      },
+      "closed": {
+        "title": "Gánh Cảm Xúc Người Khác",
+        "message": "Bạn đang ngập trong cảm xúc hoặc vấn đề của người khác đến mức quên mất ranh giới của bản thân. Quan tâm người khác không có nghĩa là gánh hết nỗi buồn của họ."
+      },
+      "image": "./assets/oracle/seed-48.webp"
+    },
+    {
+      "id": 49,
+      "name": "Hạt Giữ Mặt Nước Yên",
+      "open": {
+        "title": "Bình Tĩnh Mà Gần Gũi",
+        "message": "Bạn đang giữ được sự bình tĩnh về cảm xúc ngay giữa một hoàn cảnh khó khăn — biết quan tâm người khác mà vẫn có ranh giới riêng, đó là sức mạnh thật."
+      },
+      "closed": {
+        "title": "Điềm Tĩnh Để Xa Cách",
+        "message": "Bạn đang nén cảm xúc của mình lại, giữ khoảng cách với người khác bằng vẻ ngoài điềm tĩnh thay vì thật sự gần gũi. Cảm xúc bị giấu đi vẫn còn đó, chỉ là không ai thấy được."
+      },
+      "image": "./assets/oracle/seed-49.webp"
+    },
+    {
+      "id": 50,
+      "name": "Hạt Trên Đường Gió Sáng",
+      "open": {
+        "title": "Sự Thật Đã Rõ",
+        "message": "Có một sự thật hoặc một quyết định đang trở nên rõ ràng với bạn — cứ tin vào điều mình vừa nhận ra, dù nó có thể hơi khó nghe."
+      },
+      "closed": {
+        "title": "Sự Thật Gây Đau",
+        "message": "Có một lời nói đang làm ai đó đau nhiều hơn cần thiết, hoặc bạn biết rõ một điều nhưng chưa dám nói ra. Sự thật không cần phải nói theo cách gây tổn thương."
+      },
+      "image": "./assets/oracle/seed-50.webp"
+    },
+    {
+      "id": 51,
+      "name": "Hạt Giữa Hai Luồng Gió",
+      "open": {
+        "title": "Chưa Cần Chọn Ngay",
+        "message": "Bạn đang đứng giữa hai lối đi, nhưng chưa cần chọn ngay. Hãy để mọi tiếng ồn lắng xuống; khi không còn bị thúc ép, điều mình thật sự muốn sẽ dễ nghe hơn."
+      },
+      "closed": {
+        "title": "Né Tránh Quyết Định",
+        "message": "Điều giữ bạn lại có thể không phải nỗi sợ, mà là một mảnh thông tin còn thiếu. Đừng đoán thêm. Hãy tìm cho ra điều cần biết, rồi quyết định bằng một cái nhìn sáng rõ."
+      },
+      "image": "./assets/oracle/seed-51.webp"
+    },
+    {
+      "id": 52,
+      "name": "Hạt Qua Vệt Gió Đau",
+      "open": {
+        "title": "Gọi Tên Nỗi Đau",
+        "message": "Có một nỗi đau thật sự — một chia tay, một lời nói làm tổn thương — và cho phép mình cảm nhận nó trọn vẹn là bước đầu để lành lại."
+      },
+      "closed": {
+        "title": "Giữ Chặt Vết Thương",
+        "message": "Bạn đang giữ một vết thương cũ trong lòng, chưa từng gọi tên nó ra để thật sự bắt đầu chữa lành. Nói nó ra, dù chỉ với chính mình."
+      },
+      "image": "./assets/oracle/seed-52.webp"
+    },
+    {
+      "id": 53,
+      "name": "Hạt Trong Vòm Gió Lặng",
+      "open": {
+        "title": "Nghỉ Để Hồi Sức",
+        "message": "Bạn đã đi qua một quãng quá căng. Hôm nay, nghỉ ngơi không phải phần thưởng sau khi làm xong mọi việc; nghỉ là cách cơ thể đưa bạn trở về với chính mình."
+      },
+      "closed": {
+        "title": "Nghỉ Mà Vẫn Tự Trách",
+        "message": "Cơ thể đã dừng mà đầu óc vẫn chạy, nên khoảng nghỉ chưa thật sự chạm tới bạn. Tạm đặt xuống một việc còn dang dở và cho mình được yên, không cần kiếm lý do để xứng đáng."
+      },
+      "image": "./assets/oracle/seed-53.webp"
+    },
+    {
+      "id": 54,
+      "name": "Hạt Sau Cơn Gió Sắc",
+      "open": {
+        "title": "Nhìn Lại Cuộc Cãi Vã",
+        "message": "Có một cuộc tranh cãi hay xung đột đã qua, và đáng để nhìn lại xem thắng thua lúc đó có còn quan trọng như bạn từng nghĩ không."
+      },
+      "closed": {
+        "title": "Thắng Mà Mất Nhau",
+        "message": "Bạn đang giữ oán giận từ một cuộc cãi vã cũ, lặp lại cùng một cách phản ứng mỗi lần có xung đột. Có những trận thắng không đáng cái giá phải trả — nhất là khi mất luôn mối quan hệ đó."
+      },
+      "image": "./assets/oracle/seed-54.webp"
+    },
+    {
+      "id": 55,
+      "name": "Hạt Qua Bờ Gió Khác",
+      "open": {
+        "title": "Đi Đến Nơi Yên Hơn",
+        "message": "Bạn đang chuyển sang một giai đoạn yên ổn hơn — chậm nhưng chắc, và bạn đang đi đúng hướng."
+      },
+      "closed": {
+        "title": "Mang Theo Vết Cũ",
+        "message": "Bạn đang mang những tổn thương hay thói quen cũ theo sang một hoàn cảnh mới, chưa thật sự để chúng lại phía sau. Để lại thứ không cần mang theo trước khi bước tiếp."
+      },
+      "image": "./assets/oracle/seed-55.webp"
+    },
+    {
+      "id": 56,
+      "name": "Hạt Đi Ngoài Luồng Gió",
+      "open": {
+        "title": "Âm Thầm Giải Quyết",
+        "message": "Bạn đang cần tự xoay xở một mình, kín đáo, để giải quyết một việc — điều đó hợp lý lúc này, không phải trốn tránh."
+      },
+      "closed": {
+        "title": "Giấu Giếm Đến Lạc Đường",
+        "message": "Bạn đang giấu diếm điều gì đó, kể cả với chính mình, và nó có nguy cơ sớm bị lộ ra. Nói thật sớm còn dễ hơn để nó vỡ ra sau."
+      },
+      "image": "./assets/oracle/seed-56.webp"
+    },
+    {
+      "id": 57,
+      "name": "Hạt Trong Lồng Gió",
+      "open": {
+        "title": "Nhận Ra Điều Trói Mình",
+        "message": "Bạn đang bắt đầu nhận ra rõ điều gì thật sự đang giới hạn mình — nhìn thấy nó là bước đầu để thoát ra."
+      },
+      "closed": {
+        "title": "Tin Rằng Không Có Lối",
+        "message": "Bạn đang tin rằng mình không có lối thoát khỏi một tình huống, dù thật ra phần lớn giới hạn đó không còn chặt như bạn nghĩ. Thử một bước nhỏ để kiểm tra xem điều đó có còn đúng không."
+      },
+      "image": "./assets/oracle/seed-57.webp"
+    },
+    {
+      "id": 58,
+      "name": "Hạt Thức Cùng Gió Đêm",
+      "open": {
+        "title": "Nói Ra Nỗi Lo",
+        "message": "Gọi tên nỗi lo đang khiến bạn mất ngủ — nói nó ra với ai đó là cách để nó bớt lớn hơn thực tế."
+      },
+      "closed": {
+        "title": "Một Mình Với Nỗi Sợ",
+        "message": "Bạn đang giữ một nỗi sợ hay lo lắng một mình, xấu hổ không dám chia sẻ với ai. Không ai cần phải một mình với điều này."
+      },
+      "image": "./assets/oracle/seed-58.webp"
+    },
+    {
+      "id": 59,
+      "name": "Hạt Sau Trận Gió Cuối",
+      "open": {
+        "title": "Giai Đoạn Khó Đã Qua",
+        "message": "Đây là điểm thấp nhất của một giai đoạn khó khăn đã kết thúc — và sau điểm thấp nhất chỉ còn đường đi lên."
+      },
+      "closed": {
+        "title": "Không Cho Mình Bắt Đầu Lại",
+        "message": "Bạn đang giữ vai \"người bị tổn thương\" lâu hơn cần thiết, chưa cho phép mình bắt đầu lại. Giai đoạn khó đó đã qua rồi, bạn được phép đứng dậy bất cứ lúc nào."
+      },
+      "image": "./assets/oracle/seed-59.webp"
+    },
+    {
+      "id": 60,
+      "name": "Hạt Canh Tiếng Gió Mới",
+      "open": {
+        "title": "Quan Sát Trước Khi Nói",
+        "message": "Sự tò mò và óc quan sát của bạn đang nhạy bén — quan sát kỹ trước khi hành động là điểm mạnh của bạn lúc này."
+      },
+      "closed": {
+        "title": "Vội Kết Luận",
+        "message": "Bạn đang đưa ra kết luận hoặc phán xét trước khi thật sự hiểu hết câu chuyện. Chờ thêm một chút thông tin trước khi lên tiếng."
+      },
+      "image": "./assets/oracle/seed-60.webp"
+    },
+    {
+      "id": 61,
+      "name": "Hạt Xé Gió Mà Đi",
+      "open": {
+        "title": "Bảo Vệ Điều Đúng",
+        "message": "Bạn đang quyết liệt bảo vệ một điều mình tin là đúng — sự dứt khoát lúc này là cần thiết."
+      },
+      "closed": {
+        "title": "Đúng Nhưng Thiếu Tử Tế",
+        "message": "Bạn đang hành động quá vội, có thể đúng về mặt lý lẽ nhưng thiếu tử tế trong cách nói ra. Đúng và tử tế không loại trừ nhau."
+      },
+      "image": "./assets/oracle/seed-61.webp"
+    },
+    {
+      "id": 62,
+      "name": "Hạt Rạch Gió Mở Lối",
+      "open": {
+        "title": "Ranh Giới Rõ Ràng",
+        "message": "Bạn đang đặt ra một ranh giới rõ ràng bằng lời nói thẳng thắn — sự độc lập và sáng suốt lúc này là sức mạnh của bạn."
+      },
+      "closed": {
+        "title": "Dùng Lời Sắc Để Xa Cách",
+        "message": "Bạn đang dùng sự sắc bén trong lời nói để giữ khoảng cách, tránh phải gần gũi thật sự với ai đó. Ranh giới vững không cần phải lạnh lùng mới hiệu quả."
+      },
+      "image": "./assets/oracle/seed-62.webp"
+    },
+    {
+      "id": 63,
+      "name": "Hạt Giữ Trục Gió Thẳng",
+      "open": {
+        "title": "Quyết Định Bằng Lý Trí",
+        "message": "Bạn đang đưa ra một quyết định công bằng, dựa trên sự thật hơn là cảm xúc nhất thời — đây là lúc để lý trí dẫn đường."
+      },
+      "closed": {
+        "title": "Lý Lẽ Che Cảm Xúc",
+        "message": "Bạn đang dùng lý lẽ để tránh phải thật sự cảm nhận, phán xét người khác thay vì cố hiểu họ. Đầu và tim không cần tách rời để đưa ra một quyết định đúng."
+      },
+      "image": "./assets/oracle/seed-63.webp"
+    },
+    {
+      "id": 64,
+      "name": "Hạt Chạm Miền Đất Mới",
+      "open": {
+        "title": "Cơ Hội Trong Tầm Tay",
+        "message": "Có một cơ hội cụ thể, hữu hình đang ở ngay trước mắt — một công việc, một khoản đầu tư, một khởi đầu mới. Nó đủ tốt để bắt tay vào thật."
+      },
+      "closed": {
+        "title": "Chỉ Mơ Mà Chưa Làm",
+        "message": "Bạn đang mơ về một kết quả tốt đẹp mà chưa thật sự hành động để đạt được nó. Một bước nhỏ thật sự đáng hơn một kế hoạch hoàn hảo trên giấy."
+      },
+      "image": "./assets/oracle/seed-64.webp"
+    },
+    {
+      "id": 65,
+      "name": "Hạt Giữa Hai Nhịp Đất",
+      "open": {
+        "title": "Cân Bằng Nhiều Việc",
+        "message": "Bạn đang cân đối tốt giữa nhiều việc cùng lúc — công việc, gia đình, tài chính — sự linh hoạt này là một kỹ năng thật sự."
+      },
+      "closed": {
+        "title": "Ôm Đồm Quá Sức",
+        "message": "Bạn đang quá tải, cố ôm đồm mọi việc cùng lúc mà mất kiểm soát. Có thể đã đến lúc chọn bớt việc, thay vì cố làm hết tất cả."
+      },
+      "image": "./assets/oracle/seed-65.webp"
+    },
+    {
+      "id": 66,
+      "name": "Hạt Chung Rễ Dựng Vườn",
+      "open": {
+        "title": "Hợp Tác Để Làm Tốt",
+        "message": "Có sự hợp tác giữa bạn và người khác đang tạo ra một kết quả chất lượng — khả năng của bạn đang được nhìn thấy và công nhận."
+      },
+      "closed": {
+        "title": "Cố Làm Một Mình",
+        "message": "Bạn đang cố làm một mình một việc lẽ ra cần nhiều người hơn, và kết quả đang thiếu sự phối hợp. Mời thêm người vào không làm giảm giá trị phần bạn đóng góp."
+      },
+      "image": "./assets/oracle/seed-66.webp"
+    },
+    {
+      "id": 67,
+      "name": "Hạt Ôm Chặt Phần Đất",
+      "open": {
+        "title": "Giữ Gìn Nguồn Lực",
+        "message": "Bạn đang giữ tiền bạc, thời gian, hoặc nguồn lực của mình một cách hợp lý — sự thận trọng lúc này là cần thiết."
+      },
+      "closed": {
+        "title": "Nắm Giữ Vì Sợ Thiếu",
+        "message": "Bạn đang bám giữ tiền bạc hoặc quyền lực vì sợ thiếu, đến mức không còn tận hưởng được gì. Buông bớt một chút mới có chỗ cho điều mới vào."
+      },
+      "image": "./assets/oracle/seed-67.webp"
+    },
+    {
+      "id": 68,
+      "name": "Hạt Ngoài Vùng Đất Ấm",
+      "open": {
+        "title": "Tìm Thấy Sự Giúp Đỡ",
+        "message": "Dù đang trong giai đoạn khó khăn về tài chính hay sức khỏe, bạn vẫn đang tìm ra một nguồn hỗ trợ gần hơn bạn nghĩ."
+      },
+      "closed": {
+        "title": "Tự Chịu Đựng Một Mình",
+        "message": "Bạn đang tự cô lập trong khó khăn một mình, dù đã có người sẵn sàng giúp. Nhận sự giúp đỡ không phải là thất bại."
+      },
+      "image": "./assets/oracle/seed-68.webp"
+    },
+    {
+      "id": 69,
+      "name": "Hạt Chia Mạch Đất",
+      "open": {
+        "title": "Cho Và Nhận Công Bằng",
+        "message": "Có sự cho và nhận cân bằng đang diễn ra — chia sẻ tiền bạc, thời gian, hay sự giúp đỡ lúc này là đúng đắn và tự nhiên."
+      },
+      "closed": {
+        "title": "Giúp Đỡ Có Điều Kiện",
+        "message": "Có một sự giúp đỡ đang đi kèm điều kiện, một sự cho đi để giữ quyền kiểm soát hơn là để giúp thật lòng. Xem lại động cơ thật sự phía sau việc cho."
+      },
+      "image": "./assets/oracle/seed-69.webp"
+    },
+    {
+      "id": 70,
+      "name": "Hạt Chờ Mùa Chín",
+      "open": {
+        "title": "Kiên Nhẫn Chờ Kết Quả",
+        "message": "Bạn đang đầu tư công sức dài hạn cho một việc — công việc, học tập, một mối quan hệ — và biết chờ đúng thời điểm để gặt hái."
+      },
+      "closed": {
+        "title": "Bỏ Cuộc Quá Sớm",
+        "message": "Bạn đang sốt ruột muốn thấy kết quả ngay, có thể sẽ bỏ cuộc sớm với một việc chưa kịp chín. Cho nó thêm một khoảng thời gian trước khi quyết định đổi hướng."
+      },
+      "image": "./assets/oracle/seed-70.webp"
+    },
+    {
+      "id": 71,
+      "name": "Hạt Luyện Rễ Mỗi Ngày",
+      "open": {
+        "title": "Tiến Bộ Mỗi Ngày",
+        "message": "Bạn đang rèn luyện một kỹ năng qua từng ngày lặp lại — tiến bộ chậm mà chắc đang thật sự xảy ra."
+      },
+      "closed": {
+        "title": "Cầu Toàn Đến Bỏ Cuộc",
+        "message": "Bạn đang cầu toàn đến mức mất hết hứng thú, hoặc ngại bắt đầu vì sợ mình chưa đủ giỏi. Cho phép mình làm chưa hoàn hảo trong lúc học hỏi."
+      },
+      "image": "./assets/oracle/seed-71.webp"
+    },
+    {
+      "id": 72,
+      "name": "Hạt Trong Vườn Tự Gây",
+      "open": {
+        "title": "Tận Hưởng Thành Quả",
+        "message": "Bạn đang tận hưởng thành quả do chính mình gây dựng — sự độc lập lúc này là một niềm vui thật sự, không cần ai công nhận mới trọn vẹn."
+      },
+      "closed": {
+        "title": "Đủ Đầy Mà Cô Đơn",
+        "message": "Bạn có đủ đầy về vật chất nhưng vẫn cảm thấy cô đơn, có thể vì đang chú trọng hình thức hơn là kết nối thật với người khác. Đủ đầy vật chất không tự động lấp được khoảng trống này."
+      },
+      "image": "./assets/oracle/seed-72.webp"
+    },
+    {
+      "id": 73,
+      "name": "Hạt Nối Vào Rễ Xưa",
+      "open": {
+        "title": "Được Gia Đình Nâng Đỡ",
+        "message": "Bạn đang là một phần của điều gì đó lớn hơn và bền vững hơn chính mình — một gia đình, một truyền thống — và điều đó đang nâng đỡ bạn."
+      },
+      "closed": {
+        "title": "Gánh Kỳ Vọng Gia Đình",
+        "message": "Bạn đang gánh kỳ vọng của cả gia đình, hoặc coi tiền bạc là thước đo duy nhất cho giá trị bản thân. Một di sản không cần phải là gánh nặng mới có ý nghĩa."
+      },
+      "image": "./assets/oracle/seed-73.webp"
+    },
+    {
+      "id": 74,
+      "name": "Hạt Học Mầm Đầu Tiên",
+      "open": {
+        "title": "Học Từ Việc Nhỏ",
+        "message": "Một kỹ năng mới đang bén rễ qua từng lần bạn chịu khó làm thật. Chọn một mục tiêu nhỏ, đều đặn đi cùng nó; đường xa thường bắt đầu từ những bước rất khiêm nhường."
+      },
+      "closed": {
+        "title": "Muốn Kết Quả Ngay",
+        "message": "Bạn đang mơ đến ngày hái quả nhưng vẫn chưa đặt hạt xuống đất. Chọn một việc nhỏ có thể làm ngay hôm nay; thành quả chỉ đến sau khi đôi tay chịu dính đất."
+      },
+      "image": "./assets/oracle/seed-74.webp"
+    },
+    {
+      "id": 75,
+      "name": "Hạt Đi Dọc Luống Đất",
+      "open": {
+        "title": "Đi Chậm Mà Chắc",
+        "message": "Sự đều đặn và đáng tin của bạn đang là điều giá trị nhất lúc này — chậm mà chắc vẫn đang đưa bạn tới đích."
+      },
+      "closed": {
+        "title": "Sống Theo Quán Tính",
+        "message": "Bạn đang bám vào thói quen đến mức trì trệ, sống như đang chạy theo một danh sách việc phải làm hơn là thật sự sống. Thử phá vỡ lịch trình một chút để thấy mình còn năng lượng."
+      },
+      "image": "./assets/oracle/seed-75.webp"
+    },
+    {
+      "id": 76,
+      "name": "Hạt Ủ Ấm Khu Vườn",
+      "open": {
+        "title": "Chăm Sóc Thiết Thực",
+        "message": "Sự chăm sóc thiết thực, ấm áp của bạn đang nuôi dưỡng những người xung quanh — đó là một món quà thật sự có giá trị."
+      },
+      "closed": {
+        "title": "Chăm Sóc Đến Cạn Sức",
+        "message": "Bạn đang chăm sóc mọi người và mọi việc trừ chính mình, gắn giá trị bản thân với việc mình làm được bao nhiêu. Bạn cũng cần được chăm sóc, không chỉ là người chăm sóc."
+      },
+      "image": "./assets/oracle/seed-76.webp"
+    },
+    {
+      "id": 77,
+      "name": "Hạt Giữ Vườn Qua Mùa",
+      "open": {
+        "title": "Xây Nền Vững Chắc",
+        "message": "Sự vững vàng và khả năng quản lý tiền bạc, công việc của bạn đang tạo ra thành quả bền vững — đây là kết quả của thời gian và kỷ luật, không phải may mắn."
+      },
+      "closed": {
+        "title": "Thành Công Nhưng Khép Kín",
+        "message": "Bạn đang kiểm soát chặt đến mức không ai tiếp cận được, dùng vật chất để chứng minh giá trị thay vì lòng tin. Thành công thật sự không cần phải đóng kín mới an toàn."
+      },
+      "image": "./assets/oracle/seed-77.webp"
+    }
+  ]
+}

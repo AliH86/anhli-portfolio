@@ -1,0 +1,122 @@
+/* V2 polish: keep the accepted artwork, positions and native player. */
+.welcome { max-width: 370px; }
+.welcome p { font-size: 19px; }
+.hero-atmosphere {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(ellipse at 52% 42%, #ffe9b313, #f1ce8907 42%, transparent 72%);
+}
+.garden-breeze {
+  filter: brightness(.95) saturate(.92);
+  animation: foliage-near 23s cubic-bezier(.42,0,.38,1) infinite;
+  transform-origin: 41% 97%;
+}
+.breeze-right {
+  animation: foliage-far 31s cubic-bezier(.37,0,.48,1) -13s infinite;
+  transform-origin: 67% 98%;
+}
+/* Long rests and small, unequal gusts avoid pendulum-like rocking. */
+@keyframes foliage-near {
+  0%, 13%, 100% { transform: rotate(-.12deg) translateX(0); }
+  27% { transform: rotate(.38deg) translateX(.3px); }
+  39%, 54% { transform: rotate(.08deg) translateX(.1px); }
+  71% { transform: rotate(.65deg) translateX(.5px); }
+  87% { transform: rotate(-.18deg) translateX(-.2px); }
+}
+@keyframes foliage-far {
+  0%, 17%, 100% { transform: rotate(.09deg) translateX(0); }
+  32% { transform: rotate(-.43deg) translateX(-.4px); }
+  49%, 66% { transform: rotate(-.04deg) translateX(-.1px); }
+  82% { transform: rotate(.22deg) translateX(.2px); }
+}
+.pond-glint { animation: water-breath 19s ease-in-out -5s infinite; }
+@keyframes water-breath {
+  0%, 19%, 100% { transform: translateX(-.3px) scaleY(.995); opacity: .3; }
+  43% { transform: translateX(.4px) scaleY(1.009); opacity: .58; }
+  62%, 75% { transform: translateX(.1px) scaleY(1.002); opacity: .4; }
+}
+/* The scene is already painted with contact shadows; don't double-darken it. */
+.place .place-outline { stroke: #f4dfb5; stroke-width: 1.4; filter: none; }
+.place:hover .place-outline { opacity: .48; }
+.place-label { box-shadow: inset 0 0 0 1px #f6e9cc29; }
+.place-label i { box-shadow: none; }
+.place:focus-visible .place-outline { opacity: 1; stroke-width: 2.5; }
+.place:focus-visible .place-label { outline: 2px solid #88422d; outline-offset: 3px; }
+.place-music .place-label { background: #493f27a3; }
+
+/* Warm frosted sleeve: soft edge, restrained reflection, readable cream. */
+.room-dialog, .room-dialog[data-room=music] {
+  background: linear-gradient(135deg, #faf5e8f0, #eee7d6e8);
+  border-color: #e9dfcba6;
+  box-shadow: inset 0 1px 0 #fffaec9c, inset 0 -1px 0 #b4a48730,
+    0 22px 65px #2934203d, 0 3px 9px #413c2114;
+}
+.room-header { background: #fff9e814; border-bottom-color: #c9bda549; }
+.close-room { background: #e3dbc954; }
+.loaded-cover { border-radius: 5px; box-shadow: 1px 1px 0 #eee4cc, 2px 2px 0 #c7bda6, 4px 9px 20px #3e34252a; }
+.album-choice img { border-radius: 3px; }
+.album-choice:hover img { transform: translateY(-2px) rotate(-.45deg); box-shadow: 2px 6px 10px #44351e29; }
+.album-choice:focus-visible { outline-offset: 1px; border-radius: 4px; }
+.album-text .eyebrow { color: #827354; font-weight: 500; }
+.album-text h2 { text-wrap: balance; overflow-wrap: anywhere; }
+.track-list { scrollbar-gutter: stable; }
+.track-button:focus-visible { outline-offset: -3px; border-radius: 5px; }
+.album-shelf { scroll-padding-inline: 26px; padding-top: 7px; }
+.player-views button { min-height: 36px; }
+.shelf-arrows .round-button { width: 36px; height: 36px; }
+.close-room, .volume-button { min-width: 44px; min-height: 44px; }
+.resume-fold summary:focus-visible, .album-story summary:focus-visible,
+.video-caption summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* Show whole artwork in a loosely spaced collection, in the existing order. */
+.gallery-grid { grid-template-columns: repeat(3, minmax(0,1fr)); gap: 26px 22px; align-items: center; }
+.gallery-item { aspect-ratio: auto; padding: 5px; border-radius: 3px; background: #fff9ed; box-shadow: 1px 2px 0 #c5bba74f, 0 5px 12px #433b2414; }
+.gallery-item img { height: auto; border-radius: 1px; }
+.gallery-item:hover img { transform: none; }
+.gallery-item span { position: static; display: block; background: none; color: #746a55; padding: 9px 5px 5px; font-size: 11px; }
+.gallery-item:hover { background: #fffdf5; }
+.gallery-item:focus-visible { outline-offset: 3px; }
+.video-card:focus-visible { outline-offset: 4px; border-radius: 6px; }
+
+@media (max-width:700px) {
+  .welcome { max-width: calc(100vw - 40px); }
+  .welcome p { font-size: 15px; line-height: 1.45; }
+  .room-dialog, .room-dialog[data-room=music] { background: linear-gradient(135deg,#faf5e8f7,#eee7d6f2); }
+  .room-header, .room-dialog[data-room=music] .room-header { padding-block: 13px 11px; }
+  .room-content { scrollbar-gutter: auto; }
+  .room-inner { padding-bottom: env(safe-area-inset-bottom); }
+  .music-room { padding-bottom: 0; }
+  .player-views button { min-height: 44px; padding-inline: 9px; }
+  .shelf-arrows { display: none; } /* Direct swipe leaves room for thumb-sized layout buttons. */
+  .shelf-heading, .room-dialog[data-room=music] .shelf-heading { padding-top: 7px; padding-bottom: 3px; }
+  .album-shelf { scroll-padding-inline: 20px; padding-top: 6px; }
+  .album-feature { grid-template-columns: 132px minmax(0,1fr); gap: 15px; }
+  .loaded-cover { width: 132px; height: 132px; }
+  .album-text h2 { font-size: 22px; }
+  .gallery-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 19px 14px; }
+  .gallery-item { padding: 4px; }
+  .gallery-item span { padding: 7px 3px 3px; font-size: 10px; }
+  .motion-toggle { min-width: 44px; min-height: 44px; }
+  .mini-player > .round-button { width: 40px; min-height: 44px; }
+  .mini-player > .play-button { min-width: 44px; min-height: 44px; }
+}
+@media (max-width:360px) {
+  .album-feature { grid-template-columns: 112px minmax(0,1fr); }
+  .loaded-cover { width: 112px; height: 112px; }
+  .album-text h2 { font-size: 20px; }
+}
+@media (max-height:560px) and (orientation:landscape) {
+  .garden { min-height: 0; }
+  .room-dialog[data-room=music], .room-dialog[data-room=profile], .room-dialog[data-room=gallery] {
+    inset: auto 12px 8px; width: calc(100vw - 24px); height: 92svh; max-height: 92svh;
+  }
+}
+body[data-still=true] .garden-breeze, body[data-still=true] .pond-glint { animation: none !important; }
+body[data-still=true] .album-choice img, body[data-still=true] .gallery-item img { transition: none; }
+@media (prefers-reduced-motion:reduce) {
+  .garden-breeze, .pond-glint { animation: none !important; }
+}
+@media (prefers-reduced-transparency:reduce) {
+  .room-dialog, .room-dialog[data-room=music] { background: #f8f1e1; backdrop-filter: none; -webkit-backdrop-filter: none; }
+}

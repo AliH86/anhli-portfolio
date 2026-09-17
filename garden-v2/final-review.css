@@ -1,0 +1,82 @@
+/* Registered relit plates occupy the same three scenic depths as the day painting. */
+.middle-layer {z-index:-2;mask-image:url('./assets/layers/landscape-middle.svg')}
+.middle-layer {mask-size:cover;mask-position:center;mask-repeat:no-repeat}
+.night-scene {opacity:0;transition:opacity 1.8s ease;pointer-events:none}
+body[data-day-phase=night] .night-scene {opacity:1}
+.scene-layer img,.scenery img {filter:none!important}
+body[data-day-phase=night] .scene-shade,body[data-day-phase=night] .hero-atmosphere {opacity:0}
+.scene-shade,.hero-atmosphere {transition:opacity 1.8s}
+body[data-day-phase=night] .garden {background:#101e28}
+body[data-day-phase=night] .host-sprite {filter:brightness(.72) saturate(.78) drop-shadow(1px 2px 1px #12212a70)}
+.pond-glint {background-image:var(--pond-day)}
+body[data-day-phase=night] .pond-glint {background-image:var(--pond-night);filter:none}
+.wildlife-cricket {z-index:2}
+.wildlife-firefly:nth-of-type(3n) .creature-sprite,.wildlife-firefly:nth-of-type(3n):before {animation-delay:-1.7s}
+.wildlife-firefly:nth-of-type(3n + 1):before {animation-delay:-.8s;animation-duration:5.3s}
+/* The whole record rotates under a stationary arm in the painted scene. */
+.scene-record {z-index:2!important;overflow:visible;filter:drop-shadow(0 1px 1px #1118)}
+.vinyl-spin {position:absolute;inset:0;border-radius:50%;background:repeating-radial-gradient(circle,#1b1b17 0 1px,#33332c 2px,#111612 3px);box-shadow:inset 0 0 0 1px #aaa68b7d;animation:disc-spin 5.5s linear infinite;animation-play-state:paused}
+.scene-record img {position:absolute;left:34%;top:34%;width:32%;height:32%;animation:none!important;box-shadow:none}
+body[data-playing=true] .vinyl-spin {animation-play-state:running}
+.vinyl-shine {position:absolute;inset:2%;border-radius:50%;background:conic-gradient(from 17deg,transparent 0 20deg,#efedd841 40deg,transparent 67deg 195deg,#eeebd525 215deg,transparent 241deg)}
+body[data-day-phase=night] .scene-record {filter:brightness(.87) sepia(.15) drop-shadow(0 1px 1px #1118)}
+/* Compact, uncropped pins with browser-local hearts. */
+.room-dialog[data-room=gallery] {width:min(1120px,calc(100vw - 48px));height:min(780px,87svh)}
+.gallery-grid {display:block;columns:5;column-gap:12px}
+.gallery-pin {display:inline-block;position:relative;width:100%;margin:0 0 12px;break-inside:avoid;vertical-align:top}
+.gallery-item {display:block;width:100%;aspect-ratio:auto;border-radius:11px;overflow:hidden}
+.gallery-item img {width:100%;height:auto;object-fit:contain}
+.gallery-pin>small {display:block;margin:7px 5px 0;font-size:10px;color:#6f735d}
+.pin-heart {position:absolute;right:7px;bottom:27px;display:grid;place-items:center;width:36px;height:36px;padding:0;border-radius:50%;background:#fff9ebe8;box-shadow:0 1px 8px #17211121;color:#67654e}
+.pin-heart svg,.pin-like svg {width:19px;height:19px}
+.pin-heart[aria-pressed=true],.pin-like[aria-pressed=true] {color:#a34437}
+.pin-heart[aria-pressed=true] svg,.pin-like[aria-pressed=true] svg {fill:currentColor}
+.media-tabs button {display:flex;align-items:center;gap:5px}
+.media-tabs button svg {width:14px;height:14px}
+.media-tabs small {margin-left:2px}
+/* Pin detail, including a real heart toggle without invented public counts. */
+.lightbox {inset:0;margin:auto;width:min(980px,calc(100vw - 48px));height:min(760px,calc(100svh - 48px));padding:55px 42px 28px;background:#f7f1e3;color:#39422f;border:1px solid #fffa;border-radius:22px;box-shadow:0 20px 80px #14201366}
+.lightbox figure {display:grid;grid-template-columns:minmax(0,1.8fr) minmax(180px,.8fr);gap:28px;height:100%;align-items:center}
+.pin-image-wrap {height:100%;min-height:0;display:flex;align-items:center;justify-content:center;background:#eae5d8;border-radius:12px;overflow:hidden}
+.lightbox figure img {max-height:100%;max-width:100%;height:auto;width:auto;object-fit:contain}
+.lightbox figcaption {text-align:left;color:#455039}
+.lightbox figcaption>small {font:9px GardenSans,sans-serif;letter-spacing:1.6px;color:#8c765b}
+.lightbox h2 {font:32px Georgia,serif;line-height:1.1;margin:13px 0 15px}
+#lightbox-detail {font-size:12px;color:#72725e;line-height:1.5}
+.pin-like {display:inline-flex;align-items:center;gap:9px;min-height:44px;border:1px solid #c1bca4;border-radius:24px;background:#fffbef;padding:9px 17px;margin-top:15px;font-size:13px;color:#69634c}
+.like-note {font-size:11px;line-height:1.65;max-width:175px;color:#828170;margin-top:18px}
+.lightbox .round-button {background:#f7f1e3;color:#39422f;border-color:#c7c3b270;width:36px;height:36px}
+.lightbox-close {top:11px;right:13px}.lightbox-prev {left:3px}.lightbox-next {right:3px}
+/* One stable daily gift, loaded only when Li offers it. */
+.daily-dialog {padding:30px;border:1px solid #e1d6bc;border-radius:23px;background:#fbf5e8;color:#455039;width:min(650px,calc(100vw - 32px));max-height:85svh;box-shadow:0 20px 80px #14201355}
+.daily-dialog::backdrop {background:#1321178f;backdrop-filter:blur(4px)}
+#daily-close {position:absolute;top:12px;right:12px;width:36px;height:36px}
+.daily-dialog>.eyebrow {margin:0 0 12px}.daily-dialog h2 {font:27px/1.15 Georgia,serif;max-width:460px;margin:0 35px 25px 0}
+.daily-reading {display:grid;grid-template-columns:150px 1fr;gap:24px;align-items:start}
+#daily-image {width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:12px;box-shadow:0 5px 18px #25362225}
+#daily-image.is-closed {transform:rotate(180deg)}
+#daily-date {font-size:10px;color:#85785c}#daily-name {font:20px/1.2 Georgia,serif;margin:10px 0 16px}#daily-title {font:600 13px/1.5 GardenSans,sans-serif;margin:0 0 8px}#daily-text {font-size:14px;line-height:1.65;margin:0}
+.daily-note {font-size:11px;line-height:1.7;color:#85816d;margin:24px 0 0;border-top:1px solid #d7ceba;padding-top:16px}
+@media(max-aspect-ratio:4/3){.middle-layer{mask-image:url('./assets/layers/portrait-middle.svg')}}
+@media(max-width:950px){.gallery-grid{columns:4}.lightbox figure{grid-template-columns:minmax(0,1.5fr) minmax(150px,.8fr)}}
+@media(max-width:700px){
+ body[data-day-phase=night] .masthead{background:linear-gradient(#101e28,#101e28bc 80%,transparent)}
+ .room-dialog[data-room=gallery]{width:100%;height:85svh}.gallery-room{padding:14px 14px 25px}.gallery-grid{columns:2;column-gap:10px}.gallery-pin{margin-bottom:10px}.media-heading{gap:10px}.pin-heart{width:34px;height:34px;bottom:27px}
+ .lightbox{width:calc(100vw - 20px);height:calc(100svh - 40px);padding:54px 15px 15px;border-radius:20px;overflow:auto}.lightbox figure{display:flex;flex-direction:column;gap:18px;height:auto;min-height:100%;align-items:stretch}.pin-image-wrap{flex:0 0 auto;height:auto;max-height:55svh;min-height:100px}.lightbox figure img{max-height:55svh;max-width:100%}.lightbox figcaption{padding:0 8px 12px}.lightbox h2{font-size:25px;margin:9px 0}.pin-like{margin-top:8px}.like-note{max-width:none;margin:12px 0 0}.lightbox-prev,.lightbox-next{top:11px;bottom:auto}.lightbox-prev{left:15px}.lightbox-next{left:58px;right:auto}
+ .daily-dialog{padding:25px 22px}.daily-dialog h2{font-size:24px;margin-bottom:20px}.daily-reading{grid-template-columns:78px 1fr;gap:15px}#daily-name{font-size:18px}#daily-text{font-size:13px}.daily-note{margin-top:19px}
+}
+@media(max-height:560px) and (orientation:landscape){.lightbox{height:94svh;padding-top:42px}.lightbox h2{font-size:23px}.daily-dialog{max-height:94svh}.daily-dialog h2{font-size:23px;margin-bottom:16px}}
+@media(prefers-reduced-motion:reduce){.night-scene{transition:none}.vinyl-spin{animation:none}}
+
+#video-stage{scroll-margin-top:115px}#video-stage iframe{max-height:42svh}.video-source-link{margin:8px 0 15px}.video-source-link a{display:inline-flex;align-items:center;min-height:44px;padding:10px 18px;background:#a44932;color:#fff8e8;border-radius:24px;font-size:13px;text-decoration:none}
+
+/* Vietnamese profile, deeper work history kept behind the existing disclosure. */
+.profile-capabilities{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:20px 0 25px}.profile-capabilities h3{font:18px Georgia,serif;margin:0 0 9px}.profile-capabilities p,.profile-background{font-size:12px;line-height:1.65;color:#6d6c59}.resume-list .resume-detail{font-size:12px;line-height:1.65;color:#777260;margin-top:8px}.profile-background{border-top:1px solid #d8cebb;margin-top:24px;padding:18px 0 0 16px}.profile-background li{margin-bottom:6px}
+/* Small loading interaction only while content is actually pending. */
+.garden-loading{text-align:center;padding:30px 22px;color:#5b644d}.garden-loading p{font:18px Georgia,serif;margin:10px 0}.garden-loading small{font:11px GardenSans,sans-serif;color:#89816c}.loading-flower{position:relative;display:block;margin:auto;width:92px;height:74px;background:transparent;border:0;overflow:visible;border-radius:50%}.loading-flower span{position:absolute;left:calc(28px + var(--i)*5px);top:calc(2px + var(--i)*4px);width:25px;height:35px;transform-origin:50% 100%;animation:loading-breeze 2.8s ease-in-out calc(var(--i)*-.36s) infinite alternate}.loading-flower svg{width:100%;height:100%;stroke:#899768;fill:none;stroke-width:1}.loading-flower:hover{background:#e7e8d766}.loading-flower:focus-visible{outline:2px solid #788c52;outline-offset:3px}@keyframes loading-breeze{from{transform:rotate(-9deg) translateY(1px)}to{transform:rotate(9deg) translateY(-5px)}}
+#welcome-loading{position:fixed;z-index:7;left:28px;bottom:135px;width:220px;border-radius:18px;background:#faf5e7ee;box-shadow:0 5px 25px #2636211a}#welcome-loading .garden-loading{padding:13px}#welcome-loading .garden-loading p{font-size:15px}#welcome-loading .garden-loading small{font-size:10px}#welcome-loading .loading-flower{height:60px}
+@media(max-width:700px){.profile-capabilities{grid-template-columns:1fr;gap:8px}.profile-capabilities h3{font-size:17px}.profile-capabilities p{margin-top:6px}.profile-copy{line-height:1.65}#welcome-loading{left:16px;top:132px;bottom:auto;width:200px}}
+@media(prefers-reduced-motion:reduce){.loading-flower span{animation:none}}
+/* Keep the painted frame whole on tablets; soften the phone's reserved player edge. */
+@media(min-width:701px) and (max-aspect-ratio:4/3){.scene-world{inset:0}}
+@media(max-width:700px) and (max-aspect-ratio:4/3){.scene-world{mask-image:linear-gradient(to bottom,transparent,#000 24px,#000 calc(100% - 52px),transparent);mask-size:100% 100%;mask-repeat:no-repeat}}
