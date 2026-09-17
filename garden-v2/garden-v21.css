@@ -304,7 +304,7 @@ body[data-host-moment=sing-soft] .host[data-pose=seated] .host-sprite { animatio
 .playlist-chevron { display:block;font-size:21px;transition:transform .2s; }
 .playlist-trigger[aria-expanded=true] .playlist-chevron { transform:rotate(180deg); }
 .playlist-trigger:hover { background:#516145; }
-.track-list { display:block;width:100%;max-height:min(258px,28svh);overflow:auto hidden;scroll-snap-type:none;padding:4px 9px 8px;margin:0;border:0;list-style:none;scrollbar-width:thin;scrollbar-color:#9ca181 transparent;animation:playlist-drop .2s ease-out;transform-origin:50% 0; }
+.track-list { display:block;width:100%;max-height:min(258px,28svh);overflow-x:hidden;overflow-y:auto;scroll-snap-type:none;padding:4px 9px 8px;margin:0;border:0;list-style:none;scrollbar-width:thin;scrollbar-color:#9ca181 transparent;animation:playlist-drop .2s ease-out;transform-origin:50% 0; }
 @keyframes playlist-drop { from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none} }
 .track-list li { width:100%;min-width:0;border:0;margin:0; }
 .track-button { display:grid;grid-template-columns:23px minmax(0,1fr) 32px 13px;align-items:center;gap:9px;width:100%;height:auto;min-height:45px;padding:10px 8px;border:0;border-bottom:1px solid #cfd1a721;border-radius:0;background:transparent;color:#e8e1c7;box-shadow:none;text-align:left;transition:background .15s;position:relative; }
@@ -346,7 +346,7 @@ body[data-playing=true] .track-button[aria-pressed=true] .track-signal i { anima
  .music-room { display:flex;flex-direction:column;align-items:stretch;gap:0;padding:0;height:100%; }
  #album-art { flex:0 0 275px;min-height:0; }
  .album-feature,.room-dialog[data-listening=false] .album-feature { min-height:0; }
- .music-deck { display:flex;flex-direction:column;gap:14px;min-height:0;overflow:auto hidden;overscroll-behavior:contain;padding:2px 1px 10px;scrollbar-width:none; }
+ .music-deck { display:flex;flex-direction:column;gap:14px;min-height:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;padding:2px 1px 10px;scrollbar-width:thin; }
  .selected-album,.room-dialog[data-listening=true] .selected-album { display:block; }
  .music-object,.room-dialog[data-listening=true] .music-object{width:145px;height:145px;margin:22px 0 18px 17px}
  .sleeve-tab{font-size:8px;padding:7px 9px;bottom:-10px;right:0}
@@ -363,3 +363,56 @@ body[data-still=true] .track-signal i,body[data-page-hidden=true] .track-signal 
 body[data-room=music] .host-sprite,body[data-room=music] .pond-glint { animation-play-state:running; }
 body[data-room=music] .garden-tools { opacity:0;visibility:hidden; }
 @media(min-width:1100px) { .track-list { max-height:204px; } }
+
+/* V2.1 mobile hotfix: let native swipes reach every album and track. */
+.music-console { display:flex;flex-direction:column; }
+.music-console #album-selection { order:0; }
+.music-console .track-queue { order:1; }
+.music-console .album-text { position:relative;padding-right:48px; }
+.queue-more { position:absolute;right:-5px;top:-7px;color:#4e5c3f;background:transparent;border:0;font:26px/1 Georgia,serif; }
+.queue-more[aria-expanded=true] { background:#c3c8a366; }
+.music-console .playlist-trigger { min-height:44px;padding-top:9px;padding-bottom:9px; }
+.music-console .playlist-trigger small { display:none; }
+.music-console .track-list { border-top:1px solid #cfd1a721; }
+.garden:focus { outline:none; }
+.track-list { overscroll-behavior-y:contain; }
+.canopy-frond { background-image:url('./assets/layers/canopy-alpha.webp');mask-image:none;-webkit-mask-image:none; }
+.room-motion { margin-left:auto;color:#48513b;background:#f8f0dfef; }
+.room-header .close-room { margin-left:0; }
+.music-console .selection-empty { color:#3f4937;text-shadow:none;background:none; }
+.music-console .selection-empty p { color:#626954; }
+.music-console .selection-empty .eyebrow { color:#797451; }
+.music-console .album-controls { padding:18px 23px 12px; }
+.music-console .album-text h2 { font-size:27px;margin-bottom:7px; }
+.music-console .album-text .eyebrow { margin-bottom:8px; }
+.music-console .album-text .eyebrow,.music-console .album-byline span { display:none; }
+.music-console .play-status { position:absolute;width:1px;height:1px;min-height:0;padding:0;margin:0;overflow:hidden;clip-path:inset(50%); }
+.music-console .transport-dock { padding-top:9px;margin-top:8px; }
+.music-console .progress-row { margin-top:6px; }
+.music-console .listening-actions { margin-top:2px; }
+.shelf-block { border-radius:7px 7px 12px 12px;backdrop-filter:none;-webkit-backdrop-filter:none; }
+.album-shelf { --cover-size:96px;--rail-y:calc(var(--cover-size) + 14px);position:relative;gap:20px;padding-top:10px;padding-bottom:13px;background:linear-gradient(to bottom,#cfb88d,#9e7b51 35%,#765439 80%,#523d2b) 0 var(--rail-y)/100% 9px no-repeat; }
+.album-choice { width:var(--cover-size);flex-basis:var(--cover-size); }
+.album-choice img { width:var(--cover-size);height:var(--cover-size); }
+.album-choice span { margin-top:17px; }
+@media(min-width:1100px) {
+ .music-object,.room-dialog[data-listening=false] .music-object,.room-dialog[data-listening=true] .music-object { width:250px;height:250px;max-width:250px; }
+ .track-list { max-height:180px; }
+ .album-li-words { font-size:12px;line-height:1.55; }
+ .shelf-heading,.room-dialog[data-room=music] .shelf-heading { padding-top:8px;padding-bottom:3px; }
+}
+body[data-touch=true][data-room]:not([data-room='']) .scene-world *,
+body[data-touch=true][data-room]:not([data-room='']) .scene-world *::before,
+body[data-touch=true][data-room]:not([data-room='']) .scene-world *::after { animation-play-state:paused!important; }
+body[data-touch=true] .music-console { backdrop-filter:none;-webkit-backdrop-filter:none; }
+body[data-touch=true] .track-list { overscroll-behavior-y:auto; }
+@media(max-width:700px) {
+ .room-dialog[data-room=music] .room-header { gap:6px; }
+ .room-dialog[data-room=music] .room-header>div { min-width:0; }
+ .room-dialog[data-room=music] .room-header h1 { font-size:21px; }
+ .room-motion,.room-dialog[data-room=music] .close-room { width:40px;height:44px;min-width:40px; }
+ .music-console .album-controls { padding:15px 18px 10px; }
+ .music-console .album-text h2 { font-size:24px; }
+ .album-shelf { --cover-size:100px;gap:17px; }
+ #album-art { flex-basis:230px; }
+}

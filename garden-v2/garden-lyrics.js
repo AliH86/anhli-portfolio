@@ -64,7 +64,8 @@ export function initLyrics({audio, getTrack, getRoom, getPlaying, onMoment}) {
     }
     paint();
   }
-  for (const name of ['timeupdate','seeked','playing','pause','ended','loadedmetadata']) audio.addEventListener(name,paint);
+  // Unmapped tracks have no timed work; their empty view is handled by update().
+  for (const name of ['timeupdate','seeked','playing','pause','ended','loadedmetadata']) audio.addEventListener(name,()=>{if(data)paint();});
   document.addEventListener('visibilitychange',paint);
   return {update,paint};
 }

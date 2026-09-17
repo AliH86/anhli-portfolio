@@ -13,8 +13,8 @@
   <link rel="stylesheet" href="./polish.css?v=20260917-3">
   <link rel="stylesheet" href="./garden-life.css?v=final1">
   <link rel="stylesheet" href="./final-review.css?v=release2">
-  <link rel="stylesheet" href="./garden-v21.css?v=22">
-  <script type="module" src="./app.js?v=22"></script>
+  <link rel="stylesheet" href="./garden-v21.css?v=23">
+  <script type="module" src="./app.js?v=23"></script>
 </head>
 <body data-entered="false">
   <section id="entrance" class="entrance" role="dialog" aria-modal="true" aria-labelledby="entrance-title" tabindex="-1" data-state="loading">
@@ -63,7 +63,7 @@
         <button data-open="profile"><span data-icon="user"></span><span>Chuyện của Li</span></button>
         <button data-open="gallery"><span data-icon="image"></span><span>Điều để dành</span></button>
       </nav>
-      <button id="motion-toggle" class="round-button motion-toggle" aria-label="Tắt chuyển động" aria-pressed="false" title="Tắt chuyển động"><span data-icon="sparkle"></span></button>
+      <button id="motion-toggle" data-motion-toggle class="round-button motion-toggle" aria-label="Tắt chuyển động" aria-pressed="false" title="Tắt chuyển động"><span data-icon="sparkle"></span></button>
     </header>
     <div class="garden-tools" role="group" aria-label="Không khí trong vườn">
       <div class="daylight-controls" role="group" aria-label="Ánh sáng khu vườn">
@@ -84,7 +84,7 @@
 
   <dialog id="room-dialog" class="room-dialog" aria-labelledby="room-title">
     <div class="room-inner">
-      <header class="room-header"><div><p class="eyebrow" id="room-kicker">CÁI SẠP NHẠC</p><h1 id="room-title">Chọn một album nhạc.</h1></div><button class="round-button close-room" aria-label="Đóng, trở về vườn"><span data-icon="close"></span></button></header>
+      <header class="room-header"><div><p class="eyebrow" id="room-kicker">CÁI SẠP NHẠC</p><h1 id="room-title">Chọn một album nhạc.</h1></div><button class="round-button room-motion" data-motion-toggle aria-label="Giảm chuyển động để máy nhẹ hơn" aria-pressed="false"><span data-icon="sparkle"></span></button><button class="round-button close-room" aria-label="Đóng, trở về vườn"><span data-icon="close"></span></button></header>
       <div id="room-content" class="room-content"></div>
     </div>
   </dialog>

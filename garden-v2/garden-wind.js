@@ -11,7 +11,7 @@ export function initGardenWind() {
   const reeds=document.createElement('div');reeds.className='habitat-reeds';reeds.setAttribute('aria-hidden','true');world.append(reeds);
   let timer,blocked=true;const running=new Set();
   function place(){
-    const r=world.getBoundingClientRect(),portrait=matchMedia('(max-aspect-ratio:4/3)').matches;
+    const r={width:world.clientWidth,height:world.clientHeight},portrait=matchMedia('(max-aspect-ratio:4/3)').matches;
     const [iw,ih,x,y,w,h]=portrait?[900,1200,690,338,70,95]:[1672,941,1478,551,92,115];
     const s=Math.max(r.width/iw,r.height/ih),ox=(r.width-iw*s)/2,oy=(r.height-ih*s)/2;
     Object.assign(reeds.style,{left:`${ox+(x-w/2)*s}px`,top:`${oy+(y-h*.85)*s}px`,width:`${w*s}px`,height:`${h*s}px`});
@@ -30,12 +30,12 @@ export function initGardenWind() {
     timer=setTimeout(gust,10500+Math.random()*5500);
   }
   function sync(){
-    const next=document.hidden||body.dataset.still==='true'||body.dataset.entered!=='true'||Boolean(body.dataset.room&&body.dataset.room!=='music');
+    const next=document.hidden||body.dataset.still==='true'||body.dataset.entered!=='true'||Boolean(body.dataset.room&&(body.dataset.room!=='music'||body.dataset.touch==='true'));
     if(next===blocked)return;blocked=next;clearTimeout(timer);
     if(blocked){for(const animation of running)animation.cancel();running.clear();}
     else timer=setTimeout(gust,450+Math.random()*650);
   }
-  new MutationObserver(sync).observe(body,{attributes:true,attributeFilter:['data-room','data-still','data-entered']});
+  new MutationObserver(sync).observe(body,{attributes:true,attributeFilter:['data-room','data-still','data-entered','data-touch']});
   document.addEventListener('visibilitychange',sync);
   new ResizeObserver(place).observe(world);place();sync();
 }

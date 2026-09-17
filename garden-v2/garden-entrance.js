@@ -15,6 +15,25 @@ export async function waitForImage(image, {timeout = 15000} = {}) {
   await image.decode?.().catch(() => {});
 }
 
+// A short doorbell starts inside the click gesture and releases its audio graph.
+export function ringDoorbell() {
+  try {
+    const Context=window.AudioContext||window.webkitAudioContext;
+    if(!Context)return;
+    const context=new Context();context.resume().catch(()=>context.close());
+    const start=context.currentTime+.015;
+    [784,1176,1568].forEach((frequency,index)=>{
+      const tone=context.createOscillator(),gain=context.createGain();
+      tone.type='sine';tone.frequency.value=frequency;
+      gain.gain.setValueAtTime(0,start);
+      gain.gain.linearRampToValueAtTime(.075/(index+1),start+.007);
+      gain.gain.exponentialRampToValueAtTime(.0001,start+1.2);
+      tone.connect(gain);gain.connect(context.destination);tone.start(start);tone.stop(start+1.25);
+      tone.onended=()=>{tone.disconnect();gain.disconnect();if(index===2)context.close().catch(()=>{});};
+    });
+  } catch { /* Entry stays available when sound is unavailable. */ }
+}
+
 export function initEntrance({prepare, onEnter}) {
   const gate = document.querySelector('#entrance'), garden = document.querySelector('#garden');
   const button = document.querySelector('#entrance-bell'), label = document.querySelector('#entrance-action');
@@ -47,11 +66,12 @@ export function initEntrance({prepare, onEnter}) {
   button.addEventListener('click', () => {
     if (!ready) { if (gate.dataset.state === 'error') load(); return; }
     if (entering) return;
+    ringDoorbell();
     entering = true; button.disabled = true; gate.dataset.state = 'entering';
     document.body.dataset.entered = 'entering';
     const finish = () => {
       gate.hidden = true; garden.inert = false; document.body.dataset.entered = 'true';
-      document.querySelector('.wordmark').focus({preventScroll:true});
+      garden.setAttribute('tabindex','-1');garden.focus({preventScroll:true});
       document.dispatchEvent(new Event('garden-entered')); onEnter();
     };
     // Only the reveal has a duration. Readiness has no minimum waiting time.

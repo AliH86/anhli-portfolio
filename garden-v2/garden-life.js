@@ -64,10 +64,10 @@ export function initGardenLife({audio,notice}){
   }
   for(const m of ['day','night','auto'])on($(`#daylight-${m}`),'click',()=>{mode=m;updateClock();});
   function syncScene(){
-    wildlife.setBlocked(document.hidden||body.dataset.entered!=='true'||(!!body.dataset.room&&body.dataset.room!=='music')||dailyDialog.open||body.dataset.still==='true');
+    wildlife.setBlocked(document.hidden||body.dataset.entered!=='true'||(!!body.dataset.room&&(body.dataset.room!=='music'||body.dataset.touch==='true'))||dailyDialog.open||body.dataset.still==='true');
     if(!body.dataset.room&&pendingAlbum&&album){pendingAlbum=false;albumUntil=Date.now()+35000;say(albumIntroduction(album),'album');}
   }
-  const observer=new MutationObserver(syncScene);observer.observe(body,{attributes:true,attributeFilter:['data-room','data-still','data-entered']});
+  const observer=new MutationObserver(syncScene);observer.observe(body,{attributes:true,attributeFilter:['data-room','data-still','data-entered','data-touch']});
   on(document,'visibilitychange',()=>{
     if(document.hidden){clearTimeout(talkTimer);}else{updateClock();scheduleTalk();}syncScene();
   });
@@ -84,7 +84,10 @@ export function initGardenLife({audio,notice}){
       if(momentBackup){say(momentBackup.text,momentBackup.kind,momentBackup.invite);momentBackup=null;}
     }
   }
-  on(document,'garden-entered',()=>{scheduleTalk(9000);syncScene();});
+  on(document,'garden-entered',()=>{
+    if(body.dataset.touch==='true')say('Muốn điện thoại nhẹ hơn, chạm ngôi sao ✦ để nghỉ chuyển động nha. Nhạc vẫn nghe bình thường.','tip');
+    scheduleTalk(body.dataset.touch==='true'?16000:9000);syncScene();
+  });
 
   updateClock();syncScene();say(softLines[0]);scheduleTalk();
   const clockTimer=setInterval(()=>{if(!document.hidden)updateClock();},15000);
