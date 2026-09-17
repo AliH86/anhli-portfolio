@@ -2,6 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="utf-8">
+  <link rel="icon" type="image/svg+xml" href="./assets/garden-mark.svg">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#f5efdf">
   <meta name="description" content="Ghé khu vườn của Li. Chọn một album nhạc, nghe nhạc và xem những hình ảnh mình giữ lại.">
@@ -12,10 +13,22 @@
   <link rel="stylesheet" href="./polish.css?v=20260917-3">
   <link rel="stylesheet" href="./garden-life.css?v=final1">
   <link rel="stylesheet" href="./final-review.css?v=release2">
-  <script type="module" src="./app.js?v=20260917-release2"></script>
+  <link rel="stylesheet" href="./garden-v21.css?v=22">
+  <script type="module" src="./app.js?v=22"></script>
 </head>
-<body>
-  <main id="garden" class="garden">
+<body data-entered="false">
+  <section id="entrance" class="entrance" role="dialog" aria-modal="true" aria-labelledby="entrance-title" tabindex="-1" data-state="loading">
+    <div class="entrance-air" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="entrance-note">
+      <span class="entrance-eyebrow">MỘT GÓC NHỎ · MỘT CHÚT NHẠC</span>
+      <h1 id="entrance-title">Ghé vườn<br>nhà <em>Li.</em></h1>
+      <p id="entrance-quote">Ngoài kia vội quá thì ghé đây một chút.</p>
+      <button id="entrance-bell" class="entrance-bell" disabled><span class="bell-object" aria-hidden="true"><svg viewBox="0 0 64 72"><path class="bell-handle" d="M32 5v10M26 7q6-6 12 0"/><path class="bell-body" d="M16 43V31c0-22 32-22 32 0v12l6 8q2 4-4 4H14q-6 0-4-4Z"/><path class="bell-rim" d="M13 52h38"/><path class="bell-clapper" d="M26 57q6 11 12 0"/></svg></span><span id="entrance-action">Vườn đang thức giấc…</span><span class="bell-arrow" aria-hidden="true">↗</span></button>
+      <p id="entrance-status" role="status">Li đang mở cửa sổ, kê lại chiếc ghế.</p>
+    </div>
+    <span class="entrance-signature">ÂM NHẠC & NHỮNG ĐIỀU ĐỂ DÀNH</span>
+  </section>
+  <main id="garden" class="garden" inert>
     <div class="scene-world">
     <picture class="scene-layer far-layer" aria-hidden="true"><source media="(max-aspect-ratio:4/3)" srcset="./assets/garden-mobile.webp"><img src="./assets/garden-desktop.webp" alt=""></picture>
     <picture class="scenery" id="scenery">
@@ -33,7 +46,6 @@
       <button class="place place-gallery" data-open="gallery" aria-label="Điều để dành"><svg class="place-outline" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path pathLength="100" d="M16 3 L95 10 L80 82 L85 97 L69 96 L66 85 L23 80 L14 95 L3 94 L13 77 L12 8 Q12 3 16 3 Z"/></svg><span class="place-label"><i></i>Điều để dành<span>↗</span></span></button>
     </div>
     <div id="host" class="host" aria-hidden="true"><div class="host-shadow"></div><div class="host-cast-shadow"></div><div class="host-sprite"></div></div>
-    <div id="host-talk" class="host-talk" role="group" aria-label="Lời thoại của Li"><small id="talk-kicker">Li nói nhỏ</small><span id="host-words">Ghé vườn nhà Li chơi chút nha. Nghe vài bài hát Li sáng tác.</span><button id="tarot-draw" hidden>Rút một lá</button></div>
     <div class="music-notes" aria-hidden="true"><span>♪</span><span>♫</span><span>♩</span></div>
     <div class="dandelion-drift" aria-hidden="true"><span style="--seed:0"><svg viewBox="0 0 34 44"><path d="M17 14l-3 27M17 14L4 7m13 7L7 2m10 12L16 1m1 13L25 2m-8 12L32 8m-15 6L2 15m15-1l16 3"/></svg></span><span style="--seed:1"><svg viewBox="0 0 34 44"><path d="M17 14l-3 27M17 14L4 7m13 7L7 2m10 12L16 1m1 13L25 2m-8 12L32 8m-15 6L2 15m15-1l16 3"/></svg></span><span style="--seed:2"><svg viewBox="0 0 34 44"><path d="M17 14l-3 27M17 14L4 7m13 7L7 2m10 12L16 1m1 13L25 2m-8 12L32 8m-15 6L2 15m15-1l16 3"/></svg></span><span style="--seed:3"><svg viewBox="0 0 34 44"><path d="M17 14l-3 27M17 14L4 7m13 7L7 2m10 12L16 1m1 13L25 2m-8 12L32 8m-15 6L2 15m15-1l16 3"/></svg></span><span style="--seed:4"><svg viewBox="0 0 34 44"><path d="M17 14l-3 27M17 14L4 7m13 7L7 2m10 12L16 1m1 13L25 2m-8 12L32 8m-15 6L2 15m15-1l16 3"/></svg></span></div>
     <picture class="scene-layer near-layer" aria-hidden="true"><source media="(max-aspect-ratio:4/3)" srcset="./assets/garden-mobile.webp"><img src="./assets/garden-desktop.webp" alt=""></picture>
@@ -43,8 +55,9 @@
     <div class="canopy-frond" aria-hidden="true"></div>
     <div class="scene-record" id="scene-record" hidden aria-hidden="true"><div class="vinyl-spin"><img alt=""><i class="vinyl-shine"></i></div></div>
     </div>
+    <div id="host-talk" class="host-talk" role="group" aria-label="Lời thoại của Li"><small id="talk-kicker">Li nói nhỏ</small><span id="host-words">Ghé vườn nhà Li chơi chút nha. Nghe vài bài hát Li sáng tác.</span><button id="tarot-draw" hidden>Rút một lá</button></div>
     <header class="masthead">
-      <a href="../" class="wordmark" aria-label="Vườn của Li, về khu vườn">vườn của <em>Li.</em><small>GHÉ CHƠI · NGHE NHẠC</small></a>
+      <a href="./" class="wordmark" aria-label="Vườn của Li, về khu vườn">vườn của <em>Li.</em><small>GHÉ CHƠI · NGHE NHẠC</small></a>
       <nav class="top-nav" aria-label="Trong khu vườn">
         <button data-open="music"><span data-icon="music"></span><span>Sạp nhạc</span></button>
         <button data-open="profile"><span data-icon="user"></span><span>Chuyện của Li</span></button>
@@ -84,12 +97,12 @@
   </dialog>
   <dialog id="daily-dialog" class="daily-dialog" aria-labelledby="daily-heading">
     <button id="daily-close" class="round-button" aria-label="Đóng thông điệp"><span data-icon="close"></span></button>
-    <p class="eyebrow">LI GỬI BẠN</p><h2 id="daily-heading">Thông điệp ngẫu nhiên hôm nay cho bạn</h2>
+    <p class="eyebrow">LI GỬI BẠN</p><h2 id="daily-heading">Một lời gửi hôm nay.</h2>
     <div class="daily-reading"><img id="daily-image" alt=""><div><small id="daily-date"></small><h3 id="daily-name"></h3><h4 id="daily-title"></h4><p id="daily-text"></p></div></div>
     <p class="daily-note">Thông điệp này ở lại cùng bạn hôm nay. Ngày mai, một hạt khác có thể ghé vườn.</p>
   </dialog>
   <div id="notice" class="notice" role="status" aria-live="polite"></div>
   <audio id="audio" preload="none" controlslist="nodownload" playsinline></audio>
-  <noscript><div class="noscript"><h1>Vườn của Li</h1><p>Bật JavaScript để chọn album nhạc và xem album ảnh.</p><a href="mailto:ali.readytostart@gmail.com">Liên hệ Li</a></div></noscript>
+  <noscript><style>.entrance{display:none}.noscript{z-index:60;position:fixed}</style><div class="noscript"><h1>Vườn của Li</h1><p>Bật JavaScript để chọn album nhạc và xem album ảnh.</p><a href="mailto:ali.readytostart@gmail.com">Liên hệ Li</a></div></noscript>
 </body>
 </html>

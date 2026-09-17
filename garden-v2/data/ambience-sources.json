@@ -1,0 +1,23 @@
+{
+  "license": "CC0-1.0",
+  "retrieved": "2026-09-17",
+  "playback": "Opt-in continuous native buffer loops; three-second equal-power tail/head overlap; two-second day/night transition; music ducks ambience; hidden pages suspend ambience only.",
+  "sources": [
+    {
+      "file": "assets/ambience/garden-birds.mp3",
+      "title": "Morning Birds in a Quiet Urban Garden",
+      "creator": "WhisperingEarth",
+      "url": "https://freesound.org/people/WhisperingEarth/sounds/798842/",
+      "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "edits": "Seconds 2–30, mono 24kHz 48kbps, mild filtering, -27 LUFS"
+    },
+    {
+      "file": "assets/ambience/night-crickets.mp3",
+      "title": "Night Crickets Ambience on Rural Property",
+      "creator": "OwlStorm / Ashe Kirk",
+      "url": "https://freesound.org/people/OwlStorm/sounds/320145/",
+      "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "edits": "Seconds 10–38, mono 24kHz 48kbps, mild filtering, -28 LUFS"
+    }
+  ]
+}

@@ -2,8 +2,7 @@
 export function albumIntroduction(album){
   if(!album)return '';
   const description=String(album.description||album.sub||'Mình nghe cùng Li một chút nha.').replace(/\s+/g,' ').trim();
-  const short=description.length>115?description.slice(0,112).replace(/\s+\S*$/,'')+'…':description;
-  return `“${album.name}” nè. ${short}`;
+  return `“${album.name}” nè. ${description}`;
 }
 export function chooseDifferent(items,previous,random=Math.random){
   const choices=items.filter(x=>x!==previous);return choices[Math.floor(random()*choices.length)]||items[0];
