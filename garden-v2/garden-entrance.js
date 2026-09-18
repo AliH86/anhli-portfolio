@@ -78,6 +78,7 @@ export function initEntrance({prepare, onEnter}) {
   button.addEventListener('click', () => {
     if (!ready) { if (gate.dataset.state === 'error') load(); return; }
     if (entering) return;
+    document.dispatchEvent(new Event('garden-entering'));
     ringDoorbell();
     entering = true; button.disabled = true; gate.dataset.state = 'entering';
     document.body.dataset.entered = 'entering';

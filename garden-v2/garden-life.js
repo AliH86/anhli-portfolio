@@ -1,6 +1,6 @@
-import {initGardenAmbience} from './garden-ambient.js?v=22';
+import {initGardenAmbience} from './garden-ambient.js?v=23';
 import {initWildlife} from './garden-wildlife.js?v=21';
-import {albumIntroduction,chooseDifferent,gardenTips} from './garden-dialogue.js?v=3';
+import {albumIntroduction,createDialogueDeck,dialogueDelay,gardenQuotes,nightQuotes,gardenTips,dailyAside} from './garden-dialogue.js?v=4';
 import {createDailyReader,localDay} from './garden-daily.js?v=1';
 // Native music stays independent from the optional garden AudioContext.
 export function phaseForHour(hour,minute=0){const m=hour*60+minute;return m>=330&&m<1050?'day':'night';}
@@ -8,15 +8,15 @@ export function initGardenLife({audio,notice}){
   const $=s=>document.querySelector(s),body=document.body,world=$('.scene-world');
   const talk=$('#host-talk'),words=$('#host-words'),tarot=$('#tarot-draw');
   let mode='auto',phase='',offscreen=false;
-  let talkTimer,lastLine='',album=null,pendingAlbum=false,albumUntil=0,hostMoment=null,momentBackup=null,invited=false,speechVersion=0,dailyMessage=null;
+  let talkTimer,album=null,pendingAlbum=false,albumUntil=0,hostMoment=null,momentBackup=null,invited=false,speechVersion=0,dailyMessage=null,reading=false;
+  const nextQuote=createDialogueDeck(gardenQuotes),nextNightQuote=createDialogueDeck(nightQuotes),nextTip=createDialogueDeck(gardenTips);
   const readDaily=createDailyReader(),dailyDialog=$('#daily-dialog');
   const listeners=[];
   const on=(target,event,fn)=>{target.addEventListener(event,fn);listeners.push(()=>target.removeEventListener(event,fn));};
   function say(text,kind='quote',invite=false){
     speechVersion++;
     words.textContent=text;talk.dataset.kind=kind;talk.setAttribute('aria-label',`Li nói: ${text}`);
-    $('#talk-kicker').textContent=kind==='album'?'Li kể về album':kind==='tarot'?'Li gửi bạn một lời':kind==='tip'?'Li chỉ bạn nè':'Li nói nhỏ';
-    tarot.hidden=!invite;lastLine=text;
+    tarot.hidden=!invite;words.scrollTop=0;
   }
   function introduceAlbum(next){
     album=next;pendingAlbum=true;albumUntil=Date.now()+45000;
@@ -33,25 +33,26 @@ export function initGardenLife({audio,notice}){
         const art=$('#daily-image');art.src=message.image;art.alt=message.name;art.classList.toggle('is-closed',message.closed);
         dailyDialog.dataset.day=message.dateKey;if(!dailyDialog.open)dailyDialog.showModal();syncScene();
       }
-      if(version===speechVersion&&!body.dataset.room){say(message.title,'tarot',true);tarot.textContent='Đọc thông điệp hôm nay';albumUntil=Date.now()+28000;scheduleTalk(45000);}
+      if(version===speechVersion&&!body.dataset.room){say(dailyAside(message),'tarot',true);tarot.textContent='Đọc thông điệp hôm nay';scheduleTalk(dialogueDelay(words.textContent));}
     }catch{if(open)notice('Thông điệp chưa tải được. Bạn thử lại chút nhé.');}
   }
   on(tarot,'click',()=>showDaily(true));
   on($('#daily-close'),'click',()=>dailyDialog.close());
   on(dailyDialog,'close',()=>{syncScene();tarot.focus();});
-  const softLines=['Ghé vườn nhà Li chơi chút nha. Nghe vài bài hát Li sáng tác.','Không cần vội đâu. Mình ngồi đây một chút nha.','Vườn nhỏ thôi, nhưng luôn có chỗ cho bạn.','Một chút nhạc, một chút bình yên. Vậy là đủ ha.'];
   function randomTalk(){
-    if(document.hidden||body.dataset.entered!=='true'||body.dataset.room||dailyDialog.open||hostMoment){scheduleTalk(10000);return;}
-    if(pendingAlbum&&album){pendingAlbum=false;albumUntil=Date.now()+35000;say(albumIntroduction(album),'album');scheduleTalk(40000);return;}
-    if(Date.now()<albumUntil){scheduleTalk(30000);return;}
+    if(document.hidden||body.dataset.entered!=='true'||body.dataset.room||dailyDialog.open||hostMoment||reading){scheduleTalk(10000);return;}
+    if(pendingAlbum&&album){pendingAlbum=false;say(albumIntroduction(album),'album');albumUntil=Date.now()+dialogueDelay(words.textContent);scheduleTalk(albumUntil-Date.now());return;}
+    if(Date.now()<albumUntil){scheduleTalk(albumUntil-Date.now());return;}
     const roll=Math.random();
-    if(!invited||roll<.4){invited=true;say('Li gửi bạn một thông điệp để mang theo trong hôm nay nha.','tarot',true);tarot.textContent='Đọc thông điệp hôm nay';showDaily();}
-    else if(roll<.67)say(chooseDifferent(gardenTips,lastLine),'tip');
-    else if(album&&roll<.83)say(albumIntroduction(album),'album');
-    else say(chooseDifferent(phase==='night'?[...softLines,'Tối rồi, để những điều vội vã ngủ ngoài cổng nhé.']:softLines,lastLine));
-    scheduleTalk(22000+Math.random()*16000);
+    if(!invited||roll<.18){invited=true;say('Có một lời nhắn cho hôm nay nè. Mình mở ra đọc thong thả nha.','tarot',true);tarot.textContent='Đọc thông điệp hôm nay';showDaily();}
+    else if(roll<.30)say(nextTip(),'tip');
+    else say(phase==='night'&&roll>.78?nextNightQuote():nextQuote());
+    scheduleTalk(dialogueDelay(words.textContent));
   }
   function scheduleTalk(delay=15000){clearTimeout(talkTimer);talkTimer=setTimeout(randomTalk,delay);}
+  on(talk,'pointerenter',()=>{reading=true;});on(talk,'pointerleave',()=>{reading=false;});
+  on(talk,'focusin',()=>{reading=true;});on(talk,'focusout',()=>{reading=false;});
+  on(talk,'pointerdown',()=>scheduleTalk(dialogueDelay(words.textContent)));
   const wildlife=initWildlife({world});
   const ambience=initGardenAmbience({audio,notice});
   function updateClock(){
@@ -65,7 +66,7 @@ export function initGardenLife({audio,notice}){
   for(const m of ['day','night','auto'])on($(`#daylight-${m}`),'click',()=>{mode=m;updateClock();});
   function syncScene(){
     wildlife.setBlocked(offscreen||document.hidden||body.dataset.entered!=='true'||(!!body.dataset.room&&(body.dataset.room!=='music'||body.dataset.touch==='true'))||dailyDialog.open||body.dataset.still==='true');
-    if(!body.dataset.room&&pendingAlbum&&album){pendingAlbum=false;albumUntil=Date.now()+35000;say(albumIntroduction(album),'album');}
+    if(!body.dataset.room&&pendingAlbum&&album){pendingAlbum=false;say(albumIntroduction(album),'album');albumUntil=Date.now()+dialogueDelay(words.textContent);scheduleTalk(albumUntil-Date.now());}
   }
   const visibility=new IntersectionObserver(([entry])=>{offscreen=!entry.isIntersecting;body.dataset.worldOffscreen=String(offscreen);syncScene();});visibility.observe(world);
   const observer=new MutationObserver(syncScene);observer.observe(body,{attributes:true,attributeFilter:['data-room','data-still','data-entered','data-touch']});
@@ -79,7 +80,7 @@ export function initGardenLife({audio,notice}){
     if(key===(hostMoment?.key||''))return;
     if(moment){
       if(!hostMoment)momentBackup={text:words.textContent,kind:talk.dataset.kind,invite:!tarot.hidden};
-      hostMoment={...moment,key};body.dataset.hostMoment=moment.pose;say(moment.text,'song');$('#talk-kicker').textContent='Li hát khe khẽ';
+      hostMoment={...moment,key};body.dataset.hostMoment=moment.pose;say(moment.text,'song');
     }else{
       hostMoment=null;delete body.dataset.hostMoment;
       if(momentBackup){say(momentBackup.text,momentBackup.kind,momentBackup.invite);momentBackup=null;}
@@ -87,10 +88,10 @@ export function initGardenLife({audio,notice}){
   }
   on(document,'garden-entered',()=>{
     if(body.dataset.touch==='true')say('Muốn điện thoại nhẹ hơn, chạm ngôi sao ✦ để nghỉ chuyển động nha. Nhạc vẫn nghe bình thường.','tip');
-    scheduleTalk(body.dataset.touch==='true'?16000:9000);syncScene();
+    scheduleTalk(body.dataset.touch==='true'?12000:9000);syncScene();
   });
 
-  updateClock();syncScene();say(softLines[0]);scheduleTalk();
+  updateClock();syncScene();say(gardenQuotes[0]);scheduleTalk();
   const clockTimer=setInterval(()=>{if(!document.hidden)updateClock();},15000);
   return {introduceAlbum,setHostMoment,destroy(){observer.disconnect();visibility.disconnect();listeners.forEach(remove=>remove());clearInterval(clockTimer);clearTimeout(talkTimer);wildlife.destroy();ambience.destroy();}};
 }

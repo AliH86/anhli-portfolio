@@ -1,4 +1,4 @@
-// Opt-in field recordings; sample-accurate native loops, independent of music.
+// Field recordings start with the entrance gesture; an explicit mute is remembered.
 // Overlap the tail/head with an equal-power fade, then join adjacent source samples.
 export function seamlessAmbience(context,input,seconds=3){
   const fade=Math.min(Math.round(seconds*input.sampleRate),Math.floor(input.length/4));
@@ -16,7 +16,8 @@ export function seamlessAmbience(context,input,seconds=3){
 }
 export function initGardenAmbience({audio,notice}) {
   const button=document.querySelector('#ambience-toggle'),body=document.body;
-  let enabled=false,blocked=document.hidden,phase='day',context,master,active,version=0;
+  let enabled=true,activated=false,blocked=document.hidden,phase='day',context,master,active,version=0;
+  try{enabled=localStorage.getItem('garden-ambience')!=='false';}catch{}
   const buffers=new Map(),voices=new Set(),listeners=[];
   const on=(target,event,fn)=>{target.addEventListener(event,fn);listeners.push(()=>target.removeEventListener(event,fn));};
   function ui(){
@@ -46,7 +47,7 @@ export function initGardenAmbience({audio,notice}) {
   }
   async function play(){
     const token=++version,current=phase;
-    if(!enabled||blocked||active?.phase===current)return;
+    if(!activated||!context||!enabled||blocked||active?.phase===current)return;
     try{
       await context.resume();const buffer=await bufferFor(current);
       if(token!==version||!enabled||blocked||phase!==current)return;
@@ -63,12 +64,19 @@ export function initGardenAmbience({audio,notice}) {
       stop();enabled=false;ui();notice('Tiếng vườn chưa tải được. Bạn có thể thử bật lại.');
     }
   }
-  on(button,'click',()=>{
-    if(enabled){enabled=false;stop();ui();return;}
+  function start(){
     const Ctx=window.AudioContext||window.webkitAudioContext;
-    if(!Ctx){notice('Trình duyệt chưa hỗ trợ tiếng vườn. Bạn vẫn nghe nhạc được nhé.');return;}
-    if(!context){context=new Ctx();master=context.createGain();master.gain.value=.65;master.connect(context.destination);on(context,'statechange',()=>body.dataset.ambientContext=context.state);}
-    enabled=true;ui();play();
+    if(!Ctx){enabled=false;ui();notice('Trình duyệt chưa hỗ trợ tiếng vườn. Bạn vẫn nghe nhạc được nhé.');return;}
+    try{
+      if(!context){context=new Ctx();master=context.createGain();master.gain.value=.65;master.connect(context.destination);on(context,'statechange',()=>body.dataset.ambientContext=context.state);}
+      activated=true;ui();play();
+    }catch{enabled=false;ui();notice('Tiếng vườn chưa bật được. Bạn thử lại chút nhé.');}
+  }
+  on(document,'garden-entering',()=>{if(enabled)start();});
+  on(button,'click',()=>{
+    enabled=!enabled;
+    try{localStorage.setItem('garden-ambience',String(enabled));}catch{}
+    if(enabled)start();else{stop();ui();}
   });
   for(const event of ['playing','pause'])on(audio,event,volume);
   on(document,'visibilitychange',()=>setBlocked(document.hidden));

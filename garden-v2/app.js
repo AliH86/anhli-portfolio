@@ -1,10 +1,11 @@
 import {esc,icon,playable,albumBadge,unavailableReason,categories,matchesCategory,albumFrame,transport,bindShelf} from './garden-ui.js';
 import {initWorld,musicState,sceneGateways} from './garden-state.js';
 import {loadingMarkup,sendLoadingGust} from './garden-loading.js?v=1';
-import { initGardenLife } from './garden-life.js?v=23';
-import {albumIntroduction} from './garden-dialogue.js?v=3';
-import {initEntrance,waitForImage} from './garden-entrance.js?v=24';
+import { initGardenLife } from './garden-life.js?v=24';
+import {albumIntroduction} from './garden-dialogue.js?v=4';
+import {initEntrance,waitForImage} from './garden-entrance.js?v=25';
 import {initLyrics} from './garden-lyrics.js?v=23';
+import {mountFrameGrowth} from './garden-growth.js?v=1';
 import {initGardenWind} from './garden-wind.js?v=23';
 const $ = (s,root=document) => root.querySelector(s);
 const $$ = (s,root=document) => [...root.querySelectorAll(s)];
@@ -47,10 +48,12 @@ async function openRoom(name,{historyChange=true}={}){
   if(!titles[name]||!state.entered)return;
   const wasOpen=room.open;
   if(!wasOpen)state.lastFocus=document.activeElement;
+  $('.garden-settings').open=false;
   state.queueOpen=false;room.dataset.queueOpen='false';$('.room-header').inert=false;
   const token=++state.viewToken;state.room=name;worldController.update(state);document.body.dataset.room=name;room.dataset.room=name;fitViewport();
   // Establish the destination's geometry before WebKit promotes it to the top layer.
   if(!wasOpen)room.showModal();
+  mountFrameGrowth(room,name);
   setHostPose(name==='gallery'?'gallery':state.wanted?'seated':'idle');placeWorld();
   $('#room-kicker').textContent=titles[name][0];$('#room-title').textContent=titles[name][1];
   $$('.top-nav button').forEach(b=>b.classList.toggle('is-active',b.dataset.open===name));
@@ -61,7 +64,7 @@ async function openRoom(name,{historyChange=true}={}){
     else if(name==='profile'){const profile=await getData('profile');if(token!==state.viewToken)return;renderProfile(profile);}
     else {[state.gallery,state.videos]=await Promise.all([getData('gallery'),getData('videos').catch(()=>[])]);if(token!==state.viewToken)return;renderGallery();}
     content.scrollTop=0;
-    if(!state.still&&name!=='music'&&!matchMedia('(max-width:700px)').matches){const gateway=$(name==='profile'?'#host-talk':'.place-gallery'),g=gateway.getBoundingClientRect(),r=room.getBoundingClientRect();room.style.transformOrigin=`${g.x+g.width/2-r.x}px ${g.y+g.height/2-r.y}px`;room.animate([{opacity:.3,transform:'scale(.7)'},{opacity:1,transform:'scale(1)'}],{duration:300,easing:'cubic-bezier(.2,.7,.2,1)'});}
+    room.dataset.contentReady=String(token);
   }catch(e){if(token===state.viewToken)content.innerHTML=`<div class="empty-state" role="status">Chưa mở được góc này. Bạn thử lại nhé.<button class="retry" data-retry="${name}">Thử lại</button></div>`;}
 }
 function cleanupRoom(){shelfCleanup();state.queueOpen=false;room.dataset.queueOpen='false';$('.room-header').inert=false;stopVideo();state.room='';worldController.update(state);state.viewToken++;state.mediaToken++;setHostPose(state.wanted?'seated':'idle');document.body.dataset.room='';placeWorld();$$('.top-nav button').forEach(b=>b.classList.remove('is-active'));cancelFlight();state.lastFocus?.focus?.();}
@@ -357,15 +360,19 @@ function placeWorld(){
   const [x,y,h]=placements[pose]||placements.idle;const host=$('#host');
   Object.assign(host.style,{left:`${ox+x*iw*scale}px`,top:`${oy+y*ih*scale}px`,height:`${h*scale}px`,width:`${h*scale*(pose==='idle'?.3415:pose==='seated'?.65682:.53409)}px`});
   const talk=$('#host-talk'),hw=h*scale*(pose==='idle'?.3415:pose==='seated'?.65682:.53409),hx=ox+x*iw*scale,hy=oy+y*ih*scale-h*scale;
-  const tw=r.width<701?174:226,spaceRight=r.width-(hx+hw/2+12),side=spaceRight>=tw?'right':'left';
+  const tw=r.width<701?Math.min(220,r.width*.56):280,spaceRight=r.width-(hx+hw/2+12),side=spaceRight>=tw?'right':'left';
   talk.dataset.side=side;
   const talkLeft=r.left+Math.max(8,Math.min(r.width-tw-8,side==='right'?hx+hw/2+12:hx-hw/2-tw-12));
   talk.style.width=`${tw}px`;
   const tools=$('.garden-tools').getBoundingClientRect(),mini=$('#mini-player').getBoundingClientRect();
   document.documentElement.style.setProperty('--mini-player-height',`${mini.height}px`);
-  const minTop=talkLeft<tools.right&&talkLeft+tw>tools.left?tools.bottom+9:10;
+  const logo=$('.wordmark').getBoundingClientRect();
+  const minTop=Math.max(logo.bottom+10,$('.garden-settings').open&&talkLeft<tools.right&&talkLeft+tw>tools.left?tools.bottom+9:10);
   const bottom=Math.min(innerHeight-12,mini.top>0?mini.top-12:innerHeight-100);
-  Object.assign(talk.style,{left:`${talkLeft}px`,top:`${Math.max(minTop,Math.min(r.top+hy+h*scale*.24,bottom-talk.offsetHeight))}px`});
+  talk.style.setProperty('--talk-width',`${tw}px`);talk.style.setProperty('--talk-left',`${talkLeft}px`);
+  // The artwork is flipped vertically so its tail can follow Li's face below the header.
+  const talkTop=Math.max(minTop,Math.min(r.top+hy+h*scale*.20-talk.offsetHeight*.22,bottom-talk.offsetHeight));
+  talk.style.setProperty('--talk-top',`${talkTop}px`);Object.assign(talk.style,{left:`${talkLeft}px`,top:`${talkTop}px`});
   Object.assign($('.music-notes').style,{left:`${hx+hw*.30}px`,top:`${hy+h*scale*.2}px`});
   const lampPoints=mobile?[[133,495],[711,501]]:[[287,178],[1117,344]];
   ['.lantern-house','.lantern-stall'].forEach((sel,i)=>{const [a,b]=lampPoints[i];Object.assign($(sel).style,{left:`${ox+a*scale}px`,top:`${oy+b*scale}px`,width:`${150*scale}px`,height:`${180*scale}px`});});
@@ -375,7 +382,7 @@ function placeWorld(){
 
 }
 new ResizeObserver(placeWorld).observe($('.scene-world'));
-new ResizeObserver(placeWorld).observe($('#host-talk'));new ResizeObserver(placeWorld).observe($('#mini-player'));narrow.addEventListener('change',placeWorld);placeWorld();syncPlayback();
+new ResizeObserver(placeWorld).observe($('#host-talk'));new ResizeObserver(placeWorld).observe($('#mini-player'));narrow.addEventListener('change',placeWorld);$('.garden-settings').addEventListener('toggle',placeWorld);placeWorld();syncPlayback();
 // Hash destinations open only after the explicit entrance gesture.
 
 const gardenLife=initGardenLife({audio,notice});

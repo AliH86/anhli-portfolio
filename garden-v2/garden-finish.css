@@ -1,0 +1,97 @@
+/* Organic silhouettes, readable paper, and unhurried object motion. */
+.mini-player,.top-nav{background:none;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none;isolation:isolate;filter:drop-shadow(0 5px 4px #34220e55)}
+.mini-player::before{content:'';position:absolute;inset:5px 9px;z-index:-1;border-radius:9px;background:#f9edcee8;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);pointer-events:none}
+.top-nav{background-clip:content-box}
+.garden-settings .garden-tools{width:auto;max-width:calc(100vw - 30px);flex-wrap:nowrap;gap:6px;padding:7px;border:10px solid transparent;border-image:var(--carved-rim) 116 170 114 161 / 17px 21px;background:none;border-radius:15px;box-shadow:none;isolation:isolate;filter:drop-shadow(0 4px 4px #38230d55)}
+.garden-settings .garden-tools:before{content:'';position:absolute;inset:5px 9px;border-radius:6px;background:#f8edcff0;z-index:-1;pointer-events:none}
+.garden-settings .settings-title,.garden-settings #world-time{display:none}
+.garden-settings .daylight-controls{flex-shrink:0;gap:2px;padding:0;border:0}
+.garden-settings .garden-tool{width:44px;height:44px;border:0;border-radius:50%;color:#4a3b23;flex-shrink:0}
+.garden-settings .garden-tool[aria-pressed=true]{background:#c6cf9a;box-shadow:inset 0 0 0 1px #8a965b}
+.garden-settings #ambience-toggle{border-left:1px solid #96794655;border-radius:8px}
+.garden:has(.garden-settings[open]) #host-talk{opacity:0;visibility:hidden}
+#room-dialog .album-shelf,#room-dialog[data-queue-open=true] .album-shelf{--edge-fade:42px;mask-image:linear-gradient(90deg,transparent,#000 var(--edge-fade),#000 calc(100% - var(--edge-fade)),transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 var(--edge-fade),#000 calc(100% - var(--edge-fade)),transparent)}
+#room-dialog .shelf-prev,#room-dialog .shelf-next{z-index:4}
+#room-dialog .shelf-display:after{mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+
+/* The PNG supplies both paper and tail. No rectangular CSS paint outside it. */
+#host-talk.host-talk{position:fixed!important;left:var(--talk-left)!important;top:var(--talk-top)!important;right:auto;bottom:auto!important;width:var(--talk-width)!important;max-width:none;min-height:115px;display:flex;gap:7px;padding:25px 28px 29px 40px!important;border:0!important;border-image:none;border-radius:0;background:none;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;transform:none;filter:drop-shadow(0 4px 3px #30251655);pointer-events:auto;color:#4a321d;isolation:isolate}
+#host-talk.host-talk:before{content:'';display:block;position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:0;background:url('./assets/ui/speech-balloon.webp') center/100% 100% no-repeat;transform:scaleY(-1);z-index:-1;pointer-events:none}
+#host-talk.host-talk:after{display:none}
+#host-talk.host-talk[data-side=left]{padding:25px 40px 29px 28px!important}
+#host-talk.host-talk[data-side=left]:before{left:0;right:0;transform:scale(-1)}
+#host-talk #host-words{display:block;font:17px/1.5 Georgia,serif;color:#4a321d;max-height:220px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#a28b57 transparent;text-shadow:0 1px #fff5df}
+#host-talk #tarot-draw{display:block;align-self:start;grid-area:auto;max-width:none;min-height:44px;margin:0;padding:5px 0;border:0;border-bottom:1px solid #9d82575c;border-radius:0;background:none;color:#6a4522;font:12px/1.4 GardenSans,sans-serif;text-align:left}
+#host-talk #tarot-draw[hidden]{display:none}
+@media(max-width:700px){
+ #host-talk.host-talk{min-height:105px;padding:20px 22px 23px 32px!important}
+ #host-talk.host-talk[data-side=left]{padding:20px 32px 23px 22px!important}
+ #host-talk #host-words{font-size:14px;line-height:1.5;max-height:170px}
+ #host-talk #tarot-draw{font-size:11px}
+ #room-dialog .album-shelf{--edge-fade:25px}
+ .mini-player::before{inset:5px 9px}
+}
+@media(max-width:700px) and (orientation:portrait){
+ .scene-world{inset:0;mask-image:none;-webkit-mask-image:none}
+ .masthead,body[data-day-phase=night] .masthead{background:none}
+ .scene-shade{background:linear-gradient(180deg,#fff6d913,transparent 18%,transparent 85%,#2738200a)}
+ .garden{background:#d5ddbe}
+}
+
+/* Reading rooms are centered in the space between the header and mini player. */
+@media(min-width:701px) and (min-height:531px){
+ #room-dialog[data-room=profile],#room-dialog[data-room=gallery]{inset:142px 0 145px;width:min(1120px,calc(100vw - 160px));height:min(790px,calc(var(--visual-height,100dvh) - 287px));max-height:none;margin:auto;transform-origin:50% 60%}
+ #room-dialog[data-room=profile]{width:min(840px,calc(100vw - 170px));height:min(720px,calc(var(--visual-height,100dvh) - 287px))}
+ #room-dialog[data-room=profile] .profile-room{padding-inline:24px}
+ #room-dialog[data-room=profile] .profile-lead{gap:30px;grid-template-columns:95px minmax(0,1fr)}
+ #room-dialog[data-room=profile] .profile-portrait{width:95px;height:278px}
+ #room-dialog[data-room=profile] .profile-copy{max-width:60ch}
+ #room-dialog[data-room=gallery] .gallery-grid{column-count:5;column-gap:22px}
+ #room-dialog[data-room=gallery] .gallery-pin{margin-bottom:23px}
+}
+@media(min-width:1600px) and (min-height:850px){
+ #room-dialog[data-room=gallery]{width:min(1280px,calc(100vw - 280px));height:min(810px,calc(var(--visual-height,100dvh) - 300px))}
+ #room-dialog[data-room=gallery] .gallery-grid{column-count:6}
+ #room-dialog[data-room=profile]{width:900px;height:min(760px,calc(var(--visual-height,100dvh) - 300px))}
+ #room-dialog[data-room=profile] .profile-intro{font-size:29px!important}
+ #room-dialog[data-room=profile] .profile-copy{font-size:18px}
+}
+@media(min-width:701px) and (max-width:1000px) and (min-height:531px){
+ #room-dialog[data-room=profile],#room-dialog[data-room=gallery]{width:calc(100vw - 96px)}
+ #room-dialog[data-room=gallery] .gallery-grid{column-count:3;column-gap:18px}
+}
+
+/* Animate the inner object, never the dialog containing the iOS queue sheet. */
+#room-dialog[open]{animation:none!important}
+#room-dialog[open]>.room-inner{animation:frame-settle .85s cubic-bezier(.2,.7,.2,1) both;transform-origin:50% 75%}
+#room-dialog[open] .room-header{animation:ink-arrives .65s .16s ease-out both}
+#room-dialog[open] .room-content{animation:ink-arrives .7s .25s ease-out both}
+#room-dialog[open][data-room=music]>.room-inner,#room-dialog[open][data-room=music] .room-content,#room-dialog[open][data-room=music] .room-header{animation:none}
+#room-dialog[open][data-room=music] .room-header>div{animation:sign-settle 1.4s cubic-bezier(.2,.65,.25,1);transform-origin:50% 0}
+#room-dialog[open][data-room=music] .music-shelf,#room-dialog[open][data-room=music] #album-selection{animation:frame-settle .85s cubic-bezier(.2,.7,.2,1) both}
+#track-queue.playlist-drawer{animation:ledger-settle .65s cubic-bezier(.2,.7,.2,1)}
+@keyframes frame-settle{from{transform:translateY(14px) scale(.965)}to{transform:none}}
+@keyframes sign-settle{0%{transform:rotate(-3deg)}48%{transform:rotate(1.1deg)}77%{transform:rotate(-.35deg)}100%{transform:rotate(0)}}
+@keyframes ink-arrives{from{opacity:.8;translate:0 5px}to{opacity:1;translate:none}}
+@keyframes ledger-settle{from{opacity:.5;translate:0 14px}to{opacity:1;translate:0 0}}
+@media(max-width:700px), (max-width:1000px) and (max-height:530px){#track-queue.playlist-drawer{animation:none}}
+.frame-growth{position:absolute;width:240px;height:210px;left:-33px;top:-31px;z-index:6;pointer-events:none;overflow:visible;filter:drop-shadow(1px 2px 1px #34280d66)}
+.frame-growth.trailing{left:auto;top:auto;right:-34px;bottom:-30px;transform:rotate(180deg);width:205px;height:180px}
+#room-dialog[data-room=profile]>.frame-growth:not(.trailing){left:-47px;top:-46px;width:210px;height:184px}
+.growth-stem{fill:none;stroke:#6b7031;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:0;animation:stem-extends var(--duration,2.7s) var(--delay,.45s) linear backwards}
+.growth-stem.highlight{stroke:#b1ae5b;stroke-width:1.1}
+.vine-leaf{transform-box:fill-box;transform-origin:50% 100%;animation:leaf-unfurls 1.35s var(--delay) cubic-bezier(.2,.55,.3,1) backwards}
+.vine-leaf path:first-child{fill:#697b36;stroke:#4d5d29;stroke-width:.7}.vine-leaf .leaf-light{fill:#9ea64f;stroke:none}.vine-leaf .leaf-vein{fill:none;stroke:#c0b66d;stroke-width:.7}
+.vine-bud{transform-box:fill-box;transform-origin:50% 100%;animation:bud-swells .7s var(--delay) ease-out backwards}
+.vine-petal{transform-box:fill-box;transform-origin:50% 100%;animation:petal-opens 1.3s var(--delay) ease-out backwards;fill:#fff2cc;stroke:#cabc88;stroke-width:.6}
+.flower-heart{fill:#c99b31;stroke:#917024;stroke-width:.7}
+@keyframes stem-extends{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes leaf-unfurls{0%{transform:scale(0) rotate(-19deg)}55%{transform:scale(.48,.94) rotate(-5deg)}100%{transform:scale(1) rotate(0)}}
+@keyframes bud-swells{from{transform:scale(0)}to{transform:scale(1)}}
+@keyframes petal-opens{0%{transform:scale(.13,.23)}55%{transform:scale(.6,.85)}100%{transform:scale(1)}}
+@media(max-width:700px){.frame-growth{width:155px;height:136px;left:-24px;top:-25px}.frame-growth.trailing{width:137px;height:120px;right:-21px;bottom:-21px}}
+@media(max-width:700px){#room-dialog[data-room=profile]>.frame-growth:not(.trailing){left:-30px;top:-30px;width:140px;height:123px}}
+body[data-still=true] #room-dialog .room-inner,body[data-still=true] #room-dialog .room-header,body[data-still=true] #room-dialog .room-content,body[data-still=true] #room-dialog .music-shelf,body[data-still=true] #album-selection,body[data-still=true] #track-queue,body[data-still=true] .frame-growth *{animation:none!important}
+body[data-still=true] #room-dialog .room-header>div{animation:none!important}
+@media(prefers-reduced-motion:reduce){#room-dialog .room-inner,#room-dialog .room-header,#room-dialog .room-content,#room-dialog .music-shelf,#album-selection,#track-queue,.frame-growth *{animation:none!important}}
+@media(prefers-reduced-transparency:reduce){.mini-player::before{background:#f5e8ca;backdrop-filter:none;-webkit-backdrop-filter:none}}
