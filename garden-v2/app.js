@@ -35,7 +35,7 @@ setMotion();motion.addEventListener('change',()=>{state.still=motion.matches;set
 $$('[data-motion-toggle]').forEach(button=>button.addEventListener('click',()=>{state.still=!state.still;try{localStorage.setItem('garden-still',String(state.still));}catch{}setMotion();notice(state.still?'Đã tắt chuyển động. Nhạc vẫn nghe bình thường.':'Đã bật chuyển động nhẹ.');}));
 // Visibility only quiets decoration. Never pause/recreate audio on app or tab switches.
 document.addEventListener('visibilitychange',()=>{document.body.dataset.pageHidden=String(document.hidden);});
-window.addEventListener('pageshow',()=>{state.playing=!audio.paused;state.wanted=!audio.paused;syncPlayback();});
+window.addEventListener('pageshow',()=>{document.body.dataset.pageHidden=String(document.hidden);fitViewport();state.playing=!audio.paused;state.wanted=!audio.paused;syncPlayback();});
 // This hides a browser download affordance only; it is not access control or DRM.
 audio.addEventListener('contextmenu',e=>e.preventDefault());
 $('#scenery img').addEventListener('error',()=>{document.body.classList.add('scene-failed');notice('Cảnh vườn chưa tải được. Bạn vẫn có thể nghe nhạc và xem ảnh.');});
@@ -46,9 +46,12 @@ const titles={music:['MỖI BÀI HÁT LÀ MỘT LẦN TRỞ VỀ','Sạp nhạc'
 async function openRoom(name,{historyChange=true}={}){
   if(!titles[name]||!state.entered)return;
   const wasOpen=room.open;
-  if(!wasOpen){state.lastFocus=document.activeElement;room.showModal();}
+  if(!wasOpen)state.lastFocus=document.activeElement;
   state.queueOpen=false;room.dataset.queueOpen='false';$('.room-header').inert=false;
-  const token=++state.viewToken;state.room=name;worldController.update(state);document.body.dataset.room=name;room.dataset.room=name;setHostPose(name==='gallery'?'gallery':state.wanted?'seated':'idle');placeWorld();
+  const token=++state.viewToken;state.room=name;worldController.update(state);document.body.dataset.room=name;room.dataset.room=name;fitViewport();
+  // Establish the destination's geometry before WebKit promotes it to the top layer.
+  if(!wasOpen)room.showModal();
+  setHostPose(name==='gallery'?'gallery':state.wanted?'seated':'idle');placeWorld();
   $('#room-kicker').textContent=titles[name][0];$('#room-title').textContent=titles[name][1];
   $$('.top-nav button').forEach(b=>b.classList.toggle('is-active',b.dataset.open===name));
   if(historyChange&&location.hash!==`#${name}`)history[wasOpen?'replaceState':'pushState']({gardenRoom:true},'',`${location.pathname}${location.search}#${name}`);
@@ -58,7 +61,7 @@ async function openRoom(name,{historyChange=true}={}){
     else if(name==='profile'){const profile=await getData('profile');if(token!==state.viewToken)return;renderProfile(profile);}
     else {[state.gallery,state.videos]=await Promise.all([getData('gallery'),getData('videos').catch(()=>[])]);if(token!==state.viewToken)return;renderGallery();}
     content.scrollTop=0;
-    if(!state.still&&name!=='music'){const gateway=$(name==='profile'?'#host-talk':'.place-gallery'),g=gateway.getBoundingClientRect(),r=room.getBoundingClientRect();room.style.transformOrigin=`${g.x+g.width/2-r.x}px ${g.y+g.height/2-r.y}px`;room.animate([{opacity:.3,transform:'scale(.7)'},{opacity:1,transform:'scale(1)'}],{duration:300,easing:'cubic-bezier(.2,.7,.2,1)'});}
+    if(!state.still&&name!=='music'&&!matchMedia('(max-width:700px)').matches){const gateway=$(name==='profile'?'#host-talk':'.place-gallery'),g=gateway.getBoundingClientRect(),r=room.getBoundingClientRect();room.style.transformOrigin=`${g.x+g.width/2-r.x}px ${g.y+g.height/2-r.y}px`;room.animate([{opacity:.3,transform:'scale(.7)'},{opacity:1,transform:'scale(1)'}],{duration:300,easing:'cubic-bezier(.2,.7,.2,1)'});}
   }catch(e){if(token===state.viewToken)content.innerHTML=`<div class="empty-state" role="status">Chưa mở được góc này. Bạn thử lại nhé.<button class="retry" data-retry="${name}">Thử lại</button></div>`;}
 }
 function cleanupRoom(){shelfCleanup();state.queueOpen=false;room.dataset.queueOpen='false';$('.room-header').inert=false;stopVideo();state.room='';worldController.update(state);state.viewToken++;state.mediaToken++;setHostPose(state.wanted?'seated':'idle');document.body.dataset.room='';placeWorld();$$('.top-nav button').forEach(b=>b.classList.remove('is-active'));cancelFlight();state.lastFocus?.focus?.();}
@@ -308,7 +311,13 @@ content.addEventListener('input',e=>{if(e.target.id==='volume'){audio.volume=Num
 content.addEventListener('change',e=>{if(e.target.id==='album-jump'&&e.target.value){state.category='all';state.search='';$$('[data-category]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.category==='all')));$('#album-search').value='';filterShelf('');selectAlbum(e.target.value);$('#album-picker').hidden=true;$('[data-picker]').setAttribute('aria-expanded','false');$(`[data-album="${CSS.escape(e.target.value)}"]`)?.focus({preventScroll:true});}});
 content.addEventListener('keydown',e=>{if(e.target.matches('[data-sheet-tab]')&&['ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();const next=e.target.dataset.sheetTab==='tracks'?'lyrics':'tracks';const tab=$(`[data-sheet-tab="${next}"]`);tab.click();tab.focus();}});
 let sheetDrag=null;content.addEventListener('pointerdown',e=>{if(e.target.closest('[data-sheet-handle]')){sheetDrag=e.clientY;e.target.setPointerCapture(e.pointerId);}});content.addEventListener('pointerup',e=>{if(sheetDrag!==null&&e.clientY-sheetDrag>65){state.queueOpen=false;syncQueue();$('.queue-more')?.focus({preventScroll:true});}sheetDrag=null;});
-const viewport=window.visualViewport;function fitViewport(){if(state.room==='music')syncQueue();document.documentElement.style.setProperty('--visual-height',`${viewport?.height||innerHeight}px`);}viewport?.addEventListener('resize',fitViewport);window.addEventListener('resize',fitViewport);fitViewport();
+const viewport=window.visualViewport;function fitViewport(){
+ const height=viewport?.height||innerHeight,top=viewport?.offsetTop||0;
+ document.documentElement.style.setProperty('--visual-height',`${height}px`);
+ document.documentElement.style.setProperty('--visual-top',`${top}px`);
+ if(state.room==='music')syncQueue();
+}
+viewport?.addEventListener('resize',fitViewport);viewport?.addEventListener('scroll',fitViewport);window.addEventListener('resize',fitViewport);fitViewport();
 // The small note is the story gateway too; it keeps the same paper material.
 $('#host-talk').addEventListener('dblclick',()=>openRoom('profile'));
 // Scene-native coordinates: scale artwork, character and record in one space.
@@ -353,6 +362,7 @@ function placeWorld(){
   const talkLeft=r.left+Math.max(8,Math.min(r.width-tw-8,side==='right'?hx+hw/2+12:hx-hw/2-tw-12));
   talk.style.width=`${tw}px`;
   const tools=$('.garden-tools').getBoundingClientRect(),mini=$('#mini-player').getBoundingClientRect();
+  document.documentElement.style.setProperty('--mini-player-height',`${mini.height}px`);
   const minTop=talkLeft<tools.right&&talkLeft+tw>tools.left?tools.bottom+9:10;
   const bottom=Math.min(innerHeight-12,mini.top>0?mini.top-12:innerHeight-100);
   Object.assign(talk.style,{left:`${talkLeft}px`,top:`${Math.max(minTop,Math.min(r.top+hy+h*scale*.24,bottom-talk.offsetHeight))}px`});
@@ -365,7 +375,7 @@ function placeWorld(){
 
 }
 new ResizeObserver(placeWorld).observe($('.scene-world'));
-new ResizeObserver(placeWorld).observe($('#host-talk'));narrow.addEventListener('change',placeWorld);placeWorld();syncPlayback();
+new ResizeObserver(placeWorld).observe($('#host-talk'));new ResizeObserver(placeWorld).observe($('#mini-player'));narrow.addEventListener('change',placeWorld);placeWorld();syncPlayback();
 // Hash destinations open only after the explicit entrance gesture.
 
 const gardenLife=initGardenLife({audio,notice});
