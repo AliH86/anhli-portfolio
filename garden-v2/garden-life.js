@@ -7,7 +7,7 @@ export function phaseForHour(hour,minute=0){const m=hour*60+minute;return m>=330
 export function initGardenLife({audio,notice}){
   const $=s=>document.querySelector(s),body=document.body,world=$('.scene-world');
   const talk=$('#host-talk'),words=$('#host-words'),tarot=$('#tarot-draw');
-  let mode='auto',phase='';
+  let mode='auto',phase='',offscreen=false;
   let talkTimer,lastLine='',album=null,pendingAlbum=false,albumUntil=0,hostMoment=null,momentBackup=null,invited=false,speechVersion=0,dailyMessage=null;
   const readDaily=createDailyReader(),dailyDialog=$('#daily-dialog');
   const listeners=[];
@@ -64,9 +64,10 @@ export function initGardenLife({audio,notice}){
   }
   for(const m of ['day','night','auto'])on($(`#daylight-${m}`),'click',()=>{mode=m;updateClock();});
   function syncScene(){
-    wildlife.setBlocked(document.hidden||body.dataset.entered!=='true'||(!!body.dataset.room&&(body.dataset.room!=='music'||body.dataset.touch==='true'))||dailyDialog.open||body.dataset.still==='true');
+    wildlife.setBlocked(offscreen||document.hidden||body.dataset.entered!=='true'||(!!body.dataset.room&&(body.dataset.room!=='music'||body.dataset.touch==='true'))||dailyDialog.open||body.dataset.still==='true');
     if(!body.dataset.room&&pendingAlbum&&album){pendingAlbum=false;albumUntil=Date.now()+35000;say(albumIntroduction(album),'album');}
   }
+  const visibility=new IntersectionObserver(([entry])=>{offscreen=!entry.isIntersecting;body.dataset.worldOffscreen=String(offscreen);syncScene();});visibility.observe(world);
   const observer=new MutationObserver(syncScene);observer.observe(body,{attributes:true,attributeFilter:['data-room','data-still','data-entered','data-touch']});
   on(document,'visibilitychange',()=>{
     if(document.hidden){clearTimeout(talkTimer);}else{updateClock();scheduleTalk();}syncScene();
@@ -91,5 +92,5 @@ export function initGardenLife({audio,notice}){
 
   updateClock();syncScene();say(softLines[0]);scheduleTalk();
   const clockTimer=setInterval(()=>{if(!document.hidden)updateClock();},15000);
-  return {introduceAlbum,setHostMoment,destroy(){observer.disconnect();listeners.forEach(remove=>remove());clearInterval(clockTimer);clearTimeout(talkTimer);wildlife.destroy();ambience.destroy();}};
+  return {introduceAlbum,setHostMoment,destroy(){observer.disconnect();visibility.disconnect();listeners.forEach(remove=>remove());clearInterval(clockTimer);clearTimeout(talkTimer);wildlife.destroy();ambience.destroy();}};
 }

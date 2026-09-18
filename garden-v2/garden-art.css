@@ -1,0 +1,158 @@
+/* V2.2 art pass. Authored rim/sign bitmaps frame live, accessible HTML. */
+@font-face{font-family:GardenHand;src:url('./assets/fonts/dancing-script-600.ttf') format('truetype');font-weight:600;font-display:swap}
+:root{--carved-rim:url('./assets/ui/console-rim.webp');--stall-sign:url('./assets/ui/stall-sign.webp');--album-rim:url('./assets/ui/album-frame.webp');--leafy-corner:url('./assets/ui/leafy-corner.webp')}
+.top-nav{border:17px solid transparent;border-image:var(--carved-rim) 116 170 114 161 / 24px 30px stretch;background:#dbc28ca6;border-radius:22px;box-shadow:0 7px 10px #2917074d;gap:0}
+.top-nav:before,.top-nav:after{display:none}
+.top-nav button{border-width:5px;min-width:155px;padding:3px 13px;min-height:50px;border-right:1px solid #754a273d}
+.top-nav button:last-child{border-right:0}.top-nav button.is-active{border-image-width:9px;background:#fff1ca75;border-radius:6px}
+.top-nav button:not(.is-active):not(:hover){border-image:var(--wood-image) 80 fill / 7px;background:none}
+.top-nav button small{font-size:11px}.top-nav button .ui-icon{width:26px;height:26px}
+@media(min-width:1300px) and (min-aspect-ratio:4/3){.top-nav button{min-width:217px;padding-inline:17px}}
+.wordmark{border-width:15px;border-image:var(--carved-rim) 116 170 114 161 / 23px 27px;padding:12px 20px;box-shadow:0 6px 8px #36230f50}
+.wordmark:after{display:none}
+.host-talk{font-family:GardenHand,Georgia,serif}#host-words{font-family:GardenHand,Georgia,serif;font-size:20px;line-height:1.35}
+#room-dialog[data-room=music] .room-header{padding:0;border:0}
+#room-dialog[data-room=music] .room-header>div{border:0;box-shadow:none;background:var(--stall-sign) center/100% 100% no-repeat;width:350px;height:175px;padding:52px 55px 40px;display:flex;flex-direction:column-reverse;justify-content:center;align-items:center;text-align:center;filter:drop-shadow(0 6px 4px #301c0e66);color:#fff0c8;text-shadow:0 2px 1px #583215}
+#room-dialog[data-room=music] .room-header h1{font:600 49px/1.15 GardenHand,Georgia,serif;white-space:nowrap;letter-spacing:0;margin:0 0 8px}
+#room-dialog[data-room=music] .room-header .eyebrow{font-size:7px;letter-spacing:.7px;white-space:nowrap;margin:0;opacity:1}
+#room-dialog[data-room=music] .music-room{gap:5px}
+#room-dialog[data-room=music] .music-shelf{border:0;border-image:none;background:none;box-shadow:none;padding:0}
+#room-dialog .music-shelf:before,#room-dialog .music-shelf:after{display:none}
+#room-dialog .shelf-toolbar{border:0;border-image:none;box-shadow:none;background:none;min-height:44px;padding:0 14px!important;margin:0 0 1px;gap:7px;justify-content:center}
+.category-chips{gap:3px;overflow:visible;align-items:center}
+.category-chips .garden-button{font:600 16px/1.2 GardenHand,Georgia,serif;min-height:40px;padding:1px 10px;border-width:7px 9px;filter:drop-shadow(0 3px 2px #2b1b0f65);transform:rotate(-1deg)}
+.category-chips .garden-button:nth-child(even){transform:rotate(1deg)}
+.category-chips .garden-button[aria-pressed=true]{border-image:var(--paper-image) 154 fill / 9px;background:#d2cf95;box-shadow:inset 0 -3px #697643;color:#352a15}
+#room-dialog .picker-toggle{margin-left:2px;min-width:42px;width:42px;min-height:40px;padding:2px;border-width:7px;filter:drop-shadow(0 3px 2px #2b1b0f65)}
+#room-dialog .picker-toggle span{display:none}
+#room-dialog .album-shelf{--cover-size:195px;height:calc(var(--cover-size) + 63px);gap:0;padding-top:9px;padding-bottom:6px;align-items:end;mask-image:none}
+#room-dialog[data-queue-open=true] .album-shelf{mask-image:none}
+#room-dialog .album-choice{transform:scale(.88);transform-origin:50% 93%;opacity:.95}
+#room-dialog .album-choice[data-focus=false]:not([aria-pressed=true]){transform:scale(.88) rotate(-1.2deg)}
+#room-dialog .album-choice:nth-child(even)[data-focus=false]:not([aria-pressed=true]){transform:scale(.88) rotate(1deg)}
+#room-dialog .album-image{border:0;border-image:none;background:none;padding:18px;overflow:visible;box-shadow:none;filter:drop-shadow(1px 4px 3px #1f110b7a)}
+#room-dialog .album-image img{border:0;border-radius:4px;box-shadow:none;transform:none!important}
+#room-dialog .album-image:after,#room-dialog .album-choice:nth-child(even) .album-image:after,#room-dialog .album-choice[aria-pressed=true] .album-image:after{display:block;inset:0;width:100%;height:100%;background:none;border:20px solid transparent;border-image:var(--album-rim) 112 / 20px stretch;filter:none;transform:none;box-sizing:border-box}
+#room-dialog .album-choice[aria-pressed=true] .album-image:before{content:'';position:absolute;width:90px;height:90px;right:-9px;bottom:-10px;z-index:2;background:var(--leafy-corner) center/contain no-repeat;transform:rotate(180deg);filter:drop-shadow(1px 2px 1px #30210e70);pointer-events:none}
+#room-dialog .album-label{font:12px/1.25 Georgia,serif;margin:1px 11px 0;padding:3px 5px;border-radius:3px;color:#442d19!important;background:#f7e6bdde;text-shadow:none!important;filter:drop-shadow(0 2px 2px #33221145)}
+#room-dialog .album-choice .garden-tag{font:10px/1.2 Georgia,serif;margin-top:3px;border-width:3px 7px;opacity:1}
+#room-dialog .shelf-display:after{content:'';position:absolute;bottom:3px;left:1%;right:1%;height:24px;z-index:-1;border:8px solid transparent;border-image:var(--wood-image) 80 fill / 8px;box-shadow:0 7px 6px #28160955;pointer-events:none}
+#room-dialog .shelf-foot{border:0;border-image:none;background:none;color:#f9e8bf;text-shadow:0 1px 3px #211506;justify-content:center;padding:0;margin:1px 0;height:14px;font-size:10px}
+#room-dialog .shelf-foot>span:last-child{display:none}
+#room-dialog .shelf-prev,#room-dialog .shelf-next{top:42%;width:47px;height:47px}.shelf-prev{left:-12px}.shelf-next{right:-12px}
+#album-selection.music-console{border:26px solid transparent;border-width:27px 33px 29px;border-image:var(--carved-rim) 116 170 114 161 / 34px 42px stretch;background:none;border-radius:28px;box-shadow:none;filter:drop-shadow(1px 7px 5px #27170c66)}
+#album-selection:after{display:none}
+#album-selection .console-inset{border:0;border-image:none;border-radius:10px;background:#fff0c8c4;padding:4px 10px;min-height:100px;gap:8px 13px;grid-template-columns:minmax(220px,1.45fr) minmax(176px,1fr) 115px;box-shadow:inset 0 1px 5px #62432224}
+#album-selection .console-inset:before{inset:0;border-radius:inherit;opacity:.16}
+.console-record{gap:10px}.console-cover{width:59px;height:59px;border:2px solid #775232;border-radius:5px;box-shadow:1px 3px 4px #31200f55}
+.console-copy h2{font-size:17px;line-height:1.25;margin-bottom:5px}.console-copy .eyebrow{display:none}.console-copy .album-byline{font-size:12px}
+#album-selection .playback-row{gap:12px}.primary-play{width:65px;height:65px;min-width:65px;min-height:65px}
+#album-selection .play-status{font-size:10px;line-height:1.3}
+#album-selection .queue-more{min-height:44px;font-size:13px;filter:drop-shadow(0 2px 2px #3a260e38)}
+#track-queue.playlist-drawer{border:15px solid transparent;border-image:var(--carved-rim) 116 170 114 161 / 26px 27px;background:none;border-radius:20px;box-shadow:none;filter:drop-shadow(1px 8px 6px #29170c66)}
+.playlist-drawer:after{display:none}
+#track-queue .ledger-inset{border-width:8px;border-image-width:11px;padding:5px 9px;background:#fff0d0cf;border-radius:7px}
+.ledger-header{padding:4px 2px 9px;gap:8px}.ledger-header h2{font-size:22px;margin:5px 0}.ledger-header p{font-size:12px}.ledger-header small{font-size:8px}.ledger-tabs{gap:16px}.ledger-tabs button{font-size:15px}
+#track-queue .track-button{padding:10px 5px;min-height:48px;gap:7px;grid-template-columns:19px minmax(0,1fr) 28px}#track-queue .track-name{font-size:14px;line-height:1.3}
+.letter-salutation,.letter-signature{font-family:GardenHand,Georgia,serif}.letter-salutation{font-size:31px}.letter-signature{font-size:26px}
+.profile-copy{color:#51391f}
+#room-dialog[data-room=profile]{isolation:isolate}
+#room-dialog[data-room=profile]:before{width:134px;height:268px;left:-120px;top:65px;background:url('./assets/ui/letter-bouquet.webp') center/contain no-repeat;transform:rotate(-5deg);filter:drop-shadow(2px 5px 3px #35261266)}
+#room-dialog[data-room=profile]:after{content:'';position:absolute;inset:-42px;z-index:-1;border:21px solid transparent;border-image:var(--album-rim) 112 / 23px stretch;transform:rotate(-1deg);pointer-events:none;filter:drop-shadow(2px 6px 4px #34200e50)}
+#room-dialog[data-room=profile] .letter-salutation{margin-bottom:18px}
+.mini-player{border:18px solid transparent;border-image:var(--carved-rim) 116 170 114 161 / 27px 32px;border-radius:20px;padding:7px 12px;box-shadow:0 5px 9px #3923104d}
+.mini-player .play-button{background:transparent url('./assets/ui/round-button.webp') center/100% 100% no-repeat;border:0;width:47px;height:47px}.mini-player .play-button .ui-icon{filter:invert(.9) sepia(.3);width:22px;height:22px}.mini-player>.round-button .ui-icon{filter:none}
+#room-dialog[data-room=gallery]{border-image:var(--carved-rim) 116 170 114 161 / 35px 38px;border-radius:25px;box-shadow:0 10px 20px #25170b50}
+#room-dialog[data-room=gallery]:before,#room-dialog[data-room=gallery]:after{display:block;background:var(--leafy-corner) center/contain no-repeat;filter:drop-shadow(2px 4px 2px #30210e70)}
+#room-dialog[data-room=gallery]:before{width:235px;height:235px;left:-47px;top:-47px;transform:none}
+#room-dialog[data-room=gallery]:after{width:205px;height:205px;right:-39px;bottom:-43px;transform:rotate(180deg)}
+#room-dialog[data-room=gallery] .room-header>div{border:12px solid transparent;border-image:var(--paper-image) 154 fill / 15px;padding:1px 12px;transform:rotate(-1deg);filter:drop-shadow(0 3px 2px #664b2238)}
+#room-dialog[data-room=gallery] .room-header .eyebrow{display:none}
+#room-dialog[data-room=gallery] .room-header h1{font:600 35px/1.2 GardenHand,Georgia,serif;letter-spacing:0;margin:0}
+@media(min-width:1101px){.gallery-grid{column-count:3;column-gap:28px}.gallery-pin{margin-bottom:29px}}
+@media(min-width:1101px){
+ #room-dialog[data-room=music],#room-dialog[data-room=music][data-listening=true]{width:min(940px,56vw);right:24vw;bottom:8vh;max-height:none}
+ #room-dialog[data-room=music] .room-header>div{position:fixed;left:47%;top:12vh;width:350px;height:175px}
+ #room-dialog[data-room=music] .room-header .room-motion{position:absolute;right:45px;top:-54px;width:40px;height:40px;margin:0}
+ #room-dialog[data-room=music] .room-header .close-room{position:absolute;right:0;top:-54px;width:40px;height:40px}
+ #room-dialog .album-shelf{--cover-size:clamp(173px,12vw,205px)}
+ #track-queue.playlist-drawer{right:calc(-24vw + 25px);bottom:28px;width:min(340px,21vw);height:405px}
+}
+@media(min-width:701px) and (min-height:531px){
+ #room-dialog .album-shelf{height:calc(var(--cover-size) + 29px);padding-top:3px;padding-bottom:20px}
+ #room-dialog .album-choice{height:var(--cover-size);position:relative}
+ #room-dialog .album-label{position:absolute;left:5%;right:5%;bottom:-17px;margin:0;font-size:11px;min-height:19px}
+ #room-dialog .album-choice .garden-tag{display:none}
+ #room-dialog .album-choice[data-playable=false] .garden-tag{display:block;position:absolute;bottom:18px;left:18px;right:18px;font-size:11px;padding:4px}
+ #room-dialog .shelf-foot{display:none}
+ #room-dialog .shelf-display:after{bottom:2px;height:18px;border-width:5px;border-image-width:5px}
+ #album-selection.music-console{border-width:29px 43px;border-image-width:44px 65px}
+ #album-selection .console-inset{grid-template-columns:minmax(160px,1.5fr) minmax(145px,1fr) 110px;grid-template-rows:auto 24px;gap:0 12px;min-height:87px;padding:5px 10px}
+ #album-selection .console-record{grid-column:1;grid-row:1}
+ #album-selection .playback{display:contents}
+ #album-selection .playback-row{grid-column:2;grid-row:1/3}
+ #album-selection .progress-row{grid-column:1;grid-row:2;margin:0 0 0 69px}
+ #album-selection .console-actions{grid-column:3;grid-row:1/3}
+ #album-selection .play-status{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%)}
+ #album-selection .audio-error{grid-row:3;margin:7px 0}
+ #album-selection .console-cover{width:52px;height:52px}
+ #track-queue .ledger-inset{border-image-width:8px}
+ .ledger-header small,.ledger-header p{display:none}.ledger-header{align-items:center;padding:0 0 5px}.ledger-header h2{font-size:22px;margin:0}
+}
+@media(min-width:701px) and (max-width:1100px) and (min-height:531px){
+ #room-dialog[data-room=music],#room-dialog[data-room=music][data-listening=true]{width:calc(100vw - 72px);right:36px;bottom:7vh;max-height:none}
+ #room-dialog[data-room=music] .room-header>div{position:fixed;left:44%;top:18vh;width:300px;height:150px;padding:47px 35px 35px}
+ #room-dialog[data-room=music] .room-header h1{font-size:43px}
+ #room-dialog[data-room=music] .room-header .room-motion,#room-dialog[data-room=music] .room-header .close-room{position:absolute;right:48px;top:-48px;margin:0;width:40px;height:40px}
+ #room-dialog[data-room=music] .room-header .close-room{right:0}
+ #room-dialog .album-shelf{--cover-size:190px}
+ #track-queue.playlist-drawer{width:340px;right:0;bottom:170px;height:min(440px,50vh)}
+ .category-chips .garden-button{font-size:15px;padding:1px 7px}
+}
+@media(min-width:1101px) and (max-aspect-ratio:4/3){
+ #room-dialog[data-room=music],#room-dialog[data-room=music][data-listening=true]{width:calc(100vw - 96px);right:48px;bottom:7vh}
+ #room-dialog[data-room=music] .room-header>div{left:44%;top:18vh}
+ #track-queue.playlist-drawer{width:340px;right:0;bottom:170px;height:min(440px,50vh)}
+}
+@media(max-width:700px){
+ .top-nav{border-width:10px;border-image-width:17px 22px}.top-nav button{min-width:0;min-height:44px;padding:0 10px;border:0}
+ .wordmark{border-width:12px;border-image-width:20px;padding:8px 13px}
+ #room-dialog[data-room=music] .room-header{height:104px;align-items:center;padding-bottom:0;gap:6px}
+ #room-dialog[data-room=music] .room-header>div{width:226px;height:113px;padding:35px 32px 28px;flex:none}
+ #room-dialog[data-room=music] .room-header h1{font-size:34px;margin-bottom:4px}
+ #room-dialog[data-room=music] .room-header .eyebrow{font-size:5px;letter-spacing:.3px}
+ #room-dialog .shelf-toolbar{padding:0 4px!important;justify-content:start;gap:3px;min-height:43px}
+ .category-chips{overflow-x:auto;overflow-y:hidden;gap:2px;padding:2px 0}.category-chips .garden-button{font-size:15px;border-width:6px;padding:1px 7px;min-height:37px}
+ #room-dialog .picker-toggle{width:37px;min-width:37px;min-height:37px}
+ #room-dialog .album-shelf{--cover-size:160px;height:211px;padding-top:5px;padding-bottom:3px}
+ #room-dialog .album-label{font-size:11px;margin:0 11px;padding:3px}.shelf-prev{left:0}.shelf-next{right:0}
+ #room-dialog .shelf-prev,#room-dialog .shelf-next{width:42px;height:42px}
+ #room-dialog .shelf-foot{display:none}
+ #album-selection.music-console{border-width:21px 19px 23px;border-image-width:28px 27px;filter:drop-shadow(0 5px 4px #29190f60)}
+ #album-selection .console-inset{grid-template-columns:minmax(0,1fr) 95px;min-height:0;padding:4px 6px;gap:5px 7px;border-radius:7px}
+ .console-cover{width:42px;height:42px}.console-copy h2{font-size:16px}.console-copy .album-byline{font-size:11px}.console-record{gap:8px}
+ .primary-play{width:49px;height:49px;min-width:49px;min-height:49px}#album-selection .playback-row{gap:6px}#album-selection .queue-more{font-size:11px;min-height:40px;gap:4px;white-space:nowrap}#album-selection .queue-more .ui-icon{width:15px;height:15px}
+ #album-selection .play-status{font-size:9px}.progress-row{font-size:9px}
+ #track-queue.playlist-drawer{border-width:16px 10px 0;border-image-width:24px 21px 0;border-radius:18px 18px 0}
+ #track-queue .ledger-inset{border-width:8px 9px 0;border-image-width:14px 15px 0;padding:0 6px calc(9px + env(safe-area-inset-bottom));border-radius:10px 10px 0}
+ #track-queue .track-button{min-height:54px;padding:12px 6px}#track-queue .track-name{font-size:15px}
+ .ledger-header{padding:5px 0 12px}.ledger-header h2{font-size:22px}.ledger-header p{font-size:12px}
+ .letter-salutation{font-size:28px}
+ #room-dialog[data-room=profile]:after{inset:-22px;border-width:14px;border-image-width:17px;transform:none}
+ #room-dialog[data-room=profile]:before{width:54px;height:108px;left:-51px;top:-32px;transform:rotate(-8deg)}
+ #room-dialog[data-room=gallery]{border-image-width:23px 25px}
+ #room-dialog[data-room=gallery] .room-header>div{padding:0 2px;border-width:7px;border-image-width:10px}#room-dialog[data-room=gallery] .room-header h1{font-size:25px}
+ #room-dialog[data-room=gallery]:before{width:97px;height:97px;left:-29px;top:-30px}#room-dialog[data-room=gallery]:after{width:91px;height:91px;right:-27px;bottom:-26px}
+ #room-dialog .album-choice[aria-pressed=true] .album-image:before{width:70px;height:70px;right:-4px;bottom:-6px}
+}
+@media(max-width:700px) and (max-height:730px){
+ #room-dialog[data-room=music] .room-header{height:79px}#room-dialog[data-room=music] .room-header>div{width:188px;height:94px;padding:29px 28px 23px}#room-dialog[data-room=music] .room-header h1{font-size:29px}
+ #room-dialog .album-shelf{--cover-size:125px;height:177px}#album-selection .console-inset{gap:2px 6px}.console-copy h2{font-size:15px}
+}
+@media(max-height:530px) and (orientation:landscape){
+ #room-dialog[data-room=music] .room-header{height:0}#room-dialog[data-room=music] .room-header>div{display:none}#room-dialog[data-room=music] .room-header .room-motion,#room-dialog[data-room=music] .room-header .close-room{position:absolute;top:-41px;right:47px;width:37px;height:37px;margin:0}#room-dialog[data-room=music] .room-header .close-room{right:3px}
+ #room-dialog .album-shelf{--cover-size:98px;height:140px}#room-dialog .album-label{font-size:10px}#room-dialog .shelf-foot{display:none}#room-dialog .album-choice .garden-tag{display:none}
+ #album-selection.music-console{border-width:18px 28px;border-image-width:25px 35px}#album-selection .console-inset{min-height:76px;padding:0 5px;grid-template-columns:minmax(180px,1.4fr) 180px 108px}
+ .primary-play{width:45px;height:45px;min-width:45px;min-height:45px}.console-cover{width:44px;height:44px}.console-copy h2{font-size:15px}
+ #track-queue.playlist-drawer{border-width:11px;border-image-width:22px}#track-queue .ledger-inset{padding:0 6px 2px;border-width:6px}.ledger-header{padding:0 0 3px}.ledger-header h2{font-size:19px;margin:2px 0}.ledger-header p{font-size:11px}.ledger-tabs button{min-height:40px;padding:5px 0}
+}

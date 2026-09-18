@@ -9,7 +9,7 @@ export const gustPlan = (strength = 1) => [
 export function initGardenWind() {
   const body=document.body,world=document.querySelector('.scene-world');
   const reeds=document.createElement('div');reeds.className='habitat-reeds';reeds.setAttribute('aria-hidden','true');world.append(reeds);
-  let timer,blocked=true;const running=new Set();
+  let timer,blocked=true,offscreen=false;const running=new Set();
   function place(){
     const r={width:world.clientWidth,height:world.clientHeight},portrait=matchMedia('(max-aspect-ratio:4/3)').matches;
     const [iw,ih,x,y,w,h]=portrait?[900,1200,690,338,70,95]:[1672,941,1478,551,92,115];
@@ -18,7 +18,7 @@ export function initGardenWind() {
   }
   function gust(){
     if(blocked)return;
-    for(const plan of gustPlan(.85+Math.random()*.3)){
+    for(const plan of gustPlan((.85+Math.random()*.3)*({calm:.35,breeze:1,windy:1.45}[body.dataset.wind]||1))){
       const node=document.querySelector(plan.selector);if(!node)continue;
       const a=plan.angle,animation=node.animate([
         {transform:'rotate(0deg)',offset:0},{transform:`rotate(${a*.55}deg)`,offset:.2},
@@ -30,12 +30,13 @@ export function initGardenWind() {
     timer=setTimeout(gust,10500+Math.random()*5500);
   }
   function sync(){
-    const next=document.hidden||body.dataset.still==='true'||body.dataset.entered!=='true'||Boolean(body.dataset.room&&(body.dataset.room!=='music'||body.dataset.touch==='true'));
+    const next=offscreen||document.hidden||body.dataset.still==='true'||body.dataset.entered!=='true'||Boolean(body.dataset.room&&(body.dataset.room!=='music'||body.dataset.touch==='true'));
     if(next===blocked)return;blocked=next;clearTimeout(timer);
     if(blocked){for(const animation of running)animation.cancel();running.clear();}
     else timer=setTimeout(gust,450+Math.random()*650);
   }
-  new MutationObserver(sync).observe(body,{attributes:true,attributeFilter:['data-room','data-still','data-entered','data-touch']});
+  new MutationObserver(sync).observe(body,{attributes:true,attributeFilter:['data-room','data-still','data-entered','data-touch','data-wind']});
   document.addEventListener('visibilitychange',sync);
+  new IntersectionObserver(([entry])=>{offscreen=!entry.isIntersecting;sync();}).observe(world);
   new ResizeObserver(place).observe(world);place();sync();
 }

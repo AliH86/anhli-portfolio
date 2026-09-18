@@ -15,7 +15,9 @@
   <link rel="stylesheet" href="./garden-life.css?v=final1">
   <link rel="stylesheet" href="./final-review.css?v=release2">
   <link rel="stylesheet" href="./garden-v21.css?v=23">
-  <script type="module" src="./app.js?v=23"></script>
+  <link rel="stylesheet" href="./garden-v22.css?v=10">
+  <link rel="stylesheet" href="./garden-art.css?v=2">
+  <script type="module" src="./app.js?v=22-art2"></script>
 </head>
 <body data-entered="false">
   <section id="entrance" class="entrance" role="dialog" aria-modal="true" aria-labelledby="entrance-title" tabindex="-1" data-state="loading">
@@ -56,31 +58,31 @@
     <div class="canopy-frond" aria-hidden="true"></div>
     <div class="scene-record" id="scene-record" hidden aria-hidden="true"><div class="vinyl-spin"><img alt=""><i class="vinyl-shine"></i></div></div>
     </div>
-    <div id="host-talk" class="host-talk" role="group" aria-label="Lời thoại của Li"><small id="talk-kicker">Li nói nhỏ</small><span id="host-words">Ghé vườn nhà Li chơi chút nha. Nghe vài bài hát Li sáng tác.</span><button id="tarot-draw" hidden>Rút một lá</button></div>
+    <div id="host-talk" class="host-talk" role="group" aria-label="Lời thoại của Li"><small id="talk-kicker">Li nói nhỏ</small><span id="host-words">Ghé vườn nhà Li chơi chút nha. Nghe vài bài hát Li sáng tác.</span><button id="tarot-draw" hidden>Rút một lá</button><button class="note-story" data-open="profile">Đọc chuyện của Li <span data-icon="right"></span></button></div>
     <header class="masthead">
       <a href="./" class="wordmark" aria-label="Vườn của Li, về khu vườn">vườn của <em>Li.</em><small>GHÉ CHƠI · NGHE NHẠC</small></a>
       <nav class="top-nav" aria-label="Trong khu vườn">
-        <button data-open="music"><span data-icon="music"></span><span>Sạp nhạc</span></button>
-        <button data-open="profile"><span data-icon="user"></span><span>Chuyện của Li</span></button>
-        <button data-open="gallery"><span data-icon="image"></span><span>Điều để dành</span></button>
+        <button data-open="music"><span data-icon="music"></span><span>Sạp nhạc<small>Âm nhạc chữa lành</small></span></button>
+        <button data-open="profile"><span data-icon="user"></span><span>Chuyện của Li<small>Những câu chuyện nhỏ</small></span></button>
+        <button data-open="gallery"><span data-icon="image"></span><span>Điều để dành<small>Những khoảnh khắc đẹp</small></span></button>
       </nav>
       <button id="motion-toggle" data-motion-toggle class="round-button motion-toggle" aria-label="Tắt chuyển động" aria-pressed="false" title="Tắt chuyển động"><span data-icon="sparkle"></span></button>
     </header>
-    <div class="garden-tools" role="group" aria-label="Không khí trong vườn">
+    <details class="garden-settings wood-panel"><summary aria-label="Mở tùy chỉnh khu vườn"><span data-icon="settings"></span></summary><div class="garden-tools paper-panel" role="group" aria-label="Không khí trong vườn"><p class="settings-title">Một chút không khí vườn</p><span id="world-time" class="garden-tag">Buổi sáng</span>
       <div class="daylight-controls" role="group" aria-label="Ánh sáng khu vườn">
         <button id="daylight-day" class="garden-tool" aria-label="Ban ngày" aria-pressed="false" title="Ban ngày"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button>
         <button id="daylight-night" class="garden-tool" aria-label="Ban đêm" aria-pressed="false" title="Ban đêm"><svg viewBox="0 0 24 24"><path d="M20 15A9 9 0 0 1 9 4a9 9 0 1 0 11 11Z"/></svg></button>
         <button id="daylight-auto" class="garden-tool" aria-label="Tự động theo giờ thiết bị" aria-pressed="true" title="Tự động · 05:30–17:30 ban ngày"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg></button>
       </div>
       <button id="ambience-toggle" class="garden-tool ambience-toggle" aria-pressed="false" aria-label="Bật tiếng vườn" title="Bật tiếng vườn"><svg viewBox="0 0 24 24"><path d="M9 18V5l11-2v13M9 8l11-2"/><ellipse cx="6" cy="18" rx="3" ry="2.5"/><ellipse cx="17" cy="16" rx="3" ry="2.5"/><path class="ambient-slash" d="M3 3l18 18"/></svg></button>
-    </div>
+    </div></details>
     <section id="mini-player" class="mini-player" aria-label="Bài nhạc hiện tại">
       <button id="mini-details" class="mini-details" data-open="music"><span id="mini-cover-wrap" class="mini-cover-wrap"><span data-icon="music"></span><img id="mini-cover" alt="" hidden></span><span class="mini-copy"><small id="mini-kicker">CÁI SẠP CỦA LI</small><strong id="mini-title">Chọn một album nhạc</strong><span id="mini-subtitle">Nghe khi bạn muốn.</span></span></button>
       <button id="mini-play" class="play-button" aria-label="Phát nhạc" disabled><span data-icon="play"></span></button>
       <button id="mini-next" class="round-button" aria-label="Bài tiếp theo" disabled><span data-icon="next"></span></button>
     </section>
     <aside id="welcome-loading" hidden aria-label="Khu vườn đang tải"></aside>
-    <footer class="garden-footer"><span>Âm nhạc & những điều để dành.</span><span>HUỲNH CHÍ LẬP</span></footer>
+    <footer class="garden-footer"><span>Vườn của Li · v2.2</span><span>Âm nhạc & những điều để dành.</span></footer>
   </main>
 
   <dialog id="room-dialog" class="room-dialog" aria-labelledby="room-title">

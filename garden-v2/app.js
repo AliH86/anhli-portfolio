@@ -1,17 +1,17 @@
+import {esc,icon,playable,albumBadge,unavailableReason,categories,matchesCategory,albumFrame,transport,bindShelf} from './garden-ui.js';
+import {initWorld,musicState,sceneGateways} from './garden-state.js';
 import {loadingMarkup,sendLoadingGust} from './garden-loading.js?v=1';
 import { initGardenLife } from './garden-life.js?v=23';
 import {albumIntroduction} from './garden-dialogue.js?v=3';
-import {initEntrance,waitForImage} from './garden-entrance.js?v=23';
+import {initEntrance,waitForImage} from './garden-entrance.js?v=24';
 import {initLyrics} from './garden-lyrics.js?v=23';
 import {initGardenWind} from './garden-wind.js?v=23';
 const $ = (s,root=document) => root.querySelector(s);
 const $$ = (s,root=document) => [...root.querySelectorAll(s)];
-const paths={heart:'<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/>',music:'<path d="M9 18V5l11-2v13M9 8l11-2"/><ellipse cx="6" cy="18" rx="3" ry="2.5"/><ellipse cx="17" cy="16" rx="3" ry="2.5"/>',user:'<circle cx="12" cy="8" r="3.5"/><path d="M5 21v-2a7 7 0 0 1 14 0v2"/>',image:'<rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="1.4"/><path d="m3 17 5-5 4 4 4-6 5 7"/>',play:'<path data-fill="1" d="m8 5 11 7-11 7z"/>',pause:'<path d="M8 5v14M16 5v14" stroke-width="3"/>',next:'<path d="m5 5 10 7-10 7zM19 5v14"/>',previous:'<path d="m19 5-10 7 10 7zM5 5v14"/>',close:'<path d="m6 6 12 12M18 6 6 18"/>',left:'<path d="m15 5-7 7 7 7"/>',right:'<path d="m9 5 7 7-7 7"/>',volume:'<path d="M3 9h4l5-4v14l-5-4H3zM16 8a6 6 0 0 1 0 8M19 5a10 10 0 0 1 0 14"/>',muted:'<path d="M3 9h4l5-4v14l-5-4H3zM16 9l5 6M21 9l-5 6"/>',sparkle:'<path d="m12 3 2.6 6.4L21 12l-6.4 2.6L12 21l-2.6-6.4L3 12l6.4-2.6z"/>',mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/>'};
-const icon = name => `<svg viewBox="0 0 24 24" aria-hidden="true">${paths[name]||paths.music}</svg>`;
-const esc = v => String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function fillIcons(root=document){$$('[data-icon]',root).forEach(e=>e.innerHTML=icon(e.dataset.icon));}
 fillIcons();
 const room=$('#room-dialog'),content=$('#room-content'),lightbox=$('#lightbox'),audio=$('#audio');
+const roomNav=$('.top-nav').cloneNode(true);roomNav.classList.add('room-nav');room.prepend(roomNav);
 const motion=matchMedia('(prefers-reduced-motion: reduce)');
 const touchDevice=matchMedia('(hover: none) and (pointer: coarse)');
 document.body.dataset.touch=String(touchDevice.matches);
@@ -19,10 +19,13 @@ touchDevice.addEventListener('change',()=>{document.body.dataset.touch=String(to
 let savedMotion=null;try{savedMotion=localStorage.getItem('garden-still');}catch{}
 const state={room:'',catalog:null,album:null,trackIndex:0,wanted:false,playing:false,loading:false,error:'',token:0,viewToken:0,gallery:null,shown:24,photoIndex:0,media:'photos',videos:null,mediaToken:0,videoIndex:null,playerLayout:'cover',hostPose:'idle',still:motion.matches,lastFocus:null,entered:false,listening:false,queueOpen:false,search:''};
 if(savedMotion!==null)state.still=savedMotion==='true';
-let lyricController=null;
+let lyricController=null,shelfCleanup=()=>{};
+const worldController=initWorld();
+const favoriteAlbums=new Set();try{JSON.parse(localStorage.getItem('garden-favorite-albums')||'[]').forEach(id=>favoriteAlbums.add(id));}catch{}
+state.category='all';state.sheetTab='tracks';
 const loads={};
 async function getData(name){
-  if(!loads[name])loads[name]=fetch(`./data/${name}.json`).then(r=>{if(!r.ok)throw Error('Không tải được dữ liệu.');return r.json();}).catch(e=>{delete loads[name];throw e;});
+  if(!loads[name])loads[name]=fetch(`./data/${name}.json?v=20260918-v22`,{cache:'no-cache',signal:AbortSignal.timeout(15000)}).then(r=>{if(!r.ok)throw Error('Không tải được dữ liệu.');return r.json();}).catch(e=>{delete loads[name];throw e;});
   return loads[name];
 }
 let noticeTimer,flight,flightEl,mediaMetadataKey='';
@@ -39,24 +42,27 @@ $('#scenery img').addEventListener('error',()=>{document.body.classList.add('sce
 
 document.addEventListener('click',e=>{const button=e.target.closest('[data-loading-gust]');if(button)sendLoadingGust(button,state.still);});
 
-const titles={music:['CÁI SẠP NHẠC','Chọn một album nhạc.'],profile:['NGƯỜI TRÔNG VƯỜN','Chuyện của Li.'],gallery:['HÌNH ẢNH & NHỮNG THƯỚC PHIM','Những điều để dành.']};
+const titles={music:['MỖI BÀI HÁT LÀ MỘT LẦN TRỞ VỀ','Sạp nhạc'],profile:['NGƯỜI TRÔNG VƯỜN','Chuyện của Li.'],gallery:['HÌNH ẢNH & NHỮNG THƯỚC PHIM','Những điều để dành.']};
 async function openRoom(name,{historyChange=true}={}){
   if(!titles[name]||!state.entered)return;
-  if(!room.open){state.lastFocus=document.activeElement;room.showModal();}
-  const token=++state.viewToken;state.room=name;document.body.dataset.room=name;room.dataset.room=name;setHostPose(name==='gallery'?'gallery':state.wanted?'seated':'idle');placeWorld();
+  const wasOpen=room.open;
+  if(!wasOpen){state.lastFocus=document.activeElement;room.showModal();}
+  state.queueOpen=false;room.dataset.queueOpen='false';$('.room-header').inert=false;
+  const token=++state.viewToken;state.room=name;worldController.update(state);document.body.dataset.room=name;room.dataset.room=name;setHostPose(name==='gallery'?'gallery':state.wanted?'seated':'idle');placeWorld();
   $('#room-kicker').textContent=titles[name][0];$('#room-title').textContent=titles[name][1];
   $$('.top-nav button').forEach(b=>b.classList.toggle('is-active',b.dataset.open===name));
-  if(historyChange&&location.hash!==`#${name}`)history.pushState({gardenRoom:true},'',`${location.pathname}${location.search}#${name}`);
-  content.innerHTML=loadingMarkup();
+  if(historyChange&&location.hash!==`#${name}`)history[wasOpen?'replaceState':'pushState']({gardenRoom:true},'',`${location.pathname}${location.search}#${name}`);
+  shelfCleanup();content.innerHTML=loadingMarkup();
   try{
     if(name==='music'){state.catalog=await getData('catalog');if(token!==state.viewToken)return;renderMusic();}
     else if(name==='profile'){const profile=await getData('profile');if(token!==state.viewToken)return;renderProfile(profile);}
     else {[state.gallery,state.videos]=await Promise.all([getData('gallery'),getData('videos').catch(()=>[])]);if(token!==state.viewToken)return;renderGallery();}
     content.scrollTop=0;
+    if(!state.still&&name!=='music'){const gateway=$(name==='profile'?'#host-talk':'.place-gallery'),g=gateway.getBoundingClientRect(),r=room.getBoundingClientRect();room.style.transformOrigin=`${g.x+g.width/2-r.x}px ${g.y+g.height/2-r.y}px`;room.animate([{opacity:.3,transform:'scale(.7)'},{opacity:1,transform:'scale(1)'}],{duration:300,easing:'cubic-bezier(.2,.7,.2,1)'});}
   }catch(e){if(token===state.viewToken)content.innerHTML=`<div class="empty-state" role="status">Chưa mở được góc này. Bạn thử lại nhé.<button class="retry" data-retry="${name}">Thử lại</button></div>`;}
 }
-function cleanupRoom(){stopVideo();state.room='';state.viewToken++;state.mediaToken++;setHostPose(state.wanted?'seated':'idle');document.body.dataset.room='';placeWorld();$$('.top-nav button').forEach(b=>b.classList.remove('is-active'));cancelFlight();state.lastFocus?.focus?.();}
-function closeRoom(){if(lightbox.open){lightbox.close();return;}if(room.open)room.close();if(history.state?.gardenRoom)history.back();else history.replaceState(null,'',location.pathname+location.search);}
+function cleanupRoom(){shelfCleanup();state.queueOpen=false;room.dataset.queueOpen='false';$('.room-header').inert=false;stopVideo();state.room='';worldController.update(state);state.viewToken++;state.mediaToken++;setHostPose(state.wanted?'seated':'idle');document.body.dataset.room='';placeWorld();$$('.top-nav button').forEach(b=>b.classList.remove('is-active'));cancelFlight();state.lastFocus?.focus?.();}
+function closeRoom(){if(lightbox.open){lightbox.close();return;}if(room.open)room.close();history.replaceState(null,'',location.pathname+location.search);}
 room.addEventListener('close',cleanupRoom);
 room.addEventListener('cancel',e=>{e.preventDefault();if(state.room==='music'&&state.queueOpen){state.queueOpen=false;syncQueue();$('.queue-more')?.focus({preventScroll:true});}else closeRoom();});
 room.addEventListener('click',e=>{if(e.target===room){const r=room.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeRoom();}});
@@ -66,40 +72,43 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-open]');if
 $('.wordmark').addEventListener('click',e=>{e.preventDefault();if(room.open)closeRoom();});
 
 function renderMusic(){
-  content.innerHTML=`<section class="music-room"><div id="album-art"></div><div class="music-deck"><div id="album-introduction" class="album-greeting" hidden></div><div class="music-console"><div id="track-queue" class="track-queue" hidden></div><div id="album-selection"></div></div><div class="shelf-block"><div class="shelf-heading"><h2>Trên sạp hôm nay <small>· ${state.catalog.length} album</small></h2><label class="album-search"><span class="sr-only">Tìm album hoặc bài hát</span><input id="album-search" type="search" placeholder="Tìm một chiếc đĩa…" autocomplete="off" value="${esc(state.search)}"></label><div class="shelf-arrows"><button class="round-button" data-shelf="-1" aria-label="Xem các album trước">${icon('left')}</button><button class="round-button" data-shelf="1" aria-label="Xem thêm album">${icon('right')}</button></div></div><div class="album-shelf" aria-label="Chọn album">${state.catalog.map((a,i)=>`<button class="album-choice" data-album="${esc(a.id)}" aria-pressed="${a.id===state.album?.id}" aria-label="Chọn album ${esc(a.name)}"><img src="${esc(a.cover)}" alt="" loading="${i<7?'eager':'lazy'}" decoding="async" width="108" height="108"><span>${esc(a.name)}</span></button>`).join('')}</div><p class="shelf-no-results" hidden>Chưa thấy chiếc đĩa này. Thử một tên khác nha.</p></div></div></section>`;
+  content.innerHTML=`<section class="music-room" aria-label="Sạp đĩa của Li"><div class="shelf-block music-shelf"><div class="shelf-toolbar"><div class="category-chips" role="group" aria-label="Góc nhạc">${categories.map(([id,label])=>`<button class="garden-button paper-button" data-category="${id}" aria-pressed="${state.category===id}">${label}</button>`).join('')}</div><button class="garden-button paper-button picker-toggle" data-picker aria-label="Tìm và chọn nhanh album" aria-expanded="false" aria-controls="album-picker">${icon('search')}<span>Tìm đĩa</span></button></div><div id="album-picker" class="album-picker paper-panel" hidden><label for="album-search">Tìm một chiếc đĩa</label><input id="album-search" type="search" placeholder="Tên album hoặc bài hát…" autocomplete="off" value="${esc(state.search)}"><label class="sr-only" for="album-jump">Đến album</label><select id="album-jump"><option value="">Chọn nhanh · ${state.catalog.length} album</option>${state.catalog.map(a=>`<option value="${esc(a.id)}">${esc(a.name)}</option>`).join('')}</select></div><div class="shelf-display"><button class="round-button shelf-prev" data-shelf="-1" aria-label="Xem các album trước">${icon('left')}</button><div class="album-shelf" aria-label="Chọn album, vuốt ngang hoặc dùng phím mũi tên">${state.catalog.map((a,i)=>albumFrame(a,i,a.id===state.album?.id)).join('')}</div><button class="round-button shelf-next" data-shelf="1" aria-label="Xem thêm album">${icon('right')}</button></div><div class="shelf-foot"><span id="shelf-position">${state.catalog.length} chiếc đĩa</span><span>Chọn một chiếc đĩa, ngồi lại một chút.</span></div><p class="shelf-no-results paper-panel" hidden>Chưa thấy chiếc đĩa này. Thử một tên khác nha.</p></div><div id="album-selection" class="wood-panel music-console"></div><aside id="track-queue" class="playlist-drawer wood-panel" role="region" aria-label="Sổ bài hát" hidden></aside></section>`;
   renderSelection();filterShelf(state.search);
+  if(!state.album){const first=state.catalog.find(a=>a.name==='Untamed')||state.catalog[0];state.album=first;state.trackIndex=Math.max(0,first.tracks.findIndex(t=>t.url));renderSelection();$$('[data-album]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.album===first.id)));}
+  shelfCleanup=bindShelf(content,{still:()=>state.still,onFocus:(id,index,total)=>{const caption=$('#shelf-position');if(caption)caption.textContent=`${String(index+1).padStart(2,'0')} / ${total} chiếc đĩa`;}});
+  if(state.album)centerAlbum(state.album.id,'instant');
+}
+function centerAlbum(id,behavior=state.still?'instant':'smooth'){
+ const button=$(`[data-album="${CSS.escape(id)}"]`);if(button&&!button.hidden)button.scrollIntoView({inline:'center',block:'nearest',behavior});
 }
 function filterShelf(query){
-  const normalize=value=>value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/gi,'d').toLowerCase();
-  const needle=normalize(query.trim());let count=0;
-  for(const button of $$('[data-album]')){const album=state.catalog.find(a=>a.id===button.dataset.album);button.hidden=!normalize([album.name,...album.tracks.map(t=>t.name)].join(' ')).includes(needle);if(!button.hidden)count++;}
-  const empty=$('.shelf-no-results');if(empty)empty.hidden=Boolean(count);
+ const normalize=value=>value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/gi,'d').toLowerCase();const needle=normalize(query.trim());let count=0;
+ for(const button of $$('[data-album]')){const album=state.catalog.find(a=>a.id===button.dataset.album);button.hidden=!matchesCategory(album,state.category,favoriteAlbums)||!normalize([album.name,...album.tracks.map(t=>t.name)].join(' ')).includes(needle);if(!button.hidden)count++;}
+ const empty=$('.shelf-no-results');if(empty){empty.hidden=Boolean(count);empty.textContent=state.category==='favorites'&&!needle?'Chưa có chiếc đĩa yêu thích. Chạm trái tim bên tên bài để giữ lại nha.':'Chưa thấy chiếc đĩa này. Thử một tên khác nha.';}
+ const selected=$('[data-album][aria-pressed=true]:not([hidden])')||$('[data-album]:not([hidden])');if(selected)centerAlbum(selected.dataset.album,'instant');
+ const caption=$('#shelf-position');if(caption)caption.textContent=`${count} chiếc đĩa`;
 }
 function renderSelection(){
-  const target=$('#album-selection'),art=$('#album-art'),queue=$('#track-queue');if(!target||!art||!queue)return;
-  if(!state.album){
-    art.innerHTML='<div class="empty-record" aria-hidden="true"><i>Li.</i></div>';
-    target.innerHTML='<div class="selection-empty"><div><p class="eyebrow">MỘT CHÚT NHẠC CHO HÔM NAY</p><h2>Chọn một chiếc đĩa.<br>Ngồi lại một chút.</h2><p>Những bài hát Li giữ ở đây,<br>chờ một người muốn nghe.</p></div></div>';
-    room.dataset.listening='false';return;
-  }
-  const a=state.album;
-  const greeting=$('#album-introduction');greeting.hidden=false;greeting.innerHTML=`<span class="album-li" aria-hidden="true"></span><p class="album-li-words">${esc(albumIntroduction(a))}</p>`;
-  art.innerHTML=`<div class="album-feature"><button class="music-object" data-queue aria-expanded="${state.queueOpen}" aria-controls="track-list" aria-label="Mở các bài hát trong album ${esc(a.name)}"><span class="listening-vinyl" aria-hidden="true"><img src="${esc(a.cover)}" alt=""><i></i></span><img id="loaded-cover" class="loaded-cover" src="${esc(a.cover)}" alt="Bìa ${esc(a.name)}"><span class="sleeve-stamp" aria-hidden="true">LI · SIDE A</span><span class="sleeve-tab">${a.tracks.length} BÀI <span aria-hidden="true">⌄</span></span></button><div class="album-object-caption"><span>ÂM NHẠC CỦA LI</span><span>${String(state.catalog.indexOf(a)+1).padStart(2,'0')} / ${state.catalog.length}</span></div></div>`;
-  target.innerHTML=`<section class="selected-album" aria-label="Đĩa nhạc trên máy"><div class="album-controls"><div class="album-text"><p class="eyebrow" id="listening-kicker">ĐĨA NHẠC TRÊN MÁY</p><h2 id="now-title">${esc(currentTrack()?.name||a.name)}</h2><p class="album-byline">${esc(a.name)} <span>· ${esc(a.sub)}</span></p><button class="queue-more round-button" data-queue aria-controls="track-list" aria-expanded="${state.queueOpen}" aria-label="Mở danh sách bài hát"><span aria-hidden="true">⋯</span></button></div><div id="lyrics-field" class="lyrics-field" aria-label="Lời bài hát đồng bộ" hidden></div><div class="transport-dock"><div class="playback"><div class="playback-row"><button class="round-button" data-previous aria-label="Bài trước">${icon('previous')}</button><button class="primary-play" id="main-play">${icon('play')}<span>Play</span></button><button class="round-button" data-next aria-label="Bài tiếp theo">${icon('next')}</button><button class="round-button volume-button" id="mute" aria-label="${audio.muted?'Bật âm thanh':'Tắt âm thanh'}">${icon(audio.muted?'muted':'volume')}</button></div><div class="progress-row"><span id="elapsed">0:00</span><input class="seek" id="seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Vị trí bài hát" disabled><span id="duration">${esc(currentTrack()?.duration||'0:00')}</span></div><span class="play-status" id="play-status" role="status"></span><div class="audio-error" id="audio-error" hidden></div></div><div class="listening-actions"><button data-browse aria-expanded="${!state.listening}">Đổi album</button></div></div></div></section>`;
-  queue.innerHTML=`<button class="playlist-trigger" data-queue aria-controls="track-list" aria-expanded="${state.queueOpen}"><span><small>BÀI HÁT TRONG ĐĨA</small><strong>${esc(a.name)}</strong></span><span class="playlist-count">${a.tracks.length}<span class="playlist-chevron" aria-hidden="true">⌄</span></span></button><ol id="track-list" class="track-list" aria-label="Bài hát trong album">${a.tracks.map((t,i)=>`<li><button class="track-button" data-track="${i}" aria-label="Nghe ${esc(t.name)}${t.url?'':', chưa có đường dẫn phát'}" aria-pressed="${i===state.trackIndex}" ${t.url?'':'disabled'}><span class="track-token"><span class="track-index">${String(i+1).padStart(2,'0')}</span><span class="track-signal" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="track-name">${esc(t.name)}</span><span class="track-duration">${t.url?esc(t.duration):'Chưa có link'}<span aria-hidden="true">${t.url?'↗':'—'}</span></span></button></li>`).join('')}</ol>`;
-  syncQueue();syncPlayback();lyricController?.update();
+ const target=$('#album-selection'),queue=$('#track-queue');if(!target||!queue)return;
+ if(!state.album){target.innerHTML=`<div class="console-inset paper-panel selection-empty"><p><strong>Mỗi chiếc đĩa, một câu chuyện.</strong><span>Chọn bìa nhạc trên kệ. Li ngồi nghe cùng bạn.</span></p></div>`;room.dataset.musicState='browse';queue.hidden=true;return;}
+ const a=state.album,t=currentTrack();state.sheetTab='tracks';
+ target.innerHTML=`<section class="console-inset paper-panel" aria-label="Đĩa nhạc trên máy"><div class="console-record"><img class="console-cover" src="${esc(a.cover)}" alt="Bìa ${esc(a.name)}" width="70" height="70"><div class="console-copy"><p class="eyebrow" id="listening-kicker">ĐĨA NHẠC TRÊN MÁY</p><h2 id="now-title">${esc(t?.name||a.name)}</h2><p class="album-byline">${esc(a.name)}</p></div><button class="favorite-album round-button" data-favorite aria-label="${favoriteAlbums.has(a.id)?'Bỏ yêu thích':'Yêu thích'} album" aria-pressed="${favoriteAlbums.has(a.id)}">${icon('heart')}</button></div>${transport()}<div class="console-actions"><button class="garden-button paper-button queue-more" data-queue aria-expanded="${state.queueOpen}" aria-controls="track-queue">${icon('list')}<span>Danh sách</span></button><div class="volume-control"><button class="round-button" id="mute" aria-label="${audio.muted?'Bật âm thanh':'Tắt âm thanh'}">${icon(audio.muted?'muted':'volume')}</button><input id="volume" aria-label="Âm lượng" type="range" min="0" max="1" step="0.05" value="${audio.volume}"></div></div><p id="play-status" class="play-status" role="status"></p><div class="audio-error" id="audio-error" hidden></div></section>`;
+ queue.innerHTML=`<div class="ledger-inset paper-panel"><div class="sheet-handle" data-sheet-handle aria-hidden="true"></div><header class="ledger-header"><div><small>SỔ BÀI HÁT</small><h2>${esc(a.name)}</h2><p id="queue-current">${esc(t?.name||'')}</p></div><button class="round-button" data-close-queue aria-label="Đóng danh sách">${icon('close')}</button></header><div class="ledger-tabs" role="tablist" aria-label="Trong sổ nhạc"><button id="tab-tracks" role="tab" data-sheet-tab="tracks" aria-controls="queue-tracks" aria-selected="true">Danh sách <small>${a.tracks.length}</small></button><button id="tab-lyrics" role="tab" data-sheet-tab="lyrics" aria-controls="queue-lyrics" aria-selected="false" tabindex="-1">Lời bài hát</button></div><div id="queue-tracks" class="queue-page" role="tabpanel" aria-labelledby="tab-tracks"><ol id="track-list" class="track-list" aria-label="Bài hát trong album">${a.tracks.map((track,i)=>`<li><button class="track-button" data-track="${i}" aria-label="Nghe ${esc(track.name)}${track.url?'':'. Bài này chưa có file nhạc.'}" aria-pressed="${i===state.trackIndex}" ${track.url?'':'disabled aria-describedby="queue-unavailable"'}><span class="track-index">${String(i+1).padStart(2,'0')}</span><span class="track-name">${esc(track.name)}</span><span class="track-duration">${track.url?esc(track.duration):'Đang cập nhật'}</span></button></li>`).join('')}</ol>${a.tracks.some(t=>!t.url)?'<p id="queue-unavailable" class="unavailable-note">Một vài bài chưa có file nhạc. Li sẽ bổ sung sau nha.</p>':''}</div><div id="queue-lyrics" class="queue-page lyrics-page" role="tabpanel" aria-labelledby="tab-lyrics" hidden><div id="lyrics-field" class="lyrics-field" hidden></div><p class="lyrics-empty">Li chưa để lời bài hát này vào sổ.<br>Mình nghe nhạc trước nha.</p></div><footer class="sheet-transport">${transport({suffix:'-sheet',compact:true})}</footer></div>`;
+ syncQueue();syncPlayback();lyricController?.update();
 }
-function syncQueue(){
-  const queue=$('#track-queue'),list=$('#track-list');if(queue){queue.hidden=!state.album||!state.queueOpen;queue.dataset.expanded=String(state.queueOpen);}if(list)list.hidden=!state.queueOpen;
-  $$('[data-queue]').forEach(button=>{button.setAttribute('aria-expanded',String(state.queueOpen));if(button.classList.contains('queue-more'))button.setAttribute('aria-label',state.queueOpen?'Đóng danh sách bài hát':'Mở danh sách bài hát');});
+function syncQueue({focus=false}={}){
+ const queue=$('#track-queue');if(!queue)return;
+ queue.hidden=!state.album||!state.queueOpen;const sheet=matchMedia('(max-width:700px), (max-width:1000px) and (max-height:530px)').matches&&state.queueOpen;for(const n of [$('.music-shelf'),$('#album-selection'),$('.room-header')])if(n)n.inert=sheet;room.dataset.queueOpen=String(state.queueOpen);room.dataset.musicState=musicState(state);
+ $$('[data-queue]').forEach(button=>button.setAttribute('aria-expanded',String(state.queueOpen)));
+ if(state.queueOpen&&focus){$('[data-close-queue]')?.focus({preventScroll:true});$('#track-list')?.scrollTo({top:0});}
 }
 function syncListening(){
-  room.dataset.listening=String(state.listening);
-  const toggle=$('[data-browse]');if(toggle){toggle.setAttribute('aria-expanded',String(!state.listening));toggle.textContent=state.listening?'Đổi album':'Thu gọn sạp';}
-  const title=$('#now-title');if(title)title.textContent=currentTrack()?.name||state.album?.name||'';
-  const kicker=$('#listening-kicker');if(kicker)kicker.textContent=state.playing?'ĐANG NGHE CÙNG LI':state.listening?'MỘT KHOẢNG NGHỈ':'ĐĨA NHẠC TRÊN MÁY';
-  if(state.room==='music'){$('#room-title').textContent=state.listening?'Ngồi nghe cùng Li.':'Chọn một chiếc đĩa.';$('#room-kicker').textContent=state.listening?'CÁI SẠP NHẠC · ĐANG NGHE':'CÁI SẠP NHẠC';}
-  lyricController?.update();
+ room.dataset.listening=String(state.listening);room.dataset.musicState=musicState(state);worldController.update(state);
+ const title=$('#now-title');if(title)title.textContent=currentTrack()?.name||state.album?.name||'';
+ const current=$('#queue-current');if(current)current.textContent=currentTrack()?.name||'';
+ const kicker=$('#listening-kicker');if(kicker)kicker.textContent=state.playing?'ĐANG NGHE CÙNG LI':'ĐĨA NHẠC TRÊN MÁY';
+ if(state.room==='music'){$('#room-title').textContent='Sạp nhạc';$('#room-kicker').textContent='MỖI BÀI HÁT LÀ MỘT LẦN TRỞ VỀ';}
+ lyricController?.update();
 }
 function currentTrack(){return state.album?.tracks[state.trackIndex];}
 function cancelFlight(){flight?.cancel();flightEl?.remove();flight=null;flightEl=null;}
@@ -116,7 +125,7 @@ function animateCover(source){
 function resetAudio(){
   state.token++;state.wanted=false;state.playing=false;state.loading=false;state.error='';audio.pause();audio.removeAttribute('src');audio.load();
 }
-function selectAlbum(id,source){const a=state.catalog?.find(a=>a.id===id);if(!a)return;if(state.album?.id===id){state.queueOpen=!state.queueOpen;syncQueue();gardenLife.introduceAlbum(a);return;}resetAudio();state.listening=false;state.queueOpen=false;state.album=a;state.trackIndex=Math.max(0,a.tracks.findIndex(t=>t.url));$$('[data-album]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.album===id)));renderSelection();syncPlayback();content.scrollTop=0;$('.music-deck').scrollTop=0;animateCover(source);gardenLife.introduceAlbum(a);}
+function selectAlbum(id,source){const a=state.catalog?.find(a=>a.id===id);if(!a)return;if(state.album?.id===id){centerAlbum(id);return;}resetAudio();state.listening=false;state.queueOpen=false;state.album=a;state.trackIndex=Math.max(0,a.tracks.findIndex(t=>t.url));$$('[data-album]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.album===id)));renderSelection();syncPlayback();centerAlbum(id);gardenLife.introduceAlbum(a);}
 function selectTrack(index,{play=false}={}){const t=state.album?.tracks[index];if(!t?.url)return;resetAudio();state.trackIndex=index;syncPlayback();if(play)playTrack();}
 async function playTrack(){
   const track=currentTrack();if(!track?.url)return;
@@ -180,14 +189,16 @@ function installMediaSession(){
 }
 installMediaSession();
 function fmt(seconds){if(!Number.isFinite(seconds)||seconds<0)return '0:00';return `${Math.floor(seconds/60)}:${String(Math.floor(seconds%60)).padStart(2,'0')}`;}
-function syncTime(){syncMediaPosition();const seek=$('#seek'),elapsed=$('#elapsed'),duration=$('#duration');const valid=Number.isFinite(audio.duration)&&audio.duration>0;if(seek){seek.disabled=!valid;seek.value=valid?String(audio.currentTime/audio.duration*1000):'0';seek.setAttribute('aria-valuetext',`${fmt(audio.currentTime)} trên ${valid?fmt(audio.duration):currentTrack()?.duration||'0:00'}`);}if(elapsed)elapsed.textContent=fmt(audio.currentTime);if(duration)duration.textContent=valid?fmt(audio.duration):currentTrack()?.duration||'0:00';}
+function syncTime(){syncMediaPosition();const valid=Number.isFinite(audio.duration)&&audio.duration>0;for(const suffix of ['','-sheet']){const seek=$(`#seek${suffix}`),elapsed=$(`#elapsed${suffix}`),duration=$(`#duration${suffix}`);if(seek){seek.disabled=!valid;seek.value=valid?String(audio.currentTime/audio.duration*1000):'0';seek.setAttribute('aria-valuetext',`${fmt(audio.currentTime)} trên ${valid?fmt(audio.duration):currentTrack()?.duration||'0:00'}`);}if(elapsed)elapsed.textContent=fmt(audio.currentTime);if(duration)duration.textContent=valid?fmt(audio.duration):currentTrack()?.duration||'0:00';}}
 function syncPlayback(){
   const t=currentTrack(),a=state.album;setHostPose(state.room==='gallery'?'gallery':state.wanted?'seated':'idle');document.body.dataset.playing=String(state.playing);document.body.dataset.audioState=state.error?'error':state.loading?'loading':state.playing?'playing':a?'paused':'empty';
+  $('#mini-player').hidden=!a;
   const disabled=!t?.url;$('#mini-play').disabled=disabled;$('#mini-next').disabled=disabled;
-  $('#mini-play').innerHTML=icon(state.wanted?'pause':'play');$('#mini-play').setAttribute('aria-label',state.wanted?'Tạm dừng nhạc':'Phát nhạc');
+  $('#mini-play').innerHTML=icon(state.wanted?'pause':'play');$('#mini-play').setAttribute('aria-label',disabled?unavailableReason(a):state.wanted?'Tạm dừng nhạc':'Phát nhạc');
   if(a){$('#mini-cover').src=a.cover;$('#mini-cover').hidden=false;$('#mini-title').textContent=t?.name||a.name;$('#mini-subtitle').textContent=a.name;$('#mini-kicker').textContent=state.loading?'ĐANG TẢI BÀI…':state.playing?'ĐANG NGHE':state.error?'CHƯA PHÁT ĐƯỢC':'ĐĨA NHẠC TRÊN MÁY';const record=$('#scene-record');record.hidden=false;$('img',record).src=a.cover;}
-  const main=$('#main-play');if(main){main.disabled=disabled;main.innerHTML=`${icon(state.wanted?'pause':'play')}<span>${state.wanted?'Pause':'Play'}</span>`;main.setAttribute('aria-label',state.wanted?'Tạm dừng nhạc':'Phát nhạc');}
-  const status=$('#play-status');if(status)status.textContent=state.loading?'Đang lấy bài từ kho nhạc…':state.playing?`Đang nghe · ${t.name}`:disabled?'Bài này chưa có đường dẫn phát.':state.error?'Chưa phát được.':'Bấm Play khi bạn muốn nghe.';
+  for(const main of $$('#main-play,[data-sheet-play]')){main.disabled=disabled;main.innerHTML=`${icon(state.wanted?'pause':'play')}<span>${state.wanted?'Tạm dừng':'Phát nhạc'}</span>`;main.setAttribute('aria-label',disabled?unavailableReason(a):state.wanted?'Tạm dừng nhạc':'Phát nhạc');}
+  for(const b of $$('[data-previous],[data-next]')){b.disabled=disabled;b.title=disabled?unavailableReason(a):'';}
+  const status=$('#play-status');if(status)status.textContent=state.loading?'Đang lấy bài từ kho nhạc…':state.playing?`Đang nghe · ${t.name}`:disabled?unavailableReason(a):state.error?'Chưa phát được.':'Nhấn phát khi bạn muốn nghe.';
   const error=$('#audio-error');if(error){error.hidden=!state.error;error.innerHTML=state.error?`${esc(state.error)} <button data-audio-retry>Thử lại</button>`:'';}
   $$('[data-track]').forEach(b=>{const active=Number(b.dataset.track)===state.trackIndex;b.setAttribute('aria-pressed',String(active));$('.track-index',b).textContent=String(Number(b.dataset.track)+1).padStart(2,'0');});
   syncMediaSession();syncTime();syncListening();
@@ -207,7 +218,7 @@ audio.addEventListener('ratechange',syncMediaPosition);audio.addEventListener('t
 $('#mini-play').addEventListener('click',togglePlay);$('#mini-next').addEventListener('click',nextTrack);
 
 function renderProfile(p){
-  content.innerHTML=`<article class="profile-room"><div class="profile-lead"><div class="profile-portrait" aria-hidden="true"></div><div><p class="eyebrow">HUỲNH CHÍ LẬP · LI</p><p class="profile-intro">Làm những điều mình thích.<br>Giữ lại những điều mình thương.</p><p class="profile-role">${esc(p.role)}</p><p class="profile-copy">${esc(p.intro)}</p><a class="contact-link" href="mailto:${esc(p.email)}">${icon('mail')} Viết cho Li</a></div></div><details class="resume-fold"><summary>Công việc & những chặng đường <span>+</span></summary><div class="profile-capabilities">${(p.capabilities||[]).map(c=>`<section><h3>${esc(c.title)}</h3><p>${esc(c.text)}</p></section>`).join('')}</div><ol class="resume-list">${p.resume.map(r=>`<li><small>${esc(r.period)}</small><h3>${esc(r.role)}</h3><p>${esc(r.company)}</p>${r.detail?`<p class="resume-detail">${esc(r.detail)}</p>`:''}</li>`).join('')}</ol><ul class="profile-background">${(p.background||[]).map(t=>`<li>${esc(t)}</li>`).join('')}</ul></details></article>`;
+  content.innerHTML=`<article class="profile-room letter-panel"><p class="letter-salutation">Gửi bạn ghé vườn,</p><div class="profile-lead"><div class="profile-portrait" aria-hidden="true"></div><div><p class="eyebrow">HUỲNH CHÍ LẬP · LI</p><p class="profile-intro">Làm những điều mình thích.<br>Giữ lại những điều mình thương.</p><p class="profile-role">${esc(p.role)}</p><p class="profile-copy">${esc(p.intro)}</p><a class="contact-link" href="mailto:${esc(p.email)}">${icon('mail')} Viết cho Li</a></div></div><details class="resume-fold"><summary>Công việc & những chặng đường <span>+</span></summary><div class="profile-capabilities">${(p.capabilities||[]).map(c=>`<section><h3>${esc(c.title)}</h3><p>${esc(c.text)}</p></section>`).join('')}</div><ol class="resume-list">${p.resume.map(r=>`<li><small>${esc(r.period)}</small><h3>${esc(r.role)}</h3><p>${esc(r.company)}</p>${r.detail?`<p class="resume-detail">${esc(r.detail)}</p>`:''}</li>`).join('')}</ol><ul class="profile-background">${(p.background||[]).map(t=>`<li>${esc(t)}</li>`).join('')}</ul></details><p class="letter-signature">Thân thương,<br><em>Li.</em></p></article>`;
 }
 
 const photoLikes=new Set();
@@ -261,22 +272,27 @@ lightbox.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){e.preventDefault
 document.addEventListener('error',e=>{if(e.target.matches?.('.video-thumb img'))e.target.hidden=true;},true);
 $('#lightbox-image').addEventListener('error',()=>{$('#lightbox-caption').textContent='Ảnh chưa tải được. Bạn có thể chuyển sang ảnh kế tiếp.';});
 content.addEventListener('click',e=>{
+  if(e.target.closest('[data-close-queue]')){state.queueOpen=false;syncQueue();$('.queue-more')?.focus({preventScroll:true});return;}
+  const category=e.target.closest('[data-category]');if(category){state.category=category.dataset.category;$$('[data-category]').forEach(b=>b.setAttribute('aria-pressed',String(b===category)));filterShelf(state.search);return;}
+  const picker=e.target.closest('[data-picker]');if(picker){const pane=$('#album-picker');pane.hidden=!pane.hidden;picker.setAttribute('aria-expanded',String(!pane.hidden));if(!pane.hidden)$('#album-search').focus();return;}
+  if(e.target.closest('[data-favorite]')){const id=state.album.id;favoriteAlbums.has(id)?favoriteAlbums.delete(id):favoriteAlbums.add(id);try{localStorage.setItem('garden-favorite-albums',JSON.stringify([...favoriteAlbums]));}catch{}const b=$('[data-favorite]');b.setAttribute('aria-pressed',String(favoriteAlbums.has(id)));b.setAttribute('aria-label',`${favoriteAlbums.has(id)?'Bỏ yêu thích':'Yêu thích'} album`);if(state.category==='favorites')filterShelf(state.search);return;}
+  const sheetTab=e.target.closest('[data-sheet-tab]');if(sheetTab){state.sheetTab=sheetTab.dataset.sheetTab;$$('[data-sheet-tab]').forEach(b=>{const selected=b===sheetTab;b.setAttribute('aria-selected',String(selected));b.tabIndex=selected?0:-1;});$('#queue-tracks').hidden=state.sheetTab!=='tracks';$('#queue-lyrics').hidden=state.sheetTab!=='lyrics';return;}
   if(e.target.closest('[data-previous]')){previousTrack();return;}
   if(e.target.closest('[data-next]')){nextTrack();return;}
   if(e.target.closest('[data-browse]')){state.listening=!state.listening;syncListening();if(!state.listening)$('.shelf-block').scrollIntoView({block:'nearest',behavior:state.still?'instant':'smooth'});return;}
-  const queue=e.target.closest('[data-queue]');if(queue){state.queueOpen=!state.queueOpen;syncQueue();if(state.queueOpen){$('.music-deck')?.scrollTo({top:0,behavior:state.still?'instant':'smooth'});}return;}
+  const queue=e.target.closest('[data-queue]');if(queue){state.queueOpen=!state.queueOpen;syncQueue();if(state.queueOpen)syncQueue({focus:true});return;}
   const like=e.target.closest('[data-like]');if(like){togglePhotoLike(like.dataset.like);return;}
   const layout=e.target.closest('button[data-player-layout]');if(layout){state.playerLayout=layout.dataset.playerLayout;room.dataset.playerLayout=state.playerLayout;$$('button[data-player-layout]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.playerLayout===state.playerLayout)));return;}
   const album=e.target.closest('[data-album]');if(album){selectAlbum(album.dataset.album,$('img',album));return;}
-  const track=e.target.closest('[data-track]');if(track){selectTrack(Number(track.dataset.track),{play:true});state.queueOpen=false;syncQueue();$('.queue-more')?.focus({preventScroll:true});return;}
-  const shelf=e.target.closest('[data-shelf]');if(shelf){$('.album-shelf').scrollBy({left:Number(shelf.dataset.shelf)*310,behavior:state.still?'instant':'smooth'});return;}
+  const track=e.target.closest('[data-track]');if(track){selectTrack(Number(track.dataset.track),{play:true});syncQueue();return;}
+  const shelf=e.target.closest('[data-shelf]');if(shelf){const list=$$('[data-album]:not([hidden])'),focused=list.findIndex(b=>b.dataset.focus==='true');const next=list[Math.max(0,Math.min(list.length-1,focused+Number(shelf.dataset.shelf)))];if(next)centerAlbum(next.dataset.album);return;}
   const media=e.target.closest('[data-media]');if(media){switchMedia(media.dataset.media);return;}
   const video=e.target.closest('[data-video]');if(video){openVideo(Number(video.dataset.video));return;}
   if(e.target.closest('[data-close-video]')){stopVideo({restoreFocus:true});return;}
   const photo=e.target.closest('[data-photo]');if(photo){openPhoto(Number(photo.dataset.photo));return;}
   if(e.target.closest('[data-more]')){const y=content.scrollTop,firstNew=state.shown;state.shown+=24;renderGallery();content.scrollTop=y;$(`[data-photo="${firstNew}"]`)?.focus({preventScroll:true});return;}
   const retry=e.target.closest('[data-retry]');if(retry){openRoom(retry.dataset.retry,{historyChange:false});return;}
-  if(e.target.closest('#main-play')||e.target.closest('[data-audio-retry]')){togglePlay();return;}
+  if(e.target.closest('#main-play,[data-sheet-play]')||e.target.closest('[data-audio-retry]')){togglePlay();return;}
   if(e.target.closest('#mute')){audio.muted=!audio.muted;$('#mute').innerHTML=icon(audio.muted?'muted':'volume');$('#mute').setAttribute('aria-label',audio.muted?'Bật âm thanh':'Tắt âm thanh');}
 });
 content.addEventListener('keydown',e=>{
@@ -286,9 +302,15 @@ content.addEventListener('keydown',e=>{
   const next=e.key==='Home'?0:e.key==='End'?buttons.length-1:Math.max(0,Math.min(buttons.length-1,index+(e.key==='ArrowDown'?1:-1)));
   e.preventDefault();buttons[next]?.focus({preventScroll:true});buttons[next]?.scrollIntoView({block:'nearest',inline:'nearest',behavior:state.still?'instant':'smooth'});
 });
-document.addEventListener('click',e=>{if(state.room==='music'&&state.queueOpen&&!e.target.closest('[data-queue],[data-track],[data-album],#track-queue')){state.queueOpen=false;syncQueue();}});
-content.addEventListener('input',e=>{if(e.target.id==='album-search'){state.search=e.target.value;filterShelf(state.search);}if(e.target.id==='seek'&&Number.isFinite(audio.duration)){audio.currentTime=Number(e.target.value)/1000*audio.duration;syncTime();}});
 
+content.addEventListener('input',e=>{if(e.target.id==='volume'){audio.volume=Number(e.target.value);audio.muted=false;}if(e.target.id==='album-search'){state.search=e.target.value;filterShelf(state.search);}if(e.target.matches('[data-seek]')&&Number.isFinite(audio.duration)){audio.currentTime=Number(e.target.value)/1000*audio.duration;syncTime();}});
+
+content.addEventListener('change',e=>{if(e.target.id==='album-jump'&&e.target.value){state.category='all';state.search='';$$('[data-category]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.category==='all')));$('#album-search').value='';filterShelf('');selectAlbum(e.target.value);$('#album-picker').hidden=true;$('[data-picker]').setAttribute('aria-expanded','false');$(`[data-album="${CSS.escape(e.target.value)}"]`)?.focus({preventScroll:true});}});
+content.addEventListener('keydown',e=>{if(e.target.matches('[data-sheet-tab]')&&['ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();const next=e.target.dataset.sheetTab==='tracks'?'lyrics':'tracks';const tab=$(`[data-sheet-tab="${next}"]`);tab.click();tab.focus();}});
+let sheetDrag=null;content.addEventListener('pointerdown',e=>{if(e.target.closest('[data-sheet-handle]')){sheetDrag=e.clientY;e.target.setPointerCapture(e.pointerId);}});content.addEventListener('pointerup',e=>{if(sheetDrag!==null&&e.clientY-sheetDrag>65){state.queueOpen=false;syncQueue();$('.queue-more')?.focus({preventScroll:true});}sheetDrag=null;});
+const viewport=window.visualViewport;function fitViewport(){if(state.room==='music')syncQueue();document.documentElement.style.setProperty('--visual-height',`${viewport?.height||innerHeight}px`);}viewport?.addEventListener('resize',fitViewport);window.addEventListener('resize',fitViewport);fitViewport();
+// The small note is the story gateway too; it keeps the same paper material.
+$('#host-talk').addEventListener('dblclick',()=>openRoom('profile'));
 // Scene-native coordinates: scale artwork, character and record in one space.
 const narrow=matchMedia('(max-aspect-ratio:4/3)');
 const poseReady=new Set(['idle']),poseImages=new Map();
@@ -308,7 +330,7 @@ function setHostPose(pose){
 function placeWorld(){
   const world=$('.scene-world'),r={width:world.clientWidth,height:world.clientHeight,left:world.offsetLeft,top:world.offsetTop},mobile=narrow.matches;
   const iw=mobile?1086:1672,ih=mobile?1448:941,scale=Math.max(r.width/iw,r.height/ih),ox=(r.width-iw*scale)/2,oy=(r.height-ih*scale)/2;
-  const zones=mobile?[[25,50,355,540],[386,365,397,475],[850,530,195,395]]:[[12,40,430,500],[740,110,500,430],[1340,300,215,330]];
+  const zones=sceneGateways[mobile?'portrait':'landscape'];
   ['.place-profile','.place-music','.place-gallery'].forEach((selector,i)=>{const e=$(selector),[x,y,w,h]=zones[i];Object.assign(e.style,{left:`${ox+x*scale}px`,top:`${oy+y*scale}px`,width:`${w*scale}px`,height:`${h*scale}px`});});
   // Paint the same soft warmth around the stall and host in artwork coordinates.
   const atmosphere=$('.hero-atmosphere');
@@ -321,8 +343,8 @@ function placeWorld(){
   const pond=$('.pond-glint'),water=mobile?[938,364,125,90]:[1368,105,150,44];
   const [wx,wy,ww,wh]=water;Object.assign(pond.style,{left:`${ox+wx*scale}px`,top:`${oy+wy*scale}px`,width:`${ww*scale}px`,height:`${wh*scale}px`,backgroundSize:`${iw*scale}px ${ih*scale}px`,backgroundPosition:`${-wx*scale}px ${-wy*scale}px`});
   pond.style.setProperty('--pond-day',`url('./assets/garden-${mobile?'mobile':'desktop'}.webp')`);pond.style.setProperty('--pond-night',`url('./assets/garden-${mobile?'mobile':'desktop'}-night.webp')`);
-  const pose=$('#host').dataset.pose||'idle';const placements=mobile?{idle:[.33,.545,465],seated:[.69,.62,260],gallery:[.80,.58,270]}:{idle:[.245,.65,282],seated:[.70,.67,220],gallery:[.75,.70,253]};
-  if(state.room==='music'){placements.idle=mobile?[.74,.62,340]:[.74,.67,250];if(!mobile)placements.seated=[.73,.67,220];}
+  const pose=$('#host').dataset.pose||'idle';const placements=mobile?{idle:[.33,.545,465],seated:[.69,.62,260],gallery:[.80,.58,270]}:{idle:[.18,.65,282],seated:[.70,.67,220],gallery:[.75,.70,253]};
+  if(state.room==='music'){const portraitY=r.width>1000?.395:.34;placements.idle=mobile?[.22,portraitY,240]:[.18,.65,282];placements.seated=mobile?[.22,portraitY,180]:[.18,.65,235];}
   const [x,y,h]=placements[pose]||placements.idle;const host=$('#host');
   Object.assign(host.style,{left:`${ox+x*iw*scale}px`,top:`${oy+y*ih*scale}px`,height:`${h*scale}px`,width:`${h*scale*(pose==='idle'?.3415:pose==='seated'?.65682:.53409)}px`});
   const talk=$('#host-talk'),hw=h*scale*(pose==='idle'?.3415:pose==='seated'?.65682:.53409),hx=ox+x*iw*scale,hy=oy+y*ih*scale-h*scale;
@@ -354,7 +376,7 @@ initEntrance({prepare:async retry=>{
   const scene=phase==='night'?$('.night-scene img'):$('#scenery img');
   if(retry&&scene.complete&&!scene.naturalWidth){const picture=scene.closest('picture');const asset=`./assets/garden-${portrait?'mobile':'desktop'}${phase==='night'?'-night':''}.webp?retry=${Date.now()}`;picture.querySelector('source')?.setAttribute('srcset',asset);scene.src=asset;}
   const host=new Image();host.src='./assets/host-idle-v2.webp';
-  [state.catalog]=await Promise.all([getData('catalog'),waitForImage(scene),waitForImage(host)]);
+  [state.catalog]=await Promise.all([getData('catalog').then(v=>{document.querySelector('#entrance').dataset.catalogReady='true';return v;}),waitForImage(scene).then(()=>{document.querySelector('#entrance').dataset.sceneReady='true';}),waitForImage(host).then(()=>{document.querySelector('#entrance').dataset.hostReady='true';})]);
 },onEnter:()=>{
   state.entered=true;placeWorld();
   if(titles[location.hash.slice(1)])openRoom(location.hash.slice(1),{historyChange:false});

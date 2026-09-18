@@ -1,6 +1,18 @@
 // The entrance is an invitation, not a timed loading screen.
+async function decodeLoadedImage(image, timeout) {
+  if (!image.decode) return;
+  // A cached, detached host image may leave decode() pending after a resize.
+  // Its successful load is sufficient; decoding is only a paint optimization.
+  let timer;
+  try {
+    await Promise.race([
+      image.decode().catch(() => {}),
+      new Promise(resolve => { timer = setTimeout(resolve, Math.min(timeout, 750)); })
+    ]);
+  } finally { clearTimeout(timer); }
+}
 export async function waitForImage(image, {timeout = 15000} = {}) {
-  if (image.complete && image.naturalWidth) { await image.decode?.().catch(() => {}); return; }
+  if (image.complete && image.naturalWidth) { await decodeLoadedImage(image, timeout); return; }
   await new Promise((resolve, reject) => {
     const finish = (error) => {
       clearTimeout(timer); image.removeEventListener('load', loaded); image.removeEventListener('error', failed);
@@ -12,7 +24,7 @@ export async function waitForImage(image, {timeout = 15000} = {}) {
     image.addEventListener('load', loaded, {once:true}); image.addEventListener('error', failed, {once:true});
     if (image.complete) image.naturalWidth ? loaded() : failed();
   });
-  await image.decode?.().catch(() => {});
+  await decodeLoadedImage(image, timeout);
 }
 
 // A short doorbell starts inside the click gesture and releases its audio graph.
