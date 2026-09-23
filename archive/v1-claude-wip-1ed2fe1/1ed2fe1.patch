@@ -1,0 +1,1982 @@
+From 1ed2fe14434c5a20ef9c95774cc72668f7bdf9e8 Mon Sep 17 00:00:00 2001
+From: Ali Huynh <ali.readytostart@gmail.com>
+Date: Mon, 29 Jun 2026 00:13:20 +0700
+Subject: [PATCH] =?UTF-8?q?feat:=20theme=20base=20token=20ho=C3=A1=20+=20s?=
+ =?UTF-8?q?kin=20layer;=20share=20deep-link=20album/b=C3=A0i;=20n=E1=BB=81?=
+ =?UTF-8?q?n=20th=E1=BB=83=20lo=E1=BA=A1i=20d=E1=BB=8Bu=20h=C6=A1n;=20fix?=
+ =?UTF-8?q?=20reveal=20ti=C3=AAu=20=C4=91=E1=BB=81;=20gallery=20Xem=20th?=
+ =?UTF-8?q?=C3=AAm?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ index.html | 1441 ++++++++++++++++++++++++++++++++++++++++++++++++----
+ 1 file changed, 1341 insertions(+), 100 deletions(-)
+
+diff --git a/index.html b/index.html
+index 5ff1982..a95356d 100644
+--- a/index.html
++++ b/index.html
+@@ -25,16 +25,56 @@
+   --amber2:#E8C870;
+   --amber3:#F5DFA0;
+   --blush:#C4806A;
++  /* RGB companions — cho rgba() đi qua token để đóng kín lớp base.
++     Đổi theme/skin chỉ cần ghi đè các biến này, không phải dò màu viết cứng. */
++  --amber-rgb:204,159,74;
++  --ink-rgb:9,8,14;
++  --ink-deep:#0A0910;
++  --pink:#E06090;
++  --pink2:#E06A8F;
++  --pink-rgb:224,96,144;
++  --pink2-rgb:224,106,143;
+   --text:#EDE6DC;
+   --text2:#B8B0A4;
+   --text3:#7A7268;
+   --border:rgba(184,168,148,0.1);
+-  --border2:rgba(204,159,74,0.2);
+-  --glow:rgba(204,159,74,0.08);
++  --border2:rgba(var(--amber-rgb),0.2);
++  --glow:rgba(var(--amber-rgb),0.08);
+   --hero-scale:1;
+   --marquee-dur:30s;
+   --album-dur:70s;
+-}
++  --theme-hero-bg:url('./images/hero/dandelion-field.png');
++  --theme-hero-bg-pos:center bottom;
++  --theme-ink:#183126;
++  --theme-leaf:#516a39;
++  --theme-paper:#fff7df;
++  --theme-haze:rgba(255,250,226,0.58);
++  --theme-panel:rgba(255,250,226,0.34);
++  --theme-rim:rgba(81,106,57,0.34);
++  --theme-particle:255,248,218;
++}
++
++/* ════════════════ SKIN LAYER — "lớp áo" campaign ════════════════
++   BASE = khối :root ở trên (cứng, KHÔNG đụng khi làm campaign).
++   SKIN = một lớp ghi đè token màu + trang trí cho từng album / thông điệp.
++     • Bật:  document.documentElement.dataset.skin = 'ten-skin'   (hoặc thêm ?skin=ten-skin vào URL)
++     • Cởi:  delete document.documentElement.dataset.skin          → về base 100%
++   Khung / hoa văn của campaign vẽ trong .skin-decor (mặc định TRỐNG, không ảnh hưởng base).
++   Thêm album mới = copy khối ":root[data-skin='sample']" bên dưới, đổi tên + token. */
++.skin-decor{ position:fixed; inset:0; pointer-events:none; z-index:50; opacity:0; transition:opacity .6s ease; }
++:root[data-skin] .skin-decor{ opacity:1; }
++body.no-motion .skin-decor{ transition:none; }
++
++/* ---- SKIN MẪU 'sample' (xanh ngọc) — bằng chứng cơ chế chạy; copy để tạo skin album ----
++   Thử nhanh trong console:  document.documentElement.dataset.skin='sample'
++   Về cũ:  delete document.documentElement.dataset.skin */
++:root[data-skin="sample"]{
++  --amber:#6FB3A8; --amber2:#9AD3C9; --amber3:#C7EAE3;
++  --amber-rgb:111,179,168;
++  --glow:rgba(var(--amber-rgb),0.10);
++  --border2:rgba(var(--amber-rgb),0.20);
++}
++:root[data-skin="sample"] .skin-decor{ box-shadow: inset 0 0 0 6px rgba(var(--amber-rgb),0.18); }
+ 
+ /* TWEAK HOOKS */
+ body.no-grain::before { display:none; }
+@@ -45,6 +85,32 @@ body.no-motion .player.playing .player-eq span, body.no-motion .num-eq i,
+ body.no-motion .htag-track, body.no-motion [id^="section"]::before,
+ body.no-motion #about::before, body.no-motion #music::before, body.no-motion #videos::before,
+ body.no-motion #gallery::before, body.no-motion #work::before, body.no-motion #contact::before { animation:none !important; }
++body.no-motion .poster-hero *,
++body.no-motion .poster-hero *::before,
++body.no-motion .poster-hero *::after {
++  animation:none !important;
++  transition:none !important;
++}
++body.no-motion .hero-wind {
++  display:none !important;
++}
++body.no-motion #siteSeeds {
++  display:none !important;
++}
++body.no-season .season-layer,
++body.no-season #siteSeeds,
++body.no-season .hero-wind {
++  display:none !important;
++}
++body.no-motion .poster-field,
++body.no-motion .poster-foreground,
++body.no-motion .hero-person-wrap,
++body.no-motion .poster-hero .hero-content,
++body.no-motion .hero-name .line1,
++body.no-motion .hero-name .line2 {
++  transform:none !important;
++  translate:0 0 !important;
++}
+ 
+ html { scroll-behavior:smooth; font-size:16px; }
+ 
+@@ -76,35 +142,61 @@ body::after {
+   pointer-events:none;
+   background:radial-gradient(130% 110% at 50% 42%, transparent 58%, rgba(4,3,8,0.5) 100%);
+ }
++body.theme-dandelion::after {
++  background:radial-gradient(130% 110% at 50% 42%, transparent 64%, rgba(9,29,15,0.28) 100%);
++}
++#siteSeeds {
++  position:fixed;
++  inset:0;
++  width:100%;
++  height:100%;
++  z-index:90;
++  pointer-events:none;
++  mix-blend-mode:screen;
++  opacity:0.72;
++}
++.season-layer {
++  position:fixed;
++  inset:0;
++  z-index:1;
++  pointer-events:none;
++  opacity:0.7;
++  background:
++    radial-gradient(50% 42% at 86% 8%, rgba(255,247,210,0.12), transparent 68%),
++    radial-gradient(38% 36% at 8% 28%, rgba(120,143,83,0.08), transparent 70%),
++    linear-gradient(180deg, rgba(223,234,215,0.05), transparent 34%, rgba(33,58,34,0.06));
++}
+ 
+ /* ============================================
+    CUSTOM CURSOR
+ ============================================ */
+ #cursor {
+-  width:8px; height:8px;
+-  background:var(--amber);
++  width:7px; height:7px;
++  background:#f7f1d7;
+   border-radius:50%;
+   position:fixed;
+   top:0; left:0;
+   pointer-events:none;
+   z-index:10000;
+   transform:translate(-50%,-50%);
+-  transition:transform 0.1s, width 0.3s, height 0.3s, opacity 0.3s;
++  box-shadow:0 0 18px rgba(255,247,218,0.6);
++  transition:transform 0.1s, width 0.3s, height 0.3s, opacity 0.3s, background 0.3s;
+   mix-blend-mode:screen;
+ }
+ #cursor-ring {
+-  width:32px; height:32px;
+-  border:1px solid rgba(204,159,74,0.4);
++  width:34px; height:34px;
++  border:1px solid rgba(81,106,57,0.42);
+   border-radius:50%;
+   position:fixed;
+   top:0; left:0;
+   pointer-events:none;
+   z-index:9999;
+   transform:translate(-50%,-50%);
+-  transition:transform 0.12s ease-out, width 0.3s, height 0.3s, border-color 0.3s;
++  background:radial-gradient(circle, rgba(255,247,218,0.12), transparent 64%);
++  transition:transform 0.12s ease-out, width 0.3s, height 0.3s, border-color 0.3s, background 0.3s;
+ }
+-body:has(a:hover) #cursor, body:has(button:hover) #cursor { width:4px; height:4px; }
+-body:has(a:hover) #cursor-ring, body:has(button:hover) #cursor-ring { width:48px; height:48px; border-color:var(--amber); }
++body:has(a:hover) #cursor, body:has(button:hover) #cursor { width:4px; height:4px; background:#ffffff; }
++body:has(a:hover) #cursor-ring, body:has(button:hover) #cursor-ring { width:52px; height:52px; border-color:rgba(81,106,57,0.62); background:radial-gradient(circle, rgba(255,247,218,0.18), transparent 68%); }
+ 
+ /* ============================================
+    NAV
+@@ -181,7 +273,7 @@ body.no-shader .shader-host { display:none; }
+ .hero-bg {
+   position:absolute; inset:0; z-index:1;
+   background:
+-    radial-gradient(120% 80% at 18% 28%, rgba(204,159,74,0.10), transparent 52%),
++    radial-gradient(120% 80% at 18% 28%, rgba(var(--amber-rgb),0.10), transparent 52%),
+     radial-gradient(90% 70% at 88% 80%, rgba(120,86,160,0.06), transparent 60%),
+     linear-gradient(to top, var(--ink) 2%, rgba(9,8,14,0.2) 30%, transparent 60%);
+ }
+@@ -189,7 +281,7 @@ body.no-shader .shader-host { display:none; }
+   /* drifting aurora glow for atmospheric depth */
+   content:''; position:absolute; inset:-20%;
+   background:
+-    radial-gradient(40% 50% at 30% 40%, rgba(204,159,74,0.10), transparent 60%),
++    radial-gradient(40% 50% at 30% 40%, rgba(var(--amber-rgb),0.10), transparent 60%),
+     radial-gradient(35% 45% at 70% 60%, rgba(96,72,140,0.08), transparent 60%);
+   filter:blur(20px);
+   animation:auroraDrift 22s ease-in-out infinite alternate;
+@@ -229,32 +321,10 @@ body.no-shader .shader-host { display:none; }
+     linear-gradient(to right, transparent 0%, #000 30%);
+   mask-composite: intersect;
+ }
+-/* GHOST LAYER — D'Li ẩn trong Hero, hé lộ trong vòng tròn quanh con trỏ.
+-   Tối ưu: chỉ DỊCH CHUYỂN bằng transform (GPU) — không vẽ lại mặt nạ mỗi lần di chuột.
+-   Nằm trên ảnh nền (z1), dưới tint/vignette (z2) và chữ (z3) → không che nội dung. */
+-.hero-ghost { position:absolute; inset:0; z-index:1; overflow:hidden; pointer-events:none; }
+-.hero-ghost-win {
+-  position:absolute; top:0; left:0; width:360px; height:360px; border-radius:50%;
+-  overflow:hidden; opacity:0; transition:opacity 0.5s ease;
+-  transform:translate3d(-9999px,-9999px,0); will-change:transform;
+-  /* screen blend: chỉ phần SÁNG của D'Li (mặt) hiện lên — vùng tối không tạo "đốm đen". */
+-  mix-blend-mode:screen;
+-  -webkit-mask-image:radial-gradient(circle at 50% 50%, #000 32%, rgba(0,0,0,0.28) 60%, transparent 76%);
+-          mask-image:radial-gradient(circle at 50% 50%, #000 32%, rgba(0,0,0,0.28) 60%, transparent 76%);
+-}
+-.hero-ghost-img {
+-  position:absolute; top:0; left:0; width:100vw; height:100vh;
+-  background:url('./images/dli/dli-ghost.jpg') center/cover no-repeat;
+-  filter:contrast(1.06) saturate(1.04);
+-  will-change:transform;
+-}
+-body:not(.no-motion) .hero.ghost-on .hero-ghost-win { opacity:0.7; }
+-body.no-motion .hero-ghost { display:none; }
+-@media (hover:none){ .hero-ghost { display:none; } }
+ .hero-backlight {
+   position:absolute; z-index:0; top:18%; right:14%;
+   width:36vw; height:62vh; border-radius:50%;
+-  background:radial-gradient(circle, rgba(204,159,74,0.16), rgba(204,159,74,0.05) 45%, transparent 70%);
++  background:radial-gradient(circle, rgba(var(--amber-rgb),0.16), rgba(var(--amber-rgb),0.05) 45%, transparent 70%);
+   filter:blur(40px); pointer-events:none;
+   animation:breathe 9s ease-in-out infinite;
+ }
+@@ -265,7 +335,7 @@ body.no-motion .hero-ghost { display:none; }
+ .hero-tint {
+   position:absolute; inset:0; z-index:2; pointer-events:none;
+   background:
+-    radial-gradient(80% 70% at 66% 38%, rgba(204,159,74,0.07), transparent 60%),
++    radial-gradient(80% 70% at 66% 38%, rgba(var(--amber-rgb),0.07), transparent 60%),
+     linear-gradient(to top, var(--ink) 1%, rgba(9,8,14,0.12) 26%, transparent 52%);
+ }
+ .hero-side {
+@@ -335,6 +405,260 @@ body.no-motion .hero-ghost { display:none; }
+   display:block; line-height:1;
+ }
+ 
++/* POSTER HERO — dandelion field + original portrait cutout.
++   The portrait is not color-filtered, to preserve skin texture and avoid a plastic look. */
++.hero.poster-hero {
++  min-height:100svh;
++  padding:7rem 4rem 5rem;
++  background:#dfead7;
++  color:#183126;
++}
++.poster-field,
++.poster-grade,
++.poster-atmosphere,
++.poster-foreground,
++.hero-wind {
++  position:absolute;
++  inset:0;
++  pointer-events:none;
++}
++.poster-field {
++  z-index:0;
++  inset:-5vh -6vw;
++  background-image:var(--theme-hero-bg);
++  background-size:cover;
++  background-position:var(--theme-hero-bg-pos);
++  filter:saturate(0.98) contrast(0.96) brightness(1.02);
++  transform:scale(1.045);
++  will-change:translate;
++}
++.poster-grade {
++  z-index:1;
++  background:
++    radial-gradient(62% 52% at 80% 16%, rgba(255,246,210,0.48), transparent 68%),
++    linear-gradient(180deg, rgba(242,248,242,0.18) 0%, rgba(255,247,221,0.08) 42%, rgba(25,50,29,0.24) 100%),
++    linear-gradient(90deg, rgba(217,235,225,0.22), transparent 38%, transparent 72%, rgba(255,246,214,0.18));
++  mix-blend-mode:soft-light;
++}
++.poster-atmosphere {
++  z-index:2;
++  background:
++    linear-gradient(180deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.30) 34%, rgba(255,255,255,0.04) 58%, transparent 76%),
++    radial-gradient(70% 38% at 54% 52%, rgba(255,246,210,0.22), transparent 72%);
++}
++.hero-wind {
++  z-index:8;
++  width:100%;
++  height:100%;
++  mix-blend-mode:screen;
++}
++.hero.poster-hero .hero-wind {
++  opacity:0.95;
++}
++.poster-foreground {
++  z-index:9;
++  top:auto;
++  height:26vh;
++  background-image:
++    linear-gradient(180deg, transparent 0%, rgba(20,48,20,0.08) 34%, rgba(17,42,20,0.46) 100%),
++    var(--theme-hero-bg);
++  background-size:cover, 126vw auto;
++  background-position:center, center bottom;
++  transform-origin:center bottom;
++  filter:saturate(1.05) contrast(1.02);
++  -webkit-mask-image:linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.1) 12%, rgba(0,0,0,0.8) 34%, #000 100%);
++  mask-image:linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.1) 12%, rgba(0,0,0,0.8) 34%, #000 100%);
++  will-change:translate;
++}
++.hero-person-wrap {
++  position:absolute;
++  z-index:6;
++  right:clamp(5rem, 12vw, 16rem);
++  bottom:-10vh;
++  width:min(47vw, 780px);
++  min-width:560px;
++  opacity:0;
++  animation:heroPhotoIn 1.5s cubic-bezier(0.2,0.7,0,1) 0.15s both;
++  filter:drop-shadow(0 28px 54px rgba(23,42,25,0.28));
++  transform-origin:50% 100%;
++  will-change:translate;
++}
++.hero-person-wrap.loaded { opacity:1; }
++.hero-person-wrap::before {
++  content:'';
++  position:absolute;
++  inset:8% -5% 6% -5%;
++  border-radius:50%;
++  background:radial-gradient(closest-side, rgba(255,247,218,0.28), transparent 72%);
++  filter:blur(22px);
++  transform:translate(5%, -7%);
++  z-index:-1;
++}
++.hero-person {
++  display:block;
++  width:100%;
++  height:auto;
++  -webkit-mask-image:linear-gradient(to bottom, #000 0%, #000 84%, rgba(0,0,0,0.84) 92%, transparent 100%);
++  mask-image:linear-gradient(to bottom, #000 0%, #000 84%, rgba(0,0,0,0.84) 92%, transparent 100%);
++}
++.poster-hero .hero-tint {
++  z-index:3;
++  background:
++    radial-gradient(42% 48% at 18% 52%, rgba(255,250,226,0.5), rgba(255,250,226,0.2) 42%, transparent 74%),
++    linear-gradient(to top, rgba(9,8,14,0.2) 0%, rgba(9,8,14,0.04) 30%, transparent 58%);
++}
++.poster-hero .hero-vignette {
++  z-index:4;
++  background:radial-gradient(120% 100% at 54% 42%, transparent 58%, rgba(31,43,28,0.25) 100%);
++}
++.poster-hero .hero-side {
++  z-index:10;
++  color:rgba(31,49,37,0.42);
++}
++.poster-hero .hero-content {
++  z-index:10;
++  max-width:min(540px, 38vw);
++  padding:0;
++  background:none;
++  -webkit-backdrop-filter:none;
++  backdrop-filter:none;
++  text-shadow:0 2px 26px rgba(255,250,225,0.96), 0 1px 0 rgba(255,250,225,0.42);
++}
++.poster-hero .hero-eyebrow {
++  color:rgba(35,58,42,0.68);
++}
++.poster-hero .hero-name {
++  color:color-mix(in srgb, var(--theme-ink) 96%, #000);
++  font-size:calc(clamp(5rem,9.2vw,9.8rem) * var(--hero-scale, 1));
++  line-height:0.86;
++}
++.poster-hero .hero-name .line2 {
++  color:color-mix(in srgb, var(--theme-leaf) 90%, #1a2619);
++}
++.poster-hero .hero-roles,
++.poster-hero .hero-quote,
++.poster-hero .hero-manifesto {
++  color:rgba(14,34,24,0.9);
++}
++.poster-hero .hero-quote {
++  border-left-color:rgba(79,99,54,0.62);
++  background:linear-gradient(90deg, rgba(255,250,226,0.42), rgba(255,250,226,0.12) 58%, transparent 100%);
++  padding:0.45rem 0 0.45rem 1.25rem;
++  max-width:330px;
++}
++.poster-hero .hero-manifesto {
++  max-width:360px;
++}
++.poster-hero .counter-num {
++  color:var(--theme-leaf);
++}
++.poster-hero #typewriter-cursor {
++  background:var(--theme-leaf);
++}
++.poster-hero .scroll-hint {
++  z-index:10;
++}
++.poster-hero .scroll-hint span {
++  color:rgba(31,49,37,0.42);
++}
++.poster-hero .scroll-line {
++  background:linear-gradient(to bottom, rgba(81,106,57,0.62), transparent);
++}
++
++/* SEASON SKIN — decorative layer only. Content structure remains independent. */
++body:not(.no-season) section:not(.hero) {
++  position:relative;
++  isolation:isolate;
++}
++body:not(.no-season) section:not(.hero)::after {
++  content:'';
++  position:absolute;
++  inset:0;
++  z-index:-1;
++  pointer-events:none;
++  background:
++    radial-gradient(46% 28% at 88% 8%, rgba(255,247,210,0.045), transparent 70%),
++    radial-gradient(40% 24% at 12% 14%, rgba(120,143,83,0.04), transparent 72%);
++}
++body:not(.no-season) .sec-label {
++  color:color-mix(in srgb, var(--amber) 52%, #8aa168);
++}
++body:not(.no-season) .sec-bar {
++  width:72px;
++  background:linear-gradient(90deg, rgba(81,106,57,0.85), rgba(255,247,210,0));
++}
++body:not(.no-season) .sec-h em {
++  color:color-mix(in srgb, var(--amber) 65%, #6d844c);
++}
++body:not(.no-season) .album-cover,
++body:not(.no-season) .g-item,
++body:not(.no-season) .vid-card,
++body:not(.no-season) .work-card,
++body:not(.no-season) .drawer-inner {
++  box-shadow:0 20px 64px rgba(0,0,0,0.34), 0 0 0 1px rgba(202,190,137,0.045);
++}
++body.theme-dandelion:not(.no-season) .marquee-wrap {
++  background:linear-gradient(180deg, rgba(20,45,24,0.72), rgba(9,8,14,0.78));
++  border-color:rgba(125,148,89,0.16);
++}
++body.theme-dandelion:not(.no-season) #about,
++body.theme-dandelion:not(.no-season) #music,
++body.theme-dandelion:not(.no-season) #videos,
++body.theme-dandelion:not(.no-season) #gallery,
++body.theme-dandelion:not(.no-season) #work,
++body.theme-dandelion:not(.no-season) #contact {
++  background:
++    radial-gradient(54% 34% at 86% 0%, rgba(255,247,210,0.045), transparent 68%),
++    radial-gradient(48% 32% at 8% 12%, rgba(105,130,74,0.06), transparent 72%),
++    var(--ink2);
++}
++body.theme-dandelion:not(.no-season) .section-wm {
++  -webkit-text-stroke-color:rgba(129,150,93,0.08);
++}
++
++@media (max-width: 900px) {
++  .hero.poster-hero {
++    padding:0 1.4rem 4.5rem;
++    justify-content:flex-end;
++  }
++  .poster-field {
++    inset:-4vh -58vw;
++    background-position:43% bottom;
++  }
++  .hero-person-wrap {
++    top:19svh;
++    right:-15vw;
++    bottom:auto;
++    width:min(72vw, 520px);
++    min-width:0;
++    opacity:0.9;
++  }
++  .poster-foreground {
++    height:24vh;
++    background-size:cover, auto 50vh;
++    background-position:center, 46% bottom;
++  }
++  .poster-hero .hero-content {
++    max-width:100%;
++    padding:0;
++    margin:0 0 clamp(4.6rem, 10svh, 7.5rem);
++    background:none;
++    text-shadow:0 2px 22px rgba(255,250,225,0.94), 0 1px 0 rgba(255,250,225,0.45);
++  }
++  .poster-hero .hero-name {
++    font-size:clamp(3.2rem, 12.5vw, 4.7rem);
++    line-height:0.9;
++  }
++  .poster-hero .hero-quote {
++    max-width:280px;
++    background:linear-gradient(90deg, rgba(255,250,226,0.46), rgba(255,250,226,0.14) 70%, transparent);
++  }
++  .poster-hero .hero-manifesto {
++    max-width:320px;
++  }
++}
++
++
+ /* SCROLL HINT */
+ .scroll-hint {
+   position:absolute; bottom:2rem; left:50%;
+@@ -380,7 +704,7 @@ section { padding:5.25rem 4rem; position:relative; }
+ #about::before, #music::before, #videos::before, #gallery::before, #work::before, #contact::before {
+   content:''; position:absolute; inset:-12%; z-index:-1; pointer-events:none;
+   background:
+-    radial-gradient(36% 30% at 26% 16%, rgba(204,159,74,0.05), transparent 62%),
++    radial-gradient(36% 30% at 26% 16%, rgba(var(--amber-rgb),0.05), transparent 62%),
+     radial-gradient(32% 26% at 78% 76%, rgba(96,72,140,0.045), transparent 62%);
+   filter:blur(10px);
+   animation:sectionFog 26s ease-in-out infinite alternate;
+@@ -403,7 +727,7 @@ section { padding:5.25rem 4rem; position:relative; }
+ /* ============================================
+    ABOUT
+ ============================================ */
+-#about { background:radial-gradient(78% 60% at 14% 8%, rgba(204,159,74,0.05), transparent 55%), var(--ink2); position:relative; overflow:hidden; }
++#about { background:radial-gradient(78% 60% at 14% 8%, rgba(var(--amber-rgb),0.05), transparent 55%), var(--ink2); position:relative; overflow:hidden; }
+ 
+ /* ABOUT — unified editorial layout: portrait left, quote + body right */
+ .about-wrap {
+@@ -419,7 +743,7 @@ section { padding:5.25rem 4rem; position:relative; }
+ }
+ .about-figure::after {
+   content:''; position:absolute; inset:0; pointer-events:none; border-radius:3px;
+-  background:linear-gradient(160deg, rgba(204,159,74,0.14), transparent 42%, rgba(9,8,14,0.55));
++  background:linear-gradient(160deg, rgba(var(--amber-rgb),0.14), transparent 42%, rgba(9,8,14,0.55));
+   mix-blend-mode:soft-light;
+ }
+ .about-figure:hover img { filter:contrast(1.05) saturate(1) sepia(0.04) hue-rotate(-5deg); }
+@@ -492,7 +816,7 @@ section { padding:5.25rem 4rem; position:relative; }
+ }
+ .sw-bar {
+   flex:1 1 0; min-width:2px;
+-  background:linear-gradient(to top, rgba(204,159,74,0.25), var(--amber));
++  background:linear-gradient(to top, rgba(var(--amber-rgb),0.25), var(--amber));
+   border-radius:2px;
+   transform-origin:center;
+   animation:swPulse 1.6s ease-in-out infinite;
+@@ -506,9 +830,9 @@ section { padding:5.25rem 4rem; position:relative; }
+   z-index:0; pointer-events:none;
+   transform:rotate(-15deg); transform-origin:center;
+   display:flex; flex-direction:column; gap:0.35rem;
+-  opacity:0.17;
+-  mask-image:linear-gradient(to bottom, #000 0%, #000 52%, rgba(0,0,0,0.35) 72%, transparent 90%);
+-  -webkit-mask-image:linear-gradient(to bottom, #000 0%, #000 52%, rgba(0,0,0,0.35) 72%, transparent 90%);
++  opacity:0.12;
++  mask-image:linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, #000 38%, rgba(0,0,0,0.3) 70%, transparent 90%);
++  -webkit-mask-image:linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, #000 38%, rgba(0,0,0,0.3) 70%, transparent 90%);
+ }
+ .md-row { display:flex; gap:1.4rem; white-space:nowrap; will-change:transform; }
+ .md-row span {
+@@ -528,18 +852,18 @@ section { padding:5.25rem 4rem; position:relative; }
+   display:inline-flex; align-items:center; gap:0.6rem;
+   margin:-0.4rem 0 2rem; padding:0.7rem 1.3rem;
+   font-family:inherit; font-size:0.74rem; letter-spacing:0.04em; color:var(--text2, #cfc8d8);
+-  background:linear-gradient(100deg, rgba(204,159,74,0.14), rgba(204,159,74,0.04));
+-  border:0.5px solid rgba(204,159,74,0.45); border-radius:100px;
++  background:linear-gradient(100deg, rgba(var(--amber-rgb),0.14), rgba(var(--amber-rgb),0.04));
++  border:0.5px solid rgba(var(--amber-rgb),0.45); border-radius:100px;
+   cursor:pointer; transition:transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+   animation:pickPulse 2.8s ease-in-out infinite;
+ }
+ .pick-suggest em { font-style:normal; color:var(--amber); font-weight:500; }
+ .pick-suggest .ps-spark { font-size:0.9rem; }
+ .pick-suggest .ps-icon { color:var(--amber); font-size:0.95rem; transition:transform 0.4s ease; }
+-.pick-suggest:hover { transform:translateY(-1px); border-color:var(--amber); background:linear-gradient(100deg, rgba(204,159,74,0.22), rgba(204,159,74,0.07)); }
++.pick-suggest:hover { transform:translateY(-1px); border-color:var(--amber); background:linear-gradient(100deg, rgba(var(--amber-rgb),0.22), rgba(var(--amber-rgb),0.07)); }
+ .pick-suggest:hover .ps-icon { transform:rotate(180deg); }
+ .pick-suggest.hide { display:none; }
+-@keyframes pickPulse { 0%,100%{ box-shadow:0 0 0 0 rgba(204,159,74,0.0); } 50%{ box-shadow:0 0 0 4px rgba(204,159,74,0.08); } }
++@keyframes pickPulse { 0%,100%{ box-shadow:0 0 0 0 rgba(var(--amber-rgb),0.0); } 50%{ box-shadow:0 0 0 4px rgba(var(--amber-rgb),0.08); } }
+ body.no-motion .pick-suggest { animation:none; }
+ /* 💗 TRÁI TIM CẢM XÚC khi bắt đầu nghe nhạc */
+ .heart-fx { position:fixed; z-index:300; pointer-events:none; }
+@@ -586,13 +910,13 @@ body.no-motion .heart-fx { display:none; }
+ .cf-nav[disabled] { opacity:0.2; pointer-events:none; }
+ .album-cover { cursor:pointer; }
+ @media (max-width:640px){ .cf-nav{ width:44px; height:44px; font-size:1.5rem; } }
+-.album.selected .album-cover { box-shadow:0 0 0 1px var(--amber), 0 16px 48px rgba(204,159,74,0.25); }
++.album.selected .album-cover { box-shadow:0 0 0 1px var(--amber), 0 16px 48px rgba(var(--amber-rgb),0.25); }
+ .album-cover {
+   position:relative; aspect-ratio:1; overflow:hidden;
+   margin-bottom:0.85rem; box-shadow:0 10px 36px rgba(0,0,0,0.5);
+   transition:box-shadow 0.35s;
+ }
+-.album:hover .album-cover { box-shadow:0 18px 52px rgba(204,159,74,0.22); }
++.album:hover .album-cover { box-shadow:0 18px 52px rgba(var(--amber-rgb),0.22); }
+ .album-cover img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.5s; filter:grayscale(15%); }
+ .album-badge { position:absolute; left:0.6rem; top:0.6rem; white-space:nowrap; font-size:0.54rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--text2); background:rgba(9,8,14,0.6); backdrop-filter:blur(6px); padding:0.22rem 0.5rem; border:0.5px solid var(--border2); border-radius:100px; }
+ .album:hover .album-cover img { transform:scale(1.05); filter:grayscale(0%); }
+@@ -629,7 +953,7 @@ body.no-motion .heart-fx { display:none; }
+ .album-eq span:nth-child(3){ height:60%; animation-delay:0.4s; }
+ .album-eq span:nth-child(4){ height:100%; animation-delay:0.1s; }
+ @keyframes eqBounce { 0%,100%{ transform:scaleY(0.4); } 50%{ transform:scaleY(1); } }
+-.album.playing .album-cover { box-shadow:0 0 0 1px var(--amber), 0 14px 44px rgba(204,159,74,0.22); }
++.album.playing .album-cover { box-shadow:0 0 0 1px var(--amber), 0 14px 44px rgba(var(--amber-rgb),0.22); }
+ .album-name { font-family:'Cormorant Garamond', serif; font-size:1.15rem; color:var(--text); line-height:1.25; margin-bottom:0.4rem; white-space:normal; }
+ .album-sub { font-size:0.68rem; color:var(--text3); letter-spacing:0.04em; line-height:1.5; white-space:normal; }
+ .album-count { font-size:0.6rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--amber); margin-top:0.55rem; }
+@@ -647,8 +971,8 @@ body.no-motion .heart-fx { display:none; }
+ .drawer-suno:hover { text-decoration:underline; }
+ .tlist { display:flex; flex-direction:column; }
+ .trow { display:grid; grid-template-columns:30px 38px 1fr auto; align-items:center; gap:1rem; padding:0.7rem 0.5rem; border-radius:8px; cursor:pointer; transition:background 0.25s; }
+-.trow:hover { background:rgba(204,159,74,0.05); }
+-.trow.playing { background:rgba(204,159,74,0.08); }
++.trow:hover { background:rgba(var(--amber-rgb),0.05); }
++.trow.playing { background:rgba(var(--amber-rgb),0.08); }
+ .trow-num { font-size:0.72rem; color:var(--text3); text-align:center; position:relative; width:30px; }
+ .trow-num .num-d { display:inline-block; }
+ .trow.playing .trow-num { color:var(--amber); }
+@@ -674,7 +998,7 @@ body.no-motion .heart-fx { display:none; }
+ .vinyl-disc { width:100%; height:100%; border-radius:50%; background-size:cover; background-position:center; animation:vinylSpin 10s linear infinite; opacity:0.18; }
+ @media(max-width:600px){ .vinyl-bg{ width:200px; height:200px; right:-50px; } }
+ .vinyl-disc::before { content:''; position:absolute; inset:0; border-radius:50%; background:repeating-conic-gradient(rgba(0,0,0,0.2) 0deg 1deg, transparent 1deg 5deg); }
+-.vinyl-center { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:30px; height:30px; border-radius:50%; background:radial-gradient(circle, #14121c 45%, rgba(204,159,74,0.3) 100%); }
++.vinyl-center { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:30px; height:30px; border-radius:50%; background:radial-gradient(circle, #14121c 45%, rgba(var(--amber-rgb),0.3) 100%); }
+ /* VISUALIZER — sóng nhạc chạy vòng quanh đĩa than (vẽ bằng canvas) */
+ .np-viz { position:absolute; left:50%; top:50%; width:150%; height:150%; transform:translate(-50%,-50%); pointer-events:none; z-index:1; }
+ body.no-motion .np-viz { display:none; }
+@@ -697,13 +1021,13 @@ body.no-motion .np-viz { display:none; }
+ /* LIKE BUTTON on album card */
+ .album-like { position:absolute; left:0.6rem; bottom:0.6rem; display:inline-flex; align-items:center; gap:0.2rem; font-size:0.62rem; color:var(--text2); background:rgba(9,8,14,0.65); backdrop-filter:blur(6px); border:0.5px solid var(--border2); border-radius:100px; padding:0.2rem 0.45rem; cursor:pointer; font-family:inherit; line-height:1; transition:all 0.25s; opacity:0; transform:translateY(5px); }
+ .album:hover .album-like { opacity:1; transform:translateY(0); }
+-.album-like.liked { color:#e06090; border-color:#e06090; }
++.album-like.liked { color:var(--pink); border-color:var(--pink); }
+ .album-like .like-n { font-size:0.58rem; }
+ /* DRAWER ACTIONS */
+ .drawer-actions { display:flex; align-items:center; gap:0.65rem; flex-shrink:0; }
+ .drawer-like { font-size:0.68rem; color:var(--text3); background:none; border:0.5px solid var(--border2); border-radius:100px; padding:0.35rem 0.75rem; cursor:pointer; font-family:inherit; transition:all 0.25s; white-space:nowrap; display:inline-flex; align-items:center; gap:0.2rem; }
+-.drawer-like:hover { border-color:#e06090; color:#e06090; }
+-.drawer-like.liked { color:#e06090; border-color:#e06090; }
++.drawer-like:hover { border-color:var(--pink); color:var(--pink); }
++.drawer-like.liked { color:var(--pink); border-color:var(--pink); }
+ /* DESCRIPTION */
+ .drawer-desc { font-size:0.74rem; color:var(--text3); line-height:1.65; margin-top:0.4rem; max-width:520px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+ /* LOADING */
+@@ -759,13 +1083,15 @@ body.no-motion .np-viz { display:none; }
+ .pc-btn:hover { border-color:var(--amber); color:var(--amber); }
+ .pc-play { width:48px; height:48px; background:var(--amber); border-color:var(--amber); color:var(--ink); font-size:1rem; }
+ .pc-play:hover { background:var(--amber2); color:var(--ink); transform:scale(1.05); }
++.pc-share { margin-left:0.35rem; color:rgba(var(--amber-rgb),0.85); border-color:var(--border2); }
++.pc-share:hover { color:var(--amber2); border-color:var(--amber2); }
+ .pc-time { font-size:0.68rem; color:var(--text3); font-variant-numeric:tabular-nums; flex-shrink:0; min-width:34px; text-align:center; }
+ .pc-bar { flex:1; height:5px; border-radius:3px; background:rgba(255,255,255,0.08); cursor:pointer; position:relative; overflow:hidden; }
+ .pc-bar-fill { position:absolute; left:0; top:0; bottom:0; width:0%; background:linear-gradient(90deg, var(--amber2), var(--amber)); border-radius:3px; }
+ /* Equalizer — animates only while a track is actually playing */
+ .player-eq { display:flex; align-items:flex-end; gap:3px; height:30px; flex-shrink:0; opacity:0.25; transition:opacity 0.3s; }
+ .player.playing .player-eq { opacity:1; }
+-.player-eq span { width:4px; background:linear-gradient(to top, rgba(204,159,74,0.3), var(--amber)); border-radius:2px; height:18%; transform-origin:bottom; }
++.player-eq span { width:4px; background:linear-gradient(to top, rgba(var(--amber-rgb),0.3), var(--amber)); border-radius:2px; height:18%; transform-origin:bottom; }
+ .player.playing .player-eq span { animation:eqBounce 0.9s ease-in-out infinite; }
+ .player-eq span:nth-child(1){ animation-delay:0s; height:45%; }
+ .player-eq span:nth-child(2){ animation-delay:0.18s; height:80%; }
+@@ -789,7 +1115,7 @@ body.no-motion .np-viz { display:none; }
+   padding:clamp(2.5rem,6vw,5rem) clamp(1.25rem,4vw,3rem);
+   border-radius:18px;
+   background:
+-    radial-gradient(130% 90% at 50% -10%, rgba(204,159,74,0.16), transparent 58%),
++    radial-gradient(130% 90% at 50% -10%, rgba(var(--amber-rgb),0.16), transparent 58%),
+     linear-gradient(180deg, rgba(11,10,17,0.74) 0%, rgba(9,8,14,0.9) 100%);
+   -webkit-backdrop-filter:blur(16px) saturate(1.08);
+   backdrop-filter:blur(16px) saturate(1.08);
+@@ -869,7 +1195,7 @@ body.no-motion .np-viz { display:none; }
+ .mg-go {
+   background:var(--amber); color:var(--ink);
+   border:0.5px solid var(--amber);
+-  box-shadow:0 8px 24px rgba(204,159,74,0.28);
++  box-shadow:0 8px 24px rgba(var(--amber-rgb),0.28);
+ }
+ .mg-go:hover { background:var(--amber2); box-shadow:0 10px 30px rgba(232,200,112,0.4); transform:translateY(-2px); }
+ .mg-skip {
+@@ -901,7 +1227,7 @@ body.no-motion .np-viz { display:none; }
+   padding:1.7rem 0; border-bottom:0.5px solid var(--border);
+   transition:padding-left 0.3s, background 0.3s;
+ }
+-.ev-row:hover { padding-left:0.75rem; background:rgba(204,159,74,0.03); }
++.ev-row:hover { padding-left:0.75rem; background:rgba(var(--amber-rgb),0.03); }
+ .ev-row .ev-year { padding-top:0.15rem; }
+ .ev-row .ev-title { margin-bottom:0.25rem; transition:color 0.3s; }
+ .ev-row:hover .ev-title { color:var(--amber2); }
+@@ -984,7 +1310,7 @@ body.no-motion .np-viz { display:none; }
+ .vid-overlay { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; }
+ .vid-play {
+   width:52px; height:52px;
+-  border:1.5px solid rgba(204,159,74,0.7);
++  border:1.5px solid rgba(var(--amber-rgb),0.7);
+   display:flex; align-items:center; justify-content:center;
+   color:var(--amber); font-size:1.1rem;
+   transition:all 0.3s; backdrop-filter:blur(4px);
+@@ -998,7 +1324,7 @@ body.no-motion .np-viz { display:none; }
+ /* ============================================
+    GALLERY (Visual Lab)
+ ============================================ */
+-#gallery { background:radial-gradient(74% 55% at 12% 6%, rgba(204,159,74,0.05), transparent 55%), var(--ink2); position:relative; overflow:hidden; }
++#gallery { background:radial-gradient(74% 55% at 12% 6%, rgba(var(--amber-rgb),0.05), transparent 55%), var(--ink2); position:relative; overflow:hidden; }
+ .g-filters { display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:2.75rem; }
+ .g-chip {
+   font-size:0.64rem; letter-spacing:0.14em; text-transform:uppercase; white-space:nowrap;
+@@ -1008,6 +1334,12 @@ body.no-motion .np-viz { display:none; }
+ }
+ .g-chip:hover { border-color:var(--border2); color:var(--taupe2); }
+ .g-chip.active { border-color:var(--amber); color:var(--amber); background:var(--glow); }
++.gallery.g-collapsed .g-item.g-extra { display:none; }
++.g-more-wrap { text-align:center; margin-top:2.25rem; }
++.g-more { font-family:inherit; font-size:0.64rem; letter-spacing:0.16em; text-transform:uppercase;
++  padding:0.7rem 1.6rem; border:0.5px solid var(--border2); background:none; color:var(--taupe2);
++  cursor:pointer; transition:all 0.3s; border-radius:100px; }
++.g-more:hover { border-color:var(--amber); color:var(--amber); background:var(--glow); }
+ .gallery { columns:6; column-gap:0.75rem; }
+ @media(min-width:1800px){ .gallery{ columns:7; } }
+ @media(max-width:1400px){ .gallery{ columns:4; } }
+@@ -1026,7 +1358,7 @@ body.no-motion .np-viz { display:none; }
+ .g-frame { position:relative; width:100%; transition:aspect-ratio 0.6s cubic-bezier(0.5,0,0,1); }
+ .g-ph {
+   position:absolute; inset:0;
+-  background:repeating-linear-gradient(135deg, rgba(204,159,74,0.05) 0 2px, transparent 2px 11px), color-mix(in srgb, var(--ink3) 70%, var(--ink2));
++  background:repeating-linear-gradient(135deg, rgba(var(--amber-rgb),0.05) 0 2px, transparent 2px 11px), color-mix(in srgb, var(--ink3) 70%, var(--ink2));
+   display:flex; align-items:center; justify-content:center; text-align:center; padding:1rem;
+ }
+ .g-ph::before {
+@@ -1069,13 +1401,13 @@ body.no-motion .np-viz { display:none; }
+   border-color:transparent transparent transparent var(--amber);
+   margin-left:4px;
+ }
+-.g-item:hover .g-play::before { transform:scale(1.12); background:rgba(204,159,74,0.18); }
++.g-item:hover .g-play::before { transform:scale(1.12); background:rgba(var(--amber-rgb),0.18); }
+ 
+ /* ============================================
+    WORK
+ ============================================ */
+ /* Work section — compact horizontal header */
+-#work { background:radial-gradient(68% 55% at 88% 6%, rgba(204,159,74,0.045), transparent 55%), var(--ink2); position:relative; overflow:hidden; }
++#work { background:radial-gradient(68% 55% at 88% 6%, rgba(var(--amber-rgb),0.045), transparent 55%), var(--ink2); position:relative; overflow:hidden; }
+ .work-head-row {
+   display:flex; align-items:baseline; gap:1.5rem;
+   padding-bottom:2rem; border-bottom:0.5px solid var(--border);
+@@ -1145,7 +1477,7 @@ body.no-motion .np-viz { display:none; }
+ footer {
+   padding:4.5rem 4rem 3rem;
+   position:relative; z-index:1;
+-  background:radial-gradient(80% 90% at 50% 0%, rgba(204,159,74,0.045), transparent 60%), var(--ink);
++  background:radial-gradient(80% 90% at 50% 0%, rgba(var(--amber-rgb),0.045), transparent 60%), var(--ink);
+ }
+ .foot-marquee { margin-bottom:0; }
+ .f-top { display:flex; justify-content:space-between; align-items:flex-end; padding-bottom:2.5rem; border-bottom:0.5px solid var(--border); margin-bottom:2.5rem; }
+@@ -1391,7 +1723,7 @@ html.intro-lock { overflow:hidden; }
+   background:
+     repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0 1px, transparent 1px 5px),
+     radial-gradient(circle at 50% 50%, #16121f 0 18%, #0b0a12 19% 100%);
+-  box-shadow:0 0 0 1px rgba(204,159,74,0.2), 0 24px 70px rgba(0,0,0,0.85);
++  box-shadow:0 0 0 1px rgba(var(--amber-rgb),0.2), 0 24px 70px rgba(0,0,0,0.85);
+   animation:aiSpin 3.4s linear infinite, aiIn 1s cubic-bezier(0.2,0.8,0,1) both;
+ }
+ .ai-label {
+@@ -1400,7 +1732,7 @@ html.intro-lock { overflow:hidden; }
+   background:radial-gradient(circle, #2a2336 0 55%, #1a1626 100%);
+   color:var(--amber, #CC9F4A);
+   display:flex; align-items:center; justify-content:center; font-size:0.85rem;
+-  box-shadow:inset 0 0 0 1px rgba(204,159,74,0.35);
++  box-shadow:inset 0 0 0 1px rgba(var(--amber-rgb),0.35);
+ }
+ @keyframes aiSpin { to { transform:rotate(360deg); } }
+ @keyframes aiIn { from { opacity:0; scale:0.6; } to { opacity:1; scale:1; } }
+@@ -1408,7 +1740,7 @@ html.intro-lock { overflow:hidden; }
+ .ai-arm::before {
+   content:''; position:absolute; top:-5px; right:-4px;
+   width:13px; height:13px; border-radius:50%;
+-  background:#2a2636; box-shadow:0 0 0 1px rgba(204,159,74,0.3);
++  background:#2a2636; box-shadow:0 0 0 1px rgba(var(--amber-rgb),0.3);
+ }
+ .ai-arm i {
+   position:absolute; top:2px; right:1px; display:block;
+@@ -1494,7 +1826,7 @@ body.playing .vd-disc img { animation-play-state:running; }
+ .vd-hole {
+   position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+   width:10px; height:10px; border-radius:50%; background:#0a0910;
+-  box-shadow:0 0 0 2px rgba(204,159,74,0.4); pointer-events:none;
++  box-shadow:0 0 0 2px rgba(var(--amber-rgb),0.4); pointer-events:none;
+ }
+ .vd-info { flex:1; min-width:0; cursor:pointer; }
+ .vd-title {
+@@ -1551,7 +1883,7 @@ body.playing .vd-disc img { animation-play-state:running; }
+ }
+ .g-item:hover .g-like { opacity:1; transform:translateY(0); }
+ @media(hover:none){ .g-like { opacity:0.85; transform:none; } }
+-.g-like.liked { color:#E06A8F; border-color:rgba(224,106,143,0.65); }
++.g-like.liked { color:var(--pink2); border-color:rgba(var(--pink2-rgb),0.65); }
+ .g-burst {
+   position:absolute; z-index:5; left:50%; top:50%;
+   font-size:3rem; color:#E06A8F; pointer-events:none;
+@@ -1599,7 +1931,7 @@ body.playing .vd-disc img { animation-play-state:running; }
+   background:rgba(12,11,18,0.75); border:0.5px solid var(--border2);
+   border-radius:100px; padding:0.5rem 1.1rem; cursor:pointer; transition:all 0.25s;
+ }
+-.lb-like.liked { color:#E06A8F; border-color:rgba(224,106,143,0.65); }
++.lb-like.liked { color:var(--pink2); border-color:rgba(var(--pink2-rgb),0.65); }
+ @media(max-width:700px){ .lb-nav { width:38px; height:38px; } .lb-prev { left:0.5rem; } .lb-next { right:0.5rem; } }
+ 
+ /* ═══════════ TOAST + SECRET ═══════════ */
+@@ -1758,7 +2090,7 @@ body.no-motion .photo-stack .ps-card { transition:opacity 0.3s; }
+ }
+ 
+ .album.cf-focus .album-cover {
+-  box-shadow: 0 30px 76px rgba(0,0,0,0.6), 0 0 0 1px rgba(204,159,74,0.4);
++  box-shadow: 0 30px 76px rgba(0,0,0,0.6), 0 0 0 1px rgba(var(--amber-rgb),0.4);
+ }
+ 
+ .album-track {
+@@ -1792,7 +2124,7 @@ body.no-motion .photo-stack .ps-card { transition:opacity 0.3s; }
+ .nowplaying .vinyl-disc {
+   opacity: 1 !important;
+   background-color: #0a0910;
+-  box-shadow: 0 0 0 1px rgba(204,159,74,0.22), inset 0 0 36px rgba(0,0,0,0.7);
++  box-shadow: 0 0 0 1px rgba(var(--amber-rgb),0.22), inset 0 0 36px rgba(0,0,0,0.7);
+   animation-duration: 14s !important;
+ }
+ .nowplaying.playing .vinyl-disc { opacity:1 !important; }
+@@ -1805,7 +2137,7 @@ body.no-motion .photo-stack .ps-card { transition:opacity 0.3s; }
+ .vinyl-disc::after { /* viền nhãn giữa + lỗ trục */
+   content:''; position:absolute; inset:0; border-radius:50%; z-index:2; pointer-events:none;
+   background:
+-    radial-gradient(circle at 50% 50%, transparent 0 25%, rgba(204,159,74,0.55) 25% 25.8%, transparent 26.4% 100%),
++    radial-gradient(circle at 50% 50%, transparent 0 25%, rgba(var(--amber-rgb),0.55) 25% 25.8%, transparent 26.4% 100%),
+     radial-gradient(circle at 50% 50%, #0c0b12 0 5.5%, transparent 6%);
+ }
+ .vinyl-center {
+@@ -1815,7 +2147,7 @@ body.no-motion .photo-stack .ps-card { transition:opacity 0.3s; }
+ 
+ .drawer-inner {
+   border-radius: 24px;
+-  background: radial-gradient(65% 90% at 88% 20%, rgba(204,159,74,0.10), transparent 58%), linear-gradient(135deg, rgba(20,18,28,0.88), rgba(10,9,16,0.78));
++  background: radial-gradient(65% 90% at 88% 20%, rgba(var(--amber-rgb),0.10), transparent 58%), linear-gradient(135deg, rgba(20,18,28,0.88), rgba(10,9,16,0.78));
+   box-shadow: 0 24px 90px rgba(0,0,0,0.42), inset 0 1px 0 rgba(255,255,255,0.04);
+   overflow: hidden;
+ }
+@@ -1848,7 +2180,7 @@ body.no-motion .photo-stack .ps-card { transition:opacity 0.3s; }
+ }
+ 
+ #gallery {
+-  background: radial-gradient(70% 60% at 12% 6%, rgba(204,159,74,0.08), transparent 58%), radial-gradient(60% 50% at 90% 22%, rgba(120,86,160,0.07), transparent 58%), var(--ink2);
++  background: radial-gradient(70% 60% at 12% 6%, rgba(var(--amber-rgb),0.08), transparent 58%), radial-gradient(60% 50% at 90% 22%, rgba(120,86,160,0.07), transparent 58%), var(--ink2);
+ }
+ 
+ body.no-motion .vinyl-disc,
+@@ -1894,28 +2226,611 @@ body.no-motion .album-track {
+     border-radius:50%; overflow:visible;
+     box-shadow:
+       0 0 0 8px #0a0910,
+-      0 0 0 9px rgba(204,159,74,0.10),
++      0 0 0 9px rgba(var(--amber-rgb),0.10),
+       0 0 0 16px rgba(10,9,16,0.9),
+-      0 0 0 17px rgba(204,159,74,0.34),
++      0 0 0 17px rgba(var(--amber-rgb),0.34),
+       0 18px 46px rgba(0,0,0,0.6);
+   }
+   .nowplaying .player-cover img { border-radius:50%; }
+   .nowplaying .player-cover::after { /* lỗ trục giữa nhãn */
+     content:''; position:absolute; top:50%; left:50%; width:13px; height:13px;
+     transform:translate(-50%,-50%); border-radius:50%;
+-    background:radial-gradient(circle, #14121c 45%, rgba(204,159,74,0.4) 100%);
++    background:radial-gradient(circle, #14121c 45%, rgba(var(--amber-rgb),0.4) 100%);
+     box-shadow:0 0 0 2px rgba(0,0,0,0.6); z-index:2; pointer-events:none;
+   }
+   .nowplaying.playing .player-cover img { animation:vinylSpin 16s linear infinite; }
+   body.no-motion .nowplaying.playing .player-cover img { animation:none !important; }
+ }
++
++/* Dandelion poster composition lock.
++   Keep content and seasonal skin separated, and override older hero responsive rules. */
++.hero.poster-hero {
++  min-height:100svh;
++  padding:clamp(6.4rem, 8svh, 8rem) clamp(4.5rem, 7vw, 8.5rem) clamp(4rem, 6svh, 5.5rem);
++  justify-content:center;
++}
++.poster-hero .hero-content {
++  position:relative;
++  width:min(38vw, 520px);
++  max-width:520px;
++  margin-left:clamp(0rem, 2.2vw, 4rem);
++  padding:0 !important;
++  background:none !important;
++  -webkit-backdrop-filter:none !important;
++  backdrop-filter:none !important;
++  text-shadow:
++    0 2px 22px rgba(255,250,226,0.98),
++    0 0 1px rgba(15,42,28,0.2);
++}
++.poster-hero .hero-content::before {
++  content:'';
++  position:absolute;
++  z-index:-1;
++  inset:-2.4rem -4rem -2rem -2.4rem;
++  pointer-events:none;
++  background:
++    radial-gradient(72% 62% at 20% 46%, rgba(255,250,226,0.78), rgba(255,250,226,0.28) 48%, transparent 76%),
++    linear-gradient(90deg, rgba(255,250,226,0.24), transparent 78%);
++  opacity:0.82;
++  filter:blur(0.2px);
++}
++.poster-hero .hero-eyebrow {
++  color:rgba(32,54,39,0.72);
++  margin-bottom:clamp(1rem, 1.5svh, 1.4rem);
++}
++.poster-hero .hero-eyebrow::after {
++  content:'';
++  display:block;
++  width:min(260px, 26vw);
++  height:1px;
++  margin-top:0.8rem;
++  background:linear-gradient(90deg, rgba(81,106,57,0.62), rgba(255,250,226,0));
++}
++.poster-hero .hero-name {
++  font-size:calc(clamp(5.8rem, 8.7vw, 11.3rem) * var(--hero-scale, 1));
++  line-height:0.84;
++  margin-bottom:clamp(1rem, 1.7svh, 1.6rem);
++  letter-spacing:-0.035em;
++}
++.poster-hero .hero-roles {
++  color:rgba(21,43,30,0.9);
++  font-weight:500;
++  margin-bottom:clamp(1.35rem, 2.4svh, 2.2rem);
++  text-shadow:0 1px 18px rgba(255,250,226,0.96);
++}
++.poster-hero .hero-bottom {
++  gap:clamp(1.35rem, 2.2vw, 2.2rem);
++  align-items:flex-end;
++}
++.poster-hero .hero-quote {
++  max-width:340px;
++  padding:0 0 0 1.1rem;
++  background:none !important;
++  border-left-color:rgba(81,106,57,0.72);
++  color:rgba(17,38,27,0.92);
++}
++.poster-hero .hero-counter {
++  color:rgba(35,55,40,0.56);
++}
++.poster-hero .hero-manifesto {
++  max-width:390px;
++  color:rgba(17,38,27,0.86);
++}
++.hero-person-wrap {
++  right:clamp(7rem, 18vw, 34rem);
++  bottom:-7vh;
++  width:clamp(610px, 49vw, 1000px);
++  min-width:0;
++  filter:drop-shadow(0 30px 60px rgba(16,35,19,0.28));
++}
++.hero-person-wrap::before {
++  inset:5% -8% 2% -8%;
++  background:radial-gradient(closest-side, rgba(255,247,218,0.26), transparent 74%);
++}
++.hero-person {
++  -webkit-mask-image:linear-gradient(to bottom, #000 0%, #000 87%, rgba(0,0,0,0.76) 94%, transparent 100%);
++  mask-image:linear-gradient(to bottom, #000 0%, #000 87%, rgba(0,0,0,0.76) 94%, transparent 100%);
++}
++.poster-foreground {
++  height:clamp(8.5rem, 23vh, 18rem);
++  background-size:cover, 118vw auto;
++}
++
++@media (min-width: 1700px) {
++  .hero-person-wrap {
++    right:clamp(8rem, 14vw, 25rem);
++    width:clamp(780px, 43vw, 1080px);
++  }
++  .poster-hero .hero-content {
++    width:min(34vw, 560px);
++  }
++}
++
++@media (max-width: 1100px) {
++  .hero.poster-hero {
++    padding:0 clamp(1.35rem, 4vw, 2.4rem) clamp(4.3rem, 8svh, 5.4rem);
++    justify-content:flex-end;
++  }
++  .poster-field {
++    inset:-4vh -56vw;
++    background-position:45% bottom;
++  }
++  .poster-hero .hero-tint {
++    background:
++      linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,250,226,0.2) 34%, rgba(255,250,226,0.08) 58%, rgba(9,30,16,0.32) 100%),
++      radial-gradient(92% 44% at 18% 78%, rgba(255,250,226,0.54), rgba(255,250,226,0.16) 48%, transparent 78%);
++  }
++  .hero-person-wrap {
++    top:13svh;
++    right:-20vw;
++    bottom:auto;
++    width:min(88vw, 660px);
++    min-width:0;
++    opacity:0.96;
++  }
++  .hero-person {
++    -webkit-mask-image:linear-gradient(to bottom, #000 0%, #000 87%, rgba(0,0,0,0.76) 95%, transparent 100%);
++    mask-image:linear-gradient(to bottom, #000 0%, #000 87%, rgba(0,0,0,0.76) 95%, transparent 100%);
++  }
++  .poster-foreground {
++    height:24vh;
++    background-size:cover, auto 48vh;
++    background-position:center, 48% bottom;
++  }
++  .poster-hero .hero-content {
++    width:min(88vw, 560px);
++    max-width:560px;
++    margin:0 auto 0 0;
++    padding-top:0 !important;
++  }
++  .poster-hero .hero-content::before {
++    inset:-1.8rem -2rem -2rem -1.7rem;
++    background:
++      radial-gradient(82% 70% at 20% 46%, rgba(255,250,226,0.58), rgba(255,250,226,0.2) 50%, transparent 80%);
++    opacity:0.76;
++    filter:blur(12px);
++  }
++  .poster-hero .hero-eyebrow {
++    margin-bottom:0.75rem;
++  }
++  .poster-hero .hero-eyebrow::after {
++    width:min(220px, 52vw);
++    margin-top:0.65rem;
++  }
++  .poster-hero .hero-name {
++    font-size:clamp(4.1rem, 16vw, 6.6rem);
++    line-height:0.88;
++    margin-bottom:0.9rem;
++  }
++  .poster-hero .hero-roles {
++    margin-bottom:1.15rem;
++  }
++  .poster-hero .hero-bottom {
++    flex-direction:row;
++    align-items:flex-end;
++    gap:1.2rem;
++    flex-wrap:wrap;
++  }
++  .poster-hero .hero-quote {
++    max-width:min(68vw, 320px);
++    font-size:0.96rem;
++    line-height:1.62;
++  }
++  .poster-hero .hero-manifesto {
++    max-width:min(78vw, 380px);
++    margin-top:1.05rem;
++  }
++}
++
++@media (max-width: 620px) {
++  .poster-hero .hero-content {
++    width:min(92vw, 420px);
++  }
++  .hero-person-wrap {
++    top:12svh;
++    right:-12vw;
++    width:min(92vw, 500px);
++  }
++  .hero-person {
++    -webkit-mask-image:linear-gradient(to bottom, #000 0%, #000 72%, rgba(0,0,0,0.78) 80%, rgba(0,0,0,0.26) 89%, transparent 97%);
++    mask-image:linear-gradient(to bottom, #000 0%, #000 72%, rgba(0,0,0,0.78) 80%, rgba(0,0,0,0.26) 89%, transparent 97%);
++  }
++  .poster-foreground {
++    height:20vh;
++    background-size:cover, auto 42vh;
++    -webkit-mask-image:linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.08) 18%, rgba(0,0,0,0.72) 42%, #000 100%);
++    mask-image:linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.08) 18%, rgba(0,0,0,0.72) 42%, #000 100%);
++  }
++  .poster-hero .hero-content::before {
++    inset:-1.4rem -1.1rem -1.6rem -1.15rem;
++    background:
++      radial-gradient(88% 72% at 26% 48%, rgba(255,250,226,0.5), rgba(255,250,226,0.18) 52%, transparent 82%);
++    opacity:0.7;
++    filter:blur(16px);
++  }
++  .poster-hero .hero-name {
++    font-size:clamp(3.55rem, 17vw, 5.2rem);
++  }
++  .poster-hero .hero-eyebrow {
++    font-size:0.58rem;
++    letter-spacing:0.32em;
++  }
++  .poster-hero .hero-quote {
++    max-width:78vw;
++  }
++  .poster-hero .hero-counter {
++    min-width:72px;
++  }
++}
++
++/* HERO ART DIRECTION — final ratio map.
++   One source of truth for portrait placement, grass cover and edge fade. */
++.hero.poster-hero {
++  --person-w:clamp(620px, 44vw, 940px);
++  --person-right:clamp(3rem, 8vw, 13rem);
++  --person-bottom:-6vh;
++  --person-top:auto;
++  --person-mask:linear-gradient(to bottom, #000 0%, #000 80%, rgba(0,0,0,0.72) 88%, rgba(0,0,0,0.18) 97%, transparent 100%);
++  --fg-h:clamp(9rem, 22vh, 17rem);
++}
++.hero-person-wrap {
++  top:var(--person-top) !important;
++  right:var(--person-right) !important;
++  bottom:var(--person-bottom) !important;
++  width:var(--person-w) !important;
++}
++.hero-person {
++  -webkit-mask-image:var(--person-mask) !important;
++  mask-image:var(--person-mask) !important;
++}
++.poster-foreground {
++  height:var(--fg-h) !important;
++}
++
++@media (min-width: 1700px) {
++  .hero.poster-hero {
++    --person-w:clamp(760px, 38vw, 980px);
++    --person-right:clamp(4rem, 7vw, 12rem);
++    --person-bottom:-5vh;
++    --fg-h:clamp(9rem, 21vh, 16rem);
++  }
++}
++
++@media (max-aspect-ratio: 1.18) and (min-width: 621px) {
++  .hero.poster-hero {
++    --person-w:min(58vw, 780px);
++    --person-right:clamp(2rem, 7vw, 7rem);
++    --person-bottom:-1vh;
++    --fg-h:clamp(8rem, 18vh, 14rem);
++    --person-mask:linear-gradient(to bottom, #000 0%, #000 84%, rgba(0,0,0,0.76) 92%, rgba(0,0,0,0.24) 98%, transparent 100%);
++  }
++}
++
++@media (max-width: 620px) {
++  .hero.poster-hero {
++    --person-w:min(88vw, 440px);
++    --person-right:-13vw;
++    --person-top:10svh;
++    --person-bottom:auto;
++    --fg-h:22vh;
++    --person-mask:linear-gradient(to bottom, #000 0%, #000 63%, rgba(0,0,0,0.62) 74%, rgba(0,0,0,0.16) 88%, transparent 98%);
++    min-height:100svh;
++    padding:0 1.25rem 5.7rem;
++    justify-content:flex-start;
++  }
++  .hero-person-wrap::after {
++    display:none !important;
++  }
++  .poster-hero .hero-tint {
++    background:
++      linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,250,226,0.08) 34%, rgba(238,244,207,0.5) 56%, rgba(103,130,63,0.42) 100%),
++      radial-gradient(90% 42% at 20% 70%, rgba(255,250,226,0.52), rgba(255,250,226,0.14) 58%, transparent 82%);
++  }
++  .poster-hero .hero-vignette {
++    background:radial-gradient(120% 88% at 50% 34%, transparent 58%, rgba(19,43,22,0.2) 100%);
++  }
++  .poster-hero .hero-content {
++    width:100%;
++    max-width:100%;
++    margin:0;
++    padding-top:54svh !important;
++    text-shadow:0 2px 18px rgba(255,250,226,0.92);
++  }
++  .poster-hero .hero-content::before {
++    display:none !important;
++  }
++  .poster-hero .hero-eyebrow {
++    margin-bottom:0.7rem;
++  }
++  .poster-hero .hero-eyebrow::after {
++    width:min(210px, 56vw);
++  }
++  .poster-hero .hero-name {
++    font-size:clamp(3.7rem, 16vw, 4.9rem);
++    line-height:0.86;
++    margin-bottom:0.9rem;
++  }
++  .poster-hero .hero-roles {
++    margin-bottom:1rem;
++  }
++  .poster-hero .hero-bottom {
++    align-items:flex-start;
++    gap:1rem;
++  }
++  .poster-hero .hero-quote {
++    max-width:min(68vw, 280px);
++  }
++  .poster-hero .hero-manifesto {
++    display:none;
++  }
++}
++
++/* FULL-SITE SEASON SKIN — dandelion.
++   This layer changes palette, texture and ornamental assets while preserving content structure. */
++body.theme-dandelion {
++  --ink:#10160f;
++  --ink2:#131d11;
++  --ink3:#1b2a17;
++  --ink4:#26381f;
++  --taupe:#8e9675;
++  --taupe2:#d8d0ad;
++  --taupe3:#f6edd0;
++  --amber:#8faf5e;
++  --amber2:#e1ecad;
++  --amber3:#fff3be;
++  --text:#f7f0d4;
++  --text2:#dcd1aa;
++  --text3:#8f9676;
++  --border:rgba(222,236,177,0.11);
++  --border2:rgba(165,196,101,0.24);
++  --glow:rgba(144,180,85,0.11);
++  --theme-card:rgba(18,29,17,0.72);
++  --theme-card-soft:rgba(249,245,209,0.045);
++  --theme-line:url('./images/themes/dandelion/grass-line.svg');
++  --theme-corner:url('./images/themes/dandelion/corner-meadow.svg');
++  --theme-seed:url('./images/themes/dandelion/seed.svg');
++  --theme-paper-texture:url('./images/themes/dandelion/paper-bloom.svg');
++  background:
++    radial-gradient(80% 50% at 72% 0%, rgba(255,239,181,0.055), transparent 64%),
++    radial-gradient(80% 60% at 8% 18%, rgba(116,150,71,0.09), transparent 70%),
++    linear-gradient(180deg, #10160f 0%, #11190f 42%, #0b100b 100%);
++}
++
++body.theme-dandelion:not(.no-season) .season-layer {
++  opacity:0.82;
++  background-image:
++    var(--theme-paper-texture),
++    var(--theme-seed),
++    radial-gradient(42% 30% at 88% 8%, rgba(255,246,198,0.11), transparent 70%),
++    radial-gradient(34% 28% at 8% 22%, rgba(119,153,77,0.1), transparent 72%);
++  background-size:520px 520px, 70px 70px, auto, auto;
++  background-position:center, 92% 16%, center, center;
++  background-repeat:repeat, no-repeat, no-repeat, no-repeat;
++}
++
++body.theme-dandelion:not(.no-season) .marquee-wrap,
++body.theme-dandelion:not(.no-season) .foot-marquee {
++  background:
++    linear-gradient(90deg, rgba(10,16,9,0.86), rgba(24,38,18,0.8), rgba(10,16,9,0.86)),
++    var(--theme-paper-texture);
++  border-color:rgba(168,198,105,0.18);
++  box-shadow:inset 0 1px rgba(255,246,198,0.035), inset 0 -1px rgba(116,150,71,0.1);
++}
++body.theme-dandelion:not(.no-season) .marquee-item.accent {
++  color:#7fb1ff;
++}
++
++body.theme-dandelion:not(.no-season) #welcome,
++body.theme-dandelion:not(.no-season) #about,
++body.theme-dandelion:not(.no-season) #music,
++body.theme-dandelion:not(.no-season) #videos,
++body.theme-dandelion:not(.no-season) #gallery,
++body.theme-dandelion:not(.no-season) #work,
++body.theme-dandelion:not(.no-season) #contact {
++  overflow:hidden;
++  background:
++    linear-gradient(180deg, rgba(255,244,196,0.018), transparent 28%),
++    radial-gradient(50% 32% at 90% 0%, rgba(255,238,174,0.05), transparent 72%),
++    radial-gradient(54% 40% at 8% 18%, rgba(116,150,71,0.07), transparent 74%),
++    var(--ink2) !important;
++}
++
++body.theme-dandelion:not(.no-season) section:not(.hero)::after {
++  content:'';
++  position:absolute;
++  inset:0;
++  z-index:-1;
++  pointer-events:none;
++  background-image:
++    var(--theme-corner),
++    var(--theme-line),
++    radial-gradient(42% 22% at 86% 10%, rgba(255,246,198,0.045), transparent 72%);
++  background-size:clamp(190px, 20vw, 340px) auto, min(760px, 72vw) auto, auto;
++  background-position:right -46px bottom -54px, center bottom 12px, center;
++  background-repeat:no-repeat;
++  opacity:0.48;
++}
++body.theme-dandelion:not(.no-season) #music::after,
++body.theme-dandelion:not(.no-season) #gallery::after {
++  opacity:0.34;
++}
++body.theme-dandelion:not(.no-season) #contact::after,
++body.theme-dandelion:not(.no-season) footer::after {
++  opacity:0.58;
++}
++
++body.theme-dandelion:not(.no-season) .sec-label,
++body.theme-dandelion:not(.no-season) .albums-label,
++body.theme-dandelion:not(.no-season) .work-head-label,
++body.theme-dandelion:not(.no-season) .f-disc-h {
++  color:color-mix(in srgb, var(--amber2) 66%, #8fb8ff);
++  text-shadow:0 0 22px rgba(225,236,173,0.12);
++}
++body.theme-dandelion:not(.no-season) .sec-h,
++body.theme-dandelion:not(.no-season) .work-head-title,
++body.theme-dandelion:not(.no-season) .f-logo {
++  color:var(--text);
++}
++body.theme-dandelion:not(.no-season) .sec-h em,
++body.theme-dandelion:not(.no-season) .work-head-title em,
++body.theme-dandelion:not(.no-season) .welcome-lead em,
++body.theme-dandelion:not(.no-season) .work-method em,
++body.theme-dandelion:not(.no-season) .music-dli-note em {
++  color:var(--amber2);
++}
++body.theme-dandelion:not(.no-season) .sec-bar,
++body.theme-dandelion:not(.no-season) .work-head-line,
++body.theme-dandelion:not(.no-season) .divider {
++  background:
++    var(--theme-line) center/100% 100% no-repeat,
++    linear-gradient(90deg, transparent, rgba(145,178,92,0.62), rgba(255,241,190,0.24), transparent);
++  height:18px;
++  border:0;
++}
++body.theme-dandelion:not(.no-season) .sec-bar {
++  width:min(280px, 44vw);
++  margin:1.45rem 0 3.4rem;
++}
++body.theme-dandelion:not(.no-season) .work-head-line {
++  height:16px;
++}
++
++body.theme-dandelion:not(.no-season) .album-cover,
++body.theme-dandelion:not(.no-season) .drawer-inner,
++body.theme-dandelion:not(.no-season) .nowplaying,
++body.theme-dandelion:not(.no-season) .g-item,
++body.theme-dandelion:not(.no-season) .vid-card,
++body.theme-dandelion:not(.no-season) .work-item,
++body.theme-dandelion:not(.no-season) .clink,
++body.theme-dandelion:not(.no-season) .aim-badge {
++  border-color:rgba(168,198,105,0.18);
++  background-color:var(--theme-card);
++  box-shadow:
++    0 18px 58px rgba(0,0,0,0.34),
++    inset 0 1px rgba(255,246,198,0.035),
++    0 0 0 1px rgba(255,246,198,0.015);
++}
++body.theme-dandelion:not(.no-season) .drawer-inner,
++body.theme-dandelion:not(.no-season) .nowplaying,
++body.theme-dandelion:not(.no-season) .mg-inner,
++body.theme-dandelion:not(.no-season) .contact-deck .clink {
++  background:
++    linear-gradient(135deg, rgba(18,29,17,0.84), rgba(11,16,11,0.76)),
++    var(--theme-paper-texture);
++}
++body.theme-dandelion:not(.no-season) .album.selected .album-cover,
++body.theme-dandelion:not(.no-season) .album.playing .album-cover,
++body.theme-dandelion:not(.no-season) .album:hover .album-cover {
++  box-shadow:
++    0 0 0 1px rgba(225,236,173,0.62),
++    0 20px 58px rgba(139,174,84,0.18),
++    0 0 40px rgba(255,244,198,0.05);
++}
++
++body.theme-dandelion:not(.no-season) .pc-btn,
++body.theme-dandelion:not(.no-season) .drawer-playall,
++body.theme-dandelion:not(.no-season) .pick-suggest,
++body.theme-dandelion:not(.no-season) .g-filter,
++body.theme-dandelion:not(.no-season) .cta-float-btn,
++body.theme-dandelion:not(.no-season) .motion-toggle {
++  border-color:rgba(143,177,94,0.34);
++  background:
++    linear-gradient(135deg, rgba(17,28,15,0.9), rgba(23,38,18,0.76)),
++    var(--theme-paper-texture);
++  color:var(--text2);
++}
++body.theme-dandelion:not(.no-season) .pc-btn:hover,
++body.theme-dandelion:not(.no-season) .drawer-playall:hover,
++body.theme-dandelion:not(.no-season) .pick-suggest:hover,
++body.theme-dandelion:not(.no-season) .g-filter:hover,
++body.theme-dandelion:not(.no-season) .g-filter.active,
++body.theme-dandelion:not(.no-season) .cta-float-btn:hover {
++  border-color:rgba(225,236,173,0.62);
++  color:var(--amber2);
++  background:
++    linear-gradient(135deg, rgba(37,58,28,0.9), rgba(20,32,16,0.78)),
++    var(--theme-paper-texture);
++}
++body.theme-dandelion:not(.no-season) .pc-play,
++body.theme-dandelion:not(.no-season) .album-play {
++  background:linear-gradient(135deg, #e9efb7, #93b668);
++  color:#10160f;
++}
++body.theme-dandelion:not(.no-season) .pc-bar,
++body.theme-dandelion:not(.no-season) .pc-bar-fill {
++  background-color:rgba(225,236,173,0.14);
++}
++body.theme-dandelion:not(.no-season) .pc-bar-fill,
++body.theme-dandelion:not(.no-season) .sw-bar,
++body.theme-dandelion:not(.no-season) .player-eq span,
++body.theme-dandelion:not(.no-season) .album-eq span,
++body.theme-dandelion:not(.no-season) .num-eq i {
++  background:linear-gradient(to top, rgba(127,177,255,0.32), rgba(225,236,173,0.92));
++}
++
++body.theme-dandelion:not(.no-season) .section-wm,
++body.theme-dandelion:not(.no-season) .contact-wm {
++  -webkit-text-stroke-color:rgba(170,199,106,0.08);
++  text-shadow:0 0 48px rgba(225,236,173,0.03);
++}
++body.theme-dandelion:not(.no-season) .about-figure img {
++  filter:contrast(1.02) saturate(0.92) sepia(0.08) hue-rotate(-8deg) brightness(1.02);
++}
++body.theme-dandelion:not(.no-season) .about-figure::after {
++  background:linear-gradient(160deg, rgba(225,236,173,0.12), transparent 42%, rgba(8,16,8,0.55));
++}
++body.theme-dandelion:not(.no-season) .htag-band {
++  border-color:rgba(168,198,105,0.16);
++}
++body.theme-dandelion:not(.no-season) .htag::after {
++  color:var(--amber2);
++}
++
++body.theme-dandelion:not(.no-season) footer {
++  background:
++    radial-gradient(54% 36% at 84% 8%, rgba(225,236,173,0.055), transparent 72%),
++    linear-gradient(180deg, #11190f, #080c08);
++}
++body.theme-dandelion:not(.no-season) footer::after {
++  content:'';
++  position:absolute;
++  inset:0;
++  pointer-events:none;
++  background-image:var(--theme-corner);
++  background-size:clamp(220px, 24vw, 380px) auto;
++  background-position:right -54px bottom -64px;
++  background-repeat:no-repeat;
++  opacity:0.34;
++}
++
++@media (max-width: 700px) {
++  body.theme-dandelion:not(.no-season) section:not(.hero)::after {
++    background-size:170px auto, 90vw auto, auto;
++    background-position:right -58px bottom -44px, center bottom 8px, center;
++    opacity:0.32;
++  }
++  body.theme-dandelion:not(.no-season) .sec-bar {
++    width:min(220px, 72vw);
++    margin:1rem 0 2.5rem;
++  }
++}
+ </style>
+ </head>
+-<body>
++<body data-theme="dandelion">
++<!-- SKIN LAYER — tầng trang trí campaign (mặc định trống, cởi ra về base) -->
++<div class="skin-decor" aria-hidden="true"></div>
++<script>
++(function(){
++  try{ var p=new URLSearchParams(location.search).get('skin'); if(p) document.documentElement.dataset.skin=p; }catch(e){}
++  window.setSkin=function(name){ if(name) document.documentElement.dataset.skin=name; else delete document.documentElement.dataset.skin; };
++})();
++</script>
+ 
+ <!-- CUSTOM CURSOR -->
+ <div id="cursor"></div>
+ <div id="cursor-ring"></div>
++<div class="season-layer" aria-hidden="true"></div>
++<canvas id="siteSeeds" aria-hidden="true"></canvas>
+ 
+ <!-- NAV -->
+ <nav id="nav">
+@@ -1933,16 +2848,15 @@ body.no-motion .album-track {
+ </nav>
+ 
+ <!-- HERO -->
+-<section class="hero" id="home" data-screen-label="Hero">
+-  <div class="shader-host" id="shaderHost"></div>
+-  <div class="hero-bg"></div>
+-  <div class="hero-backlight"></div>
+-  <div class="hero-watermark" aria-hidden="true">ANH LI</div>
+-  <div class="hero-photo" id="heroBg"></div>
+-  <!-- GHOST LAYER — D'Li hé lộ theo con trỏ (desktop, tắt khi giảm chuyển động) -->
+-  <div class="hero-ghost" id="heroGhost" aria-hidden="true">
+-    <div class="hero-ghost-win" id="heroGhostWin"><div class="hero-ghost-img" id="heroGhostImg"></div></div>
++<section class="hero poster-hero" id="home" data-screen-label="Hero">
++  <div class="poster-field" aria-hidden="true"></div>
++  <div class="poster-grade" aria-hidden="true"></div>
++  <div class="poster-atmosphere" aria-hidden="true"></div>
++  <canvas class="hero-wind" id="heroWind" aria-hidden="true"></canvas>
++  <div class="hero-person-wrap" id="heroBg" aria-hidden="true">
++    <img class="hero-person" src="./images/hero/anh-li-cutout-softedge.png" alt=""/>
+   </div>
++  <div class="poster-foreground" aria-hidden="true"></div>
+   <div class="hero-tint"></div>
+   <div class="hero-vignette"></div>
+   <div class="hero-side">Làm nhạc, làm show, làm cho nó ở lại · Sài Gòn</div>
+@@ -2111,6 +3025,7 @@ body.no-motion .album-track {
+         <span class="pc-time" id="pcCur">0:00</span>
+         <div class="pc-bar" id="pcBar"><div class="pc-bar-fill" id="pcFill"></div></div>
+         <span class="pc-time" id="pcDur">0:00</span>
++        <button class="pc-btn pc-share" id="pcShare" type="button" aria-label="Chép link bài đang phát" title="Chép link bài đang phát">↗</button>
+       </div>
+     </div>
+   </div>
+@@ -2832,11 +3747,11 @@ setTimeout(type,1200);
+ ============================================================ */
+ const revObs = new IntersectionObserver(entries=>{
+   entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+-},{threshold:0.08});
++},{threshold:0, rootMargin:'0px 0px 12% 0px'});
+ function revealInView(){
+   document.querySelectorAll('.reveal:not(.in)').forEach(el=>{
+     const r=el.getBoundingClientRect();
+-    if(r.top < innerHeight*0.92 && r.bottom > 0) el.classList.add('in');
++    if(r.top < innerHeight*1.08 && r.bottom > 0) el.classList.add('in');
+   });
+ }
+ function observe(){
+@@ -2896,7 +3811,7 @@ function renderMusic(){
+       const likeN=parseInt(localStorage.getItem('album_likes_'+a.id)||'0');
+       return `<div class="album" data-aidx="${i}" onclick="cfClick(${i})">
+         <div class="album-cover">
+-          <img src="${coverUrl(a.cover)}" alt="${a.name}" loading="lazy" oncontextmenu="return false" onerror="this.outerHTML='<div class=album-cover-blank>♪</div>'"/>
++          <img src="${coverUrl(a.cover)}" alt="${a.name}" loading="eager" oncontextmenu="return false" onerror="this.outerHTML='<div class=album-cover-blank>♪</div>'"/>
+           <div class="album-play">⌄</div>
+           <span class="album-badge">${a.count||0} bài</span>
+           <button class="album-like${likeN>0?' liked':''}" data-aidx="${i}" onclick="likeAlbum(${i},event)" aria-label="Thích">♥<span class="like-n">${likeN>0?' '+likeN:''}</span></button>
+@@ -2917,7 +3832,7 @@ function renderMusic(){
+   if(decor && !decor.childElementCount){
+     const words=['Cinematic Soul','Dark R&B','Neo-soul','Trip-hop','Power Ballad','Slow Jam','Indie Pop','Urban Jazz','Downtempo','Acoustic R&B','Vietnamese Pop','Orchestral','Folk','Dream Pop','Lo-fi','Ballad','Soulful','Melancholic','Expressive','Cinematic','Warm Vocals','Original'];
+     let rows='';
+-    for(let r=0;r<18;r++){
++    for(let r=0;r<12;r++){
+       const shuffled=[...words].sort(()=>Math.random()-0.5);
+       const line=shuffled.map(w=>`<span>${w}</span>`).join('');
+       rows+=`<div class="md-row ${r%2?'b':'a'}">${line}${line}</div>`;
+@@ -3114,6 +4029,7 @@ function renderDrawer(a, tracks, showAll){
+           </div>
+           <div class="drawer-actions">
+             <button class="drawer-like${likeN>0?' liked':''}" onclick="likeAlbum(${idx},event)">♡<span class="like-n">${likeN>0?' '+likeN:''}</span></button>
++            <button class="drawer-like drawer-share" type="button" title="Chép link album này" aria-label="Chép link album này" onclick="shareAlbum(${idx},event)">↗</button>
+             <button class="drawer-playall"${loading?' disabled style="opacity:0.4;cursor:default"':''} onclick="userPick(0)">▶ Phát từ đầu</button>
+           </div>
+         </div>
+@@ -3129,6 +4045,66 @@ function markPlaying(idx){
+ /* ===== AUDIO ENGINE (trình phát của trang, nhạc thật từ Cái Sạp nhạc) ===== */
+ const audio=document.getElementById('audioEl');
+ let isPlaying=false;
++let pendingTrack=-1;
++
++/* ===== SHARE — deep-link tới bài / album (cho post Threads, dẫn thẳng về chỗ nghe) ===== */
++function aliSlug(s){
++  return (s||'').toString().normalize('NFD').replace(/[̀-ͯ]/g,'')
++    .replace(/đ/g,'d').replace(/Đ/g,'D').toLowerCase()
++    .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
++}
++function aliShareBase(){ return location.origin+location.pathname; }
++function aliCopy(url,msg){
++  function done(){ toast(msg); }
++  try{
++    if(navigator.clipboard&&navigator.clipboard.writeText){
++      navigator.clipboard.writeText(url).then(done).catch(function(){ aliCopyFb(url,done); });
++    } else aliCopyFb(url,done);
++  }catch(e){ aliCopyFb(url,done); }
++}
++function aliCopyFb(url,done){
++  try{ var ta=document.createElement('textarea'); ta.value=url; ta.style.position='fixed'; ta.style.opacity='0';
++    document.body.appendChild(ta); ta.focus(); ta.select(); document.execCommand('copy'); ta.remove(); done(); }
++  catch(e){ toast('Link: '+url); }
++}
++function shareCurrentTrack(){
++  if(activeIdx>=0&&curAlbum>=0&&ALBUMS[curAlbum]){
++    var t=(ALBUMS[curAlbum].tracks||[])[activeIdx];
++    if(t){ aliCopy(aliShareBase()+'?bai='+aliSlug(t.name),'Đã chép link bài <em>'+t.name+'</em> ✦'); return; }
++  }
++  if(curAlbum>=0&&ALBUMS[curAlbum]){ shareAlbum(curAlbum); return; }
++  toast('Chọn một bài để chia sẻ nhé ✦');
++}
++function shareAlbum(idx,ev){
++  if(ev&&ev.stopPropagation) ev.stopPropagation();
++  var a=ALBUMS[idx]; if(!a) return;
++  aliCopy(aliShareBase()+'?album='+aliSlug(a.name),'Đã chép link album <em>'+a.name+'</em> ✦');
++}
++function aliScrollMusic(){
++  var el=document.getElementById('playlistLabel')||document.getElementById('music'); if(!el) return;
++  window.scrollTo({ top:el.getBoundingClientRect().top+window.pageYOffset-110, behavior:'smooth' });
++}
++var aliDeepDone=false;
++function applyDeepLink(){
++  if(aliDeepDone) return;
++  var p; try{ p=new URLSearchParams(location.search); }catch(e){ aliDeepDone=true; return; }
++  var bai=p.get('bai'), alb=p.get('album');
++  if(!bai&&!alb){ aliDeepDone=true; return; }
++  if(typeof ALBUMS==='undefined'||!ALBUMS.length) return;
++  if(bai){
++    for(var ai=0;ai<ALBUMS.length;ai++){
++      var ts=ALBUMS[ai].tracks||[];
++      for(var ti=0;ti<ts.length;ti++){
++        if(aliSlug(ts[ti].name)===bai){ aliDeepDone=true; selectAlbum(ai,true); pendingTrack=ti; setTimeout(aliScrollMusic,250); return; }
++      }
++    }
++  }
++  if(alb){
++    for(var k=0;k<ALBUMS.length;k++){
++      if(aliSlug(ALBUMS[k].name)===alb){ aliDeepDone=true; selectAlbum(k,true); setTimeout(aliScrollMusic,250); return; }
++    }
++  }
++}
+ function fmt(s){ s=Math.floor(s||0); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); }
+ 
+ function playAt(j){
+@@ -3211,7 +4187,7 @@ function nextTrack(){
+ }
+ function prevTrack(){ playAt(activeIdx<0?0:activeIdx-1); }
+ function togglePlay(){
+-  if(activeIdx<0){ playAt(0); return; }
++  if(activeIdx<0){ playAt(pendingTrack>=0?pendingTrack:0); pendingTrack=-1; return; }
+   if(audio.paused) audio.play().catch(()=>{}); else audio.pause();
+ }
+ function toggleShuffle(){
+@@ -3298,6 +4274,7 @@ function renderHashtags(){
+ /* ============================================================
+    RENDER GALLERY (Visual Lab)
+ ============================================================ */
++let galleryExpanded=false, gMoreWrap=null;
+ function renderGallery(){
+   const grid=document.getElementById('galleryGrid');
+   const filt=document.getElementById('gFilters');
+@@ -3310,11 +4287,13 @@ function renderGallery(){
+     b.onclick=()=>filterGallery(t,b);
+     filt.appendChild(b);
+   });
++  const GAL_INIT=18;
+   GALLERY.forEach((g,i)=>{
+     const d=document.createElement('div');
+     d.className='g-item g-'+g.type;
+     d.dataset.tag=g.tag;
+     d.style.setProperty('--gd', (i%4*0.06)+'s');
++    if(i>=GAL_INIT) d.classList.add('g-extra');
+     const phLabel=`${g.tag} · ${g.type==='img'?'drop image':'drop video'}`;
+     let media='', play='';
+     if(g.type==='img'){
+@@ -3342,11 +4321,23 @@ function renderGallery(){
+       </div>`;
+     grid.appendChild(d);
+   });
++  if(GALLERY.length>GAL_INIT){
++    grid.classList.add('g-collapsed');
++    gMoreWrap=document.createElement('div'); gMoreWrap.className='g-more-wrap';
++    const mb=document.createElement('button'); mb.type='button'; mb.className='g-more';
++    mb.textContent='Xem thêm '+(GALLERY.length-GAL_INIT)+' tác phẩm ↓';
++    mb.onclick=()=>{ grid.classList.remove('g-collapsed'); galleryExpanded=true; gMoreWrap.style.display='none'; };
++    gMoreWrap.appendChild(mb);
++    grid.after(gMoreWrap);
++  }
+ }
+ function filterGallery(tag,btn){
+   document.querySelectorAll('.g-chip').forEach(c=>c.classList.remove('active'));
+   btn.classList.add('active');
+   const all=tag==='Tất cả';
++  const grid=document.getElementById('galleryGrid');
++  if(all && !galleryExpanded){ grid&&grid.classList.add('g-collapsed'); if(gMoreWrap) gMoreWrap.style.display=''; }
++  else { grid&&grid.classList.remove('g-collapsed'); if(gMoreWrap) gMoreWrap.style.display='none'; }
+   document.querySelectorAll('.g-item').forEach(it=>{
+     it.classList.toggle('g-hide', !all && it.dataset.tag!==tag);
+   });
+@@ -3497,6 +4488,7 @@ document.getElementById('pcPrev')?.addEventListener('click', prevTrack);
+ document.getElementById('pcNext')?.addEventListener('click', nextTrack);
+ document.getElementById('pcPlay')?.addEventListener('click', togglePlay);
+ document.getElementById('pcShuffle')?.addEventListener('click', toggleShuffle);
++document.getElementById('pcShare')?.addEventListener('click', shareCurrentTrack);
+ // Init shuffle button appearance
+ (()=>{ const b=document.getElementById('pcShuffle'); if(b) b.style.opacity='0.5'; })();
+ // Gợi ý "bốc cho tôi một bài" — bật shuffle + phát ngay một bài ngẫu nhiên
+@@ -3556,7 +4548,94 @@ observe();
+   });
+ })();
+ 
+-// Hero photo: detect if real image exists; show placeholder otherwise
++// Theme skin registry. Content stays fixed; theme swaps assets, palette, particles.
++(function(){
++  const THEMES = {
++    dandelion: {
++      label: 'Bồ Công Anh',
++      heroBg: './images/hero/dandelion-field.png',
++      heroBgPosition: 'center bottom',
++      heroPerson: './images/hero/anh-li-cutout-softedge.png',
++      particle: 'dandelion',
++      cursor: 'mote',
++      assets: {
++        line: './images/themes/dandelion/grass-line.svg',
++        corner: './images/themes/dandelion/corner-meadow.svg',
++        seed: './images/themes/dandelion/seed.svg',
++        paper: './images/themes/dandelion/paper-bloom.svg'
++      },
++      vars: {
++        '--theme-ink': '#183126',
++        '--theme-leaf': '#516a39',
++        '--theme-paper': '#fff7df',
++        '--theme-haze': 'rgba(255,250,226,0.58)',
++        '--theme-panel': 'rgba(255,250,226,0.34)',
++        '--theme-rim': 'rgba(81,106,57,0.34)',
++        '--theme-particle': '255,248,218'
++      }
++    },
++    ocean: {
++      label: 'Cả Biển Trời Trong',
++      heroBg: './images/themes/ocean/hero-ocean.png',
++      heroBgPosition: 'center center',
++      heroPerson: './images/themes/ocean/anh-li-ocean.png',
++      particle: 'ocean',
++      cursor: 'ripple',
++      assets: {
++        line: './images/themes/ocean/wave-line.svg',
++        corner: './images/themes/ocean/coral-corner.svg',
++        seed: './images/themes/ocean/bubble.svg',
++        paper: './images/themes/ocean/water-bloom.svg'
++      },
++      vars: {
++        '--theme-ink': '#102f3a',
++        '--theme-leaf': '#2f7f94',
++        '--theme-paper': '#eefbff',
++        '--theme-haze': 'rgba(226,248,255,0.54)',
++        '--theme-panel': 'rgba(226,248,255,0.28)',
++        '--theme-rim': 'rgba(47,127,148,0.32)',
++        '--theme-particle': '224,248,255'
++      }
++    }
++  };
++  function applyAnhLiTheme(name, options){
++    const key = THEMES[name] ? name : 'dandelion';
++    const theme = THEMES[key];
++    const root = document.documentElement;
++    document.body.dataset.theme = key;
++    document.body.dataset.cursor = theme.cursor || '';
++    document.body.classList.toggle('theme-dandelion', key === 'dandelion');
++    document.body.classList.toggle('theme-ocean', key === 'ocean');
++    root.style.setProperty('--theme-hero-bg', `url('${theme.heroBg}')`);
++    root.style.setProperty('--theme-hero-bg-pos', theme.heroBgPosition || 'center bottom');
++    if(theme.assets){
++      if(theme.assets.line) root.style.setProperty('--theme-line', `url('${theme.assets.line}')`);
++      if(theme.assets.corner) root.style.setProperty('--theme-corner', `url('${theme.assets.corner}')`);
++      if(theme.assets.seed) root.style.setProperty('--theme-seed', `url('${theme.assets.seed}')`);
++      if(theme.assets.paper) root.style.setProperty('--theme-paper-texture', `url('${theme.assets.paper}')`);
++    }
++    Object.entries(theme.vars || {}).forEach(([prop, value]) => root.style.setProperty(prop, value));
++    const person = document.querySelector('.hero-person');
++    if(person) person.src = theme.heroPerson;
++    const heroWind = document.getElementById('heroWind');
++    const siteSeeds = document.getElementById('siteSeeds');
++    if(heroWind) heroWind.dataset.particle = theme.particle;
++    if(siteSeeds) siteSeeds.dataset.particle = theme.particle;
++    window.dispatchEvent(new CustomEvent('anhli-theme-change', { detail:{ key, theme } }));
++    if(options && options.persist){
++      try{ localStorage.setItem('anhli-theme', key); }catch(e){}
++    }
++    return theme;
++  }
++  window.ANHLI_THEMES = THEMES;
++  window.ANHLI_THEME_LIBRARY = THEMES;
++  window.applyAnhLiTheme = applyAnhLiTheme;
++  let saved = null;
++  try{ saved = localStorage.getItem('anhli-theme'); }catch(e){}
++  applyAnhLiTheme(saved || document.body.dataset.theme || 'dandelion', { persist:false });
++})();
++
++// Hero portrait: detect if the poster cutout exists; show placeholder otherwise
+ (function(){
+   const probe=new Image();
+   probe.onload=()=>{
+@@ -3566,7 +4645,163 @@ observe();
+     }
+   };
+   probe.onerror=()=>{}; // keep elegant placeholder
+-  probe.src='./images/hero/hero.jpg';
++  probe.src=document.querySelector('.hero-person')?.getAttribute('src') || './images/hero/anh-li-cutout-softedge.png';
++})();
++
++// Dandelion atmosphere layer. Canvas 2D only; no shader, no face filtering.
++(function(){
++  function mountWind(canvas, target, opts){
++  if(!canvas || !target) return;
++  const ctx=canvas.getContext('2d', { alpha:true });
++  const reduced=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
++  let W=0,H=0,DPR=1,last=performance.now(),t=0,visible=true;
++  let seeds=[], streaks=[], glints=[];
++  const rand=(a,b)=>a+Math.random()*(b-a);
++  const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
++  let particleRgb='255,248,218';
++  function refreshParticle(){
++    particleRgb=getComputedStyle(document.documentElement).getPropertyValue('--theme-particle').trim() || '255,248,218';
++  }
++  function resize(){
++    const r=target===window ? { width:innerWidth, height:innerHeight } : target.getBoundingClientRect();
++    DPR=Math.min(window.devicePixelRatio||1, innerWidth<760 ? 1.2 : 1.45);
++    W=Math.max(1, Math.round(r.width));
++    H=Math.max(1, Math.round(r.height));
++    canvas.width=Math.round(W*DPR);
++    canvas.height=Math.round(H*DPR);
++    canvas.style.width=W+'px';
++    canvas.style.height=H+'px';
++    ctx.setTransform(DPR,0,0,DPR,0,0);
++    refreshParticle();
++    seeds=Array.from({length:Math.round(clamp(W/(opts.seedDiv||24), opts.minSeeds||36, opts.maxSeeds||70))},()=>makeSeed(false));
++    streaks=Array.from({length:Math.round(clamp(W/(opts.streakDiv||110), opts.minStreaks||8, opts.maxStreaks||18))},()=>makeStreak(false));
++    glints=Array.from({length:opts.glints||28},()=>({x:rand(0,W),y:rand(H*(opts.glintTop||0.45),H*0.9),r:rand(0.5,1.5),a:rand(0.035,0.12)*(opts.alpha||1),p:rand(0,Math.PI*2)}));
++  }
++  function makeSeed(fromLeft){
++    const depth=Math.random();
++    return {
++      x:fromLeft ? rand(-120,-20) : rand(-W*0.12,W*1.05),
++      y:rand(H*0.15,H*0.7),
++      depth,
++      size:rand(opts.seedMin||7,opts.seedMax||15)*(0.55+depth*0.8),
++      speed:rand(opts.speedMin||34,opts.speedMax||92)*(0.55+depth),
++      lift:rand(-14,20),
++      phase:rand(0,Math.PI*2),
++      rot:rand(0,Math.PI*2),
++      spin:rand(-0.65,0.65),
++      alpha:rand(0.1,0.34)*(0.7+depth)*(opts.alpha||1)
++    };
++  }
++  function makeStreak(fromLeft){
++    const depth=Math.random();
++    return {
++      x:fromLeft ? rand(-260,-40) : rand(-W*0.2,W),
++      y:rand(H*0.13,H*0.62),
++      len:rand(100,290)*(0.55+depth),
++      depth,
++      speed:rand(opts.streakSpeedMin||48,opts.streakSpeedMax||130)*(0.55+depth),
++      amp:rand(7,20),
++      phase:rand(0,Math.PI*2),
++      alpha:rand(0.025,0.085)*(opts.alpha||1)
++    };
++  }
++  function drawSeed(s){
++    const mode=canvas.dataset.particle || 'dandelion';
++    ctx.save();
++    ctx.translate(s.x,s.y);
++    ctx.rotate(s.rot);
++    ctx.globalAlpha=s.alpha;
++    if(mode === 'ocean'){
++      ctx.strokeStyle=`rgba(${particleRgb},0.72)`;
++      ctx.lineWidth=Math.max(0.7,s.size*0.06);
++      ctx.beginPath();
++      ctx.arc(0,0,s.size*0.42,0,Math.PI*2);
++      ctx.stroke();
++      ctx.fillStyle=`rgba(${particleRgb},0.08)`;
++      ctx.fill();
++      ctx.restore();
++      return;
++    }
++    ctx.strokeStyle=`rgba(${particleRgb},0.86)`;
++    ctx.lineWidth=Math.max(0.45,s.size*0.045);
++    ctx.lineCap='round';
++    for(let i=0;i<9;i++){
++      const a=i/9*Math.PI*2;
++      ctx.beginPath();
++      ctx.moveTo(0,0);
++      ctx.lineTo(Math.cos(a)*s.size*0.56, Math.sin(a)*s.size*0.44);
++      ctx.stroke();
++    }
++    ctx.strokeStyle='rgba(124,95,58,0.48)';
++    ctx.beginPath();
++    ctx.moveTo(0,s.size*0.18);
++    ctx.quadraticCurveTo(s.size*0.12,s.size*0.72,s.size*0.04,s.size*1.08);
++    ctx.stroke();
++    ctx.restore();
++  }
++  function drawStreak(s){
++    const y=s.y+Math.sin(t*0.75+s.phase)*s.amp;
++    ctx.save();
++    ctx.globalAlpha=s.alpha;
++    ctx.strokeStyle=`rgba(${particleRgb},0.86)`;
++    ctx.lineWidth=1+s.depth;
++    ctx.lineCap='round';
++    ctx.beginPath();
++    ctx.moveTo(s.x,y);
++    ctx.bezierCurveTo(s.x+s.len*0.28,y-s.amp,s.x+s.len*0.72,y+s.amp*0.4,s.x+s.len,y-s.amp*0.25);
++    ctx.stroke();
++    ctx.restore();
++  }
++  function frame(now){
++    requestAnimationFrame(frame);
++    if(!visible || document.hidden) return;
++    if(document.body.classList.contains('no-motion') || document.body.classList.contains('no-season')){
++      ctx.clearRect(0,0,W,H);
++      last=now;
++      return;
++    }
++    const dt=reduced ? 0 : Math.min(0.04,(now-last)/1000||0.016);
++    last=now;
++    t+=dt;
++    ctx.clearRect(0,0,W,H);
++    const gust=0.78+Math.sin(t*0.56)*0.22+Math.sin(t*1.17+2.2)*0.12;
++    for(const g of glints){
++      ctx.globalAlpha=g.a*(0.55+Math.sin(t*1.8+g.p)*0.45);
++      ctx.fillStyle=`rgba(${particleRgb},0.86)`;
++      ctx.beginPath(); ctx.arc(g.x,g.y,g.r,0,Math.PI*2); ctx.fill();
++    }
++    ctx.globalAlpha=1;
++    for(const s of streaks){
++      s.x+=dt*s.speed*(0.85+gust);
++      if(s.x>W+180) Object.assign(s, makeStreak(true));
++      drawStreak(s);
++    }
++    seeds.sort((a,b)=>a.depth-b.depth);
++    for(const s of seeds){
++      s.x+=dt*s.speed*(0.75+gust);
++      s.y+=dt*(Math.sin(t*1.3+s.phase)*16-7+s.lift*0.15);
++      s.rot+=dt*s.spin;
++      if(s.x>W+80 || s.y<-50 || s.y>H*0.86) Object.assign(s, makeSeed(true));
++      drawSeed(s);
++    }
++  }
++  if(target!==window && 'IntersectionObserver' in window){
++    new IntersectionObserver(es=>{ visible=es[0].isIntersecting; }, {threshold:0.01}).observe(target);
++  }
++  addEventListener('resize', resize, {passive:true});
++  addEventListener('anhli-theme-change', refreshParticle);
++  resize();
++  requestAnimationFrame(frame);
++  }
++  mountWind(document.getElementById('heroWind'), document.getElementById('home'), {
++    seedDiv:22, minSeeds:42, maxSeeds:82, streakDiv:96, minStreaks:10, maxStreaks:22,
++    glints:32, alpha:1, speedMin:38, speedMax:108
++  });
++  mountWind(document.getElementById('siteSeeds'), window, {
++    seedDiv:72, minSeeds:14, maxSeeds:28, streakDiv:260, minStreaks:3, maxStreaks:8,
++    glints:10, alpha:0.42, seedMin:6, seedMax:12, speedMin:18, speedMax:52,
++    streakSpeedMin:24, streakSpeedMax:70, glintTop:0.08
++  });
+ })();
+ </script>
+ 
+@@ -3893,6 +5128,7 @@ function toast(msg){
+ /* ── 3 · PARALLAX + TILT (một vòng rAF duy nhất) ───────── */
+ const fx={ nx:0, ny:0, dirty:true };
+ const heroContent=$('.hero-content'), heroPhoto=$('#heroBg'), heroSec=$('.hero');
++const posterField=$('.poster-field'), posterForeground=$('.poster-foreground');
+ const heroLine1=$('.hero-name .line1'), heroLine2=$('.hero-name .line2');
+ const pxTargets=[];
+ if(!REDUCED){
+@@ -3935,6 +5171,8 @@ function applyFx(){
+     }
+     /* parallax ảnh hero theo cả con trỏ lẫn cuộn (thuộc tính translate — không bị animation đè) */
+     if(heroPhoto) heroPhoto.style.translate=`${(-fx.nx*16).toFixed(1)}px ${((-fx.ny*10)+s*0.16).toFixed(1)}px`;
++    if(posterField) posterField.style.translate=`${(-fx.nx*8).toFixed(1)}px ${((-fx.ny*5)+s*0.04).toFixed(1)}px`;
++    if(posterForeground) posterForeground.style.translate=`${(-fx.nx*22).toFixed(1)}px ${((-fx.ny*8)+s*0.08).toFixed(1)}px`;
+     /* kinetic typography — hai dòng tên trượt ngược chiều khi cuộn */
+     if(heroLine1) heroLine1.style.transform=`translateX(${(-s*0.16).toFixed(1)}px)`;
+     if(heroLine2) heroLine2.style.transform=`translateX(${(s*0.22).toFixed(1)}px)`;
+@@ -4112,7 +5350,7 @@ function drawVinylRing(){
+     const x2=cx+Math.cos(ang)*(baseR+len), y2=cy+Math.sin(ang)*(baseR+len);
+     vizCtx.beginPath(); vizCtx.moveTo(x1,y1); vizCtx.lineTo(x2,y2);
+     vizCtx.lineWidth=2*dpr; vizCtx.lineCap='round';
+-    vizCtx.strokeStyle='rgba(204,159,74,'+(0.18+v*0.5).toFixed(2)+')';
++    vizCtx.strokeStyle='rgba(var(--amber-rgb),'+(0.18+v*0.5).toFixed(2)+')';
+     vizCtx.stroke();
+   }
+ }
+@@ -4522,6 +5760,7 @@ if(MOBILE){
+       }
+     });
+     renderMusic();
++    try{ if(typeof applyDeepLink==='function') applyDeepLink(); }catch(e){}
+   }
+   var s = document.createElement('script');
+   // Cache-bust mỗi lần tải → sửa music-data.js xong push là lên ngay, KHÔNG cần bump version.
+@@ -4529,6 +5768,8 @@ if(MOBILE){
+   s.onload = function(){ merge(window.PORTFOLIO_MUSIC); };
+   s.onerror = function(){ console.warn('[Anh Li Portfolio] music-data.js could not load; using inline data.'); };
+   document.head.appendChild(s);
++  // Fallback: nếu music-data.js không nạp được, vẫn xử deep-link trên dữ liệu inline.
++  setTimeout(function(){ try{ if(typeof applyDeepLink==='function') applyDeepLink(); }catch(e){} }, 1800);
+ })();
+ </script>
+ <!-- MOTION TOGGLE LOGIC — giảm chuyển động + tắt shader để máy đỡ nóng -->
+@@ -4564,7 +5805,7 @@ if(MOBILE){
+   });
+ 
+   // Câu quan tâm giọng Anh — chỉ hiện khi đang để chuyển động & người dùng chưa chọn gì
+-  if(!reduce && !saved){
++  if(!reduce && !saved && !mobile){
+     nudge=document.createElement('div');
+     nudge.className='motion-nudge';
+     nudge.innerHTML='Máy hơi nóng? <b>Bật giảm chuyển động</b> đi, mình chill cùng nhạc, để phần lung linh đó lại sau cũng được. ✦';
+-- 
+2.54.0 (Apple Git-157)
+
