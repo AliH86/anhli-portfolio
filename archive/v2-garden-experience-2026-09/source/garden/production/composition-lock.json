@@ -1,0 +1,214 @@
+{
+  "schemaVersion": 1,
+  "authority": "Dandelion Garden - Locked Handoff (standalone).html, WP-01 and G-01..G-05",
+  "units": "metres; Three.js x right, y up, negative z toward distant hills",
+  "lensConvention": "vertical FOV for Three.js PerspectiveCamera; handoff does not explicitly state vertical/horizontal",
+  "landmarks": {
+    "house": {
+      "xz": [
+        -14,
+        -6
+      ],
+      "height": 6.2,
+      "doorDirection": "+x",
+      "a1Rect": [
+        0.115,
+        0.4,
+        0.14,
+        0.2
+      ]
+    },
+    "stall": {
+      "xz": [
+        16.5,
+        -4
+      ],
+      "lampHeight": 2.6,
+      "a1Rect": [
+        0.745,
+        0.51,
+        0.15,
+        0.15
+      ]
+    },
+    "workspace": {
+      "xz": [
+        -1,
+        -9
+      ],
+      "a1Rect": [
+        0.38,
+        0.475,
+        0.09,
+        0.11
+      ]
+    },
+    "greenhouse": {
+      "xz": [
+        8,
+        -13
+      ],
+      "a1Rect": [
+        0.575,
+        0.44,
+        0.105,
+        0.125
+      ]
+    },
+    "horizon": {
+      "zRange": [
+        -48,
+        -64
+      ]
+    },
+    "yard": {
+      "xRange": [
+        -6,
+        8
+      ],
+      "zRange": [
+        2,
+        12
+      ],
+      "noProps": true,
+      "noTrees": true,
+      "a1Rect": [
+        0.27,
+        0.64,
+        0.33,
+        0.22
+      ]
+    }
+  },
+  "secondary": {
+    "water": {
+      "xz": [
+        -18,
+        8
+      ]
+    },
+    "showStructure": {
+      "xz": [
+        12,
+        6
+      ],
+      "platformHeight": 0.6
+    }
+  },
+  "anchors": {
+    "A1": {
+      "name": "ARRIVAL",
+      "fov": 38,
+      "eyeHeight": 1.62,
+      "pitchDown": 2,
+      "orbit": 8,
+      "horizonY": 0.42,
+      "hostFrameHeight": 0.17
+    },
+    "A2": {
+      "name": "CHOOSE",
+      "fov": 42,
+      "eyeHeight": 3.4,
+      "pitchDown": 9,
+      "orbit": 10,
+      "horizonY": 0.34,
+      "hostFrameHeight": 0.13,
+      "rectangles": {
+        "house": [
+          0.13,
+          0.335,
+          0.11,
+          0.16
+        ],
+        "workspace": [
+          0.385,
+          0.4,
+          0.075,
+          0.09
+        ],
+        "greenhouse": [
+          0.56,
+          0.37,
+          0.09,
+          0.1
+        ],
+        "stall": [
+          0.72,
+          0.44,
+          0.13,
+          0.13
+        ]
+      }
+    },
+    "A3": {
+      "name": "APPROACH",
+      "fov": 34,
+      "eyeHeight": 1.55,
+      "pitchDown": 0,
+      "orbit": 12,
+      "horizonY": 0.42,
+      "hostFrameHeight": 0.25
+    },
+    "A4": {
+      "name": "MUSIC",
+      "samePoseAs": "A3",
+      "dayNight": "night",
+      "fov": 34,
+      "eyeHeight": 1.55
+    },
+    "A5": {
+      "name": "SHOWS",
+      "dayNight": "day",
+      "fov": 44,
+      "eyeHeight": 2.1,
+      "orbit": 6,
+      "hostFrameHeight": 0
+    },
+    "A6": {
+      "name": "VISUAL",
+      "dayNight": "day",
+      "fov": 40,
+      "eyeHeight": 1.7,
+      "orbit": 8,
+      "hostFrameHeight": 0.12
+    },
+    "A7": {
+      "name": "STORY",
+      "dayNight": "night",
+      "fov": 36,
+      "eyeHeight": 1.6,
+      "orbit": 6,
+      "hostFrameHeight": 0.15
+    }
+  },
+  "portrait": {
+    "aspect": [
+      9,
+      16
+    ],
+    "sameAnchorAs": "A1",
+    "fov": 52,
+    "horizonY": 0.44,
+    "houseRect": [
+      0.06,
+      0.41,
+      0.26,
+      0.13
+    ],
+    "stallRect": [
+      0.74,
+      0.46,
+      0.26,
+      0.1
+    ]
+  },
+  "tolerance": {
+    "landmarkCenterFraction": 0.03
+  },
+  "notes": [
+    "Camera x/z and terrain elevation y are not specified numerically; any solved values are provisional.",
+    "The stated origin at yard centre differs from the numeric midpoint of its ranges (1,7). Preserve numeric ranges; do not translate the world.",
+    "A1 props annotation mentions water at the right edge; WP-01 fixes x=-18,z=8. Preserve WP-01 position and flag the screen-side discrepancy, do not move it."
+  ],
+  "currentUserOverride": "2026-09-12: camera/FOV and relative terrain may be adjusted for a good visual output; numeric frame matches are guidance. Preserve landmark geography and composition intent."
+}

@@ -1,0 +1,1580 @@
+{
+  "source": "/Users/alihuynh/Library/Mobile Documents/com~apple~CloudDocs/Downloads/My Suno_music",
+  "restoredCatalogIdentical": true,
+  "beforeAlbums": 28,
+  "beforeTracks": 226,
+  "sourceFiles": 216,
+  "matched": [
+    {
+      "album": "Một Tần Số Khác",
+      "id": "a236c5a1-948e-45c0-a981-3fb91ac85878",
+      "name": "Có Ai Nghe Không",
+      "source": "Một Tần Số Khác/01 - Có Ai Nghe Không.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/mot-tan-so-khac/01-co-ai-nghe-khong.mp3"
+    },
+    {
+      "album": "Một Tần Số Khác",
+      "id": "eeb9e276-2109-49d4-9347-7548ff0165f1",
+      "name": "Ngọn Đèn Ngoài Xa",
+      "source": "Một Tần Số Khác/02 - Ngọn Đèn Ngoài Xa.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/mot-tan-so-khac/02-ngon-den-ngoai-xa.mp3"
+    },
+    {
+      "album": "Một Tần Số Khác",
+      "id": "a0656e42-b5f5-4d12-9de9-e7e89f25bb02",
+      "name": "Con Chim Bay Sai Mùa",
+      "source": "Một Tần Số Khác/03 - Con Chim Bay Sai Mùa.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/mot-tan-so-khac/03-con-chim-bay-sai-mua.mp3"
+    },
+    {
+      "album": "Một Tần Số Khác",
+      "id": "7276a14c-3725-42a7-9550-dba200a0fa85",
+      "name": "Cái Cây Cuối Cùng Trên Đồi",
+      "source": "Một Tần Số Khác/04 - Cái Cây Cuối Cùng Trên Đồi.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/mot-tan-so-khac/04-cai-cay-cuoi-cung-tren-doi.mp3"
+    },
+    {
+      "album": "Một Tần Số Khác",
+      "id": "1b35de43-1e7e-44a0-b8aa-9f5dfd11f7b4",
+      "name": "Tín Hiệu Từ Một Vì Sao Cũ",
+      "source": "Một Tần Số Khác/05 - Tín Hiệu Từ Một Vì Sao Cũ.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/mot-tan-so-khac/05-tin-hieu-tu-mot-vi-sao-cu.mp3"
+    },
+    {
+      "album": "Một Tần Số Khác",
+      "id": "0f7b36ce-5eef-4cdf-9e4a-a079362867cd",
+      "name": "Tần Số Riêng",
+      "source": "Một Tần Số Khác/06 - Tần Số Riêng.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/mot-tan-so-khac/06-tan-so-rieng.mp3"
+    },
+    {
+      "album": "Chuyện Của Trăng",
+      "id": "b811ceb4-2492-493c-8163-6efad1329da2",
+      "name": "Quên Vầng Trăng Thề",
+      "source": "Chuyện Của Trăng/01 - Quên Vầng Trăng Thề.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/chuyen-cua-trang/01-quen-vang-trang-the.mp3"
+    },
+    {
+      "album": "Chuyện Của Trăng",
+      "id": "c69e9887-79b2-4145-9771-e3bf722d0403",
+      "name": "Mảnh Tình Treo Trăng",
+      "source": "Chuyện Của Trăng/02 - Mảnh Tình Treo Trăng.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/chuyen-cua-trang/02-manh-tinh-treo-trang.mp3"
+    },
+    {
+      "album": "Chuyện Của Trăng",
+      "id": "3e9624a7-e3c8-4a9f-9f9d-960d8a3e4589",
+      "name": "Ánh Trăng Đôi Đường",
+      "source": "Chuyện Của Trăng/03 - Ánh Trăng Đôi Đường.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/chuyen-cua-trang/03-anh-trang-doi-duong.mp3"
+    },
+    {
+      "album": "Chuyện Của Trăng",
+      "id": "5bd66ad6-cbab-4111-bbba-8442026e0919",
+      "name": "Trăng Vén Rèm Thưa",
+      "source": "Chuyện Của Trăng/04 - Trăng Vén Rèm Thưa.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/chuyen-cua-trang/04-trang-ven-rem-thua.mp3"
+    },
+    {
+      "album": "Chuyện Của Trăng",
+      "id": "083b467b-c612-4b86-951e-8a83f73d540a",
+      "name": "Kẻ Say Trăng",
+      "source": "Chuyện Của Trăng/05 - Kẻ Say Trăng.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/chuyen-cua-trang/05-ke-say-trang.mp3"
+    },
+    {
+      "album": "Chuyện Của Trăng",
+      "id": "b2135c69-5d49-4088-bfd6-6bc02fe8328b",
+      "name": "Trăng Khuyết Trăng Tròn",
+      "source": "Chuyện Của Trăng/06 - Trăng Khuyết Trăng Tròn.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/chuyen-cua-trang/06-trang-khuyet-trang-tron.mp3"
+    },
+    {
+      "album": "Chuyện Của Trăng",
+      "id": "d17a08a2-1d9e-496e-92fe-f3423e679be6",
+      "name": "Trăng Qua Bến Cũ",
+      "source": "Chuyện Của Trăng/07 - Trăng Qua Bến Cũ.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/chuyen-cua-trang/07-trang-qua-ben-cu.mp3"
+    },
+    {
+      "album": "Chuyện Của Trăng",
+      "id": "96ec7ea1-16f2-4f5a-8b24-930bd7693f1c",
+      "name": "Mượn Trăng",
+      "source": "Chuyện Của Trăng/08 - Mượn Trăng.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/chuyen-cua-trang/08-muon-trang.mp3"
+    },
+    {
+      "album": "Biên Niên Thất Nghiệp Ký",
+      "id": "c0f86817-473e-4118-ba40-121d4de7277c",
+      "name": "Lại Một Lần Tự Do",
+      "source": "Biên Niên Thất Nghiệp Ký/01 - Lại Một Lần Tự Do.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/bien-nien-that-nghiep-ky/01-lai-mot-lan-tu-do.mp3"
+    },
+    {
+      "album": "Biên Niên Thất Nghiệp Ký",
+      "id": "e5d407fc-f8e4-4007-b7eb-dad9a3d6b4e3",
+      "name": "Chuyện Của Ngày Mai",
+      "source": "Biên Niên Thất Nghiệp Ký/02 - Chuyện Của Ngày Mai.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/bien-nien-that-nghiep-ky/02-chuyen-cua-ngay-mai.mp3"
+    },
+    {
+      "album": "Biên Niên Thất Nghiệp Ký",
+      "id": "0c65bb2a-bbfa-4318-9ed5-a93a1a3ea1ad",
+      "name": "Đi Đâu Đây",
+      "source": "Biên Niên Thất Nghiệp Ký/03 - Đi Đâu Đây.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/bien-nien-that-nghiep-ky/03-di-dau-day.mp3"
+    },
+    {
+      "album": "Biên Niên Thất Nghiệp Ký",
+      "id": "df59fec5-db4b-4048-85d2-27e428597b85",
+      "name": "Hôm nay Tôi là Ai?",
+      "source": "Biên Niên Thất Nghiệp Ký/04 - Hôm nay Tôi là Ai?.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/bien-nien-that-nghiep-ky/04-hom-nay-toi-la-ai.mp3"
+    },
+    {
+      "album": "Biên Niên Thất Nghiệp Ký",
+      "id": "a930b39f-7a9c-47ed-af5c-d05f7562f234",
+      "name": "Làm Cái Gì Bây Giờ?",
+      "source": "Biên Niên Thất Nghiệp Ký/05 - Làm Cái Gì Bây Giờ?.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/bien-nien-that-nghiep-ky/05-lam-cai-gi-bay-gio.mp3"
+    },
+    {
+      "album": "Biên Niên Thất Nghiệp Ký",
+      "id": "7220ebcf-c477-4880-95ce-2fa734a03d88",
+      "name": "Đã Xem Lúc 14:37",
+      "source": "Biên Niên Thất Nghiệp Ký/06 - Đã Xem Lúc 14-37.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/bien-nien-that-nghiep-ky/06-da-xem-luc-14-37.mp3"
+    },
+    {
+      "album": "Biên Niên Thất Nghiệp Ký",
+      "id": "4e2a6a87-04ba-460f-a9b1-7b5f0d77edad",
+      "name": "Hổng biết nữa, hổng biết dzì hết...",
+      "source": "Biên Niên Thất Nghiệp Ký/07 - Hổng biết nữa, hổng biết dzì hết....mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/bien-nien-that-nghiep-ky/07-hong-biet-nua-hong-biet-dzi-het.mp3"
+    },
+    {
+      "album": "Biên Niên Thất Nghiệp Ký",
+      "id": "c76d4498-1574-4caf-b67d-81fb0755a733",
+      "name": "Vái Tứ Phương",
+      "source": "Biên Niên Thất Nghiệp Ký/08 - Vái Tứ Phương.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/bien-nien-that-nghiep-ky/08-vai-tu-phuong.mp3"
+    },
+    {
+      "album": "Hòa Bình Và Lặng Lẽ",
+      "id": "7ab57f1a-2129-46e6-82a3-d4276ed3b720",
+      "name": "Hoà Bình và Lặng Lẽ",
+      "source": "Hòa Bình Và Lặng Lẽ/01 - Hoà Bình và Lặng Lẽ.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/hoa-binh-va-lang-le/01-hoa-binh-va-lang-le.mp3"
+    },
+    {
+      "album": "Hòa Bình Và Lặng Lẽ",
+      "id": "773a3ba0-4550-4d85-8c49-629c7f63c01b",
+      "name": "Người Ơi, Về Thôi",
+      "source": "Hòa Bình Và Lặng Lẽ/02 - Người Ơi, Về Thôi.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/hoa-binh-va-lang-le/02-nguoi-oi-ve-thoi.mp3"
+    },
+    {
+      "album": "Hòa Bình Và Lặng Lẽ",
+      "id": "1869922b-a479-4f87-9448-ba7854d258d2",
+      "name": "Tuổi Hai Mươi",
+      "source": "Hòa Bình Và Lặng Lẽ/03 - Tuổi Hai Mươi.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/hoa-binh-va-lang-le/03-tuoi-hai-muoi.mp3"
+    },
+    {
+      "album": "Hòa Bình Và Lặng Lẽ",
+      "id": "8287a323-6407-4710-a490-4dbcc38a7bce",
+      "name": "Người Đi Tìm Người",
+      "source": "Hòa Bình Và Lặng Lẽ/04 - Người Đi Tìm Người.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/hoa-binh-va-lang-le/04-nguoi-di-tim-nguoi.mp3"
+    },
+    {
+      "album": "Hòa Bình Và Lặng Lẽ",
+      "id": "dbd4166a-738b-4558-a946-0c3a833a3f47",
+      "name": "Ngày Mai Người Gửi Lại",
+      "source": "Hòa Bình Và Lặng Lẽ/05 - Ngày Mai Người Gửi Lại.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/hoa-binh-va-lang-le/05-ngay-mai-nguoi-gui-lai.mp3"
+    },
+    {
+      "album": "Untamed",
+      "id": "a29966fb-a3d8-405d-baf1-6977fac27818",
+      "name": "Mơ Giấc Tình Nồng Say",
+      "source": "Untamed/01 - Mơ Giấc Tình Nồng Say.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/untamed/01-mo-giac-tinh-nong-say.mp3"
+    },
+    {
+      "album": "Untamed",
+      "id": "269bde35-151e-4da0-aeb1-e1f1f23380b4",
+      "name": "Cớ sao vậy em? [D'li x Ali]",
+      "source": "Untamed/02 - Cớ sao vậy em? [D'li x Ali].mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/untamed/02-co-sao-vay-em-d-li-x-ali.mp3"
+    },
+    {
+      "album": "Untamed",
+      "id": "7517a458-e4a8-419c-965d-d095eb1ad8ef",
+      "name": "Mật ngọt, anh say đó.[ D'Li - Anh Li]",
+      "source": "Untamed/03 - Mật ngọt, anh say đó.[ D'Li - Anh Li].mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/untamed/03-mat-ngot-anh-say-do-d-li-anh-li.mp3"
+    },
+    {
+      "album": "Untamed",
+      "id": "1cfa61e1-471b-4cfd-a05a-0083e8fa1fdb",
+      "name": "Chuyện....Mình Lạ",
+      "source": "Untamed/04 - Chuyện....Mình Lạ.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/untamed/04-chuyen-minh-la.mp3"
+    },
+    {
+      "album": "Untamed",
+      "id": "10d67ecd-8ef6-4dc6-98bf-35e502e25af0",
+      "name": "Xin đừng nói câu gì...",
+      "source": "Cả Biển Trời Trong Mắt/02 - Xin đừng nói câu gì....mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/untamed/05-xin-dung-noi-cau-gi.mp3"
+    },
+    {
+      "album": "Untamed",
+      "id": "126c5e9f-e68e-4e35-8df6-8e0f35fd01a9",
+      "name": "Nhịp Đêm Slay",
+      "source": "Untamed/06 - Nhịp Đêm Slay.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/untamed/06-nhip-dem-slay.mp3"
+    },
+    {
+      "album": "Untamed",
+      "id": "9ed95313-5d21-4601-98df-4b462d493086",
+      "name": "Rock Tình Thừ-a",
+      "source": "Untamed/07 - Rock Tình Thừ-a.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/untamed/07-rock-tinh-thu-a.mp3"
+    },
+    {
+      "album": "Untamed",
+      "id": "21c513f1-619f-44b1-9738-6ad030e5b29b",
+      "name": "Ex-Cursed Me",
+      "source": "Untamed/08 - Ex-Cursed Me.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/untamed/08-ex-cursed-me.mp3"
+    },
+    {
+      "album": "Untamed",
+      "id": "6fb457a9-df03-4bc8-a3af-f6b80505abba",
+      "name": "Vì Hết Yêu?",
+      "source": "Untamed/09 - Vì Hết Yêu?.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/untamed/09-vi-het-yeu.mp3"
+    },
+    {
+      "album": "Untamed",
+      "id": "12e6cf23-3518-43fa-9808-b029c16c94b6",
+      "name": "Gã si & ly 'on the rock'",
+      "source": "Untamed/10 - Gã si & ly 'on the rock'.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/untamed/10-ga-si-ly-on-the-rock.mp3"
+    },
+    {
+      "album": "Untamed",
+      "id": "85db229c-21a6-41b7-8299-8cf6a5986abd",
+      "name": "Không Còn ~Chúng ta~",
+      "source": "Untamed/11 - Không Còn ~Chúng ta~.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/untamed/11-khong-con-chung-ta.mp3"
+    },
+    {
+      "album": "Untamed",
+      "id": "e28362d8-175e-4787-9061-7b4e5c979355",
+      "name": "Mãi mãi là ...?! (Clean Studio Cut)",
+      "source": "Untamed/12 - Mãi mãi là ...?! (Clean Studio Cut).mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/untamed/12-mai-mai-la-clean-studio-cut.mp3"
+    },
+    {
+      "album": "Những Kẻ DRILL Loves",
+      "id": "97ab34d8-8a6d-4b66-acf2-cdce31987e25",
+      "name": "Phai Nhat Phai...",
+      "source": "Những Kẻ DRILL Loves/01 - Phai Nhat Phai....mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/nhung-ke-drill-loves/01-phai-nhat-phai.mp3"
+    },
+    {
+      "album": "Những Kẻ DRILL Loves",
+      "id": "adbe7826-8f50-42e3-ae14-9cd0c6a251a7",
+      "name": "Quên Đi Nhớ Chi?!",
+      "source": "Những Kẻ DRILL Loves/02 - Quên Đi Nhớ Chi?!.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/nhung-ke-drill-loves/02-quen-di-nho-chi.mp3"
+    },
+    {
+      "album": "Những Kẻ DRILL Loves",
+      "id": "14a7e8d3-6cc8-4b9d-acca-ee463d8122f9",
+      "name": "Những kẻ Drill Loves",
+      "source": "Những Kẻ DRILL Loves/03 - Những kẻ Drill Loves.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/nhung-ke-drill-loves/03-nhung-ke-drill-loves.mp3"
+    },
+    {
+      "album": "Những Kẻ DRILL Loves",
+      "id": "21c513f1-619f-44b1-9738-6ad030e5b29b",
+      "name": "Ex-Cursed Me",
+      "source": "Untamed/08 - Ex-Cursed Me.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/untamed/08-ex-cursed-me.mp3"
+    },
+    {
+      "album": "Những Kẻ DRILL Loves",
+      "id": "8e11c0e5-4c85-40ef-8ec2-8087e3dcb3d9",
+      "name": "Track này không thể Delete!",
+      "source": "Những Kẻ DRILL Loves/05 - Track này không thể Delete!.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/nhung-ke-drill-loves/05-track-nay-khong-the-delete.mp3"
+    },
+    {
+      "album": "Những Kẻ DRILL Loves",
+      "id": "31cbee82-0d6d-4ab9-960e-94c29920e3df",
+      "name": "Như Chưa Từng Thương",
+      "source": "Những Kẻ DRILL Loves/06 - Như Chưa Từng Thương.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/nhung-ke-drill-loves/06-nhu-chua-tung-thuong.mp3"
+    },
+    {
+      "album": "Những Kẻ DRILL Loves",
+      "id": "2b64256d-1c14-4fdc-90c3-8e14d6b03f6d",
+      "name": "Tan hết vào gió…",
+      "source": "Những Kẻ DRILL Loves/07 - Tan hết vào gió….mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/nhung-ke-drill-loves/07-tan-het-vao-gio.mp3"
+    },
+    {
+      "album": "Những Kẻ DRILL Loves",
+      "id": "159a30ea-b21a-434b-936b-958734b800fe",
+      "name": "Đừng vây mà, bae~",
+      "source": "Những Kẻ DRILL Loves/08 - Đừng vây mà, bae~.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/nhung-ke-drill-loves/08-dung-vay-ma-bae.mp3"
+    },
+    {
+      "album": "Những Kẻ DRILL Loves",
+      "id": "7b162469-4032-439a-b3c6-2e12d20b10af",
+      "name": "Tình ảo's",
+      "source": "Những Kẻ DRILL Loves/09 - Tình ảo's.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/nhung-ke-drill-loves/09-tinh-ao-s.mp3"
+    },
+    {
+      "album": "Những Kẻ DRILL Loves",
+      "id": "96ad72a0-2c6f-4894-b8d6-ea538d0b9a85",
+      "name": "Baby à, nhắm trúng tim em rồi đấy...",
+      "source": "Những Kẻ DRILL Loves/10 - Baby à, nhắm trúng tim em rồi đấy....mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/nhung-ke-drill-loves/10-baby-a-nham-trung-tim-em-roi-day.mp3"
+    },
+    {
+      "album": "Những Kẻ DRILL Loves",
+      "id": "229d579c-7ace-43cf-b0b0-a59d9c9332ec",
+      "name": "Đố elm Si ah!",
+      "source": "Những Kẻ DRILL Loves/11 - Đố elm Si ah!.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/nhung-ke-drill-loves/11-do-elm-si-ah.mp3"
+    },
+    {
+      "album": "Những Kẻ DRILL Loves",
+      "id": "419a558c-8f8a-4401-81be-826eec0ff7e8",
+      "name": "Đom đóm; Ánh sao và Mắt em",
+      "source": "Những Kẻ DRILL Loves/12 - Đom đóm; Ánh sao và Mắt em.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/nhung-ke-drill-loves/12-dom-dom-anh-sao-va-mat-em.mp3"
+    },
+    {
+      "album": "Unplugged Vol.1",
+      "id": "3b949f7a-601e-4206-a610-e55ed9a03c24",
+      "name": "9PM",
+      "source": "Unplugged Vol.1/01 - 9PM.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-1/01-9pm.mp3"
+    },
+    {
+      "album": "Unplugged Vol.1",
+      "id": "8b81a6e1-d7c2-41d9-84d2-7f27609cc099",
+      "name": "Bí Kíp Luyện Deadlines",
+      "source": "Unplugged Vol.1/02 - Bí Kíp Luyện Deadlines.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-1/02-bi-kip-luyen-deadlines.mp3"
+    },
+    {
+      "album": "Unplugged Vol.1",
+      "id": "f06e6c2a-b56c-4784-aebb-b2a68cd84ed3",
+      "name": "Nào, cho mượn bờ vai này",
+      "source": "Unplugged Vol.1/03 - Nào, cho mượn bờ vai này.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-1/03-nao-cho-muon-bo-vai-nay.mp3"
+    },
+    {
+      "album": "Unplugged Vol.1",
+      "id": "f2dfd824-606d-4f9c-ac6c-364ff94b405d",
+      "name": "An(h) Yên, Quên Phiền",
+      "source": "Unplugged Vol.1/04 - An(h) Yên, Quên Phiền.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-1/04-an-h-yen-quen-phien.mp3"
+    },
+    {
+      "album": "Unplugged Vol.1",
+      "id": "aa8e1283-e121-416f-a054-c573ce0291f2",
+      "name": "Có Sao Đâu (It's Alright)",
+      "source": "Unplugged Vol.1/05 - Có Sao Đâu (It's Alright).mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-1/05-co-sao-dau-it-s-alright.mp3"
+    },
+    {
+      "album": "Unplugged Vol.1",
+      "id": "6e96c3d7-41fc-4841-800b-b4764b862c3c",
+      "name": "Tôi yêu....",
+      "source": "Unplugged Vol.1/06 - Tôi yêu.....mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-1/06-toi-yeu.mp3"
+    },
+    {
+      "album": "Unplugged Vol.1",
+      "id": "75c08a9c-2c7c-4024-9a6e-2ad25bf1fce3",
+      "name": "Con đường ta đi",
+      "source": "Unplugged Special – Âm Hưởng/02 - Con đường ta di.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-1/07-con-duong-ta-di.mp3"
+    },
+    {
+      "album": "Unplugged Vol.1",
+      "id": "5c3f3c0d-d9f1-4e7e-b864-982832e07295",
+      "name": "Chạm vào ánh nắng.",
+      "source": "Unplugged Vol.1/08 - Chạm vào ánh nắng..mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-1/08-cham-vao-anh-nang.mp3"
+    },
+    {
+      "album": "Unplugged Vol.1",
+      "id": "8e79698b-0423-46b9-8bbc-f000197d4def",
+      "name": "Đêm nay thì không...",
+      "source": "Unplugged Vol.1/09 - Đêm nay thì không....mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-1/10-dem-nay-thi-khong.mp3"
+    },
+    {
+      "album": "Unplugged Vol.2",
+      "id": "ceec7c53-c045-4455-9b79-6d72cc29a56e",
+      "name": "Đừng lỡ nhịp!",
+      "source": "Unplugged Vol.2/01 - Đừng lỡ nhịp!.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-2/01-dung-lo-nhip.mp3"
+    },
+    {
+      "album": "Unplugged Vol.2",
+      "id": "76655d83-8252-4fda-97ae-9db85cc9de37",
+      "name": "Nẹh Têh...",
+      "source": "Unplugged Vol.2/02 - Nẹh Têh....mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-2/02-neh-teh.mp3"
+    },
+    {
+      "album": "Unplugged Vol.2",
+      "id": "976a442f-08d6-4dee-92ed-f84e60045b6d",
+      "name": "Đi nhớ trở về",
+      "source": "Unplugged Vol.2/03 - Đi nhớ trở về.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-2/03-di-nho-tro-ve.mp3"
+    },
+    {
+      "album": "Unplugged Vol.2",
+      "id": "47a44699-a285-45d9-8c6e-c25bab5e0898",
+      "name": "Mơ Ngọt",
+      "source": "Unplugged Vol.2/04 - Mơ Ngọt.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-2/04-mo-ngot.mp3"
+    },
+    {
+      "album": "Unplugged Vol.2",
+      "id": "0fff744e-1553-4b9f-977d-4b19ee5e9817",
+      "name": "Buồn Mây Bán Gió...",
+      "source": "Unplugged Special – Âm Hưởng/10 - Buôn Mây Bán Gió....mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-2/05-buon-may-ban-gio.mp3"
+    },
+    {
+      "album": "Unplugged Vol.2",
+      "id": "5c9b9dee-eddd-4d29-b068-c0481e37f60b",
+      "name": "Trước hiên nhà...",
+      "source": "Unplugged Vol.2/06 - Trước hiên nhà....mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-2/06-truoc-hien-nha.mp3"
+    },
+    {
+      "album": "Unplugged Vol.2",
+      "id": "ebe6bc52-0ac4-4930-aaeb-97e6588b79a4",
+      "name": "Đời tự lo",
+      "source": "Unplugged Vol.2/07 - Đời tự lo.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-2/07-doi-tu-lo.mp3"
+    },
+    {
+      "album": "Unplugged Vol.2",
+      "id": "86500156-b834-4f87-b194-a6cd80efb068",
+      "name": "Ai bằng mình đâu?",
+      "source": "Unplugged Vol.2/08 - Ai bằng mình đâu?.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-2/08-ai-bang-minh-dau.mp3"
+    },
+    {
+      "album": "Unplugged Vol.2",
+      "id": "e5fcd0cc-9be3-47b5-86ff-56f7bc2afbed",
+      "name": "Cho tất cả Chúng Ta",
+      "source": "Unplugged Vol.2/09 - Cho tất cả Chúng Ta.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-2/09-cho-tat-ca-chung-ta.mp3"
+    },
+    {
+      "album": "Mỹ Vị Nhân Sinh",
+      "id": "142b3ba1-12a5-4fdc-96d5-ce5984f90e12",
+      "name": "Ngọt Lạc",
+      "source": "Mỹ Vị Nhân Sinh/01 - Ngọt Lạc.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/my-vi-nhan-sinh/01-ngot-lac.mp3"
+    },
+    {
+      "album": "Mỹ Vị Nhân Sinh",
+      "id": "98dac03b-7ba7-4889-80aa-d5d5e9e9a05d",
+      "name": "Đúng Đắng",
+      "source": "Mỹ Vị Nhân Sinh/02 - Đúng Đắng.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/my-vi-nhan-sinh/02-dung-dang.mp3"
+    },
+    {
+      "album": "Mỹ Vị Nhân Sinh",
+      "id": "152d5bf6-119e-4c39-b712-68f3b7ebc1e8",
+      "name": "Chua Cay Tự Tình",
+      "source": "Mỹ Vị Nhân Sinh/03 - Chua Cay Tự Tình.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/my-vi-nhan-sinh/03-chua-cay-tu-tinh.mp3"
+    },
+    {
+      "album": "Mỹ Vị Nhân Sinh",
+      "id": "fb44f4ac-3615-4766-b323-99215101017b",
+      "name": "Thương Mầm Muối Mặn",
+      "source": "Mỹ Vị Nhân Sinh/04 - Thương Mầm Muối Mặn.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/my-vi-nhan-sinh/04-thuong-mam-muoi-man.mp3"
+    },
+    {
+      "album": "Mỹ Vị Nhân Sinh",
+      "id": "1d4cb85c-8889-4499-8c29-b8a45ed7d690",
+      "name": "Hồi (T)hương",
+      "source": "Mỹ Vị Nhân Sinh/05 - Hồi (T)hương.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/my-vi-nhan-sinh/05-hoi-t-huong.mp3"
+    },
+    {
+      "album": "Mỹ Vị Nhân Sinh",
+      "id": "301f5020-6c93-4a82-9236-dcbd7498f2d3",
+      "name": "Chát Buồn Buồn Chát - Ft D'Li",
+      "source": "Mỹ Vị Nhân Sinh/06 - Chát Buồn Buồn Chát - Ft D'Li.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/my-vi-nhan-sinh/06-chat-buon-buon-chat-ft-d-li.mp3"
+    },
+    {
+      "album": "Mỹ Vị Nhân Sinh",
+      "id": "4fbb1f41-8966-4d15-8cde-e43135debf0b",
+      "name": "Thế Gian Thêm Vị",
+      "source": "Mỹ Vị Nhân Sinh/07 - Thế Gian Thêm Vị.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/my-vi-nhan-sinh/07-the-gian-them-vi.mp3"
+    },
+    {
+      "album": "Unplugged Special – Âm Hưởng",
+      "id": "872122de-24f4-4196-825d-2214e151c69a",
+      "name": "Thương sao...rau đắng sau hè",
+      "source": "Unplugged Special – Âm Hưởng/01 - Thương sao...rau đắng sau hè.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-special-am-huong/01-thuong-sao-rau-dang-sau-he.mp3"
+    },
+    {
+      "album": "Unplugged Special – Âm Hưởng",
+      "id": "75c08a9c-2c7c-4024-9a6e-2ad25bf1fce3",
+      "name": "Con đường ta di",
+      "source": "Unplugged Special – Âm Hưởng/02 - Con đường ta di.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-1/07-con-duong-ta-di.mp3"
+    },
+    {
+      "album": "Unplugged Special – Âm Hưởng",
+      "id": "4c2ac9b3-9eff-49d6-bb79-4b90d5e50e98",
+      "name": "Mấy bạn mấy bè",
+      "source": "Unplugged Special – Âm Hưởng/03 - Mấy bạn mấy bè.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-special-am-huong/03-may-ban-may-be.mp3"
+    },
+    {
+      "album": "Unplugged Special – Âm Hưởng",
+      "id": "7bc4edd1-5bf5-4426-b929-98834bea6c1e",
+      "name": "Duyên, Hợp, Tan",
+      "source": "TẾT Ngọ Sum Vầy '26/03 - Duyên, Hợp, Tan.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-special-am-huong/04-duyen-hop-tan.mp3"
+    },
+    {
+      "album": "Unplugged Special – Âm Hưởng",
+      "id": "33fe03db-c6a1-4a37-8413-780099068b41",
+      "name": "Vọng Về Bản Nguyên",
+      "source": "Unplugged Special – Âm Hưởng/05 - Vọng Về Bản Nguyên.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-special-am-huong/05-vong-ve-ban-nguyen.mp3"
+    },
+    {
+      "album": "Unplugged Special – Âm Hưởng",
+      "id": "c19b8ca9-b4a2-4054-8705-cbc02d4b1aa7",
+      "name": "Vá lòng người thương",
+      "source": "Unplugged Special – Âm Hưởng/06 - Vá lòng người thương.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-special-am-huong/06-va-long-nguoi-thuong.mp3"
+    },
+    {
+      "album": "Unplugged Special – Âm Hưởng",
+      "id": "963ef218-b6ae-486c-9637-025dee4a8f77",
+      "name": "Đời nảy mầm",
+      "source": "Unplugged Special – Âm Hưởng/07 - Đời nảy mầm.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-special-am-huong/07-doi-nay-mam.mp3"
+    },
+    {
+      "album": "Unplugged Special – Âm Hưởng",
+      "id": "1eb49547-b8a6-4169-a511-c9ccc521f0ba",
+      "name": "Dzung Dzăng Dzung Dzẻ",
+      "source": "Unplugged Special – Âm Hưởng/08 - Dzung Dzăng Dzung Dzẻ.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-special-am-huong/08-dzung-dzang-dzung-dze.mp3"
+    },
+    {
+      "album": "Unplugged Special – Âm Hưởng",
+      "id": "699551f2-d491-4b67-bbaa-4a6e015911c1",
+      "name": "Tôi mang một chút mây về thành phố",
+      "source": "Unplugged Special – Âm Hưởng/09 - Tôi mang một chút mây về thành phố.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-special-am-huong/09-toi-mang-mot-chut-may-ve-thanh-pho.mp3"
+    },
+    {
+      "album": "Unplugged Special – Âm Hưởng",
+      "id": "0fff744e-1553-4b9f-977d-4b19ee5e9817",
+      "name": "Buôn Mây Bán Gió...",
+      "source": "Unplugged Special – Âm Hưởng/10 - Buôn Mây Bán Gió....mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-2/05-buon-may-ban-gio.mp3"
+    },
+    {
+      "album": "Cảm Thán Ca",
+      "id": "2ca4a4ac-4ed5-43db-bfed-bcf126963070",
+      "name": "Thì thôi!!!!",
+      "source": "Cảm Thán Ca/01 - Thì thôi!!!!.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/cam-than-ca/01-thi-thoi.mp3"
+    },
+    {
+      "album": "Cảm Thán Ca",
+      "id": "b1764573-79ba-4adb-bb48-7e72e1b63039",
+      "name": "ừ - thì - là - vậy - mà -",
+      "source": "Cảm Thán Ca/02 - ừ - thì - là - vậy - mà -.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/cam-than-ca/02-u-thi-la-vay-ma.mp3"
+    },
+    {
+      "album": "Cảm Thán Ca",
+      "id": "0a20485e-60a9-46c4-b7cb-11e50fc74a8c",
+      "name": "ôh ... kìa!",
+      "source": "Cảm Thán Ca/03 - ôh ... kìa!.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/cam-than-ca/03-oh-kia.mp3"
+    },
+    {
+      "album": "Cảm Thán Ca",
+      "id": "0721e27a-3d98-4831-b02f-eb51b66ab42d",
+      "name": "Ơ hay",
+      "source": "Cảm Thán Ca/04 - Ơ hay.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/cam-than-ca/04-o-hay.mp3"
+    },
+    {
+      "album": "Cảm Thán Ca",
+      "id": "fe9a5917-d92b-4c74-beeb-26e48d87a508",
+      "name": "Ối Giờiii... Là Trời Ơi...[ft D'Li]",
+      "source": "Cảm Thán Ca/05 - Ối Giờiii... Là Trời Ơi...[ft D'Li].mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/cam-than-ca/05-oi-gioiii-la-troi-oi-ft-d-li.mp3"
+    },
+    {
+      "album": "Cảm Thán Ca",
+      "id": "482a5bfa-d45d-40cb-9a1c-e26a6e1ae69f",
+      "name": "Ô thôi chếc...",
+      "source": "Cảm Thán Ca/06 - Ô thôi chếc....mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/cam-than-ca/06-o-thoi-chec.mp3"
+    },
+    {
+      "album": "Cảm Thán Ca",
+      "id": "a83954f8-0d20-4cfc-9ede-da12c17d09b1",
+      "name": "Ủa????",
+      "source": "Cảm Thán Ca/07 - Ủa????.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/cam-than-ca/07-ua.mp3"
+    },
+    {
+      "album": "Cảm Thán Ca",
+      "id": "7011c7e7-3861-4b89-bdf4-ffdc38ed1b34",
+      "name": "Úi dào...",
+      "source": "Cảm Thán Ca/08 - Úi dào....mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/cam-than-ca/08-ui-dao.mp3"
+    },
+    {
+      "album": "Cảm Thán Ca",
+      "id": "91199211-9380-4e1f-b408-14033ab3a615",
+      "name": "À... ra là..[Anh Li x D'Li]",
+      "source": "Cảm Thán Ca/09 - À... ra là..[Anh Li x D'Li].mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/cam-than-ca/09-a-ra-la-anh-li-x-d-li.mp3"
+    },
+    {
+      "album": "Tôi Hát Cả Bốn Mùa",
+      "id": "749e34d4-7589-471f-a9d8-320b5fe13a5b",
+      "name": "Mùa Hạ của Tôi [Xuân Quỳnh]",
+      "source": "Tôi Hát Cả Bốn Mùa/01 - Mùa Hạ của Tôi [Xuân Quỳnh].mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-hat-ca-bon-mua/01-mua-ha-cua-toi-xuan-quynh.mp3"
+    },
+    {
+      "album": "Tôi Hát Cả Bốn Mùa",
+      "id": "5eecfc34-d147-40a0-b674-d06d4b452d58",
+      "name": "Tiếng Thu Chùng Chình Sang [Hửu Thỉnh]",
+      "source": "Tôi Hát Cả Bốn Mùa/02 - Tiếng Thu Chùng Chình Sang [Hửu Thỉnh].mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-hat-ca-bon-mua/02-tieng-thu-chung-chinh-sang-huu-thinh.mp3"
+    },
+    {
+      "album": "Tôi Hát Cả Bốn Mùa",
+      "id": "af69d99f-c006-4ecd-aef7-cd0ed2afe698",
+      "name": "Màu Đông [Phan Vũ]",
+      "source": "Tôi Hát Cả Bốn Mùa/03 - Màu Đông [Phan Vũ].mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-hat-ca-bon-mua/03-mau-dong-phan-vu.mp3"
+    },
+    {
+      "album": "Tôi Hát Cả Bốn Mùa",
+      "id": "32c66e9b-2746-4c0b-922a-57a7816ed29c",
+      "name": "Xuân Xanh Tự Tình [Nguyễn Bính]",
+      "source": "Tôi Hát Cả Bốn Mùa/04 - Xuân Xanh Tự Tình [Nguyễn Bính].mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-hat-ca-bon-mua/04-xuan-xanh-tu-tinh-nguyen-binh.mp3"
+    },
+    {
+      "album": "Tôi Hát Cả Bốn Mùa",
+      "id": "7eddbbb4-fbb0-47e3-a1dc-daa0cb0ec3ef",
+      "name": "Hát Ca cả Bốn Mùa",
+      "source": "Tôi Hát Cả Bốn Mùa/05 - Hát Ca cả Bốn Mùa.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-hat-ca-bon-mua/05-hat-ca-ca-bon-mua.mp3"
+    },
+    {
+      "album": "Another Stage",
+      "id": "179697f4-621a-4dc1-b587-2af151c63e05",
+      "name": "Gato àh, bleh~",
+      "source": "Another Stage/01 - Gato àh, bleh~.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/another-stage/01-gato-ah-bleh.mp3"
+    },
+    {
+      "album": "Another Stage",
+      "id": "6bb9116a-7d53-4585-9464-357713534d73",
+      "name": "ỪH, GIỎI.",
+      "source": "Another Stage/02 - ỪH, GIỎI..mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/another-stage/02-uh-gioi.mp3"
+    },
+    {
+      "album": "Another Stage",
+      "id": "37465953-7e97-41db-9828-c87fb14d511a",
+      "name": "Ai Hỏi?",
+      "source": "Another Stage/03 - Ai Hỏi?.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/another-stage/03-ai-hoi.mp3"
+    },
+    {
+      "album": "Another Stage",
+      "id": "85cae75f-3ffc-4ff2-a492-7ee8bde4995c",
+      "name": "Ký sự Kỳ Thú",
+      "source": "Another Stage/04 - Ký sự Kỳ Thú.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/another-stage/04-ky-su-ky-thu.mp3"
+    },
+    {
+      "album": "Another Stage",
+      "id": "9b6105c5-e664-4338-b347-6a2b443a8dc0",
+      "name": "Của Mày Hết",
+      "source": "Another Stage/05 - Của Mày Hết.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/another-stage/05-cua-may-het.mp3"
+    },
+    {
+      "album": "Another Stage",
+      "id": "16bedbbb-d746-4785-a443-f1483016ae6b",
+      "name": "Wow, Oai thế",
+      "source": "Another Stage/06 - Wow, Oai thế.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/another-stage/06-wow-oai-the.mp3"
+    },
+    {
+      "album": "Another Stage",
+      "id": "df00b140-8512-4997-af33-5f7cba191ec0",
+      "name": "OK, Sếp",
+      "source": "Another Stage/07 - OK, Sếp.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/another-stage/07-ok-sep.mp3"
+    },
+    {
+      "album": "Another Stage",
+      "id": "e2cab1ea-3669-4100-ad16-b94e435eccf0",
+      "name": "Quen Ăn Kẹo Huh?",
+      "source": "Another Stage/08 - Quen Ăn Kẹo Huh?.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/another-stage/08-quen-an-keo-huh.mp3"
+    },
+    {
+      "album": "Another Stage",
+      "id": "31ce0e36-ec63-4cd3-b6e7-ee383f8338a3",
+      "name": "Cái Này Dễ Mà...",
+      "source": "Another Stage/09 - Cái Này Dễ Mà....mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/another-stage/09-cai-nay-de-ma.mp3"
+    },
+    {
+      "album": "Không Có Gì!!?!",
+      "id": "8ed2eec3-3dcd-44ef-aacf-2c3eed3cece6",
+      "name": "Nhàn....",
+      "source": "Không Có Gì!!?!/01 - Nhàn.....mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/khong-co-gi/01-nhan.mp3"
+    },
+    {
+      "album": "Không Có Gì!!?!",
+      "id": "7fc24b26-1908-434d-b672-bb84a66286f1",
+      "name": "Bận!",
+      "source": "Không Có Gì!!?!/02 - Bận!.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/khong-co-gi/02-ban.mp3"
+    },
+    {
+      "album": "Không Có Gì!!?!",
+      "id": "2db452f8-0368-499d-959d-9ccfeb538a3e",
+      "name": "Mệth...",
+      "source": "Không Có Gì!!?!/03 - Mệth....mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/khong-co-gi/03-meth.mp3"
+    },
+    {
+      "album": "Không Có Gì!!?!",
+      "id": "1646899f-ca67-4df6-b2bf-86fbe927f68a",
+      "name": "Xảh...",
+      "source": "Không Có Gì!!?!/04 - Xảh....mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/khong-co-gi/04-xah.mp3"
+    },
+    {
+      "album": "Không Có Gì!!?!",
+      "id": "a72464fd-19fe-420e-8d18-9b7a1b2c513e",
+      "name": "Uhmmmmmmm",
+      "source": "Không Có Gì!!?!/05 - Uhmmmmmmm.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/khong-co-gi/05-uhmmmmmmm.mp3"
+    },
+    {
+      "album": "Không Có Gì!!?!",
+      "id": "0e8cfe5c-3d7f-41c4-8fac-b95e2511b8b7",
+      "name": "Chịu...",
+      "source": "Không Có Gì!!?!/06 - Chịu....mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/khong-co-gi/06-chiu.mp3"
+    },
+    {
+      "album": "Không Có Gì!!?!",
+      "id": "aeb95eba-96e7-4ffa-8a92-d0eba5cbc1fd",
+      "name": "Tưởng ?!?",
+      "source": "Không Có Gì!!?!/07 - Tưởng ?!?.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/khong-co-gi/07-tuong.mp3"
+    },
+    {
+      "album": "Tôi Muốn Ôm Trọn Di Sản Quê Hương Mình Vào Lòng",
+      "id": "69ede1f4-3725-467f-b424-beed636dabc1",
+      "name": "IN MỘT NÉT TRANH",
+      "source": "Tôi Muốn Ôm Trọn Di Sản Quê Hương Mình Vào Lòng/01 - IN MỘT NÉT TRANH.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-muon-om-tron-di-san-que-huong-minh-vao-long/01-in-mot-net-tranh.mp3"
+    },
+    {
+      "album": "Tôi Muốn Ôm Trọn Di Sản Quê Hương Mình Vào Lòng",
+      "id": "b6902a96-b14b-4317-80d7-fd9d78dcae05",
+      "name": "VŨ ĐIỆU ĐẤT",
+      "source": "Tôi Muốn Ôm Trọn Di Sản Quê Hương Mình Vào Lòng/02 - VŨ ĐIỆU ĐẤT.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-muon-om-tron-di-san-que-huong-minh-vao-long/02-vu-dieu-dat.mp3"
+    },
+    {
+      "album": "Tôi Muốn Ôm Trọn Di Sản Quê Hương Mình Vào Lòng",
+      "id": "de139955-724b-4ce5-a96a-7074eb5a4cde",
+      "name": "CON CHI VỪA LÓ RA NÌ?",
+      "source": "Tôi Muốn Ôm Trọn Di Sản Quê Hương Mình Vào Lòng/03 - CON CHI VỪA LÓ RA NÌ?.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-muon-om-tron-di-san-que-huong-minh-vao-long/03-con-chi-vua-lo-ra-ni.mp3"
+    },
+    {
+      "album": "Tôi Muốn Ôm Trọn Di Sản Quê Hương Mình Vào Lòng",
+      "id": "05a1cbff-5616-4190-bf73-cb62fd85a0d6",
+      "name": "BUÔNG CÂU ĐỜN CA",
+      "source": "Tôi Muốn Ôm Trọn Di Sản Quê Hương Mình Vào Lòng/04 - BUÔNG CÂU ĐỜN CA.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-muon-om-tron-di-san-que-huong-minh-vao-long/04-buong-cau-don-ca.mp3"
+    },
+    {
+      "album": "Tôi Muốn Ôm Trọn Di Sản Quê Hương Mình Vào Lòng",
+      "id": "99ecde35-d33e-4f83-ba1c-19cacad9ff8e",
+      "name": "BÀI THƠ BỒNG BỀNH",
+      "source": "Tôi Muốn Ôm Trọn Di Sản Quê Hương Mình Vào Lòng/05 - BÀI THƠ BỒNG BỀNH.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-muon-om-tron-di-san-que-huong-minh-vao-long/05-bai-tho-bong-benh.mp3"
+    },
+    {
+      "album": "Tôi Muốn Ôm Trọn Di Sản Quê Hương Mình Vào Lòng",
+      "id": "dd2d5a9c-424d-4605-9544-24818bdd5e35",
+      "name": "Ơ LÚA RÃY ƠI",
+      "source": "Tôi Muốn Ôm Trọn Di Sản Quê Hương Mình Vào Lòng/06 - Ơ LÚA RÃY ƠI.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-muon-om-tron-di-san-que-huong-minh-vao-long/06-o-lua-ray-oi.mp3"
+    },
+    {
+      "album": "Tôi Muốn Ôm Trọn Di Sản Quê Hương Mình Vào Lòng",
+      "id": "4fec75bb-1b1b-47e3-b67e-a910881afa66",
+      "name": "ÂN TÌNH MẸ QUÊ",
+      "source": "Tôi Muốn Ôm Trọn Di Sản Quê Hương Mình Vào Lòng/07 - ÂN TÌNH MẸ QUÊ.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-muon-om-tron-di-san-que-huong-minh-vao-long/07-an-tinh-me-que.mp3"
+    },
+    {
+      "album": "Tôi Muốn Ôm Trọn Di Sản Quê Hương Mình Vào Lòng",
+      "id": "local-mong-coi-may-ngan",
+      "name": "MỘNG CÕI MÂY NGÀN",
+      "source": "Tôi Muốn Ôm Trọn Di Sản Quê Hương Mình Vào Lòng/08 - Mộng Cõi Mây Ngàn.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-muon-om-tron-di-san-que-huong-minh-vao-long/08-mong-coi-may-ngan.mp3"
+    },
+    {
+      "album": "01KhoảngLặng",
+      "id": "cd33b9bf-5cc1-409e-833f-865b13fdb10b",
+      "name": "01KhoảngLặng....",
+      "source": "01KhoảngLặng/01 - 01KhoảngLặng.....mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/01khoanglang/01-01khoanglang.mp3"
+    },
+    {
+      "album": "01KhoảngLặng",
+      "id": "468409c6-0ef0-42fc-bf0b-c9d44fff4ba1",
+      "name": "Ta có thể khóc không?",
+      "source": "01KhoảngLặng/02 - Ta có thể khóc không?.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/01khoanglang/02-ta-co-the-khoc-khong.mp3"
+    },
+    {
+      "album": "01KhoảngLặng",
+      "id": "9ecaada6-8cba-49c7-b420-8a09ab5c3101",
+      "name": "Cry The Rain",
+      "source": "01KhoảngLặng/03 - Cry The Rain.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/01khoanglang/03-cry-the-rain.mp3"
+    },
+    {
+      "album": "01KhoảngLặng",
+      "id": "dabc255b-9048-42cf-952e-efa5755d8311",
+      "name": "dday doesn't 5...",
+      "source": "01KhoảngLặng/04 - dday doesn't 5....mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/01khoanglang/04-dday-doesn-t-5.mp3"
+    },
+    {
+      "album": "01KhoảngLặng",
+      "id": "906cdce3-1030-47ed-9036-a0b7a398adb6",
+      "name": "Bạn tình Cô đơn!",
+      "source": "01KhoảngLặng/05 - Bạn tình Cô đơn!.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/01khoanglang/05-ban-tinh-co-don.mp3"
+    },
+    {
+      "album": "01KhoảngLặng",
+      "id": "95047cbf-54f0-4e1a-8116-612b0e40ae27",
+      "name": "Anh Glitch Một Mình...",
+      "source": "01KhoảngLặng/06 - Anh Glitch Một Mình....mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/01khoanglang/06-anh-glitch-mot-minh.mp3"
+    },
+    {
+      "album": "01KhoảngLặng",
+      "id": "54f44e62-baf9-493f-b712-95e7c7c7abae",
+      "name": "Nhảy vào Mưa....",
+      "source": "01KhoảngLặng/07 - Nhảy vào Mưa.....mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/01khoanglang/07-nhay-vao-mua.mp3"
+    },
+    {
+      "album": "01KhoảngLặng",
+      "id": "7bc4edd1-5bf5-4426-b929-98834bea6c1e",
+      "name": "Duyên, Hợp, Tan",
+      "source": "TẾT Ngọ Sum Vầy '26/03 - Duyên, Hợp, Tan.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-special-am-huong/04-duyen-hop-tan.mp3"
+    },
+    {
+      "album": "Chuyện Tình Này...Nó Lạ...",
+      "id": "1cfa61e1-471b-4cfd-a05a-0083e8fa1fdb",
+      "name": "Chuyện....Mình Lạ",
+      "source": "Untamed/04 - Chuyện....Mình Lạ.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/untamed/04-chuyen-minh-la.mp3"
+    },
+    {
+      "album": "Chuyện Tình Này...Nó Lạ...",
+      "id": "71487cfe-2274-4940-8de9-09d5149cb734",
+      "name": "Sòul Đown Đắng Hoài?",
+      "source": "Chuyện Tình Này...Nó Lạ.../02 - Sòul Đown Đắng Hoài?.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/chuyen-tinh-nay-no-la/02-soul-down-dang-hoai.mp3"
+    },
+    {
+      "album": "Chuyện Tình Này...Nó Lạ...",
+      "id": "2ff7643d-0a80-4b44-80ad-9d47471c14ab",
+      "name": "Có hai người mới ngang phố này...",
+      "source": "Chuyện Tình Này...Nó Lạ.../03 - Có hai người mới ngang phố này....mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/chuyen-tinh-nay-no-la/03-co-hai-nguoi-moi-ngang-pho-nay.mp3"
+    },
+    {
+      "album": "Chuyện Tình Này...Nó Lạ...",
+      "id": "d293ccc7-7386-4168-8787-26f93de8beb8",
+      "name": "Anh tính thế này này [Anh Li ft D'Li]",
+      "source": "Chuyện Tình Này...Nó Lạ.../04 - Anh tính thế này này [Anh Li ft D'Li].mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/chuyen-tinh-nay-no-la/04-anh-tinh-the-nay-nay-anh-li-ft-d-li.mp3"
+    },
+    {
+      "album": "Cả Biển Trời Trong Mắt",
+      "id": "06bf905f-1765-4369-a706-4197d6f76801",
+      "name": "[Lỗi 404] Chợt Nhớ Lúc Quên Em.",
+      "source": "Cả Biển Trời Trong Mắt/01 - [Lỗi 404] Chợt Nhớ Lúc Quên Em..mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/ca-bien-troi-trong-mat/01-loi-404-chot-nho-luc-quen-em.mp3"
+    },
+    {
+      "album": "Cả Biển Trời Trong Mắt",
+      "id": "10d67ecd-8ef6-4dc6-98bf-35e502e25af0",
+      "name": "Xin đừng nói câu gì...",
+      "source": "Cả Biển Trời Trong Mắt/02 - Xin đừng nói câu gì....mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/untamed/05-xin-dung-noi-cau-gi.mp3"
+    },
+    {
+      "album": "Cả Biển Trời Trong Mắt",
+      "id": "2aa5616a-016e-4867-ac87-b0d0ad861e2f",
+      "name": "Lạc Lối...",
+      "source": "Cả Biển Trời Trong Mắt/03 - Lạc Lối....mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/ca-bien-troi-trong-mat/03-lac-loi.mp3"
+    },
+    {
+      "album": "Cả Biển Trời Trong Mắt",
+      "id": "91b5c27d-c383-4a6d-8b34-75464148322d",
+      "name": "Mùa giáng sinh đi qua..",
+      "source": "Cả Biển Trời Trong Mắt/04 - Mùa giáng sinh đi qua...mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/ca-bien-troi-trong-mat/04-mua-giang-sinh-di-qua.mp3"
+    },
+    {
+      "album": "Cả Biển Trời Trong Mắt",
+      "id": "fbc726bb-7ca1-433a-baf2-4208f60928ad",
+      "name": "Nhớ em...nhiều",
+      "source": "Cả Biển Trời Trong Mắt/05 - Nhớ em...nhiều.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/ca-bien-troi-trong-mat/05-nho-em-nhieu.mp3"
+    },
+    {
+      "album": "Cả Biển Trời Trong Mắt",
+      "id": "97edf55c-f92c-4e49-b100-5e1ba5da11b5",
+      "name": "Cả biển trời trong",
+      "source": "Cả Biển Trời Trong Mắt/06 - Cả biển trời trong.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/ca-bien-troi-trong-mat/06-ca-bien-troi-trong.mp3"
+    },
+    {
+      "album": "Cả Biển Trời Trong Mắt",
+      "id": "448b3ec7-c670-4f51-85dd-ae4cebf6a42c",
+      "name": "Điều Anh Thấy...",
+      "source": "Cả Biển Trời Trong Mắt/07 - Điều Anh Thấy....mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/ca-bien-troi-trong-mat/07-dieu-anh-thay.mp3"
+    },
+    {
+      "album": "Cả Biển Trời Trong Mắt",
+      "id": "295c3f26-330d-47d6-ab2e-7440f0b4dcb2",
+      "name": "Nhớ hay Quên!",
+      "source": "Cả Biển Trời Trong Mắt/08 - Nhớ hay Quên!.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/ca-bien-troi-trong-mat/08-nho-hay-quen.mp3"
+    },
+    {
+      "album": "Cả Biển Trời Trong Mắt",
+      "id": "906cdce3-1030-47ed-9036-a0b7a398adb6",
+      "name": "Bạn tình Cô đơn!",
+      "source": "01KhoảngLặng/05 - Bạn tình Cô đơn!.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/01khoanglang/05-ban-tinh-co-don.mp3"
+    },
+    {
+      "album": "Lạ mà Quen",
+      "id": "891bc6cb-0ed4-4939-b413-5ea3fb2dcc91",
+      "name": "Mưa vương bụi sầu...",
+      "source": "Lạ mà Quen/01 - Mưa vương bụi sầu....mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/la-ma-quen/01-mua-vuong-bui-sau.mp3"
+    },
+    {
+      "album": "Lạ mà Quen",
+      "id": "9c3b3a4c-d710-43c2-85be-d9d636420b96",
+      "name": "Sao chỉ là... (nửa trái tim)",
+      "source": "Lạ mà Quen/02 - Sao chỉ là... (nửa trái tim).mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/la-ma-quen/02-sao-chi-la-nua-trai-tim.mp3"
+    },
+    {
+      "album": "Lạ mà Quen",
+      "id": "f6830484-2824-4b3b-b76b-50771a2d930b",
+      "name": "Quá khó",
+      "source": "Lạ mà Quen/03 - Quá khó.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/la-ma-quen/03-qua-kho.mp3"
+    },
+    {
+      "album": "Lạ mà Quen",
+      "id": "6147634e-5d55-42bf-9249-3bce315965a2",
+      "name": "Rực rỡ đến tàn phai.",
+      "source": "Lạ mà Quen/04 - Rực rỡ đến tàn phai..mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/la-ma-quen/04-ruc-ro-den-tan-phai.mp3"
+    },
+    {
+      "album": "Lạ mà Quen",
+      "id": "39ce9834-36c4-4e80-8990-0913a7044b49",
+      "name": "Lời Dối Gian Đó",
+      "source": "Lạ mà Quen/05 - Lời Dối Gian Đó.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/la-ma-quen/05-loi-doi-gian-do.mp3"
+    },
+    {
+      "album": "Lạ mà Quen",
+      "id": "b697089e-8efe-4258-85a3-2ca8d2584671",
+      "name": "Chiếc lá cuốn bay",
+      "source": "Lạ mà Quen/06 - Chiếc lá cuốn bay.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/la-ma-quen/06-chiec-la-cuon-bay.mp3"
+    },
+    {
+      "album": "Lạ mà Quen",
+      "id": "6047e2be-51ae-4d2a-b512-fd87b7c23038",
+      "name": "Biển Xanh Sâu Thẳm...",
+      "source": "Lạ mà Quen/07 - Biển Xanh Sâu Thẳm....mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/la-ma-quen/07-bien-xanh-sau-tham.mp3"
+    },
+    {
+      "album": "Lạ mà Quen",
+      "id": "9d24c3ac-67a1-4a1e-99dd-3ff5cc20571b",
+      "name": "Mưa Gió.... Đời Ta",
+      "source": "Lạ mà Quen/08 - Mưa Gió.... Đời Ta.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/la-ma-quen/08-mua-gio-doi-ta.mp3"
+    },
+    {
+      "album": "Lạ mà Quen",
+      "id": "33b91a57-2539-4676-8456-1244768f013c",
+      "name": "\"Ai sẽ đưa em về...\"",
+      "source": "Lạ mà Quen/09 - \"Ai sẽ đưa em về...\".mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/la-ma-quen/09-ai-se-dua-em-ve.mp3"
+    },
+    {
+      "album": "Lạ mà Quen",
+      "id": "ccc0c475-717b-4b80-bca1-015994ea834b",
+      "name": "Xin cứ làm ngơ...[Ft D'Li]",
+      "source": "Lạ mà Quen/10 - Xin cứ làm ngơ...[Ft D'Li].mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/la-ma-quen/10-xin-cu-lam-ngo-ft-d-li.mp3"
+    },
+    {
+      "album": "Lạ mà Quen",
+      "id": "e2aeff99-60d6-4485-9c05-964baef488ed",
+      "name": "Mất Đi Màu Xanh..",
+      "source": "Lạ mà Quen/11 - Mất Đi Màu Xanh...mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/la-ma-quen/11-mat-di-mau-xanh.mp3"
+    },
+    {
+      "album": "Lạ mà Quen",
+      "id": "5c3caace-9305-4ee4-8d1a-be6042305ffe",
+      "name": "Tan",
+      "source": "Lạ mà Quen/12 - Tan.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/la-ma-quen/12-tan.mp3"
+    },
+    {
+      "album": "Lạ mà Quen",
+      "id": "df4057e6-1272-4d67-8837-b7f49e9b3535",
+      "name": "TRAP*KIMLANG*",
+      "source": "Lạ mà Quen/13 - TRAP*KIMLANG*.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/la-ma-quen/13-trap-kimlang.mp3"
+    },
+    {
+      "album": "Đi Khắp Một Dãy Non Sông",
+      "id": "2096197a-b0a3-4fba-89d2-d654b2f1188e",
+      "name": "Việt Nam Ta Yêu",
+      "source": "Đi Khắp Một Dãy Non Sông/01 - Việt Nam Ta Yêu.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/di-khap-mot-day-non-song/01-viet-nam-ta-yeu.mp3"
+    },
+    {
+      "album": "Đi Khắp Một Dãy Non Sông",
+      "id": "b8f7a3ec-5e4d-4d15-b0cc-53ceee89cf16",
+      "name": "Chất-Việt-Chất!",
+      "source": "Đi Khắp Một Dãy Non Sông/02 - Chất-Việt-Chất!.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/di-khap-mot-day-non-song/02-chat-viet-chat.mp3"
+    },
+    {
+      "album": "Đi Khắp Một Dãy Non Sông",
+      "id": "f595f503-1399-4f0b-800c-07cf0503153e",
+      "name": "Khát Vọng Sông Vàm",
+      "source": "Đi Khắp Một Dãy Non Sông/03 - Khát Vọng Sông Vàm.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/di-khap-mot-day-non-song/03-khat-vong-song-vam.mp3"
+    },
+    {
+      "album": "Đi Khắp Một Dãy Non Sông",
+      "id": "222f5fdc-1516-40c4-ba37-cb41685c4758",
+      "name": "Vươn Cao Long An",
+      "source": "Đi Khắp Một Dãy Non Sông/04 - Vươn Cao Long An.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/di-khap-mot-day-non-song/04-vuon-cao-long-an.mp3"
+    },
+    {
+      "album": "Đi Khắp Một Dãy Non Sông",
+      "id": "2cf71f83-6d84-4abb-a241-123e19dea645",
+      "name": "Dưới Bầu Trời Ta Yêu",
+      "source": "Đi Khắp Một Dãy Non Sông/05 - Dưới Bầu Trời Ta Yêu.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/di-khap-mot-day-non-song/05-duoi-bau-troi-ta-yeu.mp3"
+    },
+    {
+      "album": "Đi Khắp Một Dãy Non Sông",
+      "id": "38a81c22-bfe4-48a4-991c-5a4b65322d0f",
+      "name": "Tôi Yêu Lâm Đồng",
+      "source": "Đi Khắp Một Dãy Non Sông/06 - Tôi Yêu Lâm Đồng.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/di-khap-mot-day-non-song/06-toi-yeu-lam-dong.mp3"
+    },
+    {
+      "album": "Đi Khắp Một Dãy Non Sông",
+      "id": "6f1de184-72ab-4078-8a1e-112bbd09aa41",
+      "name": "Lâm Đồng Ngày Mới",
+      "source": "Đi Khắp Một Dãy Non Sông/07 - Lâm Đồng Ngày Mới.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/di-khap-mot-day-non-song/07-lam-dong-ngay-moi.mp3"
+    },
+    {
+      "album": "Đi Khắp Một Dãy Non Sông",
+      "id": "976a442f-08d6-4dee-92ed-f84e60045b6d",
+      "name": "Đi nhớ trở về",
+      "source": "Unplugged Vol.2/03 - Đi nhớ trở về.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-2/03-di-nho-tro-ve.mp3"
+    },
+    {
+      "album": "Đi Khắp Một Dãy Non Sông",
+      "id": "e5fcd0cc-9be3-47b5-86ff-56f7bc2afbed",
+      "name": "Cho tất cả Chúng Ta",
+      "source": "Unplugged Vol.2/09 - Cho tất cả Chúng Ta.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-2/09-cho-tat-ca-chung-ta.mp3"
+    },
+    {
+      "album": "Tình Vuu-verse",
+      "id": "c321302b-bd2d-473b-a72c-cc5a2b3ff445",
+      "name": "Điệu Valse say vòng xoay...",
+      "source": "Tình Vuu-verse/01 - Điệu Valse say vòng xoay....mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tinh-vuu-verse/01-dieu-valse-say-vong-xoay.mp3"
+    },
+    {
+      "album": "Tình Vuu-verse",
+      "id": "1a222b30-6000-4546-941b-61570bf0b7f2",
+      "name": "Đâu Ai chờ Ai",
+      "source": "Tình Vuu-verse/02 - Đâu Ai chờ Ai.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tinh-vuu-verse/02-dau-ai-cho-ai.mp3"
+    },
+    {
+      "album": "Tình Vuu-verse",
+      "id": "1b94288e-54c5-4f8a-ab77-b99426cb54a4",
+      "name": "Hơi Đ-Đ-Đau",
+      "source": "Tình Vuu-verse/03 - Hơi Đ-Đ-Đau.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tinh-vuu-verse/03-hoi-d-d-dau.mp3"
+    },
+    {
+      "album": "Tình Vuu-verse",
+      "id": "de26016d-ddb2-475b-8ac0-78ca23adfb15",
+      "name": "Xin lỗi, tôi yêu nhầm",
+      "source": "Tình Vuu-verse/04 - Xin lỗi, tôi yêu nhầm.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tinh-vuu-verse/04-xin-loi-toi-yeu-nham.mp3"
+    },
+    {
+      "album": "Tình Vuu-verse",
+      "id": "eb1d4984-bef7-4e36-9ce2-0d87686a4e59",
+      "name": "Em Mơ",
+      "source": "Tình Vuu-verse/05 - Em Mơ.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tinh-vuu-verse/05-em-mo.mp3"
+    },
+    {
+      "album": "Tình Vuu-verse",
+      "id": "3cde4f67-64c8-40ed-930d-41dc431f24ee",
+      "name": "Tình Vu Verse",
+      "source": "Tình Vuu-verse/06 - Tình Vu Verse.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tinh-vuu-verse/06-tinh-vu-verse.mp3"
+    },
+    {
+      "album": "Tình Vuu-verse",
+      "id": "5b3596a6-f12a-4234-85ef-5fa4732c9073",
+      "name": "Tình Cũng Như Không",
+      "source": "Tình Vuu-verse/07 - Tình Cũng Như Không.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tinh-vuu-verse/07-tinh-cung-nhu-khong.mp3"
+    },
+    {
+      "album": "Tình Vuu-verse",
+      "id": "ef551951-2f3e-42b0-8c1c-35cd5a8b485e",
+      "name": "Tắt Đèn",
+      "source": "Tình Vuu-verse/08 - Tắt Đèn.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tinh-vuu-verse/08-tat-den.mp3"
+    },
+    {
+      "album": "Thơ Ru Em Ngủ",
+      "id": "fba3bdc4-4168-4b42-a6df-c19ce7d4ba8f",
+      "name": "[Interlude] Khúc dạo thơ đầu anh kể em nghe",
+      "source": "Thơ Ru Em Ngủ/01 - [Interlude] Khúc dạo thơ đầu anh kể em nghe.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tho-ru-em-ngu/01-interlude-khuc-dao-tho-dau-anh-ke-em-nghe.mp3"
+    },
+    {
+      "album": "Thơ Ru Em Ngủ",
+      "id": "5d394e86-38de-467b-98fa-f7a20b54af93",
+      "name": "DẪU XA ANH CŨNG TÌM VỀ - [Theo thơ Nguyễn Bính]",
+      "source": "Thơ Ru Em Ngủ/02 - DẪU XA ANH CŨNG TÌM VỀ - [Theo thơ Nguyễn Bính].mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tho-ru-em-ngu/02-dau-xa-anh-cung-tim-ve-theo-tho-nguyen-binh.mp3"
+    },
+    {
+      "album": "Thơ Ru Em Ngủ",
+      "id": "bbd75a95-016a-4ad9-925f-cc894606d2b6",
+      "name": "CÓT CA CÓT KÉT - [Cảm tác từ \"Tiếng Võng Đưa\" - Bàng Bá Lân]",
+      "source": "Thơ Ru Em Ngủ/03 - CÓT CA CÓT KÉT - [Cảm tác từ \"Tiếng Võng Đưa\" - Bàng Bá Lân].mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tho-ru-em-ngu/03-cot-ca-cot-ket-cam-tac-tu-tieng-vong-dua-bang-ba-lan.mp3"
+    },
+    {
+      "album": "Thơ Ru Em Ngủ",
+      "id": "873f6093-8fc2-4f4b-a838-a8f12e794282",
+      "name": "DẶM LIỄU MÂY BAY - [Cảm tác từ \"Đường Về Quê Mẹ\" - Đoàn Văn Cừ]",
+      "source": "Thơ Ru Em Ngủ/04 - DẶM LIỄU MÂY BAY - [Cảm tác từ \"Đường Về Quê Mẹ\" - Đoàn Văn Cừ].mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tho-ru-em-ngu/04-dam-lieu-may-bay-cam-tac-tu-duong-ve-que-me-doan-van-cu.mp3"
+    },
+    {
+      "album": "Thơ Ru Em Ngủ",
+      "id": "7a5b3654-f198-4329-bae5-7598e4cb5fc9",
+      "name": "NẮNG CHÍN BÊN ĐỒI - [Cảm tác từ \"Mùa Xuân Chín\" - Hàn Mặc Tử]",
+      "source": "Thơ Ru Em Ngủ/05 - NẮNG CHÍN BÊN ĐỒI - [Cảm tác từ \"Mùa Xuân Chín\" - Hàn Mặc Tử].mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tho-ru-em-ngu/05-nang-chin-ben-doi-cam-tac-tu-mua-xuan-chin-han-mac-tu.mp3"
+    },
+    {
+      "album": "Thơ Ru Em Ngủ",
+      "id": "c01b616f-ab30-4f98-80e2-63b45d41ca73",
+      "name": "CHIỀU CŨ KHÔNG TÊN [Cảm tác từ \"Tình già\" — Phan Khôi]",
+      "source": "Thơ Ru Em Ngủ/06 - CHIỀU CŨ KHÔNG TÊN [Cảm tác từ \"Tình già\" — Phan Khôi].mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tho-ru-em-ngu/06-chieu-cu-khong-ten-cam-tac-tu-tinh-gia-phan-khoi.mp3"
+    },
+    {
+      "album": "Thơ Ru Em Ngủ",
+      "id": "2201907e-abbe-4731-a487-ba58baa30718",
+      "name": "VŨ KHÚC TA VỚI TA - [Cảm tác từ \"Qua Đèo Ngang\" - Bà Huyện Thanh Quan]",
+      "source": "Thơ Ru Em Ngủ/07 - VŨ KHÚC TA VỚI TA - [Cảm tác từ \"Qua Đèo Ngang\" - Bà Huyện Thanh Quan].mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tho-ru-em-ngu/07-vu-khuc-ta-voi-ta-cam-tac-tu-qua-deo-ngang-ba-huyen-thanh-qu.mp3"
+    },
+    {
+      "album": "Thơ Ru Em Ngủ",
+      "id": "ccaa90f1-8dd3-468a-af84-e2cae5f5083f",
+      "name": "TIẾNG TỲ BÀ TRONG TRĂNG - [Cảm tác từ \"Tỳ Bà\" - Bích Khê]",
+      "source": "Thơ Ru Em Ngủ/08 - TIẾNG TỲ BÀ TRONG TRĂNG - [Cảm tác từ \"Tỳ Bà\" - Bích Khê].mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tho-ru-em-ngu/08-tieng-ty-ba-trong-trang-cam-tac-tu-ty-ba-bich-khe.mp3"
+    },
+    {
+      "album": "Thơ Ru Em Ngủ",
+      "id": "79bdaacc-e20a-4770-8ffc-6eac9ccd2a25",
+      "name": "NHÀ ƠI, BẠN ĐẾN CHƠI - [Cảm tác từ \"Bạn Đến Chơi Nhà\" - Nguyễn Khuyến]",
+      "source": "Thơ Ru Em Ngủ/09 - NHÀ ƠI, BẠN ĐẾN CHƠI - [Cảm tác từ \"Bạn Đến Chơi Nhà\" - Nguyễn Khuyến].mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tho-ru-em-ngu/09-nha-oi-ban-den-choi-cam-tac-tu-ban-den-choi-nha-nguyen-khuye.mp3"
+    },
+    {
+      "album": "Thơ Ru Em Ngủ",
+      "id": "f1f4f628-9875-4f8f-8c59-98e636e0b11d",
+      "name": "Ả À ƠI, THƠ RU EM NGỦ - [Sáng tác gốc - Anh Li]",
+      "source": "Thơ Ru Em Ngủ/10 - Ả À ƠI, THƠ RU EM NGỦ - [Sáng tác gốc - Anh Li].mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tho-ru-em-ngu/10-a-a-oi-tho-ru-em-ngu-sang-tac-goc-anh-li.mp3"
+    },
+    {
+      "album": "Sau Một Mùa Sóng",
+      "id": "97edf55c-f92c-4e49-b100-5e1ba5da11b5",
+      "name": "Cả biển trời trong",
+      "source": "Cả Biển Trời Trong Mắt/06 - Cả biển trời trong.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/ca-bien-troi-trong-mat/06-ca-bien-troi-trong.mp3"
+    },
+    {
+      "album": "Sau Một Mùa Sóng",
+      "id": "cd255d0c-1091-4302-a67a-ee33fd783116",
+      "name": "Có Một Tiếng Thở Dài Giữa Biển",
+      "source": "Sau Một Mùa Sóng/02 - Có Một Tiếng Thở Dài Giữa Biển.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/sau-mot-mua-song/02-co-mot-tieng-tho-dai-giua-bien.mp3"
+    },
+    {
+      "album": "Sau Một Mùa Sóng",
+      "id": "3b60b43c-2640-4293-9938-9c6393e27725",
+      "name": "Một Ngày Sóng Không Về",
+      "source": "Sau Một Mùa Sóng/03 - Một Ngày Sóng Không Về.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/sau-mot-mua-song/03-mot-ngay-song-khong-ve.mp3"
+    },
+    {
+      "album": "Sau Một Mùa Sóng",
+      "id": "a9fd3296-d400-4039-9977-92618c5b3240",
+      "name": "Sau cùng, Trời vẫn thênh thang",
+      "source": "Sau Một Mùa Sóng/04 - Sau cùng, Trời vẫn thênh thang.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/sau-mot-mua-song/04-sau-cung-troi-van-thenh-thang.mp3"
+    },
+    {
+      "album": "Tôi Hoạ Cả Thế Gian",
+      "id": "7cc49535-164a-42b3-a2b3-4c98adc0e931",
+      "name": "Ngắm Nhìn Bức Hoạ Thế Gian",
+      "source": "Tôi Hoạ Cả Thế Gian/01 - Ngắm Nhìn Bức Hoạ Thế Gian.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-hoa-ca-the-gian/01-ngam-nhin-buc-hoa-the-gian.mp3"
+    },
+    {
+      "album": "Tôi Hoạ Cả Thế Gian",
+      "id": "70ccf96a-3b48-442a-a16d-af30520a0a71",
+      "name": "Nét Đời",
+      "source": "Tôi Hoạ Cả Thế Gian/02 - Nét Đời.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-hoa-ca-the-gian/02-net-doi.mp3"
+    },
+    {
+      "album": "Tôi Hoạ Cả Thế Gian",
+      "id": "df51a475-1944-4c90-ab59-d27da515d9ab",
+      "name": "Qua Miền Gió Bay",
+      "source": "Tôi Hoạ Cả Thế Gian/03 - Qua Miền Gió Bay.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-hoa-ca-the-gian/03-qua-mien-gio-bay.mp3"
+    },
+    {
+      "album": "Tôi Hoạ Cả Thế Gian",
+      "id": "2debfb51-0310-4759-970a-33487e0bc77c",
+      "name": "Mạch Đất",
+      "source": "Tôi Hoạ Cả Thế Gian/04 - Mạch Đất.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-hoa-ca-the-gian/04-mach-dat.mp3"
+    },
+    {
+      "album": "Tôi Hoạ Cả Thế Gian",
+      "id": "bb942cb4-c693-416b-a63a-5c241c66ddef",
+      "name": "Nước Về Đâu",
+      "source": "Tôi Hoạ Cả Thế Gian/05 - Nước Về Đâu.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-hoa-ca-the-gian/05-nuoc-ve-dau.mp3"
+    },
+    {
+      "album": "Tôi Hoạ Cả Thế Gian",
+      "id": "190b2560-b91a-4cdb-9d10-33e149820d63",
+      "name": "Muôn Vạn Dấu Chân",
+      "source": "Tôi Hoạ Cả Thế Gian/06 - Muôn Vạn Dấu Chân.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-hoa-ca-the-gian/06-muon-van-dau-chan.mp3"
+    },
+    {
+      "album": "Tôi Hoạ Cả Thế Gian",
+      "id": "fca5ff76-12ec-41ac-a229-12dc0b6f3f19",
+      "name": "Phủ Bạc Nhân Gian",
+      "source": "Tôi Hoạ Cả Thế Gian/07 - Phủ Bạc Nhân Gian.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-hoa-ca-the-gian/07-phu-bac-nhan-gian.mp3"
+    },
+    {
+      "album": "Tôi Hoạ Cả Thế Gian",
+      "id": "74d27a3b-f6af-4566-ad0f-8a35c3ff54c1",
+      "name": "Chữ Tài Gánh Một Chữ Tai",
+      "source": "Tôi Hoạ Cả Thế Gian/08 - Chữ Tài Gánh Một Chữ Tai.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-hoa-ca-the-gian/08-chu-tai-ganh-mot-chu-tai.mp3"
+    },
+    {
+      "album": "Tôi Hoạ Cả Thế Gian",
+      "id": "1730b98b-21b2-493d-b45a-be76b6146599",
+      "name": "Lưng Đồi Dậy Gió",
+      "source": "Tôi Hoạ Cả Thế Gian/09 - Lưng Đồi Dậy Gió.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-hoa-ca-the-gian/09-lung-doi-day-gio.mp3"
+    },
+    {
+      "album": "Vị Muối Mặn — 鹹味未散",
+      "id": "3686ee9c-b6ab-44c7-be8f-0fc99edcaa42",
+      "name": "你係我嘅夏天 · Mùa Hè Của Anh",
+      "source": "Vị Muối Mặn — 鹹味未散/01 - 你係我嘅夏天 · Mùa Hè Của Anh.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/vi-muoi-man/01-mua-he-cua-anh.mp3"
+    },
+    {
+      "album": "Vị Muối Mặn — 鹹味未散",
+      "id": "ec99b8f1-732f-4266-8941-ceffb4f01932",
+      "name": "慢半拍 · Chậm Nửa Nhịp",
+      "source": "Vị Muối Mặn — 鹹味未散/02 - 慢半拍 · Chậm Nửa Nhịp.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/vi-muoi-man/02-cham-nua-nhip.mp3"
+    },
+    {
+      "album": "Vị Muối Mặn — 鹹味未散",
+      "id": "850e0cd3-8e87-4843-aeda-681b7c9da22a",
+      "name": "最後一杯 · Ly Cuối",
+      "source": "Vị Muối Mặn — 鹹味未散/03 - 最後一杯 · Ly Cuối.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/vi-muoi-man/03-ly-cuoi.mp3"
+    },
+    {
+      "album": "Vị Muối Mặn — 鹹味未散",
+      "id": "70c48887-107d-4e61-ba35-e1ea82ba965c",
+      "name": "閉上眼就見到你 · Nhắm Mắt Là Thấy Em",
+      "source": "Vị Muối Mặn — 鹹味未散/04 - 閉上眼就見到你 · Nhắm Mắt Là Thấy Em.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/vi-muoi-man/04-nham-mat-la-thay-em.mp3"
+    },
+    {
+      "album": "Vị Muối Mặn — 鹹味未散",
+      "id": "a9139bcc-b017-4be1-a016-85abff90437b",
+      "name": "佔線中 · Máy Đang Bận",
+      "source": "Vị Muối Mặn — 鹹味未散/05 - 佔線中 · Máy Đang Bận.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/vi-muoi-man/04-may-dang-ban.mp3"
+    },
+    {
+      "album": "Vị Muối Mặn — 鹹味未散",
+      "id": "f16e1106-c044-4500-902b-73788c6a9286",
+      "name": "鹹味 · Vị Muối Mặn",
+      "source": "Vị Muối Mặn — 鹹味未散/06 - 鹹味 · Vị Muối Mặn.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/vi-muoi-man/05-vi-muoi-man.mp3"
+    },
+    {
+      "album": "Vị Muối Mặn — 鹹味未散",
+      "id": "a09bfa7a-bd45-4926-8742-bf907b8f00c9",
+      "name": "月光薄情 · Bạc Như Ánh Trăng",
+      "source": "Vị Muối Mặn — 鹹味未散/07 - 月光薄情 · Bạc Như Ánh Trăng.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/vi-muoi-man/06-bac-nhu-anh-trang.mp3"
+    },
+    {
+      "album": "Vị Muối Mặn — 鹹味未散",
+      "id": "21e9effc-9707-437c-a073-90c0bec1903e",
+      "name": "餘像 · Dư Ảnh",
+      "source": "Vị Muối Mặn — 鹹味未散/08 - 餘像 · Dư Ảnh.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/vi-muoi-man/07-du-anh.mp3"
+    },
+    {
+      "album": "Vị Muối Mặn — 鹹味未散",
+      "id": "9f18cd23-7166-44e5-ab7a-c1e2b8f9c0f3",
+      "name": "借火 · Mượn Lửa",
+      "source": "Vị Muối Mặn — 鹹味未散/09 - 借火 · Mượn Lửa.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/vi-muoi-man/08-muon-lua.mp3"
+    },
+    {
+      "album": "Cái Bàn Nhậu",
+      "id": "bd692a38-6568-4cc2-9195-cc1f06b4ab4c",
+      "name": "Là Cái Gzì Nào",
+      "source": "Cái Bàn Nhậu/01 - Là Cái Gzì Nào.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/cai-ban-nhau/01-la-cai-gzi-nao.mp3"
+    },
+    {
+      "album": "Cái Bàn Nhậu",
+      "id": "8d4dbcea-8725-4a7f-b5c9-518f2c195af7",
+      "name": "Lo Vợ La",
+      "source": "Cái Bàn Nhậu/02 - Lo Vợ La.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/cai-ban-nhau/02-lo-vo-la.mp3"
+    },
+    {
+      "album": "Cái Bàn Nhậu",
+      "id": "ae925461-79ec-4de8-991e-594e7b6333d7",
+      "name": "Cái ly đá cái ly đá",
+      "source": "Cái Bàn Nhậu/03 - Cái ly đá cái ly đá.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/cai-ban-nhau/03-cai-ly-da-cai-ly-da.mp3"
+    },
+    {
+      "album": "Cái Bàn Nhậu",
+      "id": "0aed4918-86b6-4d33-ad61-430d18045dfb",
+      "name": "Sầu Thừa Vừa Một Ly",
+      "source": "Cái Bàn Nhậu/04 - Sầu Thừa Vừa Một Ly.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/cai-ban-nhau/04-sau-thua-vua-mot-ly.mp3"
+    },
+    {
+      "album": "Cái Bàn Nhậu",
+      "id": "40faef41-9b1c-4b25-9bbc-f49436783e56",
+      "name": "Duyên—Hợp—Tan [Folk Remake]",
+      "source": "Cái Bàn Nhậu/05 - Duyên—Hợp—Tan [Folk Remake].mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/cai-ban-nhau/05-duyen-hop-tan-folk-remake.mp3"
+    },
+    {
+      "album": "Cái Bàn Nhậu",
+      "id": "5ee43099-6a9d-49d2-9f7c-144652da1438",
+      "name": "Bàn Chuyện",
+      "source": "Cái Bàn Nhậu/06 - Bàn Chuyện.mp3",
+      "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/cai-ban-nhau/06-ban-chuyen.mp3"
+    }
+  ],
+  "unmatched": [
+    {
+      "album": "MiTek · Way of Stars",
+      "id": "a03438fa-df97-4d68-917d-82b2f9c9086e",
+      "name": "[Way of STARS] -We are The Stars Tonight-D'Li",
+      "url": null
+    },
+    {
+      "album": "MiTek · Way of Stars",
+      "id": "6f0dfec6-8e3b-47cc-8d5f-bbddf941d67f",
+      "name": "Way of STAR — Master",
+      "url": null
+    },
+    {
+      "album": "MiTek · Way of Stars",
+      "id": "59b37b9a-9fe7-4c1a-9cc3-acce0a8a6377",
+      "name": "Gọi Tên Những Vì Sao",
+      "url": null
+    },
+    {
+      "album": "MiTek · Way of Stars",
+      "id": "5f686228-97f3-4c13-bd26-daac9b75b1cd",
+      "name": "Mitek-nista...",
+      "url": null
+    },
+    {
+      "album": "MiTek · Way of Stars",
+      "id": "e1ee21d5-f187-407c-b751-198c2a28c074",
+      "name": "Lovers Gonna Love (Electro House Edit)",
+      "url": null
+    },
+    {
+      "album": "Tôi ❤ Việt Nam",
+      "id": "f8628247-b5d2-4839-b501-8308976c1615",
+      "name": "HẸN ƯỚC BẮC NAM - Cover",
+      "url": null
+    },
+    {
+      "album": "Tôi ❤ Việt Nam",
+      "id": "9bd3da93-4f91-4053-a88e-8d09109d29d5",
+      "name": "Viết Tiếp Ước Mơ",
+      "url": null
+    },
+    {
+      "album": "Tôi ❤ Việt Nam",
+      "id": "4d8aa486-6064-41b7-a890-84c01cc2cc8e",
+      "name": "Vững Hậu Phương Vươn Tiền Tuyến...",
+      "url": null
+    },
+    {
+      "album": "Tôi ❤ Việt Nam",
+      "id": "93aab150-3285-4534-b71c-97c8d408371a",
+      "name": "Tiếng Vọng Non Sông",
+      "url": null
+    },
+    {
+      "album": "Tôi ❤ Việt Nam",
+      "id": "f6adf1b5-3075-46fe-8b85-fb6b7177b182",
+      "name": "Đất Trời Nước Nam",
+      "url": null
+    },
+    {
+      "album": "Tôi ❤ Việt Nam",
+      "id": "99752465-a1c0-4e7e-a3ac-563dd22bba1b",
+      "name": "Một Việt Nam!",
+      "url": null
+    },
+    {
+      "album": "Tôi ❤ Việt Nam",
+      "id": "4c3815e9-5c08-48d4-88b0-cfbcd1356c0b",
+      "name": "Một Việt Nam Vươn Cao",
+      "url": null
+    },
+    {
+      "album": "Tôi ❤ Việt Nam",
+      "id": "1e75456e-d27d-4e85-9afc-9c5d67cd50f0",
+      "name": "Khúc ca Việt tự hào",
+      "url": null
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "at": "2026-09-17T04:15:11.365Z",
+  "runtimeLegacyImports": 0,
+  "audioBase": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/",
+  "albums": 28,
+  "tracks": 226,
+  "unmapped": [
+    "[Way of STARS] -We are The Stars Tonight-D'Li",
+    "Way of STAR — Master",
+    "Gọi Tên Những Vì Sao",
+    "Mitek-nista...",
+    "Lovers Gonna Love (Electro House Edit)",
+    "HẸN ƯỚC BẮC NAM - Cover",
+    "Viết Tiếp Ước Mơ",
+    "Vững Hậu Phương Vươn Tiền Tuyến...",
+    "Tiếng Vọng Non Sông",
+    "Đất Trời Nước Nam",
+    "Một Việt Nam!",
+    "Một Việt Nam Vươn Cao",
+    "Khúc ca Việt tự hào"
+  ],
+  "gallery": 171,
+  "missingGallery": [],
+  "remoteMetadataPreferred": [
+    "Chuyện Của Trăng",
+    "Unplugged Vol.1",
+    "Lạ mà Quen",
+    "Lạ mà Quen",
+    "Tôi Hoạ Cả Thế Gian",
+    "Vị Muối Mặn — 鹹味未散"
+  ],
+  "sourceNote": "Public music metadata extracted once from local and fetched origin/main, latest remote metadata wins; local-only audio map additions retained. Gallery images only. Resume facts only; original UI/scripts not shipped."
+}

@@ -1,0 +1,1 @@
+{"name":"vuon-cua-li-fresh","private":true,"type":"module","engines":{"node":">=22.13"},"scripts":{"build:content":"node scripts/prepare-content.mjs","dev":"python3 -m http.server 8792 --bind 127.0.0.1 --directory dist","test":"node --test scripts/test-*.mjs"},"dependencies":{"@phosphor-icons/core":"2.1.1","sharp":"0.34.5"}}

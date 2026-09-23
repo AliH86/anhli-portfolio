@@ -1,0 +1,22 @@
+{
+  "createdAt": "2026-09-18T03:30:37.140441+00:00",
+  "runtimeFiles": 547,
+  "runtimeBytes": 32451732,
+  "archiveBytes": 32145185,
+  "archiveSha256": "53e6fb11ff553d9cdec36445588bacdca4b4b89d680c467c111e179fe3368cba",
+  "zipCRC": "passed",
+  "everyArchivedFileHash": "matched",
+  "baselineFiles": 539,
+  "changedExistingFiles": [
+    "app.js",
+    "garden-entrance.js",
+    "garden-ui.js",
+    "index.html"
+  ],
+  "removedFiles": [],
+  "existingArtAndDataPreserved": true,
+  "automatedTests": "43/43 passed",
+  "visualApproval": "pending user review",
+  "physicalDeviceQA": "pending",
+  "deployed": false
+}

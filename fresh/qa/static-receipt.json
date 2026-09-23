@@ -1,0 +1,13 @@
+{
+  "albums": 28,
+  "uniqueAlbumIds": 28,
+  "tracks": 226,
+  "mappedAudio": 213,
+  "gallery": 171,
+  "missingLocalReferences": [],
+  "desktopInitialFileBytes": 464836,
+  "mobileInitialFileBytes": 371050,
+  "allMediaBytesOnDisk": 22300710,
+  "httpStatus": 200,
+  "note": "File bytes, not browser transfer timing. Gallery and catalog are fetched on demand. Not a physical-device thermal benchmark."
+}

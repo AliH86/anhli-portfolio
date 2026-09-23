@@ -1,0 +1,133 @@
+{
+  "bundler": "esbuild",
+  "inputs": {
+    "js/vendor/three/three.core.js": {
+      "bytes": 1458113,
+      "imports": [],
+      "format": "esm"
+    },
+    "js/vendor/three/three.module.js": {
+      "bytes": 662772,
+      "imports": [
+        {
+          "path": "js/vendor/three/three.core.js",
+          "kind": "import-statement",
+          "original": "./three.core.js"
+        },
+        {
+          "path": "js/vendor/three/three.core.js",
+          "kind": "import-statement",
+          "original": "./three.core.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "js/vendor/three/BufferGeometryUtils.js": {
+      "bytes": 37724,
+      "imports": [
+        {
+          "path": "js/vendor/three/three.module.js",
+          "kind": "import-statement",
+          "original": "./three.module.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "js/vendor/three/SkeletonUtils.js": {
+      "bytes": 11547,
+      "imports": [
+        {
+          "path": "js/vendor/three/three.module.js",
+          "kind": "import-statement",
+          "original": "./three.module.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "js/vendor/three/GLTFLoader.js": {
+      "bytes": 117568,
+      "imports": [
+        {
+          "path": "js/vendor/three/three.module.js",
+          "kind": "import-statement",
+          "original": "./three.module.js"
+        },
+        {
+          "path": "js/vendor/three/BufferGeometryUtils.js",
+          "kind": "import-statement",
+          "original": "./BufferGeometryUtils.js"
+        },
+        {
+          "path": "js/vendor/three/SkeletonUtils.js",
+          "kind": "import-statement",
+          "original": "./SkeletonUtils.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "js/garden/sleeves.js": {
+      "bytes": 660,
+      "imports": [],
+      "format": "esm"
+    },
+    "js/garden/scene.js": {
+      "bytes": 12156,
+      "imports": [
+        {
+          "path": "js/vendor/three/three.module.js",
+          "kind": "import-statement",
+          "original": "../vendor/three/three.module.js"
+        },
+        {
+          "path": "js/vendor/three/GLTFLoader.js",
+          "kind": "import-statement",
+          "original": "../vendor/three/GLTFLoader.js"
+        },
+        {
+          "path": "js/vendor/three/BufferGeometryUtils.js",
+          "kind": "import-statement",
+          "original": "../vendor/three/BufferGeometryUtils.js"
+        },
+        {
+          "path": "js/garden/sleeves.js",
+          "kind": "import-statement",
+          "original": "./sleeves.js"
+        }
+      ],
+      "format": "esm"
+    }
+  },
+  "outputs": {
+    "js/garden/scene.runtime.js": {
+      "imports": [],
+      "exports": [
+        "createGarden"
+      ],
+      "entryPoint": "js/garden/scene.js",
+      "inputs": {
+        "js/vendor/three/three.core.js": {
+          "bytesInOutput": 214738
+        },
+        "js/vendor/three/three.module.js": {
+          "bytesInOutput": 355006
+        },
+        "js/vendor/three/BufferGeometryUtils.js": {
+          "bytesInOutput": 4695
+        },
+        "js/vendor/three/SkeletonUtils.js": {
+          "bytesInOutput": 438
+        },
+        "js/vendor/three/GLTFLoader.js": {
+          "bytesInOutput": 43591
+        },
+        "js/garden/sleeves.js": {
+          "bytesInOutput": 441
+        },
+        "js/garden/scene.js": {
+          "bytesInOutput": 7991
+        }
+      },
+      "bytes": 627020
+    }
+  }
+}

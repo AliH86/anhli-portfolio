@@ -1,0 +1,9 @@
+{
+  "approvedAt": "2026-09-18T03:36:34.154085+00:00",
+  "userRequest": "Tuyệt, lên live đi em. Rồi a check trên mobile/iphone cho",
+  "scope": "Publish the approved frozen V2.2 art review package; user performs physical iPhone checks afterward.",
+  "artApproved": true,
+  "publicationAuthorized": true,
+  "physicalDeviceQA": "pending user testing",
+  "supersedes": "Historical no-commit/no-push/no-deploy status in review documents."
+}

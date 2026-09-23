@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Be+Vietnam+Pro:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  body { margin: 0; font-family: 'Be Vietnam Pro', system-ui, sans-serif; color: #1E231C; }
+  a { color: #B86B4A; text-decoration: none; }
+  a:hover { color: #8E4F33; }
+  doc-page:not(:defined) { visibility: hidden; }
+</style>
+<script src="./doc-page.js"></script>
+</helmet>
+
+<doc-page margin="0.7in" style="--doc-hdr-h:42px;--doc-ftr-h:48px">
+
+  <div slot="header" style="display:flex;align-items:baseline;justify-content:space-between;padding-bottom:8px;border-bottom:1px solid rgba(30,35,28,.18);font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;color:rgba(30,35,28,.6)">
+    <span>ANH LI · THE DANDELION GARDEN</span>
+    <span>CODEX HANDOFF · {{ revision }}</span>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:10px;margin:0 0 34px">
+    <span style="font:500 11px 'JetBrains Mono',monospace;letter-spacing:.18em;color:#6B8F7A">V3 §15 · BUILD SPECIFICATION</span>
+    <h1 style="margin:0;font:400 40px/1.1 'Playfair Display',serif">Codex Handoff Pack</h1>
+    <p style="margin:0;max-width:34em;font:300 17px/1.6 'Be Vietnam Pro',sans-serif;color:rgba(30,35,28,.78)">State diagram · camera notes · asset sheet · animation notes · route behavior · interaction behavior. Đi kèm bản mockup 10 màn đã duyệt.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:6px">
+      <span style="font:500 12px 'JetBrains Mono',monospace;padding:5px 10px;border:1px solid rgba(30,35,28,.2);border-radius:4px">SOURCE · Mockup Round 10 Screens</span>
+      <span style="font:500 12px 'JetBrains Mono',monospace;padding:5px 10px;border:1px solid rgba(30,35,28,.2);border-radius:4px">LOCKS · L1–L13</span>
+      <span style="font:500 12px 'JetBrains Mono',monospace;padding:5px 10px;border:1px solid rgba(30,35,28,.2);border-radius:4px">12.09.2026</span>
+    </div>
+  </div>
+
+  <div style="background:#F1EFE7;border-left:3px solid #6B8F7A;padding:18px 22px;margin:0 0 34px;break-inside:avoid">
+    <p style="margin:0 0 8px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">QUYỀN QUYẾT ĐỊNH</p>
+    <p style="margin:0;font:300 16px/1.62 'Be Vietnam Pro',sans-serif">Codex sở hữu Blender · GLB · Three.js · shader · camera rig · lighting · performance · responsive · content integration. Codex <strong style="font-weight:600">không</strong> diễn giải lại visual language: màu, chữ, layout, nhãn nav, cấp độ hiện diện của host đều đã chốt ở mockup. Nghi ngờ chỗ nào thì hỏi, không tự suy diễn.</p>
+  </div>
+
+  <h2 style="margin:0 0 4px;font:400 26px/1.2 'Playfair Display',serif">1 · State diagram</h2>
+  <p style="margin:0 0 16px;font:300 16px/1.62 'Be Vietnam Pro',sans-serif;color:rgba(30,35,28,.8)">Một world, sáu state. GARDEN là hub và là đường về. Mọi state chuyển trực tiếp sang mọi state khác qua nav hoặc MAP — không có state nào là cul-de-sac, không có state nào chặn MAP.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0 0 14px;break-inside:avoid">
+    <div style="border:1px solid rgba(30,35,28,.18);border-radius:6px;padding:14px 16px">
+      <p style="margin:0 0 6px;font:500 12px 'JetBrains Mono',monospace;letter-spacing:.12em;color:#B86B4A">GARDEN</p>
+      <p style="margin:0;font:300 14.5px/1.55 'Be Vietnam Pro',sans-serif">Daylight. Chủ nhà hiện diện. Hotspot của 4 state còn lại nằm sẵn trong khung.</p>
+    </div>
+    <div style="border:1px solid rgba(30,35,28,.18);border-radius:6px;padding:14px 16px">
+      <p style="margin:0 0 6px;font:500 12px 'JetBrains Mono',monospace;letter-spacing:.12em;color:#B86B4A">MUSIC</p>
+      <p style="margin:0;font:300 14.5px/1.55 'Be Vietnam Pro',sans-serif">Blue hour ở Cái Sạp. Host rõ nhất. Play ở đây sinh ra mini-player toàn cục.</p>
+    </div>
+    <div style="border:1px solid rgba(30,35,28,.18);border-radius:6px;padding:14px 16px">
+      <p style="margin:0 0 6px;font:500 12px 'JetBrains Mono',monospace;letter-spacing:.12em;color:#B86B4A">SHOWS</p>
+      <p style="margin:0;font:300 14.5px/1.55 'Be Vietnam Pro',sans-serif">Sân trống + lớp sân khấu nhẹ. Không host. 3 Featured + Archive.</p>
+    </div>
+    <div style="border:1px solid rgba(30,35,28,.18);border-radius:6px;padding:14px 16px">
+      <p style="margin:0 0 6px;font:500 12px 'JetBrains Mono',monospace;letter-spacing:.12em;color:#B86B4A">VISUAL</p>
+      <p style="margin:0;font:300 14.5px/1.55 'Be Vietnam Pro',sans-serif">Góc làm việc, overcast. Host như working figure, nhỏ và lệch khỏi tâm.</p>
+    </div>
+    <div style="border:1px solid rgba(30,35,28,.18);border-radius:6px;padding:14px 16px">
+      <p style="margin:0 0 6px;font:500 12px 'JetBrains Mono',monospace;letter-spacing:.12em;color:#B86B4A">STORY</p>
+      <p style="margin:0;font:300 14.5px/1.55 'Be Vietnam Pro',sans-serif">Chiều muộn quanh nhà. About · career path · memory · family traces · cổng /sky.</p>
+    </div>
+    <div style="border:1px solid rgba(30,35,28,.18);border-radius:6px;padding:14px 16px">
+      <p style="margin:0 0 6px;font:500 12px 'JetBrains Mono',monospace;letter-spacing:.12em;color:#6B8F7A">MAP · overlay</p>
+      <p style="margin:0;font:300 14.5px/1.55 'Be Vietnam Pro',sans-serif">Không phải state: overlay phủ lên state đang mở, đóng lại là về đúng chỗ cũ.</p>
+    </div>
+  </div>
+
+  <table style="width:100%;border-collapse:collapse;margin:0 0 32px;font-family:'Be Vietnam Pro',sans-serif">
+    <thead>
+      <tr style="background:#EDEAE0">
+        <th style="text-align:left;padding:9px 11px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;border:1px solid rgba(30,35,28,.15)">TỪ</th>
+        <th style="text-align:left;padding:9px 11px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;border:1px solid rgba(30,35,28,.15)">SANG</th>
+        <th style="text-align:left;padding:9px 11px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;border:1px solid rgba(30,35,28,.15)">TRIGGER</th>
+        <th style="text-align:left;padding:9px 11px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;border:1px solid rgba(30,35,28,.15)">CAMERA</th>
+        <th style="text-align:left;padding:9px 11px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;border:1px solid rgba(30,35,28,.15)">GIỮ LẠI</th>
+      </tr>
+    </thead>
+    <tbody style="font:300 13.5px/1.5 'Be Vietnam Pro',sans-serif">
+      <tr><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Landing</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">GARDEN</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">“Bước vào vườn” hoặc 1.8s idle</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">dolly-in 1.2m</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">—</td></tr>
+      <tr style="background:#FAF9F5"><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">GARDEN</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">MUSIC</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">hotspot sạp / nav MUSIC</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">travel 1000ms + grade sang dusk</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">scroll pos</td></tr>
+      <tr><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">GARDEN</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">SHOWS</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">hotspot sân / nav SHOWS</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">travel 1100ms, host fade-out 40%</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">nhạc đang phát</td></tr>
+      <tr style="background:#FAF9F5"><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">SHOWS</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">/works/[slug]</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">chọn Featured / Archive item</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">world blur 12px, đứng yên</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">world state + camera</td></tr>
+      <tr><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">state nào cũng được</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">MAP</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">nút MAP / phím M</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">pull-back ortho 600ms</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">toàn bộ state</td></tr>
+      <tr style="background:#FAF9F5"><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">state nào cũng được</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">GARDEN</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">logo / nav GARDEN / Esc</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">travel về anchor gốc 900ms</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">nhạc đang phát</td></tr>
+      <tr><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">STORY</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">/sky</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">chapter Inner World (optional)</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">tilt lên trời 1400ms</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">nhạc đang phát</td></tr>
+      <tr style="background:#FAF9F5"><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">WebGL fail</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">/flat</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">tự động, không hỏi</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">không camera</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">route + nội dung</td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin:0 0 4px;font:400 26px/1.2 'Playfair Display',serif">2 · Fixed geography (L12)</h2>
+  <p style="margin:0 0 16px;font:300 16px/1.62 'Be Vietnam Pro',sans-serif;color:rgba(30,35,28,.8)">Đơn vị: mét, trục Y lên, gốc toạ độ ở tâm sân trống. Sáu thứ dưới đây <strong style="font-weight:600">không đổi qua mọi state</strong> — đây là bằng chứng duy nhất cho thấy các state là một nơi. Cần khác biệt thì đổi ánh sáng, góc camera, hoặc vật mọc thêm.</p>
+
+  <table style="width:100%;border-collapse:collapse;margin:0 0 32px;font-family:'Be Vietnam Pro',sans-serif">
+    <thead>
+      <tr style="background:#EDEAE0">
+        <th style="text-align:left;padding:9px 11px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;border:1px solid rgba(30,35,28,.15)">ANCHOR</th>
+        <th style="text-align:left;padding:9px 11px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;border:1px solid rgba(30,35,28,.15)">VỊ TRÍ (x, z)</th>
+        <th style="text-align:left;padding:9px 11px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;border:1px solid rgba(30,35,28,.15)">KÍCH THƯỚC</th>
+        <th style="text-align:left;padding:9px 11px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;border:1px solid rgba(30,35,28,.15)">GHI CHÚ</th>
+      </tr>
+    </thead>
+    <tbody style="font:300 13.5px/1.5 'Be Vietnam Pro',sans-serif">
+      <tr><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Nhà</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace">−14.0, −8.0</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">9 × 7 m, đỉnh mái 5.2 m</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Silhouette đơn giản, không sang trọng. Cửa hướng +z.</td></tr>
+      <tr style="background:#FAF9F5"><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Cái Sạp</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace">+11.0, +5.0</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">3.4 × 3.0 m, mái 2.6 m</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Nhỏ, cá nhân. Không phải shop bán hàng.</td></tr>
+      <tr><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Góc làm việc</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace">−3.0, +13.0</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">bàn 1.8 × 0.8 m</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Ngoài trời dưới tán cây. Có dùng, không bừa.</td></tr>
+      <tr style="background:#FAF9F5"><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Nhà kính</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace">+17.0, −12.0</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">6 × 4 m, cao 3.1 m</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Kính mờ, phát sáng nhẹ khi trời tối.</td></tr>
+      <tr><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Sân trống</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace">0, 0</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">bán kính 7 m</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Luôn trống. Lớp sân khấu SHOWS dựng đúng trên vùng này.</td></tr>
+      <tr style="background:#FAF9F5"><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Chân trời &amp; đồi xa</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace">z −120 → −180</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">cao 12–20 m</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Đường chân trời luôn ở 0.52–0.58 chiều cao khung.</td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin:0 0 4px;font:400 26px/1.2 'Playfair Display',serif">3 · Camera notes</h2>
+  <p style="margin:0 0 16px;font:300 16px/1.62 'Be Vietnam Pro',sans-serif;color:rgba(30,35,28,.8)">Cinematic anchor cho từng state: camera đi tới một khung đã dựng sẵn, không phải camera tự do. Orbit bị giới hạn vì host là sprite 2D (L3) — vượt biên yaw là lộ mép. Không WASD, không first-person.</p>
+
+  <table style="width:100%;border-collapse:collapse;margin:0 0 14px;font-family:'Be Vietnam Pro',sans-serif">
+    <thead>
+      <tr style="background:#EDEAE0">
+        <th style="text-align:left;padding:9px 11px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;border:1px solid rgba(30,35,28,.15)">STATE</th>
+        <th style="text-align:left;padding:9px 11px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;border:1px solid rgba(30,35,28,.15)">POSITION</th>
+        <th style="text-align:left;padding:9px 11px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;border:1px solid rgba(30,35,28,.15)">TARGET</th>
+        <th style="text-align:left;padding:9px 11px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;border:1px solid rgba(30,35,28,.15)">FOV</th>
+        <th style="text-align:left;padding:9px 11px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;border:1px solid rgba(30,35,28,.15)">YAW / PITCH</th>
+        <th style="text-align:left;padding:9px 11px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;border:1px solid rgba(30,35,28,.15)">MOTION</th>
+      </tr>
+    </thead>
+    <tbody style="font:300 13px/1.5 'JetBrains Mono',monospace">
+      <tr><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">GARDEN</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">18.0, 6.5, 26.0</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">−2.0, 1.6, 0</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">34°</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">±14° / −6→−12°</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">breathing 0.15m @ 14s</td></tr>
+      <tr style="background:#FAF9F5"><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">MUSIC</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">14.5, 2.2, 9.5</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">11.0, 1.4, 5.0</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">42°</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">±10° / −4→−9°</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">đứng yên; sway 0.08m khi đang phát</td></tr>
+      <tr><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">SHOWS</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">0.5, 3.4, 22.0</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">0, 2.2, 0</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">30°</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">±8° / −5→−8°</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">dolly-in 0.9m khi mở Featured</td></tr>
+      <tr style="background:#FAF9F5"><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">VISUAL</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">−2.5, 2.0, 17.5</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">−3.0, 1.2, 13.0</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">46°</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">±12° / −14→−20°</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">parallax theo con trỏ, biên độ 0.25m</td></tr>
+      <tr><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">STORY</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">−20.0, 3.0, 6.0</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">−14.0, 1.7, −8.0</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">36°</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">±10° / −5→−10°</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">drift ngang 1.6m theo chapter</td></tr>
+      <tr style="background:#FAF9F5"><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">MAP</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">0, 34.0, 30.0</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">0, 0, −2.0</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">ortho, frustum 48m</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">khoá / −42°</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">không orbit, không zoom</td></tr>
+    </tbody>
+  </table>
+
+  <div style="background:#F1EFE7;padding:16px 20px;margin:0 0 32px;border-radius:6px;break-inside:avoid">
+    <p style="margin:0 0 8px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">RIG RULES</p>
+    <ul style="margin:0;padding-left:18px;font:300 15px/1.62 'Be Vietnam Pro',sans-serif">
+      <li>Travel giữa hai anchor: 900–1200ms, <span style="font-family:'JetBrains Mono',monospace;font-size:13.5px">cubic-bezier(.22,.61,.36,1)</span>, đường bay là cung tròn quanh tâm sân — không cắt xuyên nhà.</li>
+      <li>Mobile: fov +6°, lùi 15%, yaw giảm còn 60%; không có free camera, chỉ tap-to-approach.</li>
+      <li>Host sprite luôn billboard theo yaw camera nhưng khoá pitch; trong lúc travel, đổi pose ở mốc 55% để không thấy sprite trượt.</li>
+      <li><span style="font-family:'JetBrains Mono',monospace;font-size:13.5px">prefers-reduced-motion</span>: bỏ travel, cắt cảnh crossfade 220ms; breathing và parallax tắt hoàn toàn.</li>
+    </ul>
+  </div>
+
+  <h2 style="margin:0 0 4px;font:400 26px/1.2 'Playfair Display',serif">4 · Asset sheet</h2>
+  <p style="margin:0 0 16px;font:300 16px/1.62 'Be Vietnam Pro',sans-serif;color:rgba(30,35,28,.8)">Tổng ngân sách: ≤ 145k tri desktop, ≤ 70k mobile. Texture KTX2/Basis, AO bake vào vertex color, không realtime shadow ngoài contact shadow của host và prop chính.</p>
+
+  <table style="width:100%;border-collapse:collapse;margin:0 0 14px;font-family:'Be Vietnam Pro',sans-serif">
+    <thead>
+      <tr style="background:#EDEAE0">
+        <th style="text-align:left;padding:9px 11px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;border:1px solid rgba(30,35,28,.15)">FILE</th>
+        <th style="text-align:left;padding:9px 11px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;border:1px solid rgba(30,35,28,.15)">TRI ≤</th>
+        <th style="text-align:left;padding:9px 11px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;border:1px solid rgba(30,35,28,.15)">TEXTURE</th>
+        <th style="text-align:left;padding:9px 11px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;border:1px solid rgba(30,35,28,.15)">LOAD</th>
+      </tr>
+    </thead>
+    <tbody style="font:300 13.5px/1.5 'Be Vietnam Pro',sans-serif">
+      <tr><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace;font-size:13px">garden_terrain.glb</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">28k</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">atlas_ground 2048</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">critical</td></tr>
+      <tr style="background:#FAF9F5"><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace;font-size:13px">house_exterior.glb</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">22k</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">atlas_build 2048</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">critical</td></tr>
+      <tr><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace;font-size:13px">sap_music.glb</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">18k</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">atlas_build 2048</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">critical</td></tr>
+      <tr style="background:#FAF9F5"><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace;font-size:13px">desk_corner.glb</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">16k</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">atlas_props 2048</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">critical</td></tr>
+      <tr><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace;font-size:13px">greenhouse.glb</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">14k</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">atlas_build 2048</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">critical</td></tr>
+      <tr style="background:#FAF9F5"><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace;font-size:13px">stage_light_layer.glb</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">12k</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">atlas_props 2048</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">lazy · SHOWS</td></tr>
+      <tr><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace;font-size:13px">props_family_traces.glb</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">8k</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">atlas_props 2048</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">lazy · STORY</td></tr>
+      <tr style="background:#FAF9F5"><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace;font-size:13px">veg_instanced.glb</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">3 LOD · 1.2k/inst</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">alpha 1024</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">critical · GPU instancing</td></tr>
+      <tr><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace;font-size:13px">anhli_host_sheet.png</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">sprite</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">4096×2048 · 6 pose × 2 state</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">critical · WebP fallback</td></tr>
+    </tbody>
+  </table>
+
+  <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0 0 32px;break-inside:avoid">
+    <div style="border:1px solid rgba(30,35,28,.18);border-radius:6px;padding:14px 16px">
+      <p style="margin:0 0 6px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.12em;color:#6B8F7A">HOST SPRITE (L3)</p>
+      <p style="margin:0;font:300 14.5px/1.55 'Be Vietnam Pro',sans-serif">Adult male, kính, hơi mủm mỉm, casual creative, trưởng thành. Line-art 2D, cao 1.74 m theo scale world, mỗi pose 620×1100 @2x. Bắt buộc: contact shadow, grading theo state, đặt cạnh prop 3D thật. Không chibi, không kawaii, không dán phẳng lên nền.</p>
+    </div>
+    <div style="border:1px solid rgba(30,35,28,.18);border-radius:6px;padding:14px 16px">
+      <p style="margin:0 0 6px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.12em;color:#6B8F7A">FAMILY TRACES (L7)</p>
+      <p style="margin:0;font:300 14.5px/1.55 'Be Vietnam Pro',sans-serif">V1 chỉ là dấu vết: khung ảnh, tranh con vẽ, vài đồ vật nhỏ, 3 chi tiết gợi ba con gái, 1 dấu vết gợi vợ, silhouette xa hoặc ánh đèn trong nhà. Chưa model người, chưa sprite, chưa thành navigation.</p>
+    </div>
+  </div>
+
+  <h2 style="margin:0 0 4px;font:400 26px/1.2 'Playfair Display',serif">5 · Animation notes</h2>
+  <table style="width:100%;border-collapse:collapse;margin:0 0 32px;font-family:'Be Vietnam Pro',sans-serif">
+    <thead>
+      <tr style="background:#EDEAE0">
+        <th style="text-align:left;padding:9px 11px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;border:1px solid rgba(30,35,28,.15)">LỚP</th>
+        <th style="text-align:left;padding:9px 11px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;border:1px solid rgba(30,35,28,.15)">HÀNH VI</th>
+        <th style="text-align:left;padding:9px 11px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;border:1px solid rgba(30,35,28,.15)">TIMING</th>
+      </tr>
+    </thead>
+    <tbody style="font:300 13.5px/1.5 'Be Vietnam Pro',sans-serif">
+      <tr><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">State transition</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Camera travel + light grade crossfade, đồng thời</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">900–1200ms · grade 400ms</td></tr>
+      <tr style="background:#FAF9F5"><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Hotspot idle</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Ring pulse rất nhẹ, không nhảy, không icon động</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">2400ms loop</td></tr>
+      <tr><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Hotspot hover</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Nhãn state hiện ra, vòng sáng đặc lại</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">160ms ease-out</td></tr>
+      <tr style="background:#FAF9F5"><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Cỏ &amp; bồ công anh</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Vertex-shader wind, biên độ theo state (SHOWS đứng nhất)</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">noise 0.18 Hz</td></tr>
+      <tr><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Ba Hạt (L10)</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Một hạt bay ngang khung; chạm thì mở, không chạm thì bay mất. Không gate, không badge, không nhắc lại.</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">9s drift · tối đa 3 lần/session</td></tr>
+      <tr style="background:#FAF9F5"><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Mini-player (L6)</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Thu nhỏ khi rời MUSIC, luôn có pause · mute · back to Music</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">morph 280ms</td></tr>
+      <tr><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">World clock</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Giờ thật của khách đổi ánh sáng nền; đêm làm /sky dễ thấy hơn nhưng không khoá gì</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">lerp khi load, không animate realtime</td></tr>
+      <tr style="background:#FAF9F5"><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Panel nội dung</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Trượt vào từ phải 32px + fade; world blur 12px phía sau</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">320ms</td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin:0 0 4px;font:400 26px/1.2 'Playfair Display',serif">6 · Route behavior</h2>
+  <p style="margin:0 0 16px;font:300 16px/1.62 'Be Vietnam Pro',sans-serif;color:rgba(30,35,28,.8)">Mọi route là URL thật, deep-link được, share được, back/forward đúng (L11). <span style="font-family:'JetBrains Mono',monospace;font-size:14px">/flat</span> và world đọc <strong style="font-weight:600">cùng một nguồn nội dung</strong> — một CMS collection, sửa một chỗ hai bên đổi theo.</p>
+
+  <table style="width:100%;border-collapse:collapse;margin:0 0 32px;font-family:'Be Vietnam Pro',sans-serif">
+    <thead>
+      <tr style="background:#EDEAE0">
+        <th style="text-align:left;padding:9px 11px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;border:1px solid rgba(30,35,28,.15)">ROUTE</th>
+        <th style="text-align:left;padding:9px 11px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;border:1px solid rgba(30,35,28,.15)">MỞ RA</th>
+        <th style="text-align:left;padding:9px 11px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;border:1px solid rgba(30,35,28,.15)">SSR / SEO</th>
+      </tr>
+    </thead>
+    <tbody style="font:300 13.5px/1.5 'Be Vietnam Pro',sans-serif">
+      <tr><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace;font-size:13px">/</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Landing → GARDEN</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">SSR hero + meta</td></tr>
+      <tr style="background:#FAF9F5"><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace;font-size:13px">/sap</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">MUSIC, chưa phát nhạc</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">SSR tracklist</td></tr>
+      <tr><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace;font-size:13px">/works</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">SHOWS · 3 Featured + Archive (L5)</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">SSR full list</td></tr>
+      <tr style="background:#FAF9F5"><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace;font-size:13px">/works/[slug]</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Full case (Brief · Creative Frame · Space · Moment · My Role) hoặc Short case</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">SSR + OG image</td></tr>
+      <tr><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace;font-size:13px">/visual</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">VISUAL · KV &amp; creative process</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">SSR</td></tr>
+      <tr style="background:#FAF9F5"><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace;font-size:13px">/story</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">STORY · About + journey + memory (L2)</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">SSR</td></tr>
+      <tr><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace;font-size:13px">/sky</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Inner World / Jyotiṣa — vào được mọi lúc</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">noindex tuỳ chọn</td></tr>
+      <tr style="background:#FAF9F5"><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace;font-size:13px">/flat</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Toàn bộ nội dung, không WebGL, in được, index được — cùng identity</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">SSR · canonical</td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin:0 0 4px;font:400 26px/1.2 'Playfair Display',serif">7 · Interaction behavior</h2>
+  <p style="margin:0 0 14px;font:300 16px/1.62 'Be Vietnam Pro',sans-serif;color:rgba(30,35,28,.8)">Vòng lõi: <span style="font-family:'JetBrains Mono',monospace;font-size:14px">SEE → CHOOSE → APPROACH → VIEW → RETURN</span>. Đây là work-life showroom, không phải exploration game (L8) — mọi bước phải gần như hiển nhiên.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0 0 14px;break-inside:avoid">
+    <div style="border:1px solid rgba(30,35,28,.18);border-radius:6px;padding:14px 16px">
+      <p style="margin:0 0 6px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.12em;color:#6B8F7A">DESKTOP</p>
+      <p style="margin:0;font:300 14.5px/1.55 'Be Vietnam Pro',sans-serif">Hover hiện nhãn state · click là đi · Esc về GARDEN · M mở MAP · ←/→ đổi chapter trong STORY và Featured trong SHOWS · Tab đi qua đúng thứ tự hotspot với focus ring rõ.</p>
+    </div>
+    <div style="border:1px solid rgba(30,35,28,.18);border-radius:6px;padding:14px 16px">
+      <p style="margin:0 0 6px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.12em;color:#6B8F7A">MOBILE</p>
+      <p style="margin:0;font:300 14.5px/1.55 'Be Vietnam Pro',sans-serif">Không free camera. Tap hotspot là tới thẳng anchor. Nav thu thành thanh dưới 5 mục, hit target ≥ 44px. Panel nội dung là sheet trượt lên, kéo xuống để về world.</p>
+    </div>
+  </div>
+
+  <ul style="margin:0 0 32px;padding-left:18px;font:300 15px/1.68 'Be Vietnam Pro',sans-serif">
+    <li>Nav luôn đúng 5 mục, đúng tên: GARDEN · MUSIC · SHOWS · VISUAL · STORY (L1). Hotspot trong world dùng đúng các nhãn này — khách không phải dịch hai hệ thống.</li>
+    <li>Không state nào được phép không mở được MAP. Đường về luôn hiển thị, không cần học.</li>
+    <li>Nhạc chỉ chạy khi khách bấm Play — không autoplay, không âm thanh nền tự động (L6).</li>
+    <li>Độ sâu khám phá tối đa 2 lớp: world → state → nội dung. Không có lớp thứ ba.</li>
+    <li>Panel nội dung không bao giờ chiếm hết khung: world còn thấy được ít nhất 28% chiều ngang ở desktop.</li>
+  </ul>
+
+  <h2 style="margin:0 0 4px;font:400 26px/1.2 'Playfair Display',serif">8 · Performance &amp; fallback</h2>
+  <table style="width:100%;border-collapse:collapse;margin:0 0 32px;font-family:'Be Vietnam Pro',sans-serif">
+    <thead>
+      <tr style="background:#EDEAE0">
+        <th style="text-align:left;padding:9px 11px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;border:1px solid rgba(30,35,28,.15)">TIER</th>
+        <th style="text-align:left;padding:9px 11px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;border:1px solid rgba(30,35,28,.15)">ĐIỀU KIỆN</th>
+        <th style="text-align:left;padding:9px 11px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;border:1px solid rgba(30,35,28,.15)">HẠ GÌ</th>
+      </tr>
+    </thead>
+    <tbody style="font:300 13.5px/1.5 'Be Vietnam Pro',sans-serif">
+      <tr><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">HIGH</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">desktop, GPU rời, ≥ 60fps thử nghiệm 3s đầu</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">đủ: instancing 3 LOD, contact shadow, bloom nhẹ</td></tr>
+      <tr style="background:#FAF9F5"><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">MEDIUM</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">laptop tích hợp, mobile cao cấp</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">DPR ≤ 1.5, bỏ bloom, cỏ LOD1, texture 1024</td></tr>
+      <tr><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">LOW</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">mobile phổ thông, &lt; 30fps kéo dài 5s</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">tắt wind shader, cắt cảnh thay travel, chỉ giữ 6 anchor tĩnh</td></tr>
+      <tr style="background:#FAF9F5"><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">NO WEBGL</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">không context / data-saver / crawler</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">chuyển <span style="font-family:'JetBrains Mono',monospace;font-size:13px">/flat</span> ngay, giữ nguyên route và nội dung</td></tr>
+    </tbody>
+  </table>
+
+  <sc-if value="{{ showDoNot }}" hint-placeholder-val="{{ true }}">
+  <div style="border:1px solid #B86B4A;border-radius:6px;padding:18px 22px;margin:0 0 30px;break-inside:avoid">
+    <p style="margin:0 0 10px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#B86B4A">KHÔNG ĐƯỢC LÀM</p>
+    <ul style="margin:0;padding-left:18px;font:300 15px/1.68 'Be Vietnam Pro',sans-serif">
+      <li>Không rig host 3D ở V1 — host là sprite 2D line-art, có chủ ý (L3).</li>
+      <li>Không đưa host vào SHOWS; để công việc tự nói (L4).</li>
+      <li>Không thêm zone 3D riêng cho JOURNEY — journey là chapter trong STORY (L2).</li>
+      <li>Không đổi vị trí sáu anchor cố định để “bố cục đẹp hơn” (L12).</li>
+      <li>Không thêm nav item thứ sáu, không đổi tên 5 mục, không dùng lại SOUND/SHOW (L1).</li>
+      <li>Không biến Ba Hạt thành achievement, badge, hay điều kiện mở khoá (L10).</li>
+      <li>Không model người trong gia đình ở V1 (L7).</li>
+      <li>Không làm <span style="font-family:'JetBrains Mono',monospace;font-size:13.5px">/flat</span> thành trang dự phòng xấu — cùng identity, cùng chữ, cùng màu (L11).</li>
+      <li>Không autoplay nhạc (L6). Không WASD, không first-person, không màn loading bắt chờ.</li>
+    </ul>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ showAnnex }}" hint-placeholder-val="{{ true }}">
+  <h2 style="margin:0 0 4px;font:400 26px/1.2 'Playfair Display',serif">Annex · Lock → spec map</h2>
+  <p style="margin:0 0 14px;font:300 16px/1.62 'Be Vietnam Pro',sans-serif;color:rgba(30,35,28,.8)">Tra ngược khi Codex cần biết một quyết định đến từ đâu.</p>
+  <table style="width:100%;border-collapse:collapse;margin:0 0 20px;font-family:'Be Vietnam Pro',sans-serif">
+    <thead>
+      <tr style="background:#EDEAE0">
+        <th style="text-align:left;padding:9px 11px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;border:1px solid rgba(30,35,28,.15)">LOCK</th>
+        <th style="text-align:left;padding:9px 11px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;border:1px solid rgba(30,35,28,.15)">NỘI DUNG</th>
+        <th style="text-align:left;padding:9px 11px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;border:1px solid rgba(30,35,28,.15)">MỤC ÁP DỤNG</th>
+      </tr>
+    </thead>
+    <tbody style="font:300 13.5px/1.5 'Be Vietnam Pro',sans-serif">
+      <tr><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace">L1</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Một vocabulary: GARDEN · MUSIC · SHOWS · VISUAL · STORY</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">§1 · §6 · §7</td></tr>
+      <tr style="background:#FAF9F5"><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace">L2</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">STORY gộp About + journey + memory</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">§1 · §6</td></tr>
+      <tr><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace">L3 · L4</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Host 2D trong world 3D; mức hiện diện theo state</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">§3 · §4</td></tr>
+      <tr style="background:#FAF9F5"><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace">L5</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">/works adaptive, hai cấp case study</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">§6</td></tr>
+      <tr><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace">L6</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Nhạc xuyên state, chỉ khi bấm Play</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">§1 · §5 · §7</td></tr>
+      <tr style="background:#FAF9F5"><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace">L7</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Family V1 = traces only</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">§4</td></tr>
+      <tr><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace">L8</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Showroom, không phải game: SEE → CHOOSE → APPROACH → VIEW → RETURN</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">§7</td></tr>
+      <tr style="background:#FAF9F5"><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace">L10</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Ba Hạt optional; world clock là lớp sống</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">§5</td></tr>
+      <tr><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace">L11</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Route thật; /flat và world cùng nguồn nội dung</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">§6 · §8</td></tr>
+      <tr style="background:#FAF9F5"><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace">L12</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Sáu anchor không đổi</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">§2 · §3</td></tr>
+      <tr><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15);font-family:'JetBrains Mono',monospace">L13</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">Playfair Display · Be Vietnam Pro · JetBrains Mono; palette earthy warm calm</td><td style="padding:8px 11px;border:1px solid rgba(30,35,28,.15)">toàn bộ lớp UI</td></tr>
+    </tbody>
+  </table>
+  </sc-if>
+
+  <div slot="footer" style="display:flex;align-items:baseline;justify-content:space-between;padding-top:8px;border-top:1px solid rgba(30,35,28,.18);font:400 11px 'JetBrains Mono',monospace;color:rgba(30,35,28,.55)">
+    <span>Approved design = mockup 10 màn + tài liệu này. Ngoài phạm vi này, hỏi trước khi làm.</span>
+    <span>{{ revision }}</span>
+  </div>
+
+</doc-page>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;revision&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;HANDOFF v1 · 12.09.2026&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showDoNot&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;showAnnex&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;}}">
+class Component extends DCLogic {
+  componentDidMount() {
+    // doc-page measures its slotted header/footer once, before the DC streams them in;
+    // re-apply the real heights so the print spacers actually reserve space.
+    requestAnimationFrame(() => {
+      const page = document.querySelector('doc-page');
+      if (!page) return;
+      const h = page.querySelector('[slot="header"]');
+      const f = page.querySelector('[slot="footer"]');
+      if (h) page.style.setProperty('--doc-hdr-h', Math.ceil(h.getBoundingClientRect().height) + 18 + 'px');
+      if (f) page.style.setProperty('--doc-ftr-h', Math.ceil(f.getBoundingClientRect().height) + 18 + 'px');
+    });
+  }
+  renderVals() {
+    return {
+      revision: this.props.revision ?? 'HANDOFF v1 · 12.09.2026',
+      showDoNot: this.props.showDoNot ?? true,
+      showAnnex: this.props.showAnnex ?? true,
+    };
+  }
+}
+</script>
+</body>
+</html>

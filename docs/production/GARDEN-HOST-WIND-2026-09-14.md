@@ -1,0 +1,13 @@
+# Host1.70m + meadow wind · 14 September 2026
+
+User said the imagery otherwise looks good; asked to check host1.7m and add grasses/dandelions with a light breeze. Implemented only this Garden visual/motion scope.
+
+Calibration: source matte1122×1402, green-channel alphaTest threshold133, occupied rows63–1350, visible fraction0.9186875892. Prior full-plane1.94m corresponded to a visible1.782253923m, not exactly1.70m. New plane1.850465839m gives visible1.70m. Source RGB+mask unchanged. The host felt small because of camera distance; moved the rendering anchor from[7.8,-1.5241,13] to[9.4,-1.0660,16.2] with terrain raycast and0.012m ground offset. Arrival distance17.75→14.15m; mobile9.08→5.63m. Fresh transparent native renders2560×1440/1080×1920 preserve source illustration and contact shadow. House/stall/greenhouse anchors and scene backgrounds are unchanged. This uses authored 3D camera/terrain calibration; generated photographic scenery is not surveyed geometry. Original 3D QA viewer remains historical; new capture script/receipt defines the current 2.5D host.
+
+Runtime assets under assets/garden/production/stills/2026-09-14-wind/, capture script scripts/capture-garden-host-170.mjs, exact metrics in host-scale-receipt.json. Source versions preserved.
+
+New built-in imagegen4-column photographic meadow atlas: slender grass, golden seed spikes and dandelion globes. Original RGB black backing retained; CSS screen blend composites it without rewriting pixels.10 clusters on desktop,5 on mobile; root transforms with7.8–12.1s staggered periods, restrained rotation/skew. Foreground has slight softness, a few smaller clusters enrich meadow edges. These are independent added clusters, not animation of every pre-existing tree or baked leaf. Motion respects the existing pause button, reduced-motion and route/visibility stop. Text/player unchanged.
+
+View generator switched host references and inserts wind clusters; CSS added wind layer.8 routes regenerated. scripts/test-garden-motion.mjs now writes docs/qa/garden-wind-2026-09-14/ and passed8 behavior checks with no page errors, including exact visible-height math, wind time progression/staggering, pause, reduced motion, route state, grounded host/backdrop transforms, fixed text and touch layout. Inspected desktop and mobile screenshots. Physical-device profiling remains untested.
+
+Prompt: docs/production/GARDEN-WIND-PROMPT-2026-09-14.md. Asset provenanceJSON saved. Preview http://127.0.0.1:8784/; reload existing tab, avoid spawning more preview tabs. No commit/push/deployment. Mixed existing changes and remote music work remain preserved.

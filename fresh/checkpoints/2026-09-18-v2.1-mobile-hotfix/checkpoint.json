@@ -1,0 +1,21 @@
+{
+  "createdAt": "2026-09-17T18:34:15.940416+00:00",
+  "baselineRelease": "3b80fa7d4159cb4b5e75c3877aba97047da7940d",
+  "files": 507,
+  "runtimeBytes": 31319758,
+  "zipSha256": "9898f07e080589100def7bbff6de1b5345738ae058b78c8f23fb5f50aab10874",
+  "status": "local QA complete; release preflight pending",
+  "published": false,
+  "changes": [
+    "garden-v2/app.js",
+    "garden-v2/assets/layers/canopy-alpha.webp",
+    "garden-v2/garden-entrance.js",
+    "garden-v2/garden-life.js",
+    "garden-v2/garden-lyrics.js",
+    "garden-v2/garden-v21.css",
+    "garden-v2/garden-wind.js",
+    "garden-v2/index.html",
+    "index.html"
+  ],
+  "evidence": "fresh/qa/v2.1-mobile-hotfix-2026-09-18"
+}

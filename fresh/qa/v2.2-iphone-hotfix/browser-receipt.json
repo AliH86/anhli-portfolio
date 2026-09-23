@@ -1,0 +1,48 @@
+{
+  "testedAt": "2026-09-18T04:00:00.904749+00:00",
+  "engine": "Codex in-app Chromium browser; not physical Safari",
+  "physicalSafariReproduced": false,
+  "checks": {
+    "directMusicRoute": "passed",
+    "dailyToMusicReopen": "passed",
+    "phone394x710": {
+      "roomTop": 100,
+      "roomBottom": 698,
+      "trackCount": 12,
+      "trackBodyHeight": 289.3,
+      "transportTop": 582,
+      "transportBottom": 678
+    },
+    "lastRow": {
+      "scrollTop": 368.5,
+      "bottom": 578.2,
+      "transportTop": 582
+    },
+    "landscape844x390": {
+      "queueTop": 8,
+      "queueBottom": 382,
+      "transportBottom": 356
+    },
+    "small360x600": {
+      "queueBottom": 588,
+      "trackBodyHeight": 187.3,
+      "transportBottom": 568,
+      "horizontalOverflow": false
+    },
+    "gardenWithMiniPlayer": {
+      "noteBottom": 509,
+      "miniTop": 525,
+      "miniBottom": 622,
+      "navTop": 630,
+      "overlap": false
+    },
+    "audio": {
+      "count": 1,
+      "playingTime": 38.689503,
+      "pausedAtEnd": true
+    }
+  },
+  "consoleErrorsAndWarnings": [],
+  "automatedTests": "43/43 passed",
+  "physicalIPhoneRetest": "pending user"
+}

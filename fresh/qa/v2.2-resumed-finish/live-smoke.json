@@ -1,0 +1,33 @@
+{
+  "url": "https://alih86.github.io/anhli-portfolio/?v=22-garden2#music",
+  "checks": {
+    "audioCount": 1,
+    "audioPaused": true,
+    "lastRow": {
+      "bottom": 578.1953125,
+      "height": 54,
+      "left": 35,
+      "right": 359,
+      "top": 524.1953125,
+      "width": 324,
+      "x": 35,
+      "y": 524.1953125
+    },
+    "queue": {
+      "bottom": 698,
+      "height": 598,
+      "left": 10,
+      "right": 384,
+      "top": 100,
+      "width": 374,
+      "x": 10,
+      "y": 100
+    },
+    "rows": 12,
+    "viewport": [
+      394,
+      710
+    ]
+  },
+  "console": []
+}

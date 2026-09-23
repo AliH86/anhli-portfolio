@@ -1,0 +1,31 @@
+{
+  "date": "2026-09-17",
+  "method": "Manual CUA in-app browser interaction, AX state and screenshots; not an automated test suite",
+  "viewportsVisuallyChecked": [
+    "1440x900",
+    "390x844",
+    "889x1150"
+  ],
+  "observed": [
+    "Garden shows three destinations; portrait composition and hotspot clamping retain reachable buttons.",
+    "Album selection: audio paused, src null, currentTime zero before Play.",
+    "Có Ai Nghe Không: actual Play changed status to playing and elapsed time advanced to 0:14.",
+    "Quên Vầng Trăng Thề: audio readyState 4, paused false, currentTime 88.198.",
+    "Closing music drawer while playing retains playing mini-player; mini pause changes back to Play.",
+    "Three consecutive album changes resolve to the final selection with Play still required.",
+    "Mobile 390x844 selected-album Play and seek appear within viewport.",
+    "Gallery opens original image 1, next changes to image 2; Escape closes lightbox then gallery.",
+    "Profile shows five sourced résumé roles and contact email.",
+    "Motion switch handled a click; reduced-motion and hidden-tab rules also inspected in source.",
+    "All-five-unmapped MiTek album displays disabled track controls and disabled Play.",
+    "Browser console logs returned no warnings or errors during the checked flows."
+  ],
+  "notVerified": [
+    "Physical-phone thermal or battery measurements",
+    "Playback of all 213 mapped URLs",
+    "Slow-network and injected network-failure test",
+    "User art approval",
+    "Complete accessibility audit and cross-browser matrix"
+  ],
+  "shellProbeNote": "qa/audio-network.json records six 403 responses from a separate shell probe; browser playback succeeded. Do not equate the shell result to production unavailability."
+}

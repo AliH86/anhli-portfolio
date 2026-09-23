@@ -1,0 +1,22 @@
+{
+  "version": "2.2",
+  "expectedAlbums": 26,
+  "expectedTracks": 213,
+  "libraryPathFromHome": "Library/Mobile Documents/com~apple~CloudDocs/Downloads/My Suno_music",
+  "removedAlbums": [
+    {
+      "id": "1c504bd2-2249-4fca-931a-f1c992581a25",
+      "name": "MiTek · Way of Stars",
+      "reason": "Absent from current canonical audio library; no track has a source file or audio mapping."
+    },
+    {
+      "id": "df0c36ec-4afd-4760-9aa3-3b05350a1b87",
+      "name": "Tôi ❤ Việt Nam",
+      "reason": "Absent from current canonical audio library; no track has a source file or audio mapping."
+    }
+  ],
+  "unpublishedLibraryFolders": [
+    "TẾT Ngọ Sum Vầy '26"
+  ],
+  "note": "Existing hidden client-job content is not promoted. Two extra source files in Di Khap are duplicate title copies. No legacy metadata merge or fallback."
+}

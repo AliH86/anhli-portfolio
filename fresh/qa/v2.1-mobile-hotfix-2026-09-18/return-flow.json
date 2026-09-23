@@ -1,0 +1,18 @@
+[
+  {
+    "name": "laptop",
+    "pass": true,
+    "before": 0.513335,
+    "after": 1.37183,
+    "defaultPlaylistHidden": true,
+    "reopenAndEscape": true
+  },
+  {
+    "name": "phone",
+    "pass": true,
+    "before": 0.515676,
+    "after": 1.374217,
+    "defaultPlaylistHidden": true,
+    "reopenAndEscape": true
+  }
+]

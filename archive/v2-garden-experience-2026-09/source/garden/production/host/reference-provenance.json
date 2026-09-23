@@ -1,0 +1,22 @@
+[
+  {
+    "file": "user-style-reference-1.png",
+    "source": "/private/var/folders/7x/mn81flk51xz9t5ytg6bz1x_w0000gn/T/TemporaryItems/com.apple.Photos.NSItemProvider/uuid=444EC0F1-5E72-4693-AA13-79D69EE20F4E&code=001&library=1&type=1&mode=1&loc=true&cap=true&keywords=true&provenance=false.png/81866FC4-1876-4E41-B5C4-9097D4C80BA7.png",
+    "sha256": "aa0eb7524bd0b595511f4d9224ead2f09065991827bee8f2d94533e22dcc54e8",
+    "mode": "RGB",
+    "size": [
+      1122,
+      1402
+    ]
+  },
+  {
+    "file": "user-style-reference-2.png",
+    "source": "/private/var/folders/7x/mn81flk51xz9t5ytg6bz1x_w0000gn/T/TemporaryItems/com.apple.Photos.NSItemProvider/uuid=959CC820-409D-4B8D-81B0-E5908F936AA5&code=001&library=1&type=1&mode=1&loc=true&cap=true&keywords=true&provenance=false.png/50FE22FF-49DD-4265-85BF-58080260A94B.png",
+    "sha256": "f72de0a84661a80d44e648cf376addd13bcf70d0110b1955c3b4fde57b99b4b2",
+    "mode": "RGB",
+    "size": [
+      1254,
+      1254
+    ]
+  }
+]

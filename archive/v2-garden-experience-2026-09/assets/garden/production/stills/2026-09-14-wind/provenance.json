@@ -1,0 +1,21 @@
+{
+  "tool": "built-in image_gen for meadow atlas; native Three.js rendering for host layers",
+  "atlas_source": "/Users/alihuynh/.codex/generated_images/01a09dac-4090-76e3-877f-eb1b3106b2cd/exec-e07c8dca-62d0-4f72-a391-e1a00a62e0b8.png",
+  "prompt": "docs/production/GARDEN-WIND-PROMPT-2026-09-14.md",
+  "host_calibration": "host-scale-receipt.json",
+  "host_render_script": "scripts/capture-garden-host-170.mjs",
+  "files": {
+    "meadow-wind-atlas.png": {
+      "bytes": 1291295,
+      "sha256": "92fe15d9f2cfec03277daee78c3535f121d25211e25efd021b05acdb20a7c678"
+    },
+    "mobile-host-170.png": {
+      "bytes": 145317,
+      "sha256": "ba0105e96cbb988cbb012540a441d78c78ab2dd193a72de3341b1ecfcbb5d113"
+    },
+    "arrival-host-170.png": {
+      "bytes": 109906,
+      "sha256": "81c73b544f8cc0852d51242b6649baf8e5bd8af88b062d3785e4068e2c6f1994"
+    }
+  }
+}

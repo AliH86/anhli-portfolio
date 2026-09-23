@@ -1,0 +1,24 @@
+{
+  "at": "2026-09-18T02:37:18.819Z",
+  "source": "fresh/content",
+  "legacyImports": 0,
+  "albums": 26,
+  "tracks": 213,
+  "playable": 213,
+  "unmapped": [],
+  "gallery": 171,
+  "videos": 18,
+  "verifiedLocalFiles": 213,
+  "removedStaleAlbums": [
+    {
+      "id": "1c504bd2-2249-4fca-931a-f1c992581a25",
+      "name": "MiTek · Way of Stars",
+      "reason": "Absent from current canonical audio library; no track has a source file or audio mapping."
+    },
+    {
+      "id": "df0c36ec-4afd-4760-9aa3-3b05350a1b87",
+      "name": "Tôi ❤ Việt Nam",
+      "reason": "Absent from current canonical audio library; no track has a source file or audio mapping."
+    }
+  ]
+}

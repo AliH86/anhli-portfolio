@@ -1,0 +1,94 @@
+[
+  {
+    "name": "garden",
+    "taskSeconds": 0.113571,
+    "running": [
+      {
+        "target": "lantern-light lantern-house",
+        "name": "lantern-flicker",
+        "visibility": "visible",
+        "opacity": "0.696168"
+      },
+      {
+        "target": "lantern-light lantern-stall",
+        "name": "lantern-flicker",
+        "visibility": "visible",
+        "opacity": "0.79203"
+      },
+      {
+        "target": "pond-glint",
+        "name": "water-breath",
+        "visibility": "visible",
+        "opacity": "0.4"
+      },
+      {
+        "target": "host-sprite",
+        "name": "host-life",
+        "visibility": "visible",
+        "opacity": "1"
+      },
+      {
+        "target": "habitat-firefly",
+        "name": "WAAPI",
+        "visibility": "visible",
+        "opacity": "0.167744"
+      },
+      {
+        "target": "garden-sprig sprig-house",
+        "name": "WAAPI",
+        "visibility": "visible",
+        "opacity": "0.85"
+      },
+      {
+        "target": "garden-sprig sprig-stall",
+        "name": "WAAPI",
+        "visibility": "visible",
+        "opacity": "0.85"
+      },
+      {
+        "target": "canopy-frond",
+        "name": "WAAPI",
+        "visibility": "visible",
+        "opacity": "1"
+      },
+      {
+        "target": "habitat-firefly",
+        "name": "WAAPI",
+        "visibility": "visible",
+        "opacity": "0.330857"
+      },
+      {
+        "target": "habitat-firefly",
+        "name": "WAAPI",
+        "visibility": "visible",
+        "opacity": "0.253665"
+      },
+      {
+        "target": "habitat-firefly",
+        "name": "WAAPI",
+        "visibility": "visible",
+        "opacity": "0.463062"
+      },
+      {
+        "target": "habitat-firefly",
+        "name": "WAAPI",
+        "visibility": "visible",
+        "opacity": "0.529101"
+      }
+    ],
+    "deck": null
+  },
+  {
+    "name": "music",
+    "taskSeconds": 0.0010150000000000159,
+    "running": [],
+    "deck": {
+      "overflowY": "auto",
+      "client": 263,
+      "scroll": 456
+    }
+  },
+  {
+    "touchAfter": 191
+  }
+]

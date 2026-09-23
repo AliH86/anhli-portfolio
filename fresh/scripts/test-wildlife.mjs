@@ -1,0 +1,19 @@
+import {readFileSync} from 'node:fs';import vm from 'node:vm';import test from 'node:test';import assert from 'node:assert/strict';
+const source=readFileSync(new URL('../dist/garden-wildlife.js',import.meta.url),'utf8').replaceAll('export ','');
+function fixture({random=0,portrait=false}={}){
+ const children=[],timers=new Map(),active=new Set();let id=0,now=0,maxLights=0;
+ function schedule(fn,delay){const n=++id;timers.set(n,{fn,at:now+delay});return n;}
+ const create=()=>({dataset:{},children:[],hidden:false,style:{setProperty(){}},setAttribute(){},append(e){this.children.push(e);},replaceChildren(){this.children=[];},remove(){this.hidden=true;},animate(frames,options){
+  const a={frames,options,onfinish:null,cancel(){clearTimeoutId(t);active.delete(a);},commitStyles(){},node:this};this.motion=a;active.add(a);maxLights=Math.max(maxLights,[...active].filter(x=>x.node.className==='habitat-firefly').length);const t=schedule(()=>{a.onfinish?.();},options.duration);return a;
+ }});
+ function clearTimeoutId(n){timers.delete(n);}
+ const world={getBoundingClientRect:()=>({width:portrait?390:1440,height:portrait?844:900}),append(e){children.push(e);}};
+ const math=Object.create(Math);math.random=()=>random;
+ const sandbox=vm.createContext({document:{createElement:create},Math:math,Map,Set,matchMedia:()=>({matches:portrait}),ResizeObserver:class{observe(){}disconnect(){}},setTimeout:schedule,clearTimeout:clearTimeoutId});vm.runInContext(source,sandbox);const wildlife=sandbox.initWildlife({world});
+ function tick(ms){const end=now+ms;for(let guard=0;guard<10000;guard++){const next=[...timers].sort((a,b)=>a[1].at-b[1].at)[0];if(!next||next[1].at>end)break;now=next[1].at;timers.delete(next[0]);next[1].fn();}now=end;}
+ return {children,timers,active,wildlife,tick,sandbox,get maxLights(){return maxLights;}};
+}
+test('no residents before entrance; sparrows stay in a small perch group',()=>{const f=fixture();f.wildlife.setPhase('day');f.tick(30000);assert.equal(f.children.filter(e=>e.dataset.species).length,0);f.wildlife.setBlocked(false);f.tick(7000);const birds=f.children.filter(e=>e.dataset.species);assert.equal(birds.length,2);assert.ok(birds.every(e=>e.dataset.species==='sparrow'));assert.notEqual(birds[0].motion.frames[0].transform,birds[1].motion.frames[0].transform);f.wildlife.destroy();assert.equal(f.active.size,0);assert.equal(f.timers.size,0);});
+test('owl remains over a minute, prepares, then makes a short local departure',()=>{const f=fixture();f.wildlife.setPhase('night');f.wildlife.setBlocked(false);f.tick(88000);const owl=f.children.find(e=>e.dataset.species==='owl');assert.equal(owl.hidden,false);f.tick(1000);assert.equal(owl.dataset.state,'prepare');f.tick(650);assert.equal(owl.dataset.state,'flying');assert.equal(owl.motion.options.duration,2200);f.tick(2200);assert.equal(owl.hidden,true);f.wildlife.destroy();});
+for(const portrait of [false,true])test(`firefly candidates and simultaneous lights stay bounded (${portrait?'portrait':'desktop'})`,()=>{const f=fixture({portrait});f.wildlife.setPhase('night');f.wildlife.setBlocked(false);f.tick(180000);assert.equal(f.children.find(e=>e.className==='firefly-habitat').children.length,portrait?12:16);assert.equal(f.maxLights,portrait?6:8);f.wildlife.setBlocked(true);assert.equal(f.active.size,0);assert.equal(f.timers.size,0);f.wildlife.destroy();});
+test('phase changes cancel stale animations and visits never repeat the same species',()=>{const f=fixture();f.wildlife.setPhase('day');f.wildlife.setBlocked(false);f.tick(4500);const bird=f.children.find(e=>e.dataset.species);const stale=bird.motion.onfinish;f.wildlife.setPhase('night');assert.equal(bird.hidden,true);stale();f.wildlife.setBlocked(true);assert.equal(f.timers.size,0);assert.notEqual(f.sandbox.chooseVisit('night','owl',()=>0),'owl');assert.notEqual(f.sandbox.chooseVisit('day','sparrow',()=>0),'sparrow');f.wildlife.destroy();});

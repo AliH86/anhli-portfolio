@@ -1,0 +1,28 @@
+{
+  "dailyBefore": {
+    "date": "2026-09-17",
+    "imageLoaded": true,
+    "message": "Bạn đang rời khỏi một điều không còn phù hợp nữa — một công việc, một mối quan hệ — để tìm điều có ý nghĩa hơn. Đây là can đảm, không phải bỏ cuộc.",
+    "name": "Hạt Rời Dòng Đã Cạn",
+    "title": "Rời Điều Không Còn Hợp"
+  },
+  "dailyAfterReload": {
+    "date": "2026-09-17",
+    "imageLoaded": true,
+    "message": "Bạn đang rời khỏi một điều không còn phù hợp nữa — một công việc, một mối quan hệ — để tìm điều có ý nghĩa hơn. Đây là can đảm, không phải bỏ cuộc.",
+    "name": "Hạt Rời Dòng Đã Cạn",
+    "title": "Rời Điều Không Còn Hợp"
+  },
+  "sameMessage": true,
+  "sameCard": true,
+  "mainLogs": [],
+  "testLogs": [],
+  "checks": [
+    "Heart persists after reload; test heart removed",
+    "Audio progressed from 3.3 to 48.2 seconds; vinyl transform changed; pause stopped both",
+    "Mobile 390x844 pin detail and daily reading checked",
+    "Tablet 820x1180 and landscape 844x390: no overflow",
+    "Night owl perched on fence; fireflies near pond",
+    "Vimeo iframe blank; source link available; external playback not certified"
+  ]
+}

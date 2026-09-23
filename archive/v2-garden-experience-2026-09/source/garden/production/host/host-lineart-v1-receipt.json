@@ -1,0 +1,20 @@
+{
+  "file": "host-lineart-v1.png",
+  "generator": "built-in imagegen",
+  "source": "/Users/alihuynh/.codex/generated_images/01a09a1f-4e4c-7d43-969b-118d4e711ef6/exec-adb405c9-ba88-4efa-935f-445cb996242e.png",
+  "prompt": "host-lineart-v1-prompt.txt",
+  "references": [
+    "user-style-reference-1.png",
+    "user-style-reference-2.png"
+  ],
+  "sha256": "2be0843b031c6ad124bbe5b456226bad9a8d3fe62d50a1e5fba06638c7927c39",
+  "dimensions": [
+    1122,
+    1402
+  ],
+  "mode": "RGB",
+  "transparent": false,
+  "status": "User-directed simple black-and-white host candidate. White-background source, not yet a runtime sprite.",
+  "visualReview": "Glasses, simplified friendly face, sparse linework, black shirt, white trousers, complete body and shoes. No photographic textures.",
+  "supersedes": "Earlier coloured realistic host candidates are rejected by user style correction; do not use them."
+}

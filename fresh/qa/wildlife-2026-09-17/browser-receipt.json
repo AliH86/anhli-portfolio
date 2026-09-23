@@ -1,0 +1,61 @@
+{
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "dom": {
+    "body": {
+      "ambientEnabled": "false",
+      "ambientSound": "quiet",
+      "audioState": "paused",
+      "dayMode": "night",
+      "dayPhase": "night",
+      "playing": "false",
+      "room": "",
+      "still": "false"
+    },
+    "overflow": false,
+    "refreshButton": 0,
+    "removedDecor": 0,
+    "visitors": [
+      {
+        "hidden": true,
+        "species": "dragonfly",
+        "state": "hovering"
+      },
+      {
+        "hidden": false,
+        "species": "owl",
+        "state": "perched"
+      },
+      {
+        "hidden": false,
+        "species": "firefly",
+        "state": "hovering"
+      },
+      {
+        "hidden": false,
+        "species": "firefly",
+        "state": "hovering"
+      },
+      {
+        "hidden": true,
+        "species": "cricket",
+        "state": "departing"
+      },
+      {
+        "hidden": true,
+        "species": "bat",
+        "state": "flying"
+      }
+    ]
+  },
+  "logs": [],
+  "checks": [
+    "Desktop: separated sparrow perches; sound on landing",
+    "Mobile 390x844: day/night, full-width album introduction, no horizontal overflow",
+    "Tablet 820x1180: no horizontal overflow, corrected scene boundary",
+    "Landscape 844x390: controls, player and balloon within viewport",
+    "Music continued through tray close, lighting and sound controls"
+  ]
+}

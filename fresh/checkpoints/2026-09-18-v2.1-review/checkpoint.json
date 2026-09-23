@@ -1,0 +1,15 @@
+{
+  "createdAt": "2026-09-17T17:34:40.803111+00:00",
+  "status": "four requested refinements complete locally; awaiting user review",
+  "baselineCheckpoint": "2026-09-17-v2.1-local",
+  "baselineRelease": "64f76b313c67d6345cae48eaa87f66a244bce07b",
+  "runtime": "fresh/dist",
+  "files": 506,
+  "runtimeBytes": 31046470,
+  "zipBytes": 30840966,
+  "zipSha256": "26a68503a4b23fc46e835069254f2c2dd6f91a36e3f78c4c7240065c95ad3a2d",
+  "wrapup": "docs/production/V2.1-LOCAL-WRAPUP-2026-09-17.md",
+  "evidence": "fresh/qa/v2.1-review-2026-09-18",
+  "userApproval": "rest of V2.1 accepted; four follow-up changes pending review",
+  "published": false
+}

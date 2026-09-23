@@ -1,0 +1,75 @@
+{
+  "changedFromPolish": [
+    "app.js",
+    "index.html"
+  ],
+  "allPreviousArtAndDataUnchanged": true,
+  "newFiles": [
+    "assets/layers/canopy-color.webp",
+    "assets/layers/canopy-matte.webp",
+    "assets/layers/landscape-far.svg",
+    "assets/layers/landscape-middle.svg",
+    "assets/layers/landscape-near.svg",
+    "assets/layers/layers.json",
+    "assets/layers/portrait-far.svg",
+    "assets/layers/portrait-middle.svg",
+    "assets/layers/portrait-near.svg",
+    "garden-life.css",
+    "garden-life.js"
+  ],
+  "http": [
+    [
+      "app.js",
+      200
+    ],
+    [
+      "assets/layers/canopy-color.webp",
+      200
+    ],
+    [
+      "assets/layers/canopy-matte.webp",
+      200
+    ],
+    [
+      "assets/layers/landscape-far.svg",
+      200
+    ],
+    [
+      "assets/layers/landscape-middle.svg",
+      200
+    ],
+    [
+      "assets/layers/landscape-near.svg",
+      200
+    ],
+    [
+      "assets/layers/layers.json",
+      200
+    ],
+    [
+      "assets/layers/portrait-far.svg",
+      200
+    ],
+    [
+      "assets/layers/portrait-middle.svg",
+      200
+    ],
+    [
+      "assets/layers/portrait-near.svg",
+      200
+    ],
+    [
+      "garden-life.css",
+      200
+    ],
+    [
+      "garden-life.js",
+      200
+    ],
+    [
+      "index.html",
+      200
+    ]
+  ],
+  "newRuntimeBytes": 292110
+}

@@ -1,0 +1,21 @@
+{
+  "checkpointComparison": {
+    "checked": 386,
+    "changed": [
+      "app.js",
+      "index.html"
+    ],
+    "missing": []
+  },
+  "localHTTP": {
+    "checked": 387,
+    "failed": []
+  },
+  "initialFileBytesApprox": {
+    "desktop": 658229,
+    "mobile": 564443
+  },
+  "dataUnchanged": true,
+  "artUnchanged": true,
+  "note": "File-size estimate, not CPU/network measurement. Local asset requests only; remote media not comprehensively tested."
+}

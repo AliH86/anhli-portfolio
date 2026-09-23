@@ -1,0 +1,41 @@
+✔ daily message preserves all 78 original messages and first draw of legacy Oracle (4.872792ms)
+✔ same local day/device locks message across reload, next day uses fresh draw (1.385417ms)
+✔ blocked storage retains stable daily result in the current page; failed data request can retry (0.247666ms)
+✔ automatic day is 05:30 inclusive to 17:30 exclusive (11.727042ms)
+✔ daylight selection cycles day/night/device time without touching music (0.71325ms)
+✔ album introduction uses selected metadata and host moments restore the prior note (0.631458ms)
+✔ first daily invitation starts nine seconds after entrance, and no quote repeats immediately (0.553583ms)
+✔ cached scenery introduces no loading delay or timer (0.405041ms)
+✔ scenery load immediately clears its nonblocking loading notice (0.090459ms)
+✔ scenery error immediately clears its nonblocking loading notice (0.475292ms)
+✔ stalled image has a bounded notice with no navigation or audio gate (0.107792ms)
+✔ reduced motion never animates the loading interaction (0.081667ms)
+✔ late video success cannot repaint another tray (1.294958ms)
+✔ late video failure cannot repaint or announce over another tray (0.337917ms)
+✔ photos win over an earlier video request (0.350042ms)
+✔ current video failure returns to usable photos with feedback (0.295167ms)
+✔ tapping the current album preserves playback; a different album resets once (0.387125ms)
+✔ closing gallery restores idle or listening pose and invalidates pending views (0.495334ms)
+✔ motion off cancels an in-flight cover animation (0.819542ms)
+✔ native media controls use the existing player and clamp seek positions (0.67875ms)
+✔ lock-screen metadata and playback position describe the selected track (0.453083ms)
+✔ browsers without Media Session keep the native player path usable (0.371875ms)
+✔ a background visibility change only pauses decoration (0.335875ms)
+✔ timed lyrics handle exact boundaries, instrumental gaps and backward seeks (0.514875ms)
+✔ malformed and overlapping lyrics are rejected; unsupported metadata stays quiet (0.166583ms)
+✔ lyrics load only mapped tracks, cache requests, reject paths and recover from failure (0.261208ms)
+✔ critical images are ready immediately when decoded; failures and timeouts reject (5.604875ms)
+✔ a gust reaches small foliage before the canopy and settles within the rest interval (0.623333ms)
+✔ no residents before entrance; sparrows stay in a small perch group (1.948667ms)
+✔ owl remains over a minute, prepares, then makes a short local departure (1.602709ms)
+✔ firefly candidates and simultaneous lights stay bounded (desktop) (1.723375ms)
+✔ firefly candidates and simultaneous lights stay bounded (portrait) (1.445ms)
+✔ phase changes cancel stale animations and visits never repeat the same species (0.552542ms)
+ℹ tests 33
+ℹ suites 0
+ℹ pass 33
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 60.008125

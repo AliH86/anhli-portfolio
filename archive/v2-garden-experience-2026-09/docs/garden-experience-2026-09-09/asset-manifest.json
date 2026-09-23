@@ -1,0 +1,260 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-09",
+  "sourceCommit": "5eacde1787ef205517d9a47d3d2d9dcbba72b873",
+  "rootRelativeToRepo": "docs/garden-experience-2026-09-09",
+  "assets": [
+    {
+      "id": "anhli-gardener-ink-master",
+      "path": "assets/anhli-gardener-ink-master.png",
+      "status": "lookdev",
+      "runtimeReady": false,
+      "width": 1145,
+      "height": 1374,
+      "mode": "RGB",
+      "hasAlpha": false,
+      "bytes": 1246651,
+      "sha256": "e8adb69418fe28a4cfa2b5d9c296ecce39c85941ede1604c2507471c23ed7d27",
+      "purpose": "Character shape/style reference; white background, needs alpha extraction and rig"
+    },
+    {
+      "id": "garden-stall-cleanplate",
+      "path": "assets/garden-stall-cleanplate.png",
+      "status": "lookdev",
+      "runtimeReady": false,
+      "width": 1672,
+      "height": 941,
+      "mode": "RGB",
+      "hasAlpha": false,
+      "bytes": 2673464,
+      "sha256": "e1f637b5f5f1cd07f786f67cfdde4689da83f854a5df06263604f7b2ce1753c8",
+      "purpose": "Environment layout/light reference and static fallback candidate; not 3D geometry"
+    },
+    {
+      "id": "garden-stall-cleanplate-web",
+      "path": "assets/garden-stall-cleanplate.webp",
+      "status": "lookdev",
+      "runtimeReady": false,
+      "width": 1672,
+      "height": 941,
+      "mode": "RGB",
+      "hasAlpha": false,
+      "bytes": 311944,
+      "sha256": "7c8c84c760c626d0382df680fc441e5a60d66caf36716201d45fc7ddea0beb64",
+      "purpose": "Environment layout/light reference and static fallback candidate; not 3D geometry"
+    },
+    {
+      "id": "li-layered-rig",
+      "status": "planned",
+      "runtimeReady": false,
+      "deliverable": "Editable aligned layers plus alpha exports and pivots"
+    },
+    {
+      "id": "garden-stall-geometry",
+      "status": "planned",
+      "runtimeReady": false,
+      "deliverable": "Low-poly GLB with separate sleeve planes"
+    },
+    {
+      "id": "turntable",
+      "status": "planned",
+      "runtimeReady": false,
+      "deliverable": "GLB body/platter/vinyl/tonearm separate"
+    },
+    {
+      "id": "planter",
+      "status": "planned",
+      "runtimeReady": false,
+      "deliverable": "Low-poly pot, soil and leaf meshes"
+    },
+    {
+      "id": "garden-lighting",
+      "status": "planned",
+      "runtimeReady": false,
+      "deliverable": "Baked lighting/ambient occlusion and contact shadow"
+    },
+    {
+      "id": "seed-fx",
+      "status": "planned",
+      "runtimeReady": false,
+      "deliverable": "Small instanced seed mesh/material"
+    },
+    {
+      "id": "garden-distant-cleanplate-v1-png",
+      "path": "assets/garden-distant-cleanplate-v1.png",
+      "status": "lookdev",
+      "runtimeReady": false,
+      "width": 1672,
+      "height": 941,
+      "mode": "RGB",
+      "hasAlpha": false,
+      "bytes": 2836647,
+      "sha256": "8f83b8d134a8fe8ad3c01fbd3c2108745642cbeea51f2c490b4a3a6b4910e04e",
+      "created": "2026-09-11",
+      "purpose": "Distant garden backdrop with stall and foreground props removed; visual inspected, scene integration pending. Original ground perspective and baked daylight still require matching."
+    },
+    {
+      "id": "garden-distant-cleanplate-v1-webp",
+      "path": "assets/garden-distant-cleanplate-v1.webp",
+      "status": "lookdev",
+      "runtimeReady": false,
+      "width": 1672,
+      "height": 941,
+      "mode": "RGB",
+      "hasAlpha": false,
+      "bytes": 328396,
+      "sha256": "54e52ee492d3042cec235f07e553f720fe747a6c2ce62e1f717e972ffa800d96",
+      "created": "2026-09-11",
+      "purpose": "Distant garden backdrop with stall and foreground props removed; visual inspected, scene integration pending. Original ground perspective and baked daylight still require matching."
+    }
+  ],
+  "existingAlbumSources": {
+    "status": "existing",
+    "source": "../../music-data-base.js",
+    "runtimeRule": "Resolve stable IDs only after full runtime merge/sort readiness",
+    "promotedAlbumId": "f5fc153c-51b8-4583-bfe9-1fcc872aab85",
+    "baseAlbums": [
+      {
+        "id": "e2a4ae09-b3d2-4421-bd45-68978bed409c",
+        "name": "Biên Niên Thất Nghiệp Ký",
+        "cover": "uploads/bien-nien-that-nghiep-ky.jpg",
+        "coverExists": true
+      },
+      {
+        "id": "5d7b86a1-a197-402d-bfea-3184fa59f69e",
+        "name": "Another Stage",
+        "cover": "uploads/another-stage.jpg",
+        "coverExists": true
+      },
+      {
+        "id": "b31825a3-7a38-4744-834a-96930f05015c",
+        "name": "Chuyện Của Trăng",
+        "cover": "uploads/chuyen-cua-trang.jpg",
+        "coverExists": true
+      },
+      {
+        "id": "e5c30e35-b012-4fa2-86cb-14e8c334b977",
+        "name": "Không Có Gì!!?!",
+        "cover": "uploads/khong-co-gi.jpg",
+        "coverExists": true
+      },
+      {
+        "id": "30456da3-d6e4-4f3b-babd-a30056ad23d1",
+        "name": "Tôi Muốn Ôm Trọn Di Sản Quê Hương Mình Vào Lòng",
+        "cover": "uploads/toi-muon-om-tron-di-san.jpg",
+        "coverExists": true
+      },
+      {
+        "id": "f5fc153c-51b8-4583-bfe9-1fcc872aab85",
+        "name": "Một Tần Số Khác",
+        "cover": "uploads/mot-tan-so-khac.jpg",
+        "coverExists": true
+      },
+      {
+        "id": "c6672b33-6803-4fa3-8c9d-900d15dfaf2d",
+        "name": "01KhoảngLặng",
+        "cover": "uploads/01-khoang-lang.jpg",
+        "coverExists": true
+      },
+      {
+        "id": "debb379c-7814-426c-8409-abe0f0a43215",
+        "name": "Chuyện Tình Này...Nó Lạ...",
+        "cover": "uploads/chuyen-tinh-nay-no-la.jpg",
+        "coverExists": true
+      },
+      {
+        "id": "560a4089-5871-4536-8375-785f7a2f8dca",
+        "name": "Những Kẻ DRILL Loves",
+        "cover": "uploads/nhung-ke-drill-loves.jpg",
+        "coverExists": true
+      },
+      {
+        "id": "2818d6f0-318d-4aad-94ac-027ccc756ec4",
+        "name": "Unplugged Vol.1",
+        "cover": "uploads/Unplugged-vol1.jpg",
+        "coverExists": true
+      },
+      {
+        "id": "15c4b5fa-3d24-4a7c-b1bf-6ca2420d81c7",
+        "name": "Unplugged Vol.2",
+        "cover": "uploads/Unplugged-vol2.jpg",
+        "coverExists": true
+      },
+      {
+        "id": "b1021057-56bd-49e8-a1fb-5af4d69c2c0e",
+        "name": "Mỹ Vị Nhân Sinh",
+        "cover": "uploads/My-vi-nhan-sinh.jpg",
+        "coverExists": true
+      },
+      {
+        "id": "35ce4803-2ec5-405a-abdb-4a4a2cbf64a1",
+        "name": "Cả Biển Trời Trong Mắt",
+        "cover": "uploads/ca-bien-troi-trong-mat.jpg",
+        "coverExists": true
+      },
+      {
+        "id": "1c504bd2-2249-4fca-931a-f1c992581a25",
+        "name": "MiTek · Way of Stars",
+        "cover": "uploads/WoS-MiTek.jpg",
+        "coverExists": true
+      },
+      {
+        "id": "df0c36ec-4afd-4760-9aa3-3b05350a1b87",
+        "name": "Tôi ❤ Việt Nam",
+        "cover": "uploads/toi-yeu-vn.jpg",
+        "coverExists": true
+      },
+      {
+        "id": "0bd2c183-50a7-4917-ae88-2ecdc9f0d2f3",
+        "name": "TẾT Ngọ Sum Vầy '26",
+        "cover": "uploads/tet-ngo-sum-vay-26.jpg",
+        "coverExists": true
+      },
+      {
+        "id": "c6d1b392-c21b-4d47-9e67-1687cae2a955",
+        "name": "Lạ mà Quen",
+        "cover": "uploads/la-ma-quen.jpg",
+        "coverExists": true
+      },
+      {
+        "id": "8f2c17b4-cb70-46e1-9f2e-464ccadaf1ab",
+        "name": "Đi Khắp Một Dãy Non Sông",
+        "cover": "uploads/di-khap-mot-day-non-song.jpg",
+        "coverExists": true
+      },
+      {
+        "id": "549189a6-43bd-4112-b3cc-f6a05105b082",
+        "name": "Tình Vuu-verse",
+        "cover": "uploads/tinh-vuu-verse.jpg",
+        "coverExists": true
+      },
+      {
+        "id": "443d7aad-1161-4de3-b1ca-79b8646f4cb8",
+        "name": "Thơ Ru Em Ngủ",
+        "cover": "uploads/tho-ru-em-ngu.jpg",
+        "coverExists": true
+      },
+      {
+        "id": "c6d1b392-c21b-4d47-9e67-1687cae2a955",
+        "name": "Lạ mà Quen",
+        "cover": "uploads/la-ma-quen.jpg",
+        "coverExists": true
+      },
+      {
+        "id": "ee01969a-6e94-4b7e-8b93-69d0be8aa866",
+        "name": "Sau Một Mùa Sóng",
+        "cover": "uploads/sau-mot-mua-song.jpg",
+        "coverExists": true
+      },
+      {
+        "id": "b1fe85ee-becf-464d-ab82-a5f5513d0738",
+        "name": "Tôi Hoạ Cả Thế Gian",
+        "cover": "uploads/toi-hoa-ca-the-gian.jpeg",
+        "coverExists": true
+      }
+    ],
+    "coverPathBase": "repository root"
+  },
+  "updatedAt": "2026-09-11",
+  "latestScopeNote": "Full illustrated redesign with animation/Three.js. Egg hatch game deferred. Model building and runtime integration continue in next session per user."
+}

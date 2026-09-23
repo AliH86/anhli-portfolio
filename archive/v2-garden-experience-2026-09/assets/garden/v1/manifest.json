@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-11",
+  "catalogSourceCommit": "5dc754a",
+  "syncMethod": "Remote file contents applied. HEAD stays 5eacde1; no commit/merge/push.",
+  "assetBytes": 2065594,
+  "files": [
+    {
+      "path": "assets/garden/v1/chuyen-cua-trang.webp",
+      "bytes": 23892,
+      "sha256": "67556002f4ba631579a6faebc63160c36dbae6577e1d09289a0c8e4314dd66e0"
+    },
+    {
+      "path": "assets/garden/v1/eye-near-closed-v1.png",
+      "bytes": 1210,
+      "sha256": "d3a52cfc39b59534f3b3cb0c2c36b3ef9b75730abced9dbaf8a40a9c57eb7f02"
+    },
+    {
+      "path": "assets/garden/v1/another-stage.webp",
+      "bytes": 46086,
+      "sha256": "1cdcfdb17bff72b21037890a2aa93982d418d009f137509495eb18686c82e698"
+    },
+    {
+      "path": "assets/garden/v1/eye-far-closed-v1.png",
+      "bytes": 574,
+      "sha256": "1127bfc07e4c41e5e3a26d942b2d346e279ee89acdf19c1200453a37e17a9e4d"
+    },
+    {
+      "path": "assets/garden/v1/anhli-gardener-web-v1.webp",
+      "bytes": 128504,
+      "sha256": "7ebde5a3e5ea313c3c1589642e2d2a9f6fdfae1aa518c883fb628a26b7996942"
+    },
+    {
+      "path": "assets/garden/v1/backdrop.webp",
+      "bytes": 328396,
+      "sha256": "54e52ee492d3042cec235f07e553f720fe747a6c2ce62e1f717e972ffa800d96"
+    },
+    {
+      "path": "assets/garden/v1/sau-mot-mua-song.webp",
+      "bytes": 35640,
+      "sha256": "3da49e7c0e207b6d5db8c8f8419e73b667e641c0a03b9013a2f974e074e5e911"
+    },
+    {
+      "path": "assets/garden/v1/mot-tan-so-khac.webp",
+      "bytes": 22248,
+      "sha256": "fde221ca20b8c56c1d46bbf23c5143b4c1dc883a209213c679274d6b31816b73"
+    },
+    {
+      "path": "assets/garden/v1/toi-hoa-ca-the-gian.webp",
+      "bytes": 78526,
+      "sha256": "0ad2f4820264c70221292b358cf773e2eba9e40907ba196cfc21410981141ac8"
+    },
+    {
+      "path": "assets/garden/v1/khong-co-gi.webp",
+      "bytes": 56070,
+      "sha256": "fdc2c6935b373de1656b273111f344a4749f1ca408ff8e635d5a230db009ec87"
+    },
+    {
+      "path": "assets/garden/v1/garden-models-v1.glb",
+      "bytes": 717428,
+      "sha256": "f1e3ff82f6db16714aaebbddc9d4f755c3d66eb663cc39396c27924678b124f1"
+    },
+    {
+      "path": "js/garden/scene.runtime.js",
+      "bytes": 627020,
+      "sha256": "4a5f5a1204dbffc99e7c34bd909f309f611c43a8b452cf9a05bbd67e44404b3c"
+    }
+  ],
+  "model": {
+    "requiredNodes": [
+      "stall_root",
+      "turntable_root",
+      "platter_pivot",
+      "vinyl",
+      "label",
+      "tonearm_pivot",
+      "planter_root",
+      "li_anchor",
+      "hand_target",
+      "contact_shadow",
+      "sleeve_01",
+      "sleeve_02",
+      "sleeve_03",
+      "sleeve_04",
+      "sleeve_05",
+      "sleeve_06",
+      "leaf_01",
+      "leaf_02",
+      "leaf_03",
+      "leaf_04",
+      "leaf_05"
+    ],
+    "nodes": 96,
+    "normalAttributes": true,
+    "sixSleeveUVs": true
+  },
+  "note": "Raw files. Includes backdrop and Li reused by entrance; excludes site catalog/gallery/audio and source Blender/generated images."
+}

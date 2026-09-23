@@ -1,0 +1,218 @@
+[
+  {
+    "name": "chrome-phone",
+    "pass": true,
+    "base": "http://127.0.0.1:8791/",
+    "deck": {
+      "display": "flex",
+      "y": "auto"
+    },
+    "tracks": {
+      "top": 297,
+      "max": 297
+    },
+    "audio": {
+      "same": true,
+      "count": 1,
+      "paused": false,
+      "time": 0.698396
+    },
+    "balloon": {
+      "top": 206.484375,
+      "hostTop": 166.40625,
+      "hostHeight": 166.984375,
+      "bottom": 310.0625
+    },
+    "bell": [
+      "closed"
+    ],
+    "backgroundAnimations": [],
+    "errors": []
+  },
+  {
+    "name": "webkit-phone",
+    "pass": true,
+    "base": "http://127.0.0.1:8791/",
+    "deck": {
+      "display": "flex",
+      "y": "auto"
+    },
+    "tracks": {
+      "top": 297,
+      "max": 297
+    },
+    "audio": {
+      "same": true,
+      "count": 1,
+      "paused": false,
+      "time": 0.7048047086610875
+    },
+    "balloon": {
+      "top": 206.484375,
+      "hostTop": 166.390625,
+      "hostHeight": 166.984375,
+      "bottom": 310.0625
+    },
+    "bell": [
+      "closed"
+    ],
+    "backgroundAnimations": [],
+    "errors": []
+  },
+  {
+    "name": "chrome-android",
+    "pass": true,
+    "base": "http://127.0.0.1:8791/",
+    "deck": {
+      "display": "flex",
+      "y": "auto"
+    },
+    "tracks": {
+      "top": 297,
+      "max": 297
+    },
+    "audio": {
+      "same": true,
+      "count": 1,
+      "paused": false,
+      "time": 0.702538
+    },
+    "balloon": {
+      "top": 250.640625,
+      "hostTop": 208.3125,
+      "hostHeight": 176.40625,
+      "bottom": 354.21875
+    },
+    "bell": [
+      "closed"
+    ],
+    "backgroundAnimations": [],
+    "errors": []
+  },
+  {
+    "name": "webkit-tablet",
+    "pass": true,
+    "base": "http://127.0.0.1:8791/",
+    "deck": {
+      "display": "flex",
+      "y": "auto"
+    },
+    "tracks": {
+      "top": 295,
+      "max": 295
+    },
+    "audio": {
+      "same": true,
+      "count": 1,
+      "paused": false,
+      "time": 0.7103549593825357
+    },
+    "balloon": {
+      "top": 355.09375,
+      "hostTop": 264.09375,
+      "hostHeight": 378.921875,
+      "bottom": 480.96875
+    },
+    "bell": [
+      "closed"
+    ],
+    "backgroundAnimations": [],
+    "errors": []
+  },
+  {
+    "name": "chrome-tablet",
+    "pass": true,
+    "base": "http://127.0.0.1:8791/",
+    "deck": {
+      "display": "flex",
+      "y": "auto"
+    },
+    "tracks": {
+      "top": 338,
+      "max": 338
+    },
+    "audio": {
+      "same": true,
+      "count": 1,
+      "paused": false,
+      "time": 0.702527
+    },
+    "balloon": {
+      "top": 112.203125,
+      "hostTop": 7,
+      "hostHeight": 438.4375,
+      "bottom": 238.078125
+    },
+    "bell": [
+      "closed"
+    ],
+    "backgroundAnimations": [],
+    "errors": []
+  },
+  {
+    "name": "chrome-laptop",
+    "pass": true,
+    "base": "http://127.0.0.1:8791/",
+    "deck": {
+      "display": "contents",
+      "y": "visible"
+    },
+    "tracks": {
+      "top": 373,
+      "max": 373
+    },
+    "audio": {
+      "same": true,
+      "count": 1,
+      "paused": false,
+      "time": 0.694202
+    },
+    "balloon": {
+      "top": 380.015625,
+      "hostTop": 315.296875,
+      "hostHeight": 269.703125,
+      "bottom": 485.59375
+    },
+    "bell": [
+      "closed"
+    ],
+    "backgroundAnimations": [
+      "disc-spin",
+      "WAAPI"
+    ],
+    "errors": []
+  },
+  {
+    "name": "webkit-laptop",
+    "pass": true,
+    "base": "http://127.0.0.1:8791/",
+    "deck": {
+      "display": "contents",
+      "y": "visible"
+    },
+    "tracks": {
+      "top": 373,
+      "max": 373
+    },
+    "audio": {
+      "same": true,
+      "count": 1,
+      "paused": false,
+      "time": 0.712502334281733
+    },
+    "balloon": {
+      "top": 380.015625,
+      "hostTop": 315,
+      "hostHeight": 269.703125,
+      "bottom": 485.59375
+    },
+    "bell": [
+      "closed"
+    ],
+    "backgroundAnimations": [
+      "disc-spin",
+      "WAAPI"
+    ],
+    "errors": []
+  }
+]

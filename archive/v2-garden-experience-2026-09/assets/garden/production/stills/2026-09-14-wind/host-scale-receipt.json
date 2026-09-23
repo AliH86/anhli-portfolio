@@ -1,0 +1,80 @@
+[
+  {
+    "view": "arrival",
+    "targetVisibleHeightM": 1.7,
+    "sourceMask": {
+      "width": 1122,
+      "height": 1402,
+      "top": 63,
+      "bottom": 1350,
+      "visibleFraction": 0.9186875891583453
+    },
+    "previousVisibleHeightM": 1.7822539229671897,
+    "fullPlaneHeightM": 1.8504658385093167,
+    "worldPosition": [
+      9.4,
+      -1.0659978197376927,
+      16.2
+    ],
+    "previousWorldPosition": [
+      7.8,
+      -1.5241381689373346,
+      13
+    ],
+    "previousDistanceM": 17.752342067230032,
+    "distanceM": 14.151716642199485,
+    "foot": [
+      0.4073505467699635,
+      0.7302615513014539
+    ],
+    "head": [
+      0.4069531157903244,
+      0.5528746073167988
+    ],
+    "projectedHeightFraction": 0.17738694398465504,
+    "pixelSize": [
+      2560,
+      1440
+    ],
+    "projection": "Original authored camera; photographic plate remains an approximate visual reference, not surveyed geometry."
+  },
+  {
+    "view": "mobile",
+    "targetVisibleHeightM": 1.7,
+    "sourceMask": {
+      "width": 1122,
+      "height": 1402,
+      "top": 63,
+      "bottom": 1350,
+      "visibleFraction": 0.9186875891583453
+    },
+    "previousVisibleHeightM": 1.7822539229671897,
+    "fullPlaneHeightM": 1.8504658385093167,
+    "worldPosition": [
+      9.4,
+      -1.0659978197376927,
+      16.2
+    ],
+    "previousWorldPosition": [
+      7.8,
+      -1.5241381689373346,
+      13
+    ],
+    "previousDistanceM": 9.078065515069074,
+    "distanceM": 5.627463637480113,
+    "foot": [
+      0.31486649512652454,
+      0.7726945029615928
+    ],
+    "head": [
+      0.3111182283702529,
+      0.5069459632397645
+    ],
+    "projectedHeightFraction": 0.2657485397218283,
+    "pixelSize": [
+      1080,
+      1920
+    ],
+    "projection": "Original authored camera; photographic plate remains an approximate visual reference, not surveyed geometry."
+  }
+]

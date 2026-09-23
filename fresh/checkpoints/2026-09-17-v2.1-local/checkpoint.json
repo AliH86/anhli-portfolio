@@ -1,0 +1,14 @@
+{
+  "createdAt": "2026-09-17T16:53:00.243379+00:00",
+  "status": "local implementation ready for user review; not committed or deployed",
+  "baselineRelease": "64f76b313c67d6345cae48eaa87f66a244bce07b",
+  "runtime": "fresh/dist",
+  "files": 506,
+  "runtimeBytes": 31043758,
+  "zipBytes": 30840180,
+  "zipSha256": "448bf9d4596af926bb1ec957bf43cb065ab10bca53679c16bc4f3cb3596557a1",
+  "brief": "docs/production/V2.1-USER-BRIEF-2026-09-17.md",
+  "wrapup": "docs/production/V2.1-LOCAL-WRAPUP-2026-09-17.md",
+  "lastMenuDirection": "continuous vertical dropdown; reject horizontal song cards",
+  "userVisualApproval": false
+}

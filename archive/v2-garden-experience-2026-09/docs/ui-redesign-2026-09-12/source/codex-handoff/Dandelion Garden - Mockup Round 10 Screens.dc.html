@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="design_doc_mode" content="canvas" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Be+Vietnam+Pro:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  body { margin: 0; background: #E7E4DC; font-family: 'Be Vietnam Pro', system-ui, sans-serif; }
+  a { color: #B86B4A; text-decoration: none; }
+  a:hover { color: #8E4F33; }
+  @keyframes seedDrift { 0% { transform: translate(0,0) rotate(0deg); } 100% { transform: translate(38px,-16px) rotate(24deg); } }
+  @keyframes ringPulse { 0%,100% { box-shadow: 0 0 0 6px rgba(255,255,255,.10); } 50% { box-shadow: 0 0 0 13px rgba(255,255,255,.04); } }
+</style>
+</helmet>
+
+<section style="padding:44px 48px 56px;border-bottom:1px solid rgba(0,0,0,.08)" id="t1">
+  <div style="display:flex;align-items:baseline;gap:10px;margin:0 0 8px">
+    <span style="font:600 10px 'JetBrains Mono',monospace;padding:3px 7px;background:#23261F;color:#fff;border-radius:4px">MOCKUP R1</span>
+    <span style="font:600 13px/1.2 'Be Vietnam Pro',sans-serif;color:#23261F">Visual Mockup Round — 10 màn theo v3 §14 · vocabulary GARDEN · MUSIC · SHOWS · VISUAL · STORY · 11.09.2026</span>
+  </div>
+  <p style="max-width:760px;margin:0 0 26px;font:400 11.5px/1.7 'Be Vietnam Pro',sans-serif;color:rgba(0,0,0,.55);text-wrap:pretty">Lớp UI là bản chốt được: chữ, màu, nav, player, panel, đường về. Lớp thế giới 3D chỉ dựng bằng ánh sáng + đường chân trời để khoá không khí và hướng sáng từng state — ảnh render thật thay vào đúng khung <span style="font-family:'JetBrains Mono',monospace;font-size:10px">WORLD PLATE</span>. Sáu mốc L12 (nhà · sạp · góc làm việc · chân trời · nhà kính · sân trống) giữ nguyên toạ độ ở mọi màn.</p>
+
+  <div style="display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start">
+
+  <div style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px" id="1a">
+    <div style="display:flex;align-items:baseline;gap:9px;font:400 11.5px/1.3 'Be Vietnam Pro',sans-serif;color:rgba(0,0,0,.55)"><span style="font:600 10.5px 'JetBrains Mono',monospace;padding:3px 7px;background:rgba(0,0,0,.07);color:#23261F;border-radius:5px">1a</span>M-01 · ARRIVAL — viewport đầu tiên đã là thế giới</div>
+    <div style="width:1280px;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden">
+      <div style="position:relative;height:740px;overflow:hidden">
+        <div style="position:absolute;inset:0;background:linear-gradient(178deg,#9FB8C6 0%,#C6D3D6 30%,#E3DBC8 50%,#D3CBA6 66%,#A9AE84 84%,#8B9370 100%)"></div>
+        <div style="position:absolute;left:-4%;right:-4%;top:38%;height:18%;background:#8FA2A6;opacity:.5;border-radius:50% 50% 0 0/100% 100% 0 0"></div>
+        <div style="position:absolute;left:-10%;right:20%;top:44%;height:14%;background:#76878A;opacity:.45;border-radius:50% 50% 0 0/100% 100% 0 0"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(58% 46% at 74% 26%,rgba(255,246,222,.72) 0%,rgba(255,246,222,0) 70%)"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(96deg,rgba(30,35,28,.52) 0%,rgba(30,35,28,.16) 42%,rgba(30,35,28,0) 68%)"></div>
+        <div style="position:absolute;left:38px;bottom:16px;white-space:nowrap;font:500 9px 'JetBrains Mono',monospace;letter-spacing:.16em;color:rgba(255,255,255,.8);border:1px dashed rgba(255,255,255,.42);background:rgba(30,35,28,.3);padding:5px 11px;border-radius:3px">WORLD PLATE · GARDEN / MORNING · camera anchor 01</div>
+
+        <div style="position:absolute;left:0;right:0;top:0;height:66px;display:flex;align-items:center;gap:30px;padding:0 34px;background:linear-gradient(180deg,rgba(30,35,28,.34),rgba(30,35,28,0))">
+          <div style="display:flex;flex-direction:column;gap:1px">
+            <span style="font:500 19px/1 'Playfair Display',serif;letter-spacing:.1em;color:#F7F4EC">ANH LI</span>
+            <span style="font:300 10px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.13em;color:rgba(247,244,236,.72)">The Dandelion Garden</span>
+          </div>
+          <div style="display:flex;gap:26px;margin:0 auto">
+            <span style="font:500 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:#F7F4EC">GARDEN</span>
+            <span style="font:400 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:rgba(247,244,236,.62)">MUSIC</span>
+            <span style="font:400 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:rgba(247,244,236,.62)">SHOWS</span>
+            <span style="font:400 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:rgba(247,244,236,.62)">VISUAL</span>
+            <span style="font:400 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:rgba(247,244,236,.62)">STORY</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:9px;border:1px solid rgba(247,244,236,.6);border-radius:99px;padding:7px 14px">
+            <span style="font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:#F7F4EC">MAP</span>
+            <span style="width:7px;height:7px;border-radius:99px;background:#B86B4A"></span>
+          </div>
+        </div>
+
+        <div style="position:absolute;left:64px;top:174px;width:470px;display:flex;flex-direction:column;gap:20px">
+          <span style="font:400 25px/1.25 Caveat,cursive;color:rgba(247,244,236,.9)">Some things grow.<br />Some things become.</span>
+          <h1 style="margin:0;font:400 44px/1.12 'Playfair Display',serif;color:#F7F4EC;text-wrap:pretty">Một khu vườn của những điều tôi làm, những người tôi gặp, và những thứ ở lại.</h1>
+          <p style="margin:0;max-width:330px;font:300 13.5px/1.75 'Be Vietnam Pro',sans-serif;color:rgba(247,244,236,.8);text-wrap:pretty">Producer · Show Director · Music Lover · Dad of 3 Daughters. Vào vườn, đi tới chỗ nào anh muốn xem.</p>
+          <div style="display:flex;align-items:center;gap:18px">
+            <div style="display:flex;align-items:center;gap:12px;background:#B86B4A;padding:14px 24px;border-radius:99px">
+              <span style="font:500 11px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.18em;color:#fff">BƯỚC VÀO VƯỜN</span>
+              <span style="font:400 12px/1 'JetBrains Mono',monospace;color:rgba(255,255,255,.8)">&#8594;</span>
+            </div>
+            <span style="font:400 11px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.12em;color:rgba(247,244,236,.62)">hoặc <span style="border-bottom:1px solid rgba(247,244,236,.45);padding-bottom:2px">đọc bản chữ</span></span>
+          </div>
+        </div>
+
+        <div style="position:absolute;right:34px;bottom:26px;text-align:right">
+          <span style="font:400 17px/1.5 Caveat,cursive;color:rgba(247,244,236,.82)">Âm nhạc. Công việc.<br />Gia đình. Và những ngày đẹp.</span>
+        </div>
+        <div style="position:absolute;left:50%;bottom:74px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:7px">
+          <span style="font:500 9px/1 'JetBrains Mono',monospace;letter-spacing:.2em;color:rgba(247,244,236,.7)">SCROLL / CLICK ĐỂ VÀO</span>
+          <span style="width:1px;height:26px;background:linear-gradient(180deg,rgba(247,244,236,.7),rgba(247,244,236,0))"></span>
+        </div>
+      </div>
+      <sc-if value="{{ showAnnotations }}" hint-placeholder-val="{{ true }}">
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:rgba(0,0,0,.1)">
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">STATE · LIGHT</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">Morning, sáng nghiêng từ phải. Không autoplay nhạc, không gate.</p></div>
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">PRIMARY</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">BƯỚC VÀO VƯỜN → Explore. Nav + MAP đã có sẵn để nhảy thẳng.</p></div>
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">TYPE</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">Playfair 54/1.08 headline · Caveat accent · Be Vietnam Pro body 13.5/1.75.</p></div>
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">FALLBACK</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">Không WebGL → ảnh tĩnh cùng khung + link “đọc bản chữ” (/flat).</p></div>
+      </div>
+      </sc-if>
+    </div>
+  </div>
+
+  <div style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px" id="1b">
+    <div style="display:flex;align-items:baseline;gap:9px;font:400 11.5px/1.3 'Be Vietnam Pro',sans-serif;color:rgba(0,0,0,.55)"><span style="font:600 10.5px 'JetBrains Mono',monospace;padding:3px 7px;background:rgba(0,0,0,.07);color:#23261F;border-radius:5px">1b</span>M-02 · EXPLORE — bốn cửa, một cái nhìn</div>
+    <div style="width:1280px;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden">
+      <div style="position:relative;height:740px;overflow:hidden">
+        <div style="position:absolute;inset:0;background:linear-gradient(178deg,#A8BEC8 0%,#CBD6D5 28%,#E6DDC8 48%,#D0C8A2 64%,#A3A87C 82%,#87906B 100%)"></div>
+        <div style="position:absolute;left:-4%;right:-4%;top:37%;height:19%;background:#8FA2A6;opacity:.45;border-radius:50% 50% 0 0/100% 100% 0 0"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(52% 42% at 70% 22%,rgba(255,248,226,.6) 0%,rgba(255,248,226,0) 70%)"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(30,35,28,.3) 0%,rgba(30,35,28,0) 24%,rgba(30,35,28,0) 62%,rgba(30,35,28,.34) 100%)"></div>
+        <div style="position:absolute;left:50%;bottom:16px;transform:translateX(-50%);font:500 9px 'JetBrains Mono',monospace;letter-spacing:.16em;color:rgba(255,255,255,.8);border:1px dashed rgba(255,255,255,.42);background:rgba(30,35,28,.3);padding:5px 11px;border-radius:3px">WORLD PLATE · GARDEN / MIDDAY WIDE · camera lùi, thấy đủ 6 mốc L12 · sân trống ở giữa</div>
+
+        <div style="position:absolute;left:0;right:0;top:0;height:62px;display:flex;align-items:center;gap:30px;padding:0 34px;background:rgba(244,241,234,.9);border-bottom:1px solid rgba(30,35,28,.1)">
+          <div style="display:flex;flex-direction:column;gap:1px">
+            <span style="font:500 17px/1 'Playfair Display',serif;letter-spacing:.1em;color:#1E231C">ANH LI</span>
+            <span style="font:300 9px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.13em;color:rgba(30,35,28,.55)">The Dandelion Garden</span>
+          </div>
+          <div style="display:flex;gap:26px;margin:0 auto">
+            <span style="display:flex;flex-direction:column;align-items:center;gap:5px;font:500 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:#B86B4A">GARDEN<span style="width:4px;height:4px;border-radius:99px;background:#B86B4A"></span></span>
+            <span style="font:400 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:rgba(30,35,28,.62)">MUSIC</span>
+            <span style="font:400 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:rgba(30,35,28,.62)">SHOWS</span>
+            <span style="font:400 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:rgba(30,35,28,.62)">VISUAL</span>
+            <span style="font:400 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:rgba(30,35,28,.62)">STORY</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:9px;border:1px solid rgba(30,35,28,.35);border-radius:99px;padding:7px 14px">
+            <span style="font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:#1E231C">MAP</span>
+            <span style="width:7px;height:7px;border-radius:99px;background:#B86B4A"></span>
+          </div>
+        </div>
+
+        <div style="position:absolute;left:21%;top:63%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:9px">
+          <span style="width:40px;height:40px;border-radius:99px;border:1.5px solid rgba(255,255,255,.9);background:rgba(184,107,74,.3);animation:ringPulse 3.4s ease-in-out infinite"></span>
+          <span style="font:500 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.55)">MUSIC</span>
+          <span style="font:400 15px/1 Caveat,cursive;color:rgba(255,255,255,.85);text-shadow:0 1px 8px rgba(0,0,0,.5)">Cái Sạp — nghe, lưu giữ, chia sẻ</span>
+        </div>
+        <div style="position:absolute;left:48%;top:56%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:9px">
+          <span style="width:40px;height:40px;border-radius:99px;border:1.5px solid rgba(255,255,255,.9);background:rgba(184,107,74,.3)"></span>
+          <span style="font:500 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.55)">SHOWS</span>
+          <span style="font:400 15px/1 Caveat,cursive;color:rgba(255,255,255,.85);text-shadow:0 1px 8px rgba(0,0,0,.5)">Sân trống — nơi show dựng lên</span>
+        </div>
+        <div style="position:absolute;left:70%;top:61%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:9px">
+          <span style="width:40px;height:40px;border-radius:99px;border:1.5px solid rgba(255,255,255,.9);background:rgba(184,107,74,.3)"></span>
+          <span style="font:500 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.55)">VISUAL</span>
+          <span style="font:400 15px/1 Caveat,cursive;color:rgba(255,255,255,.85);text-shadow:0 1px 8px rgba(0,0,0,.5)">Nhà kính — phác thảo, thử nghiệm</span>
+        </div>
+        <div style="position:absolute;left:87%;top:52%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:9px">
+          <span style="width:40px;height:40px;border-radius:99px;border:1.5px solid rgba(255,255,255,.9);background:rgba(184,107,74,.3)"></span>
+          <span style="font:500 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.55)">STORY</span>
+          <span style="font:400 15px/1 Caveat,cursive;color:rgba(255,255,255,.85);text-shadow:0 1px 8px rgba(0,0,0,.5)">Đường lên đồi</span>
+        </div>
+
+        <div style="position:absolute;left:32%;top:70%;display:flex;flex-direction:column;align-items:center;gap:6px">
+          <span style="width:26px;height:52px;border-radius:13px 13px 4px 4px;background:linear-gradient(180deg,#23261F,#1E231C);opacity:.9"></span>
+          <span style="width:34px;height:5px;border-radius:99px;background:rgba(30,35,28,.35);filter:blur(2px)"></span>
+          <span style="font:500 8px/1 'JetBrains Mono',monospace;letter-spacing:.14em;color:rgba(255,255,255,.75);text-shadow:0 1px 6px rgba(0,0,0,.5)">HOST · 2D LINE-ART · vai chủ nhà</span>
+        </div>
+        <sc-if value="{{ showFamilyTraces }}" hint-placeholder-val="{{ true }}">
+        <span style="position:absolute;left:15%;top:47%;font:500 8px/1.3 'JetBrains Mono',monospace;letter-spacing:.06em;color:#DCE7DF;border:1px dotted rgba(220,231,223,.75);padding:3px 6px;border-radius:3px;background:rgba(107,143,122,.28)">FAMILY TRACE · tranh con vẽ dán cửa sổ</span>
+        </sc-if>
+        <span style="position:absolute;left:60%;top:31%;width:9px;height:9px;border-radius:99px;background:rgba(255,255,255,.9);box-shadow:0 0 12px rgba(255,255,255,.8);animation:seedDrift 9s ease-in-out infinite alternate"></span>
+        <span style="position:absolute;left:62.5%;top:28%;font:400 13px/1 Caveat,cursive;color:rgba(255,255,255,.8)">một hạt bay ngang — chạm thì mở</span>
+
+        <div style="position:absolute;left:34px;bottom:26px;display:flex;align-items:center;gap:13px;background:rgba(30,35,28,.78);border-radius:99px;padding:9px 16px 9px 10px">
+          <span style="width:30px;height:30px;border-radius:99px;border:1px solid rgba(247,244,236,.6);display:grid;place-items:center;font:400 10px/1 'JetBrains Mono',monospace;color:#F7F4EC">&#9654;</span>
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <span style="font:400 10.5px/1 'Be Vietnam Pro',sans-serif;color:#F7F4EC">Chưa phát — nhạc chỉ chạy khi anh bấm</span>
+            <span style="font:500 8px/1 'JetBrains Mono',monospace;letter-spacing:.14em;color:rgba(247,244,236,.55)">GLOBAL MINI-PLAYER · IDLE</span>
+          </div>
+        </div>
+        <div style="position:absolute;right:34px;bottom:26px;display:flex;align-items:center;gap:9px;background:rgba(244,241,234,.9);border-radius:99px;padding:9px 15px">
+          <span style="font:500 9px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:#1E231C">GARDEN</span>
+          <span style="font:300 9px/1 'Be Vietnam Pro',sans-serif;color:rgba(30,35,28,.5)">đang ở đây · bấm nhà để về</span>
+        </div>
+      </div>
+      <sc-if value="{{ showAnnotations }}" hint-placeholder-val="{{ true }}">
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:rgba(0,0,0,.1)">
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">LOOP</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">SEE → CHOOSE → APPROACH → VIEW → RETURN. Bốn ring, không câu đố.</p></div>
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">HOTSPOT</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">Ring cam là màu duy nhất được bấm. Nhãn dùng đúng từ trên nav (L1).</p></div>
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">HOST</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">Sprite 2D có contact shadow, đứng cạnh prop 3D, scale theo scene (L3).</p></div>
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">BA HẠT</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">Hạt bay ngang, không badge, không nhắc lại. Bỏ qua là mất luôn (L10).</p></div>
+      </div>
+      </sc-if>
+    </div>
+  </div>
+
+  <div style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px" id="1c">
+    <div style="display:flex;align-items:baseline;gap:9px;font:400 11.5px/1.3 'Be Vietnam Pro',sans-serif;color:rgba(0,0,0,.55)"><span style="font:600 10.5px 'JetBrains Mono',monospace;padding:3px 7px;background:rgba(0,0,0,.07);color:#23261F;border-radius:5px">1c</span>M-03 · SHOWS — loại việc &amp; vai trò, không tên dự án (NDA)</div>
+    <div style="width:1280px;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden">
+      <div style="position:relative;height:740px;overflow:hidden">
+        <div style="position:absolute;inset:0;background:linear-gradient(178deg,#31404C 0%,#4C5A5F 26%,#6E7563 48%,#4E5548 70%,#2C3229 100%)"></div>
+        <div style="position:absolute;left:-4%;right:-4%;top:36%;height:18%;background:#26302E;opacity:.6;border-radius:50% 50% 0 0/100% 100% 0 0"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(44% 40% at 50% 46%,rgba(255,224,168,.42) 0%,rgba(255,224,168,0) 72%)"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,24,19,.5) 0%,rgba(20,24,19,.1) 26%,rgba(20,24,19,.72) 100%)"></div>
+        <div style="position:absolute;left:50%;bottom:16px;transform:translateX(-50%);font:500 9px 'JetBrains Mono',monospace;letter-spacing:.16em;color:rgba(255,255,255,.78);border:1px dashed rgba(255,255,255,.4);background:rgba(20,24,19,.4);padding:5px 11px;border-radius:3px">WORLD PLATE · SHOWS / DUSK · sân trống đã dựng sân khấu · đèn dây · truss · ghế · khói nhẹ — KHÔNG host (L4)</div>
+
+        <div style="position:absolute;left:0;right:0;top:0;height:62px;display:flex;align-items:center;gap:30px;padding:0 34px">
+          <div style="display:flex;flex-direction:column;gap:1px">
+            <span style="font:500 17px/1 'Playfair Display',serif;letter-spacing:.1em;color:#F7F4EC">ANH LI</span>
+            <span style="font:300 9px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.13em;color:rgba(247,244,236,.6)">The Dandelion Garden</span>
+          </div>
+          <div style="display:flex;gap:26px;margin:0 auto">
+            <span style="font:400 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:rgba(247,244,236,.62)">GARDEN</span>
+            <span style="font:400 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:rgba(247,244,236,.62)">MUSIC</span>
+            <span style="display:flex;flex-direction:column;align-items:center;gap:5px;font:500 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:#E8A87C">SHOWS<span style="width:4px;height:4px;border-radius:99px;background:#E8A87C"></span></span>
+            <span style="font:400 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:rgba(247,244,236,.62)">VISUAL</span>
+            <span style="font:400 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:rgba(247,244,236,.62)">STORY</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:9px;border:1px solid rgba(247,244,236,.5);border-radius:99px;padding:7px 14px">
+            <span style="font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:#F7F4EC">MAP</span>
+            <span style="width:7px;height:7px;border-radius:99px;background:#E8A87C"></span>
+          </div>
+        </div>
+
+        <div style="position:absolute;left:64px;top:118px;width:430px">
+          <span style="font:500 9.5px/1 'JetBrains Mono',monospace;letter-spacing:.22em;color:rgba(247,244,236,.6)">SHOWS</span>
+          <h2 style="margin:14px 0 12px;font:400 42px/1.12 'Playfair Display',serif;color:#F7F4EC">Biến ý tưởng thành những khoảnh khắc thật.</h2>
+          <p style="margin:0;font:300 13px/1.75 'Be Vietnam Pro',sans-serif;color:rgba(247,244,236,.75);text-wrap:pretty">Phần lớn dự án của em nằm dưới NDA. Nên ở đây em kể loại việc, vai trò và quy mô — không kể tên khách, không mổ từng project.</p>
+        </div>
+
+        <div style="position:absolute;left:530px;right:64px;top:118px">
+          <span style="display:block;margin:0 0 11px;font:500 8.5px/1 'JetBrains Mono',monospace;letter-spacing:.18em;color:rgba(247,244,236,.55)">MOMENTS · KHÔNG CAPTION, KHÔNG TÊN KHÁCH</span>
+          <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px">
+            <div style="height:104px;border-radius:6px;background:repeating-linear-gradient(135deg,#CFC9B8 0 7px,#C5BEAA 7px 14px)"></div>
+            <div style="height:104px;border-radius:6px;background:repeating-linear-gradient(135deg,#CFC9B8 0 7px,#C5BEAA 7px 14px)"></div>
+            <div style="height:104px;border-radius:6px;background:repeating-linear-gradient(135deg,#CFC9B8 0 7px,#C5BEAA 7px 14px)"></div>
+            <div style="height:104px;border-radius:6px;background:repeating-linear-gradient(135deg,#CFC9B8 0 7px,#C5BEAA 7px 14px)"></div>
+            <div style="height:104px;border-radius:6px;background:repeating-linear-gradient(135deg,#CFC9B8 0 7px,#C5BEAA 7px 14px)"></div>
+            <div style="height:104px;border-radius:6px;background:repeating-linear-gradient(135deg,#CFC9B8 0 7px,#C5BEAA 7px 14px)"></div>
+          </div>
+        </div>
+
+        <div style="position:absolute;left:64px;right:64px;bottom:70px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) 210px;gap:18px;align-items:stretch">
+          <div style="background:rgba(244,241,234,.94);border-radius:8px;padding:20px 20px 22px;display:flex;flex-direction:column;gap:9px">
+            <span style="font:500 8px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:#B86B4A">01 · SHOW DIRECTION</span>
+            <h3 style="margin:3px 0 0;font:500 21px/1.2 'Playfair Display',serif;color:#1E231C">Dựng một đêm diễn</h3>
+            <p style="margin:0;font:300 11.5px/1.65 'Be Vietnam Pro',sans-serif;color:rgba(30,35,28,.68)">Concept, flow, cue, casting, và những quyết định trên sàn lúc dựng.</p>
+            <span style="margin-top:auto;font:400 10px/1.5 'JetBrains Mono',monospace;color:rgba(30,35,28,.5)">500 – 5.000 khách · indoor &amp; outdoor</span>
+          </div>
+          <div style="background:rgba(244,241,234,.94);border-radius:8px;padding:20px 20px 22px;display:flex;flex-direction:column;gap:9px">
+            <span style="font:500 8px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:#B86B4A">02 · CREATIVE PRODUCTION</span>
+            <h3 style="margin:3px 0 0;font:500 21px/1.2 'Playfair Display',serif;color:#1E231C">Đi từ brief tới thật</h3>
+            <p style="margin:0;font:300 11.5px/1.65 'Be Vietnam Pro',sans-serif;color:rgba(30,35,28,.68)">Timeline, đội, ngân sách, vận hành — để ý tưởng không chết ở file trình bày.</p>
+            <span style="margin-top:auto;font:400 10px/1.5 'JetBrains Mono',monospace;color:rgba(30,35,28,.5)">brand event · concert · corporate</span>
+          </div>
+          <div style="background:rgba(244,241,234,.94);border-radius:8px;padding:20px 20px 22px;display:flex;flex-direction:column;gap:9px">
+            <span style="font:500 8px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:#B86B4A">03 · LIVE CONTENT &amp; MUSIC</span>
+            <h3 style="margin:3px 0 0;font:500 21px/1.2 'Playfair Display',serif;color:#1E231C">Phần nghe của cả đêm</h3>
+            <p style="margin:0;font:300 11.5px/1.65 'Be Vietnam Pro',sans-serif;color:rgba(30,35,28,.68)">Medley, band, chuyển bài, và chỗ nào nên để im lặng.</p>
+            <span style="margin-top:auto;font:400 10px/1.5 'JetBrains Mono',monospace;color:rgba(30,35,28,.5)">music direction · arrangement</span>
+          </div>
+          <div style="border:1px solid rgba(247,244,236,.45);border-radius:8px;padding:18px 16px;display:flex;flex-direction:column;gap:10px;background:rgba(20,24,19,.34)">
+            <span style="font:500 8px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:rgba(247,244,236,.6)">NDA</span>
+            <p style="margin:0;font:300 11.5px/1.6 'Be Vietnam Pro',sans-serif;color:rgba(247,244,236,.85)">Hầu hết dự án không công bố được. Cần xem cụ thể, em gửi riêng.</p>
+            <span style="font:500 9.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.16em;color:#E8A87C;margin-top:auto">LIÊN HỆ &#8594;</span>
+          </div>
+        </div>
+
+        <div style="position:absolute;left:34px;top:80px;display:flex;align-items:center;gap:9px;background:rgba(30,35,28,.6);border-radius:99px;padding:8px 14px">
+          <span style="font:400 11px/1 'JetBrains Mono',monospace;color:#F7F4EC">&#8592;</span>
+          <span style="font:500 9px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:#F7F4EC">VỀ GARDEN</span>
+        </div>
+      </div>
+      <sc-if value="{{ showAnnotations }}" hint-placeholder-val="{{ true }}">
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:rgba(0,0,0,.1)">
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">L4</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">Không host trong Shows — để công việc tự nói.</p></div>
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">L5</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">Không per-project: 3 loại việc + dải moment ẩn danh + cửa NDA để liên hệ.</p></div>
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">CLIENT PATH</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">Arrival → nav SHOWS → hiểu em làm gì: 1 cú bấm, dưới 15 giây.</p></div>
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">LIGHT</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">Dusk + đèn sân khấu. Cùng chân trời, cùng toạ độ sân trống như M-02.</p></div>
+      </div>
+      </sc-if>
+    </div>
+  </div>
+
+  <div style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px" id="1d">
+    <div style="display:flex;align-items:baseline;gap:9px;font:400 11.5px/1.3 'Be Vietnam Pro',sans-serif;color:rgba(0,0,0,.55)"><span style="font:600 10.5px 'JetBrains Mono',monospace;padding:3px 7px;background:rgba(0,0,0,.07);color:#23261F;border-radius:5px">1d</span>M-04 · CÁCH EM LÀM — /works/how, một trang, không per-project</div>
+    <div style="width:1280px;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden">
+      <div style="position:relative;height:920px;overflow:hidden;background:#F4F1EA">
+        <div style="position:absolute;left:0;right:0;top:0;height:300px;background:linear-gradient(178deg,#2C3A44 0%,#4A5658 40%,#6B7263 78%,#3A4038 100%)"></div>
+        <div style="position:absolute;left:0;right:0;top:0;height:300px;background:radial-gradient(50% 60% at 62% 40%,rgba(255,226,172,.35) 0%,rgba(255,226,172,0) 70%)"></div>
+        <div style="position:absolute;left:0;right:0;top:0;height:300px;background:linear-gradient(180deg,rgba(20,24,19,.55) 0%,rgba(20,24,19,.15) 40%,rgba(244,241,234,.1) 100%)"></div>
+        <div style="position:absolute;right:22px;top:266px;font:500 9px 'JetBrains Mono',monospace;letter-spacing:.16em;color:rgba(255,255,255,.75);border:1px dashed rgba(255,255,255,.4);background:rgba(20,24,19,.38);padding:5px 10px;border-radius:3px">HERO PLATE · ảnh/clip show, 16:5</div>
+
+        <div style="position:absolute;left:0;right:0;top:0;height:62px;display:flex;align-items:center;gap:20px;padding:0 34px">
+          <span style="font:500 17px/1 'Playfair Display',serif;letter-spacing:.1em;color:#F7F4EC">ANH LI</span>
+          <div style="display:flex;align-items:center;gap:10px;margin-left:14px;font:500 9px/1 'JetBrains Mono',monospace;letter-spacing:.14em;color:rgba(247,244,236,.7)">
+            <span>SHOWS</span><span>/</span><span style="color:#F7F4EC">CÁCH EM LÀM</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:9px;margin-left:auto;border:1px solid rgba(247,244,236,.5);border-radius:99px;padding:7px 14px">
+            <span style="font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:#F7F4EC">MAP</span>
+            <span style="width:7px;height:7px;border-radius:99px;background:#E8A87C"></span>
+          </div>
+        </div>
+
+        <div style="position:absolute;left:64px;top:150px;width:620px">
+          <span style="font:500 9.5px/1 'JetBrains Mono',monospace;letter-spacing:.22em;color:rgba(247,244,236,.7)">CRAFT · KHÔNG GẮN DỰ ÁN CỤ THỂ</span>
+          <h2 style="margin:13px 0 0;font:400 42px/1.14 'Playfair Display',serif;color:#F7F4EC">Cách em dựng một đêm diễn</h2>
+        </div>
+
+        <div style="position:absolute;left:64px;right:64px;top:334px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:44px">
+          <div style="display:flex;flex-direction:column;gap:26px">
+            <div style="display:grid;grid-template-columns:132px minmax(0,1fr);gap:22px;padding-bottom:22px;border-bottom:1px solid rgba(30,35,28,.12)">
+              <span style="font:500 9px/1.4 'JetBrains Mono',monospace;letter-spacing:.16em;color:#B86B4A">BRIEF</span>
+              <p style="margin:0;font:300 13.5px/1.8 'Be Vietnam Pro',sans-serif;color:#2E332C;text-wrap:pretty">Việc đầu tiên không phải nghĩ ý tưởng, mà là hiểu khách muốn người ta <em style="font-style:normal;font-weight:500">cảm</em> được gì khi ra về. Cái đó quyết hết phần sau.</p>
+            </div>
+            <div style="display:grid;grid-template-columns:132px minmax(0,1fr);gap:22px;padding-bottom:22px;border-bottom:1px solid rgba(30,35,28,.12)">
+              <span style="font:500 9px/1.4 'JetBrains Mono',monospace;letter-spacing:.16em;color:#B86B4A">CREATIVE FRAME</span>
+              <p style="margin:0;font:300 13.5px/1.8 'Be Vietnam Pro',sans-serif;color:#2E332C;text-wrap:pretty">Một câu ngắn đủ để cả đội nhớ. Nếu phải giải thích dài thì nó chưa đúng — và trên sàn dựng sẽ không ai làm theo được.</p>
+            </div>
+            <div style="display:grid;grid-template-columns:132px minmax(0,1fr);gap:22px">
+              <div><span style="display:block;font:500 9px/1.4 'JetBrains Mono',monospace;letter-spacing:.16em;color:#B86B4A">SPACE</span><span style="display:block;margin-top:6px;font:400 9px/1.5 'JetBrains Mono',monospace;color:rgba(30,35,28,.45)">dạng tài liệu, đã xoá nhận diện khách</span></div>
+              <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px">
+                <div style="height:112px;border-radius:6px;background:repeating-linear-gradient(135deg,#DFD9C9 0 7px,#D5CEBB 7px 14px);display:grid;place-items:center"><span style="font:500 8px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#7A7A72">GROUND PLAN</span></div>
+                <div style="height:112px;border-radius:6px;background:repeating-linear-gradient(135deg,#DFD9C9 0 7px,#D5CEBB 7px 14px);display:grid;place-items:center"><span style="font:500 8px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#7A7A72">STAGE RENDER</span></div>
+                <div style="height:112px;border-radius:6px;background:repeating-linear-gradient(135deg,#DFD9C9 0 7px,#D5CEBB 7px 14px);display:grid;place-items:center"><span style="font:500 8px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#7A7A72">LIGHT PLOT</span></div>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:132px minmax(0,1fr);gap:22px;padding-top:22px;border-top:1px solid rgba(30,35,28,.12)">
+              <span style="font:500 9px/1.4 'JetBrains Mono',monospace;letter-spacing:.16em;color:#B86B4A">MOMENT</span>
+              <div>
+                <p style="margin:0 0 10px;font:400 20px/1.5 Caveat,cursive;color:#3A4136">“Lúc đèn tắt hết mà cả sân vẫn hát tiếp — đó là cái mình dựng cả tháng để đợi.”</p>
+                <div style="height:150px;border-radius:6px;background:repeating-linear-gradient(135deg,#DFD9C9 0 7px,#D5CEBB 7px 14px);display:grid;place-items:center"><span style="font:500 8px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#7A7A72">MOMENT PHOTO · KHÔNG CAPTION, KHÔNG TÊN KHÁCH</span></div>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <div style="background:#EDEAE0;border:1px solid rgba(30,35,28,.1);border-radius:8px;padding:20px">
+              <span style="font:500 9px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:#B86B4A">VAI TRÒ EM NHẬN</span>
+              <div style="display:flex;flex-direction:column;gap:11px;margin-top:14px">
+                <div style="display:flex;justify-content:space-between;gap:12px;font:300 12px/1.5 'Be Vietnam Pro',sans-serif;color:#2E332C"><span style="color:rgba(30,35,28,.55)">Thường là</span><span style="font-weight:500;text-align:right">Show Director<br />Creative Producer</span></div>
+                <div style="display:flex;justify-content:space-between;gap:12px;font:300 12px/1.5 'Be Vietnam Pro',sans-serif;color:#2E332C"><span style="color:rgba(30,35,28,.55)">Quy mô</span><span style="font-weight:500;text-align:right">500 – 5.000 khách</span></div>
+                <div style="display:flex;justify-content:space-between;gap:12px;font:300 12px/1.5 'Be Vietnam Pro',sans-serif;color:#2E332C"><span style="color:rgba(30,35,28,.55)">Đội</span><span style="font-weight:500;text-align:right">10 – 40 người</span></div>
+                <div style="display:flex;justify-content:space-between;gap:12px;font:300 12px/1.5 'Be Vietnam Pro',sans-serif;color:#2E332C"><span style="color:rgba(30,35,28,.55)">Chi tiết</span><span style="font-weight:500;text-align:right">gửi riêng khi cần</span></div>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px;border:1px solid rgba(30,35,28,.14);border-radius:8px;padding:18px">
+              <span style="font:500 9px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:rgba(30,35,28,.5)">ĐI TIẾP</span>
+              <span style="font:400 13px/1.5 'Be Vietnam Pro',sans-serif;color:#1E231C">Về sân khấu trong vườn &#8594;</span>
+              <span style="font:400 13px/1.5 'Be Vietnam Pro',sans-serif;color:#1E231C">Xem fragments ở VISUAL &#8594;</span>
+              <span style="font:400 13px/1.5 'Be Vietnam Pro',sans-serif;color:#1E231C">Liên hệ &#8594;</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <sc-if value="{{ showAnnotations }}" hint-placeholder-val="{{ true }}">
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:rgba(0,0,0,.1)">
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">STRUCTURE</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">Giữ khung Brief → Frame → Space → Moment → Role, nhưng kể như phương pháp, không kể dự án.</p></div>
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">SHORT CASE</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">Mọi hình ở đây đã xoá nhận diện: không logo, không tên khách, không năm.</p></div>
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">ROUTE</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">Một route duy nhất /works/how thay cho /works/[slug] — không cần CMS từng project.</p></div>
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">OUT</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">Về sân khấu (camera zoom-out) · VISUAL · liên hệ. Luôn có đường về.</p></div>
+      </div>
+      </sc-if>
+    </div>
+  </div>
+
+  <div style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px" id="1e">
+    <div style="display:flex;align-items:baseline;gap:9px;font:400 11.5px/1.3 'Be Vietnam Pro',sans-serif;color:rgba(0,0,0,.55)"><span style="font:600 10.5px 'JetBrains Mono',monospace;padding:3px 7px;background:rgba(0,0,0,.07);color:#23261F;border-radius:5px">1e</span>M-05 · MUSIC — Cái Sạp, host hiện diện rõ nhất</div>
+    <div style="width:1280px;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden">
+      <div style="position:relative;height:740px;overflow:hidden">
+        <div style="position:absolute;inset:0;background:linear-gradient(178deg,#C3CBC2 0%,#D8D3C0 30%,#DCCFAF 52%,#BFB490 72%,#96906E 100%)"></div>
+        <div style="position:absolute;left:-4%;right:-4%;top:37%;height:17%;background:#93A29B;opacity:.38;border-radius:50% 50% 0 0/100% 100% 0 0"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(46% 40% at 30% 34%,rgba(255,239,204,.55) 0%,rgba(255,239,204,0) 72%)"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(268deg,rgba(30,35,28,.5) 0%,rgba(30,35,28,.08) 46%,rgba(30,35,28,.22) 100%)"></div>
+        <div style="position:absolute;left:38px;bottom:16px;font:500 9px 'JetBrains Mono',monospace;letter-spacing:.16em;color:rgba(255,255,255,.8);border:1px dashed rgba(255,255,255,.42);background:rgba(30,35,28,.32);padding:5px 11px;border-radius:3px">WORLD PLATE · MUSIC / LATE AFTERNOON · sạp gỗ, máy hát, đĩa, con mèo · camera gần, dolly nhẹ</div>
+
+        <div style="position:absolute;left:0;right:0;top:0;height:62px;display:flex;align-items:center;gap:30px;padding:0 34px">
+          <div style="display:flex;flex-direction:column;gap:1px">
+            <span style="font:500 17px/1 'Playfair Display',serif;letter-spacing:.1em;color:#F7F4EC">ANH LI</span>
+            <span style="font:300 9px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.13em;color:rgba(247,244,236,.62)">The Dandelion Garden</span>
+          </div>
+          <div style="display:flex;gap:26px;margin:0 auto">
+            <span style="font:400 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:rgba(247,244,236,.66)">GARDEN</span>
+            <span style="display:flex;flex-direction:column;align-items:center;gap:5px;font:500 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:#F7F4EC">MUSIC<span style="width:4px;height:4px;border-radius:99px;background:#B86B4A"></span></span>
+            <span style="font:400 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:rgba(247,244,236,.66)">SHOWS</span>
+            <span style="font:400 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:rgba(247,244,236,.66)">VISUAL</span>
+            <span style="font:400 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:rgba(247,244,236,.66)">STORY</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:9px;border:1px solid rgba(247,244,236,.55);border-radius:99px;padding:7px 14px">
+            <span style="font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:#F7F4EC">MAP</span>
+            <span style="width:7px;height:7px;border-radius:99px;background:#B86B4A"></span>
+          </div>
+        </div>
+
+        <div style="position:absolute;left:52px;top:122px;width:330px">
+          <span style="font:500 9.5px/1 'JetBrains Mono',monospace;letter-spacing:.22em;color:rgba(247,244,236,.72)">MUSIC · CÁI SẠP</span>
+          <h2 style="margin:13px 0 12px;font:400 40px/1.14 'Playfair Display',serif;color:#F7F4EC">Nghe, lưu giữ, và chia sẻ.</h2>
+          <p style="margin:0;font:300 12.5px/1.75 'Be Vietnam Pro',sans-serif;color:rgba(247,244,236,.78);text-wrap:pretty">Sạp nhạc của em. Bài em viết, bài em thương, và những bản mix để dành cho một buổi chiều rảnh.</p>
+        </div>
+
+        <div style="position:absolute;left:40%;top:60%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:7px">
+          <span style="width:34px;height:70px;border-radius:17px 17px 5px 5px;background:linear-gradient(180deg,#23261F,#1E231C)"></span>
+          <span style="width:46px;height:6px;border-radius:99px;background:rgba(30,35,28,.4);filter:blur(2.5px)"></span>
+          <span style="font:500 8px/1 'JetBrains Mono',monospace;letter-spacing:.14em;color:rgba(255,255,255,.8);text-shadow:0 1px 6px rgba(0,0,0,.5)">HOST · ngồi cạnh máy hát, pose nhỏ đổi theo track</span>
+        </div>
+
+        <div style="position:absolute;right:46px;top:104px;width:392px;background:rgba(244,241,234,.95);border-radius:10px;overflow:hidden;box-shadow:0 18px 50px rgba(30,35,28,.28)">
+          <div style="display:flex;gap:16px;padding:20px;border-bottom:1px solid rgba(30,35,28,.1)">
+            <div style="width:96px;height:96px;border-radius:6px;background:repeating-linear-gradient(135deg,#DCD6C6 0 7px,#D2CBB8 7px 14px);display:grid;place-items:center;text-align:center"><span style="font:500 8px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;color:#7A7A72">COVER<br />ART</span></div>
+            <div style="display:flex;flex-direction:column;gap:6px;min-width:0">
+              <span style="font:500 8px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:#B86B4A">ĐANG PHÁT</span>
+              <h3 style="margin:0;font:500 22px/1.2 'Playfair Display',serif;color:#1E231C">Tên bài hát</h3>
+              <span style="font:300 11.5px/1.5 'Be Vietnam Pro',sans-serif;color:rgba(30,35,28,.6)">Anh Li · 2025 · sáng tác &amp; sản xuất</span>
+              <div style="display:flex;align-items:center;gap:10px;margin-top:6px">
+                <span style="font:400 9px/1 'JetBrains Mono',monospace;color:rgba(30,35,28,.5)">01:24</span>
+                <span style="flex:1;height:3px;border-radius:99px;background:rgba(30,35,28,.15);position:relative"><span style="position:absolute;left:0;top:0;bottom:0;width:38%;border-radius:99px;background:#B86B4A"></span></span>
+                <span style="font:400 9px/1 'JetBrains Mono',monospace;color:rgba(30,35,28,.5)">03:42</span>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:18px;padding:14px 20px;border-bottom:1px solid rgba(30,35,28,.1)">
+            <span style="font:400 13px/1 'JetBrains Mono',monospace;color:rgba(30,35,28,.55)">&#8676;</span>
+            <span style="width:42px;height:42px;border-radius:99px;background:#1E231C;display:grid;place-items:center;font:400 13px/1 'JetBrains Mono',monospace;color:#F7F4EC">&#10074;&#10074;</span>
+            <span style="font:400 13px/1 'JetBrains Mono',monospace;color:rgba(30,35,28,.55)">&#8677;</span>
+            <span style="margin-left:auto;font:500 9px/1 'JetBrains Mono',monospace;letter-spacing:.14em;color:rgba(30,35,28,.5)">NHẠC ĐI THEO ANH SANG STATE KHÁC</span>
+          </div>
+          <div style="padding:8px 0 12px">
+            <div style="display:flex;align-items:center;gap:14px;padding:11px 20px;background:rgba(184,107,74,.1)">
+              <span style="font:400 9.5px/1 'JetBrains Mono',monospace;color:#B86B4A">01</span>
+              <span style="flex:1;font:400 12.5px/1 'Be Vietnam Pro',sans-serif;color:#1E231C">Tên bài hát</span>
+              <span style="font:400 9.5px/1 'JetBrains Mono',monospace;color:rgba(30,35,28,.45)">03:42</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;padding:11px 20px">
+              <span style="font:400 9.5px/1 'JetBrains Mono',monospace;color:rgba(30,35,28,.4)">02</span>
+              <span style="flex:1;font:300 12.5px/1 'Be Vietnam Pro',sans-serif;color:#2E332C">Bài thứ hai</span>
+              <span style="font:400 9.5px/1 'JetBrains Mono',monospace;color:rgba(30,35,28,.45)">04:05</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;padding:11px 20px">
+              <span style="font:400 9.5px/1 'JetBrains Mono',monospace;color:rgba(30,35,28,.4)">03</span>
+              <span style="flex:1;font:300 12.5px/1 'Be Vietnam Pro',sans-serif;color:#2E332C">Bài thứ ba</span>
+              <span style="font:400 9.5px/1 'JetBrains Mono',monospace;color:rgba(30,35,28,.45)">02:58</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;padding:11px 20px">
+              <span style="font:400 9.5px/1 'JetBrains Mono',monospace;color:rgba(30,35,28,.4)">04</span>
+              <span style="flex:1;font:300 12.5px/1 'Be Vietnam Pro',sans-serif;color:#2E332C">Bản mix chiều rảnh</span>
+              <span style="font:400 9.5px/1 'JetBrains Mono',monospace;color:rgba(30,35,28,.45)">18:20</span>
+            </div>
+            <div style="padding:12px 20px 4px;display:flex;justify-content:space-between;align-items:center">
+              <span style="font:500 9.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.16em;color:#B86B4A">TẤT CẢ BÀI &#8594;</span>
+              <span style="font:400 15px/1 Caveat,cursive;color:rgba(30,35,28,.5)">/sap</span>
+            </div>
+          </div>
+        </div>
+
+        <sc-if value="{{ showFamilyTraces }}" hint-placeholder-val="{{ true }}">
+        <span style="position:absolute;left:20%;top:44%;font:500 8px/1.3 'JetBrains Mono',monospace;letter-spacing:.06em;color:#DCE7DF;border:1px dotted rgba(220,231,223,.75);padding:3px 6px;border-radius:3px;background:rgba(107,143,122,.3)">FAMILY TRACE · khung ảnh nhỏ trên sạp</span>
+        </sc-if>
+        <div style="position:absolute;left:34px;bottom:64px;display:flex;align-items:center;gap:9px;background:rgba(30,35,28,.6);border-radius:99px;padding:8px 14px">
+          <span style="font:400 11px/1 'JetBrains Mono',monospace;color:#F7F4EC">&#8592;</span>
+          <span style="font:500 9px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:#F7F4EC">VỀ GARDEN</span>
+        </div>
+      </div>
+      <sc-if value="{{ showAnnotations }}" hint-placeholder-val="{{ true }}">
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:rgba(0,0,0,.1)">
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">L6</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">Không autoplay. Bấm play ở đây → player thu nhỏ thành mini-control ở state khác.</p></div>
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">L4</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">Host rõ nhất ở đây — vùng cá nhân nhất, nhưng vẫn phụ so với world.</p></div>
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">PANEL</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">Panel phải là HTML thật: chữ chọn được, dịch được, accessible.</p></div>
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">ROUTE</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">/sap mở trực tiếp được, cùng nội dung, không cần world.</p></div>
+      </div>
+      </sc-if>
+    </div>
+  </div>
+
+  <div style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px" id="1f">
+    <div style="display:flex;align-items:baseline;gap:9px;font:400 11.5px/1.3 'Be Vietnam Pro',sans-serif;color:rgba(0,0,0,.55)"><span style="font:600 10.5px 'JetBrains Mono',monospace;padding:3px 7px;background:rgba(0,0,0,.07);color:#23261F;border-radius:5px">1f</span>M-06 · VISUAL — nhà kính, cách nghĩ bằng hình</div>
+    <div style="width:1280px;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden">
+      <div style="position:relative;height:740px;overflow:hidden">
+        <div style="position:absolute;inset:0;background:linear-gradient(178deg,#B9C6C4 0%,#CFD4C9 32%,#D9D5C2 56%,#B9B79B 78%,#8F9478 100%)"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(60% 50% at 50% 18%,rgba(255,252,236,.6) 0%,rgba(255,252,236,0) 72%)"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(30,35,28,.36) 0%,rgba(30,35,28,.04) 28%,rgba(30,35,28,.4) 100%)"></div>
+        <div style="position:absolute;left:50%;bottom:16px;transform:translateX(-50%);font:500 9px 'JetBrains Mono',monospace;letter-spacing:.16em;color:rgba(255,255,255,.8);border:1px dashed rgba(255,255,255,.42);background:rgba(30,35,28,.32);padding:5px 11px;border-radius:3px">WORLD PLATE · VISUAL / NHÀ KÍNH · bàn làm việc, bảng ghim phác thảo, cây, nắng lọc qua kính</div>
+
+        <div style="position:absolute;left:0;right:0;top:0;height:62px;display:flex;align-items:center;gap:30px;padding:0 34px">
+          <div style="display:flex;flex-direction:column;gap:1px">
+            <span style="font:500 17px/1 'Playfair Display',serif;letter-spacing:.1em;color:#F7F4EC">ANH LI</span>
+            <span style="font:300 9px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.13em;color:rgba(247,244,236,.62)">The Dandelion Garden</span>
+          </div>
+          <div style="display:flex;gap:26px;margin:0 auto">
+            <span style="font:400 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:rgba(247,244,236,.66)">GARDEN</span>
+            <span style="font:400 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:rgba(247,244,236,.66)">MUSIC</span>
+            <span style="font:400 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:rgba(247,244,236,.66)">SHOWS</span>
+            <span style="display:flex;flex-direction:column;align-items:center;gap:5px;font:500 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:#F7F4EC">VISUAL<span style="width:4px;height:4px;border-radius:99px;background:#B86B4A"></span></span>
+            <span style="font:400 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:rgba(247,244,236,.66)">STORY</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:9px;border:1px solid rgba(247,244,236,.55);border-radius:99px;padding:7px 14px">
+            <span style="font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:#F7F4EC">MAP</span>
+            <span style="width:7px;height:7px;border-radius:99px;background:#B86B4A"></span>
+          </div>
+        </div>
+
+        <div style="position:absolute;left:56px;top:112px;width:300px">
+          <span style="font:500 9.5px/1 'JetBrains Mono',monospace;letter-spacing:.22em;color:rgba(247,244,236,.75)">VISUAL</span>
+          <h2 style="margin:13px 0 12px;font:400 38px/1.14 'Playfair Display',serif;color:#F7F4EC">Phác thảo, thử nghiệm, hoàn thiện.</h2>
+          <p style="margin:0 0 20px;font:300 12.5px/1.75 'Be Vietnam Pro',sans-serif;color:rgba(247,244,236,.8);text-wrap:pretty">Mảnh vụn: KV, moodboard, bản nháp, ảnh chụp vọc. Không xếp theo dự án, không caption dài — cái nào cho xem được thì ở đây.</p>
+          <span style="display:inline-block;font:400 10px/1.5 'JetBrains Mono',monospace;letter-spacing:.06em;color:rgba(247,244,236,.72);border:1px solid rgba(247,244,236,.32);padding:8px 12px;border-radius:3px">NDA · đã xoá logo &amp; nhận diện khách</span>
+        </div>
+
+        <div style="position:absolute;left:394px;right:46px;top:106px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:232px;gap:16px">
+          <div style="border-radius:8px;background:repeating-linear-gradient(135deg,#E2DCCC 0 7px,#D8D1BE 7px 14px);position:relative;grid-row:span 2"><span style="position:absolute;left:14px;bottom:14px;font:500 8px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#6E6E66">FRAGMENT · 3:4</span></div>
+          <div style="border-radius:8px;background:repeating-linear-gradient(135deg,#E2DCCC 0 7px,#D8D1BE 7px 14px);position:relative"><span style="position:absolute;left:14px;bottom:14px;font:500 8px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#6E6E66">FRAGMENT</span></div>
+          <div style="border-radius:8px;background:repeating-linear-gradient(135deg,#E2DCCC 0 7px,#D8D1BE 7px 14px);position:relative"><span style="position:absolute;left:14px;bottom:14px;font:500 8px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#6E6E66">NHÁP TAY</span></div>
+          <div style="border-radius:8px;background:rgba(244,241,234,.94);padding:20px;display:flex;flex-direction:column;gap:9px">
+            <span style="font:500 8px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:#B86B4A">PROCESS NOTE</span>
+            <p style="margin:0;font:400 17px/1.45 Caveat,cursive;color:#3A4136">Nháp bằng tay trước, máy sau. Cái gì vẽ ra không hiểu ngay thì show cũng không hiểu.</p>
+            <span style="margin-top:auto;font:500 9.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.16em;color:#B86B4A">XEM QUY TRÌNH &#8594;</span>
+          </div>
+          <div style="border-radius:8px;background:repeating-linear-gradient(135deg,#E2DCCC 0 7px,#D8D1BE 7px 14px);position:relative"><span style="position:absolute;left:14px;bottom:14px;font:500 8px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#6E6E66">FRAGMENT · KHÔNG TÊN</span></div>
+        </div>
+
+        <div style="position:absolute;left:70px;bottom:112px;display:flex;flex-direction:column;align-items:center;gap:6px">
+          <span style="width:22px;height:46px;border-radius:11px 11px 4px 4px;background:linear-gradient(180deg,#23261F,#1E231C);opacity:.72"></span>
+          <span style="width:30px;height:5px;border-radius:99px;background:rgba(30,35,28,.3);filter:blur(2px)"></span>
+          <span style="font:500 8px/1 'JetBrains Mono',monospace;letter-spacing:.14em;color:rgba(255,255,255,.72);text-shadow:0 1px 6px rgba(0,0,0,.5)">HOST · nhẹ, working figure</span>
+        </div>
+        <div style="position:absolute;left:34px;bottom:26px;display:flex;align-items:center;gap:13px;background:rgba(30,35,28,.78);border-radius:99px;padding:9px 16px 9px 10px">
+          <span style="width:30px;height:30px;border-radius:99px;background:#B86B4A;display:grid;place-items:center;font:400 9px/1 'JetBrains Mono',monospace;color:#fff">&#10074;&#10074;</span>
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <span style="font:400 10.5px/1 'Be Vietnam Pro',sans-serif;color:#F7F4EC">Tên bài hát — đang phát</span>
+            <span style="font:500 8px/1 'JetBrains Mono',monospace;letter-spacing:.14em;color:rgba(247,244,236,.55)">MINI-PLAYER · PAUSE · MUTE · VỀ MUSIC</span>
+          </div>
+        </div>
+      </div>
+      <sc-if value="{{ showAnnotations }}" hint-placeholder-val="{{ true }}">
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:rgba(0,0,0,.1)">
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">GOAL</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">Cho thấy cách nghĩ (L9) — không phải gallery trang trí.</p></div>
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">GRID</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">Masonry 3 cột, messy có chủ ý — không nhóm theo dự án, không filter.</p></div>
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">MINI-PLAYER</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">Nhạc từ MUSIC vẫn chạy, luôn có pause/mute/back (L6).</p></div>
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">OUT</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">Bấm ảnh → lightbox HTML; bấm nhà → về GARDEN.</p></div>
+      </div>
+      </sc-if>
+    </div>
+  </div>
+
+  <div style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px" id="1g">
+    <div style="display:flex;align-items:baseline;gap:9px;font:400 11.5px/1.3 'Be Vietnam Pro',sans-serif;color:rgba(0,0,0,.55)"><span style="font:600 10.5px 'JetBrains Mono',monospace;padding:3px 7px;background:rgba(0,0,0,.07);color:#23261F;border-radius:5px">1g</span>M-07 · STORY / MEMORY — gộp About + Journey + gia đình</div>
+    <div style="width:1280px;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden">
+      <div style="position:relative;height:740px;overflow:hidden">
+        <div style="position:absolute;inset:0;background:linear-gradient(178deg,#3E4A5C 0%,#7C7A76 22%,#C69A6E 42%,#D8A878 54%,#8A7A5C 72%,#413F34 100%)"></div>
+        <div style="position:absolute;left:-4%;right:-4%;top:40%;height:16%;background:#3B4038;opacity:.55;border-radius:50% 50% 0 0/100% 100% 0 0"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(34% 26% at 66% 44%,rgba(255,214,150,.65) 0%,rgba(255,214,150,0) 70%)"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,24,19,.42) 0%,rgba(20,24,19,.06) 30%,rgba(20,24,19,.68) 100%)"></div>
+        <div style="position:absolute;left:50%;bottom:16px;transform:translateX(-50%);font:500 9px 'JetBrains Mono',monospace;letter-spacing:.16em;color:rgba(255,255,255,.8);border:1px dashed rgba(255,255,255,.42);background:rgba(20,24,19,.36);padding:5px 11px;border-radius:3px">WORLD PLATE · STORY / SUNSET · đường lên đồi, băng ghế, chân trời quen · host ngồi nhìn ra xa</div>
+
+        <div style="position:absolute;left:0;right:0;top:0;height:62px;display:flex;align-items:center;gap:30px;padding:0 34px">
+          <div style="display:flex;flex-direction:column;gap:1px">
+            <span style="font:500 17px/1 'Playfair Display',serif;letter-spacing:.1em;color:#F7F4EC">ANH LI</span>
+            <span style="font:300 9px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.13em;color:rgba(247,244,236,.62)">The Dandelion Garden</span>
+          </div>
+          <div style="display:flex;gap:26px;margin:0 auto">
+            <span style="font:400 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:rgba(247,244,236,.66)">GARDEN</span>
+            <span style="font:400 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:rgba(247,244,236,.66)">MUSIC</span>
+            <span style="font:400 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:rgba(247,244,236,.66)">SHOWS</span>
+            <span style="font:400 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:rgba(247,244,236,.66)">VISUAL</span>
+            <span style="display:flex;flex-direction:column;align-items:center;gap:5px;font:500 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:#F7F4EC">STORY<span style="width:4px;height:4px;border-radius:99px;background:#E8A87C"></span></span>
+          </div>
+          <div style="display:flex;align-items:center;gap:9px;border:1px solid rgba(247,244,236,.55);border-radius:99px;padding:7px 14px">
+            <span style="font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:#F7F4EC">MAP</span>
+            <span style="width:7px;height:7px;border-radius:99px;background:#E8A87C"></span>
+          </div>
+        </div>
+
+        <div style="position:absolute;left:56px;top:124px;width:430px">
+          <span style="font:500 9.5px/1 'JetBrains Mono',monospace;letter-spacing:.22em;color:rgba(247,244,236,.72)">STORY</span>
+          <h2 style="margin:13px 0 14px;font:400 42px/1.14 'Playfair Display',serif;color:#F7F4EC">Những chặng đường, những người đồng hành.</h2>
+          <p style="margin:0;font:300 13px/1.8 'Be Vietnam Pro',sans-serif;color:rgba(247,244,236,.82);text-wrap:pretty">Em là Lập. Làm show, viết nhạc, và về nhà. Phần này là chỗ để kể cả ba thứ đó cùng một lúc — nghề, người, và những gì ở lại.</p>
+        </div>
+
+        <div style="position:absolute;left:56px;bottom:74px;width:470px;display:flex;flex-direction:column;gap:1px;background:rgba(247,244,236,.22);border-radius:8px;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:16px;padding:15px 18px;background:rgba(244,241,234,.94)">
+            <span style="font:400 10px/1 'JetBrains Mono',monospace;color:#B86B4A">01</span>
+            <div style="min-width:0"><span style="display:block;font:500 14px/1.3 'Playfair Display',serif;color:#1E231C">Bắt đầu · trước 2015</span><span style="display:block;font:300 10.5px/1.4 'Be Vietnam Pro',sans-serif;color:rgba(30,35,28,.6)">Học nghề bằng cách đứng hậu trường</span></div>
+            <span style="margin-left:auto;font:400 11px/1 'JetBrains Mono',monospace;color:#B86B4A">&#8594;</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:16px;padding:15px 18px;background:rgba(244,241,234,.86)">
+            <span style="font:400 10px/1 'JetBrains Mono',monospace;color:#B86B4A">02</span>
+            <div style="min-width:0"><span style="display:block;font:500 14px/1.3 'Playfair Display',serif;color:#1E231C">Làm nghề · 2015 — 2022</span><span style="display:block;font:300 10.5px/1.4 'Be Vietnam Pro',sans-serif;color:rgba(30,35,28,.6)">Từ chạy sản xuất tới show director</span></div>
+            <span style="margin-left:auto;font:400 11px/1 'JetBrains Mono',monospace;color:#B86B4A">&#8594;</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:16px;padding:15px 18px;background:rgba(244,241,234,.86)">
+            <span style="font:400 10px/1 'JetBrains Mono',monospace;color:#B86B4A">03</span>
+            <div style="min-width:0"><span style="display:block;font:500 14px/1.3 'Playfair Display',serif;color:#1E231C">Bây giờ · 2023 —</span><span style="display:block;font:300 10.5px/1.4 'Be Vietnam Pro',sans-serif;color:rgba(30,35,28,.6)">Show, nhạc, và ba đứa con gái</span></div>
+            <span style="margin-left:auto;font:400 11px/1 'JetBrains Mono',monospace;color:#B86B4A">&#8594;</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:16px;padding:15px 18px;background:rgba(30,35,28,.62)">
+            <span style="font:400 10px/1 'JetBrains Mono',monospace;color:#E8A87C">04</span>
+            <div style="min-width:0"><span style="display:block;font:500 14px/1.3 'Playfair Display',serif;color:#F7F4EC">Inner world · Jyotiṣa</span><span style="display:block;font:300 10.5px/1.4 'Be Vietnam Pro',sans-serif;color:rgba(247,244,236,.65)">Optional · mở /sky bất cứ lúc nào, đêm thì dễ thấy hơn</span></div>
+            <span style="margin-left:auto;font:400 11px/1 'JetBrains Mono',monospace;color:#E8A87C">&#8594;</span>
+          </div>
+        </div>
+
+        <div style="position:absolute;right:56px;top:130px;width:300px;display:flex;flex-direction:column;gap:14px">
+          <div style="background:rgba(244,241,234,.94);border-radius:8px;padding:18px">
+            <span style="font:500 8px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:#B86B4A">PHILOSOPHY</span>
+            <p style="margin:11px 0 0;font:400 21px/1.45 Caveat,cursive;color:#3A4136">Some things grow. Some things become. Việc của mình là ở đó lúc nó xảy ra.</p>
+          </div>
+          <div style="border-radius:8px;background:repeating-linear-gradient(135deg,#DFD9C9 0 7px,#D5CEBB 7px 14px);height:168px;display:grid;place-items:center"><span style="font:500 8px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#6E6E66">ARCHIVE PHOTO · 4:3</span></div>
+          <sc-if value="{{ showFamilyTraces }}" hint-placeholder-val="{{ true }}">
+          <span style="font:500 8px/1.4 'JetBrains Mono',monospace;letter-spacing:.06em;color:#DCE7DF;border:1px dotted rgba(220,231,223,.75);padding:7px 9px;border-radius:3px;background:rgba(107,143,122,.3)">FAMILY TRACE V1 · 3 chi tiết gợi ba con gái + 1 dấu vết gợi vợ + silhouette xa. Chưa model, chưa navigation.</span>
+          </sc-if>
+        </div>
+
+        <div style="position:absolute;left:56%;top:57%;display:flex;flex-direction:column;align-items:center;gap:6px">
+          <span style="width:24px;height:40px;border-radius:12px 12px 4px 4px;background:linear-gradient(180deg,#23261F,#1E231C);opacity:.92"></span>
+          <span style="width:32px;height:5px;border-radius:99px;background:rgba(20,24,19,.45);filter:blur(2px)"></span>
+          <span style="font:500 8px/1 'JetBrains Mono',monospace;letter-spacing:.14em;color:rgba(255,255,255,.78);text-shadow:0 1px 6px rgba(0,0,0,.55)">HOST · hiện diện cảm xúc, ngồi ghế, nhìn ra xa</span>
+        </div>
+      </div>
+      <sc-if value="{{ showAnnotations }}" hint-placeholder-val="{{ true }}">
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:rgba(0,0,0,.1)">
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">L2</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">Journey là chapter trong Story, không phải nav item, không có zone 3D riêng.</p></div>
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">L7</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">Family = traces only ở V1. Không thành feature, không gate.</p></div>
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">L10</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">Chapter 04 là cổng optional vào /sky. World clock chỉ làm nó dễ thấy hơn về đêm.</p></div>
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">DEPTH</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">Chapter mở thành reading panel, không đi sâu thêm tầng nữa (L8).</p></div>
+      </div>
+      </sc-if>
+    </div>
+  </div>
+
+  <div style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px" id="1h">
+    <div style="display:flex;align-items:baseline;gap:9px;font:400 11.5px/1.3 'Be Vietnam Pro',sans-serif;color:rgba(0,0,0,.55)"><span style="font:600 10.5px 'JetBrains Mono',monospace;padding:3px 7px;background:rgba(0,0,0,.07);color:#23261F;border-radius:5px">1h</span>M-08 · MAP — overlay, luôn mở được từ mọi state</div>
+    <div style="width:1280px;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden">
+      <div style="position:relative;height:740px;overflow:hidden">
+        <div style="position:absolute;inset:0;background:linear-gradient(178deg,#A8BEC8 0%,#CBD6D5 28%,#E6DDC8 48%,#D0C8A2 64%,#A3A87C 100%)"></div>
+        <div style="position:absolute;inset:0;background:rgba(20,24,19,.62);backdrop-filter:blur(7px)"></div>
+
+        <div style="position:absolute;left:0;right:0;top:0;height:62px;display:flex;align-items:center;gap:30px;padding:0 34px">
+          <span style="font:500 17px/1 'Playfair Display',serif;letter-spacing:.1em;color:#F7F4EC">ANH LI</span>
+          <div style="display:flex;align-items:center;gap:9px;margin-left:auto;background:#F7F4EC;border-radius:99px;padding:7px 14px">
+            <span style="font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:#1E231C">ĐÓNG MAP</span>
+            <span style="font:400 10px/1 'JetBrains Mono',monospace;color:#B86B4A">&#10005;</span>
+          </div>
+        </div>
+
+        <div style="position:absolute;left:50%;top:118px;transform:translateX(-50%);text-align:center">
+          <span style="font:500 9.5px/1 'JetBrains Mono',monospace;letter-spacing:.22em;color:rgba(247,244,236,.6)">WORLD MAP · 5 CHỖ, 1 KHU VƯỜN</span>
+          <h2 style="margin:12px 0 0;font:400 34px/1.2 'Playfair Display',serif;color:#F7F4EC">Anh muốn đi đâu?</h2>
+        </div>
+
+        <div style="position:absolute;left:50%;top:236px;transform:translateX(-50%);width:1080px;height:330px;border:1px dashed rgba(247,244,236,.28);border-radius:10px">
+          <div style="position:absolute;left:8%;right:8%;top:44%;height:1px;background:rgba(247,244,236,.2)"></div>
+          <div style="position:absolute;left:9%;top:46%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:10px;width:150px;text-align:center">
+            <span style="width:46px;height:46px;border-radius:99px;border:1.5px solid #E8A87C;background:rgba(184,107,74,.22);display:grid;place-items:center;font:500 8px/1 'JetBrains Mono',monospace;color:#F7F4EC">01</span>
+            <span style="font:500 11px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:#F7F4EC">GARDEN</span>
+            <span style="font:300 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:rgba(247,244,236,.7)">Nhà &amp; sân — nơi mọi thứ bắt đầu và là đường về</span>
+          </div>
+          <div style="position:absolute;left:30%;top:46%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:10px;width:150px;text-align:center">
+            <span style="width:46px;height:46px;border-radius:99px;border:1.5px solid rgba(247,244,236,.5);display:grid;place-items:center;font:500 8px/1 'JetBrains Mono',monospace;color:#F7F4EC">02</span>
+            <span style="font:500 11px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:#F7F4EC">MUSIC</span>
+            <span style="font:300 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:rgba(247,244,236,.7)">Cái Sạp — nghe, lưu giữ, chia sẻ · /sap</span>
+          </div>
+          <div style="position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:10px;width:150px;text-align:center">
+            <span style="width:46px;height:46px;border-radius:99px;border:1.5px solid rgba(247,244,236,.5);display:grid;place-items:center;font:500 8px/1 'JetBrains Mono',monospace;color:#F7F4EC">03</span>
+            <span style="font:500 11px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:#F7F4EC">SHOWS</span>
+            <span style="font:300 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:rgba(247,244,236,.7)">Sân khấu — loại việc, vai trò, cách làm</span>
+          </div>
+          <div style="position:absolute;left:70%;top:46%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:10px;width:150px;text-align:center">
+            <span style="width:46px;height:46px;border-radius:99px;border:1.5px solid rgba(247,244,236,.5);display:grid;place-items:center;font:500 8px/1 'JetBrains Mono',monospace;color:#F7F4EC">04</span>
+            <span style="font:500 11px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:#F7F4EC">VISUAL</span>
+            <span style="font:300 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:rgba(247,244,236,.7)">Nhà kính — fragments, mảnh cho xem được</span>
+          </div>
+          <div style="position:absolute;left:91%;top:46%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:10px;width:150px;text-align:center">
+            <span style="width:46px;height:46px;border-radius:99px;border:1.5px solid rgba(247,244,236,.5);display:grid;place-items:center;font:500 8px/1 'JetBrains Mono',monospace;color:#F7F4EC">05</span>
+            <span style="font:500 11px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:#F7F4EC">STORY</span>
+            <span style="font:300 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:rgba(247,244,236,.7)">Đồi — About, chặng đường, gia đình, /sky</span>
+          </div>
+          <span style="position:absolute;left:9%;top:46%;transform:translate(-50%,-50%);width:66px;height:66px;border-radius:99px;border:1px solid rgba(232,168,124,.4)"></span>
+          <span style="position:absolute;left:9%;bottom:14%;transform:translateX(-50%);font:400 15px/1 Caveat,cursive;color:rgba(247,244,236,.7)">anh đang ở đây</span>
+        </div>
+
+        <div style="position:absolute;left:50%;bottom:96px;transform:translateX(-50%);display:flex;gap:12px">
+          <span style="font:500 9.5px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:rgba(247,244,236,.85);border:1px solid rgba(247,244,236,.4);padding:10px 16px;border-radius:99px">/FLAT · ĐỌC NHANH, IN ĐƯỢC</span>
+          <span style="font:500 9.5px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:rgba(247,244,236,.85);border:1px solid rgba(247,244,236,.4);padding:10px 16px;border-radius:99px">/SAP</span>
+          <span style="font:500 9.5px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:rgba(247,244,236,.85);border:1px solid rgba(247,244,236,.4);padding:10px 16px;border-radius:99px">/SKY</span>
+          <span style="font:500 9.5px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:rgba(247,244,236,.85);border:1px solid rgba(247,244,236,.4);padding:10px 16px;border-radius:99px">LIÊN HỆ</span>
+        </div>
+        <span style="position:absolute;left:50%;bottom:52px;transform:translateX(-50%);font:400 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.1em;color:rgba(247,244,236,.5)">ESC để đóng · MAP mở được từ mọi state (L11)</span>
+      </div>
+      <sc-if value="{{ showAnnotations }}" hint-placeholder-val="{{ true }}">
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:rgba(0,0,0,.1)">
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">FORM</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">Overlay chứ không phải trang riêng — world vẫn mờ phía sau, không mất ngữ cảnh.</p></div>
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">ORDER</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">Trái sang phải đúng thứ tự không gian trong world, không phải list ABC.</p></div>
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">ROUTES</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">Route thật nằm ngay đây, không giấu trong footer.</p></div>
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">TRANSITION</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">Chọn chỗ → overlay tan, camera travel tới anchor tương ứng, 900ms ease.</p></div>
+      </div>
+      </sc-if>
+    </div>
+  </div>
+
+  <div style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px" id="1i">
+    <div style="display:flex;align-items:baseline;gap:9px;font:400 11.5px/1.3 'Be Vietnam Pro',sans-serif;color:rgba(0,0,0,.55)"><span style="font:600 10.5px 'JetBrains Mono',monospace;padding:3px 7px;background:rgba(0,0,0,.07);color:#23261F;border-radius:5px">1i</span>M-09 · FLAT — /flat, cùng identity, không WebGL</div>
+    <div style="width:1280px;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden">
+      <div style="position:relative;height:740px;overflow:hidden;background:#F4F1EA">
+        <div style="position:absolute;left:0;right:0;top:0;height:64px;display:flex;align-items:center;gap:24px;padding:0 56px;border-bottom:1px solid rgba(30,35,28,.12)">
+          <div style="display:flex;flex-direction:column;gap:1px">
+            <span style="font:500 17px/1 'Playfair Display',serif;letter-spacing:.1em;color:#1E231C">ANH LI</span>
+            <span style="font:300 9px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.13em;color:rgba(30,35,28,.55)">The Dandelion Garden · bản chữ</span>
+          </div>
+          <div style="display:flex;gap:24px;margin-left:auto">
+            <span style="font:400 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:rgba(30,35,28,.62)">MUSIC</span>
+            <span style="font:400 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:rgba(30,35,28,.62)">SHOWS</span>
+            <span style="font:400 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:rgba(30,35,28,.62)">VISUAL</span>
+            <span style="font:400 10.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.2em;color:rgba(30,35,28,.62)">STORY</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:9px;background:#1E231C;border-radius:99px;padding:8px 15px">
+            <span style="font:500 9.5px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:#F7F4EC">VÀO KHU VƯỜN 3D</span>
+          </div>
+        </div>
+
+        <div style="position:absolute;left:56px;right:56px;top:112px;display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:56px">
+          <div>
+            <h1 style="margin:0 0 18px;font:400 46px/1.14 'Playfair Display',serif;color:#1E231C;max-width:620px;text-wrap:pretty">Anh Lập — producer, show director, người viết nhạc, ba của ba đứa con gái.</h1>
+            <p style="margin:0 0 34px;max-width:560px;font:300 14px/1.85 'Be Vietnam Pro',sans-serif;color:#2E332C;text-wrap:pretty">Bản chữ của khu vườn: cùng một nội dung, đọc trong hai phút, in được, gửi được. Phần lớn dự án dưới NDA nên ở đây em ghi loại việc và vai trò, không ghi tên khách.</p>
+
+            <div style="display:flex;flex-direction:column;gap:0;border-top:1px solid rgba(30,35,28,.14)">
+              <div style="display:grid;grid-template-columns:180px minmax(0,1fr);gap:20px;padding:19px 0;border-bottom:1px solid rgba(30,35,28,.1);align-items:baseline">
+                <span style="font:400 10px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;color:rgba(30,35,28,.5)">SHOW DIRECTION</span>
+                <p style="margin:0;font:300 13px/1.75 'Be Vietnam Pro',sans-serif;color:#2E332C">Concept, flow, cue, casting, dựng. Indoor và outdoor, 500 – 5.000 khách.</p>
+              </div>
+              <div style="display:grid;grid-template-columns:180px minmax(0,1fr);gap:20px;padding:19px 0;border-bottom:1px solid rgba(30,35,28,.1);align-items:baseline">
+                <span style="font:400 10px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;color:rgba(30,35,28,.5)">CREATIVE PRODUCTION</span>
+                <p style="margin:0;font:300 13px/1.75 'Be Vietnam Pro',sans-serif;color:#2E332C">Từ brief tới đêm diễn: timeline, đội 10 – 40 người, ngân sách, vận hành.</p>
+              </div>
+              <div style="display:grid;grid-template-columns:180px minmax(0,1fr);gap:20px;padding:19px 0;border-bottom:1px solid rgba(30,35,28,.1);align-items:baseline">
+                <span style="font:400 10px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;color:rgba(30,35,28,.5)">LIVE CONTENT &amp; MUSIC</span>
+                <p style="margin:0;font:300 13px/1.75 'Be Vietnam Pro',sans-serif;color:#2E332C">Music direction, medley, band, chuyển bài — phần nghe của cả đêm.</p>
+              </div>
+              <div style="display:grid;grid-template-columns:180px minmax(0,1fr);gap:20px;padding:19px 0;border-bottom:1px solid rgba(30,35,28,.1);align-items:baseline">
+                <span style="font:400 10px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;color:rgba(30,35,28,.5)">DỰ ÁN CỤ THỂ</span>
+                <p style="margin:0;font:300 13px/1.75 'Be Vietnam Pro',sans-serif;color:#2E332C">Hầu hết dưới NDA. Cần xem, em gửi riêng — <span style="color:#B86B4A">liên hệ &#8594;</span></p>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <div style="border:1px solid rgba(30,35,28,.14);border-radius:8px;padding:20px">
+              <span style="font:500 8.5px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:#B86B4A">NGHE</span>
+              <p style="margin:11px 0 13px;font:300 12px/1.7 'Be Vietnam Pro',sans-serif;color:#2E332C">Cái Sạp — nhạc em viết và những bản mix để dành.</p>
+              <span style="font:500 9.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.16em;color:#B86B4A">/SAP &#8594;</span>
+            </div>
+            <div style="border:1px solid rgba(30,35,28,.14);border-radius:8px;padding:20px">
+              <span style="font:500 8.5px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:#B86B4A">XEM</span>
+              <p style="margin:11px 0 13px;font:300 12px/1.7 'Be Vietnam Pro',sans-serif;color:#2E332C">Fragments — KV, moodboard, bản nháp, không xếp theo dự án.</p>
+              <span style="font:500 9.5px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.16em;color:#B86B4A">VISUAL &#8594;</span>
+            </div>
+            <div style="background:#EDEAE0;border-radius:8px;padding:20px">
+              <span style="font:500 8.5px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:rgba(30,35,28,.5)">LIÊN HỆ</span>
+              <p style="margin:11px 0 4px;font:400 13px/1.6 'Be Vietnam Pro',sans-serif;color:#1E231C">hello@anhli.xx</p>
+              <p style="margin:0;font:300 11.5px/1.6 'Be Vietnam Pro',sans-serif;color:rgba(30,35,28,.6)">Show direction · creative production · music</p>
+            </div>
+            <p style="margin:0;font:400 16px/1.5 Caveat,cursive;color:rgba(30,35,28,.55)">Cùng một nguồn nội dung với khu vườn — không phải trang dự phòng xấu.</p>
+          </div>
+        </div>
+      </div>
+      <sc-if value="{{ showAnnotations }}" hint-placeholder-val="{{ true }}">
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:rgba(0,0,0,.1)">
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">L11</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">/flat cùng identity: cùng chữ, cùng màu, cùng giọng. Đọc 2 phút là xong.</p></div>
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">SEO / PRINT</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">Đây là bản máy tìm kiếm index và bản in/gửi khách.</p></div>
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">NO WORLD</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">Không ảnh world, không WebGL, không mini-player tự bật.</p></div>
+        <div style="background:#fff;padding:12px 15px"><p style="margin:0 0 5px;font:500 8px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#6B8F7A">IN</p><p style="margin:0;font:400 10.5px/1.5 'Be Vietnam Pro',sans-serif;color:#4A4A44">“VÀO KHU VƯỜN 3D” là cửa duy nhất đi ngược lại world.</p></div>
+      </div>
+      </sc-if>
+    </div>
+  </div>
+
+  <div style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px" id="1j">
+    <div style="display:flex;align-items:baseline;gap:9px;font:400 11.5px/1.3 'Be Vietnam Pro',sans-serif;color:rgba(0,0,0,.55)"><span style="font:600 10.5px 'JetBrains Mono',monospace;padding:3px 7px;background:rgba(0,0,0,.07);color:#23261F;border-radius:5px">1j</span>M-10 · MOBILE — arrival → chọn → work, không phụ thuộc free camera</div>
+    <div style="width:1280px;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden">
+      <div style="padding:34px 40px 38px;background:#EDEAE0;display:flex;gap:30px;align-items:flex-start">
+
+        <div style="display:flex;flex-direction:column;gap:11px">
+          <span style="font:500 8.5px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:rgba(30,35,28,.55)">01 · ARRIVAL</span>
+          <div style="position:relative;width:286px;height:604px;border-radius:34px;overflow:hidden;background:#1E231C;box-shadow:0 12px 34px rgba(30,35,28,.2)">
+            <div style="position:absolute;inset:0;background:linear-gradient(178deg,#9FB8C6 0%,#C6D3D6 26%,#E3DBC8 46%,#D3CBA6 64%,#8B9370 100%)"></div>
+            <div style="position:absolute;left:-8%;right:-8%;top:36%;height:18%;background:#8FA2A6;opacity:.45;border-radius:50% 50% 0 0/100% 100% 0 0"></div>
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(30,35,28,.42) 0%,rgba(30,35,28,.02) 34%,rgba(30,35,28,.66) 100%)"></div>
+            <div style="position:absolute;left:0;right:0;top:0;height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 18px">
+              <span style="font:500 13px/1 'Playfair Display',serif;letter-spacing:.1em;color:#F7F4EC">ANH LI</span>
+              <span style="display:flex;flex-direction:column;gap:3px"><span style="width:16px;height:1.5px;background:#F7F4EC"></span><span style="width:16px;height:1.5px;background:#F7F4EC"></span></span>
+            </div>
+            <div style="position:absolute;left:20px;right:20px;bottom:88px">
+              <span style="font:400 17px/1.3 Caveat,cursive;color:rgba(247,244,236,.85)">Some things grow.</span>
+              <h3 style="margin:8px 0 12px;font:400 27px/1.2 'Playfair Display',serif;color:#F7F4EC">Một khu vườn của những điều tôi làm.</h3>
+              <p style="margin:0;font:300 11.5px/1.7 'Be Vietnam Pro',sans-serif;color:rgba(247,244,236,.78)">Producer · Show Director · Music Lover · Dad of 3.</p>
+            </div>
+            <div style="position:absolute;left:20px;right:20px;bottom:24px;height:50px;border-radius:99px;background:#B86B4A;display:flex;align-items:center;justify-content:center;gap:10px">
+              <span style="font:500 11px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.16em;color:#fff">BƯỚC VÀO VƯỜN</span>
+              <span style="font:400 12px/1 'JetBrains Mono',monospace;color:rgba(255,255,255,.85)">&#8594;</span>
+            </div>
+          </div>
+          <p style="margin:0;width:286px;font:300 10.5px/1.6 'Be Vietnam Pro',sans-serif;color:rgba(30,35,28,.6)">Plate dọc riêng (không crop plate desktop). Nút 50px — trên ngưỡng 44px.</p>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:11px">
+          <span style="font:500 8.5px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:rgba(30,35,28,.55)">02 · CHOOSE — SWIPE, KHÔNG FREE CAMERA</span>
+          <div style="position:relative;width:286px;height:604px;border-radius:34px;overflow:hidden;background:#1E231C;box-shadow:0 12px 34px rgba(30,35,28,.2)">
+            <div style="position:absolute;inset:0;background:linear-gradient(178deg,#A8BEC8 0%,#CBD6D5 26%,#E6DDC8 46%,#D0C8A2 64%,#87906B 100%)"></div>
+            <div style="position:absolute;left:-8%;right:-8%;top:35%;height:18%;background:#8FA2A6;opacity:.4;border-radius:50% 50% 0 0/100% 100% 0 0"></div>
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(30,35,28,.4) 0%,rgba(30,35,28,.02) 30%,rgba(30,35,28,.72) 100%)"></div>
+            <div style="position:absolute;left:0;right:0;top:0;height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 18px">
+              <span style="font:500 13px/1 'Playfair Display',serif;letter-spacing:.1em;color:#F7F4EC">ANH LI</span>
+              <span style="display:flex;align-items:center;gap:7px;border:1px solid rgba(247,244,236,.55);border-radius:99px;padding:5px 10px"><span style="font:500 8.5px/1 'JetBrains Mono',monospace;letter-spacing:.14em;color:#F7F4EC">MAP</span><span style="width:5px;height:5px;border-radius:99px;background:#B86B4A"></span></span>
+            </div>
+            <div style="position:absolute;left:38%;top:45%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:7px">
+              <span style="width:34px;height:34px;border-radius:99px;border:1.5px solid rgba(255,255,255,.9);background:rgba(184,107,74,.3)"></span>
+              <span style="font:500 9px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.18em;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.5)">MUSIC</span>
+            </div>
+            <div style="position:absolute;left:20px;right:20px;bottom:98px;display:flex;gap:10px;overflow:hidden">
+              <div style="flex:none;width:150px;background:rgba(244,241,234,.95);border-radius:10px;padding:14px">
+                <span style="font:500 8px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:#B86B4A">02 · MUSIC</span>
+                <h4 style="margin:8px 0 6px;font:500 17px/1.2 'Playfair Display',serif;color:#1E231C">Cái Sạp</h4>
+                <p style="margin:0 0 10px;font:300 10.5px/1.55 'Be Vietnam Pro',sans-serif;color:rgba(30,35,28,.65)">Nghe, lưu giữ, và chia sẻ.</p>
+                <span style="display:block;font:500 9px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.14em;color:#B86B4A">ĐI TỚI &#8594;</span>
+              </div>
+              <div style="flex:none;width:150px;background:rgba(244,241,234,.6);border-radius:10px;padding:14px">
+                <span style="font:500 8px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:#B86B4A">03 · SHOWS</span>
+                <h4 style="margin:8px 0 6px;font:500 17px/1.2 'Playfair Display',serif;color:#1E231C">Sân khấu</h4>
+                <p style="margin:0;font:300 10.5px/1.55 'Be Vietnam Pro',sans-serif;color:rgba(30,35,28,.65)">Loại việc</p>
+              </div>
+            </div>
+            <div style="position:absolute;left:20px;right:20px;bottom:66px;display:flex;justify-content:center;gap:6px">
+              <span style="width:16px;height:3px;border-radius:99px;background:#F7F4EC"></span>
+              <span style="width:6px;height:3px;border-radius:99px;background:rgba(247,244,236,.45)"></span>
+              <span style="width:6px;height:3px;border-radius:99px;background:rgba(247,244,236,.45)"></span>
+              <span style="width:6px;height:3px;border-radius:99px;background:rgba(247,244,236,.45)"></span>
+              <span style="width:6px;height:3px;border-radius:99px;background:rgba(247,244,236,.45)"></span>
+            </div>
+            <div style="position:absolute;left:20px;right:20px;bottom:22px;height:38px;border-radius:99px;background:rgba(30,35,28,.82);display:flex;align-items:center;gap:10px;padding:0 8px">
+              <span style="width:26px;height:26px;border-radius:99px;border:1px solid rgba(247,244,236,.55);display:grid;place-items:center;font:400 8px/1 'JetBrains Mono',monospace;color:#F7F4EC">&#9654;</span>
+              <span style="font:400 9.5px/1 'Be Vietnam Pro',sans-serif;color:rgba(247,244,236,.85)">Chưa phát — bấm để nghe</span>
+            </div>
+          </div>
+          <p style="margin:0;width:286px;font:300 10.5px/1.6 'Be Vietnam Pro',sans-serif;color:rgba(30,35,28,.6)">Camera đi theo rail cố định giữa 5 anchor. Swipe ngang = đổi chỗ; không orbit tự do.</p>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:11px">
+          <span style="font:500 8.5px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:rgba(30,35,28,.55)">03 · WORK — CÁCH LÀM, ĐỌC DỌC</span>
+          <div style="position:relative;width:286px;height:604px;border-radius:34px;overflow:hidden;background:#F4F1EA;box-shadow:0 12px 34px rgba(30,35,28,.2)">
+            <div style="position:absolute;left:0;right:0;top:0;height:176px;background:linear-gradient(178deg,#2C3A44 0%,#4A5658 46%,#6B7263 100%)"></div>
+            <div style="position:absolute;left:0;right:0;top:0;height:176px;background:linear-gradient(180deg,rgba(20,24,19,.5),rgba(20,24,19,.08))"></div>
+            <div style="position:absolute;left:0;right:0;top:0;height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 18px">
+              <span style="display:flex;align-items:center;gap:8px;font:500 8.5px/1 'JetBrains Mono',monospace;letter-spacing:.14em;color:#F7F4EC">&#8592; SHOWS</span>
+              <span style="display:flex;align-items:center;gap:7px;border:1px solid rgba(247,244,236,.55);border-radius:99px;padding:5px 10px"><span style="font:500 8.5px/1 'JetBrains Mono',monospace;letter-spacing:.14em;color:#F7F4EC">MAP</span><span style="width:5px;height:5px;border-radius:99px;background:#E8A87C"></span></span>
+            </div>
+            <div style="position:absolute;left:20px;right:20px;top:104px">
+              <span style="font:500 8px/1 'JetBrains Mono',monospace;letter-spacing:.18em;color:rgba(247,244,236,.8)">CRAFT · KHÔNG GẮN DỰ ÁN</span>
+              <h3 style="margin:8px 0 0;font:400 24px/1.18 'Playfair Display',serif;color:#F7F4EC">Cách em dựng một đêm diễn</h3>
+            </div>
+            <div style="position:absolute;left:20px;right:20px;top:200px;display:flex;flex-direction:column;gap:16px">
+              <div><span style="display:block;font:500 8px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:#B86B4A">BRIEF</span><p style="margin:7px 0 0;font:300 11.5px/1.7 'Be Vietnam Pro',sans-serif;color:#2E332C">Hiểu khách muốn người ta cảm được gì khi ra về — trước khi nghĩ ý tưởng.</p></div>
+              <div><span style="display:block;font:500 8px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:#B86B4A">CREATIVE FRAME</span><p style="margin:7px 0 0;font:300 11.5px/1.7 'Be Vietnam Pro',sans-serif;color:#2E332C">Một câu ngắn đủ để cả đội nhớ và làm theo được trên sàn dựng.</p></div>
+              <div style="height:96px;border-radius:6px;background:repeating-linear-gradient(135deg,#DFD9C9 0 7px,#D5CEBB 7px 14px);display:grid;place-items:center"><span style="font:500 8px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#7A7A72">MOMENT · KHÔNG TÊN KHÁCH</span></div>
+              <div style="background:#EDEAE0;border-radius:8px;padding:14px">
+                <span style="font:500 8px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:#B86B4A">VAI TRÒ EM NHẬN</span>
+                <p style="margin:7px 0 0;font:300 11.5px/1.6 'Be Vietnam Pro',sans-serif;color:#2E332C">Show Director hoặc Creative Producer · 500 – 5.000 khách · đội 10 – 40 người.</p>
+              </div>
+            </div>
+            <div style="position:absolute;left:0;right:0;bottom:0;height:56px;background:rgba(244,241,234,.96);border-top:1px solid rgba(30,35,28,.12);display:flex;align-items:center;justify-content:space-between;padding:0 20px">
+              <span style="font:500 9px/1 'JetBrains Mono',monospace;letter-spacing:.14em;color:#1E231C">&#8592; VỀ SÂN KHẤU</span>
+              <span style="font:500 9px/1 'JetBrains Mono',monospace;letter-spacing:.14em;color:#B86B4A">LIÊN HỆ &#8594;</span>
+            </div>
+          </div>
+          <p style="margin:0;width:286px;font:300 10.5px/1.6 'Be Vietnam Pro',sans-serif;color:rgba(30,35,28,.6)">Một trang cách làm, đọc dọc bình thường. Thanh dưới luôn có đường về — không bao giờ dead-end.</p>
+        </div>
+
+        <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:14px;padding-left:8px">
+          <span style="font:500 8.5px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:rgba(30,35,28,.55)">MOBILE RULES</span>
+          <div style="display:flex;flex-direction:column;gap:1px;background:rgba(30,35,28,.12);border-radius:8px;overflow:hidden">
+            <div style="background:#F7F5F1;padding:13px 15px"><p style="margin:0;font:400 11px/1.6 'Be Vietnam Pro',sans-serif;color:#2E332C">Không free camera, không WASD. Rail 5 anchor, swipe ngang.</p></div>
+            <div style="background:#F7F5F1;padding:13px 15px"><p style="margin:0;font:400 11px/1.6 'Be Vietnam Pro',sans-serif;color:#2E332C">Hotspot 3D → card chữ ngay dưới, đọc được mà không cần chạm đúng ring nhỏ.</p></div>
+            <div style="background:#F7F5F1;padding:13px 15px"><p style="margin:0;font:400 11px/1.6 'Be Vietnam Pro',sans-serif;color:#2E332C">Mọi hit target ≥ 44px. Mini-player luôn nằm trên safe-area dưới.</p></div>
+            <div style="background:#F7F5F1;padding:13px 15px"><p style="margin:0;font:400 11px/1.6 'Be Vietnam Pro',sans-serif;color:#2E332C">Máy yếu / tiết kiệm pin → tự chuyển plate tĩnh, giữ nguyên layout chữ.</p></div>
+            <div style="background:#F7F5F1;padding:13px 15px"><p style="margin:0;font:400 11px/1.6 'Be Vietnam Pro',sans-serif;color:#2E332C">Nav 5 mục nằm trong menu; MAP luôn nhìn thấy ở mọi màn (L11).</p></div>
+          </div>
+          <p style="margin:0;font:400 17px/1.5 Caveat,cursive;color:rgba(30,35,28,.55)">Mobile là bản rút gọn của cùng một nơi — không phải một site khác.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+  <p style="margin:30px 0 0;font:400 12px/1.7 'Be Vietnam Pro',sans-serif;color:rgba(0,0,0,.5);max-width:820px">Chốt được bộ này thì em ra asset sheet + camera notes + animation notes cho Codex. Cần đổi gì trước: hướng sáng từng state, mức host, hay layout panel — nói id card (<a href="#1c">1c</a>, <a href="#1e">1e</a>…) là em sửa đúng chỗ đó.</p>
+</section>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showAnnotations&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Review&quot;},&quot;showFamilyTraces&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Review&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      showAnnotations: this.props.showAnnotations ?? true,
+      showFamilyTraces: this.props.showFamilyTraces ?? true
+    };
+  }
+}
+</script>
+</body>
+</html>

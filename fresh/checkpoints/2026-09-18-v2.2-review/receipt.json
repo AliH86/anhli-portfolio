@@ -1,0 +1,14 @@
+{
+  "version": "2.2",
+  "status": "local-review-awaiting-user",
+  "deployed": false,
+  "files": 539,
+  "archiveBytes": 31469456,
+  "archiveSHA256": "8f9e681d5bdf220345d88a147c52e3f111a30cd4f1605c480108f13a1b166034",
+  "archiveVerified": true,
+  "catalogAlbums": 26,
+  "catalogTracks": 213,
+  "testsPassed": 43,
+  "preview": "http://127.0.0.1:8792/#music",
+  "physicalDeviceQA": "pending"
+}

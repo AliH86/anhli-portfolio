@@ -1,0 +1,15 @@
+{
+  "sourceSide": "left",
+  "implementationSide": "right",
+  "fullPixels": [
+    1672,
+    941
+  ],
+  "state": "music, Untamed, first track, playlist open; reference is playing, implementation paused to preserve explicit playback",
+  "intentionalDifferences": [
+    "Original garden and host preserved",
+    "Actual album covers and catalog preserved",
+    "User requested brighter translucent paper",
+    "Responsive sheets authored; no mobile source mock"
+  ]
+}

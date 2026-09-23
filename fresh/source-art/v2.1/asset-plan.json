@@ -1,0 +1,152 @@
+{
+  "baseline": "64f76b3",
+  "inspected": [
+    "garden-desktop.webp",
+    "garden-mobile.webp",
+    "wildlife/night-color.png"
+  ],
+  "assets": [
+    {
+      "name": "foliage-atlas",
+      "purpose": "Replace the three cloned ground sprigs with three distinct rooted silhouettes",
+      "reason": "Replace the three cloned ground sprigs with three distinct rooted silhouettes",
+      "location": {
+        "landscape": [
+          [
+            500,
+            498
+          ],
+          [
+            1260,
+            550
+          ],
+          [
+            690,
+            475
+          ]
+        ],
+        "portrait": [
+          [
+            282,
+            787
+          ],
+          [
+            663,
+            717
+          ],
+          [
+            149,
+            1044
+          ]
+        ],
+        "coordinateSystems": [
+          "1672x941",
+          "900x1200"
+        ]
+      },
+      "scenePosition": {
+        "landscape": [
+          [
+            500,
+            498
+          ],
+          [
+            1260,
+            550
+          ],
+          [
+            690,
+            475
+          ]
+        ],
+        "portrait": [
+          [
+            282,
+            787
+          ],
+          [
+            663,
+            717
+          ],
+          [
+            149,
+            1044
+          ]
+        ],
+        "coordinateSystems": [
+          "1672x941",
+          "900x1200"
+        ]
+      },
+      "depth": "ground mid / near",
+      "dayNight": "day/night",
+      "lightDirection": "soft upper-right warm daylight; cool soft ambient and dim warm lamp spill at night",
+      "sizeTarget": [
+        360,
+        260
+      ],
+      "scaleReference": "Approximately 80–140 painting pixels; stems rooted beside path and stall",
+      "occlusion": "Root feet behind nearby vegetation; owl feet attached to tree branch",
+      "behavior": "Gust wave small leaves then stems, long irregular rests",
+      "animationBehavior": "Gust wave small leaves then stems, long irregular rests",
+      "motionRange": "0–2 degrees; 0–3 px",
+      "transformOrigin": "50% 98%",
+      "mobileVariant": "same atlas, separate authored anchors, smaller footprint",
+      "desktopVariant": "same atlas at source-relative positions",
+      "mobileUsage": true,
+      "expectedFileWeight": "under 100 KB WebP total",
+      "status": "planned before generation"
+    },
+    {
+      "name": "owl-states",
+      "purpose": "Six padded consistent poses to avoid existing atlas wing cropping",
+      "reason": "Six padded consistent poses to avoid existing atlas wing cropping",
+      "location": {
+        "landscape": [
+          1572,
+          219
+        ],
+        "portrait": [
+          802,
+          124
+        ],
+        "coordinateSystems": [
+          "1672x941",
+          "900x1200"
+        ]
+      },
+      "scenePosition": {
+        "landscape": [
+          1572,
+          219
+        ],
+        "portrait": [
+          802,
+          124
+        ],
+        "coordinateSystems": [
+          "1672x941",
+          "900x1200"
+        ]
+      },
+      "depth": "tree branch far",
+      "dayNight": "night",
+      "lightDirection": "soft upper-right warm daylight; cool soft ambient and dim warm lamp spill at night",
+      "sizeTarget": [
+        192,
+        192
+      ],
+      "scaleReference": "Owl body approximately 30–40 painting pixels; entire cell up to 62 px",
+      "occlusion": "Root feet behind nearby vegetation; owl feet attached to tree branch",
+      "behavior": "idle, blink, turn, settle, prepare, takeoff; long residency",
+      "animationBehavior": "idle, blink, turn, settle, prepare, takeoff; long residency",
+      "motionRange": "Small poses inside padded cell; brief local departure",
+      "transformOrigin": "50% 86%",
+      "mobileVariant": "same atlas, separate authored anchors, smaller footprint",
+      "desktopVariant": "same atlas at source-relative positions",
+      "mobileUsage": true,
+      "expectedFileWeight": "under 100 KB WebP total",
+      "status": "planned before generation"
+    }
+  ]
+}

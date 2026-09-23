@@ -1,0 +1,7 @@
+{
+  "method":"Native SVG and CSS, no additional bitmap generation",
+  "assets":[
+    {"name":"garden-mark.svg","purpose":"Browser tab icon; avoid implicit favicon.ico request","location":"browser tab","depth":"interface","dayNight":"both","lightDirection":"flat ink","scaleReference":"16–32 px browser icon","occlusion":"none","behavior":"static","motionRange":"none","transformOrigin":"center","mobileVariant":"same SVG","desktopVariant":"same SVG","expectedFileWeight":"under 1 KB"},
+    {"name":"playlist-disclosure","purpose":"Continuous vertical playlist attached to album trigger","location":"below album, left of host on desktop; below reserved scene area on mobile","depth":"HUD","dayNight":"both","lightDirection":"soft top edge","scaleReference":"44 px minimum rows","occlusion":"never covers host; bounded vertical scroll","behavior":"expand, highlight, select, collapse","motionRange":"5 px entrance, 200 ms","transformOrigin":"top center","mobileVariant":"full lower-deck width","desktopVariant":"320 px width","expectedFileWeight":"CSS/HTML only"}
+  ]
+}

@@ -1,0 +1,25 @@
+✔ local hour transitions cover dawn, day, dusk and overnight (12.10125ms)
+✔ no ambient audio context or sound is created before explicit opt-in (0.519333ms)
+✔ ambient opt-in mixes separately; opt-out stops only its own sound nodes (0.750833ms)
+✔ hidden page silences ambience while leaving native music untouched (0.600584ms)
+✔ sparse ambient interval stays between 110 and 210 seconds (0.33025ms)
+✔ daylight control cycles through explicit day/night and device-time mode (0.402541ms)
+✔ late video success cannot repaint another tray (1.193125ms)
+✔ late video failure cannot repaint or announce over another tray (0.39825ms)
+✔ photos win over an earlier video request (0.338416ms)
+✔ current video failure returns to usable photos with feedback (0.287917ms)
+✔ tapping the current album preserves playback; a different album resets once (0.365458ms)
+✔ closing gallery restores idle or listening pose and invalidates pending views (0.499834ms)
+✔ motion off cancels an in-flight cover animation (0.323084ms)
+✔ native media controls use the existing player and clamp seek positions (1.070541ms)
+✔ lock-screen metadata and playback position describe the selected track (0.537667ms)
+✔ browsers without Media Session keep the native player path usable (0.387625ms)
+✔ a background visibility change only pauses decoration (0.324459ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 58.613167

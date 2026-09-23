@@ -1,0 +1,13 @@
+{
+  "recordedAt": "2026-09-17T18:07:03.184529+00:00",
+  "published": true,
+  "commit": "3b80fa7d4159cb4b5e75c3877aba97047da7940d",
+  "url": "https://alih86.github.io/anhli-portfolio/",
+  "package": "../website-releases/2026-09-18-v2.1/",
+  "sourceZipSha256": "26a68503a4b23fc46e835069254f2c2dd6f91a36e3f78c4c7240065c95ad3a2d",
+  "userAuthorization": "ok, chắc 2.2 sẽ sửa thêm, còn giờ chốt live nhé. vì karaoke - lyrics chắc để phiên sau",
+  "deferredToV22": [
+    "wording refinements",
+    "karaoke / authored synchronized lyrics"
+  ]
+}

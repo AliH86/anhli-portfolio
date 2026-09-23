@@ -1,0 +1,49 @@
+{
+  "changed": [
+    "index.html",
+    "garden-wildlife.js",
+    "garden-life.js",
+    "app.js"
+  ],
+  "added": [
+    "assets/ambience/garden-birds.mp3",
+    "assets/ambience/night-crickets.mp3",
+    "assets/garden-mark.svg",
+    "assets/v2.1/foliage-0.webp",
+    "assets/v2.1/foliage-1.webp",
+    "assets/v2.1/foliage-2.webp",
+    "assets/v2.1/foliage-3.webp",
+    "assets/v2.1/foliage-4.webp",
+    "assets/v2.1/foliage-5.webp",
+    "assets/v2.1/owl-states.webp",
+    "data/ambience-sources.json",
+    "data/entrance-quotes.json",
+    "data/lyrics/index.json",
+    "garden-ambient.js",
+    "garden-entrance.js",
+    "garden-lyrics.js",
+    "garden-v21.css",
+    "garden-wind.js"
+  ],
+  "removed": [],
+  "preservedContent": {
+    "catalog": true,
+    "profile": true,
+    "gallery": true,
+    "videos": true,
+    "daily-messages": true
+  },
+  "assets": {
+    "assets/v2.1/foliage-4.webp": 26396,
+    "assets/v2.1/foliage-5.webp": 25868,
+    "assets/v2.1/foliage-2.webp": 33752,
+    "assets/v2.1/foliage-3.webp": 26530,
+    "assets/v2.1/foliage-0.webp": 20844,
+    "assets/v2.1/foliage-1.webp": 27804,
+    "assets/v2.1/owl-states.webp": 33730
+  },
+  "ambience": {
+    "assets/ambience/night-crickets.mp3": 168572,
+    "assets/ambience/garden-birds.mp3": 168572
+  }
+}

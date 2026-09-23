@@ -1,0 +1,494 @@
+{
+  "baseline": "64f76b3",
+  "preGenerationManifest": "asset-plan.json",
+  "assets": [
+    {
+      "name": "foliage-0.webp",
+      "purpose": "house broad leaves",
+      "reason": "Replace the three cloned ground sprigs with three distinct rooted silhouettes",
+      "location": {
+        "land": [
+          500,
+          498
+        ],
+        "portrait": [
+          282,
+          787
+        ]
+      },
+      "scenePosition": {
+        "landscape": [
+          [
+            500,
+            498
+          ],
+          [
+            1260,
+            550
+          ],
+          [
+            690,
+            475
+          ]
+        ],
+        "portrait": [
+          [
+            282,
+            787
+          ],
+          [
+            663,
+            717
+          ],
+          [
+            149,
+            1044
+          ]
+        ],
+        "coordinateSystems": [
+          "1672x941",
+          "900x1200"
+        ]
+      },
+      "depth": "ground mid / near",
+      "dayNight": "day/night",
+      "lightDirection": "soft upper-right warm daylight; cool soft ambient and dim warm lamp spill at night",
+      "sizeTarget": [
+        360,
+        260
+      ],
+      "scaleReference": "Approximately 80–140 painting pixels; stems rooted beside path and stall",
+      "occlusion": "Root feet behind nearby vegetation; owl feet attached to tree branch",
+      "behavior": "Gust wave small leaves then stems, long irregular rests",
+      "animationBehavior": "Gust wave small leaves then stems, long irregular rests",
+      "motionRange": "0–2 degrees; 0–3 px",
+      "transformOrigin": "50% 85%",
+      "mobileVariant": "same atlas, separate authored anchors, smaller footprint",
+      "desktopVariant": "same atlas at source-relative positions",
+      "mobileUsage": true,
+      "expectedFileWeight": "under 100 KB WebP total",
+      "status": "active",
+      "active": true,
+      "runtimeSize": [
+        256,
+        256
+      ],
+      "actualBytes": 20844
+    },
+    {
+      "name": "foliage-1.webp",
+      "purpose": "path grasses",
+      "reason": "Replace the three cloned ground sprigs with three distinct rooted silhouettes",
+      "location": {
+        "land": [
+          690,
+          475
+        ],
+        "portrait": [
+          149,
+          1044
+        ]
+      },
+      "scenePosition": {
+        "landscape": [
+          [
+            500,
+            498
+          ],
+          [
+            1260,
+            550
+          ],
+          [
+            690,
+            475
+          ]
+        ],
+        "portrait": [
+          [
+            282,
+            787
+          ],
+          [
+            663,
+            717
+          ],
+          [
+            149,
+            1044
+          ]
+        ],
+        "coordinateSystems": [
+          "1672x941",
+          "900x1200"
+        ]
+      },
+      "depth": "ground mid / near",
+      "dayNight": "day/night",
+      "lightDirection": "soft upper-right warm daylight; cool soft ambient and dim warm lamp spill at night",
+      "sizeTarget": [
+        360,
+        260
+      ],
+      "scaleReference": "Approximately 80–140 painting pixels; stems rooted beside path and stall",
+      "occlusion": "Root feet behind nearby vegetation; owl feet attached to tree branch",
+      "behavior": "Gust wave small leaves then stems, long irregular rests",
+      "animationBehavior": "Gust wave small leaves then stems, long irregular rests",
+      "motionRange": "0–2 degrees; 0–3 px",
+      "transformOrigin": "50% 85%",
+      "mobileVariant": "same atlas, separate authored anchors, smaller footprint",
+      "desktopVariant": "same atlas at source-relative positions",
+      "mobileUsage": true,
+      "expectedFileWeight": "under 100 KB WebP total",
+      "status": "active",
+      "active": true,
+      "runtimeSize": [
+        256,
+        256
+      ],
+      "actualBytes": 27804
+    },
+    {
+      "name": "foliage-2.webp",
+      "purpose": "wildflowers",
+      "reason": "Replace the three cloned ground sprigs with three distinct rooted silhouettes",
+      "location": null,
+      "scenePosition": {
+        "landscape": [
+          [
+            500,
+            498
+          ],
+          [
+            1260,
+            550
+          ],
+          [
+            690,
+            475
+          ]
+        ],
+        "portrait": [
+          [
+            282,
+            787
+          ],
+          [
+            663,
+            717
+          ],
+          [
+            149,
+            1044
+          ]
+        ],
+        "coordinateSystems": [
+          "1672x941",
+          "900x1200"
+        ]
+      },
+      "depth": "ground mid / near",
+      "dayNight": "day/night",
+      "lightDirection": "soft upper-right warm daylight; cool soft ambient and dim warm lamp spill at night",
+      "sizeTarget": [
+        360,
+        260
+      ],
+      "scaleReference": "Approximately 80–140 painting pixels; stems rooted beside path and stall",
+      "occlusion": "Root feet behind nearby vegetation; owl feet attached to tree branch",
+      "behavior": "Gust wave small leaves then stems, long irregular rests",
+      "animationBehavior": "Gust wave small leaves then stems, long irregular rests",
+      "motionRange": "0–2 degrees; 0–3 px",
+      "transformOrigin": "50% 85%",
+      "mobileVariant": "same atlas, separate authored anchors, smaller footprint",
+      "desktopVariant": "same atlas at source-relative positions",
+      "mobileUsage": true,
+      "expectedFileWeight": "under 100 KB WebP total",
+      "status": "retained unused variant; not requested by runtime",
+      "active": false,
+      "runtimeSize": [
+        256,
+        256
+      ],
+      "actualBytes": 33752
+    },
+    {
+      "name": "foliage-3.webp",
+      "purpose": "pond reeds",
+      "reason": "Replace the three cloned ground sprigs with three distinct rooted silhouettes",
+      "location": {
+        "land": [
+          1478,
+          551
+        ],
+        "portrait": [
+          690,
+          338
+        ]
+      },
+      "scenePosition": {
+        "landscape": [
+          [
+            500,
+            498
+          ],
+          [
+            1260,
+            550
+          ],
+          [
+            690,
+            475
+          ]
+        ],
+        "portrait": [
+          [
+            282,
+            787
+          ],
+          [
+            663,
+            717
+          ],
+          [
+            149,
+            1044
+          ]
+        ],
+        "coordinateSystems": [
+          "1672x941",
+          "900x1200"
+        ]
+      },
+      "depth": "ground mid / near",
+      "dayNight": "day/night",
+      "lightDirection": "soft upper-right warm daylight; cool soft ambient and dim warm lamp spill at night",
+      "sizeTarget": [
+        360,
+        260
+      ],
+      "scaleReference": "Approximately 80–140 painting pixels; stems rooted beside path and stall",
+      "occlusion": "Root feet behind nearby vegetation; owl feet attached to tree branch",
+      "behavior": "Gust wave small leaves then stems, long irregular rests",
+      "animationBehavior": "Gust wave small leaves then stems, long irregular rests",
+      "motionRange": "0–2 degrees; 0–3 px",
+      "transformOrigin": "50% 85%",
+      "mobileVariant": "same atlas, separate authored anchors, smaller footprint",
+      "desktopVariant": "same atlas at source-relative positions",
+      "mobileUsage": true,
+      "expectedFileWeight": "under 100 KB WebP total",
+      "status": "active",
+      "active": true,
+      "runtimeSize": [
+        256,
+        256
+      ],
+      "actualBytes": 26530
+    },
+    {
+      "name": "foliage-4.webp",
+      "purpose": "stall shrub",
+      "reason": "Replace the three cloned ground sprigs with three distinct rooted silhouettes",
+      "location": {
+        "land": [
+          1260,
+          550
+        ],
+        "portrait": [
+          663,
+          717
+        ]
+      },
+      "scenePosition": {
+        "landscape": [
+          [
+            500,
+            498
+          ],
+          [
+            1260,
+            550
+          ],
+          [
+            690,
+            475
+          ]
+        ],
+        "portrait": [
+          [
+            282,
+            787
+          ],
+          [
+            663,
+            717
+          ],
+          [
+            149,
+            1044
+          ]
+        ],
+        "coordinateSystems": [
+          "1672x941",
+          "900x1200"
+        ]
+      },
+      "depth": "ground mid / near",
+      "dayNight": "day/night",
+      "lightDirection": "soft upper-right warm daylight; cool soft ambient and dim warm lamp spill at night",
+      "sizeTarget": [
+        360,
+        260
+      ],
+      "scaleReference": "Approximately 80–140 painting pixels; stems rooted beside path and stall",
+      "occlusion": "Root feet behind nearby vegetation; owl feet attached to tree branch",
+      "behavior": "Gust wave small leaves then stems, long irregular rests",
+      "animationBehavior": "Gust wave small leaves then stems, long irregular rests",
+      "motionRange": "0–2 degrees; 0–3 px",
+      "transformOrigin": "50% 85%",
+      "mobileVariant": "same atlas, separate authored anchors, smaller footprint",
+      "desktopVariant": "same atlas at source-relative positions",
+      "mobileUsage": true,
+      "expectedFileWeight": "under 100 KB WebP total",
+      "status": "active",
+      "active": true,
+      "runtimeSize": [
+        256,
+        256
+      ],
+      "actualBytes": 26396
+    },
+    {
+      "name": "foliage-5.webp",
+      "purpose": "herbs",
+      "reason": "Replace the three cloned ground sprigs with three distinct rooted silhouettes",
+      "location": null,
+      "scenePosition": {
+        "landscape": [
+          [
+            500,
+            498
+          ],
+          [
+            1260,
+            550
+          ],
+          [
+            690,
+            475
+          ]
+        ],
+        "portrait": [
+          [
+            282,
+            787
+          ],
+          [
+            663,
+            717
+          ],
+          [
+            149,
+            1044
+          ]
+        ],
+        "coordinateSystems": [
+          "1672x941",
+          "900x1200"
+        ]
+      },
+      "depth": "ground mid / near",
+      "dayNight": "day/night",
+      "lightDirection": "soft upper-right warm daylight; cool soft ambient and dim warm lamp spill at night",
+      "sizeTarget": [
+        360,
+        260
+      ],
+      "scaleReference": "Approximately 80–140 painting pixels; stems rooted beside path and stall",
+      "occlusion": "Root feet behind nearby vegetation; owl feet attached to tree branch",
+      "behavior": "Gust wave small leaves then stems, long irregular rests",
+      "animationBehavior": "Gust wave small leaves then stems, long irregular rests",
+      "motionRange": "0–2 degrees; 0–3 px",
+      "transformOrigin": "50% 85%",
+      "mobileVariant": "same atlas, separate authored anchors, smaller footprint",
+      "desktopVariant": "same atlas at source-relative positions",
+      "mobileUsage": true,
+      "expectedFileWeight": "under 100 KB WebP total",
+      "status": "retained unused variant; not requested by runtime",
+      "active": false,
+      "runtimeSize": [
+        256,
+        256
+      ],
+      "actualBytes": 25868
+    },
+    {
+      "name": "owl-states.webp",
+      "purpose": "Six padded consistent poses to avoid existing atlas wing cropping",
+      "reason": "Six padded consistent poses to avoid existing atlas wing cropping",
+      "location": {
+        "land": [
+          663,
+          107
+        ],
+        "portrait": [
+          458,
+          187
+        ],
+        "coordinates": [
+          "1672x941",
+          "900x1200"
+        ]
+      },
+      "scenePosition": {
+        "landscape": [
+          1572,
+          219
+        ],
+        "portrait": [
+          802,
+          124
+        ],
+        "coordinateSystems": [
+          "1672x941",
+          "900x1200"
+        ]
+      },
+      "depth": "tree branch far",
+      "dayNight": "night",
+      "lightDirection": "soft upper-right warm daylight; cool soft ambient and dim warm lamp spill at night",
+      "sizeTarget": [
+        192,
+        192
+      ],
+      "scaleReference": "Owl body approximately 30–40 painting pixels; entire cell up to 62 px",
+      "occlusion": "Root feet behind nearby vegetation; owl feet attached to tree branch",
+      "behavior": "idle, blink, turn, settle, prepare, takeoff; long residency",
+      "animationBehavior": "idle, blink, turn, settle, prepare, takeoff; long residency",
+      "motionRange": "Small poses inside padded cell; brief local departure",
+      "transformOrigin": "50% 86%",
+      "mobileVariant": "same atlas, separate authored anchors, smaller footprint",
+      "desktopVariant": "same atlas at source-relative positions",
+      "mobileUsage": true,
+      "expectedFileWeight": "under 100 KB WebP total",
+      "status": "implemented; branch moved inward to remain inside viewport crop",
+      "runtimeSize": [
+        576,
+        384
+      ],
+      "runtimeCell": [
+        192,
+        192
+      ],
+      "feetAnchor": 161,
+      "active": true,
+      "actualBytes": 33730
+    }
+  ],
+  "notes": [
+    "Original source PNGs, generated mattes and prompts retained.",
+    "Alpha packaging and atlas padding performed by prepare-v21-art.mjs.",
+    "Four foliage assets load at runtime (101574 bytes total); two remain unused.",
+    "Owl is lazy through its wildlife class; ambient recordings load only after explicit opt-in."
+  ]
+}

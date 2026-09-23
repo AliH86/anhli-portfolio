@@ -1,0 +1,1610 @@
+[
+  {
+    "id": "f5fc153c-51b8-4583-bfe9-1fcc872aab85",
+    "name": "Một Tần Số Khác",
+    "sub": "Indie Folk · Ambient Poetic EP",
+    "description": "Có những tín hiệu cần đi thật xa mới gặp được người nghe. Sáu bài hát dành cho những ai đang giữ một nhịp riêng giữa thế giới quá nhiều âm thanh.",
+    "cover": "assets/covers/f5fc153c-51b8-4583-bfe9-1fcc872aab85.webp",
+    "tracks": [
+      {
+        "id": "a236c5a1-948e-45c0-a981-3fb91ac85878",
+        "name": "Có Ai Nghe Không",
+        "duration": "4:37",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/mot-tan-so-khac/01-co-ai-nghe-khong.mp3"
+      },
+      {
+        "id": "eeb9e276-2109-49d4-9347-7548ff0165f1",
+        "name": "Ngọn Đèn Ngoài Xa",
+        "duration": "4:34",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/mot-tan-so-khac/02-ngon-den-ngoai-xa.mp3"
+      },
+      {
+        "id": "a0656e42-b5f5-4d12-9de9-e7e89f25bb02",
+        "name": "Con Chim Bay Sai Mùa",
+        "duration": "4:37",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/mot-tan-so-khac/03-con-chim-bay-sai-mua.mp3"
+      },
+      {
+        "id": "7276a14c-3725-42a7-9550-dba200a0fa85",
+        "name": "Cái Cây Cuối Cùng Trên Đồi",
+        "duration": "5:44",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/mot-tan-so-khac/04-cai-cay-cuoi-cung-tren-doi.mp3"
+      },
+      {
+        "id": "1b35de43-1e7e-44a0-b8aa-9f5dfd11f7b4",
+        "name": "Tín Hiệu Từ Một Vì Sao Cũ",
+        "duration": "4:52",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/mot-tan-so-khac/05-tin-hieu-tu-mot-vi-sao-cu.mp3"
+      },
+      {
+        "id": "0f7b36ce-5eef-4cdf-9e4a-a079362867cd",
+        "name": "Tần Số Riêng",
+        "duration": "4:52",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/mot-tan-so-khac/06-tan-so-rieng.mp3"
+      }
+    ]
+  },
+  {
+    "id": "b31825a3-7a38-4744-834a-96930f05015c",
+    "name": "Chuyện Của Trăng",
+    "sub": "Vietnamese Folk-Soul · Chamber Folk · Art-Pop",
+    "description": "Những câu chuyện bài ca, thơ, văn lấy trăng làm trọng tâm.",
+    "cover": "assets/covers/b31825a3-7a38-4744-834a-96930f05015c.webp",
+    "tracks": [
+      {
+        "id": "b811ceb4-2492-493c-8163-6efad1329da2",
+        "name": "Quên Vầng Trăng Thề",
+        "duration": "4:43",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/chuyen-cua-trang/01-quen-vang-trang-the.mp3"
+      },
+      {
+        "id": "c69e9887-79b2-4145-9771-e3bf722d0403",
+        "name": "Mảnh Tình Treo Trăng",
+        "duration": "3:42",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/chuyen-cua-trang/02-manh-tinh-treo-trang.mp3"
+      },
+      {
+        "id": "3e9624a7-e3c8-4a9f-9f9d-960d8a3e4589",
+        "name": "Ánh Trăng Đôi Đường",
+        "duration": "4:11",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/chuyen-cua-trang/03-anh-trang-doi-duong.mp3"
+      },
+      {
+        "id": "5bd66ad6-cbab-4111-bbba-8442026e0919",
+        "name": "Trăng Vén Rèm Thưa",
+        "duration": "4:46",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/chuyen-cua-trang/04-trang-ven-rem-thua.mp3"
+      },
+      {
+        "id": "083b467b-c612-4b86-951e-8a83f73d540a",
+        "name": "Kẻ Say Trăng",
+        "duration": "5:36",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/chuyen-cua-trang/05-ke-say-trang.mp3"
+      },
+      {
+        "id": "b2135c69-5d49-4088-bfd6-6bc02fe8328b",
+        "name": "Trăng Khuyết Trăng Tròn",
+        "duration": "4:25",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/chuyen-cua-trang/06-trang-khuyet-trang-tron.mp3"
+      },
+      {
+        "id": "d17a08a2-1d9e-496e-92fe-f3423e679be6",
+        "name": "Trăng Qua Bến Cũ",
+        "duration": "3:58",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/chuyen-cua-trang/07-trang-qua-ben-cu.mp3"
+      },
+      {
+        "id": "96ec7ea1-16f2-4f5a-8b24-930bd7693f1c",
+        "name": "Mượn Trăng",
+        "duration": "5:13",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/chuyen-cua-trang/08-muon-trang.mp3"
+      }
+    ]
+  },
+  {
+    "id": "e2a4ae09-b3d2-4421-bd45-68978bed409c",
+    "name": "Biên Niên Thất Nghiệp Ký",
+    "sub": "Acoustic Folk · Chanson · Blues-Folk · Ritual-Folk Mixtape",
+    "description": "=))) như tiêu đề, thì tui ế nên tui làm album này. =))) là vậy ó...",
+    "cover": "assets/covers/e2a4ae09-b3d2-4421-bd45-68978bed409c.webp",
+    "tracks": [
+      {
+        "id": "c0f86817-473e-4118-ba40-121d4de7277c",
+        "name": "Lại Một Lần Tự Do",
+        "duration": "3:39",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/bien-nien-that-nghiep-ky/01-lai-mot-lan-tu-do.mp3"
+      },
+      {
+        "id": "e5d407fc-f8e4-4007-b7eb-dad9a3d6b4e3",
+        "name": "Chuyện Của Ngày Mai",
+        "duration": "2:45",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/bien-nien-that-nghiep-ky/02-chuyen-cua-ngay-mai.mp3"
+      },
+      {
+        "id": "0c65bb2a-bbfa-4318-9ed5-a93a1a3ea1ad",
+        "name": "Đi Đâu Đây",
+        "duration": "2:50",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/bien-nien-that-nghiep-ky/03-di-dau-day.mp3"
+      },
+      {
+        "id": "df59fec5-db4b-4048-85d2-27e428597b85",
+        "name": "Hôm nay Tôi là Ai?",
+        "duration": "3:49",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/bien-nien-that-nghiep-ky/04-hom-nay-toi-la-ai.mp3"
+      },
+      {
+        "id": "a930b39f-7a9c-47ed-af5c-d05f7562f234",
+        "name": "Làm Cái Gì Bây Giờ?",
+        "duration": "2:55",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/bien-nien-that-nghiep-ky/05-lam-cai-gi-bay-gio.mp3"
+      },
+      {
+        "id": "7220ebcf-c477-4880-95ce-2fa734a03d88",
+        "name": "Đã Xem Lúc 14:37",
+        "duration": "3:58",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/bien-nien-that-nghiep-ky/06-da-xem-luc-14-37.mp3"
+      },
+      {
+        "id": "4e2a6a87-04ba-460f-a9b1-7b5f0d77edad",
+        "name": "Hổng biết nữa, hổng biết dzì hết...",
+        "duration": "3:18",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/bien-nien-that-nghiep-ky/07-hong-biet-nua-hong-biet-dzi-het.mp3"
+      },
+      {
+        "id": "c76d4498-1574-4caf-b67d-81fb0755a733",
+        "name": "Vái Tứ Phương",
+        "duration": "3:40",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/bien-nien-that-nghiep-ky/08-vai-tu-phuong.mp3"
+      }
+    ]
+  },
+  {
+    "id": "92cb0009-596c-478a-b8c2-8a59ccc0f9dc",
+    "name": "Hòa Bình Và Lặng Lẽ",
+    "sub": "Chamber-Pop · Cinematic · Anh Li",
+    "description": "Năm bài hát đồng hành cùng hành trình 500 ngày đêm tìm Di Hài Cốt Liệt Sĩ Việt Nam — mang tâm nhạc làm ngọn đèn dẫn đường, gửi niềm hy vọng đoàn viên đến những gia đình các Anh-Chị-Em liệt sĩ. Một lời chưa nói, nở thành cả trời hoa.",
+    "cover": "assets/covers/92cb0009-596c-478a-b8c2-8a59ccc0f9dc.webp",
+    "tracks": [
+      {
+        "id": "7ab57f1a-2129-46e6-82a3-d4276ed3b720",
+        "name": "Hoà Bình và Lặng Lẽ",
+        "duration": "5:27",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/hoa-binh-va-lang-le/01-hoa-binh-va-lang-le.mp3"
+      },
+      {
+        "id": "773a3ba0-4550-4d85-8c49-629c7f63c01b",
+        "name": "Người Ơi, Về Thôi",
+        "duration": "5:53",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/hoa-binh-va-lang-le/02-nguoi-oi-ve-thoi.mp3"
+      },
+      {
+        "id": "1869922b-a479-4f87-9448-ba7854d258d2",
+        "name": "Tuổi Hai Mươi",
+        "duration": "6:07",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/hoa-binh-va-lang-le/03-tuoi-hai-muoi.mp3"
+      },
+      {
+        "id": "8287a323-6407-4710-a490-4dbcc38a7bce",
+        "name": "Người Đi Tìm Người",
+        "duration": "5:08",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/hoa-binh-va-lang-le/04-nguoi-di-tim-nguoi.mp3"
+      },
+      {
+        "id": "dbd4166a-738b-4558-a946-0c3a833a3f47",
+        "name": "Ngày Mai Người Gửi Lại",
+        "duration": "5:37",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/hoa-binh-va-lang-le/05-ngay-mai-nguoi-gui-lai.mp3"
+      }
+    ]
+  },
+  {
+    "id": "e7dd732d-9b6c-487c-836e-d2f412b1683e",
+    "name": "Untamed",
+    "sub": "R&B · Dark Pop · Anh Li & D'Li",
+    "description": "Mười hai bài hát đẩy tình yêu về phía bản năng: si mê, nổi loạn, cuồng dại và sẵn sàng chạm vào những phần tối hơn của cảm xúc.",
+    "cover": "assets/covers/e7dd732d-9b6c-487c-836e-d2f412b1683e.webp",
+    "tracks": [
+      {
+        "id": "a29966fb-a3d8-405d-baf1-6977fac27818",
+        "name": "Mơ Giấc Tình Nồng Say",
+        "duration": "3:23",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/untamed/01-mo-giac-tinh-nong-say.mp3"
+      },
+      {
+        "id": "269bde35-151e-4da0-aeb1-e1f1f23380b4",
+        "name": "Cớ sao vậy em? [D'li x Ali]",
+        "duration": "2:27",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/untamed/02-co-sao-vay-em-d-li-x-ali.mp3"
+      },
+      {
+        "id": "7517a458-e4a8-419c-965d-d095eb1ad8ef",
+        "name": "Mật ngọt, anh say đó.[ D'Li - Anh Li]",
+        "duration": "3:19",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/untamed/03-mat-ngot-anh-say-do-d-li-anh-li.mp3"
+      },
+      {
+        "id": "1cfa61e1-471b-4cfd-a05a-0083e8fa1fdb",
+        "name": "Chuyện....Mình Lạ",
+        "duration": "3:04",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/untamed/04-chuyen-minh-la.mp3"
+      },
+      {
+        "id": "10d67ecd-8ef6-4dc6-98bf-35e502e25af0",
+        "name": "Xin đừng nói câu gì...",
+        "duration": "3:22",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/untamed/05-xin-dung-noi-cau-gi.mp3"
+      },
+      {
+        "id": "126c5e9f-e68e-4e35-8df6-8e0f35fd01a9",
+        "name": "Nhịp Đêm Slay",
+        "duration": "3:24",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/untamed/06-nhip-dem-slay.mp3"
+      },
+      {
+        "id": "9ed95313-5d21-4601-98df-4b462d493086",
+        "name": "Rock Tình Thừ-a",
+        "duration": "3:41",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/untamed/07-rock-tinh-thu-a.mp3"
+      },
+      {
+        "id": "21c513f1-619f-44b1-9738-6ad030e5b29b",
+        "name": "Ex-Cursed Me",
+        "duration": "3:47",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/untamed/08-ex-cursed-me.mp3"
+      },
+      {
+        "id": "6fb457a9-df03-4bc8-a3af-f6b80505abba",
+        "name": "Vì Hết Yêu?",
+        "duration": "3:35",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/untamed/09-vi-het-yeu.mp3"
+      },
+      {
+        "id": "12e6cf23-3518-43fa-9808-b029c16c94b6",
+        "name": "Gã si & ly 'on the rock'",
+        "duration": "3:28",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/untamed/10-ga-si-ly-on-the-rock.mp3"
+      },
+      {
+        "id": "85db229c-21a6-41b7-8299-8cf6a5986abd",
+        "name": "Không Còn ~Chúng ta~",
+        "duration": "3:54",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/untamed/11-khong-con-chung-ta.mp3"
+      },
+      {
+        "id": "e28362d8-175e-4787-9061-7b4e5c979355",
+        "name": "Mãi mãi là ...?! (Clean Studio Cut)",
+        "duration": "4:49",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/untamed/12-mai-mai-la-clean-studio-cut.mp3"
+      }
+    ]
+  },
+  {
+    "id": "560a4089-5871-4536-8375-785f7a2f8dca",
+    "name": "Những Kẻ DRILL Loves",
+    "sub": "Dark R&B · Drill · D'Li & SEN[SE] da Band",
+    "description": "Những kẻ yêu bằng bản năng, giữ vết thương như kỷ niệm, biến cảm xúc thành âm thanh — tình yêu với đủ gương mặt: đẹp đẽ, hỗn loạn, ngông cuồng, quyến rũ và buồn bã.",
+    "cover": "assets/covers/560a4089-5871-4536-8375-785f7a2f8dca.webp",
+    "tracks": [
+      {
+        "id": "97ab34d8-8a6d-4b66-acf2-cdce31987e25",
+        "name": "Phai Nhat Phai...",
+        "duration": "3:08",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/nhung-ke-drill-loves/01-phai-nhat-phai.mp3"
+      },
+      {
+        "id": "adbe7826-8f50-42e3-ae14-9cd0c6a251a7",
+        "name": "Quên Đi Nhớ Chi?!",
+        "duration": "3:41",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/nhung-ke-drill-loves/02-quen-di-nho-chi.mp3"
+      },
+      {
+        "id": "14a7e8d3-6cc8-4b9d-acca-ee463d8122f9",
+        "name": "Những kẻ Drill Loves",
+        "duration": "2:36",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/nhung-ke-drill-loves/03-nhung-ke-drill-loves.mp3"
+      },
+      {
+        "id": "21c513f1-619f-44b1-9738-6ad030e5b29b",
+        "name": "Ex-Cursed Me",
+        "duration": "3:47",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/untamed/08-ex-cursed-me.mp3"
+      },
+      {
+        "id": "8e11c0e5-4c85-40ef-8ec2-8087e3dcb3d9",
+        "name": "Track này không thể Delete!",
+        "duration": "3:45",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/nhung-ke-drill-loves/05-track-nay-khong-the-delete.mp3"
+      },
+      {
+        "id": "31cbee82-0d6d-4ab9-960e-94c29920e3df",
+        "name": "Như Chưa Từng Thương",
+        "duration": "3:52",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/nhung-ke-drill-loves/06-nhu-chua-tung-thuong.mp3"
+      },
+      {
+        "id": "2b64256d-1c14-4fdc-90c3-8e14d6b03f6d",
+        "name": "Tan hết vào gió…",
+        "duration": "3:28",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/nhung-ke-drill-loves/07-tan-het-vao-gio.mp3"
+      },
+      {
+        "id": "159a30ea-b21a-434b-936b-958734b800fe",
+        "name": "Đừng vây mà, bae~",
+        "duration": "3:49",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/nhung-ke-drill-loves/08-dung-vay-ma-bae.mp3"
+      },
+      {
+        "id": "7b162469-4032-439a-b3c6-2e12d20b10af",
+        "name": "Tình ảo's",
+        "duration": "2:42",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/nhung-ke-drill-loves/09-tinh-ao-s.mp3"
+      },
+      {
+        "id": "96ad72a0-2c6f-4894-b8d6-ea538d0b9a85",
+        "name": "Baby à, nhắm trúng tim em rồi đấy...",
+        "duration": "2:42",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/nhung-ke-drill-loves/10-baby-a-nham-trung-tim-em-roi-day.mp3"
+      },
+      {
+        "id": "229d579c-7ace-43cf-b0b0-a59d9c9332ec",
+        "name": "Đố elm Si ah!",
+        "duration": "2:51",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/nhung-ke-drill-loves/11-do-elm-si-ah.mp3"
+      },
+      {
+        "id": "419a558c-8f8a-4401-81be-826eec0ff7e8",
+        "name": "Đom đóm; Ánh sao và Mắt em",
+        "duration": "3:32",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/nhung-ke-drill-loves/12-dom-dom-anh-sao-va-mat-em.mp3"
+      }
+    ]
+  },
+  {
+    "id": "2818d6f0-318d-4aad-94ac-027ccc756ec4",
+    "name": "Unplugged Vol.1",
+    "sub": "Acoustic · Indie Folk · Hát mộc",
+    "description": "Một mạch hát mộc đi qua những lát cắt đời thường: mệt thì ngồi lại, buồn thì tựa vai, vui thì hát thêm một bài.",
+    "cover": "assets/covers/2818d6f0-318d-4aad-94ac-027ccc756ec4.webp",
+    "tracks": [
+      {
+        "id": "3b949f7a-601e-4206-a610-e55ed9a03c24",
+        "name": "9PM",
+        "duration": "2:18",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-1/01-9pm.mp3"
+      },
+      {
+        "id": "8b81a6e1-d7c2-41d9-84d2-7f27609cc099",
+        "name": "Bí Kíp Luyện Deadlines",
+        "duration": "3:16",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-1/02-bi-kip-luyen-deadlines.mp3"
+      },
+      {
+        "id": "f06e6c2a-b56c-4784-aebb-b2a68cd84ed3",
+        "name": "Nào, cho mượn bờ vai này",
+        "duration": "3:14",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-1/03-nao-cho-muon-bo-vai-nay.mp3"
+      },
+      {
+        "id": "f2dfd824-606d-4f9c-ac6c-364ff94b405d",
+        "name": "An(h) Yên, Quên Phiền",
+        "duration": "4:36",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-1/04-an-h-yen-quen-phien.mp3"
+      },
+      {
+        "id": "aa8e1283-e121-416f-a054-c573ce0291f2",
+        "name": "Có Sao Đâu (It's Alright)",
+        "duration": "3:33",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-1/05-co-sao-dau-it-s-alright.mp3"
+      },
+      {
+        "id": "6e96c3d7-41fc-4841-800b-b4764b862c3c",
+        "name": "Tôi yêu....",
+        "duration": "2:51",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-1/06-toi-yeu.mp3"
+      },
+      {
+        "id": "75c08a9c-2c7c-4024-9a6e-2ad25bf1fce3",
+        "name": "Con đường ta đi",
+        "duration": "3:46",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-1/07-con-duong-ta-di.mp3"
+      },
+      {
+        "id": "5c3f3c0d-d9f1-4e7e-b864-982832e07295",
+        "name": "Chạm vào ánh nắng.",
+        "duration": "4:38",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-1/08-cham-vao-anh-nang.mp3"
+      },
+      {
+        "id": "8e79698b-0423-46b9-8bbc-f000197d4def",
+        "name": "Đêm nay thì không...",
+        "duration": "3:28",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-1/10-dem-nay-thi-khong.mp3"
+      }
+    ]
+  },
+  {
+    "id": "15c4b5fa-3d24-4a7c-b1bf-6ca2420d81c7",
+    "name": "Unplugged Vol.2",
+    "sub": "Acoustic · Bossa Nova · Indie Folk",
+    "description": "Tiếp mạch hát mộc — lần này đong đưa hơn một chút, có bossa, có gió. Những bài hát như chiếc võng trước hiên nhà: chậm rãi, êm, và rất đời.",
+    "cover": "assets/covers/15c4b5fa-3d24-4a7c-b1bf-6ca2420d81c7.webp",
+    "tracks": [
+      {
+        "id": "ceec7c53-c045-4455-9b79-6d72cc29a56e",
+        "name": "Đừng lỡ nhịp!",
+        "duration": "3:08",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-2/01-dung-lo-nhip.mp3"
+      },
+      {
+        "id": "76655d83-8252-4fda-97ae-9db85cc9de37",
+        "name": "Nẹh Têh...",
+        "duration": "2:44",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-2/02-neh-teh.mp3"
+      },
+      {
+        "id": "976a442f-08d6-4dee-92ed-f84e60045b6d",
+        "name": "Đi nhớ trở về",
+        "duration": "3:17",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-2/03-di-nho-tro-ve.mp3"
+      },
+      {
+        "id": "47a44699-a285-45d9-8c6e-c25bab5e0898",
+        "name": "Mơ Ngọt",
+        "duration": "3:35",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-2/04-mo-ngot.mp3"
+      },
+      {
+        "id": "0fff744e-1553-4b9f-977d-4b19ee5e9817",
+        "name": "Buồn Mây Bán Gió...",
+        "duration": "3:17",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-2/05-buon-may-ban-gio.mp3"
+      },
+      {
+        "id": "5c9b9dee-eddd-4d29-b068-c0481e37f60b",
+        "name": "Trước hiên nhà...",
+        "duration": "5:44",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-2/06-truoc-hien-nha.mp3"
+      },
+      {
+        "id": "ebe6bc52-0ac4-4930-aaeb-97e6588b79a4",
+        "name": "Đời tự lo",
+        "duration": "4:01",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-2/07-doi-tu-lo.mp3"
+      },
+      {
+        "id": "86500156-b834-4f87-b194-a6cd80efb068",
+        "name": "Ai bằng mình đâu?",
+        "duration": "5:14",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-2/08-ai-bang-minh-dau.mp3"
+      },
+      {
+        "id": "e5fcd0cc-9be3-47b5-86ff-56f7bc2afbed",
+        "name": "Cho tất cả Chúng Ta",
+        "duration": "4:00",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-2/09-cho-tat-ca-chung-ta.mp3"
+      }
+    ]
+  },
+  {
+    "id": "b1021057-56bd-49e8-a1fb-5af4d69c2c0e",
+    "name": "Mỹ Vị Nhân Sinh",
+    "sub": "Alt-Indie Folk · Anh Li",
+    "description": "Cuộc đời có cay để nhớ, đắng để thấm, ngọt để thương và nhạt để bình yên. Bốn bài hát gom những hương vị ấy thành một lát cắt nhỏ của nhân sinh.",
+    "cover": "assets/covers/b1021057-56bd-49e8-a1fb-5af4d69c2c0e.webp",
+    "tracks": [
+      {
+        "id": "142b3ba1-12a5-4fdc-96d5-ce5984f90e12",
+        "name": "Ngọt Lạc",
+        "duration": "2:39",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/my-vi-nhan-sinh/01-ngot-lac.mp3"
+      },
+      {
+        "id": "98dac03b-7ba7-4889-80aa-d5d5e9e9a05d",
+        "name": "Đúng Đắng",
+        "duration": "2:14",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/my-vi-nhan-sinh/02-dung-dang.mp3"
+      },
+      {
+        "id": "152d5bf6-119e-4c39-b712-68f3b7ebc1e8",
+        "name": "Chua Cay Tự Tình",
+        "duration": "",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/my-vi-nhan-sinh/03-chua-cay-tu-tinh.mp3"
+      },
+      {
+        "id": "fb44f4ac-3615-4766-b323-99215101017b",
+        "name": "Thương Mầm Muối Mặn",
+        "duration": "",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/my-vi-nhan-sinh/04-thuong-mam-muoi-man.mp3"
+      },
+      {
+        "id": "1d4cb85c-8889-4499-8c29-b8a45ed7d690",
+        "name": "Hồi (T)hương",
+        "duration": "",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/my-vi-nhan-sinh/05-hoi-t-huong.mp3"
+      },
+      {
+        "id": "301f5020-6c93-4a82-9236-dcbd7498f2d3",
+        "name": "Chát Buồn Buồn Chát - Ft D'Li",
+        "duration": "",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/my-vi-nhan-sinh/06-chat-buon-buon-chat-ft-d-li.mp3"
+      },
+      {
+        "id": "4fbb1f41-8966-4d15-8cde-e43135debf0b",
+        "name": "Thế Gian Thêm Vị",
+        "duration": "",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/my-vi-nhan-sinh/07-the-gian-them-vi.mp3"
+      }
+    ]
+  },
+  {
+    "id": "74ba3104-59db-41e6-90d6-ecd657c449ce",
+    "name": "Unplugged Special – Âm Hưởng",
+    "sub": "Acoustic · Tribal Folk · Anh Li & D'Li",
+    "description": "Tiếng đàn, tiếng sáo và những điệu lý đưa Anh Li và D'Li trở về với chất liệu nguyên bản, từ quê hương, đại ngàn đến những rung động rất gần trong tim.",
+    "cover": "assets/covers/74ba3104-59db-41e6-90d6-ecd657c449ce.webp",
+    "tracks": [
+      {
+        "id": "872122de-24f4-4196-825d-2214e151c69a",
+        "name": "Thương sao...rau đắng sau hè",
+        "duration": "3:42",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-special-am-huong/01-thuong-sao-rau-dang-sau-he.mp3"
+      },
+      {
+        "id": "75c08a9c-2c7c-4024-9a6e-2ad25bf1fce3",
+        "name": "Con đường ta di",
+        "duration": "3:46",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-1/07-con-duong-ta-di.mp3"
+      },
+      {
+        "id": "4c2ac9b3-9eff-49d6-bb79-4b90d5e50e98",
+        "name": "Mấy bạn mấy bè",
+        "duration": "2:40",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-special-am-huong/03-may-ban-may-be.mp3"
+      },
+      {
+        "id": "7bc4edd1-5bf5-4426-b929-98834bea6c1e",
+        "name": "Duyên, Hợp, Tan",
+        "duration": "3:14",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-special-am-huong/04-duyen-hop-tan.mp3"
+      },
+      {
+        "id": "33fe03db-c6a1-4a37-8413-780099068b41",
+        "name": "Vọng Về Bản Nguyên",
+        "duration": "3:15",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-special-am-huong/05-vong-ve-ban-nguyen.mp3"
+      },
+      {
+        "id": "c19b8ca9-b4a2-4054-8705-cbc02d4b1aa7",
+        "name": "Vá lòng người thương",
+        "duration": "4:03",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-special-am-huong/06-va-long-nguoi-thuong.mp3"
+      },
+      {
+        "id": "963ef218-b6ae-486c-9637-025dee4a8f77",
+        "name": "Đời nảy mầm",
+        "duration": "4:07",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-special-am-huong/07-doi-nay-mam.mp3"
+      },
+      {
+        "id": "1eb49547-b8a6-4169-a511-c9ccc521f0ba",
+        "name": "Dzung Dzăng Dzung Dzẻ",
+        "duration": "3:30",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-special-am-huong/08-dzung-dzang-dzung-dze.mp3"
+      },
+      {
+        "id": "699551f2-d491-4b67-bbaa-4a6e015911c1",
+        "name": "Tôi mang một chút mây về thành phố",
+        "duration": "5:18",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-special-am-huong/09-toi-mang-mot-chut-may-ve-thanh-pho.mp3"
+      },
+      {
+        "id": "0fff744e-1553-4b9f-977d-4b19ee5e9817",
+        "name": "Buôn Mây Bán Gió...",
+        "duration": "3:17",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-2/05-buon-may-ban-gio.mp3"
+      }
+    ]
+  },
+  {
+    "id": "1c504bd2-2249-4fca-931a-f1c992581a25",
+    "name": "MiTek · Way of Stars",
+    "sub": "EDM · Stadium · Show",
+    "description": "Nhạc dựng cho đêm gala “Way of Stars” — từ anthem khai màn tới khoảnh khắc sáng đèn cuối show, cả khán phòng cùng hát.",
+    "cover": "assets/covers/1c504bd2-2249-4fca-931a-f1c992581a25.webp",
+    "tracks": [
+      {
+        "id": "a03438fa-df97-4d68-917d-82b2f9c9086e",
+        "name": "[Way of STARS] -We are The Stars Tonight-D'Li",
+        "duration": "4:46",
+        "url": null
+      },
+      {
+        "id": "6f0dfec6-8e3b-47cc-8d5f-bbddf941d67f",
+        "name": "Way of STAR — Master",
+        "duration": "",
+        "url": null
+      },
+      {
+        "id": "59b37b9a-9fe7-4c1a-9cc3-acce0a8a6377",
+        "name": "Gọi Tên Những Vì Sao",
+        "duration": "",
+        "url": null
+      },
+      {
+        "id": "5f686228-97f3-4c13-bd26-daac9b75b1cd",
+        "name": "Mitek-nista...",
+        "duration": "3:18",
+        "url": null
+      },
+      {
+        "id": "e1ee21d5-f187-407c-b751-198c2a28c074",
+        "name": "Lovers Gonna Love (Electro House Edit)",
+        "duration": "3:37",
+        "url": null
+      }
+    ]
+  },
+  {
+    "id": "df0c36ec-4afd-4760-9aa3-3b05350a1b87",
+    "name": "Tôi ❤ Việt Nam",
+    "sub": "Patriotic · Pop · Epic",
+    "description": "Những khúc ca viết cho dải đất hình chữ S, mang theo niềm tự hào, tinh thần tự cường và một tình yêu rất đỗi thân quen.",
+    "cover": "assets/covers/df0c36ec-4afd-4760-9aa3-3b05350a1b87.webp",
+    "tracks": [
+      {
+        "id": "f8628247-b5d2-4839-b501-8308976c1615",
+        "name": "HẸN ƯỚC BẮC NAM - Cover",
+        "duration": "5:03",
+        "url": null
+      },
+      {
+        "id": "9bd3da93-4f91-4053-a88e-8d09109d29d5",
+        "name": "Viết Tiếp Ước Mơ",
+        "duration": "4:42",
+        "url": null
+      },
+      {
+        "id": "4d8aa486-6064-41b7-a890-84c01cc2cc8e",
+        "name": "Vững Hậu Phương Vươn Tiền Tuyến...",
+        "duration": "4:57",
+        "url": null
+      },
+      {
+        "id": "93aab150-3285-4534-b71c-97c8d408371a",
+        "name": "Tiếng Vọng Non Sông",
+        "duration": "4:11",
+        "url": null
+      },
+      {
+        "id": "f6adf1b5-3075-46fe-8b85-fb6b7177b182",
+        "name": "Đất Trời Nước Nam",
+        "duration": "4:41",
+        "url": null
+      },
+      {
+        "id": "99752465-a1c0-4e7e-a3ac-563dd22bba1b",
+        "name": "Một Việt Nam!",
+        "duration": "4:32",
+        "url": null
+      },
+      {
+        "id": "4c3815e9-5c08-48d4-88b0-cfbcd1356c0b",
+        "name": "Một Việt Nam Vươn Cao",
+        "duration": "4:58",
+        "url": null
+      },
+      {
+        "id": "1e75456e-d27d-4e85-9afc-9c5d67cd50f0",
+        "name": "Khúc ca Việt tự hào",
+        "duration": "4:26",
+        "url": null
+      }
+    ]
+  },
+  {
+    "id": "8f8611b8-416e-4624-9bd9-e91e1c2dea62",
+    "name": "Cảm Thán Ca",
+    "sub": "Indie Folk · Anh Li & D'Li",
+    "description": "Vui, buồn, thương, giận, ngỡ ngàng — mỗi bài là một tiếng cảm thán rất đời qua hai màu giọng Anh Li và D'Li. Thốt ra cho nhẹ lòng, rồi “thì thôi” mà bước tiếp.",
+    "cover": "assets/covers/8f8611b8-416e-4624-9bd9-e91e1c2dea62.webp",
+    "tracks": [
+      {
+        "id": "2ca4a4ac-4ed5-43db-bfed-bcf126963070",
+        "name": "Thì thôi!!!!",
+        "duration": "3:02",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/cam-than-ca/01-thi-thoi.mp3"
+      },
+      {
+        "id": "b1764573-79ba-4adb-bb48-7e72e1b63039",
+        "name": "ừ - thì - là - vậy - mà -",
+        "duration": "2:58",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/cam-than-ca/02-u-thi-la-vay-ma.mp3"
+      },
+      {
+        "id": "0a20485e-60a9-46c4-b7cb-11e50fc74a8c",
+        "name": "ôh ... kìa!",
+        "duration": "4:42",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/cam-than-ca/03-oh-kia.mp3"
+      },
+      {
+        "id": "0721e27a-3d98-4831-b02f-eb51b66ab42d",
+        "name": "Ơ hay",
+        "duration": "2:59",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/cam-than-ca/04-o-hay.mp3"
+      },
+      {
+        "id": "fe9a5917-d92b-4c74-beeb-26e48d87a508",
+        "name": "Ối Giờiii... Là Trời Ơi...[ft D'Li]",
+        "duration": "3:55",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/cam-than-ca/05-oi-gioiii-la-troi-oi-ft-d-li.mp3"
+      },
+      {
+        "id": "482a5bfa-d45d-40cb-9a1c-e26a6e1ae69f",
+        "name": "Ô thôi chếc...",
+        "duration": "4:22",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/cam-than-ca/06-o-thoi-chec.mp3"
+      },
+      {
+        "id": "a83954f8-0d20-4cfc-9ede-da12c17d09b1",
+        "name": "Ủa????",
+        "duration": "4:04",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/cam-than-ca/07-ua.mp3"
+      },
+      {
+        "id": "7011c7e7-3861-4b89-bdf4-ffdc38ed1b34",
+        "name": "Úi dào...",
+        "duration": "4:07",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/cam-than-ca/08-ui-dao.mp3"
+      },
+      {
+        "id": "91199211-9380-4e1f-b408-14033ab3a615",
+        "name": "À... ra là..[Anh Li x D'Li]",
+        "duration": "5:04",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/cam-than-ca/09-a-ra-la-anh-li-x-d-li.mp3"
+      }
+    ]
+  },
+  {
+    "id": "bd830721-0b26-40ea-b7d5-508e5d6612a2",
+    "name": "Tôi Hát Cả Bốn Mùa",
+    "sub": "Ghibli Folk · Anh Li & D'Li",
+    "description": "Bốn mùa đi qua thiên nhiên, tình yêu và ký ức bằng hai màu giọng Anh Li và D'Li. Có mùa lướt qua như gió, có mùa ở lại thành bài ca.",
+    "cover": "assets/covers/bd830721-0b26-40ea-b7d5-508e5d6612a2.webp",
+    "tracks": [
+      {
+        "id": "749e34d4-7589-471f-a9d8-320b5fe13a5b",
+        "name": "Mùa Hạ của Tôi [Xuân Quỳnh]",
+        "duration": "3:18",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-hat-ca-bon-mua/01-mua-ha-cua-toi-xuan-quynh.mp3"
+      },
+      {
+        "id": "5eecfc34-d147-40a0-b674-d06d4b452d58",
+        "name": "Tiếng Thu Chùng Chình Sang [Hửu Thỉnh]",
+        "duration": "3:32",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-hat-ca-bon-mua/02-tieng-thu-chung-chinh-sang-huu-thinh.mp3"
+      },
+      {
+        "id": "af69d99f-c006-4ecd-aef7-cd0ed2afe698",
+        "name": "Màu Đông [Phan Vũ]",
+        "duration": "4:03",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-hat-ca-bon-mua/03-mau-dong-phan-vu.mp3"
+      },
+      {
+        "id": "32c66e9b-2746-4c0b-922a-57a7816ed29c",
+        "name": "Xuân Xanh Tự Tình [Nguyễn Bính]",
+        "duration": "2:30",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-hat-ca-bon-mua/04-xuan-xanh-tu-tinh-nguyen-binh.mp3"
+      },
+      {
+        "id": "7eddbbb4-fbb0-47e3-a1dc-daa0cb0ec3ef",
+        "name": "Hát Ca cả Bốn Mùa",
+        "duration": "3:58",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-hat-ca-bon-mua/05-hat-ca-ca-bon-mua.mp3"
+      }
+    ]
+  },
+  {
+    "id": "5d7b86a1-a197-402d-bfea-3184fa59f69e",
+    "name": "Another Stage",
+    "sub": "Trap · Jersey Club · Funk · Swing-Rap Mixtape",
+    "description": "1 góc dầy thú vị - một góc phản biện, một thế giới quan, mọi sự phán xét là thừa :)",
+    "cover": "assets/covers/5d7b86a1-a197-402d-bfea-3184fa59f69e.webp",
+    "tracks": [
+      {
+        "id": "179697f4-621a-4dc1-b587-2af151c63e05",
+        "name": "Gato àh, bleh~",
+        "duration": "3:10",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/another-stage/01-gato-ah-bleh.mp3"
+      },
+      {
+        "id": "6bb9116a-7d53-4585-9464-357713534d73",
+        "name": "ỪH, GIỎI.",
+        "duration": "2:57",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/another-stage/02-uh-gioi.mp3"
+      },
+      {
+        "id": "37465953-7e97-41db-9828-c87fb14d511a",
+        "name": "Ai Hỏi?",
+        "duration": "2:27",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/another-stage/03-ai-hoi.mp3"
+      },
+      {
+        "id": "85cae75f-3ffc-4ff2-a492-7ee8bde4995c",
+        "name": "Ký sự Kỳ Thú",
+        "duration": "3:53",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/another-stage/04-ky-su-ky-thu.mp3"
+      },
+      {
+        "id": "9b6105c5-e664-4338-b347-6a2b443a8dc0",
+        "name": "Của Mày Hết",
+        "duration": "4:22",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/another-stage/05-cua-may-het.mp3"
+      },
+      {
+        "id": "16bedbbb-d746-4785-a443-f1483016ae6b",
+        "name": "Wow, Oai thế",
+        "duration": "3:54",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/another-stage/06-wow-oai-the.mp3"
+      },
+      {
+        "id": "df00b140-8512-4997-af33-5f7cba191ec0",
+        "name": "OK, Sếp",
+        "duration": "3:23",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/another-stage/07-ok-sep.mp3"
+      },
+      {
+        "id": "e2cab1ea-3669-4100-ad16-b94e435eccf0",
+        "name": "Quen Ăn Kẹo Huh?",
+        "duration": "3:56",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/another-stage/08-quen-an-keo-huh.mp3"
+      },
+      {
+        "id": "31ce0e36-ec63-4cd3-b6e7-ee383f8338a3",
+        "name": "Cái Này Dễ Mà...",
+        "duration": "3:41",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/another-stage/09-cai-nay-de-ma.mp3"
+      }
+    ]
+  },
+  {
+    "id": "e5c30e35-b012-4fa2-86cb-14e8c334b977",
+    "name": "Không Có Gì!!?!",
+    "sub": "Acoustic Funk · Indie Pop · Eclectic Mood Mix",
+    "description": "Miệng trả lời không có gì đâu, nhưng cả bầu trời drama cảm lạnh thiên hạ....",
+    "cover": "assets/covers/e5c30e35-b012-4fa2-86cb-14e8c334b977.webp",
+    "tracks": [
+      {
+        "id": "8ed2eec3-3dcd-44ef-aacf-2c3eed3cece6",
+        "name": "Nhàn....",
+        "duration": "3:29",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/khong-co-gi/01-nhan.mp3"
+      },
+      {
+        "id": "7fc24b26-1908-434d-b672-bb84a66286f1",
+        "name": "Bận!",
+        "duration": "3:56",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/khong-co-gi/02-ban.mp3"
+      },
+      {
+        "id": "2db452f8-0368-499d-959d-9ccfeb538a3e",
+        "name": "Mệth...",
+        "duration": "3:30",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/khong-co-gi/03-meth.mp3"
+      },
+      {
+        "id": "1646899f-ca67-4df6-b2bf-86fbe927f68a",
+        "name": "Xảh...",
+        "duration": "4:24",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/khong-co-gi/04-xah.mp3"
+      },
+      {
+        "id": "a72464fd-19fe-420e-8d18-9b7a1b2c513e",
+        "name": "Uhmmmmmmm",
+        "duration": "5:27",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/khong-co-gi/05-uhmmmmmmm.mp3"
+      },
+      {
+        "id": "0e8cfe5c-3d7f-41c4-8fac-b95e2511b8b7",
+        "name": "Chịu...",
+        "duration": "4:28",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/khong-co-gi/06-chiu.mp3"
+      },
+      {
+        "id": "aeb95eba-96e7-4ffa-8a92-d0eba5cbc1fd",
+        "name": "Tưởng ?!?",
+        "duration": "3:11",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/khong-co-gi/07-tuong.mp3"
+      }
+    ]
+  },
+  {
+    "id": "30456da3-d6e4-4f3b-babd-a30056ad23d1",
+    "name": "Tôi Muốn Ôm Trọn Di Sản Quê Hương Mình Vào Lòng",
+    "sub": "Dân ca ba miền · Heritage Folk Series",
+    "description": "Đi từ làng nghề, di sản văn hoá đến những làn điệu dân gian ba miền, album kể lại chất liệu Việt bằng một hơi thở mới.",
+    "cover": "assets/covers/30456da3-d6e4-4f3b-babd-a30056ad23d1.webp",
+    "tracks": [
+      {
+        "id": "69ede1f4-3725-467f-b424-beed636dabc1",
+        "name": "IN MỘT NÉT TRANH",
+        "duration": "4:54",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-muon-om-tron-di-san-que-huong-minh-vao-long/01-in-mot-net-tranh.mp3"
+      },
+      {
+        "id": "b6902a96-b14b-4317-80d7-fd9d78dcae05",
+        "name": "VŨ ĐIỆU ĐẤT",
+        "duration": "4:13",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-muon-om-tron-di-san-que-huong-minh-vao-long/02-vu-dieu-dat.mp3"
+      },
+      {
+        "id": "de139955-724b-4ce5-a96a-7074eb5a4cde",
+        "name": "CON CHI VỪA LÓ RA NÌ?",
+        "duration": "4:14",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-muon-om-tron-di-san-que-huong-minh-vao-long/03-con-chi-vua-lo-ra-ni.mp3"
+      },
+      {
+        "id": "05a1cbff-5616-4190-bf73-cb62fd85a0d6",
+        "name": "BUÔNG CÂU ĐỜN CA",
+        "duration": "5:02",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-muon-om-tron-di-san-que-huong-minh-vao-long/04-buong-cau-don-ca.mp3"
+      },
+      {
+        "id": "99ecde35-d33e-4f83-ba1c-19cacad9ff8e",
+        "name": "BÀI THƠ BỒNG BỀNH",
+        "duration": "4:24",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-muon-om-tron-di-san-que-huong-minh-vao-long/05-bai-tho-bong-benh.mp3"
+      },
+      {
+        "id": "dd2d5a9c-424d-4605-9544-24818bdd5e35",
+        "name": "Ơ LÚA RÃY ƠI",
+        "duration": "3:43",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-muon-om-tron-di-san-que-huong-minh-vao-long/06-o-lua-ray-oi.mp3"
+      },
+      {
+        "id": "4fec75bb-1b1b-47e3-b67e-a910881afa66",
+        "name": "ÂN TÌNH MẸ QUÊ",
+        "duration": "4:35",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-muon-om-tron-di-san-que-huong-minh-vao-long/07-an-tinh-me-que.mp3"
+      },
+      {
+        "id": "local-mong-coi-may-ngan",
+        "name": "MỘNG CÕI MÂY NGÀN",
+        "duration": "4:52",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-muon-om-tron-di-san-que-huong-minh-vao-long/08-mong-coi-may-ngan.mp3"
+      }
+    ]
+  },
+  {
+    "id": "c6672b33-6803-4fa3-8c9d-900d15dfaf2d",
+    "name": "01KhoảngLặng",
+    "sub": "Lo-fi Hip-hop · Vietnamese R&B · Cinematic Soul",
+    "description": "Một góc nhỏ để ngồi lại giữa những ngày ồn ào. Mưa, piano cũ, boom-bap chậm, R&B khàn và rap tự sự đi qua nhiều sắc thái cô đơn, rồi dẫn mình về một khoảng lặng riêng.",
+    "cover": "assets/covers/c6672b33-6803-4fa3-8c9d-900d15dfaf2d.webp",
+    "tracks": [
+      {
+        "id": "cd33b9bf-5cc1-409e-833f-865b13fdb10b",
+        "name": "01KhoảngLặng....",
+        "duration": "3:23",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/01khoanglang/01-01khoanglang.mp3"
+      },
+      {
+        "id": "468409c6-0ef0-42fc-bf0b-c9d44fff4ba1",
+        "name": "Ta có thể khóc không?",
+        "duration": "3:44",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/01khoanglang/02-ta-co-the-khoc-khong.mp3"
+      },
+      {
+        "id": "9ecaada6-8cba-49c7-b420-8a09ab5c3101",
+        "name": "Cry The Rain",
+        "duration": "3:23",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/01khoanglang/03-cry-the-rain.mp3"
+      },
+      {
+        "id": "dabc255b-9048-42cf-952e-efa5755d8311",
+        "name": "dday doesn't 5...",
+        "duration": "3:39",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/01khoanglang/04-dday-doesn-t-5.mp3"
+      },
+      {
+        "id": "906cdce3-1030-47ed-9036-a0b7a398adb6",
+        "name": "Bạn tình Cô đơn!",
+        "duration": "4:43",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/01khoanglang/05-ban-tinh-co-don.mp3"
+      },
+      {
+        "id": "95047cbf-54f0-4e1a-8116-612b0e40ae27",
+        "name": "Anh Glitch Một Mình...",
+        "duration": "3:27",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/01khoanglang/06-anh-glitch-mot-minh.mp3"
+      },
+      {
+        "id": "54f44e62-baf9-493f-b712-95e7c7c7abae",
+        "name": "Nhảy vào Mưa....",
+        "duration": "4:20",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/01khoanglang/07-nhay-vao-mua.mp3"
+      },
+      {
+        "id": "7bc4edd1-5bf5-4426-b929-98834bea6c1e",
+        "name": "Duyên, Hợp, Tan",
+        "duration": "3:14",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-special-am-huong/04-duyen-hop-tan.mp3"
+      }
+    ]
+  },
+  {
+    "id": "debb379c-7814-426c-8409-abe0f0a43215",
+    "name": "Chuyện Tình Này...Nó Lạ...",
+    "sub": "Folk-soul Noir · Retro Pop · Anh Li & D'Li",
+    "description": "Tình yêu trong album này vừa quen vừa lạ: có người đến, người đi và những điều chỉ hiểu ra khi câu chuyện đã qua.",
+    "cover": "assets/covers/debb379c-7814-426c-8409-abe0f0a43215.webp",
+    "tracks": [
+      {
+        "id": "1cfa61e1-471b-4cfd-a05a-0083e8fa1fdb",
+        "name": "Chuyện....Mình Lạ",
+        "duration": "3:04",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/untamed/04-chuyen-minh-la.mp3"
+      },
+      {
+        "id": "71487cfe-2274-4940-8de9-09d5149cb734",
+        "name": "Sòul Đown Đắng Hoài?",
+        "duration": "5:44",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/chuyen-tinh-nay-no-la/02-soul-down-dang-hoai.mp3"
+      },
+      {
+        "id": "2ff7643d-0a80-4b44-80ad-9d47471c14ab",
+        "name": "Có hai người mới ngang phố này...",
+        "duration": "4:27",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/chuyen-tinh-nay-no-la/03-co-hai-nguoi-moi-ngang-pho-nay.mp3"
+      },
+      {
+        "id": "d293ccc7-7386-4168-8787-26f93de8beb8",
+        "name": "Anh tính thế này này [Anh Li ft D'Li]",
+        "duration": "3:32",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/chuyen-tinh-nay-no-la/04-anh-tinh-the-nay-nay-anh-li-ft-d-li.mp3"
+      }
+    ]
+  },
+  {
+    "id": "35ce4803-2ec5-405a-abdb-4a4a2cbf64a1",
+    "name": "Cả Biển Trời Trong Mắt",
+    "sub": "Ballad Collection · Anh Li · Healing Pop",
+    "description": "Những câu chuyện tình, ký ức, chia xa và những lần học cách dịu lại, được kể bằng giai điệu chậm, gần và nhiều khoảng thở.",
+    "cover": "assets/covers/35ce4803-2ec5-405a-abdb-4a4a2cbf64a1.webp",
+    "tracks": [
+      {
+        "id": "06bf905f-1765-4369-a706-4197d6f76801",
+        "name": "[Lỗi 404] Chợt Nhớ Lúc Quên Em.",
+        "duration": "3:43",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/ca-bien-troi-trong-mat/01-loi-404-chot-nho-luc-quen-em.mp3"
+      },
+      {
+        "id": "10d67ecd-8ef6-4dc6-98bf-35e502e25af0",
+        "name": "Xin đừng nói câu gì...",
+        "duration": "3:22",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/untamed/05-xin-dung-noi-cau-gi.mp3"
+      },
+      {
+        "id": "2aa5616a-016e-4867-ac87-b0d0ad861e2f",
+        "name": "Lạc Lối...",
+        "duration": "4:49",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/ca-bien-troi-trong-mat/03-lac-loi.mp3"
+      },
+      {
+        "id": "91b5c27d-c383-4a6d-8b34-75464148322d",
+        "name": "Mùa giáng sinh đi qua..",
+        "duration": "3:40",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/ca-bien-troi-trong-mat/04-mua-giang-sinh-di-qua.mp3"
+      },
+      {
+        "id": "fbc726bb-7ca1-433a-baf2-4208f60928ad",
+        "name": "Nhớ em...nhiều",
+        "duration": "4:52",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/ca-bien-troi-trong-mat/05-nho-em-nhieu.mp3"
+      },
+      {
+        "id": "97edf55c-f92c-4e49-b100-5e1ba5da11b5",
+        "name": "Cả biển trời trong",
+        "duration": "4:52",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/ca-bien-troi-trong-mat/06-ca-bien-troi-trong.mp3"
+      },
+      {
+        "id": "448b3ec7-c670-4f51-85dd-ae4cebf6a42c",
+        "name": "Điều Anh Thấy...",
+        "duration": "3:55",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/ca-bien-troi-trong-mat/07-dieu-anh-thay.mp3"
+      },
+      {
+        "id": "295c3f26-330d-47d6-ab2e-7440f0b4dcb2",
+        "name": "Nhớ hay Quên!",
+        "duration": "4:33",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/ca-bien-troi-trong-mat/08-nho-hay-quen.mp3"
+      },
+      {
+        "id": "906cdce3-1030-47ed-9036-a0b7a398adb6",
+        "name": "Bạn tình Cô đơn!",
+        "duration": "4:43",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/01khoanglang/05-ban-tinh-co-don.mp3"
+      }
+    ]
+  },
+  {
+    "id": "c6d1b392-c21b-4d47-9e67-1687cae2a955",
+    "name": "Lạ mà Quen",
+    "sub": "Hoài Niệm Remix · Tình Khúc Xưa Khoác Áo Mới · Neo-Soul Việt",
+    "description": "Quen từ một câu hát, lạ từ một cách kể. Những giai điệu cũ được Cái Sạp phối lại bằng màu sắc mới, trong khi phần ký ức vẫn được giữ nguyên.",
+    "cover": "assets/covers/c6d1b392-c21b-4d47-9e67-1687cae2a955.webp",
+    "tracks": [
+      {
+        "id": "891bc6cb-0ed4-4939-b413-5ea3fb2dcc91",
+        "name": "Mưa vương bụi sầu...",
+        "duration": "4:22",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/la-ma-quen/01-mua-vuong-bui-sau.mp3"
+      },
+      {
+        "id": "9c3b3a4c-d710-43c2-85be-d9d636420b96",
+        "name": "Sao chỉ là... (nửa trái tim)",
+        "duration": "4:12",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/la-ma-quen/02-sao-chi-la-nua-trai-tim.mp3"
+      },
+      {
+        "id": "f6830484-2824-4b3b-b76b-50771a2d930b",
+        "name": "Quá khó",
+        "duration": "3:18",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/la-ma-quen/03-qua-kho.mp3"
+      },
+      {
+        "id": "6147634e-5d55-42bf-9249-3bce315965a2",
+        "name": "Rực rỡ đến tàn phai.",
+        "duration": "4:14",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/la-ma-quen/04-ruc-ro-den-tan-phai.mp3"
+      },
+      {
+        "id": "39ce9834-36c4-4e80-8990-0913a7044b49",
+        "name": "Lời Dối Gian Đó",
+        "duration": "4:19",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/la-ma-quen/05-loi-doi-gian-do.mp3"
+      },
+      {
+        "id": "b697089e-8efe-4258-85a3-2ca8d2584671",
+        "name": "Chiếc lá cuốn bay",
+        "duration": "3:54",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/la-ma-quen/06-chiec-la-cuon-bay.mp3"
+      },
+      {
+        "id": "6047e2be-51ae-4d2a-b512-fd87b7c23038",
+        "name": "Biển Xanh Sâu Thẳm...",
+        "duration": "4:57",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/la-ma-quen/07-bien-xanh-sau-tham.mp3"
+      },
+      {
+        "id": "9d24c3ac-67a1-4a1e-99dd-3ff5cc20571b",
+        "name": "Mưa Gió.... Đời Ta",
+        "duration": "3:53",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/la-ma-quen/08-mua-gio-doi-ta.mp3"
+      },
+      {
+        "id": "33b91a57-2539-4676-8456-1244768f013c",
+        "name": "\"Ai sẽ đưa em về...\"",
+        "duration": "3:04",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/la-ma-quen/09-ai-se-dua-em-ve.mp3"
+      },
+      {
+        "id": "ccc0c475-717b-4b80-bca1-015994ea834b",
+        "name": "Xin cứ làm ngơ...[Ft D'Li]",
+        "duration": "4:26",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/la-ma-quen/10-xin-cu-lam-ngo-ft-d-li.mp3"
+      },
+      {
+        "id": "e2aeff99-60d6-4485-9c05-964baef488ed",
+        "name": "Mất Đi Màu Xanh..",
+        "duration": "3:34",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/la-ma-quen/11-mat-di-mau-xanh.mp3"
+      },
+      {
+        "id": "5c3caace-9305-4ee4-8d1a-be6042305ffe",
+        "name": "Tan",
+        "duration": "2:56",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/la-ma-quen/12-tan.mp3"
+      },
+      {
+        "id": "df4057e6-1272-4d67-8837-b7f49e9b3535",
+        "name": "TRAP*KIMLANG*",
+        "duration": "3:21",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/la-ma-quen/13-trap-kimlang.mp3"
+      }
+    ]
+  },
+  {
+    "id": "8f2c17b4-cb70-46e1-9f2e-464ccadaf1ab",
+    "name": "Đi Khắp Một Dãy Non Sông",
+    "sub": "Vietnam Travel · Folk Pop · Anh Li",
+    "description": "Một hành trình âm nhạc đi qua những miền non sông Việt Nam — gom phong cảnh, ký ức và tình quê thành một dải thanh âm.",
+    "cover": "assets/covers/8f2c17b4-cb70-46e1-9f2e-464ccadaf1ab.webp",
+    "tracks": [
+      {
+        "id": "2096197a-b0a3-4fba-89d2-d654b2f1188e",
+        "name": "Việt Nam Ta Yêu",
+        "duration": "3:54",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/di-khap-mot-day-non-song/01-viet-nam-ta-yeu.mp3"
+      },
+      {
+        "id": "b8f7a3ec-5e4d-4d15-b0cc-53ceee89cf16",
+        "name": "Chất-Việt-Chất!",
+        "duration": "2:44",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/di-khap-mot-day-non-song/02-chat-viet-chat.mp3"
+      },
+      {
+        "id": "f595f503-1399-4f0b-800c-07cf0503153e",
+        "name": "Khát Vọng Sông Vàm",
+        "duration": "4:47",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/di-khap-mot-day-non-song/03-khat-vong-song-vam.mp3"
+      },
+      {
+        "id": "222f5fdc-1516-40c4-ba37-cb41685c4758",
+        "name": "Vươn Cao Long An",
+        "duration": "4:04",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/di-khap-mot-day-non-song/04-vuon-cao-long-an.mp3"
+      },
+      {
+        "id": "2cf71f83-6d84-4abb-a241-123e19dea645",
+        "name": "Dưới Bầu Trời Ta Yêu",
+        "duration": "3:11",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/di-khap-mot-day-non-song/05-duoi-bau-troi-ta-yeu.mp3"
+      },
+      {
+        "id": "38a81c22-bfe4-48a4-991c-5a4b65322d0f",
+        "name": "Tôi Yêu Lâm Đồng",
+        "duration": "3:29",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/di-khap-mot-day-non-song/06-toi-yeu-lam-dong.mp3"
+      },
+      {
+        "id": "6f1de184-72ab-4078-8a1e-112bbd09aa41",
+        "name": "Lâm Đồng Ngày Mới",
+        "duration": "3:02",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/di-khap-mot-day-non-song/07-lam-dong-ngay-moi.mp3"
+      },
+      {
+        "id": "976a442f-08d6-4dee-92ed-f84e60045b6d",
+        "name": "Đi nhớ trở về",
+        "duration": "3:17",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-2/03-di-nho-tro-ve.mp3"
+      },
+      {
+        "id": "e5fcd0cc-9be3-47b5-86ff-56f7bc2afbed",
+        "name": "Cho tất cả Chúng Ta",
+        "duration": "4:00",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/unplugged-vol-2/09-cho-tat-ca-chung-ta.mp3"
+      }
+    ]
+  },
+  {
+    "id": "549189a6-43bd-4112-b3cc-f6a05105b082",
+    "name": "Tình Vuu-verse",
+    "sub": "City Pop · Dream Pop · Bossa Nova · Jazz Moods",
+    "description": "Một thế giới cho những tâm hồn mềm và những đêm chưa muốn ngủ. Tình yêu, nỗi nhớ và chút mộng mị được gói trong một không gian vừa cổ điển, vừa rất thành thị.",
+    "cover": "assets/covers/549189a6-43bd-4112-b3cc-f6a05105b082.webp",
+    "tracks": [
+      {
+        "id": "c321302b-bd2d-473b-a72c-cc5a2b3ff445",
+        "name": "Điệu Valse say vòng xoay...",
+        "duration": "4:30",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tinh-vuu-verse/01-dieu-valse-say-vong-xoay.mp3"
+      },
+      {
+        "id": "1a222b30-6000-4546-941b-61570bf0b7f2",
+        "name": "Đâu Ai chờ Ai",
+        "duration": "2:54",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tinh-vuu-verse/02-dau-ai-cho-ai.mp3"
+      },
+      {
+        "id": "1b94288e-54c5-4f8a-ab77-b99426cb54a4",
+        "name": "Hơi Đ-Đ-Đau",
+        "duration": "2:52",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tinh-vuu-verse/03-hoi-d-d-dau.mp3"
+      },
+      {
+        "id": "de26016d-ddb2-475b-8ac0-78ca23adfb15",
+        "name": "Xin lỗi, tôi yêu nhầm",
+        "duration": "2:33",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tinh-vuu-verse/04-xin-loi-toi-yeu-nham.mp3"
+      },
+      {
+        "id": "eb1d4984-bef7-4e36-9ce2-0d87686a4e59",
+        "name": "Em Mơ",
+        "duration": "3:38",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tinh-vuu-verse/05-em-mo.mp3"
+      },
+      {
+        "id": "3cde4f67-64c8-40ed-930d-41dc431f24ee",
+        "name": "Tình Vu Verse",
+        "duration": "2:42",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tinh-vuu-verse/06-tinh-vu-verse.mp3"
+      },
+      {
+        "id": "5b3596a6-f12a-4234-85ef-5fa4732c9073",
+        "name": "Tình Cũng Như Không",
+        "duration": "4:34",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tinh-vuu-verse/07-tinh-cung-nhu-khong.mp3"
+      },
+      {
+        "id": "ef551951-2f3e-42b0-8c1c-35cd5a8b485e",
+        "name": "Tắt Đèn",
+        "duration": "3:17",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tinh-vuu-verse/08-tat-den.mp3"
+      }
+    ]
+  },
+  {
+    "id": "443d7aad-1161-4de3-b1ca-79b8646f4cb8",
+    "name": "Thơ Ru Em Ngủ",
+    "sub": "Ru Ca Thơ Việt · Mộc Mạc Trữ Tình · Hoài Niệm Đêm Trăng",
+    "description": "Một tập thơ biết hát — Anh Li cảm tác từ những bài thơ Việt cũ, giữ hồn thơ nhưng viết lại bằng giọng hát hôm nay.",
+    "cover": "assets/covers/443d7aad-1161-4de3-b1ca-79b8646f4cb8.webp",
+    "tracks": [
+      {
+        "id": "fba3bdc4-4168-4b42-a6df-c19ce7d4ba8f",
+        "name": "[Interlude] Khúc dạo thơ đầu anh kể em nghe",
+        "duration": "1:11",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tho-ru-em-ngu/01-interlude-khuc-dao-tho-dau-anh-ke-em-nghe.mp3"
+      },
+      {
+        "id": "5d394e86-38de-467b-98fa-f7a20b54af93",
+        "name": "DẪU XA ANH CŨNG TÌM VỀ - [Theo thơ Nguyễn Bính]",
+        "duration": "5:39",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tho-ru-em-ngu/02-dau-xa-anh-cung-tim-ve-theo-tho-nguyen-binh.mp3"
+      },
+      {
+        "id": "bbd75a95-016a-4ad9-925f-cc894606d2b6",
+        "name": "CÓT CA CÓT KÉT - [Cảm tác từ \"Tiếng Võng Đưa\" - Bàng Bá Lân]",
+        "duration": "5:27",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tho-ru-em-ngu/03-cot-ca-cot-ket-cam-tac-tu-tieng-vong-dua-bang-ba-lan.mp3"
+      },
+      {
+        "id": "873f6093-8fc2-4f4b-a838-a8f12e794282",
+        "name": "DẶM LIỄU MÂY BAY - [Cảm tác từ \"Đường Về Quê Mẹ\" - Đoàn Văn Cừ]",
+        "duration": "3:49",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tho-ru-em-ngu/04-dam-lieu-may-bay-cam-tac-tu-duong-ve-que-me-doan-van-cu.mp3"
+      },
+      {
+        "id": "7a5b3654-f198-4329-bae5-7598e4cb5fc9",
+        "name": "NẮNG CHÍN BÊN ĐỒI - [Cảm tác từ \"Mùa Xuân Chín\" - Hàn Mặc Tử]",
+        "duration": "3:59",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tho-ru-em-ngu/05-nang-chin-ben-doi-cam-tac-tu-mua-xuan-chin-han-mac-tu.mp3"
+      },
+      {
+        "id": "c01b616f-ab30-4f98-80e2-63b45d41ca73",
+        "name": "CHIỀU CŨ KHÔNG TÊN [Cảm tác từ \"Tình già\" — Phan Khôi]",
+        "duration": "4:51",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tho-ru-em-ngu/06-chieu-cu-khong-ten-cam-tac-tu-tinh-gia-phan-khoi.mp3"
+      },
+      {
+        "id": "2201907e-abbe-4731-a487-ba58baa30718",
+        "name": "VŨ KHÚC TA VỚI TA - [Cảm tác từ \"Qua Đèo Ngang\" - Bà Huyện Thanh Quan]",
+        "duration": "3:42",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tho-ru-em-ngu/07-vu-khuc-ta-voi-ta-cam-tac-tu-qua-deo-ngang-ba-huyen-thanh-qu.mp3"
+      },
+      {
+        "id": "ccaa90f1-8dd3-468a-af84-e2cae5f5083f",
+        "name": "TIẾNG TỲ BÀ TRONG TRĂNG - [Cảm tác từ \"Tỳ Bà\" - Bích Khê]",
+        "duration": "4:24",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tho-ru-em-ngu/08-tieng-ty-ba-trong-trang-cam-tac-tu-ty-ba-bich-khe.mp3"
+      },
+      {
+        "id": "79bdaacc-e20a-4770-8ffc-6eac9ccd2a25",
+        "name": "NHÀ ƠI, BẠN ĐẾN CHƠI - [Cảm tác từ \"Bạn Đến Chơi Nhà\" - Nguyễn Khuyến]",
+        "duration": "4:14",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tho-ru-em-ngu/09-nha-oi-ban-den-choi-cam-tac-tu-ban-den-choi-nha-nguyen-khuye.mp3"
+      },
+      {
+        "id": "f1f4f628-9875-4f8f-8c59-98e636e0b11d",
+        "name": "Ả À ƠI, THƠ RU EM NGỦ - [Sáng tác gốc - Anh Li]",
+        "duration": "4:43",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/tho-ru-em-ngu/10-a-a-oi-tho-ru-em-ngu-sang-tac-goc-anh-li.mp3"
+      }
+    ]
+  },
+  {
+    "id": "ee01969a-6e94-4b7e-8b93-69d0be8aa866",
+    "name": "Sau Một Mùa Sóng",
+    "sub": "Mini Deluxe Album · Biển Lặng Sau Bão · Tự Sự Nội Tâm",
+    "description": "Bốn bài hát về biển, sự im lặng và những điều chưa kịp nói. Sau một mùa sóng, mình học cách dịu lại và nhìn bầu trời rộng thêm một chút.",
+    "cover": "assets/covers/ee01969a-6e94-4b7e-8b93-69d0be8aa866.webp",
+    "tracks": [
+      {
+        "id": "97edf55c-f92c-4e49-b100-5e1ba5da11b5",
+        "name": "Cả biển trời trong",
+        "duration": "4:52",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/ca-bien-troi-trong-mat/06-ca-bien-troi-trong.mp3"
+      },
+      {
+        "id": "cd255d0c-1091-4302-a67a-ee33fd783116",
+        "name": "Có Một Tiếng Thở Dài Giữa Biển",
+        "duration": "5:01",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/sau-mot-mua-song/02-co-mot-tieng-tho-dai-giua-bien.mp3"
+      },
+      {
+        "id": "3b60b43c-2640-4293-9938-9c6393e27725",
+        "name": "Một Ngày Sóng Không Về",
+        "duration": "3:34",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/sau-mot-mua-song/03-mot-ngay-song-khong-ve.mp3"
+      },
+      {
+        "id": "a9fd3296-d400-4039-9977-92618c5b3240",
+        "name": "Sau cùng, Trời vẫn thênh thang",
+        "duration": "4:38",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/sau-mot-mua-song/04-sau-cung-troi-van-thenh-thang.mp3"
+      }
+    ]
+  },
+  {
+    "id": "b1fe85ee-becf-464d-ab82-a5f5513d0738",
+    "name": "Tôi Hoạ Cả Thế Gian",
+    "sub": "Vietnamese Ink-Wash Folk · Chamber Folk · Roots Ritual",
+    "description": "Một bức thuỷ mặc bằng âm thanh — người lữ khách đứng giữa núi sông, trăng nước, vẽ lại cả thế gian bằng những gam trầm và một vệt son.",
+    "cover": "assets/covers/b1fe85ee-becf-464d-ab82-a5f5513d0738.webp",
+    "tracks": [
+      {
+        "id": "7cc49535-164a-42b3-a2b3-4c98adc0e931",
+        "name": "Ngắm Nhìn Bức Hoạ Thế Gian",
+        "duration": "4:14",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-hoa-ca-the-gian/01-ngam-nhin-buc-hoa-the-gian.mp3"
+      },
+      {
+        "id": "70ccf96a-3b48-442a-a16d-af30520a0a71",
+        "name": "Nét Đời",
+        "duration": "3:24",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-hoa-ca-the-gian/02-net-doi.mp3"
+      },
+      {
+        "id": "df51a475-1944-4c90-ab59-d27da515d9ab",
+        "name": "Qua Miền Gió Bay",
+        "duration": "4:57",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-hoa-ca-the-gian/03-qua-mien-gio-bay.mp3"
+      },
+      {
+        "id": "2debfb51-0310-4759-970a-33487e0bc77c",
+        "name": "Mạch Đất",
+        "duration": "3:57",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-hoa-ca-the-gian/04-mach-dat.mp3"
+      },
+      {
+        "id": "bb942cb4-c693-416b-a63a-5c241c66ddef",
+        "name": "Nước Về Đâu",
+        "duration": "4:21",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-hoa-ca-the-gian/05-nuoc-ve-dau.mp3"
+      },
+      {
+        "id": "190b2560-b91a-4cdb-9d10-33e149820d63",
+        "name": "Muôn Vạn Dấu Chân",
+        "duration": "4:34",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-hoa-ca-the-gian/06-muon-van-dau-chan.mp3"
+      },
+      {
+        "id": "fca5ff76-12ec-41ac-a229-12dc0b6f3f19",
+        "name": "Phủ Bạc Nhân Gian",
+        "duration": "4:27",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-hoa-ca-the-gian/07-phu-bac-nhan-gian.mp3"
+      },
+      {
+        "id": "74d27a3b-f6af-4566-ad0f-8a35c3ff54c1",
+        "name": "Chữ Tài Gánh Một Chữ Tai",
+        "duration": "3:41",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-hoa-ca-the-gian/08-chu-tai-ganh-mot-chu-tai.mp3"
+      },
+      {
+        "id": "1730b98b-21b2-493d-b45a-be76b6146599",
+        "name": "Lưng Đồi Dậy Gió",
+        "duration": "3:31",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/toi-hoa-ca-the-gian/09-lung-doi-day-gio.mp3"
+      }
+    ]
+  },
+  {
+    "id": "local-vi-muoi-man",
+    "name": "Vị Muối Mặn — 鹹味未散",
+    "sub": "Cantopop · City-Night Ballad · Song ngữ Quảng–Việt",
+    "description": "Những thứ đã đi qua, vẫn để lại một vị. Một chuyến đi song ngữ qua tình yêu, thành phố, và những gì còn sót lại.",
+    "cover": "assets/covers/local-vi-muoi-man.webp",
+    "tracks": [
+      {
+        "id": "3686ee9c-b6ab-44c7-be8f-0fc99edcaa42",
+        "name": "你係我嘅夏天 · Mùa Hè Của Anh",
+        "duration": "4:30",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/vi-muoi-man/01-mua-he-cua-anh.mp3"
+      },
+      {
+        "id": "ec99b8f1-732f-4266-8941-ceffb4f01932",
+        "name": "慢半拍 · Chậm Nửa Nhịp",
+        "duration": "3:50",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/vi-muoi-man/02-cham-nua-nhip.mp3"
+      },
+      {
+        "id": "850e0cd3-8e87-4843-aeda-681b7c9da22a",
+        "name": "最後一杯 · Ly Cuối",
+        "duration": "3:53",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/vi-muoi-man/03-ly-cuoi.mp3"
+      },
+      {
+        "id": "70c48887-107d-4e61-ba35-e1ea82ba965c",
+        "name": "閉上眼就見到你 · Nhắm Mắt Là Thấy Em",
+        "duration": "3:52",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/vi-muoi-man/04-nham-mat-la-thay-em.mp3"
+      },
+      {
+        "id": "a9139bcc-b017-4be1-a016-85abff90437b",
+        "name": "佔線中 · Máy Đang Bận",
+        "duration": "5:02",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/vi-muoi-man/04-may-dang-ban.mp3"
+      },
+      {
+        "id": "f16e1106-c044-4500-902b-73788c6a9286",
+        "name": "鹹味 · Vị Muối Mặn",
+        "duration": "4:00",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/vi-muoi-man/05-vi-muoi-man.mp3"
+      },
+      {
+        "id": "a09bfa7a-bd45-4926-8742-bf907b8f00c9",
+        "name": "月光薄情 · Bạc Như Ánh Trăng",
+        "duration": "4:41",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/vi-muoi-man/06-bac-nhu-anh-trang.mp3"
+      },
+      {
+        "id": "21e9effc-9707-437c-a073-90c0bec1903e",
+        "name": "餘像 · Dư Ảnh",
+        "duration": "5:40",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/vi-muoi-man/07-du-anh.mp3"
+      },
+      {
+        "id": "9f18cd23-7166-44e5-ab7a-c1e2b8f9c0f3",
+        "name": "借火 · Mượn Lửa",
+        "duration": "3:34",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/vi-muoi-man/08-muon-lua.mp3"
+      }
+    ]
+  },
+  {
+    "id": "local-cai-ban-nhau",
+    "name": "Cái Bàn Nhậu",
+    "sub": "Folk Nhậu · Acoustic Banter · Street-Table Mixtape",
+    "description": "chuyện gì ở cái bàn nhậu, thì nằm ở cái bàn nhậu ^^",
+    "cover": "assets/covers/local-cai-ban-nhau.webp",
+    "tracks": [
+      {
+        "id": "bd692a38-6568-4cc2-9195-cc1f06b4ab4c",
+        "name": "Là Cái Gzì Nào",
+        "duration": "4:39",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/cai-ban-nhau/01-la-cai-gzi-nao.mp3"
+      },
+      {
+        "id": "8d4dbcea-8725-4a7f-b5c9-518f2c195af7",
+        "name": "Lo Vợ La",
+        "duration": "3:57",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/cai-ban-nhau/02-lo-vo-la.mp3"
+      },
+      {
+        "id": "ae925461-79ec-4de8-991e-594e7b6333d7",
+        "name": "Cái ly đá cái ly đá",
+        "duration": "3:43",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/cai-ban-nhau/03-cai-ly-da-cai-ly-da.mp3"
+      },
+      {
+        "id": "0aed4918-86b6-4d33-ad61-430d18045dfb",
+        "name": "Sầu Thừa Vừa Một Ly",
+        "duration": "4:27",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/cai-ban-nhau/04-sau-thua-vua-mot-ly.mp3"
+      },
+      {
+        "id": "40faef41-9b1c-4b25-9bbc-f49436783e56",
+        "name": "Duyên—Hợp—Tan [Folk Remake]",
+        "duration": "4:15",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/cai-ban-nhau/05-duyen-hop-tan-folk-remake.mp3"
+      },
+      {
+        "id": "5ee43099-6a9d-49d2-9f7c-144652da1438",
+        "name": "Bàn Chuyện",
+        "duration": "3:29",
+        "url": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/cai-ban-nhau/06-ban-chuyen.mp3"
+      }
+    ]
+  }
+]

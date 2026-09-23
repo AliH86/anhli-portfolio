@@ -1,0 +1,15 @@
+{
+  "release": "33f1c0c1f4e968781a4c2674797363d1b332059e",
+  "base": "3b80fa7d4159cb4b5e75c3877aba97047da7940d",
+  "preflightPassed": true,
+  "published": true,
+  "worktree": "/Users/alihuynh/Claude/Projects/Anh Li Portfolion/portfolio-garden-hotfix-2026-09-18",
+  "scope": "portrait and playlist scroll, compact ellipsis HUD, doorbell, host balloon, mobile decorative load",
+  "physicalDeviceQA": false,
+  "pushed": true,
+  "live": true,
+  "publishedAt": "2026-09-17T18:40:37.349073+00:00",
+  "url": "https://alih86.github.io/anhli-portfolio/",
+  "browserSmokePassed": true,
+  "liveResourceMatches": 18
+}

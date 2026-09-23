@@ -1,0 +1,7 @@
+{
+  "units": "metres",
+  "Blender_to_glTF": "(x,y,z) -> (x,z,-y)",
+  "objects": 96,
+  "triangles": 9972,
+  "source": "source/garden/v1/garden-models-v1.blend"
+}

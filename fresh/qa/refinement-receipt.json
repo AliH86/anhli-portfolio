@@ -1,0 +1,77 @@
+{
+  "date": "2026-09-17",
+  "status": "user_accepted_local_refinement_checkpoint",
+  "sceneryPreserved": true,
+  "dataHashesUnchanged": {
+    "gallery.json": true,
+    "catalog.json": true,
+    "profile.json": true
+  },
+  "assets": {
+    "assets/host-idle-v2.webp": {
+      "bytes": 76262,
+      "http": 200
+    },
+    "assets/host-seated.webp": {
+      "bytes": 124302,
+      "http": 200
+    },
+    "assets/host-gallery.webp": {
+      "bytes": 86338,
+      "http": 200
+    },
+    "assets/garden-foliage.webp": {
+      "bytes": 138626,
+      "http": 200
+    },
+    "refinement.css": {
+      "bytes": 16270,
+      "http": 200
+    },
+    "app.js": {
+      "bytes": 25232,
+      "http": 200
+    },
+    "data/videos.json": {
+      "bytes": 6473,
+      "http": 200
+    },
+    "integration.css": {
+      "bytes": 6781,
+      "http": 200
+    }
+  },
+  "initialFileBytesApprox": {
+    "desktop": 647501,
+    "mobile": 553715
+  },
+  "verified": [
+    "JavaScript syntax",
+    "Desktop 1440x900 and mobile 390x844 visual inspection",
+    "Explicit Play: Quen Vang Trang The played more than 1 minute; closing tray continues playback; Pause stops it",
+    "Album selection waits for Play",
+    "Seated and gallery sprite images have actual RGBA transparency and render in scene",
+    "Mobile gallery host clear of both hotspot labels",
+    "Motion-off profile remains visible",
+    "Gallery 171 photos and 18 video source links",
+    "No captured warning/error logs in final browser check",
+    "Keyboard focus displays stall outline; Enter opens music",
+    "Cover and compact layouts inspected at desktop and mobile",
+    "Quen Vang Trang The elapsed progress continues through layout changes"
+  ],
+  "limits": [
+    "Embedded Vimeo and YouTube players remained blank in app browser; original-provider links available",
+    "No physical-device thermal, battery or slow-network benchmark",
+    "13 unmapped music entries remain disabled",
+    "Sprite loops are sparse gesture frames, not walking or full skeletal animation"
+  ],
+  "deployment": "Local only; no commit, push, merge or deployment",
+  "integration": [
+    "Static warm host color treatment; contact/cast shadows and small grass blades",
+    "Object-sized hover/focus light outlines, small labels, keyboard and touch navigation",
+    "8px desktop / 5px mobile warm glass; background decoration paused behind trays",
+    "Cover and compact album layouts; changing layout preserves audio progress"
+  ],
+  "userFeedback": "quá xá đã - wrap up đi em, mình tính step tiếp theo",
+  "acceptanceScope": "Current visual/interaction direction accepted for continuation; not deployment or physical-device performance approval."
+}

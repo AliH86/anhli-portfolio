@@ -1,0 +1,39 @@
+✔ daily message preserves all 78 original messages and first draw of legacy Oracle (6.366833ms)
+✔ same local day/device locks message across reload, next day uses fresh draw (2.359792ms)
+✔ blocked storage retains stable daily result in the current page; failed data request can retry (0.335292ms)
+✔ automatic day is exactly 05:30 inclusive to 17:30 exclusive (31.926834ms)
+✔ no ambient audio context or sound is created before explicit opt-in (0.562ms)
+✔ ambient opt-in mixes separately; opt-out stops only its own sound nodes (0.98475ms)
+✔ hidden page silences ambience while leaving native music untouched (1.392083ms)
+✔ sparse ambient interval stays between 90 and 190 seconds (0.692709ms)
+✔ daylight control cycles through explicit day/night and device-time mode (0.67375ms)
+✔ album greeting uses the actual selected catalog entry (0.613625ms)
+✔ random dialogue avoids immediately repeating the previous line (0.395167ms)
+✔ cached scenery introduces no loading delay or timer (0.459875ms)
+✔ scenery load immediately clears its nonblocking loading notice (0.320084ms)
+✔ scenery error immediately clears its nonblocking loading notice (0.543583ms)
+✔ stalled image has a bounded notice with no navigation or audio gate (0.078792ms)
+✔ reduced motion never animates the loading interaction (0.076458ms)
+✔ late video success cannot repaint another tray (1.9385ms)
+✔ late video failure cannot repaint or announce over another tray (0.626792ms)
+✔ photos win over an earlier video request (0.821125ms)
+✔ current video failure returns to usable photos with feedback (0.696459ms)
+✔ tapping the current album preserves playback; a different album resets once (0.4805ms)
+✔ closing gallery restores idle or listening pose and invalidates pending views (0.560459ms)
+✔ motion off cancels an in-flight cover animation (0.371791ms)
+✔ native media controls use the existing player and clamp seek positions (1.383458ms)
+✔ lock-screen metadata and playback position describe the selected track (0.493125ms)
+✔ browsers without Media Session keep the native player path usable (0.634709ms)
+✔ a background visibility change only pauses decoration (0.973666ms)
+✔ a sparrow visit is one small group with separate perch anchors and one chorus (2.49325ms)
+✔ a day/night switch cancels old visits; stale arrivals cannot chirp (0.483167ms)
+✔ bats only pass through the air and never enter a perched state (0.359708ms)
+✔ birds cross the scene boundary at full opacity instead of dissolving (0.483ms)
+ℹ tests 31
+ℹ suites 0
+ℹ pass 31
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 94.180833

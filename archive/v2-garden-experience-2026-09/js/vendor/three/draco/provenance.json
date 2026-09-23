@@ -1,0 +1,38 @@
+[
+  {
+    "url": "https://raw.githubusercontent.com/mrdoob/three.js/r186/examples/jsm/loaders/DRACOLoader.js",
+    "file": "js/vendor/three/DRACOLoader.js",
+    "bytes": 19042,
+    "sha256": "7adac2f41e0cdea86e321050a1ae3e41d10b76809f12873b030545c7cbcc889d"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/mrdoob/three.js/r186/examples/jsm/libs/draco/gltf/draco_wasm_wrapper.js",
+    "file": "js/vendor/three/draco/draco_wasm_wrapper.js",
+    "bytes": 58456,
+    "sha256": "8bb2952d2ba7d67e1414f8df819410cb0434a666be53f671fff75f68843d76f6"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/mrdoob/three.js/r186/examples/jsm/libs/draco/gltf/draco_decoder.wasm",
+    "file": "js/vendor/three/draco/draco_decoder.wasm",
+    "bytes": 192420,
+    "sha256": "a680d927bed9cb864ddbd63521868891af2bfbe755092761b4837487618df8ac"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/mrdoob/three.js/r186/examples/jsm/libs/draco/gltf/draco_decoder.js",
+    "file": "js/vendor/three/draco/draco_decoder.js",
+    "bytes": 512465,
+    "sha256": "8625489da79a805f4f2a7d511c3e52d8b4085608a9d2a4d5f4f9de5db0aea04f"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/mrdoob/three.js/r186/examples/jsm/libs/draco/README.md",
+    "file": "js/vendor/three/draco/README.md",
+    "bytes": 1395,
+    "sha256": "839850a67c93f6b26d3cc038a45bd8289e3cfdf15531e69339e8eb1282b4eb76"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/google/draco/1.5.7/LICENSE",
+    "file": "js/vendor/three/draco/LICENSE",
+    "bytes": 13898,
+    "sha256": "d3709b0fb4b8a94bbb1d02b8a2e484f258b0d9c5c5a01f940391f3fe662cd1a4"
+  }
+]

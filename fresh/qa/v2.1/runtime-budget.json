@@ -1,0 +1,336 @@
+[
+  {
+    "name": "desktop",
+    "atGate": {
+      "millisecondsToReady": 69.19999998807907,
+      "resources": [
+        {
+          "name": "127.0.0.1:8791/style.css",
+          "bytes": 23195,
+          "duration": 5.399999976158142
+        },
+        {
+          "name": "127.0.0.1:8791/refinement.css",
+          "bytes": 16570,
+          "duration": 4.5
+        },
+        {
+          "name": "127.0.0.1:8791/integration.css",
+          "bytes": 7081,
+          "duration": 5
+        },
+        {
+          "name": "127.0.0.1:8791/polish.css?v=20260917-3",
+          "bytes": 6778,
+          "duration": 5.5
+        },
+        {
+          "name": "127.0.0.1:8791/garden-life.css?v=final1",
+          "bytes": 13154,
+          "duration": 5.399999976158142
+        },
+        {
+          "name": "127.0.0.1:8791/final-review.css?v=release2",
+          "bytes": 10618,
+          "duration": 5.899999976158142
+        },
+        {
+          "name": "127.0.0.1:8791/garden-v21.css?v=21",
+          "bytes": 35252,
+          "duration": 6.700000047683716
+        },
+        {
+          "name": "assets/garden-desktop.webp",
+          "bytes": 355486,
+          "duration": 7.5
+        },
+        {
+          "name": "assets/garden-desktop-night.webp",
+          "bytes": 293220,
+          "duration": 7.5
+        },
+        {
+          "name": "127.0.0.1:8791/app.js?v=21",
+          "bytes": 40578,
+          "duration": 6.800000011920929
+        },
+        {
+          "name": "v2.1/foliage-0.webp",
+          "bytes": 21144,
+          "duration": 2.899999976158142
+        },
+        {
+          "name": "v2.1/foliage-1.webp",
+          "bytes": 28104,
+          "duration": 3
+        },
+        {
+          "name": "v2.1/foliage-4.webp",
+          "bytes": 26696,
+          "duration": 3.699999988079071
+        },
+        {
+          "name": "assets/host-idle-v2.webp",
+          "bytes": 76562,
+          "duration": 3.800000011920929
+        },
+        {
+          "name": "layers/landscape-near.svg",
+          "bytes": 680,
+          "duration": 3.899999976158142
+        },
+        {
+          "name": "layers/canopy-color.webp",
+          "bytes": 162560,
+          "duration": 3.699999988079071
+        },
+        {
+          "name": "layers/canopy-matte.webp",
+          "bytes": 104704,
+          "duration": 4.199999988079071
+        },
+        {
+          "name": "127.0.0.1:8791/garden-loading.js?v=1",
+          "bytes": 1819,
+          "duration": 1.5
+        },
+        {
+          "name": "127.0.0.1:8791/garden-life.js?v=21",
+          "bytes": 7152,
+          "duration": 1.899999976158142
+        },
+        {
+          "name": "127.0.0.1:8791/garden-entrance.js",
+          "bytes": 3733,
+          "duration": 2.199999988079071
+        },
+        {
+          "name": "127.0.0.1:8791/garden-lyrics.js",
+          "bytes": 4690,
+          "duration": 3.399999976158142
+        },
+        {
+          "name": "127.0.0.1:8791/garden-wind.js",
+          "bytes": 2850,
+          "duration": 3.899999976158142
+        },
+        {
+          "name": "127.0.0.1:8791/garden-ambient.js",
+          "bytes": 4297,
+          "duration": 2
+        },
+        {
+          "name": "127.0.0.1:8791/garden-wildlife.js?v=21",
+          "bytes": 8649,
+          "duration": 2.5
+        },
+        {
+          "name": "127.0.0.1:8791/garden-dialogue.js?v=2",
+          "bytes": 1456,
+          "duration": 2.699999988079071
+        },
+        {
+          "name": "127.0.0.1:8791/garden-daily.js?v=1",
+          "bytes": 1893,
+          "duration": 2.599999964237213
+        },
+        {
+          "name": "v2.1/foliage-3.webp",
+          "bytes": 26830,
+          "duration": 1.399999976158142
+        },
+        {
+          "name": "data/entrance-quotes.json",
+          "bytes": 780,
+          "duration": 1.5
+        },
+        {
+          "name": "data/catalog.json",
+          "bytes": 69125,
+          "duration": 1.300000011920929
+        },
+        {
+          "name": "assets/garden-mark.svg",
+          "bytes": 581,
+          "duration": 1.0999999642372131
+        }
+      ],
+      "longTasks": []
+    },
+    "afterEntry": {
+      "longTasks": [],
+      "domNodes": 266,
+      "nativePlayers": 1,
+      "animations": 14
+    },
+    "errors": [],
+    "notes": "Local Chrome headless sample, real wall clock, no network/CPU throttle; not a physical-device benchmark."
+  },
+  {
+    "name": "mobile",
+    "atGate": {
+      "millisecondsToReady": 71,
+      "resources": [
+        {
+          "name": "127.0.0.1:8791/style.css",
+          "bytes": 23195,
+          "duration": 3.300000011920929
+        },
+        {
+          "name": "127.0.0.1:8791/refinement.css",
+          "bytes": 16570,
+          "duration": 3.099999964237213
+        },
+        {
+          "name": "127.0.0.1:8791/integration.css",
+          "bytes": 7081,
+          "duration": 3.699999988079071
+        },
+        {
+          "name": "127.0.0.1:8791/polish.css?v=20260917-3",
+          "bytes": 6778,
+          "duration": 3.800000011920929
+        },
+        {
+          "name": "127.0.0.1:8791/garden-life.css?v=final1",
+          "bytes": 13154,
+          "duration": 4.100000023841858
+        },
+        {
+          "name": "127.0.0.1:8791/final-review.css?v=release2",
+          "bytes": 10618,
+          "duration": 5
+        },
+        {
+          "name": "127.0.0.1:8791/garden-v21.css?v=21",
+          "bytes": 35252,
+          "duration": 6.100000023841858
+        },
+        {
+          "name": "assets/garden-mobile.webp",
+          "bytes": 261700,
+          "duration": 6.800000011920929
+        },
+        {
+          "name": "127.0.0.1:8791/app.js?v=21",
+          "bytes": 40578,
+          "duration": 5.899999976158142
+        },
+        {
+          "name": "assets/garden-mobile-night.webp",
+          "bytes": 304582,
+          "duration": 6.399999976158142
+        },
+        {
+          "name": "v2.1/foliage-0.webp",
+          "bytes": 21144,
+          "duration": 1.800000011920929
+        },
+        {
+          "name": "v2.1/foliage-4.webp",
+          "bytes": 26696,
+          "duration": 1.699999988079071
+        },
+        {
+          "name": "v2.1/foliage-1.webp",
+          "bytes": 28104,
+          "duration": 1.9000000357627869
+        },
+        {
+          "name": "assets/host-idle-v2.webp",
+          "bytes": 76562,
+          "duration": 2.5
+        },
+        {
+          "name": "layers/portrait-near.svg",
+          "bytes": 800,
+          "duration": 2.100000023841858
+        },
+        {
+          "name": "layers/canopy-color.webp",
+          "bytes": 162560,
+          "duration": 3
+        },
+        {
+          "name": "layers/canopy-matte.webp",
+          "bytes": 104704,
+          "duration": 2.699999988079071
+        },
+        {
+          "name": "127.0.0.1:8791/garden-loading.js?v=1",
+          "bytes": 1819,
+          "duration": 1.800000011920929
+        },
+        {
+          "name": "127.0.0.1:8791/garden-life.js?v=21",
+          "bytes": 7152,
+          "duration": 2
+        },
+        {
+          "name": "127.0.0.1:8791/garden-wind.js",
+          "bytes": 2850,
+          "duration": 3.5
+        },
+        {
+          "name": "127.0.0.1:8791/garden-entrance.js",
+          "bytes": 3733,
+          "duration": 3.599999964237213
+        },
+        {
+          "name": "127.0.0.1:8791/garden-lyrics.js",
+          "bytes": 4690,
+          "duration": 4
+        },
+        {
+          "name": "127.0.0.1:8791/garden-wildlife.js?v=21",
+          "bytes": 8649,
+          "duration": 1.7999999523162842
+        },
+        {
+          "name": "127.0.0.1:8791/garden-ambient.js",
+          "bytes": 4297,
+          "duration": 2.199999988079071
+        },
+        {
+          "name": "127.0.0.1:8791/garden-dialogue.js?v=2",
+          "bytes": 1456,
+          "duration": 2.5
+        },
+        {
+          "name": "127.0.0.1:8791/garden-daily.js?v=1",
+          "bytes": 1893,
+          "duration": 2.5
+        },
+        {
+          "name": "v2.1/foliage-3.webp",
+          "bytes": 26830,
+          "duration": 1.300000011920929
+        },
+        {
+          "name": "data/entrance-quotes.json",
+          "bytes": 780,
+          "duration": 1.2999999523162842
+        },
+        {
+          "name": "data/catalog.json",
+          "bytes": 69125,
+          "duration": 0.8999999761581421
+        },
+        {
+          "name": "assets/garden-mark.svg",
+          "bytes": 581,
+          "duration": 1
+        }
+      ],
+      "longTasks": []
+    },
+    "afterEntry": {
+      "longTasks": [],
+      "domNodes": 262,
+      "nativePlayers": 1,
+      "animations": 14
+    },
+    "errors": [],
+    "notes": "Local Chrome headless sample, real wall clock, no network/CPU throttle; not a physical-device benchmark."
+  }
+]

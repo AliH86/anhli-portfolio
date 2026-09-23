@@ -1,0 +1,27 @@
+{
+  "preparedAt": "2026-09-18T03:33:44.023104+00:00",
+  "base": "33f1c0c1f4e968781a4c2674797363d1b332059e",
+  "userAuthorization": "Tuyệt, lên live đi em. Rồi a check trên mobile/iphone cho",
+  "runtimeFileCount": 547,
+  "runtimeMatchesApprovedCheckpoint": true,
+  "retiredRuntimeFiles": [
+    "assets/covers/1c504bd2-2249-4fca-931a-f1c992581a25.webp",
+    "assets/covers/df0c36ec-4afd-4760-9aa3-3b05350a1b87.webp"
+  ],
+  "rootEntryTransform": "Insert base href ./garden-v2/ only",
+  "worktree": "/Users/alihuynh/Claude/Projects/Anh Li Portfolion/portfolio-garden-v22-release-2026-09-18",
+  "published": true,
+  "commit": "d00e69a94d2c91d763ce4eff8e025417524ef343",
+  "preflightPassed": true,
+  "automatedTests": "43/43 passed",
+  "pushed": true,
+  "pushedAt": "2026-09-18T03:36:17.797400+00:00",
+  "pagesBuild": "success",
+  "liveResourceMatches": 56,
+  "url": "https://alih86.github.io/anhli-portfolio/?v=22-art2",
+  "browserSmoke": "passed",
+  "publishedAt": "2026-09-18T03:42:07.960382+00:00",
+  "live": true,
+  "physicalDeviceQA": "pending user iPhone testing",
+  "buildURL": "https://github.com/AliH86/anhli-portfolio/actions/runs/35303812328"
+}

@@ -1,0 +1,41 @@
+[
+  {
+    "name": "desktop",
+    "errors": [],
+    "failed": [],
+    "entered": "true",
+    "audioCount": 1,
+    "time": 1.948176,
+    "paused": false,
+    "overflow": false,
+    "bodyHeight": 900,
+    "viewport": 900,
+    "listening": "true"
+  },
+  {
+    "name": "tablet",
+    "errors": [],
+    "failed": [],
+    "entered": "true",
+    "audioCount": 1,
+    "time": 1.875465,
+    "paused": false,
+    "overflow": false,
+    "bodyHeight": 1112,
+    "viewport": 1112,
+    "listening": "true"
+  },
+  {
+    "name": "mobile",
+    "errors": [],
+    "failed": [],
+    "entered": "true",
+    "audioCount": 1,
+    "time": 1.780266,
+    "paused": false,
+    "overflow": false,
+    "bodyHeight": 844,
+    "viewport": 844,
+    "listening": "true"
+  }
+]

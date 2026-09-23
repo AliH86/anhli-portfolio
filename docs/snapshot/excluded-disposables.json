@@ -1,0 +1,119 @@
+{
+  "generated": "2026-09-23",
+  "source_clone": "portfolio-garden-v2 @ 5eacde1 (codex/garden-experience-v2)",
+  "excluded": [
+    {
+      "path": "portfolio-garden-v2/fresh/node_modules",
+      "files": 9192,
+      "bytes": 23260586,
+      "reason": "dependency install",
+      "restore": "cd fresh && npm ci (package-lock.json committed)"
+    },
+    {
+      "path": "portfolio-garden-v2/fresh/dist",
+      "files": 551,
+      "bytes": 32528166,
+      "reason": "duplicated generated runtime: byte-identical to garden-v2/ on main d058ee2 (551 files, diff -rq = 0)",
+      "restore": "cp -R garden-v2/ fresh/dist/"
+    },
+    {
+      "path": "portfolio-garden-v2/fresh/checkpoints",
+      "files": 40,
+      "bytes": 369031499,
+      "reason": "checkpoint site.zip copies + runtime copies (text receipts kept)",
+      "restore": "text receipts are on the branch; binaries not preserved"
+    },
+    {
+      "path": "portfolio-garden-v2/fresh/qa",
+      "files": 656,
+      "bytes": 280377531,
+      "reason": "temporary QA screenshots/harness output (json/md/txt receipts kept)",
+      "restore": "not preserved"
+    },
+    {
+      "path": "portfolio-garden-v2/docs/qa",
+      "files": 325,
+      "bytes": 179823391,
+      "reason": "temporary QA output of the superseded garden-experience era",
+      "restore": "not preserved"
+    },
+    {
+      "path": "portfolio-garden-v2/docs/garden-experience-2026-09-09/evidence",
+      "files": 34,
+      "bytes": 27385844,
+      "reason": "QA/review screenshots",
+      "restore": "not preserved"
+    },
+    {
+      "path": "portfolio-garden-v2/docs/ui-redesign-2026-09-12/evidence",
+      "files": 58,
+      "bytes": 18072007,
+      "reason": "QA/review screenshots",
+      "restore": "not preserved"
+    },
+    {
+      "path": "portfolio-garden-v2/scripts/__pycache__",
+      "files": 1,
+      "bytes": 20006,
+      "reason": "Python bytecode cache",
+      "restore": "regenerated automatically"
+    },
+    {
+      "path": "portfolio-garden-v2/source/garden/v1/garden-models-v1.blend1",
+      "files": 1,
+      "bytes": 183285,
+      "reason": "Blender auto-backup of garden-models-v1.blend (kept)",
+      "restore": "not preserved"
+    },
+    {
+      "path": "portfolio-garden-v2/audio-map.js",
+      "files": 1,
+      "bytes": 18081,
+      "reason": "obsolete: identical to blob in 5dc754a, superseded by 487e4fd on main",
+      "restore": "git history"
+    },
+    {
+      "path": "portfolio-garden-v2/music-data-base.js",
+      "files": 1,
+      "bytes": 40799,
+      "reason": "obsolete: identical to blob in 5dc754a, superseded by 487e4fd on main",
+      "restore": "git history"
+    },
+    {
+      "path": "portfolio-garden-v2/css/cjk-fonts.css",
+      "files": 1,
+      "bytes": 5109,
+      "reason": "obsolete: identical to blob in 5dc754a, superseded on main",
+      "restore": "git history"
+    },
+    {
+      "path": "portfolio-garden-v2/fonts",
+      "files": 4,
+      "bytes": 38300,
+      "reason": "obsolete: 4 CJK woff2 identical to blobs in 5dc754a, superseded on main",
+      "restore": "git history"
+    },
+    {
+      "path": "portfolio-garden-v2/uploads/cai-ban-nhau.jpg",
+      "files": 1,
+      "bytes": 166462,
+      "reason": "duplicate: identical to main",
+      "restore": "git history"
+    },
+    {
+      "path": "portfolio-garden-v2/uploads/vi-muoi-man.jpg",
+      "files": 1,
+      "bytes": 115743,
+      "reason": "duplicate: identical to main",
+      "restore": "git history"
+    },
+    {
+      "path": "portfolio-garden-v2/scripts/build-cjk-fonts.mjs",
+      "files": 1,
+      "bytes": 5099,
+      "reason": "duplicate: identical to main",
+      "restore": "git history"
+    }
+  ],
+  "total_bytes": 931071908
+}

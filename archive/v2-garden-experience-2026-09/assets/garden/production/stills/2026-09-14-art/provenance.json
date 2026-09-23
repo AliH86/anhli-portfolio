@@ -1,0 +1,30 @@
+{
+  "tool": "built-in image_gen",
+  "type": "static art-directed plate with native rendered host layer",
+  "not_a_new_3d_model": true,
+  "prompts": "docs/production/GARDEN-ART-PROMPTS-2026-09-14.md",
+  "files": {
+    "mobile-host.png": {
+      "bytes": 39494,
+      "sha256": "306f05c6cda83a03145a49e76c2e5dec54b49125ef82d8f87e0e5df32ad233a1"
+    },
+    "arrival-host.png": {
+      "bytes": 72991,
+      "sha256": "9cc458e96a05ff1af70afe002d1aac18ef23c6b8958c8bf57fdc7862373767e0"
+    },
+    "garden-arrival.png": {
+      "bytes": 3065491,
+      "sha256": "b003da48bd9b8b9e476cdf9bcf5d0d0621ce4d7e49efacb35a0086da6e7f9ba1"
+    },
+    "garden-mobile.png": {
+      "bytes": 2854799,
+      "sha256": "ead9a1dd23ce70bedbf4f945c85ad1c86476b29d3276cebb82243983dd67dad1"
+    }
+  },
+  "generation_files": [
+    "exec-14725ed6-0d60-4f21-8e6f-54e8b0bb79ab.png",
+    "exec-4bf44f37-60d7-450e-89d4-aaa507f4fa6a.png"
+  ],
+  "host_source": "source/garden/production/host/host-lineart-v1.png",
+  "host_render_script": "docs/qa/garden-finish-2026-09-14/capture-art-inputs.mjs"
+}

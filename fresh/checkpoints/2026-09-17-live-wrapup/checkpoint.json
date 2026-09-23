@@ -1,0 +1,13 @@
+{
+  "status": "live baseline accepted for further improvement; editing paused by user",
+  "date": "2026-09-17",
+  "release_commit": "64f76b313c67d6345cae48eaa87f66a244bce07b",
+  "v1_commit": "487e4fd46fcebb2356e1f44cfb0a8212635acdbd",
+  "live_url": "https://alih86.github.io/anhli-portfolio/",
+  "runtime_snapshot": "/Users/alihuynh/Claude/Projects/Anh Li Portfolion/website-releases/2026-09-17/02-GARDEN-V2-READY.zip",
+  "sha256": "80cc7cb5f5568530640461540e45b18f18716ccfc293e8b66bb9ca6a2c2dfabc",
+  "v1_archive": "/Users/alihuynh/Claude/Projects/Anh Li Portfolion/website-archives/2026-09-17-v1-before-garden",
+  "wrapup": "/Users/alihuynh/Claude/Projects/Anh Li Portfolion/portfolio-garden-v2/docs/production/V2-LIVE-WRAPUP-2026-09-17.md",
+  "user_pending_feedback": "A few points remain; user has not yet itemized them. Resume next session.",
+  "runtime_changed_this_wrapup": false
+}

@@ -1,0 +1,28 @@
+{
+  "tool": "built-in image_gen",
+  "reference": "assets/garden/production/stills/2026-09-14-art/garden-arrival.png",
+  "prompt": "docs/production/SHOWS-ART-PROMPTS-2026-09-14.md",
+  "originalDirectory": "/Users/alihuynh/.codex/generated_images/01a09fab-5f67-76e2-92a3-9f04e0a909ec",
+  "sourceOutputs": [
+    "exec-0b342119-c8c7-4420-9121-8377e14d79ca.png",
+    "exec-6526dca3-007c-4946-8082-7ad36a25cf55.png"
+  ],
+  "status": "Integrated local static scenery; user visual review pending",
+  "geometry": "Illustrative same-world camera, not a surveyed new 3D model",
+  "assets": [
+    {
+      "file": "shows-desktop.png",
+      "bytes": 3136576,
+      "width": 1672,
+      "height": 941,
+      "sha256": "030972a25e785f4a8bae5d83af715ed453bd65eae2e21dc1bf12fb65eb3521fe"
+    },
+    {
+      "file": "shows-mobile.png",
+      "bytes": 2919476,
+      "width": 941,
+      "height": 1672,
+      "sha256": "2c32b0c034d275e7c3e86e344279c35b08cf43c391d83f0a0b26f76c24e448ac"
+    }
+  ]
+}

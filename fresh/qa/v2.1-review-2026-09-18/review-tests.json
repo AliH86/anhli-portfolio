@@ -1,0 +1,152 @@
+{
+  "quotes": [
+    {
+      "name": "desktop",
+      "chars": 258,
+      "fullHeight": true,
+      "lineClamp": "none",
+      "textOverflow": "clip",
+      "text": "“Hòa Bình Và Lặng Lẽ” nè. Năm bài hát đồng hành cùng hành trình 500 ngày đêm tìm Di Hài Cốt Liệt Sĩ Việt Nam — mang tâm nhạc làm ngọn đèn dẫn đường, gửi niềm hy vọng đoàn viên đến những gia đình các Anh-Chị-Em liệt sĩ. Một lời chưa nói, nở thành cả trời hoa.",
+      "x": 370.265625,
+      "y": 327.28125,
+      "bottom": 554.640625,
+      "right": 596.265625,
+      "width": 1440,
+      "height": 900,
+      "scrollHeight": 225,
+      "clientHeight": 225
+    },
+    {
+      "name": "tablet",
+      "chars": 258,
+      "fullHeight": true,
+      "lineClamp": "none",
+      "textOverflow": "clip",
+      "text": "“Hòa Bình Và Lặng Lẽ” nè. Năm bài hát đồng hành cùng hành trình 500 ngày đêm tìm Di Hài Cốt Liệt Sĩ Việt Nam — mang tâm nhạc làm ngọn đèn dẫn đường, gửi niềm hy vọng đoàn viên đến những gia đình các Anh-Chị-Em liệt sĩ. Một lời chưa nói, nở thành cả trời hoa.",
+      "x": 348.1875,
+      "y": 260.9375,
+      "bottom": 488.296875,
+      "right": 574.1875,
+      "width": 834,
+      "height": 1112,
+      "scrollHeight": 225,
+      "clientHeight": 225
+    },
+    {
+      "name": "mobile",
+      "chars": 258,
+      "fullHeight": true,
+      "lineClamp": "none",
+      "textOverflow": "clip",
+      "text": "“Hòa Bình Và Lặng Lẽ” nè. Năm bài hát đồng hành cùng hành trình 500 ngày đêm tìm Di Hài Cốt Liệt Sĩ Việt Nam — mang tâm nhạc làm ngọn đèn dẫn đường, gửi niềm hy vọng đoàn viên đến những gia đình các Anh-Chị-Em liệt sĩ. Một lời chưa nói, nở thành cả trời hoa.",
+      "x": 164.5625,
+      "y": 232.734375,
+      "bottom": 453.890625,
+      "right": 338.5625,
+      "width": 390,
+      "height": 844,
+      "scrollHeight": 219,
+      "clientHeight": 219
+    },
+    {
+      "name": "small-mobile",
+      "chars": 258,
+      "fullHeight": true,
+      "lineClamp": "none",
+      "textOverflow": "clip",
+      "text": "“Hòa Bình Và Lặng Lẽ” nè. Năm bài hát đồng hành cùng hành trình 500 ngày đêm tìm Di Hài Cốt Liệt Sĩ Việt Nam — mang tâm nhạc làm ngọn đèn dẫn đường, gửi niềm hy vọng đoàn viên đến những gia đình các Anh-Chị-Em liệt sĩ. Một lời chưa nói, nở thành cả trời hoa.",
+      "x": 138,
+      "y": 138.171875,
+      "bottom": 359.328125,
+      "right": 312,
+      "width": 320,
+      "height": 568,
+      "scrollHeight": 219,
+      "clientHeight": 219
+    },
+    {
+      "name": "landscape",
+      "chars": 258,
+      "fullHeight": true,
+      "lineClamp": "none",
+      "textOverflow": "clip",
+      "text": "“Hòa Bình Và Lặng Lẽ” nè. Năm bài hát đồng hành cùng hành trình 500 ngày đêm tìm Di Hài Cốt Liệt Sĩ Việt Nam — mang tâm nhạc làm ngọn đèn dẫn đường, gửi niềm hy vọng đoàn viên đến những gia đình các Anh-Chị-Em liệt sĩ. Một lời chưa nói, nở thành cả trời hoa.",
+      "x": 243.078125,
+      "y": 135.890625,
+      "bottom": 284.140625,
+      "right": 469.078125,
+      "width": 844,
+      "height": 390,
+      "scrollHeight": 146,
+      "clientHeight": 146
+    }
+  ],
+  "wind": [
+    {
+      "name": "desktop",
+      "transform": "matrix(0.999982, 0.00606057, -0.00606057, 0.999982, 0, 0)",
+      "active": true,
+      "tipTravel": 13.849503245166735
+    },
+    {
+      "name": "tablet",
+      "transform": "matrix(0.99998, 0.00625314, -0.00625314, 0.99998, 0, 0)",
+      "active": true,
+      "tipTravel": 8.010638123811093
+    },
+    {
+      "name": "mobile",
+      "transform": "matrix(0.999979, 0.00644817, -0.00644817, 0.999979, 0, 0)",
+      "active": true,
+      "tipTravel": 7.476595582223688
+    },
+    {
+      "name": "small-mobile",
+      "transform": "matrix(0.99998, 0.00625317, -0.00625317, 0.99998, 0, 0)",
+      "active": true,
+      "tipTravel": 7.476595582223688
+    },
+    {
+      "name": "landscape",
+      "transform": "matrix(0.99998, 0.00625285, -0.00625285, 0.99998, 0, 0)",
+      "active": true,
+      "tipTravel": 8.117446632128575
+    }
+  ],
+  "ambience": {
+    "initial": {
+      "duration": 25,
+      "loop": true,
+      "startArguments": 1,
+      "seamJump": 0.0009174244478344917,
+      "quietest100ms": 0.011603288413992165,
+      "contextTime": 0.005333333333333333
+    },
+    "twoCycles": {
+      "sources": 1,
+      "ended": false,
+      "contextTime": 50.928,
+      "sound": "field-birds"
+    },
+    "transition": [
+      {
+        "loop": true,
+        "start": [
+          0.005333333333333333
+        ],
+        "stop": [
+          53.41533333333333
+        ],
+        "ended": false
+      },
+      {
+        "loop": true,
+        "start": [
+          51.36533333333333
+        ],
+        "stop": null,
+        "ended": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const dest=path.join(root,'docs/qa/garden-ui-2026-09-14');
+let source=await fs.readFile(path.join(root,'index.html'),'utf8');
+source=source.replace(/<base[^>]*data-dg-base[^>]*>/,'<base data-dg-base href="../../../">');
+source=source.replace('</head>','<link rel="stylesheet" href="docs/qa/garden-ui-2026-09-14/proof.css"></head>');
+source=source.replace('</body>','<script type="module" src="docs/qa/garden-ui-2026-09-14/proof.mjs"></script></body>');
+await fs.writeFile(path.join(dest,'index.html'),source);
+console.log('Built isolated real-shell static Garden proof; source index and all routes unchanged.');

@@ -1,0 +1,11 @@
+# Host integration checkpoint · 13 September 2026
+
+User said “oki lah, tiếp” after the simplified monochrome host. Integrated that accepted direction in a NEW local QA viewer: http://127.0.0.1:8784/docs/qa/garden-host-2026-09-13/?view=arrival . Views arrival/host/mobile show the standing illustration; architecture study views retain no host. No free orbit.
+
+Source artwork remains unchanged. Built-in imagegen authored a registered grayscale matte, saved with its prompt/provenance under `source/garden/production/host/`. RGB artwork + opacity-map PNGs copied to `assets/garden/production/host/`. Three.js uses map/alphaMap with alphaTest .52; not a standalone transparent PNG. Display verified against the garden: background is removed, face/clothing are retained. A generated mask is not guaranteed pixel-perfect; inspect/clean its outline if using a larger portrait in future.
+
+Host x7.8,z13 at yard edge, terrain raycast y−1.536138, grounded offset .012; approx 1.78m visible figure. Separate soft contact-shadow shader. Figure uses two triangles; shadow uses two; two additional textures. A1 visible height ~16% frame (plane17.3%); mobile camera changed to [13,1,20],FOV62,target[−6,−1,−6] so the person remains legible. Mobile deliberately focuses home/host/workspace; house is partially cropped and stall is out of frame. Keep navigation accessible when integrating actual shell.
+
+11/11 browser checks pass, including host containment/size and terrain placement, 390px controls, no idle loop, source spatial anchors, unobstructed veranda ray, context-loss/no-WebGL static fallback, one real stopped audio/26albums on existing portfolio and no scenic loads. Seven camera screenshots, 390px and no-WebGL evidence are in this QA folder. Baseline preservation receipt passes. Old scenic viewer and all geometry/material assets remain unchanged.
+
+This is host-in-scene QA, not final Garden art or actual-device performance acceptance. All previous foliage/ground/water/light quality and mobile performance limitations remain. Next: material/light/planting pass, refine portrait composition WITH real UI, then Garden-only static proof before other-state motion. Do not restart host style or use rejected realistic colour portraits. No commit/push/deploy. Save before 95% usage as user requested.

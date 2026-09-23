@@ -1,0 +1,19 @@
+✔ late video success cannot repaint another tray (2.094292ms)
+✔ late video failure cannot repaint or announce over another tray (0.398291ms)
+✔ photos win over an earlier video request (0.347458ms)
+✔ current video failure returns to usable photos with feedback (0.307833ms)
+✔ tapping the current album preserves playback; a different album resets once (0.373958ms)
+✔ closing gallery restores idle or listening pose and invalidates pending views (0.511875ms)
+✔ motion off cancels an in-flight cover animation (0.336792ms)
+✔ native media controls use the existing player and clamp seek positions (0.952208ms)
+✔ lock-screen metadata and playback position describe the selected track (0.487959ms)
+✔ browsers without Media Session keep the native player path usable (0.37525ms)
+✔ a background visibility change only pauses decoration (0.306666ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 62.836708

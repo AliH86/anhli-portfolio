@@ -1,0 +1,64 @@
+{
+  "audioBefore": {
+    "src": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/chuyen-cua-trang/01-quen-vang-trang-the.mp3",
+    "time": 37.503019
+  },
+  "ambientOn": {
+    "audio": {
+      "paused": false,
+      "time": 37.760781
+    },
+    "state": {
+      "ambientContext": "running",
+      "ambientEnabled": "true",
+      "ambientSound": "birds",
+      "audioState": "playing",
+      "dayMode": "auto",
+      "dayPhase": "day",
+      "playing": "true",
+      "room": "",
+      "still": "false"
+    }
+  },
+  "ambientOff": {
+    "audio": {
+      "paused": false,
+      "src": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/chuyen-cua-trang/01-quen-vang-trang-the.mp3",
+      "time": 38.037762
+    },
+    "state": {
+      "ambientContext": "suspended",
+      "ambientEnabled": "false",
+      "ambientSound": "quiet",
+      "audioState": "playing",
+      "dayMode": "auto",
+      "dayPhase": "day",
+      "playing": "true",
+      "room": "",
+      "still": "false"
+    }
+  },
+  "console": [],
+  "viewports": [
+    [
+      1440,
+      900
+    ],
+    [
+      390,
+      844
+    ],
+    [
+      820,
+      1180
+    ],
+    [
+      844,
+      390
+    ]
+  ],
+  "manualFoliageToggle": "All six animated foliage elements showed animation-name:none",
+  "gallery": "pose=gallery and canopy paused with tray open",
+  "night": "brightness .48, owl opacity 1, ambientSound owl and context running observed",
+  "limits": "Browser viewport tests only; no physical mobile/lock-screen or auditory quality certification"
+}

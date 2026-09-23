@@ -1,3 +1,93 @@
+# CURRENT · V2.2 finish pass live · 18 September 2026
+
+User resumed after the laptop pause. Finish pass is now live at https://alih86.github.io/anhli-portfolio/?v=22-garden2 , commit `d058ee25f2803d2d6d1562defbf928b769c165c3`. Pages build succeeded; 13 live resource hashes match. Live laptop sign and phone playlist smoke passed. 50 automated tests passed after resume; physical iPhone Safari retest remains pending.
+
+Read `docs/production/V2.2-FINISH-2026-09-18.md` for final scope, evidence and release boundary. Source remains `fresh/dist/`; final package is `../website-releases/2026-09-18-v2.2-finish/`. Preserve unrelated development work. The paused/local status and older release entries below are historical, superseded by this entry. Next work should follow concrete user feedback on this live version.
+
+---
+
+## 2026-09-18 — PAUSED by user, V2.2 finish pass remains local
+
+User is closing the laptop. Do not continue until they resume. Exact checkpoint: `fresh/checkpoints/2026-09-18-v2.2-paused-finish/`. Read `docs/production/V2.2-PAUSED-FINISH-2026-09-18.md` first. Latest laptop sign-animation fix is not yet rechecked; 50 tests passed before that last edit. Live is still `198184e`, not this local finish pass.
+
+---
+
+# CURRENT · V2.2 iPhone hotfix live · 18 September 2026
+
+User physical-iPhone screenshots exposed overlapping garden labels/note and a blank music layer after V2.2 release. Targeted repair is now live at https://alih86.github.io/anhli-portfolio/?v=22-iphone1 , commit `198184ebc1bfd7ce44bc93a9859308a666b01712`. Pages build succeeded;6 live entry/code/style/catalog hashes match. **Physical Safari retest remains pending; do not claim it is verified from Chromium viewport QA.**
+
+Read `docs/production/V2.2-IPHONE-HOTFIX-2026-09-18.md`. Music now has explicit visual viewport geometry, an inset playlist with independent scrolling and fixed transport, no mobile dialog fade dependency, and dimensions assigned before showModal. Compact garden note and measured mini-player/navigation spacing remove overlaps; duplicate large scenic labels hidden on phones while object hotspots remain.548 runtime files; only app.js/index.html changed and garden-mobile.css added; original art/catalog unchanged.43 automated checks, local flow/scroll/resize/audio checks and live394×710 playlist smoke passed.
+
+Source: `fresh/dist/`. Clean release: `../portfolio-garden-v22-iphone-hotfix-2026-09-18/`. Package/publication/evidence: `../website-releases/2026-09-18-v2.2-iphone-hotfix/`. Previous version: `d00e69a`; before-hotfix checkpoint saved. Preserve mixed development work. Next: user's physical Safari retest, then concrete fixes if necessary.
+
+---
+
+# CURRENT · V2.2 live · 18 September 2026
+
+User approved the revised art and explicitly requested publication. **V2.2 is live** at https://alih86.github.io/anhli-portfolio/?v=22-art2 . Release `d00e69a94d2c91d763ce4eff8e025417524ef343`; GitHub Pages build succeeded;56 live resources match release SHA-256.547 runtime files match the approved art checkpoint.43 regression tests and live browser smoke passed: entrance, explicit Play, one native audio, playback after room close, mobile playlist. Physical iPhone checks are now pending the user's testing.
+
+Read `docs/production/V2.2-LIVE-WRAPUP-2026-09-18.md`. Source `fresh/dist/`; clean release worktree `../portfolio-garden-v22-release-2026-09-18/`; evidence `../website-releases/2026-09-18-v2.2/`. Checkpoint acceptance/publication receipts supersede historical pending/no-deploy snapshots below. Preserve mixed development work and wait for concrete iPhone feedback.
+
+---
+
+# V2.2 · Vòng art sau phản hồi · 18/09/2026
+
+Bản art đầu chưa đạt ref; nhận định hoàn thiện trước đó quá sớm. Đã chỉnh lại khung, bảng tên, tỷ lệ kệ/player, thư và bảng ảnh. Bản duyệt mới: `docs/production/V2.2-ART-REVIEW-2026-09-18.md`; checkpoint `fresh/checkpoints/2026-09-18-v2.2-art-review/`. Chưa có duyệt mỹ thuật, chưa live. Dữ liệu và artwork cũ nguyên vẹn.
+
+---
+
+# V2.2 · 18/09/2026 · Local review only
+
+Hoàn thiện art/UI/mobile, đối soát nguồn 26 album/213 bài, pipeline project-local. Chữ opaque trên vellum trong nhẹ; wood honey + vine/daisy alpha.43 tests pass,213/213 URL audio. Tham chiếu `docs/production/V2.2-REVIEW-2026-09-18.md` và `design-qa.md`. Chưa live; đợi duyệt mỹ thuật và QA thiết bị thật. Checkpoint `fresh/checkpoints/2026-09-18-v2.2-review/`.
+
+---
+
+# Latest · Wrap-up V2.1 tổng hợp cập nhật · 18/09/2026
+
+Theo yêu cầu anh Li, đã cập nhật `docs/production/V2.1-LIVE-WRAPUP-2026-09-18.md` thành điểm vào tổng hợp cho toàn bộ V2.1 và hotfix: brief/quyết định HUD ⋯ cuối cùng, các lỗi và cách sửa, catalog 28 album/226 bài (213 có URL, 13 thiếu), release `33f1c0c`, QA, giới hạn nhiệt/pin/thiết bị thật, việc V2.2, checkpoint, worktree, archive và nguồn cần sửa. Lịch sử lần live đầu được giữ bên dưới, có đánh dấu rõ. SESSION-HANDOFF/fresh README và các wrap-up liên quan đã trỏ về bản tổng hợp.
+
+Đã fetch đối chiếu origin/main và xác nhận 507 runtime file vẫn đúng manifest hotfix, worktree release sạch. Vòng này chỉ cập nhật tài liệu; không sửa runtime hoặc deploy lại. Snapshot `checkpoint.json` là trạng thái lúc tạo gói; `publication.json`/live receipts mới hơn xác nhận đã live. Chưa có phản hồi xác nhận sau hotfix từ iPhone thật của anh; không đổi trạng thái QA thiết bị thành đã đạt.
+
+---
+
+# Previous · V2.1 sửa mobile và HUD ⋯ đã live · 18/09/2026
+
+Anh báo lỗi cuộn dọc Safari iPhone 13 Pro, playlist kẹt từ bài 5, máy nóng, chuông không có sound và balloon/focus logo sai. Theo các mẫu anh gửi, HUD đã thu gọn: bấm ⋯ mở danh sách cuộn dọc, chọn bài rồi thu lại; đóng HUD vẫn nghe, bấm player nhỏ mở lại đúng bài. Bìa album có mép kệ gỗ và phần Li giới thiệu giữ đủ lời. Karaoke/lời hát vẫn để phiên sau.
+
+Đã sửa overflow đúng trục, thêm chuông 1.25 giây rồi đóng context, bỏ focus cam tự bật ở logo và neo balloon cạnh vai. Dừng animation cảnh/gió/wildlife khi mở khay trên touch, lưu lựa chọn ✦ và có nút ✦ trong HUD; host nhắc nhẹ. Canopy dùng alpha native để tránh lỗi checkerboard Safari. Một native music player được bảo toàn.
+
+Commit live `33f1c0c1f4e968781a4c2674797363d1b332059e`; Pages build thành công, 18 resource online đúng checksum; live Chrome/WebKit responsive scroll và desktop/mobile R2/profile/gallery smoke đạt. 36 unit checks + 7 viewport/browser scenarios. Nhiệt độ, pin và background/lock-screen trên máy thật chưa được chứng nhận; anh sẽ thử lại iPhone, không có tablet/Android. Chi tiết: `docs/production/V2.1-MOBILE-HOTFIX-2026-09-18.md`. Checkpoint `fresh/checkpoints/2026-09-18-v2.1-mobile-hotfix/`, package `../website-releases/2026-09-18-v2.1-hotfix/`. Bản V1/V2/V2.1 cũ giữ nguyên; không trộn dirty work vào release.
+
+---
+
+# Previous · V2.1 đã lên live · 18/09/2026
+
+Anh Li chốt xuất bản V2.1; wording và karaoke/lyrics để phiên V2.2. Đã push commit `3b80fa7d4159cb4b5e75c3877aba97047da7940d` từ worktree release riêng, GitHub Pages build/deploy thành công. Live: https://alih86.github.io/anhli-portfolio/ . 17 tài nguyên online trùng checksum; smoke desktop/mobile trên site thật đạt, gồm nhạc R2 phát tiếp khi đóng sạp và ambience đổi ngày/đêm. Một native player được giữ nguyên. Lyrics index vẫn trống, chưa hiển thị karaoke.
+
+Wrap-up: `docs/production/V2.1-LIVE-WRAPUP-2026-09-18.md`. Gói lưu/chứng từ: `../website-releases/2026-09-18-v2.1/`; worktree sạch: `../portfolio-garden-release-2026-09-18/`. Bản lưu V1/V2, kho nhạc local và workspace nháp được giữ nguyên. File deploy một lần đã archive sau khi kiểm tra xong. QA thiết bị thật vẫn là giới hạn chưa xác minh; các note wording/karaoke sẽ tiếp tục ở phiên sau.
+
+---
+
+# Previous · V2.1 accepted; wording remains · 18 September 2026
+
+## User acceptance · 18 September 2026
+
+Ali confirmed: “ok, còn lại là wording, còn lại ổn nha”. The current V2.1 visuals, layout, motion, ambience and interaction are accepted, including all four review refinements. Remaining work is **wording only**. All 506 runtime files still match `fresh/checkpoints/2026-09-18-v2.1-review/hashes.json`; the reviewed archive is unchanged. Approval receipt: `fresh/checkpoints/2026-09-18-v2.1-review/acceptance.json`. No runtime copy was changed in this acknowledgment, and no publication was performed.
+
+# Previous · V2.1 review follow-up · 18 September 2026
+
+Ali: “mostly là quá ổn… còn lại ok hết cho trang v2.1”; requested full host quotes, visible breeze, uninterrupted looping ambience, and two related HUD groups with Li's avatar introduction below the album and playlist alongside. Implemented these four locally in `fresh/dist/`. Full quote is no longer shortened or affected by the scenery mask. Playlist remains one vertical menu joined to its transport panel. Continuous birds/crickets ambience is opt-in and ducks for music. Native music, catalog and artwork are preserved.
+
+36 unit/regression checks and 12 browser scenarios passed; full longest quote and active wind checked across five viewport sizes. Real ambience played across two native loop cycles without a restart or silence timer; delayed day/night handoff and clean stop passed. Actual R2 playback sampled at three viewport sizes. Evidence: `fresh/qa/v2.1-review-2026-09-18/`. Exact local checkpoint: `fresh/checkpoints/2026-09-18-v2.1-review/`. Details at the top of `docs/production/V2.1-LOCAL-WRAPUP-2026-09-17.md`. No commit/push/deploy. The four follow-up changes await review; V2 release worktree remains clean.
+
+---
+
+# Latest · V2.1 local · 17 September 2026
+
+Runtime: `fresh/dist/`. Built locally from the supplied V2.1 brief, including gate, habitat/world polish, continuous vertical playlist dropdown, reserved host visibility and lazy featured-lyrics support. No commit/push/deploy. Full handoff: `docs/production/V2.1-LOCAL-WRAPUP-2026-09-17.md`; checkpoint: `fresh/checkpoints/2026-09-17-v2.1-local/`. Earlier horizontal song cards were rejected; do not restore them. Existing content and unrelated development work are preserved.
+
+---
+
 # Recap — anhli-portfolio (cập nhật 13/7/2026)
 
 ## Ba lỗi của script dọn thư mục — Ali phát hiện 3/9/2026
@@ -1510,6 +1600,294 @@ CHƯA PUSH, CHƯA DEPLOY — chờ Ali bấm `deploy-egg-chicken-2026-08-01.comm
 - 2 sheet asset chưa dùng (pose mở rộng + item pack) — để dành phase sau.
 
 
+## 09/09/2026 — Codex: Garden experience, asset và handoff
+
+- Mốc source đã đối chiếu: `5eacde1`, origin `AliH86/anhli-portfolio`; checkout đúng là `portfolio-garden-v2`. Repo ở thư mục cha là dandelion-oracle, không dùng để sửa portfolio.
+- Tạo bộ `docs/garden-experience-2026-09-09/`: review.html, flow sáu điểm dừng, asset manifest, instruction triển khai và kiểm tra hiệu năng từ source/DOM. Có mẫu Li đen trắng ngồi làm vườn nền trắng, cleanplate sạp màu và bản WebP. Đây là lookdev; nhân vật chưa alpha/rig, nền chưa geometry 3D.
+- Hướng: nhân vật 2D giữa vườn 3D; tái dùng catalog/player/gallery/career/calendar; mobile/classic không tải scene mới. Prototype đầu chỉ góc cây → sạp nhạc.
+- Các ưu tiên đã ghi: bỏ sync XHR trong music-data.js; gate media/renderer trước tải; thống nhất lifecycle; xử lý texture disposal/race; version cache thay Date.now theo phạm vi dữ liệu. Chưa áp dụng các sửa chức năng này.
+- Chưa benchmark FPS/Network; budget là mục tiêu. Không thay source app, không commit, không push/deploy.
+
+## 10/09/2026 — Codex Garden implementation checkpoint (paused at user request)
+
+User authorized applying new Garden review art + Three.js and replacing incompatible decorative video/theme. Started new entrance, async music loader, gated/retired old decor, draft Garden controller/adapter, local Three.js 0.186.0 and gardener alpha asset. Actual `js/garden/scene.js` is NOT built; `SCENE_READY=false` keeps missing scene inaccessible and routes entry to real music. Full visual/interaction/performance QA pending. No commit/push/deploy. Continue from `docs/garden-experience-2026-09-09/SESSION-HANDOFF-2026-09-10.md`; preserve pre-existing recap/docs changes.
+
+## 11/09/2026 — Codex: asset bổ sung, game trứng hoãn, chốt kế hoạch session sau
+
+- Anh làm rõ đại tu giao diện/style toàn trang: Li minh họa, animation/Three.js; Blender được dùng cho model. Giữ nội dung và cá tính của portfolio, không ràng buộc giao diện cũ. Game trứng/ấp/nở/gà bỏ khỏi bản này; game nối sau ở giai đoạn xa hơn.
+- Tạo nền xa bằng built-in imagegen từ cleanplate đã chọn, bỏ sạp/props gần; lưu master PNG và WebP tại `docs/garden-experience-2026-09-09/assets/garden-distant-cleanplate-v1.*`. Xuất Li alpha 853×1024 và 6 bìa 512² vào `assets/runtime-candidates/` trong bộ docs, có manifest nguồn/ID/hash. Tổng bản web mới 719.362 byte. Đây là asset chuẩn bị, chưa tích hợp; model/rig chưa làm.
+- Đã bỏ nạp game CSS, world-state/config/game JS và cụm DOM hiddenEgg trong `index.html`; chuyển governor CSS/JS sang nạp trực tiếp vì trước đây đi qua egg-game.js. Giữ file nguồn game và localStorage; không đổi Oracle/Vedic. Receipt kiểm tra tại `evidence/egg-removal-2026-09-11.json` trong bộ docs.
+- Fetch origin/main hiện `5dc754a`, hơn local `5eacde1` 5 commit, chưa merge. Dữ liệu mới gồm hai album, audio map/font CJK, đổi album của một bài, và Vị Muối Mặn có 8 bài. Không dùng số bài của audit hôm trước như hiện trạng mới.
+- Anh mở Blender nhưng MCP vẫn không nối được addon ở thời điểm kiểm tra. CLI xác nhận Blender 5.2.1 LTS; không thay scene UI, không tạo model mới.
+- Theo chỉ dẫn cuối, kết thúc ở asset và kế hoạch; scene/model/rig/tích hợp tiếp tục session sau. Điểm đọc đầu: `docs/garden-experience-2026-09-09/NEXT-SESSION-ASSETS-2026-09-11.md`. `SCENE_READY=false`, scene.js chưa tồn tại. Không commit/push/deploy.
+
+
+## 12/09/2026 — Codex: tiếp nhận UI Redesign anh đã phát triển
+
+- Yêu cầu phiên này: đọc gói ZIP, định hình bước xử lý; khi usage >=95% chủ động lưu/wrap up/handoff. Chưa sửa UI/runtime.
+- Điểm nối mới: `docs/ui-redesign-2026-09-12/INTAKE-AND-HANDOFF.md`; có nguồn ZIP giữ nguyên, 10 ảnh mockup, bảng lệch nguồn, thứ tự triển khai và prompt session tiếp theo.
+- Mockup đã chuyển SHOWS sang NDA: loại việc/vai trò/moments + `/works/how`; handoff/CLAUDE vẫn còn Featured/Archive/per-project. VISUAL/STORY, light MUSIC, nav mobile cũng cần đồng bộ theo bản tiếp nhận, không âm thầm code từ spec cũ.
+- Xác minh source hiện có `SCENE_READY=true`, scene.js/runtime và receipt cũ active true; hai fail cũ reduced-motion/eyelid và audio-vinyl vẫn cần reproduce. Không suy diễn từ recap cũ nói scene chưa có.
+- Fetch: local `5eacde1`, origin `5dc754a`, behind 5; chưa merge. Bảo toàn thay đổi sẵn có; không commit/push/deploy.
+- Usage đầu phiên: 1% / 31% (5 giờ / tuần). Quy tắc checkpoint và handoff đã lưu trong bản tiếp nhận, không tạo monitor nền.
+
+
+## 12/09/2026 — Codex: triển khai UI mới + blockout bước đầu
+
+- Anh xác nhận làm tuần tự. Đã khóa spec; thêm 8 route HTML tĩnh, UI 5 mục/MAP/mobile/Flat, nhạc dùng 26 album và một audio engine cũ. Không đổi dữ liệu nhạc.
+- Three.js blockout geography/camera trong js/redesign/, xem qua ?world=blockout. Chưa GLB/host/lighting final, chưa camera travel.
+- Suite UI pass các phần route/audio/responsive/No-JS; fail MAP đã sửa và có targeted receipt PASS. Edge run bắt race Oracle identity source, chưa cô lập.
+- Chưa publish-ready: HTML ẩn vẫn chứa dữ liệu legacy, cần tách runtime khỏi dữ liệu khách để NDA-safe. Không được coi CSS hide là loại dữ liệu khỏi output.
+- Điểm nối: docs/ui-redesign-2026-09-12/SESSION-HANDOFF.md. Có source, lệnh build/test, receipt, ảnh và thứ tự tiếp tục. Usage gần wrap-up 87%/45%. Không merge/commit/push/deploy.
+
+
+## 12/09/2026 — Codex: Garden production checkpoint và house draft
+
+- Đã lưu hai nguồn Locked Handoff/Master Prompt, kế hoạch theo usage, manifest, decision log và QA tại docs/qa/garden-proof/.
+- Anh đã cho phép cân camera/FOV riêng mobile và cao độ terrain tương đối để output tốt; không hỏi lại và không chặn production vì match số tuyệt đối. Giữ geography và composition intent.
+- Có source/GLB terrain study và house architecture draft: source/garden/production/garden-house.blend → assets/garden/production/garden-house.glb. Nhà có ngói cong, khung gỗ, cửa/hiên; chưa texture/AO/visual final.
+- Viewer local 8784: /docs/qa/garden-proof/?asset=house&detail=1. Không sửa shell/player/catalog của portfolio. Bảy kiểm tra study pass; house tải và chụp QA không page error.
+- Điểm nối mới: SESSION-HANDOFF.md ở root. Bước tiếp theo: stall + greenhouse, cân cảnh/camera, rồi landscape/material/light/host; Garden visual approval vẫn bắt buộc trước rollout.
+- Không merge/commit/push/deploy. Hash baseline 599 file cũ được giữ; recap chỉ thêm cuối.
+
+
+## 13/09/2026 — Codex: board art direction + sạp/nhà kính
+
+- Anh gửi DANDELION_GARDEN_ART_DIRECTION_BOARD (1).pptx, xác nhận direction đã chốt và tiếp tục v2. Đọc 14 slide và ảnh tham chiếu; lưu bản gốc/hash. Board khóa look/feel, không thay spatial contract.
+- Dựng mới sạp/nhà kính: source Blender editable + GLB tại source/garden/production và assets/garden/production; 166/219 source parts. Giữ trục máy hát và sáu sleeve; dùng bìa nhạc thật trong preview.
+- Viewer mới: http://127.0.0.1:8784/docs/qa/garden-architecture-2026-09-13/ — A1/A2/A3/mobile và các góc gần. 11 kiểm tra pass; sửa lỗi mặt gắn bìa được phát hiện khi xem ảnh.
+- Đây là mốc kiến trúc WIP, chưa near-final Garden. Tiếp: chỉnh mái/side facade nhà, workspace + terrain/path/water, planting/material/light/host rồi ghép Garden vào shell. Không hỏi lại direction/camera permission.
+- Root SESSION-HANDOFF.md đã cập nhật. Không đổi catalog/audio/index/runtime/v1/house cũ; không merge/commit/push/deploy.
+
+
+### 13/09/2026 — Ghi nhận steering sau architecture checkpoint
+
+- Anh nhận xét thiếu mảng xanh, nhà đơn giản; “không ý kiến nếu chỉ định vị” không phải duyệt visual.
+- Sau khi bắt đầu soạn lượt scenic, anh nêu vấn đề flow thực của nhà có sân vườn nhìn ra bờ hồ. Tạm dừng dựng phụ thuộc để làm rõ lối vào/sân/cửa/hiên/view mặt nước.
+- Đề xuất sơ bộ chưa duyệt: cửa đón phía sân + hiên ôm góc mở về mặt nước; trước hết thử giữ geography. Không tự đổi tọa độ/route.
+- Chỉ có script draft và baseline mới; build đầu lỗi trước khi save/export. Preview architecture cũ giữ nguyên; không có scenic output được kiểm chứng. Chi tiết nối việc ở đầu SESSION-HANDOFF.md.
+
+
+### 13/09/2026 — Sơ đồ flow nhà/sân/hiên/mặt nước
+
+- Anh cho phép làm tiếp sơ đồ. Đã làm comparison hiện trạng/hiên ôm góc và mặt cắt tầm nhìn; chưa sửa model.
+- Nối cửa đón phía sân với hiên nhìn nước có thể thử trên vị trí hiện tại. Cao độ study nước cao hơn mặt sàn hiên khoảng 0,45m; mặt cắt mới chỉ đề xuất dốc vườn xuống nước.
+- Mặt nước study 7,6×3,6m đang đọc như ao vườn; cần phân biệt với ý định bờ hồ liên tục. Chưa coi layout mới hoặc thay hình dạng nước là được duyệt.
+- Chi tiết: docs/production/SPATIAL-FLOW-REVIEW-2026-09-13.md. Kiểm tra diagram desktop/390px, toggle, overflow và ảnh. Không đổi asset/runtime/catalog, không push.
+
+
+## 2026-09-13 · Codex · House, wraparound veranda and lakeshore
+
+Tiếp theo “ok, tiếp tục”: dựng hướng sân đón → hiên ôm góc → vườn → bờ hồ, giữ tọa độ công trình. Nhà có cửa hông, mái hiên, chỗ ngồi; cảnh quan thêm cây/bụi/cỏ, đường đi, bàn nghề và sàn gỗ thấp. Sàn hiên cao hơn nước 0,65m; kiểm tra ray từ chỗ ngồi ra hồ thông thoáng. Source mới 392/1.567 phần mesh vẫn editable, texture packed; bản cũ giữ nguyên.
+
+Review: http://127.0.0.1:8784/docs/qa/garden-scenic-2026-09-13/?view=house . 11/11 browser checks, source reopen và bảo toàn portfolio (26 album, 1 audio, không autoplay) pass. GLB toàn cảnh 8,68MB/554.730 triangle riêng; còn quá nặng cho mobile, chưa đo GPU thật. Đây là scenic development: cây/đất/nước/ánh sáng còn schematic, host/UI và near-final proof chưa xong. Không commit/push/deploy. Handoff và `docs/production/SCENIC-CHECKPOINT-2026-09-13.md` ghi bước tiếp: hoàn thiện chất liệu/mảng xanh/host và dựng proof cùng UI thật.
+
+
+## 2026-09-13 · Codex · Host style correction
+
+Anh chấp nhận bố cục nhà/vườn hiện tại và yêu cầu tiếp. Sau bản host quá tả thực, anh gửi 2 hình và sửa “đơn giản thế này nè”. Đã theo nét đen trắng, mặt cách điệu thân thiện, kính, trang phục casual. Reference nguyên vẹn và host mới `source/garden/production/host/host-lineart-v1.png` được lưu với prompt/provenance. Bản PNG nguồn nền trắng RGB, chưa phải sprite alpha và chưa đặt vào world. Không thay runtime/nhạc/geometry trong lượt này. Host màu tả thực trước đó bị loại theo feedback.
+
+
+## 2026-09-13 · Codex · Host đã vào Garden QA
+
+Theo “oki lah, tiếp”, giữ host nét đen trắng đã chọn, tạo opacity mask bằng imagegen và ghép trong Three.js tại mép sân với bóng tiếp xúc. Review mới `docs/qa/garden-host-2026-09-13/`, góc arrival/host/mobile. 11/11 checks và bảo toàn source/runtime cũ pass. PNG RGB + mask riêng, không phải một PNG RGBA. Mobile đã cân gần để host rõ, nhà crop một phần/sạp ngoài khung; UI thật, cảnh quan/chất liệu/ánh sáng và GPU mobile chưa hoàn tất. Handoff đầy đủ trước mốc usage95%; không reset, không commit/push/deploy.
+
+
+## 2026-09-14 · Codex · Cảnh mới + UI/player thật trong bản duyệt
+
+Tiếp từ host đã chốt: làm mới tán cây, cỏ thấp, màu nền và mép đường sỏi, điều chỉnh ánh sáng trong viewer. Source mới garden-landscape-finish.blend giữ1.869mesh editable, GLB408.642triangle/4,30MB. Bốn GLB493.674triangle; không thay asset cũ.
+
+Ghép ảnh cảnh mới với bản copy của shell/engine thật tại http://127.0.0.1:8784/docs/qa/garden-ui-2026-09-14/ . DesktopPNG1,96MB/mobile536KB, không tải GLB/Three; player thật26album,1audio, không autoplay. Sửa headline tránh tán cây và thẻ Explore nằm dưới host. 11 scene checks +8 UI checks/source reopen/preservation pass. Đây là review local, không default-route integration hay final art acceptance; refresh/new-tab route thật quay về bản route hiện có. Cây/vật liệu/nước/AO vẫn còn việc polish. Handoff và GARDEN-UI-PROOF-2026-09-14.md đã lưu; không commit/push/deploy.
+
+
+## 2026-09-14 · Codex · Garden local ổn định qua route
+
+Theo kỳ vọng “hài hoà ổn định”, tích hợp cảnh tĩnh vào root/local8routes; reload/newtab giữ Garden, 1picture/1player, lỗi ảnh có nền sáng dự phòng. Tablet dọc dùng portrait, màn thấp cuộn bố cục đầy đủ. 23checks pass, gồm phát audio thật qua route/MAP; bảo toàn music/art/legacy engine. Không deploy/commit/push. Handoff lưu ở usage96%; dừng heavywork theo mốc95% đã dặn. Xem GARDEN-STABILITY-2026-09-14.md.
+
+
+# Latest checkpoint · Garden image finish matched to deck · 14 September 2026
+
+Latest user correction: wants the finished imagery shown in the art-direction deck, not further low-poly polish. Explicitly acknowledged that procedural geometry polish alone could not promise that visual target.
+
+Completed two built-in imagegen scene plates using exact current arrival/portrait camera renders as composition guides and board image-5-1.png as material/light authority. Runtime assets: assets/garden/production/stills/2026-09-14-art/. Desktop 1672×941 and portrait 941×1672. Same house-left/court/pergola/greenhouse/stall composition; rich natural vegetation, weathered plaster/tiles/timber, late-afternoon sun. This is finished static artwork, NOT a matching new 3D model or evidence that free-camera views attain the same quality. Generated detail is approximate; the GLB sources remain unchanged. Final user visual acceptance still pending.
+
+Approved monochrome host source+mask preserved, rendered with original camera into separate transparent native Three.js overlays (arrival-host.png/mobile-host.png). No AI repaint of host. view.mjs now creates one scene wrapper with background and host responsive picture layers; controller still uses the background load state. CSS keeps header/readability and action contrast over detailed art. Eight local routes rebuilt; real catalog and audio engine unchanged. Root preview http://127.0.0.1:8784/ . Browser open request returned queued; do not claim it visibly opened.
+
+Evidence: docs/qa/garden-finish-2026-09-14/art-page/{desktop,mobile}.png and receipt.json: both loads successful, host loaded, no page errors, no horizontal overflow, one stopped audio, no canvas. Viewports are headless Chrome 1440×900 and390×844, not actual device tests. Prompt/provenance: docs/production/GARDEN-ART-PROMPTS-2026-09-14.md; source capture script capture-art-inputs.mjs and art-inputs/ alongside. Existing scene/route regression receipts describe the preceding implementation, not a fresh run for this artwork.
+
+No commit, push or deployment. Next: user assesses the actual scene image; do not roll out other-state motion before Garden visual acceptance. Do not return to incremental primitive foliage edits as the route to photographic deck finish.
+
+
+# Garden 2.5D motion · 14 September 2026
+
+User accepted the new scene imagery and explicitly accepted 2.5D with a little movement, parallax and/or depth-of-field. This authorizes the Garden motion pass; it does not claim all other scene art is finished.
+
+Implemented `js/redesign/garden-motion.mjs` and integrated with garden-plate controller. Desktop pointer input eases to ±4px on backdrop and host and ±11px on a softly masked foreground image layer. Host and ground use exactly the same transform, preserving contact. Existing photographed foreground blur remains, with a 0.6px softening on the near-plane duplicate. This is a restrained masked-image depth effect, not semantic foliage separation or independent leaf/water animation. Image source assets and host source have not been edited.
+
+CSS camera drift runs slowly over24s; touch uses subpixel drift and no pointer tracking. Text/navigation/player stay outside the transformed scene. Pause button persists locally. Reduced-motion, hidden document, image failure and inactive routes stop decorative movement; JS requestAnimationFrame only interpolates pointer changes and stops after settling. One shared audio element, no autoplay, no WebGL/canvas. All8 route HTML files regenerated from current local source; no music data changes in this pass.
+
+Validation: `scripts/test-garden-motion.mjs` completed6 behavior checks with no page errors: separate near-plane transform and fixed copy; interpolation settles; pause persistence; route stop/resume; live reduced-motion preference; touch layout with no horizontal overflow. Desktop1440×900 and390×844 touch emulation in headless Chrome, not physical-device performance profiling. Screenshots and JSON: docs/qa/garden-motion-2026-09-14/. Initial video capture was unavailable because Playwright ffmpeg is not installed; no video recording is claimed.
+
+Preview: http://127.0.0.1:8784/ . Reload and move pointer gently. UI now has Dừng chuyển động / Bật chuyển động. The static-review label is cleared for loaded Garden because the scene now has movement.
+
+Git: origin/main advanced to487e4fd (local HEAD5eacde1, behind6). New remote change concerns music/catalog/fonts and a legacy index line; it was inspected, not merged. Existing mixed uncommitted work preserved. No commit, push or publish.
+
+Next: retain this subtle motion amplitude; extend art direction to content scenes in a separate pass. Free camera navigation is not promised.
+
+
+# Host1.70m + meadow wind · 14 September 2026
+
+User said the imagery otherwise looks good; asked to check host1.7m and add grasses/dandelions with a light breeze. Implemented only this Garden visual/motion scope.
+
+Calibration: source matte1122×1402, green-channel alphaTest threshold133, occupied rows63–1350, visible fraction0.9186875892. Prior full-plane1.94m corresponded to a visible1.782253923m, not exactly1.70m. New plane1.850465839m gives visible1.70m. Source RGB+mask unchanged. The host felt small because of camera distance; moved the rendering anchor from[7.8,-1.5241,13] to[9.4,-1.0660,16.2] with terrain raycast and0.012m ground offset. Arrival distance17.75→14.15m; mobile9.08→5.63m. Fresh transparent native renders2560×1440/1080×1920 preserve source illustration and contact shadow. House/stall/greenhouse anchors and scene backgrounds are unchanged. This uses authored 3D camera/terrain calibration; generated photographic scenery is not surveyed geometry. Original 3D QA viewer remains historical; new capture script/receipt defines the current 2.5D host.
+
+Runtime assets under assets/garden/production/stills/2026-09-14-wind/, capture script scripts/capture-garden-host-170.mjs, exact metrics in host-scale-receipt.json. Source versions preserved.
+
+New built-in imagegen4-column photographic meadow atlas: slender grass, golden seed spikes and dandelion globes. Original RGB black backing retained; CSS screen blend composites it without rewriting pixels.10 clusters on desktop,5 on mobile; root transforms with7.8–12.1s staggered periods, restrained rotation/skew. Foreground has slight softness, a few smaller clusters enrich meadow edges. These are independent added clusters, not animation of every pre-existing tree or baked leaf. Motion respects the existing pause button, reduced-motion and route/visibility stop. Text/player unchanged.
+
+View generator switched host references and inserts wind clusters; CSS added wind layer.8 routes regenerated. scripts/test-garden-motion.mjs now writes docs/qa/garden-wind-2026-09-14/ and passed8 behavior checks with no page errors, including exact visible-height math, wind time progression/staggering, pause, reduced motion, route state, grounded host/backdrop transforms, fixed text and touch layout. Inspected desktop and mobile screenshots. Physical-device profiling remains untested.
+
+Prompt: docs/production/GARDEN-WIND-PROMPT-2026-09-14.md. Asset provenanceJSON saved. Preview http://127.0.0.1:8784/; reload existing tab, avoid spawning more preview tabs. No commit/push/deployment. Mixed existing changes and remote music work remain preserved.
+
+
+# WRAP-UP · Canopy wind, parallax, transitions · 14 September 2026
+
+User latest: “oki lah, hiện sẵn tiến trình điều chỉnh - em wrap-up nhé”. Stop here. Latest live usage98% five-hour /84% weekly; do not start new heavy work in this window. No reset credit used. Next continuation must read this checkpoint and recheck usage.
+
+Preview remains http://127.0.0.1:8784/ in the existing tab. Do not create additional preview tabs; user already has5. Changes are local only. No commit, push or deployment.
+
+Completed:
+- Removed the duplicate photographic foreground layer that caused doubled plants during parallax. The backdrop picture is now either visible as fallback OR replaced in paint by a single opaque 2D image-effect canvas. No second moving background photograph is composited over it.
+- Added garden-canopy.mjs: small native WebGL image displacement shader, no Three.js/GLB world. Locally masks high foreground branches and tree crowns; protects house, greenhouse, stall and pergola areas. Smoothly tapered displacement and leaf movement; source artwork remains unchanged. This is image warping, not articulated 3D branches or simulation.
+- Current normal Garden has ONE lightweight effect canvas, superseding prior “zero canvas/no WebGL” notes. Approx30 draw updates/sec, capped DPR1.25, pauses off-route/hidden/paused; reduced motion shows ordinary static picture. GPU/context setup failure retains the image. Actual device GPU profiling and forced context-loss fallback tests are not completed.
+- Increased depth separation: backdrop/host±13px horizontally, independent grass layer±31px; high near branches gain local parallax. Host retains the calibrated1.70m artwork, closer anchor and same ground transform. No host source or landmark center changes in this pass.
+- Stronger grass sway, about−3 to+4.2deg desktop, lower mobile amplitude, staggered phases. Existing10 desktop/5 mobile photographic clusters preserved.
+- Removed white tag boxes behind lower links, pause control and handwritten note; warm light lettering and a smooth darkened lower edge replace them. Mobile intro chip also removed. Main brown arrival CTA and approved scene retained.
+- Added synchronous route transitions in shell.mjs: content fades/rises420ms and backdrop fades/settles600ms via Web Animations; header and real player remain outside those effects. Back/Forward/URL/focus update immediately. Reduced motion skips these effects. This is a UI/scene entry transition, not a continuous journey through authored new destination imagery.
+
+Verification:
+- scripts/test-garden-motion.mjs:9 passed, no page errors. Receipt/screens docs/qa/garden-canopy-2026-09-14/. Covers one background paint, crown clock, removed duplicate,1.70m calibration, grass timing, parallax/copy/ground, pause, route stop, reduced motion and touch layout.
+- scripts/test-garden-routes.mjs: final13/13 PASS after switching route animation to synchronous rendering. Includes actual audio playback across routes/MAP, Back/Forward/reload,26albums, keyboard/lightbox/Sky,390/768/1280 layouts, no-JS/reduced motion. Final receipts/screens overwrite the current regression folder docs/qa/garden-stable-2026-09-14/regression/.
+- Initial native View Transition attempt made legacy immediate-state assertions race; replaced by synchronous render plus non-blocking Web Animations. No native View Transition route code remains.
+- Fresh desktop/mobile combined images also under docs/qa/garden-finish-2026-09-14/art-page/. Inspected desktop final composition; browser emulation is not real-device acceptance. git diff --check passed for tracked changes.
+
+Current files: js/redesign/{garden-canopy,garden-motion,garden-plate,shell,view}.mjs, css/garden-plate.css, generated8route HTML. Existing mixed music/data work preserved. origin/main487e4fd, local HEAD5eacde1, behind6; no merge performed.
+
+Next after usage refresh: user assessment of current wind/parallax; physical-device smoothness if available; then match destination scene imagery to approved Garden quality. MUSIC/SHOWS/VISUAL/STORY real content still works but has not received finished photographic world scenes in this pass. Do not restart the accepted art direction or host.
+
+
+# MUSIC near-final review checkpoint · 14 September 2026
+
+## Authoritative continuation
+The user's CONTINUATION NOTE after14Sep now approves Garden as the technical/visual baseline. It supersedes earlier “Garden approval pending” notes. Lock SCENIC2.5D WORLD + limited depth + unchanged illustrated host + selective effects + simple spatial navigation. Goal: simple, polished, personal, memorable; SEE → CHOOSE → ENTER → VIEW → RETURN. No free camera, no stronger Garden parallax/wind, no new low-poly world, no mass production of destination states. Navigation remains GARDEN · MUSIC · SHOWS · VISUAL · STORY. No JOURNEY destination. Family V1 is subtle objects/traces only, never a character/navigation system.
+
+Order: Garden locked → MUSIC near-final → Garden/MUSIC review → SHOWS → VISUAL → STORY → Flat/mobile/performance/accessibility/release. Do not pass the MUSIC review gate without user acceptance. SHOWS work-led/minimal host; VISUAL quiet creative process/light host; STORY personal/memory/InnerWorld/current host. No commit/push/deploy authorized.
+
+## Completed now
+1. Saved Garden/source/audio hashes in docs/production/GARDEN-LOCK-2026-09-14/baseline.json.13 protected files all unchanged after MUSIC work; receipt under docs/qa/music-2026-09-14/baseline-preservation.json. Garden CSS, art, canopy/wind/parallax, calibrated host and audio data remain frozen.
+2. Built MUSIC only, on actual local /sap/ route. Same cottage/greenhouse/garden and existing timber/cream-canvas record-stall language, photographed closer at quiet blue hour with warm practical light. Two new built-in imagegen desktop1672×941 and portrait941×1672 plates. No new universe, no fantasy music elements. The real album covers remain in the actual player; scenic record sleeves are illustrative artwork only.
+3. Reused original host RGB+mask, no redraw/remodel/new pose. Native Three.js OFFLINE render produced transparent layers at visible1.70m with contact shadow and mild warm material tint. Original host source and Garden host placements remain untouched. MUSIC is a static layered2.5D scene with depth/DOF in art; no additional parallax or decorative idle loop. Existing route transitions carry across.
+4. Music-scoped CSS puts the world first: headline/return link above, slim shared-player strip at lower edge, real track list below. Mobile uses a separately composed image, its Play and mute controls visible on first390×844 screen; track list scrolls below. No new audio element, no autoplay; shared player continuity and global mini control preserved.
+5. Added js/redesign/music-view.mjs, music-scene.mjs, css/music-scene.css. Minimal imports/hooks in view.mjs/shell.mjs and one new stylesheet link in index; regenerated8route HTML. No destination art/code redesign for SHOWS/VISUAL/STORY. Existing mixed uncommitted music work preserved; origin/main487e4fd is6 commits ahead of local5eacde1, inspected but not merged.
+
+## Review and evidence
+Open existing browser tab at http://127.0.0.1:8784/sap/ (avoid creating more tabs). Garden remains http://127.0.0.1:8784/ . Fresh final Music screenshots in docs/qa/music-2026-09-14/music-1440x900.png and music-390x844.png; also320×568,768×1024,844×390. Initial larger full-page captures are in the same folder, with an earlier headline width before the final max-width correction.
+
+scripts/test-garden-routes.mjs:13/13pass, including actual audio playback across all routes/MAP, catalog26albums, selection no-autoplay, pause/seek/mute, Back/Forward/reload, lightbox/Sky, mobile layouts, no-JS and reduced motion. Current receipt under docs/qa/garden-stable-2026-09-14/regression/.
+scripts/test-music-scene.mjs:10/10pass, no page errors. Cold Garden downloads no Music art; one scene/no duplication;1.70m host metadata; Garden motion off in Music; user-started audio survives Garden↔Music and mini return;5 viewport sizes,390pxPlay visible, image failure retains player and Garden return. acceptance-receipt.json records device limitation.
+
+Visual review assessment: same-world architecture/materials/light, Garden-quality scenic photography, quiet controls, original host, actual music and return flow are ready for USER review. Mobile is intentionally reframed, not a desktop crop. No physical phone was available through this workflow; Chrome viewport/touch emulation is not device smoothness/battery/heat validation. No Garden motion increase occurred.
+
+## Sources
+assets/garden/music/v1/{music-desktop,music-mobile,host-desktop,host-mobile}.png
+assets/garden/music/v1/{provenance,host-placement}.json
+scripts/capture-music-host.mjs — unchanged-source1.70m offline host projection; generated background is visual scale reference, not surveyed geometry.
+docs/production/MUSIC-ART-PROMPTS-2026-09-14.md — full built-in imagegen prompts and input roles.
+
+## Next
+STOP at MUSIC review. Await user assessment of Garden↔Music continuity, scene/host/UI balance. Revise MUSIC if needed; do not move to SHOWS/VISUAL/STORY yet. Public release still unapproved. Usage window had reset to9% five-hour /85% weekly at entry; no reset credit used. Recheck on next sustained continuation and honor95% handoff rule.
+
+
+# SHOWS static scenery + host animation requirement · 14 September 2026
+
+## Latest direct instruction
+Anh asked to recheck v2 checkpoint and continue, emphasizing 2.5D: finish all context/layout/scenery before animation effects; host needs multiple gestures AND sprite animated loops. See `docs/production/SCENIC-AND-HOST-SEQUENCE-2026-09-14.md` for mandatory acceptance and proposed gesture clips. New host artwork/atlas/loops have NOT been produced. Preserve approved monochrome identity, glasses, clothing, scale/grounding. Existing one-pose host is an interim state. SHOWS remains without host.
+
+## Completed in this continuation
+- Checked actual checkout, fetched origin/main and inspected six remote commits; local branch codex/garden-experience-v2 at5eacde1 remains behind origin/main487e4fd by6. Prior mixed catalog/audio/index/UI changes remain; no merge/commit/push/deploy.
+- Garden already approved per the preceding handoff. MUSIC is near-final and still open to visual feedback. Latest “continue” authorizes the next scenery work; it is not recorded as automatic visual approval of MUSIC/SHOWS.
+- Built SHOWS on actual local `/works/`: same-world afternoon timber stage, cottage/greenhouse/planting, two native generated compositions (1672×941 desktop,941×1672 portrait). No host or event-client imagery. Preserved three work categories, NDA/contact and method route; replaced six decorative blank moment tiles with the scenic view and honest project-material note.
+- Added `js/redesign/shows-{view,scene}.mjs`, `css/shows-scene.css`; small hooks in view/shell and stylesheet in index; generated8routes. Lazy responsive art, static/no loop, route hide/resume, readable image-error fallback. Existing real audio survives navigation. PNGs are about3.14MB/2.92MB; web compression still pending.
+- Route regression reproduced historical Oracle race: async identities could execute before cards/profiles. Changed three Oracle script tags in index to ordered defer and rebuilt routes. Weekly stays async; Oracle source content/meanings untouched. Deterministic800ms delay tests reproduce0identities+error before and78identities+no errors after.
+- 32 protected files and13Garden-lock files hash-identical. Garden/Music scene code, CSS, source artwork and audio data unchanged.
+
+## Evidence and review
+Preview: http://127.0.0.1:8784/works/ . One new in-app preview was opened only after inventory showed no remaining localhost preview tabs, and marked deliverable. Reuse it.
+
+`docs/qa/shows-2026-09-14/`:
+- `acceptance-receipt.json`:12/12SHOWS checks, five viewports320×568,390×844,768×1024,844×390,1440×900; real player, back/reload, no-JS, reduced motion, lazy art and image failure.
+- `regression-final/ui-receipt.json`:13/13full-site checks after ordered-defer fix, including8direct routes, real audio26albums, MAP, keyboard/lightbox/Sky, mobile, fallback and no page errors.
+- `oracle-before.json` / `oracle-startup.json`: two intentionally delayed dependency cases before/after fix.
+- `preservation-receipt.json`:32+13checks, no changed protected files.
+- `shows-1440x900.png`, `shows-390x844.png`, full-page versions and3other viewport captures. Inspected desktop/portrait/full layout plus visible in-app preview. Device scope is Chrome emulation; no physical-phone performance/battery test.
+- Earlier `regression/` retains the failed concurrent pre-fix run (Oracle race and a transient readiness timeout); final sequential run above is authoritative. No test failure was hidden or removed.
+
+## Next exact work
+1. Review the SHOWS static composition in the same Garden/Music family; refine only if feedback identifies a mismatch. Static art acceptance remains user-owned; tests do not approve aesthetics.
+2. Continue VISUAL: same existing greenhouse/daylight, work-in-progress mood, real personal fragments/lightbox, light host presence; separate desktop/portrait composition. Then STORY: personal porch/evening scene, existing chapters/InnerWorld and subtle family traces. Keep real content and navigation.
+3. Only after ALL backgrounds/layout/scenery are completed and reviewed, build selective effects plus real multi-gesture host source frames/atlas/runtime. Include idle/blink, welcome/invitation and context clips, clean first/last loop, grounded foot anchor, no character identity drift, lazy atlas, pause/off-route/hidden and reduced-motion static fallback. Do not substitute one-pose CSS sway for sprite animation.
+4. Web image compression, physical-device profiling, Flat/accessibility and release-content checks remain. This pass fixes the Oracle load-order bug only, not blanket release readiness.
+
+No usage stop was encountered; last live usage27%five-hour/4%weekly. Recheck next sustained continuation and honor95%save/handoff rule. No reset credit used.
+
+
+## 17 September 2026 · V2 wrap-up and rebuilding assessment
+
+User requests stopping implementation, evaluating art/experience and proposing reconstruction because inspiration is below average. Supersedes the earlier instruction to expand Shows/Visual/Story and any inference that prior Garden approval is final acceptance now.
+
+The immediately preceding About change is implemented locally: Garden/Music/About navigation; résumé plus original181gallery items and18videos; old work/visual/story paths redirect to About; no individual case studies. Shows assets retained only as history. Sep14 About functional receipt has10passes; mobile gallery visual QA remains incomplete (blank tiles in capture). Host is still one pose; no multi-gesture sprite loops yet.
+
+Saved detailed assessment and three unselected proposals in docs/production/V2-WRAPUP-AND-REBUILD-2026-09-17.md. Recommend testing an intimate2.5D room/porch with meaningful music/photo/notebook interactions; alternatives are a personal editorial magazine or a short three-scene narrative. Stop scene/effect expansion. Next implementation follows direction choice and a small desktop/mobile static proof, then interaction proof, before asset production.
+
+Fetched remote: behind6/ahead0, inspected music/font log, no merge. This wrap-up changes documentation only. No commit/push/deployment. HTTP preview responds200 after restart; in-app navigation still errored, so assessment uses saved captures plus current source, not a fresh successful live walkthrough.
+
+
+## 17 September 2026 · Fresh independent V2 direction
+
+User clarified: one garden in view, record stall with deliberate choose/place/play, profile/résumé and gallery inside the garden; no stage, scroll-led tour or entrance gate. Wants emotional spatial depth and meaningful character/environment loops; 2.5D is acceptable.
+
+User permits rebuilding frontend, player, layout, scenery and host without preserving V1 or old V2 assets/code. Only gallery images carry over by default; music connects to its independent store. Local source confirms an external AUDIO_BASE plus a track-path map; authoritative album metadata still needs verification before integration. Profile/résumé remains required, with verified factual content and new presentation. Existing files are not authorized for deletion.
+
+Saved docs/production/V2-FRESH-BUILD-BRIEF-2026-09-17.md, prepended SESSION-HANDOFF.md and marked the earlier wrap-up historical. Next is whole-garden desktop/mobile composition and opened-stall state, with a small early motion proof. This is a requirements update, not completed art or implementation.
+
+Fetched origin/main: behind6/ahead0; inspected six music/font commits. Mixed uncommitted application work preserved. Documentation only this turn; no merge, commit, push or deploy.
+
+
+# CURRENT · Fresh V2 built locally · 17 September 2026
+
+Latest user authorization: “portfolio cũng chỉ là 1 phần nằm trong đó ... cái gì ổn thì build.” Build the experience with music central and portfolio secondary. The new authorization supersedes earlier implementation pauses and requirements to retain old UI/player/host. Simplified meaningful animation is acceptable; performance is a priority.
+
+**New independent application: `fresh/dist/`. Preview: http://127.0.0.1:8791/ .** See `fresh/README.md` and `fresh/qa/`. Do not resume old scenic routes by mistake.
+
+Implemented: one garden, new desktop/portrait art, new four-state host, choose/place/explicit Play, one native audio player, in-garden résumé and gallery drawers. 28 albums / 226 tracks / 213 mapped URLs; 13 unmapped disabled honestly. 171 gallery images, all local references exist. No legacy runtime. Metadata is an extracted snapshot; audio stays in separate R2 store. Generated art is raster, not UE/Twinmotion or an editable 3D scene.
+
+Verified locally: actual audio playback and elapsed progress, selection no-autoplay, closing drawer keeps playback, pause, rapid selection, image lightbox/next/Escape, profile and disabled missing links. Desktop1440×900, mobile390×844, portrait889×1150 visual review. Initial file bytes about465KB desktop/371KB mobile. No captured browser console errors. Not a physical-device performance or thermal certification; no full 213-track playback audit. Small host gesture loop and static environment are the current motion scope; richer character/environment motion is not claimed complete. User art acceptance is still open.
+
+Next continuation should start with this build and the user's concrete feedback, then improve it or perform targeted physical-device QA. Preserve existing mixed uncommitted work. No merge, commit, push or deployment occurred. Server was started locally with `python3 -m http.server 8791 --bind 127.0.0.1 --directory dist` from `fresh/`.
+
+---
+
+
+## 2026-09-17 — Codex Fresh Garden wildlife follow-up (local only)
+
+Continued only `fresh/` from the accepted refinement and later living-garden pass. Fixed detached shoe grass/duplicated edge foliage; added icon-only day/night/auto and ambience, exact 05:30–17:30 day time, selected-album Li dialogue and gentle random messages. New imagegen wildlife drawings were accepted by Ali; subsequent steering required mapped perches, sparrow pairs/small groups, no species parade, and faster call/response birdsong. Those behavior corrections are implemented locally. 22 regression checks pass. Latest detailed handoff: `docs/production/V2-FRESH-WILDLIFE-WRAPUP-2026-09-17.md`; QA: `fresh/qa/wildlife-2026-09-17/`. No commit/push/deploy, no legacy Oracle edits, no changes to prior music/art data. Physical-device background audio and private audio delivery remain unverified/unimplemented respectively.
+
+
+## 2026-09-17 — Codex: Fresh final-review follow-up (local only)
+
+User accepted most of the preceding wildlife work and requested a final revision before an on-air review. Generated two exact-composition night relighting plates, crossfaded through the existing three scenic layers; removed blanket nighttime grading. Animals leave beyond the frame at full opacity, with pond/low-plant fireflies and a single bat pass. User confirmed **78 cards**, so the conversational daily gift now uses the approved full source deck and identical date/device selection to the first card of the legacy Oracle; ordinary Li quotes stay random. Gallery is compact masonry with large pin detail and browser-local hearts. Video remains in Điều để dành → Video; blank external Vimeo embed is not certified, source link made prominent. Record is resized to the whole platter, visibly rotates on play and holds on pause. Original assets/catalog remain unchanged; 26 checks pass. No commit, push or deployment. Awaiting user final visual approval. Handoff: `docs/production/V2-FRESH-FINAL-REVIEW-2026-09-17.md`.
+
+
 ## 2026-09-17 — Codex: Fresh release package and v1 keepsake
 
 Ali approved moving to the new look ("còn lại là triển"), requested a safe v1 archive and optionally a Vietnamese profile based on Ali_Huynh_Resume_2026.pdf. The Fresh profile now has a concise Vietnamese introduction, three capability areas, verified work history and education/teaching in the existing expandable section. The full CV, phone number and future project details are not added to the public runtime.
@@ -1523,3 +1901,19 @@ Release prepared independently in `../portfolio-garden-release-2026-09-17/`, bra
 Verification: 31 checks pass; 488 runtime files / 30,456,659 bytes; 108 literal relative references and 448 content asset references resolve. Browser release-path smoke confirms profile, 28-album shelf, album selection without autoplay, one native audio element, no broken loaded images, and close/back navigation. Profile checked on desktop and 390×844 phone; 834×1112 tablet scenery checked. Throttled local QA server exercised the interactive loading state; production has no artificial loading delay. No browser console errors captured. QA: `fresh/qa/release-2026-09-17/`.
 
 Publication status at handoff: release commit/package prepared, not yet pushed. Per AGENT-RULES.md §3, final push is delivered as a dated `.command` for Ali to double-click; this checkpoint is preserved. Script checks the expected remote revision before pulling/pushing, refuses changed release files, then checks the deployed HTML after Pages builds. Do not report live until that receipt passes. Device background/lock-screen audio remains to be validated on real iPhone/iPad/Android; public R2 playback links still have UI download deterrents only, not server-side access control.
+
+
+## 2026-09-17 — Codex: Vườn của Li V2 is LIVE
+
+Ali explicitly requested direct publication ("live đi em, cho phép, miễn v1 đã an toàn"). Reverified all archive checksums/ZIP CRC and complete Git bundle. Clean release worktree remained at 64f76b3, origin/main at the expected 487e4fd; pull was already up to date. Pushed release commit `64f76b313c67d6345cae48eaa87f66a244bce07b` to main without force. GitHub Pages build/deploy succeeded (run 35208057344). Live URL: https://alih86.github.io/anhli-portfolio/ .
+
+Five deployed resources returned HTTP 200 and hashes identical to release (root HTML, app, profile, loading, night art). Browser verified 28 albums, no autoplay on selection, real playback of Quên Vầng Trăng Thề, elapsed progress 18.47→28.39 seconds across closing the tray, one audio element and disc-spin animation. No broken loaded images or captured console errors. Paused the test song and left the live tab open. Proof: `../website-releases/2026-09-17/live-receipt.json`, `release-receipt.json`, and `fresh/qa/release-2026-09-17/live-garden.png`.
+
+V1, original sources and local music remain untouched. No more audio downloaded. Archived the one-time deployment helper. The physical-device/background-audio, external embed and public audio URL limitations from the previous handoff remain; deployment does not certify those. No unrelated development changes were staged, committed or removed.
+
+
+## 2026-09-17 — Codex: user paused at live baseline; comparison saved
+
+Ali says the live version is currently acceptable, with a few unspecified points to fix and improve next session. Saved `docs/production/V2-LIVE-WRAPUP-2026-09-17.md` and `fresh/checkpoints/2026-09-17-live-wrapup/checkpoint.json`; current handoff and Fresh README point to this pause. Existing v2 ZIP checksum was verified; v1 archive remains intact. No runtime edits, asset generation, additional audio downloads, commits, or deployments in this wrap-up. Release worktree remains clean at 64f76b3.
+
+Compared archived v1 487e4fd with live v2 64f76b3 using source sections/player controls and release evidence. V2 strengthens the garden/music identity; v1 had more visibly separated professional content and legacy Oracle/calendar/Vedic experiences. V1 shuffle is not yet carried into the simpler v2 player. Saved a prioritized proposal: receive exact user notes, real-device audio/performance and 13 unmapped tracks first; then music search, gallery/role context and a quick professional route; access-controlled audio and extra ambient diversity later. These are recommendations, not an approved implementation batch. No unmeasured performance superiority is claimed.

@@ -1,0 +1,70 @@
+✔ ambient loop joins adjacent original samples and preserves every channel (3.745584ms)
+✔ tiny decoded samples cannot introduce NaN at a one-sample crossfade (0.0985ms)
+✔ daily message preserves all 78 original messages and first draw of legacy Oracle (4.480208ms)
+✔ same local day/device locks message across reload, next day uses fresh draw (1.3605ms)
+✔ blocked storage retains stable daily result in the current page; failed data request can retry (0.235125ms)
+✔ automatic day is 05:30 inclusive to 17:30 exclusive (14.247708ms)
+✔ daylight selection cycles day/night/device time without touching music (0.741167ms)
+✔ album introduction uses selected metadata and host moments restore the prior note (0.519625ms)
+✔ first daily invitation starts nine seconds after entrance, and no quote repeats immediately (0.436292ms)
+✔ album introduction keeps the complete source paragraph, including its ending (0.353375ms)
+✔ cached scenery introduces no loading delay or timer (0.428292ms)
+✔ scenery load immediately clears its nonblocking loading notice (0.088375ms)
+✔ scenery error immediately clears its nonblocking loading notice (0.439334ms)
+✔ stalled image has a bounded notice with no navigation or audio gate (0.105458ms)
+✔ reduced motion never animates the loading interaction (0.085292ms)
+✔ late video success cannot repaint another tray (1.293209ms)
+✔ late video failure cannot repaint or announce over another tray (0.350333ms)
+✔ photos win over an earlier video request (0.349542ms)
+✔ current video failure returns to usable photos with feedback (0.290625ms)
+✖ tapping the current album preserves playback; a different album resets once (0.373958ms)
+✖ closing gallery restores idle or listening pose and invalidates pending views (0.307834ms)
+✔ motion off cancels an in-flight cover animation (0.344333ms)
+✔ native media controls use the existing player and clamp seek positions (0.502292ms)
+✔ lock-screen metadata and playback position describe the selected track (0.442625ms)
+✔ browsers without Media Session keep the native player path usable (0.364834ms)
+✔ a background visibility change only pauses decoration (0.327959ms)
+✔ timed lyrics handle exact boundaries, instrumental gaps and backward seeks (0.502959ms)
+✔ malformed and overlapping lyrics are rejected; unsupported metadata stays quiet (0.182833ms)
+✔ lyrics load only mapped tracks, cache requests, reject paths and recover from failure (0.251417ms)
+✔ critical images are ready immediately when decoded; failures and timeouts reject (5.066042ms)
+✔ a gust reaches small foliage before the canopy and settles within the rest interval (0.492208ms)
+✔ no residents before entrance; sparrows stay in a small perch group (1.947333ms)
+✔ owl remains over a minute, prepares, then makes a short local departure (1.756208ms)
+✔ firefly candidates and simultaneous lights stay bounded (desktop) (1.690333ms)
+✔ firefly candidates and simultaneous lights stay bounded (portrait) (1.01075ms)
+✔ phase changes cancel stale animations and visits never repeat the same species (0.403709ms)
+ℹ tests 36
+ℹ suites 0
+ℹ pass 34
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 62.279791
+
+✖ failing tests:
+
+test at fresh/scripts/test-polish.mjs:48:1
+✖ tapping the current album preserves playback; a different album resets once (0.373958ms)
+  ReferenceError: centerAlbum is not defined
+      at Object.selectAlbum (evalmachine.<anonymous>:1:113)
+      at TestContext.<anonymous> (file:///Users/alihuynh/Claude/Projects/Anh%20Li%20Portfolion/portfolio-garden-v2/fresh/scripts/test-polish.mjs:54:11)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at fresh/scripts/test-polish.mjs:58:1
+✖ closing gallery restores idle or listening pose and invalidates pending views (0.307834ms)
+  ReferenceError: shelfCleanup is not defined
+      at Object.cleanupRoom (evalmachine.<anonymous>:1:24)
+      at TestContext.<anonymous> (file:///Users/alihuynh/Claude/Projects/Anh%20Li%20Portfolion/portfolio-garden-v2/fresh/scripts/test-polish.mjs:64:13)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)

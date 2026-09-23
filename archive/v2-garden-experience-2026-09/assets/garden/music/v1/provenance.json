@@ -1,0 +1,26 @@
+{
+  "tool": "built-in image_gen",
+  "prompts": "docs/production/MUSIC-ART-PROMPTS-2026-09-14.md",
+  "desktop_source": "exec-ad53d545-6b2e-4686-9707-e1f3dab8ee1f.png",
+  "mobile_source": "exec-5c6b2d89-162b-4ed1-9fa0-3ba66fa8847a.png",
+  "host": "Native rendering of unchanged approved source/mask,1.70m; see host-placement.json",
+  "files": {
+    "host-desktop.png": {
+      "bytes": 182014,
+      "sha256": "68dc1460abb756897230d488725f274f7db247b0b2b0a73e0fbd06c196df6caa"
+    },
+    "music-mobile.png": {
+      "bytes": 2526122,
+      "sha256": "7e7792e9ddaefb3ff1dc5fb7e70bfd11743a00a13f3c396a8c267bf8070027f4"
+    },
+    "music-desktop.png": {
+      "bytes": 2673811,
+      "sha256": "dc546b93e2cf0823ad183a0e2b2bcdc048c5caaf3db4d2d12dbbe76ee0683809"
+    },
+    "host-mobile.png": {
+      "bytes": 168420,
+      "sha256": "b8fecaa9e56015daa758c30681260930c61a0fe10ce3c454c7a8724ced10a2ec"
+    }
+  },
+  "status": "Local review candidate; not approved for public release"
+}

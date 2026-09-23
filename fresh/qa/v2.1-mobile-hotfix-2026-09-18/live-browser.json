@@ -1,0 +1,62 @@
+[
+  {
+    "name": "chrome-phone",
+    "pass": true,
+    "base": "https://alih86.github.io/anhli-portfolio/",
+    "deck": {
+      "display": "flex",
+      "y": "auto"
+    },
+    "tracks": {
+      "top": 297,
+      "max": 297
+    },
+    "audio": {
+      "same": true,
+      "count": 1,
+      "paused": false,
+      "time": 0.700055
+    },
+    "balloon": {
+      "top": 206.484375,
+      "hostTop": 166.40625,
+      "hostHeight": 166.984375,
+      "bottom": 310.0625
+    },
+    "bell": [
+      "closed"
+    ],
+    "backgroundAnimations": [],
+    "errors": []
+  },
+  {
+    "name": "webkit-phone",
+    "pass": true,
+    "base": "https://alih86.github.io/anhli-portfolio/",
+    "deck": {
+      "display": "flex",
+      "y": "auto"
+    },
+    "tracks": {
+      "top": 297,
+      "max": 297
+    },
+    "audio": {
+      "same": true,
+      "count": 1,
+      "paused": false,
+      "time": 0.720460125007864
+    },
+    "balloon": {
+      "top": 206.484375,
+      "hostTop": 166.390625,
+      "hostHeight": 166.984375,
+      "bottom": 310.0625
+    },
+    "bell": [
+      "closed"
+    ],
+    "backgroundAnimations": [],
+    "errors": []
+  }
+]

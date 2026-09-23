@@ -1,0 +1,133 @@
+{
+  "generated": "2026-09-23",
+  "workspace_root": "/Users/alihuynh/Claude/Projects/Anh Li Portfolio",
+  "policy": "Files > 50 MB stay out of Git (no LFS). No file in the preserved V2 set exceeded 50 MB, so nothing was moved; the entries below are the pre-existing archive stores that remain outside Git.",
+  "files_over_50MB": [
+    {
+      "original_path": "website-archives/2026-09-17-v1-before-garden/local-workspace-before-release.zip",
+      "external_destination": "website-archives/2026-09-17-v1-before-garden/local-workspace-before-release.zip",
+      "moved": false,
+      "bytes": 563907635,
+      "sha256": "cde1230249459afe1d5ca794035edafdef64a676b28cc2e7beba301e7f39117a",
+      "ownership": "Anh Li (AliH86)",
+      "purpose": "Full local workspace captured before the first garden release (1666 files, CRC verified).",
+      "runtime_derivative": "none (archive only)"
+    },
+    {
+      "original_path": "website-archives/2026-09-17-v1-before-garden/portfolio-history.bundle",
+      "external_destination": "website-archives/2026-09-17-v1-before-garden/portfolio-history.bundle",
+      "moved": false,
+      "bytes": 115002243,
+      "sha256": "886d2104c40474aebefe16dc89a320cd59b7fef5f2c2850101a0e8df64bd4a92",
+      "ownership": "Anh Li (AliH86)",
+      "purpose": "git bundle of AliH86/anhli-portfolio history before the garden release.",
+      "runtime_derivative": "restorable with `git clone portfolio-history.bundle`"
+    },
+    {
+      "original_path": "website-archives/2026-09-17-v1-before-garden/v1-live-main.zip",
+      "external_destination": "website-archives/2026-09-17-v1-before-garden/v1-live-main.zip",
+      "moved": false,
+      "bytes": 115050642,
+      "sha256": "6c40fca2a5656950e23d11f51df5e7d017176eedd1aa327cba5511ee9fdeaed2",
+      "ownership": "Anh Li (AliH86)",
+      "purpose": "V1 single-file site exactly as live before the garden (443 files).",
+      "runtime_derivative": "V1 live site (retired 2026-09-17)"
+    }
+  ],
+  "archive_stores": [
+    {
+      "path": "website-archives/2026-09-17-v1-before-garden/audio",
+      "files": 210,
+      "bytes": 1136460738,
+      "ownership": "Anh Li (AliH86)",
+      "purpose": "ORIGINAL AUDIO ARCHIVE. Not touched, not hashed by this task; see audio-receipt.json (210 entries) beside it.",
+      "runtime_derivative": "R2 bucket anhli-music (https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/) - not touched"
+    },
+    {
+      "path": "website-releases",
+      "files": 144,
+      "bytes": 282453663,
+      "ownership": "Anh Li (AliH86)",
+      "purpose": "Release packages + receipts for V2 (09-17), V2.1, V2.1 hotfix, V2.2, V2.2 iPhone hotfix, V2.2 finish.",
+      "runtime_derivative": "garden-v2/ on main (live = V2.2 finish, d058ee2)"
+    },
+    {
+      "path": "source-archive",
+      "files": 19,
+      "bytes": 2204145,
+      "ownership": "Anh Li (AliH86)",
+      "purpose": "Pre-existing local archive: garden-session-2026-09-11-start, ui-redesign-2026-09-12, hero/dandelion-scene placeholders.",
+      "runtime_derivative": "none"
+    }
+  ],
+  "release_zips": [
+    {
+      "original_path": "website-releases/2026-09-17/02-GARDEN-V2-READY.zip",
+      "external_destination": "website-releases/2026-09-17/02-GARDEN-V2-READY.zip",
+      "moved": false,
+      "bytes": 30308116,
+      "sha256": "80cc7cb5f5568530640461540e45b18f18716ccfc293e8b66bb9ca6a2c2dfabc",
+      "ownership": "Anh Li (AliH86)",
+      "purpose": "Release package",
+      "runtime_derivative": "garden-v2/ at the matching release commit"
+    },
+    {
+      "original_path": "website-releases/2026-09-18-v2.1/02-GARDEN-V2.1-READY.zip",
+      "external_destination": "website-releases/2026-09-18-v2.1/02-GARDEN-V2.1-READY.zip",
+      "moved": false,
+      "bytes": 30840966,
+      "sha256": "26a68503a4b23fc46e835069254f2c2dd6f91a36e3f78c4c7240065c95ad3a2d",
+      "ownership": "Anh Li (AliH86)",
+      "purpose": "Release package",
+      "runtime_derivative": "garden-v2/ at the matching release commit"
+    },
+    {
+      "original_path": "website-releases/2026-09-18-v2.1-hotfix/02-GARDEN-V2.1-HOTFIX.zip",
+      "external_destination": "website-releases/2026-09-18-v2.1-hotfix/02-GARDEN-V2.1-HOTFIX.zip",
+      "moved": false,
+      "bytes": 31109977,
+      "sha256": "9898f07e080589100def7bbff6de1b5345738ae058b78c8f23fb5f50aab10874",
+      "ownership": "Anh Li (AliH86)",
+      "purpose": "Release package",
+      "runtime_derivative": "garden-v2/ at the matching release commit"
+    },
+    {
+      "original_path": "website-releases/2026-09-18-v2.2/site.zip",
+      "external_destination": "website-releases/2026-09-18-v2.2/site.zip",
+      "moved": false,
+      "bytes": 32145185,
+      "sha256": "53e6fb11ff553d9cdec36445588bacdca4b4b89d680c467c111e179fe3368cba",
+      "ownership": "Anh Li (AliH86)",
+      "purpose": "Release package",
+      "runtime_derivative": "garden-v2/ at the matching release commit"
+    },
+    {
+      "original_path": "website-releases/2026-09-18-v2.2-finish/site.zip",
+      "external_destination": "website-releases/2026-09-18-v2.2-finish/site.zip",
+      "moved": false,
+      "bytes": 32205343,
+      "sha256": "86dcdf2c12583c8efecc1cc4629d125606d909863c42bb39472d6f140458aca3",
+      "ownership": "Anh Li (AliH86)",
+      "purpose": "Release package",
+      "runtime_derivative": "garden-v2/ at the matching release commit"
+    },
+    {
+      "original_path": "website-releases/2026-09-18-v2.2-iphone-hotfix/site.zip",
+      "external_destination": "website-releases/2026-09-18-v2.2-iphone-hotfix/site.zip",
+      "moved": false,
+      "bytes": 32146914,
+      "sha256": "7ce708d8546946d83b30594c38eac8f0c2ab21c13ebba3a02b9a296c4285b1a3",
+      "ownership": "Anh Li (AliH86)",
+      "purpose": "Release package",
+      "runtime_derivative": "garden-v2/ at the matching release commit"
+    }
+  ],
+  "committed_copies_of_local_sources": [
+    {
+      "path": "Pé-gà-asset",
+      "files": 22,
+      "bytes": 21717922,
+      "note": "Bé Gà generations (2026-08-02). Committed on source/v2-snapshot under archive/li-world-source/LW-CHICK-LEGACY-V01/generations-2026-08-02/ (sha256 in preserved-files.tsv). Local folder can stay or be retired."
+    }
+  ]
+}

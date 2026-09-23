@@ -1,0 +1,30 @@
+✔ automatic day is exactly 05:30 inclusive to 17:30 exclusive (10.983666ms)
+✔ no ambient audio context or sound is created before explicit opt-in (0.468958ms)
+✔ ambient opt-in mixes separately; opt-out stops only its own sound nodes (0.87975ms)
+✔ hidden page silences ambience while leaving native music untouched (1.4625ms)
+✔ sparse ambient interval stays between 90 and 190 seconds (0.652625ms)
+✔ daylight control cycles through explicit day/night and device-time mode (0.468917ms)
+✔ album greeting uses the actual selected catalog entry (0.557209ms)
+✔ random dialogue avoids immediately repeating the previous line (0.376125ms)
+✔ late video success cannot repaint another tray (1.167791ms)
+✔ late video failure cannot repaint or announce over another tray (0.354459ms)
+✔ photos win over an earlier video request (0.331875ms)
+✔ current video failure returns to usable photos with feedback (0.289083ms)
+✔ tapping the current album preserves playback; a different album resets once (0.39875ms)
+✔ closing gallery restores idle or listening pose and invalidates pending views (0.50825ms)
+✔ motion off cancels an in-flight cover animation (0.402791ms)
+✔ native media controls use the existing player and clamp seek positions (1.053917ms)
+✔ lock-screen metadata and playback position describe the selected track (0.413625ms)
+✔ browsers without Media Session keep the native player path usable (0.351875ms)
+✔ a background visibility change only pauses decoration (0.298792ms)
+✔ a sparrow visit is one small group with separate perch anchors and one chorus (1.602292ms)
+✔ a day/night switch cancels old visits; stale arrivals cannot chirp (0.417584ms)
+✔ bats only pass through the air and never enter a perched state (0.38225ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 62.5985

@@ -1,0 +1,29 @@
+{
+  "artwork": "host-lineart-v1.png",
+  "mask": "host-lineart-v1-mask.png",
+  "maskTool": "built-in imagegen",
+  "maskPrompt": "host-lineart-v1-mask-prompt.txt",
+  "runtime": "assets/garden/production/host/",
+  "compositing": "Three MeshBasicMaterial map + registered alphaMap, alphaTest .52; original RGB retained unchanged. No claim of standalone RGBA PNG.",
+  "sourceMask": "/Users/alihuynh/.codex/generated_images/01a09a1f-4e4c-7d43-969b-118d4e711ef6/exec-a39913c6-29ff-40c6-8bfe-e981a77f2f22.png",
+  "worldXZ": [
+    7.8,
+    13
+  ],
+  "terrainY": -1.5361381689373346,
+  "positionOffsetY": 0.012,
+  "figureHeightApprox": 1.78,
+  "fullPlaneHeight": 1.94,
+  "visibility": [
+    "arrival",
+    "host",
+    "mobile"
+  ],
+  "status": "QA integration candidate; final visual approval pending",
+  "limitations": [
+    "AI matte can need contour cleanup at larger display scales.",
+    "Single pose faces approved anchor cameras; no free orbit or full rig.",
+    "Mobile camera intentionally focuses host/home/workspace; stall outside crop and house partly cropped.",
+    "No actual mobile GPU measurement or production UI integration."
+  ]
+}

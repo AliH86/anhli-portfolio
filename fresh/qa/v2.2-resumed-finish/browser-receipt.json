@@ -1,0 +1,90 @@
+{
+  "commit": "d058ee25f2803d2d6d1562defbf928b769c165c3",
+  "time": "2026-09-18T07:26:33.527389+00:00",
+  "automated_tests": {
+    "passed": 50,
+    "failed": 0,
+    "run": "after resume; before final decorative CSS adjustment"
+  },
+  "laptop": {
+    "viewport": [
+      1366,
+      768
+    ],
+    "sign_y": [
+      92.15625,
+      267.15625
+    ],
+    "shelf_top": 352.5625,
+    "music_ancestor_transforms": "none"
+  },
+  "phone": {
+    "viewport": [
+      394,
+      710
+    ],
+    "queue_y": [
+      100,
+      698
+    ],
+    "track_count": 12,
+    "scroll_body_height": 289,
+    "last_row_bottom": 578.1953125,
+    "transport_y": [
+      582,
+      678
+    ]
+  },
+  "small_phone": {
+    "viewport": [
+      360,
+      600
+    ],
+    "queue_y": [
+      100,
+      588
+    ],
+    "scroll_body_height": 187,
+    "transport_bottom": 568
+  },
+  "landscape": {
+    "viewport": [
+      844,
+      390
+    ],
+    "queue_y": [
+      8,
+      382
+    ],
+    "scroll_body_height": 165,
+    "transport_bottom": 356
+  },
+  "large_gallery": {
+    "viewport": [
+      1920,
+      1080
+    ],
+    "board_x": [
+      320,
+      1600
+    ],
+    "board_y": [
+      148.5,
+      928.5
+    ],
+    "columns": 6,
+    "photo_width": 184.2
+  },
+  "playback": {
+    "native_audio_elements": 1,
+    "play_started": true,
+    "paused_after_check": true
+  },
+  "still_mode": {
+    "active_animations_in_frame": 0,
+    "complete_static_leaves": true
+  },
+  "console_errors": [],
+  "physical_iPhone_Safari": "pending user retest",
+  "background_lock_screen_audio": "not verified on physical device"
+}

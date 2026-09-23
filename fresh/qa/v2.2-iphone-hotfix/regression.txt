@@ -1,0 +1,55 @@
+
+> test
+> node --test scripts/test-*.mjs
+
+✔ ambient loop joins adjacent original samples and preserves every channel (3.988459ms)
+✔ tiny decoded samples cannot introduce NaN at a one-sample crossfade (0.078458ms)
+✔ daily message preserves all 78 original messages and first draw of legacy Oracle (3.765875ms)
+✔ same local day/device locks message across reload, next day uses fresh draw (1.160334ms)
+✔ blocked storage retains stable daily result in the current page; failed data request can retry (0.244166ms)
+✔ automatic day is 05:30 inclusive to 17:30 exclusive (11.881333ms)
+✔ daylight selection cycles day/night/device time without touching music (0.61275ms)
+✔ album introduction uses selected metadata and host moments restore the prior note (0.518583ms)
+✔ first daily invitation starts nine seconds after entrance, and no quote repeats immediately (0.385792ms)
+✔ album introduction keeps the complete source paragraph, including its ending (0.341708ms)
+✔ offscreen wildlife stops and resumes without controlling music (0.317416ms)
+✔ cached scenery introduces no loading delay or timer (0.407ms)
+✔ scenery load immediately clears its nonblocking loading notice (0.088666ms)
+✔ scenery error immediately clears its nonblocking loading notice (0.41675ms)
+✔ stalled image has a bounded notice with no navigation or audio gate (0.064625ms)
+✔ reduced motion never animates the loading interaction (0.073875ms)
+✔ late video success cannot repaint another tray (1.190541ms)
+✔ late video failure cannot repaint or announce over another tray (0.353708ms)
+✔ photos win over an earlier video request (0.343875ms)
+✔ current video failure returns to usable photos with feedback (0.305708ms)
+✔ tapping the current album preserves playback; a different album resets once (0.366791ms)
+✔ closing gallery restores idle or listening pose and invalidates pending views (0.561458ms)
+✔ motion off cancels an in-flight cover animation (0.938458ms)
+✔ native media controls use the existing player and clamp seek positions (0.617125ms)
+✔ lock-screen metadata and playback position describe the selected track (0.510292ms)
+✔ browsers without Media Session keep the native player path usable (0.385667ms)
+✔ a background visibility change only pauses decoration (0.460542ms)
+✔ close returns to the garden rather than reopening a previous room (0.395875ms)
+✔ timed lyrics handle exact boundaries, instrumental gaps and backward seeks (0.499791ms)
+✔ malformed and overlapping lyrics are rejected; unsupported metadata stays quiet (0.257791ms)
+✔ lyrics load only mapped tracks, cache requests, reject paths and recover from failure (0.274792ms)
+✔ critical images are ready immediately when decoded; failures and timeouts reject (13.941208ms)
+✔ a gust reaches small foliage before the canopy and settles within the rest interval (0.657042ms)
+✔ all published tracks have reviewed local mapping; retired ghost IDs cannot return (1.854333ms)
+✔ missing audio stays honest and accessible rather than implying a playable album (0.10275ms)
+✔ time boundaries and future locations stay separate from feature/playback state (1.230791ms)
+✔ category filters derive from real metadata, with independent favorite membership (0.135875ms)
+✔ production lyrics stay empty unless the author provides verified timing (0.4295ms)
+✔ no residents before entrance; sparrows stay in a small perch group (2.226125ms)
+✔ owl remains over a minute, prepares, then makes a short local departure (1.915ms)
+✔ firefly candidates and simultaneous lights stay bounded (desktop) (2.009792ms)
+✔ firefly candidates and simultaneous lights stay bounded (portrait) (1.190666ms)
+✔ phase changes cancel stale animations and visits never repeat the same species (0.510458ms)
+ℹ tests 43
+ℹ suites 0
+ℹ pass 43
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 63.080375

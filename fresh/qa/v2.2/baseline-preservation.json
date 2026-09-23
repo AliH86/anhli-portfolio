@@ -1,0 +1,41 @@
+{
+  "at": "2026-09-18T02:37:18.656Z",
+  "baselineFiles": 507,
+  "unchanged": 500,
+  "changed": [
+    "index.html",
+    "garden-wind.js",
+    "garden-life.js",
+    "app.js",
+    "data/catalog.json"
+  ],
+  "removedFromRuntime": [
+    "assets/covers/df0c36ec-4afd-4760-9aa3-3b05350a1b87.webp",
+    "assets/covers/1c504bd2-2249-4fca-931a-f1c992581a25.webp"
+  ],
+  "preservedData": [
+    {
+      "path": "data/gallery.json",
+      "identical": true
+    },
+    {
+      "path": "data/profile.json",
+      "identical": true
+    },
+    {
+      "path": "data/videos.json",
+      "identical": true
+    }
+  ],
+  "sceneArtwork": [
+    "assets/host-atlas.webp",
+    "assets/host-idle-v2.webp",
+    "assets/garden-mobile-night.webp",
+    "assets/garden-mobile.webp",
+    "assets/garden-desktop-night.webp",
+    "assets/host-seated.webp",
+    "assets/host-gallery.webp",
+    "assets/garden-foliage.webp",
+    "assets/garden-desktop.webp"
+  ]
+}

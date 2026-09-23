@@ -1,0 +1,21 @@
+{
+  "status": "User approved Garden technical and visual baseline; MUSIC only next",
+  "sha256": {
+    "css/garden-plate.css": "fdc4a6fcce74cc4e0750e0a1a4a7b100523d74c6a73245df544803aeab24691f",
+    "js/redesign/garden-canopy.mjs": "20063d04544557a155173f60e185dd4d3f1b3d4bce12c836c1ba68a234fb10d2",
+    "js/redesign/garden-motion.mjs": "b3c32db49776e0b105f13de33988c1c42b72afbe517cc379a81525b4f3666608",
+    "js/redesign/garden-plate.mjs": "934d227525e54729b567cc2277cc0a146b942125ab51b8459648dbe5691b640c",
+    "assets/garden/production/stills/2026-09-14-art/garden-arrival.png": "b003da48bd9b8b9e476cdf9bcf5d0d0621ce4d7e49efacb35a0086da6e7f9ba1",
+    "assets/garden/production/stills/2026-09-14-art/garden-mobile.png": "ead9a1dd23ce70bedbf4f945c85ad1c86476b29d3276cebb82243983dd67dad1",
+    "assets/garden/production/stills/2026-09-14-wind/arrival-host-170.png": "81c73b544f8cc0852d51242b6649baf8e5bd8af88b062d3785e4068e2c6f1994",
+    "assets/garden/production/stills/2026-09-14-wind/mobile-host-170.png": "ba0105e96cbb988cbb012540a441d78c78ab2dd193a72de3341b1ecfcbb5d113",
+    "source/garden/production/host/host-lineart-v1.png": "2be0843b031c6ad124bbe5b456226bad9a8d3fe62d50a1e5fba06638c7927c39",
+    "source/garden/production/host/host-lineart-v1-mask.png": "f2de69f2d17816d6d1c46a8c269cac68191aac726886499b6e08f93ac39ece8f",
+    "music-data-base.js": "87c16f8cd79ea10ae8fe2f9ccdcec18f0f8d09f17ad83f18c1a4652e6a5c87f8",
+    "music-data.js": "553356bad164885876adfec8642a02fea7592401c8c70b969df56442729d71f6",
+    "audio-map.js": "ab6235fdd834492821e1646db79d539a2fbe8eed83447859340d349fc753c258"
+  },
+  "gate": "Finish MUSIC, review Garden-MUSIC, then SHOWS/VISUAL/STORY",
+  "motion": "All Garden amplitudes and effect code frozen",
+  "release": "No commit/push/deploy authorized"
+}

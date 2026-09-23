@@ -1,0 +1,12 @@
+PASS desktop day interaction matrix
+PASS desktop night interaction matrix
+PASS tablet day interaction matrix
+PASS tablet night interaction matrix
+PASS mobile day interaction matrix
+PASS mobile night interaction matrix
+PASS entrance holds slow critical data then permits immediate entry
+PASS entrance recovers failed critical catalog on explicit retry
+PASS featured lyrics seek, gaps, subtitle, and metadata host moment
+PASS reduced motion suppresses decoration and transparency preference applies
+PASS ambient opt-in, one field sample, hidden stop and music remains playing
+PASS night habitat and earlier daily gift stay bounded in the browser

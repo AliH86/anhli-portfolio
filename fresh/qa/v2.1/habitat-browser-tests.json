@@ -1,0 +1,32 @@
+[
+  {
+    "name": "desktop",
+    "owl": {
+      "x": 523.4539794921875,
+      "y": 50.11690139770508,
+      "width": 62.15625,
+      "height": 62.156246185302734
+    },
+    "stats": {
+      "owlState": "perched",
+      "fireflyCount": 16,
+      "liveAnimations": 12
+    },
+    "birds": 2
+  },
+  {
+    "name": "mobile",
+    "owl": {
+      "x": 183.07699584960938,
+      "y": 154.4346923828125,
+      "width": 31.625,
+      "height": 31.625
+    },
+    "stats": {
+      "owlState": "perched",
+      "fireflyCount": 12,
+      "liveAnimations": 10
+    },
+    "birds": 2
+  }
+]

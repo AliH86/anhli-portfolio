@@ -1,0 +1,66 @@
+.dg-garden-plate{position:absolute;inset:0;display:block}.dg-garden-plate img{width:100%;height:100%;object-fit:cover;object-position:center}.dg-garden-scene{color:#23261f}.dg-garden-scene .dg-hill,.dg-garden-scene .dg-world-shade{display:none}.dg-garden-scene .dg-header{background:transparent}.dg-garden-scene .dg-arrival{padding:35px 5vw 130px}.dg-garden-scene .dg-arrival-copy{max-width:650px}.dg-garden-scene .dg-arrival h1{font-size:clamp(28px,2.6vw,37px);line-height:1.17}.dg-garden-scene .dg-motto{position:absolute;right:5vw;top:38px;font-size:25px;line-height:1.35;max-width:240px}.dg-garden-scene .dg-intro{margin-top:20px!important;font-size:12px;opacity:1}.dg-garden-scene .dg-arrival-actions{position:absolute;bottom:64px;left:5vw}.dg-garden-scene .dg-primary{color:#fff;background:#805334}.dg-garden-scene .dg-quiet-link{border-color:#23261f88;min-height:44px;display:flex;align-items:center}.dg-garden-scene .dg-arrival-note{font-size:20px;bottom:65px}.dg-garden-scene .dg-review-label{opacity:.9}.dg-garden-scene .dg-scroll-cue{bottom:44px}.dg-garden-scene .dg-hotspots{padding:48svh 5vw 0;min-height:76svh;align-items:end;gap:15px}.dg-garden-scene .dg-hotspot{transform:none;min-height:130px;padding:18px 12px;background:#f4f2e5e8;border:1px solid #68725b55;border-radius:6px;text-shadow:none;gap:6px}.dg-garden-scene .dg-hotspot .dg-hand{font:12px/1.5 'Be Vietnam Pro',sans-serif}.dg-garden-scene .dg-ring{width:28px;height:28px;background:#805334;border:1px solid #805334;box-shadow:none}.dg-garden-scene .dg-map-button{border-color:#23261f66}.dg-garden-scene .dg-explore-foot{padding-top:18px}.dg-garden-scene .dg-mini{color:#23261f;background:#f7f4ecf2}
+@media(max-width:700px){.dg-garden-scene .dg-arrival{padding:16px 24px 140px}.dg-garden-scene .dg-motto{position:static;font-size:19px;line-height:1.12;margin-bottom:12px}.dg-garden-scene .dg-arrival-copy{max-width:340px}.dg-garden-scene .dg-arrival h1{font-size:26px;line-height:1.17}.dg-garden-scene .dg-intro{font-size:10px;line-height:1.6;margin-top:13px!important}.dg-garden-scene .dg-arrival-actions{bottom:62px;left:24px;right:24px;gap:10px;flex-wrap:wrap}.dg-garden-scene .dg-primary{font-size:9px}.dg-garden-scene .dg-hotspots{padding:50svh 23px 24px;min-height:75svh;align-items:stretch}.dg-garden-scene .dg-hotspot{padding:20px;flex:0 0 76vw;min-height:155px}.dg-garden-scene .dg-ring{width:30px;height:30px}.dg-garden-scene .dg-explore-foot{padding-bottom:110px}.dg-garden-scene .dg-nav{color:#23261f}.dg-garden-scene .dg-mini{bottom:26px}}
+@media(max-height:650px) and (min-width:701px){.dg-garden-scene .dg-arrival{padding-top:10px}.dg-garden-scene .dg-arrival-copy{max-width:590px}.dg-garden-scene .dg-arrival h1{font-size:27px}.dg-garden-scene .dg-motto{font-size:20px;top:10px}.dg-garden-scene .dg-intro{margin-top:10px!important}}
+/* Keep ink text clear of the foreground canopy and keep the host above Explore cards. */
+@media(min-width:701px){.dg-garden-scene .dg-header{background:#f5f2e5ed}.dg-garden-scene .dg-arrival-copy{margin-left:16vw;max-width:46vw}.dg-garden-scene .dg-hotspots{padding-top:56svh;min-height:79svh}.dg-garden-scene .dg-motto{max-width:18vw;font-size:clamp(18px,1.75vw,25px)}}
+.dg-garden-scene .dg-header{position:sticky;top:0;z-index:4}
+@media(max-width:700px){.dg-garden-scene[data-view="explore"] .dg-hotspots{padding-top:64svh;min-height:0}.dg-garden-scene[data-view="explore"] .dg-mini{position:relative;left:auto;bottom:auto;margin:16px;width:max-content;max-width:calc(100% - 32px)}.dg-garden-scene .dg-explore-foot{padding-bottom:12px}}
+
+/* Stable light fallback also works before the image arrives or when it cannot load. */
+.dg-garden-plate>picture{position:absolute;inset:0;display:block}.dg-garden-plate .dg-garden-host{pointer-events:none}
+.dg-garden-scene .dg-header{background:#f5f2e5ed}
+.dg-garden-scene[data-view="arrival"] .dg-world::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#f6f3e866 0%,#f6f3e847 25%,transparent 40%);pointer-events:none}
+.dg-garden-scene .dg-quiet-link{background:#f5f2e5e8;padding:0 14px;border:0;border-radius:24px}
+.dg-garden-scene .dg-arrival-note{background:#f5f2e5db;padding:8px 14px;border-radius:6px}
+@media(max-width:700px){.dg-garden-scene .dg-intro{background:#f5f2e5db;padding:6px 8px;border-radius:3px}}
+@media(min-width:1101px){.dg-garden-scene .dg-arrival-copy{margin-left:22vw}}
+.dg-garden-scene .dg-world{background:linear-gradient(#a7c2ce 0%,#ced9d8 35%,#c4cbb1 65%,#97a376 100%)}
+.dg-garden-plate[hidden]{display:none}
+.dg-garden-scene[data-garden-image="error"] .dg-world{background:linear-gradient(#b5cbd0,#dde1cf 52%,#b7c59b)}
+@media(max-width:700px) and (max-height:720px){.dg-garden-scene[data-view="arrival"] .dg-arrival{min-height:700px}.dg-garden-scene .dg-arrival-actions{position:absolute;bottom:55px}.dg-garden-scene .dg-arrival h1{font-size:24px}}
+@media(max-width:1100px){.dg-garden-scene .dg-scroll-cue{display:none}}
+/* Short screens scroll through the complete composition instead of squeezing text onto trees. */
+@media(max-height:720px){.dg-garden-scene[data-view="arrival"]{min-height:850px}.dg-garden-scene[data-view="arrival"] .dg-world{position:absolute;height:100%;min-height:850px}.dg-garden-scene[data-view="arrival"] .dg-arrival{min-height:calc(850px - 76px)}}
+@media(max-width:700px) and (max-height:720px){.dg-garden-scene[data-view="arrival"] .dg-arrival{min-height:calc(850px - 68px)}}
+@media(max-height:720px){.dg-garden-scene[data-view="arrival"] .dg-review-label{position:absolute;bottom:10px}}
+
+/* A small camera drift and softer near-plane retain the accepted photograph.
+   Host and ground share a transform to keep the feet and contact shadow planted. */
+.dg-garden-plate{--garden-x:0;--garden-y:0;transform:scale(1.026);transform-origin:50% 60%}
+.dg-garden-backdrop,.dg-garden-host{transform:translate3d(calc(var(--garden-x)*-4px),calc(var(--garden-y)*-2px),0)}
+.dg-garden-scene[data-garden-motion="running"] .dg-garden-plate{animation:dg-garden-drift 24s ease-in-out infinite alternate;will-change:transform}
+.dg-garden-scene[data-garden-motion="running"] .dg-garden-plate>picture{will-change:transform}
+@keyframes dg-garden-drift{from{transform:translate3d(-2px,0,0) scale(1.026)}to{transform:translate3d(2px,-1px,0) scale(1.029)}}
+.dg-garden-scene .dg-motion-toggle{position:fixed;z-index:3;left:5vw;bottom:15px;border:1px solid #68725b55;border-radius:20px;padding:8px 13px;min-height:36px;background:#f5f2e5e8;color:#23261f;font:10px/1.4 'Be Vietnam Pro',sans-serif;cursor:pointer}
+.dg-motion-toggle[hidden]{display:none}.dg-motion-toggle:focus-visible{outline:2px solid #805334;outline-offset:3px}
+@media(max-width:700px){.dg-garden-scene .dg-motion-toggle{left:24px;bottom:8px;font-size:9px;min-height:32px}.dg-garden-scene[data-view="explore"] .dg-motion-toggle{position:relative;left:auto;bottom:auto;margin:8px 24px 18px}.dg-garden-scene[data-garden-motion="running"] .dg-garden-plate{animation-name:dg-garden-drift-mobile}}
+@keyframes dg-garden-drift-mobile{from{transform:translate3d(-.7px,0,0) scale(1.026)}to{transform:translate3d(.7px,-.5px,0) scale(1.027)}}
+@media(prefers-reduced-motion:reduce){.dg-garden-plate{animation:none!important;transform:none}.dg-garden-plate>picture{transform:none!important;will-change:auto!important}.dg-garden-plate .dg-garden-foreground{display:none}}
+
+/* Individually anchored photographic meadow clusters, lit from the scene's sun.
+   Black sprite backing screens out in the browser; source atlas stays intact. */
+.dg-wind-layer{position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;transform:translate3d(calc(var(--garden-x)*-9px),calc(var(--garden-y)*-4px),0)}
+.dg-wind-plant{position:absolute;left:var(--plant-left);bottom:var(--plant-bottom);height:var(--plant-height);width:calc(var(--plant-height)*.5);margin-left:calc(var(--plant-height)*-.25);background-image:url('../assets/garden/production/stills/2026-09-14-wind/meadow-wind-atlas.png');background-size:400% 100%;background-position:var(--plant-sprite) 50%;background-repeat:no-repeat;transform-origin:50% 94%;opacity:.79;filter:blur(.35px);mask-image:linear-gradient(#000 0%,#000 75%,transparent 96%);-webkit-mask-image:linear-gradient(#000 0%,#000 75%,transparent 96%);animation:dg-meadow-breeze var(--plant-duration) ease-in-out var(--plant-delay) infinite;animation-play-state:paused}
+.dg-wind-plant-7,.dg-wind-plant-8,.dg-wind-plant-9{opacity:.5;filter:blur(.2px)}
+.dg-garden-scene[data-garden-motion="running"] .dg-wind-plant{animation-play-state:running;will-change:transform}
+@keyframes dg-meadow-breeze{0%,100%{transform:rotate(-1.6deg) skewX(-.35deg)}38%{transform:rotate(2.3deg) skewX(.8deg)}65%{transform:rotate(.5deg) skewX(.15deg)}}
+@media(max-width:700px){.dg-wind-plant{height:calc(var(--plant-height)*.65);width:calc(var(--plant-height)*.325);margin-left:calc(var(--plant-height)*-.1625);opacity:.68}.dg-wind-plant-2,.dg-wind-plant-4,.dg-wind-plant-7,.dg-wind-plant-8,.dg-wind-plant-9{display:none}.dg-wind-plant-1{left:20%}.dg-wind-plant-3{left:65%}.dg-wind-plant-5{left:90%}}
+@media(prefers-reduced-motion:reduce){.dg-wind-layer{transform:none!important}.dg-wind-plant{animation:none!important;will-change:auto!important}}
+
+/* Single painted background. The picture stays as a non-overlapping fallback. */
+.dg-garden-canopy{position:absolute;inset:0;width:100%;height:100%;display:none;pointer-events:none}
+.dg-canopy-ready .dg-garden-canopy{display:block}.dg-canopy-ready .dg-garden-backdrop{opacity:0}
+.dg-garden-backdrop,.dg-garden-host,.dg-garden-canopy{transform:translate3d(calc(var(--garden-x)*-13px),calc(var(--garden-y)*-6px),0)}
+.dg-garden-plate{transform:scale(1.055)}
+.dg-wind-layer{transform:translate3d(calc(var(--garden-x)*-31px),calc(var(--garden-y)*-13px),0)}
+@keyframes dg-garden-drift{from{transform:translate3d(-3px,0,0) scale(1.055)}to{transform:translate3d(3px,-1.5px,0) scale(1.058)}}
+@keyframes dg-meadow-breeze{0%,100%{transform:rotate(-3deg) skewX(-.7deg)}38%{transform:rotate(4.2deg) skewX(1.35deg)}65%{transform:rotate(.6deg) skewX(.2deg)}}
+.dg-garden-scene[data-view="arrival"] .dg-world::after{background:linear-gradient(180deg,#f6f3e866 0%,#f6f3e847 25%,transparent 40%),linear-gradient(0deg,#20271ee0 0%,#27312072 12%,transparent 29%)}
+.dg-garden-scene .dg-quiet-link{background:none;color:#f4edda;border-radius:0;border-bottom:1px solid #e6d9b880;padding:0 2px;text-shadow:0 1px 5px #152016}
+.dg-garden-scene .dg-arrival-note{background:none;color:#f4edda;padding:0;border-radius:0;text-shadow:0 2px 8px #152016}
+.dg-garden-scene .dg-motion-toggle{background:none;color:#f4edda;border-color:#e6d9b84d;border-radius:4px;text-shadow:0 1px 4px #152016}
+.dg-garden-scene .dg-scroll-cue{color:#f4edda;text-shadow:0 1px 5px #152016}
+@media(max-width:700px){.dg-garden-scene .dg-intro{background:none;padding:0;border-radius:0;text-shadow:0 1px 7px #f6f3e8}.dg-garden-scene[data-view="explore"] .dg-motion-toggle{color:#23261f;text-shadow:none;border-color:#68725b55}.dg-wind-plant{animation-name:dg-meadow-breeze-mobile}}
+@keyframes dg-meadow-breeze-mobile{0%,100%{transform:rotate(-2.4deg) skewX(-.5deg)}40%{transform:rotate(3.3deg) skewX(.8deg)}65%{transform:rotate(.4deg)}}
+@media(prefers-reduced-motion:reduce){.dg-canopy-ready .dg-garden-canopy{display:none}.dg-canopy-ready .dg-garden-backdrop{opacity:1}.dg-garden-canopy{transform:none!important}}
+

@@ -1,0 +1,91 @@
+[
+  {
+    "name": "desktop day interaction matrix",
+    "pass": true,
+    "revealMs": 645,
+    "errors": [],
+    "failed": [],
+    "overflow": false,
+    "audioCount": 1,
+    "audio": "synthetic WAV transport fixture; real R2 playback separately verified"
+  },
+  {
+    "name": "desktop night interaction matrix",
+    "pass": true,
+    "revealMs": 642,
+    "errors": [],
+    "failed": [],
+    "overflow": false,
+    "audioCount": 1,
+    "audio": "synthetic WAV transport fixture; real R2 playback separately verified"
+  },
+  {
+    "name": "tablet day interaction matrix",
+    "pass": true,
+    "revealMs": 633,
+    "errors": [],
+    "failed": [],
+    "overflow": false,
+    "audioCount": 1,
+    "audio": "synthetic WAV transport fixture; real R2 playback separately verified"
+  },
+  {
+    "name": "tablet night interaction matrix",
+    "pass": true,
+    "revealMs": 601,
+    "errors": [],
+    "failed": [],
+    "overflow": false,
+    "audioCount": 1,
+    "audio": "synthetic WAV transport fixture; real R2 playback separately verified"
+  },
+  {
+    "name": "mobile day interaction matrix",
+    "pass": true,
+    "revealMs": 569,
+    "errors": [],
+    "failed": [],
+    "overflow": false,
+    "audioCount": 1,
+    "audio": "synthetic WAV transport fixture; real R2 playback separately verified"
+  },
+  {
+    "name": "mobile night interaction matrix",
+    "pass": true,
+    "revealMs": 648,
+    "errors": [],
+    "failed": [],
+    "overflow": false,
+    "audioCount": 1,
+    "audio": "synthetic WAV transport fixture; real R2 playback separately verified"
+  },
+  {
+    "name": "entrance holds slow critical data then permits immediate entry",
+    "pass": true,
+    "readinessMs": 10
+  },
+  {
+    "name": "entrance recovers failed critical catalog on explicit retry",
+    "pass": true
+  },
+  {
+    "name": "featured lyrics seek, gaps, subtitle, and metadata host moment",
+    "pass": true,
+    "fixtureOnly": true,
+    "productionLyricsAdded": 0
+  },
+  {
+    "name": "reduced motion suppresses decoration and transparency preference applies",
+    "pass": true
+  },
+  {
+    "name": "ambient opt-in, one field sample, hidden stop and music remains playing",
+    "pass": true
+  },
+  {
+    "name": "night habitat and earlier daily gift stay bounded in the browser",
+    "pass": true,
+    "candidates": 16,
+    "visibleAtSample": 8
+  }
+]

@@ -1,0 +1,31 @@
+{
+  "archive": "/Users/alihuynh/Downloads/Anhli Portfolio UI Redesign.zip",
+  "sha256": "383645036b98bff89dafb56a7eb06efd616dfc1fb2c19b7c5d424cf8acecf19a",
+  "files": [
+    {
+      "path": "source/codex-handoff/CLAUDE.md",
+      "bytes": 6576,
+      "sha256": "8fd5d90761dc173534832bddf8eb1096898d1ec211bfbe956f5491b32ee1b9fc"
+    },
+    {
+      "path": "source/codex-handoff/Dandelion Garden - Codex Handoff Pack.dc.html",
+      "bytes": 47732,
+      "sha256": "efef005971055af946f93537c79b5ffb9abdd14f26ac5841b13e7d2336890637"
+    },
+    {
+      "path": "source/codex-handoff/Dandelion Garden - Mockup Round 10 Screens.dc.html",
+      "bytes": 104110,
+      "sha256": "9a0ada5059eef7a2162ed14f6c8bfcb5a178ba40f74dc1dc5fa18b50841ea2de"
+    },
+    {
+      "path": "source/codex-handoff/doc-page.js",
+      "bytes": 38579,
+      "sha256": "f52ae9c02fca7ab44c37f3ff363194fdf81caa20ae63e2fe1f518ed21133185e"
+    },
+    {
+      "path": "source/codex-handoff/support.js",
+      "bytes": 69150,
+      "sha256": "8fe7df74405f3c55f49b7249c74ea1397e65d07dea2b1bd3b4a489bec2e28cbe"
+    }
+  ]
+}

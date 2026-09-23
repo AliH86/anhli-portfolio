@@ -1,0 +1,34 @@
+✔ daily message preserves all 78 original messages and first draw of legacy Oracle (3.69475ms)
+✔ same local day/device locks message across reload, next day uses fresh draw (1.444208ms)
+✔ blocked storage retains stable daily result in the current page; failed data request can retry (0.296833ms)
+✔ automatic day is exactly 05:30 inclusive to 17:30 exclusive (11.370542ms)
+✔ no ambient audio context or sound is created before explicit opt-in (0.585875ms)
+✔ ambient opt-in mixes separately; opt-out stops only its own sound nodes (1.356583ms)
+✔ hidden page silences ambience while leaving native music untouched (1.247875ms)
+✔ sparse ambient interval stays between 90 and 190 seconds (0.46425ms)
+✔ daylight control cycles through explicit day/night and device-time mode (0.474292ms)
+✔ album greeting uses the actual selected catalog entry (0.547416ms)
+✔ random dialogue avoids immediately repeating the previous line (0.365416ms)
+✔ late video success cannot repaint another tray (1.175667ms)
+✔ late video failure cannot repaint or announce over another tray (0.323542ms)
+✔ photos win over an earlier video request (0.36075ms)
+✔ current video failure returns to usable photos with feedback (0.440459ms)
+✔ tapping the current album preserves playback; a different album resets once (0.427083ms)
+✔ closing gallery restores idle or listening pose and invalidates pending views (0.520417ms)
+✔ motion off cancels an in-flight cover animation (0.336292ms)
+✔ native media controls use the existing player and clamp seek positions (0.951417ms)
+✔ lock-screen metadata and playback position describe the selected track (0.386084ms)
+✔ browsers without Media Session keep the native player path usable (0.356875ms)
+✔ a background visibility change only pauses decoration (0.299292ms)
+✔ a sparrow visit is one small group with separate perch anchors and one chorus (2.132958ms)
+✔ a day/night switch cancels old visits; stale arrivals cannot chirp (0.429166ms)
+✔ bats only pass through the air and never enter a perched state (0.349167ms)
+✔ birds cross the scene boundary at full opacity instead of dissolving (0.480125ms)
+ℹ tests 26
+ℹ suites 0
+ℹ pass 26
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 62.7665

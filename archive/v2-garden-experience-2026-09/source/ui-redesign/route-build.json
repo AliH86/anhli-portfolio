@@ -1,0 +1,12 @@
+{
+  "routes": [
+    "index.html",
+    "sap/index.html",
+    "about/index.html",
+    "flat/index.html",
+    "sky/index.html"
+  ],
+  "albums": 26,
+  "tracks": 212,
+  "source": "index.html engine + js/redesign/content.mjs + view.mjs; generated route HTML"
+}

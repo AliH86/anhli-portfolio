@@ -1,0 +1,50 @@
+{
+  "canvas": [
+    853,
+    1024
+  ],
+  "source": "source/garden/v1/anhli-eyes-closed-generated-v1.png",
+  "sourceStatus": "Full generated frame not accepted as a replacement: alignment drift and baked checkerboard. Only inner eye patches are used.",
+  "layers": [
+    {
+      "name": "eye_near",
+      "file": "eye-near-closed-v1.png",
+      "sourceRect": [
+        480,
+        156,
+        39,
+        24
+      ],
+      "targetRect": [
+        480,
+        154,
+        39,
+        24
+      ]
+    },
+    {
+      "name": "eye_far",
+      "file": "eye-far-closed-v1.png",
+      "sourceRect": [
+        536,
+        168,
+        12,
+        17
+      ],
+      "targetRect": [
+        536,
+        164,
+        12,
+        17
+      ]
+    }
+  ],
+  "reaction": "Single 140 ms blink on plant click/focus; disabled with reduced motion.",
+  "static": [
+    "body",
+    "head silhouette",
+    "hands",
+    "chair"
+  ],
+  "units": "pixels from top-left"
+}

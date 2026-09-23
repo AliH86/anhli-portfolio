@@ -1,0 +1,144 @@
+[
+  {
+    "name": "owl-0",
+    "sourceBounds": [
+      148,
+      89,
+      407,
+      465
+    ],
+    "runtimeCell": 192,
+    "feetAnchor": 161,
+    "bodyScale": 0.27
+  },
+  {
+    "name": "owl-1",
+    "sourceBounds": [
+      121,
+      89,
+      377,
+      465
+    ],
+    "runtimeCell": 192,
+    "feetAnchor": 161,
+    "bodyScale": 0.27
+  },
+  {
+    "name": "owl-2",
+    "sourceBounds": [
+      106,
+      89,
+      366,
+      466
+    ],
+    "runtimeCell": 192,
+    "feetAnchor": 161,
+    "bodyScale": 0.27
+  },
+  {
+    "name": "owl-3",
+    "sourceBounds": [
+      102,
+      101,
+      406,
+      412
+    ],
+    "runtimeCell": 192,
+    "feetAnchor": 161,
+    "bodyScale": 0.27
+  },
+  {
+    "name": "owl-4",
+    "sourceBounds": [
+      5,
+      114,
+      510,
+      410
+    ],
+    "runtimeCell": 192,
+    "feetAnchor": 161,
+    "bodyScale": 0.27
+  },
+  {
+    "name": "owl-5",
+    "sourceBounds": [
+      1,
+      1,
+      484,
+      414
+    ],
+    "runtimeCell": 192,
+    "feetAnchor": 161,
+    "bodyScale": 0.27
+  },
+  {
+    "name": "owl-atlas",
+    "bytes": 33730
+  },
+  {
+    "name": "foliage-0",
+    "sourceBounds": [
+      53,
+      159,
+      508,
+      477
+    ],
+    "file": "/Users/alihuynh/Claude/Projects/Anh Li Portfolion/portfolio-garden-v2/fresh/dist/assets/v2.1/foliage-0.webp",
+    "bytes": 20844
+  },
+  {
+    "name": "foliage-1",
+    "sourceBounds": [
+      31,
+      83,
+      494,
+      484
+    ],
+    "file": "/Users/alihuynh/Claude/Projects/Anh Li Portfolion/portfolio-garden-v2/fresh/dist/assets/v2.1/foliage-1.webp",
+    "bytes": 27804
+  },
+  {
+    "name": "foliage-2",
+    "sourceBounds": [
+      36,
+      92,
+      475,
+      490
+    ],
+    "file": "/Users/alihuynh/Claude/Projects/Anh Li Portfolion/portfolio-garden-v2/fresh/dist/assets/v2.1/foliage-2.webp",
+    "bytes": 33752
+  },
+  {
+    "name": "foliage-3",
+    "sourceBounds": [
+      38,
+      4,
+      480,
+      443
+    ],
+    "file": "/Users/alihuynh/Claude/Projects/Anh Li Portfolion/portfolio-garden-v2/fresh/dist/assets/v2.1/foliage-3.webp",
+    "bytes": 26530
+  },
+  {
+    "name": "foliage-4",
+    "sourceBounds": [
+      19,
+      84,
+      487,
+      449
+    ],
+    "file": "/Users/alihuynh/Claude/Projects/Anh Li Portfolion/portfolio-garden-v2/fresh/dist/assets/v2.1/foliage-4.webp",
+    "bytes": 26396
+  },
+  {
+    "name": "foliage-5",
+    "sourceBounds": [
+      18,
+      69,
+      477,
+      444
+    ],
+    "file": "/Users/alihuynh/Claude/Projects/Anh Li Portfolion/portfolio-garden-v2/fresh/dist/assets/v2.1/foliage-5.webp",
+    "bytes": 25868
+  }
+]

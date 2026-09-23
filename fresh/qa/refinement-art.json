@@ -1,0 +1,74 @@
+{
+  "original": {
+    "width": 1536,
+    "height": 1024
+  },
+  "poses": {
+    "seated": {
+      "bounds": [
+        {
+          "left": 106,
+          "top": 14,
+          "right": 415,
+          "bottom": 495
+        },
+        {
+          "left": 101,
+          "top": 19,
+          "right": 408,
+          "bottom": 495
+        },
+        {
+          "left": 101,
+          "top": 13,
+          "right": 409,
+          "bottom": 495
+        }
+      ],
+      "commonCrop": {
+        "l": 97,
+        "t": 9,
+        "w": 323,
+        "h": 491
+      },
+      "frame": {
+        "width": 289,
+        "height": 440
+      },
+      "ratio": 0.6568181818181819
+    },
+    "gallery": {
+      "bounds": [
+        {
+          "left": 161,
+          "top": 2,
+          "right": 395,
+          "bottom": 499
+        },
+        {
+          "left": 155,
+          "top": 2,
+          "right": 415,
+          "bottom": 499
+        },
+        {
+          "left": 158,
+          "top": 2,
+          "right": 392,
+          "bottom": 498
+        }
+      ],
+      "commonCrop": {
+        "l": 151,
+        "t": 0,
+        "w": 269,
+        "h": 504
+      },
+      "frame": {
+        "width": 235,
+        "height": 440
+      },
+      "ratio": 0.5340909090909091
+    }
+  }
+}

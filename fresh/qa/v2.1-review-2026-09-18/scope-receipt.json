@@ -1,0 +1,23 @@
+{
+  "baseline": "fresh/checkpoints/2026-09-17-v2.1-local",
+  "changed": [
+    "app.js",
+    "data/ambience-sources.json",
+    "garden-ambient.js",
+    "garden-dialogue.js",
+    "garden-life.js",
+    "garden-v21.css",
+    "garden-wind.js",
+    "index.html"
+  ],
+  "added": [],
+  "removed": [],
+  "preservedContent": {
+    "data/catalog.json": true,
+    "data/profile.json": true,
+    "data/gallery.json": true,
+    "data/videos.json": true,
+    "data/daily-messages.json": true,
+    "data/lyrics/index.json": true
+  }
+}

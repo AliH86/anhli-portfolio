@@ -1,0 +1,153 @@
+{
+  "date": "2026-09-17",
+  "browser": "Codex in-app browser",
+  "viewports": [
+    [
+      1440,
+      900
+    ],
+    [
+      390,
+      844
+    ],
+    [
+      820,
+      1180
+    ],
+    [
+      844,
+      390
+    ]
+  ],
+  "checks": [
+    {
+      "name": "mobile-layout-and-same-album-continuity",
+      "pass": false,
+      "before": {
+        "paused": false,
+        "src": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/mot-tan-so-khac/01-co-ai-nghe-khong.mp3",
+        "time": 26.621058
+      },
+      "after": {
+        "audios": 1,
+        "paused": true,
+        "src": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/mot-tan-so-khac/01-co-ai-nghe-khong.mp3",
+        "time": 0
+      }
+    },
+    {
+      "name": "versioned-script-mobile-continuity",
+      "pass": true,
+      "before": {
+        "paused": false,
+        "src": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/mot-tan-so-khac/01-co-ai-nghe-khong.mp3",
+        "time": 18.534196
+      },
+      "after": {
+        "audios": 1,
+        "paused": false,
+        "src": "https://pub-a3731640f04640feb4e5e790b78deedf.r2.dev/mot-tan-so-khac/01-co-ai-nghe-khong.mp3",
+        "time": 19.073496
+      }
+    },
+    {
+      "name": "close-tray-keeps-audio",
+      "pass": true,
+      "result": {
+        "paused": false,
+        "pose": "seated",
+        "time": 22.114368
+      }
+    },
+    {
+      "name": "video-close-restores-focus",
+      "pass": true,
+      "result": {
+        "focus": "Xem Dai-Ichi GO!",
+        "frames": 0
+      }
+    },
+    {
+      "name": "second-tab-playback",
+      "pass": true,
+      "before": {
+        "hidden": false,
+        "paused": false,
+        "time": 39.010952
+      },
+      "after": {
+        "hidden": false,
+        "paused": false,
+        "time": 96.4922
+      }
+    },
+    {
+      "name": "track-selection-waits-for-play",
+      "pass": true,
+      "result": {
+        "paused": true,
+        "src": null,
+        "title": "Mảnh Tình Treo Trăng"
+      }
+    },
+    {
+      "name": "rapid-album-changes",
+      "pass": true,
+      "result": {
+        "audioCount": 1,
+        "paused": true,
+        "source": null,
+        "title": "Hòa Bình Và Lặng Lẽ"
+      }
+    },
+    {
+      "name": "keyboard-and-motion-off",
+      "pass": true,
+      "details": "Enter opened music; Escape closed and returned focus; motion off animation none and visible content."
+    },
+    {
+      "name": "gallery-pagination-focus",
+      "pass": true,
+      "result": {
+        "count": 48,
+        "focus": "24"
+      }
+    },
+    {
+      "name": "pause-and-ui-state",
+      "pass": true,
+      "result": {
+        "label": "Phát nhạc",
+        "paused": true
+      }
+    },
+    {
+      "name": "final-mobile-no-autoplay-no-overflow",
+      "pass": true,
+      "result": {
+        "page": [
+          390,
+          844
+        ],
+        "paused": true,
+        "room": [
+          388,
+          388
+        ],
+        "source": null,
+        "viewport": [
+          390,
+          844
+        ]
+      }
+    }
+  ],
+  "console": [],
+  "resolvedFailure": "Initial continuity check used a cached old script; explicit module version in HTML fixed delivery. Versioned-script retest passed.",
+  "limits": [
+    "Second-tab test did not report document.hidden=true; not proof of OS background playback.",
+    "No physical iPhone/iPad/Android testing or lock-screen UI verification.",
+    "Manual motion-off inspected; OS-level reduced-motion emulation unavailable in this browser tool.",
+    "Vimeo embed remained blank; original-provider link verified present, not playback."
+  ]
+}

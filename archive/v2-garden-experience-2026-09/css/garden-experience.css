@@ -1,0 +1,191 @@
+/* Garden edition — the scene is an enhancement of the real portfolio. */
+body.garden-edition{--amber:#c49b56;--amber2:#ecd3a4;--amber3:#f7e7c8;cursor:auto;background:#17271f}
+.garden-edition a,.garden-edition button{cursor:pointer}
+.garden-edition #home,.garden-edition #cursor,.garden-edition #cursor-ring,.garden-edition #siteSeeds,.garden-edition .season-layer,.garden-edition #musicScrollBg,.garden-edition .np-vinyl,.garden-edition .motion-nudge{display:none!important}
+.garden-edition::before,.garden-edition::after{display:none!important}
+.garden-edition #nav{background:#f5f0e5;color:#2b3c2e;border-bottom:1px solid #d5d5c4;backdrop-filter:none;min-height:76px;padding:16px 4vw}
+.garden-edition #nav .nav-logo,.garden-edition #nav a{color:#2b3c2e}
+.garden-edition #nav .motion-toggle{color:#496049;border-color:#c9cbb8;background:transparent}
+.garden-edition #nav .nav-burger span{background:#2b3c2e}
+.garden-edition #nav .nav-links{gap:2rem}
+.garden-edition #nav .nav-links a{font-size:12px;letter-spacing:.06em}
+.garden-edition #gardenEntrance,.garden-edition #gardenWalk{isolation:isolate;background:#f5f0e5;color:#293f30;padding:0;margin:0;scroll-margin-top:76px}
+.garden-edition #gardenEntrance::before,.garden-edition #gardenEntrance::after,.garden-edition #gardenWalk::before,.garden-edition #gardenWalk::after{display:none!important}
+#gardenEntrance{position:relative;min-height:100svh;display:grid;grid-template-columns:44% 56%;padding-top:76px!important;overflow:hidden}
+.garden-intro-copy{position:relative;z-index:2;align-self:center;padding:6vh 2vw 7vh 6vw}
+.garden-eyebrow{font:500 10px/1.6 'Instrument Sans',sans-serif;letter-spacing:.16em;text-transform:uppercase}
+.garden-intro-copy .garden-eyebrow{display:flex;align-items:center;gap:14px;color:#75805b;margin-bottom:34px}
+.garden-intro-copy .garden-eyebrow>span{font-size:25px;color:#9b7336;line-height:1}
+#gardenTitle{font:400 clamp(66px,7.7vw,128px)/.91 'Cormorant Garamond',Georgia,serif;letter-spacing:-.045em;margin:0 0 32px}
+#gardenTitle em{font-weight:300;color:#7c8c50}
+.garden-intro-text{font:400 14px/1.9 'Instrument Sans',sans-serif;max-width:340px;color:#64715c}
+.garden-entry-actions{display:flex;gap:24px;align-items:center;margin:30px 0 14px;flex-wrap:wrap}
+.garden-entry-actions button{border:0;border-radius:3px;background:#344b35;color:#faf5e6;padding:16px 22px;font:500 13px 'Instrument Sans',sans-serif;display:flex;gap:38px;align-items:center;min-height:48px;transition:background .2s}
+.garden-entry-actions button:hover{background:#526840}
+.garden-entry-actions button:disabled{opacity:.65;cursor:wait}
+.garden-entry-actions a{font-size:12px;color:#526345;text-decoration:none;padding:14px 0;border-bottom:1px solid #aeb393}
+.garden-entry-actions a span{margin-left:12px}
+.garden-status{font-size:10px;line-height:1.7;color:#7d846e;max-width:330px;min-height:34px}
+.garden-signature{font:italic 32px 'Cormorant Garamond',Georgia,serif;margin-top:5vh;color:#8e744d}
+.garden-signature span{display:block;margin-top:8px;font:9px/1.7 'Instrument Sans',sans-serif;letter-spacing:.065em;color:#7d846e}
+.garden-entrance-art{margin:0;position:relative;min-height:calc(100svh - 124px);overflow:hidden}
+.garden-entrance-art>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:65% center}
+.garden-entrance-art::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(17,34,22,.65),transparent 44%)}
+.garden-entrance-art figcaption{position:absolute;z-index:1;bottom:8%;left:8%;color:#fff4d8;font:400 clamp(28px,3vw,48px)/1.15 'Cormorant Garamond',Georgia,serif}
+.garden-entrance-art figcaption>*{display:block}
+.garden-entrance-art figcaption em{opacity:.82;font-weight:300}
+.garden-entry-foot{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;padding:16px 4vw;font-size:9px;letter-spacing:.08em;text-transform:uppercase;border-top:1px solid #d5d5c4;gap:16px}
+.garden-entry-foot a{color:#526345;text-decoration:none}
+#gardenWalk[hidden],#gardenEntrance[hidden]{display:none!important}
+#gardenWalk{height:250svh;padding-top:76px!important}
+.garden-sticky{position:sticky;top:76px;height:calc(100svh - 76px);min-height:500px;overflow:hidden}
+#gardenCanvas{position:absolute;inset:0;background:#e8e2c8}
+#gardenCanvas canvas{display:block;width:100%;height:100%}
+.garden-scene-copy{position:absolute;top:8%;left:5%;width:min(280px,24vw);pointer-events:none}
+.garden-scene-copy .garden-eyebrow{color:#7a825b;margin-bottom:22px}
+.garden-scene-copy h2{font:400 clamp(30px,3.7vw,58px)/.99 'Cormorant Garamond',Georgia,serif;letter-spacing:-.03em;margin-bottom:20px}
+.garden-scene-copy h2 em{font-weight:300;color:#798847}
+.garden-scene-copy>p:not(.garden-eyebrow){font-size:12px;line-height:1.8;color:#6f755a;max-width:225px}
+.garden-scene-copy button{pointer-events:auto;background:transparent;border:0;border-bottom:1px solid #9ba278;padding:14px 0;color:#425c36;font-size:12px;min-height:44px;margin-top:12px}
+.garden-toolbar{position:absolute;top:24px;right:4%;display:flex;gap:12px}
+.garden-toolbar button{min-height:44px;border:1px solid #9da987;border-radius:24px;background:#f7f3e5d9;color:#435538;font:11px 'Instrument Sans',sans-serif;padding:10px 17px}
+.garden-hotspots{position:absolute;inset:0;pointer-events:none}
+.garden-hotspot{position:absolute;pointer-events:auto;border:1px solid #fff7e0b3;background:#fff7eae8;color:#344930;border-radius:50%;width:44px;height:44px;display:grid;place-items:center;font-size:20px;transform:translate(-50%,-50%);box-shadow:0 3px 16px #2e382325;transition:background .18s}
+.garden-hotspot:hover,.garden-hotspot:focus-visible{background:#334c35;color:#fff7df}
+.garden-hotspot span{position:absolute;right:calc(100% + 9px);max-width:190px;min-width:100px;width:max-content;text-align:right;font:11px/1.3 'Instrument Sans',sans-serif;background:#fff9ebeb;color:#354a30;padding:9px 12px;border-radius:3px;opacity:0;pointer-events:none}
+.garden-hotspot:hover span,.garden-hotspot:focus-visible span{opacity:1}
+.garden-walk-footer{position:absolute;bottom:25px;left:5%;right:4%;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.garden-stops{display:flex;align-items:center;gap:12px}
+.garden-stops button{min-height:44px;border:0;background:transparent;color:#7e846e;font-size:10px;display:flex;align-items:center;gap:8px}
+.garden-stops button[aria-current]{color:#2d472d}
+.garden-stops button span{letter-spacing:.02em}
+.garden-route-line{height:1px;width:28px;background:#a2aa88}
+.garden-walk-footer>p{font-size:10px;color:#707a59}
+.garden-walk-footer>a{font-size:11px;color:#435935;text-decoration:none;border-bottom:1px solid #899873;padding:12px 0}
+#gardenPlayerDock{position:absolute;bottom:84px;right:4%;width:min(450px,42vw);display:none}
+body.garden-active.has-track #gardenPlayerDock{display:block}
+#gardenPlayerDock .player{border-radius:12px;background:#263e30ec;padding:12px;color:#f6edd8;box-shadow:0 10px 35px #23302024}
+#gardenPlayerDock .player-title{font-size:12px}
+#gardenPlayerDock .player-controls{gap:8px}
+#gardenAlbumDialog{width:min(900px,94vw);max-height:88svh;margin:auto;padding:28px;border:1px solid #718058;border-radius:16px;background:#1c3024;color:#f5eddc;box-shadow:0 24px 100px #0007}
+#gardenAlbumDialog::backdrop{background:#12221ac9;backdrop-filter:blur(5px)}
+.garden-dialog-head{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.garden-dialog-head .garden-eyebrow{color:#b5bf90}
+.garden-dialog-head h2{font:400 34px/1.2 'Cormorant Garamond',Georgia,serif;margin:8px 0}
+#gardenAlbumClose{border:1px solid #8b9c6f;background:transparent;color:#eee6cd;border-radius:50%;width:44px;height:44px;font-size:26px;flex:none}
+.garden-music-note{font-size:11px;line-height:1.7;color:#aab99b;margin:12px 0 20px;max-width:590px}
+#gardenAlbumDialog #albumDrawer{display:block;max-height:none!important;opacity:1;overflow:visible;margin:0}
+#gardenAlbumDialog .drawer-inner{padding:22px!important;border:1px solid #8e9d7144;border-radius:10px;min-height:0;background:#213b2a}
+#gardenAlbumDialog .drawer-bg,#gardenAlbumDialog .np-vinyl{display:none!important}
+#gardenAlbumDialog .drawer-z{position:relative;max-width:none;margin:0}
+#gardenAlbumDialog .drawer-head{gap:16px;flex-wrap:wrap}
+#gardenAlbumDialog .drawer-title{font-size:25px;color:#f1dfbb}
+#gardenAlbumDialog .drawer-desc{font-size:12px;line-height:1.8;color:#bcc7ab}
+#gardenAlbumDialog .trow{min-height:48px;cursor:pointer}
+#gardenAlbumDialog .trow:focus-visible{outline:2px solid #e4c77e;outline-offset:2px}
+#gardenAlbumPlayer{position:sticky;bottom:-28px;background:#1c3024;padding:16px 0;margin-top:10px}
+#gardenAlbumPlayer .player{padding:10px 0}
+#gardenAudioStatus{font-size:12px;color:#e9c688;line-height:1.7}
+body.garden-panel{overflow:hidden}
+body.garden-active .vinyl-dock,body.garden-panel .vinyl-dock{display:none!important}
+.garden-edition .garden-return{font-size:11px;color:inherit;min-height:44px;padding:8px 12px;border:1px solid #a1aa8b;background:none;border-radius:20px}
+.garden-edition :is(#gardenEntrance,#gardenWalk) :focus-visible{outline:2px solid #956b36;outline-offset:5px}
+body.garden-dusk #gardenCanvas{background-color:#dfc8ab}
+body.garden-dusk .garden-scene-copy h2 em{color:#a16644}
+@media(max-width:900px){
+ #gardenEntrance{grid-template-columns:1fr;padding-top:72px!important}
+ .garden-intro-copy{padding:42px 7vw 32px}
+ .garden-intro-copy .garden-eyebrow{margin-bottom:22px}
+ #gardenTitle{font-size:clamp(66px,12vw,100px);margin-bottom:24px}
+ .garden-intro-text{max-width:430px;font-size:13px}
+ .garden-signature{margin-top:20px;font-size:28px}
+ .garden-entrance-art{min-height:52vw;grid-row:2}
+ .garden-entrance-art>img{object-position:65% 50%}
+ .garden-entrance-art figcaption{bottom:12%;font-size:30px}
+ .garden-entry-foot{font-size:8px;align-items:flex-start;padding:18px 7vw}
+ .garden-edition #nav .nav-links{background:#f5f0e5}
+ #gardenAlbumDialog{padding:18px}
+ #gardenAlbumPlayer{bottom:-18px}
+}
+@media(prefers-reduced-motion:reduce){.garden-edition{scroll-behavior:auto}.garden-edition *{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+/* September 11: one Garden palette across real content and the walk. */
+body.garden-edition{--ink:#18291f;--ink2:#22392a;--ink3:#2d4532;--ink4:#3b503a;--text:#f3ecdc;--text2:#c9ceb8;--text3:#9aaa8b;--border:#bcc7a626;--border2:#bcc7a640;--taupe2:#b9c5a7;--taupe3:#e3dcc5}
+.garden-edition #gardenCanvas{background:#e8dfc4 url('../assets/garden/v1/backdrop.webp') center/cover no-repeat}
+.garden-edition #gardenCanvas::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,#f5f0e5 0%,#f5f0e5e8 12%,#f5f0e560 29%,transparent 42%)}
+.garden-edition .garden-sticky{min-height:0}
+.garden-edition .garden-scene-copy{top:15%;width:22%;max-width:270px}
+.garden-edition .garden-scene-copy h2{font-size:clamp(34px,3.5vw,56px)}
+.garden-edition .garden-walk-footer{background:#f5f0e5e8;border:1px solid #c4c7ad;border-radius:5px;padding:0 18px;bottom:20px}
+.garden-edition .garden-hotspot[hidden]{display:none}
+.garden-edition .garden-hotspot{width:44px;height:44px;font-size:19px;background:#f8f1dfed;border-color:#9b9a73;box-shadow:0 3px 8px #18302024}
+.garden-edition .garden-entrance-art>.garden-entry-host{width:60%;height:76%;left:15%;top:auto;bottom:2%;object-fit:contain;object-position:center bottom;filter:drop-shadow(4px 10px 5px #20301944)}
+.garden-edition .garden-entrance-art::after{background:linear-gradient(0deg,#17302299,transparent 30%)}
+.garden-edition .garden-entrance-art figcaption{left:auto;right:7%;bottom:8%;font-size:clamp(26px,2.7vw,43px);text-align:right;max-width:58%}
+.garden-edition .garden-entrance-art>img:first-child{object-position:center}
+.garden-edition section{scroll-margin-top:90px}
+body.garden-edition.theme-dandelion:not(.no-season) :is(#welcome,#about,#music,#videos,#gallery,#work,#contact){background:#18291f;background-image:none}
+body.garden-edition.theme-dandelion:not(.no-season) section:not(.hero)::after{display:none}
+.garden-edition :is(#about,#music,#gallery,#videos,#work,#contact){padding:90px max(5vw,24px);border-top:1px solid #aeb99d2b}
+.garden-edition #welcome{padding:90px 24px 60px}
+.garden-edition #welcome .welcome-lead{color:#f3ecdc}
+.garden-edition .sec-label{color:#b0ba8b;letter-spacing:.13em}
+.garden-edition .garden-host-figure{background:#dce1c8;border-radius:48% 48% 8px 8px;padding:30px 24px 0;overflow:hidden;position:relative;min-height:430px}
+.garden-edition .garden-host-figure>img{width:100%;height:auto;max-height:590px;object-fit:contain;display:block}
+.garden-edition .garden-host-figure figcaption{position:relative;background:#dce1c8;color:#43583b;padding:18px 4px;text-align:center;font-size:11px}
+.garden-edition .about-figure::before,.garden-edition .about-figure::after,.garden-edition .aq-decor{display:none!important}
+.garden-edition .about-quote{color:#eee7d4}
+.garden-edition .cp-card{background:#253d2b;border-color:#c2c7a52c;border-radius:4px}
+.garden-edition #gardenCalendar{display:block;max-width:660px;padding:32px 24px 70px;margin:0 auto;background:transparent}
+.garden-edition #gardenCalendar .gc-paper{background:#f0e9d6;color:#3b4d32;box-shadow:none;border:1px solid #b9bd9b;border-radius:5px}
+.garden-edition .music-threshold{background:#e8e4ce!important;color:#344b35}
+.garden-edition #music .listening-room{background:#203627!important;border:1px solid #b3c09840;box-shadow:none;border-radius:8px}
+.garden-edition #music .artist.real .artist-photo img{object-position:center 14%;background:#dce1c8}
+.garden-edition .album-card{border-radius:4px}
+.garden-edition .album-cover{border-radius:3px}
+.garden-edition #gardenAlbumDialog{background:#f1ecdF;color:#31452f;border-color:#c9c5a9;border-radius:8px}
+.garden-edition #gardenAlbumDialog .garden-eyebrow,.garden-edition #gardenAlbumDialog .garden-music-note{color:#687554}
+.garden-edition #gardenAlbumClose{color:#344b35;border-color:#9aa480}
+.garden-edition #gardenAlbumDialog .drawer-inner{background:#e4e4ce!important;border-color:#a0ae8940}
+.garden-edition #gardenAlbumDialog .drawer-title{color:#344b35}
+.garden-edition #gardenAlbumDialog :is(.drawer-desc,.drawer-sub,.trow-name,.trow-dur,.trow-num){color:#536444}
+.garden-edition #gardenAlbumPlayer{background:#f1ecdf}
+.garden-edition #gardenAlbumPlayer #player{background:#233b2b;padding:14px;border-radius:6px;color:#f5eedb}
+.garden-edition #gardenPlayerDock #player{background:#233b2bf2;padding:14px;border:1px solid #a7b089;border-radius:6px;color:#f5eedb}
+.garden-edition #gardenPlayerDock .player-eq{display:none}
+.garden-edition #gardenPlayerDock .player-cover{width:48px;height:48px}
+.garden-edition :is(#gardenPlayerDock,#gardenAlbumPlayer) .player-main{min-width:0}
+.garden-edition :is(#gardenPlayerDock,#gardenAlbumPlayer) .player-controls{flex-wrap:wrap}
+.garden-edition :is(#gardenPlayerDock,#gardenAlbumPlayer) .player-title{font-size:17px}
+body.garden-dusk #gardenCanvas{background-blend-mode:multiply;background-color:#d7baaa}
+@media(max-width:900px){
+ .garden-edition :is(#about,#music,#gallery,#videos,#work,#contact){padding:60px 6vw}
+ .garden-edition .garden-host-figure{min-height:0;max-width:450px;margin:0 auto}
+ .garden-edition .garden-host-figure>img{max-height:440px}
+ .garden-edition .garden-entrance-art{min-height:68vw}
+ .garden-edition .garden-entrance-art>.garden-entry-host{height:90%;width:56%;left:4%;bottom:0}
+ .garden-edition .garden-entrance-art figcaption{font-size:clamp(25px,5vw,38px);right:5%;max-width:53%}
+ .garden-edition .garden-entry-foot{flex-wrap:wrap;line-height:1.7}
+ .garden-edition #gardenCalendar{max-width:560px}
+}
+.garden-edition #gardenCanvas::after{display:none}
+.garden-edition #gardenCanvas::before{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,#f5f0e5 0%,#f5f0e5e8 12%,#f5f0e560 29%,transparent 42%)}
+.garden-edition #gardenCanvas canvas{position:relative;z-index:1}
+.garden-edition #nav a{text-shadow:none!important;filter:none}
+body.garden-active :is(.cta-float,.momo-fab,.donate-fab){display:none!important}
+.garden-edition #gardenWalk[data-chapter="1"] .garden-scene-copy h2{font-size:clamp(32px,3vw,44px)}
+.garden-edition #gardenCanvas{z-index:0;pointer-events:none}
+.garden-edition :is(.garden-hotspots,.garden-scene-copy,.garden-toolbar,.garden-walk-footer,#gardenPlayerDock){z-index:2}
+body.garden-active :is(.momo-btn,#nowplaying.is-docked){display:none!important}
+.garden-plant-button{position:absolute;pointer-events:auto;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:#f4eddde8;color:#3c5933;border:1px solid #97a67b;font-size:24px;display:grid;place-items:center}
+.garden-plant-button span{position:absolute;left:50%;bottom:50px;transform:translateX(-50%);font:11px/1.5 'Instrument Sans',sans-serif;color:#344b35;background:#faf4e7;padding:6px 12px;min-width:155px;opacity:0;pointer-events:none}
+.garden-plant-button:hover span,.garden-plant-button:focus-visible span{opacity:1}
+.garden-edition #music{animation:none!important}
+.garden-edition :is(.music-decor,.music-muse-world){display:none!important}
+.garden-music-disclosure{font:12px/1.8 'Instrument Sans',sans-serif;color:#bec9ad;max-width:660px;border-left:1px solid #a4ae80;padding:0 0 0 16px;margin:20px 0 28px}
+.garden-music-disclosure p+p{margin-top:10px;color:#9cad8b}
+.garden-edition #music .music-intro-band{gap:24px}
+.garden-edition #pcBar:focus-visible{outline:2px solid #eed7a0;outline-offset:5px}
+.garden-edition #music .artist.real .artist-photo img{transform:scale(2.7);transform-origin:58% 17%}
+body.garden-edition.theme-dandelion :is(#welcome,#about,#music,#videos,#gallery,#work,#contact){background:#18291f!important;background-image:none!important}
+body.garden-edition :is(#about,#music,#videos,#gallery,#work,#contact)::before{display:none!important}
+.garden-edition section[tabindex="-1"]:focus{outline:none}

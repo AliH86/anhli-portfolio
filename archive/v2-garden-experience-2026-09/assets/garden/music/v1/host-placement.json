@@ -1,0 +1,50 @@
+[
+  {
+    "name": "desktop",
+    "visibleHeightM": 1.7,
+    "planeHeightM": 1.8504658385093167,
+    "cameraPosition": [
+      0,
+      1.3783783783783787,
+      5.984664067539815
+    ],
+    "worldPosition": [
+      -0.16336336336336352,
+      0.012,
+      0
+    ],
+    "fov": 42,
+    "frame": [
+      2560,
+      1440
+    ],
+    "footY": 0.8,
+    "projectedHeightFraction": 0.37,
+    "source": "Unchanged approved host RGB+mask; native material tint and contact shadow only",
+    "scaleCaveat": "Calibrated placement camera; photographic stall is a visual scale reference, not surveyed geometry"
+  },
+  {
+    "name": "mobile",
+    "visibleHeightM": 1.7,
+    "planeHeightM": 1.8504658385093167,
+    "cameraPosition": [
+      0,
+      1.7000000000000002,
+      7.142986145128165
+    ],
+    "worldPosition": [
+      -0.6169354838709677,
+      0.012,
+      0
+    ],
+    "fov": 42,
+    "frame": [
+      1080,
+      1920
+    ],
+    "footY": 0.81,
+    "projectedHeightFraction": 0.31,
+    "source": "Unchanged approved host RGB+mask; native material tint and contact shadow only",
+    "scaleCaveat": "Calibrated placement camera; photographic stall is a visual scale reference, not surveyed geometry"
+  }
+]

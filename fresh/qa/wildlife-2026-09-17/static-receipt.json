@@ -1,0 +1,60 @@
+{
+  "changedFiles": [
+    "app.js",
+    "garden-life.css",
+    "garden-life.js",
+    "index.html"
+  ],
+  "addedFiles": [
+    "assets/wildlife/day-color.webp",
+    "assets/wildlife/day-matte.webp",
+    "assets/wildlife/night-color.webp",
+    "assets/wildlife/night-matte.webp",
+    "garden-dialogue.js",
+    "garden-wildlife.js"
+  ],
+  "preservedOriginalAssetsAndData": true,
+  "http": [
+    [
+      "app.js",
+      200
+    ],
+    [
+      "garden-life.css",
+      200
+    ],
+    [
+      "garden-life.js",
+      200
+    ],
+    [
+      "index.html",
+      200
+    ],
+    [
+      "assets/wildlife/day-color.webp",
+      200
+    ],
+    [
+      "assets/wildlife/day-matte.webp",
+      200
+    ],
+    [
+      "assets/wildlife/night-color.webp",
+      200
+    ],
+    [
+      "assets/wildlife/night-matte.webp",
+      200
+    ],
+    [
+      "garden-dialogue.js",
+      200
+    ],
+    [
+      "garden-wildlife.js",
+      200
+    ]
+  ],
+  "runtimeSpriteBytes": 701248
+}

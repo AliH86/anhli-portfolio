@@ -1,0 +1,32 @@
+[
+  {
+    "firstLeaf": "none",
+    "lastLeaf": "matrix(0.0850967, -0.0976705, 0.0293011, 0.283656, 0, 0)",
+    "petal": "matrix(0.13, 0, 0, 0.23, 0, 0)",
+    "stem": "0.0588544px"
+  },
+  {
+    "firstLeaf": "none",
+    "lastLeaf": "matrix(0.528236, -0.074538, 0.0417618, 0.942814, 0, 0)",
+    "petal": "matrix(0.530221, 0, 0, 0.757951, 0, 0)",
+    "stem": "0px"
+  },
+  {
+    "firstLeaf": "none",
+    "lastLeaf": "none",
+    "petal": "none",
+    "stem": "0px"
+  },
+  {
+    "firstLeaf": "none",
+    "lastLeaf": "none",
+    "petal": "none",
+    "stem": "0px"
+  },
+  {
+    "firstLeaf": "none",
+    "lastLeaf": "none",
+    "petal": "none",
+    "stem": "0px"
+  }
+]

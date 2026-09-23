@@ -1,0 +1,34 @@
+{
+  "name": "Huỳnh Chí Lập",
+  "nickname": "Li",
+  "role": "Creative Producer · Show Director",
+  "intro": "Mình làm sáng tạo, sân khấu và âm nhạc. Khu vườn này là chỗ để những điều mình thích được ở cạnh nhau.",
+  "email": "ali.readytostart@gmail.com",
+  "resume": [
+    {
+      "period": "2025 – nay",
+      "role": "Creative Services Producer",
+      "company": "Freelance · Independent"
+    },
+    {
+      "period": "Mar – Nov 2025",
+      "role": "Associate Producer",
+      "company": "2RES"
+    },
+    {
+      "period": "2016 – 2021",
+      "role": "Director of Client Services",
+      "company": "White Lion Communication"
+    },
+    {
+      "period": "2014 – 2016",
+      "role": "Creative Specialist",
+      "company": "Yan Live · Yan Group"
+    },
+    {
+      "period": "2010 – 2014",
+      "role": "Account Supervisor",
+      "company": "Gamma Production · SquareGroup"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "surface": "player-body",
+    "foreground": "#51391f",
+    "paper": "#fff0c8",
+    "alpha": 0.7686274509803922,
+    "backdrop": "#000000",
+    "minimumContrastWithoutPaperTexture": 5.48
+  },
+  {
+    "surface": "playlist-body",
+    "foreground": "#51391f",
+    "paper": "#fff0d0",
+    "alpha": 0.8117647058823529,
+    "backdrop": "#000000",
+    "minimumContrastWithoutPaperTexture": 6.15
+  },
+  {
+    "surface": "profile-body",
+    "foreground": "#51391f",
+    "paper": "#fcf2d7",
+    "alpha": 0.8117647058823529,
+    "backdrop": "#000000",
+    "minimumContrastWithoutPaperTexture": 6.21
+  }
+]
