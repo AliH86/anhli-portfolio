@@ -1,0 +1,73 @@
+{
+  "name": "Huỳnh Chí Lập",
+  "nickname": "Li",
+  "role": "Đạo diễn chương trình · Sản xuất sáng tạo",
+  "intro": "Mình làm sáng tạo, sân khấu và âm nhạc. Sau 16 năm làm sự kiện, điều mình thích vẫn là đưa một ý tưởng thành khoảnh khắc thật — từ câu chuyện đầu tiên tới nhịp cuối trên sân khấu. Khu vườn này giữ lại những bài hát, hình ảnh và điều mình thương.",
+  "email": "ali.readytostart@gmail.com",
+  "resume": [
+    {
+      "period": "12/2025 – nay",
+      "role": "Sản xuất sáng tạo độc lập",
+      "company": "Làm việc trực tiếp với khách hàng và các đơn vị sản xuất",
+      "detail": "Đạo diễn và sản xuất các chương trình doanh nghiệp, lễ vinh danh, sự kiện đội nhóm và âm nhạc."
+    },
+    {
+      "period": "03 – 11/2025",
+      "role": "Điều phối sản xuất · Associate Producer",
+      "company": "2RES",
+      "detail": "Phân bổ công việc, lịch trình và tiến độ cho nhóm ba nhà sản xuất, theo dõi khoảng 20 dự án song song."
+    },
+    {
+      "period": "2023 – 2024",
+      "role": "Quản lý vận hành",
+      "company": "Phan Khang Home"
+    },
+    {
+      "period": "2023",
+      "role": "Quản lý sáng tạo",
+      "company": "Mystery of Mekong"
+    },
+    {
+      "period": "2021 – 2022",
+      "role": "Trưởng bộ phận vận hành",
+      "company": "M&M Production and Communication"
+    },
+    {
+      "period": "2016 – 2021",
+      "role": "Giám đốc dịch vụ khách hàng",
+      "company": "White Lion Communication",
+      "detail": "Dẫn dắt đội ngũ 15–20 người thuộc các nhóm khách hàng, thiết kế, vận hành và hành chính."
+    },
+    {
+      "period": "2014 – 2016",
+      "role": "Chuyên viên sáng tạo",
+      "company": "Yan Live · Yan Group",
+      "detail": "Phát triển sáng tạo cho các chương trình âm nhạc và sự kiện công chúng."
+    },
+    {
+      "period": "2010 – 2014",
+      "role": "Giám sát khách hàng & sáng tạo",
+      "company": "Gamma Production · SquareGroup",
+      "detail": "Khởi đầu từ thiết kế 2D, 3D, rồi mở rộng sang sáng tạo và quản lý khách hàng trong sản xuất sự kiện, triển lãm và nội thất."
+    }
+  ],
+  "capabilities": [
+    {
+      "title": "Ý tưởng & câu chuyện",
+      "text": "Phát triển ý tưởng, thông điệp, tên gọi và định hướng hình ảnh; thiết kế trò chơi và hoạt động trải nghiệm."
+    },
+    {
+      "title": "Sân khấu & sản xuất",
+      "text": "Xây mạch chương trình, kịch bản MC Việt–Anh, lịch chạy và cue; tập luyện, phối hợp kỹ thuật và điều hành tại hiện trường."
+    },
+    {
+      "title": "Âm nhạc & hình ảnh",
+      "text": "Sáng tác nhạc, phát triển hình ảnh, video và tài liệu chương trình để ý tưởng có thể được nghe và nhìn thấy."
+    }
+  ],
+  "background": [
+    "Giảng dạy Quản lý sự kiện & hoạt động trải nghiệm tại AIM Academy.",
+    "Cử nhân Thiết kế nội thất, Đại học Quốc tế Hồng Bàng, 2010.",
+    "Làm việc và viết kịch bản bằng tiếng Việt, tiếng Anh."
+  ]
+}

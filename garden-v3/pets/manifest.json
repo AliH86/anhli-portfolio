@@ -1,0 +1,126 @@
+{
+ "bo": {
+  "flip": false,
+  "still": [
+   56,
+   52
+  ],
+  "sit": [
+   56,
+   52
+  ],
+  "walk": 6
+ },
+ "vang": {
+  "flip": false,
+  "still": [
+   40,
+   40
+  ],
+  "sit": [
+   40,
+   40
+  ],
+  "sleep": [
+   40,
+   40
+  ],
+  "walk": 6
+ },
+ "muc": {
+  "flip": true,
+  "still": [
+   40,
+   40
+  ],
+  "sit": [
+   40,
+   40
+  ],
+  "sleep": [
+   40,
+   40
+  ],
+  "walk": 6
+ },
+ "mun_tabby": {
+  "flip": false,
+  "still": [
+   52,
+   40
+  ],
+  "walk": 6
+ },
+ "socola": {
+  "flip": true,
+  "still": [
+   40,
+   40
+  ],
+  "sit": [
+   40,
+   40
+  ],
+  "sleep": [
+   40,
+   40
+  ],
+  "walk": 6
+ },
+ "tux": {
+  "flip": false,
+  "still": [
+   52,
+   40
+  ],
+  "walk": 6
+ },
+ "corgi": {
+  "flip": false,
+  "still": [
+   56,
+   44
+  ],
+  "walk": 6
+ },
+ "husky": {
+  "flip": false,
+  "still": [
+   60,
+   54
+  ],
+  "sit": [
+   60,
+   54
+  ],
+  "sleep": [
+   60,
+   54
+  ],
+  "walk": 6
+ },
+ "poodle": {
+  "flip": false,
+  "still": [
+   36,
+   36
+  ],
+  "sit": [
+   36,
+   36
+  ],
+  "sleep": [
+   36,
+   36
+  ],
+  "walk": 6
+ },
+ "spaniel": {
+  "flip": false,
+  "still": [
+   52,
+   44
+  ],
+  "walk": 6
+ }
+}
