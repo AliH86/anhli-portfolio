@@ -2,7 +2,8 @@
 // naps by the hour, hens scratching by the vegetable beds, sparrows that take off
 // when Li walks close. Sprites face right; facing left is a mirror.
 
-const loadImg = (src) => new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = no; i.src = src; });
+import { loadSprite } from './sprite-loader.js?v=70';
+const loadImg = (src) => loadSprite(src, false);
 const rnd = (a, b) => a + Math.random() * (b - a);
 
 export async function loadAnimals(base) {

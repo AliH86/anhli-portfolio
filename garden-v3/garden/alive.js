@@ -15,7 +15,7 @@ export async function buildWind(ground, base = '../world/sway/') {
   SRC = imgData(ground);
   const meta = await (await fetch(`${base}sway.json`, { cache: 'no-cache' })).json();
   REGIONS = await Promise.all(Object.entries(meta).map(async ([name, m]) => {
-    const wimg = await loadImg(`${base}${name}.png?v=69`); const wd = imgData(wimg).data;
+    const wimg = await loadImg(`${base}${name}.png?v=70`); const wd = imgData(wimg).data;
     const idx = [], wt = [];
     for (let y = 0; y < m.h; y++) for (let x = 0; x < m.w; x++) { const v = wd[(y * m.w + x) * 4]; if (v > 6) { idx.push(y * m.w + x); wt.push(v / 255); } }
     const c = off(m.w, m.h), g = c.getContext('2d');

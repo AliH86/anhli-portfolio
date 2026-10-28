@@ -1,4 +1,4 @@
-import { reveal, focusScope, announce, setMotion, getMotion } from './motion.js?v=69';
+import { reveal, focusScope, announce, setMotion, getMotion } from './motion.js?v=70';
 
 export function initInterface({ visit, live, callPets, resetLi, setWide, openDaily }) {
   const panel = document.getElementById('garden-settings');

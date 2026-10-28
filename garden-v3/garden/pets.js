@@ -2,7 +2,8 @@
 // In the garden they roam the lawn, nap by day, gather round Li now and then, and
 // curl up near the porch at night. All sprites face right; facing left is a mirror.
 
-const loadImg = (src) => new Promise((ok) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => ok(null); i.src = src; });
+import { loadSprite } from './sprite-loader.js?v=70';
+const loadImg = (src) => loadSprite(src, true);
 const rnd = (a, b) => a + Math.random() * (b - a);
 
 export async function loadPets(base) {

@@ -1,25 +1,47 @@
-import { makeNavigator } from './navigation.js?v=69';
-import { initInterface } from './interface.js?v=69';
-import { reducedMotion, announce } from './motion.js?v=69';
-import * as S from './scene.js?v=69';
-import * as live from '../map/living.js?v=69';
-import * as A from './alive.js?v=69';
-import * as Z from './animals.js?v=69';
-import { initStall } from './stall.js?v=69';
-import { initMenu } from './menu.js?v=69';
-import { initRooms, initGate, ROOMS } from './rooms.js?v=69';
-import * as AM from './ambient.js?v=69';
-import * as N from './night.js?v=69';
-import * as P from './pets.js?v=69';
-import * as WET from './puddles.js?v=69';
-import { createDailyReader } from './daily.js?v=69';
-import { createDialogueDeck, gardenQuotes, nightQuotes, dailyAside } from './dialogue.js?v=69';
+import { makeNavigator } from './navigation.js?v=70';
+import { initInterface } from './interface.js?v=70';
+import { reducedMotion, announce } from './motion.js?v=70';
+import * as S from './scene.js?v=70';
+import * as live from '../map/living.js?v=70';
+import * as A from './alive.js?v=70';
+import * as Z from './animals.js?v=70';
+import { initStall } from './stall.js?v=70';
+import { initMenu } from './menu.js?v=70';
+import { initRooms, initGate, ROOMS } from './rooms.js?v=70';
+import * as AM from './ambient.js?v=70';
+import * as N from './night.js?v=70';
+import * as P from './pets.js?v=70';
+import * as WET from './puddles.js?v=70';
+import { loadSprite, warmSpriteBundle } from './sprite-loader.js?v=70';
+import { createDailyReader } from './daily.js?v=70';
+import { createDialogueDeck, gardenQuotes, nightQuotes, dailyAside } from './dialogue.js?v=70';
 
 const SOUND = '../web/assets/';
 const loadImg = (src) => new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = no; i.src = src; });
-const ground = await loadImg('../world/garden_day.png');
+warmSpriteBundle();
+const groundPromise = loadImg('../world/garden_day.png');
+const flowerPromise = loadImg('../world/flower-repair-v64.png');
+const cinemaPromise = loadImg('../world/cinema-corner-v58.png');
+const animalsPromise = Z.loadAnimals('../animals/');
+const petsPromise = P.loadPets('../pets/');
+const smallPromise = P.loadSmall('../pets/');
+const nightPromise = N.loadNight('../pets/_night/');
+const luckyPromise = loadImg('../world/lucky.png');
+const liManifestPromise = fetch('../li2/manifest.json', { cache: 'no-cache' }).then(r => r.json());
+const poseMasksPromise = fetch('../li2/pose/masks.json').then(r => r.json());
+const liAssetsPromise = (async () => {
+  const manifest = await liManifestPromise;
+  const dirs = ['east', 'north-east', 'north', 'north-west', 'west', 'south-west', 'south', 'south-east'];
+  const entries = await Promise.all(Object.entries(manifest.outfits).map(async ([name, counts]) => [name, Object.fromEntries(await Promise.all(Object.entries(counts).map(async ([anim, n]) => [anim, Object.fromEntries(await Promise.all(dirs.map(async d => [d, await Promise.all(Array.from({length:n}, (_,i) => loadSprite(`../li2/${name}/${anim}/${d}/${i}.png`)))])))])))]));
+  return Object.fromEntries(entries);
+})();
+const idlePromise = Promise.all(['east','north-east','north','north-west','west','south-west','south','south-east'].map(async d => [d, await loadSprite(`../li2/corrected/rotation-${d}.png`)]));
+const northPromise = Promise.all([0,1,2,3].map(i => loadSprite(`../li2/corrected/north-${i}.png`)));
+const waterPromise = Promise.all(Array.from({length:9},(_,i)=>loadSprite(`../li2/watering/${i}.png`)));
+const posesPromise = Promise.all(Object.entries(S.POSES).map(async ([k,p]) => [k, await loadSprite(p.img)]));
+const ground = await groundPromise;
 // Repair the repeated flower strips on a runtime copy of the original painting.
-const flowerSource=await loadImg('../world/flower-repair-v64.png');
+const flowerSource=await flowerPromise;
 const flowerLayer=document.createElement('canvas'); flowerLayer.width=120; flowerLayer.height=260;
 const fg=flowerLayer.getContext('2d'); fg.imageSmoothingEnabled=false;
 fg.drawImage(flowerSource,100*flowerSource.width/288,20*flowerSource.height/288,120*flowerSource.width/288,260*flowerSource.height/288,0,0,120,260);
@@ -32,7 +54,7 @@ for(const axis of ['x','y']){
 const sceneGround=document.createElement('canvas'); sceneGround.width=ground.width; sceneGround.height=ground.height;
 const sg=sceneGround.getContext('2d'); sg.imageSmoothingEnabled=false; sg.drawImage(ground,0,0); sg.drawImage(flowerLayer,1000,220);
 // Replacement is a separate, reviewable layer; the original painting is untouched.
-const cinemaSource = await loadImg('../world/cinema-corner-v58.png');
+const cinemaSource = await cinemaPromise;
 const cinemaX=1040, cinemaY=830, cinemaSize=288;
 const cinemaLayer=document.createElement('canvas'); cinemaLayer.width=cinemaLayer.height=cinemaSize;
 const cinemaCtx=cinemaLayer.getContext('2d'); cinemaCtx.imageSmoothingEnabled=false;
@@ -54,7 +76,7 @@ const butterflies = A.makeButterflies(S.BUTTERFLIES);
 let bits = [];
 const puddles = WET.makePuddles();
 const frontMeta = await (await fetch('../world/front/front.json', { cache: 'no-cache' })).json();
-const front = await Promise.all(Object.entries(frontMeta).map(async ([name, m]) => ({ name, ...m, img: await loadImg(`../world/front/${name}.png?v=69`) })));
+const front = await Promise.all(Object.entries(frontMeta).map(async ([name, m]) => ({ name, ...m, img: await loadImg(`../world/front/${name}.png?v=70`) })));
 const cinemaShrub=front.find(f=>f.name==='shrub_cine');
 if(cinemaShrub){
   // Reuse the original plant's transparency, but sample the newly painted view.
@@ -65,15 +87,15 @@ if(cinemaShrub){
   g.globalCompositeOperation='destination-in'; g.drawImage(cinemaShrub.img,0,0);
   cinemaShrub.img=c;
 }
-const zoo = await Z.loadAnimals('../animals/');
+const zoo = await animalsPromise;
 const animals = Z.makeAnimals();
-const petSprites = await P.loadPets('../pets/');
+const petSprites = await petsPromise;
 const pets = P.makeGardenPets(petSprites);
-const luckyImg = await loadImg('../world/lucky.png');
+const luckyImg = await luckyPromise;
 const liSay = { text: '', until: 0 };
-const smallSprites = await P.loadSmall('../pets/');
+const smallSprites = await smallPromise;
 const small = P.makeSmall();
-const nightSprites = await N.loadNight('../pets/_night/');
+const nightSprites = await nightPromise;
 const night_ = N.makeNight();
 const stall = await initStall({ onOpenChange: (on) => {
   document.body.classList.toggle('at-stall', on);
@@ -149,23 +171,16 @@ const tag = document.getElementById('tag');
 
 // ---------- Li: two outfits, idle + walk in 8 directions ----------
 const DIRS8 = ['east', 'north-east', 'north', 'north-west', 'west', 'south-west', 'south', 'south-east'];
-const liM = await (await fetch('../li2/manifest.json', { cache: 'no-cache' })).json();
+const liM = await liManifestPromise;
 const FPS = { idle: 4, walk: 10 };
-const outfits = {};
-for (const [name, counts] of Object.entries(liM.outfits)) {
-  outfits[name] = {};
-  for (const [anim, n] of Object.entries(counts)) {
-    outfits[name][anim] = {};
-    await Promise.all(DIRS8.map(async (d) => { outfits[name][anim][d] = await Promise.all([...Array(n).keys()].map((i) => loadImg(`../li2/${name}/${anim}/${d}/${i}.png`))); }));
-  }
-}
+const outfits = await liAssetsPromise;
 const LI_SCALE = .70; // display only; all source pixels stay unchanged
-const idleClean = Object.fromEntries(await Promise.all(DIRS8.map(async d => [d, await loadImg(`../li2/corrected/rotation-${d}.png`)])));
-const northIdle = await Promise.all([0,1,2,3].map(i => loadImg(`../li2/corrected/north-${i}.png`)));
-const wateringFrames=await Promise.all(Array.from({length:9},(_,i)=>loadImg(`../li2/watering/${i}.png`)));
+const idleClean = Object.fromEntries(await idlePromise);
+const northIdle = await northPromise;
+const wateringFrames = await waterPromise;
 const OUTFITS = Object.keys(outfits).filter((k) => k !== 'rain');
-const poseImg = Object.fromEntries(await Promise.all(Object.entries(S.POSES).map(async ([k, p]) => [k, await loadImg(p.img)])));
-const poseMasks = await (await fetch('../li2/pose/masks.json')).json();
+const poseImg = Object.fromEntries(await posesPromise);
+const poseMasks = await poseMasksPromise;
 // Extract only the approved character pixels. Existing painted furniture remains the support.
 for (const [name, source] of Object.entries(poseImg)) {
   const cv = document.createElement('canvas'); cv.width=source.width; cv.height=source.height;
