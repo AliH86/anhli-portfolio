@@ -102,10 +102,15 @@ export function drawOverlay(ctx, view, t, grade, lights) {
   // Soft cloud shadows drifting with the wind (stronger on cloudy days, gone at night).
   const sh = (0.07 + wx.cloud * 0.12) * (1 - grade.night);
   if (sh > 0.01) {
-    ctx.fillStyle = `rgba(30,50,70,${sh})`;
-    for (let i = 0; i < 5; i++) {
-      const sx = ((i * 431 + t * (8 + wx.wind * 10)) % 1400) - 300 - (view.x * 0.6 % 1400), sy = (i * 197) % 900 - 200 - view.y * 0.6 % 900;
-      ctx.beginPath(); ctx.ellipse(Math.round(sx), Math.round(sy), 150 + i * 30, 70 + i * 12, 0, 0, Math.PI * 2); ctx.fill();
+    // Soft, wide patches that fade to nothing at their edges and drift slowly with the wind.
+    for (let i = 0; i < 3; i++) {
+      const R = 360 + i * 90, span = 2000;
+      const sx = (((i * 677 + t * (5 + wx.wind * 6)) % span) + span) % span - 400 - view.x * 0.15;
+      const sy = ((i * 331) % 700) - 150 - view.y * 0.15;
+      const g = ctx.createRadialGradient(sx, sy, 0, sx, sy, R);
+      g.addColorStop(0, `rgba(30,50,70,${sh * 0.55})`); g.addColorStop(0.55, `rgba(30,50,70,${sh * 0.3})`); g.addColorStop(1, 'rgba(30,50,70,0)');
+      ctx.save(); ctx.translate(sx, sy); ctx.scale(1, 0.55); ctx.translate(-sx, -sy);
+      ctx.fillStyle = g; ctx.fillRect(sx - R, sy - R, R * 2, R * 2); ctx.restore();
     }
   }
   // Day/night grade, flattened and cooled by grey weather.

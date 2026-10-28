@@ -1,0 +1,335 @@
+/* V3.3 — warm paper, carved wood and readable controls over the original garden. */
+:root { --sage:#355443; --muted:#706854; --paper:#fff9e9; --line:#b5a583; --ease:cubic-bezier(.2,.8,.2,1); }
+* { box-sizing:border-box; }
+button,a,input,select { -webkit-tap-highlight-color:transparent; }
+button { touch-action:manipulation; }
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible { outline:3px solid #e5a638; outline-offset:4px; }
+button:not(.card):not(.mbtn) { transition:translate .18s var(--ease),filter .18s,background .18s,box-shadow .18s; }
+button:not(:disabled):hover { filter:brightness(1.05); }
+button:not(:disabled):active { translate:0 2px; }
+button:disabled { opacity:.4; cursor:default; }
+[hidden] { display:none !important; }
+canvas { cursor:default; }
+.hud { top:max(18px,env(safe-area-inset-top)); left:24px; right:24px; gap:16px; z-index:8; }
+.plaque { padding:11px 16px; border:1px solid #8c7958; box-shadow:0 4px 0 #2b211839; border-radius:4px; background:#fff9e9f2; }
+.plaque b { font-size:19px; letter-spacing:-.6px; }
+.plaque small { letter-spacing:.08em; font-size:9px; color:var(--sage); margin-top:3px; display:block; }
+.tools { align-items:center; gap:7px; }
+.clock,button.sq,.np { border:1px solid #8c7958; box-shadow:0 3px 0 #2b21182e; border-radius:4px; height:44px; background:#fff9e9f2; }
+.clock { padding:0 14px; font:600 12px 'Be Vietnam Pro',sans-serif; }
+button.sq { width:44px; }
+#weather { display:none; }
+.menu { bottom:18px; }
+.menu-row { background:#fff9e9f5; border:1px solid #8c7958; box-shadow:0 5px 0 #2b211840,0 10px 30px #21321c30; clip-path:none; border-radius:5px; gap:8px; padding:10px 16px; overflow:visible; }
+.mbtn { color:var(--ink); text-shadow:none; width:70px; gap:7px; transition:translate .24s var(--ease),background .24s; border-radius:3px; }
+.mbtn img { width:42px; height:42px; box-shadow:none; clip-path:none; transition:translate .24s var(--ease); }
+.mbtn span { opacity:1; font-size:10px; }
+.mbtn:hover,.mbtn:focus-visible { transform:none; translate:0 -4px; outline:2px solid var(--sage); outline-offset:3px; }
+.mbtn:hover img,.mbtn:focus-visible img { box-shadow:none; }
+.mbtn:hover span,.mbtn:focus-visible span { color:var(--sage); }
+.mbtn[aria-current="location"] { background:#dce5c7; }
+.mbtn[data-id="aulinh"] img { background:none; box-shadow:none; }
+.mbtn[data-id="aulinh"]::before { background:#a99b7c60; }
+body.night .menu-row { background:#f7eedcf5; }
+body.night .plaque,body.night .clock,body.night button.sq,body.night .np { background:#fff9e9ed; color:var(--ink); border-color:#8c7958; box-shadow:0 3px 0 #171b2b55; }
+body.night .plaque small { color:var(--sage); }
+.garden-welcome { position:fixed; left:24px; bottom:142px; z-index:7; width:260px; padding:18px 20px; background:#fff9e9ed; border:1px solid #a59371; box-shadow:0 5px 0 #26352226; border-radius:4px; }
+.eyebrow { text-transform:uppercase; letter-spacing:.16em; font-size:9px; font-weight:800; color:var(--sage); }
+.garden-welcome h1 { margin:10px 0 6px; font-size:23px; letter-spacing:-1px; line-height:1.25; }
+.garden-welcome p { color:var(--muted); font-size:12px; line-height:1.7; margin:8px 0 13px; }
+.text-button { border:0; background:transparent; padding:8px 0; color:var(--sage); font:800 12px 'Be Vietnam Pro'; cursor:pointer; }
+.welcome-close { position:absolute; top:6px; right:10px; font-size:10px; color:var(--muted); }
+.primary { padding:12px 18px; min-height:44px; border:1px solid #243e30; border-radius:3px; background:var(--sage); color:#fff9e9; font:600 13px 'Be Vietnam Pro'; cursor:pointer; box-shadow:0 3px 0 #203225; }
+body.at-stall .garden-welcome,body.in-room .garden-welcome,body.chill .garden-welcome,body.wide-view .garden-welcome { display:none; }
+.notice { position:fixed; top:100px; left:50%; translate:-50% 0; z-index:48; max-width:calc(100% - 32px); padding:12px 18px; background:var(--paper); border:1px solid var(--line); box-shadow:0 4px 16px #26352222; border-radius:4px; color:var(--sage); font-size:12px; pointer-events:none; }
+.settings { position:fixed; right:24px; top:86px; width:310px; z-index:35; padding:22px; background:var(--paper); border:1px solid var(--line); box-shadow:0 12px 40px #1b281c40; border-radius:4px; }
+.settings header { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+.settings h2 { font-size:18px; margin:0; }
+.settings label { display:grid; gap:8px; margin:14px 0; font-size:12px; font-weight:600; }
+.settings select { padding:12px; width:100%; border:1px solid var(--line); background:#fffdf5; font:12px 'Be Vietnam Pro'; color:var(--ink); border-radius:3px; }
+.settings p { font-size:11px; color:var(--muted); line-height:1.7; margin-bottom:0; }
+/* The welcome lives in the garden: no paper panel or lateral offset. */
+.gate { backdrop-filter:none; background:radial-gradient(ellipse at center,#101e15c2 0%,#101e1596 35%,#101e1540 85%); padding:24px 16px; overflow-y:auto; }
+.gate-card { align-items:center; text-align:center; width:min(620px,calc(100vw - 32px)); max-width:100%; min-width:0; padding:0; margin:0; background:none; color:var(--paper); border:0; box-shadow:none; border-radius:0; gap:18px; text-shadow:0 2px 12px #10201799; animation:gate-arrive .85s var(--ease) backwards; }
+.gate-card .st-sign { width:264px; height:132px; margin:0 0 -4px; }
+.gate-card .st-sign h2 { font-size:31px; }
+.gate-card .eyebrow { color:#f1e8d2; font-size:10px; letter-spacing:.2em; }
+.gate-card h1 { font:800 clamp(34px,4vw,52px)/1.2 'Be Vietnam Pro',sans-serif; letter-spacing:-.045em; margin:0; max-width:100%; }
+.gate-q { font:400 15px/1.8 'Be Vietnam Pro',sans-serif; text-shadow:inherit; color:var(--paper); max-width:460px; }
+.gate-card small { color:#f1e8d2; text-shadow:inherit; font-size:11px; line-height:1.8; letter-spacing:.04em; }
+.gate-go { margin-top:6px; background:var(--paper); color:#294736; font-size:14px; border:1px solid #fff9e980; border-radius:5px; clip-path:none; height:52px; box-shadow:0 3px 0 #14291ab3,0 6px 20px #10201740; }
+.gate-go:focus-visible { outline-color:#ffdf8c; }
+@keyframes gate-arrive { from { opacity:0; translate:0 14px; } to { opacity:1; translate:0 0; } }
+/* Shared room chrome */
+.st-head { left:24px; right:24px; top:16px; gap:20px; }
+.st-sign { width:180px; height:90px; }
+.st-sign h2 { font-size:20px; }
+.pill { min-height:38px; height:auto; border:1px solid #8c7958; clip-path:none; border-radius:3px; box-shadow:0 2px 0 #2b211835; padding:10px 14px; font-size:11px; }
+.pill[aria-pressed="true"] { background:var(--sage); color:var(--paper); }
+.st-pills { gap:8px; padding:6px 3px; }
+.st-close { width:44px; height:44px; }
+.room-body { top:128px; bottom:30px; }
+.room-body.house { grid-template-columns:1fr min(540px,55vw); }
+.letter { font-size:15px; line-height:1.9; padding:22px 26px; transform:none; }
+.idcard { padding:14px 18px; }
+.room-body.cine { grid-template-columns:1fr min(650px,60vw); gap:16px; }
+.now-film { max-height:130px; }
+.now-film .film-external { display:inline-block; color:var(--sage); font-size:11px; margin-top:7px; }
+.screen { box-sizing:border-box; }
+.screen .idle { font-size:15px; padding:20px; text-align:center; }
+.ticket { transition:translate .2s var(--ease),background .2s; }
+.ticket:hover { translate:0 -5px; }
+.ticket.on { background:var(--sage); }
+.photo { transition:scale .22s var(--ease); }
+.photo:hover { scale:1.035; }
+.lightbox { backdrop-filter:blur(5px); }
+/* Music workspace */
+.stall-search { position:absolute; top:112px; right:26px; z-index:3; display:flex; align-items:center; gap:12px; }
+.stall-search label { font-size:11px; color:#fff9e9; text-shadow:0 1px 3px #182b1d; }
+.stall-search input { width:240px; max-width:45vw; padding:12px 14px; border:1px solid #8c7958; border-radius:4px; background:#fff9e9f5; color:var(--ink); font:12px 'Be Vietnam Pro'; }
+.st-line { top:180px; }
+.st-arrows { top:290px; }
+.st-deck { bottom:124px; --deck:2.4; }
+.st-ribbon { bottom:20px; left:24px; right:24px; height:88px; padding:14px 20px; border:1px solid #81785f; border-radius:4px; background:#fff9e9f5; color:var(--ink); transform:none; box-shadow:0 5px 0 #2b211840; gap:20px; }
+.st-ribbon>* { transform:none; }
+.st-ribbon .now { min-width:120px; flex-basis:280px; }
+.st-ribbon b { font:800 18px/1.3 'Be Vietnam Pro'; }
+.st-ribbon small,.rope output { color:var(--muted); font-size:11px; }
+.st-ribbon .kick span { background:transparent; color:var(--sage); padding:0; font-size:9px; letter-spacing:.12em; transform:none; }
+.st-ribbon .kick canvas { display:none; }
+.st-ribbon .list-btn { color:var(--sage); border:1px solid #8c7958; border-radius:3px; font-size:11px; height:42px; }
+.st-ribbon .list-btn[aria-expanded="true"] { background:var(--sage); color:var(--paper); }
+.st-ctl { gap:6px; }
+.heart { color:#8f7f64; }
+.heart[aria-pressed="true"] { color:#c9483a; animation:heart-pop .3s var(--ease); }
+@keyframes heart-pop { 50% { scale:1.3; } }
+.st-list { bottom:126px; max-height:calc(100dvh - 310px); width:min(400px,calc(100vw - 48px)); right:26px; transform:none; }
+.st-list header { padding:10px 34px 10px 10px; }
+.st-list header b { transform:none; background:var(--sage); font:800 16px 'Be Vietnam Pro'; padding:4px 10px; box-shadow:none; }
+.tracks button { min-height:46px; padding:10px; font-size:12px; }
+.tracks li.on button { background:#dfe7ce; }
+.tracks em { font-size:10px; }
+.st-list header button { min-width:36px; min-height:36px; }
+.playback-state { position:absolute; left:24px; bottom:118px; background:var(--paper); color:var(--sage); border:1px solid var(--line); padding:9px 13px; font-size:11px; z-index:3; max-width:calc(100vw - 48px); }
+.mini-player { position:fixed; right:24px; bottom:142px; z-index:8; display:flex; align-items:center; gap:10px; padding:9px 12px; width:280px; background:#fff9e9ed; border:1px solid #a59371; border-radius:4px; box-shadow:0 4px 0 #26352226; }
+.mini-player .mini-open { flex:1; min-width:0; text-align:left; border:0; background:none; color:var(--ink); padding:3px; cursor:pointer; }
+.mini-open small { display:block; color:var(--sage); letter-spacing:.1em; font-size:8px; margin-bottom:5px; }
+.mini-open b { display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font:600 11px 'Be Vietnam Pro'; }
+.mini-toggle { min-width:54px; min-height:40px; background:var(--sage); color:var(--paper); border:0; border-radius:3px; font:600 10px 'Be Vietnam Pro'; cursor:pointer; }
+body.at-stall .mini-player,body.in-room .mini-player,body.chill .mini-player { display:none; }
+body.at-stall #menu-pets { bottom:109px; }
+body.in-room #menu-pets { bottom:0; }
+#return-garden { position:fixed; left:24px; bottom:24px; z-index:6; }
+body.at-stall #return-garden,body.in-room #return-garden { display:none; }
+body.chill #return-garden { opacity:0; pointer-events:none; }
+body:not(.chill) .chill-cap { display:none; }
+.stick { display:none!important; }
+.reduce-motion *, .reduce-motion *::before,.reduce-motion *::after { animation-duration:.001ms!important; animation-iteration-count:1!important; transition-duration:.001ms!important; scroll-behavior:auto!important; }
+@media(max-width:1000px) { .garden-welcome { width:220px; } .st-ribbon { gap:12px; } .rope { flex-basis:140px; } .st-deck { --deck:2; } #return-garden { bottom:122px; left:24px; } .garden-welcome { bottom:182px; } }
+@media(max-width:760px) {
+ .hud { top:max(10px,env(safe-area-inset-top)); left:10px; right:10px; gap:8px; }
+ .plaque { padding:9px 12px; } .plaque b { font-size:15px; } .plaque small { display:block; font-size:7px; letter-spacing:.02em; }
+ .tools { gap:5px; flex-wrap:nowrap; } .clock { position:fixed; top:76px; right:10px; height:34px; font-size:10px; padding:0 10px; }
+ button.sq { width:40px; height:40px; } #np { display:none!important; }
+ .menu { width:calc(100vw - 20px); max-width:420px; bottom:calc(10px + env(safe-area-inset-bottom)); }
+ .menu-row { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); padding:9px 6px; gap:3px; overflow:visible; }
+ .mbtn { width:auto; padding:3px 0; gap:7px; } .mbtn img { width:32px; height:32px; } .mbtn span { font-size:8px; }
+ .mbtn[data-id="aulinh"] { margin-left:0; } .mbtn[data-id="aulinh"]::before { display:none; }
+ .garden-welcome { left:12px; bottom:116px; width:216px; padding:15px 17px; } .garden-welcome h1 { font-size:19px; } .garden-welcome p { font-size:11px; }
+ .mini-player { left:12px; right:12px; width:auto; bottom:112px; }
+ body.has-music .garden-welcome { display:none; }
+ #return-garden { top:76px; bottom:auto; left:12px; font-size:10px; }
+ .gate-card { gap:16px; } .gate-card h1 { font-size:clamp(30px,8.5vw,42px); } .gate-q { font-size:14px; max-width:320px; }
+ .gate-card .st-sign { width:224px; height:112px; } .gate-card .st-sign h2 { font-size:26px; }
+ .settings { right:10px; top:120px; width:min(310px,calc(100% - 20px)); }
+ .st-head { top:max(8px,env(safe-area-inset-top)); left:10px; right:10px; gap:8px; }
+ .st-sign { width:140px; height:70px; } .st-sign h2 { font-size:16px; }
+ .st-close { width:44px; height:44px; margin-left:auto; }
+ .st-pills { flex-basis:100%; padding:4px 1px 7px; gap:6px; }
+ .pill { min-height:36px; font-size:10px; padding:9px 12px; }
+ .stall-search { top:134px; right:12px; left:12px; } .stall-search label { flex:1; font-size:10px; } .stall-search input { width:196px; max-width:60vw; padding:10px; }
+ .st-line { top:190px; height:155px; } .st-arrows { top:270px; }
+ .card.hero { width:90px; } .card { width:78px; } .card.hero::after { inset:-3px; border-width:2px; }
+ .st-deck { --deck:1.5; left:10px; bottom:190px; } .stall.list-open .st-deck { visibility:hidden; }
+ .st-ribbon { left:10px; right:10px; bottom:calc(12px + env(safe-area-inset-bottom)); height:162px; display:grid; grid-template-columns:1fr auto; grid-template-rows:auto 44px 24px; gap:7px 12px; padding:12px; }
+ .st-ribbon .now { min-width:0; grid-column:1/-1; } .st-ribbon b { font-size:16px; } .st-ribbon small { font-size:10px; }
+ .st-ctl { grid-column:1; grid-row:2; justify-content:flex-start; gap:9px; } .st-ctl .logbtn { width:40px; height:40px; } .st-ctl .big { width:44px; height:44px; }
+ .st-ribbon .list-btn { grid-column:2; grid-row:2; font-size:10px; height:38px; padding:0 10px; }
+ .rope { grid-column:1/-1; grid-row:3; min-width:0; gap:12px; } .rope input { margin:0; } .rope output { min-width:74px; }
+ .st-list { bottom:190px; left:12px; right:12px; width:auto; max-height:calc(100dvh - 410px); min-height:130px; }
+ .st-list header b { font-size:13px; } .st-list header small { font-size:10px; margin-top:6px; } .st-list header p { display:none; }
+ .tracks button { min-height:42px; font-size:11px; padding:8px; }
+ .playback-state { bottom:180px; left:12px; font-size:10px; }
+ body.at-stall #menu-pets { bottom:174px; }
+ .room-body { top:144px; bottom:20px; width:calc(100vw - 24px); }
+ .room-body.house,.room-body.cine { grid-template-columns:minmax(0,1fr); grid-template-rows:auto; align-content:start; gap:14px; }
+ .room-body.house > :not(.idcard) { max-height:calc(100dvh - 300px); }
+ .letter { padding:14px 16px; font-size:13px; line-height:1.8; }
+ .idcard { margin-top:auto; padding:12px; }
+ .screen,.now-film,.tickets { grid-column:1; grid-row:auto; }
+ .screen { width:calc(100% - 16px); } .now-film { max-height:160px; }
+ .tickets { min-height:110px; padding-bottom:8px; }
+ .ticket { flex-basis:130px; } .ticket b { font-size:10px; }
+ .room-body.hammock { overflow:auto; } .book .leaf { min-height:0; }
+ .lightbox .polaroid { max-width:calc(100vw - 32px); }
+ .notice { top:120px; }
+}
+@media(max-width:360px) { .mbtn img { width:28px; height:28px; } .mbtn span { font-size:7px; } .plaque b { font-size:13px; } }
+@media(max-height:650px) and (min-width:761px) { .st-line { top:150px; } .st-deck { --deck:1.7; } .st-arrows { top:240px; } .st-list { max-height:calc(100dvh - 280px); } .stall-search { top:100px; } }
+
+body.at-gate .hud,body.at-gate .menu,body.at-gate .garden-welcome,body.at-gate #return-garden {visibility:hidden;}
+
+#return-garden { background:#fff9e9ed; border:1px solid #a59371; border-radius:3px; padding:8px 12px; min-height:34px; }
+
+#menu-pets { z-index:19; }
+body.at-stall #bubble { display:none; }
+
+/* Review adjustment: a generous, compact scrapbook with one larger image per spread. */
+.room-body.hammock { width:min(1320px,calc(100vw - 64px)); top:134px; bottom:28px; gap:20px; justify-content:center; }
+.album.book { margin:0; width:100%; min-height:0; flex:1; max-height:680px; }
+.book .leaf { min-height:0; grid-template-rows:repeat(3,minmax(0,1fr)); grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; padding:16px 16px 30px; align-content:stretch; }
+.book .photo { min-width:0; min-height:0; transform:none; padding:4px 4px 20px; }
+.book .photo.featured { grid-column:span 2; grid-row:span 2; }
+.book .photo img { height:100%; aspect-ratio:auto; object-fit:contain; background:#e7ddc5; box-shadow:none; }
+.book .photo:hover,.book .photo:focus-visible { transform:translateY(-3px); outline:3px solid #ddac53; outline-offset:2px; }
+.book .photo small { font-size:10px; }
+.hammock .pager { align-self:center; background:#fff9e9eb; padding:6px 16px; border:1px solid #a59371; border-radius:4px; color:var(--sage); text-shadow:none; }
+.lightbox .polaroid { max-width:calc(100vw - 100px); max-height:calc(100dvh - 80px); transform:none; animation:photo-arrive .28s var(--ease) both; }
+@keyframes photo-arrive { from { opacity:0; transform:scale(.96); } to { opacity:1; transform:scale(1); } }
+.lightbox img { max-width:min(90vw,1500px); max-height:calc(100dvh - 145px); object-fit:contain; }
+.st-deck { --deck:3; }
+@media(min-width:1100px) { .room-body.house { grid-template-columns:1fr min(680px,62vw); } .room-body.cine { grid-template-columns:1fr min(860px,72vw); } }
+@media(max-width:760px) {
+ .room-body.hammock { width:calc(100vw - 24px); top:144px; bottom:22px; overflow:auto; justify-content:flex-start; }
+ .album.book.one { flex:none; min-height:520px; }
+ .book.one .leaf { grid-template-columns:repeat(3,minmax(0,1fr)); grid-template-rows:repeat(3,minmax(0,1fr)); gap:8px; padding:12px 10px 28px; }
+ .book.one .photo.featured { grid-column:span 2; grid-row:span 2; }
+ .book.one .photo:last-of-type { grid-column:1/-1; }
+ .lightbox .polaroid { max-width:calc(100vw - 26px); padding:8px 8px 34px; }
+ .lightbox img { max-width:calc(100vw - 44px); }
+ .st-deck { --deck:1.8; bottom:190px; }
+}
+@media(max-height:700px) and (min-width:761px) { .st-deck { --deck:2.25; } }
+/* Signs and boards settle gently instead of appearing as static slabs. */
+.st-sign { transform-origin:50% 0; animation:sign-breathe 6s ease-in-out infinite; }
+.gate-card .st-sign { animation-duration:4.8s; }
+@keyframes sign-breathe { 0%,100%{rotate:-.6deg} 50%{rotate:.6deg} }
+.room:not([hidden]) .paper,.room:not([hidden]) .screen { animation:board-enter .4s var(--ease) both; }
+@keyframes board-enter { from{opacity:0;translate:0 16px;rotate:-.6deg} to{opacity:1;translate:0 0;rotate:0deg} }
+.gate.open .gate-card { animation:gate-opening .65s var(--ease) forwards; }
+@keyframes gate-opening { to { translate:0 -12px; opacity:0; } }
+@media(max-height:540px) { .gate { padding-block:16px; } .gate-card { gap:10px; } .gate-card .st-sign { width:180px; height:90px; } .gate-card .st-sign h2 { font-size:22px; } .gate-card h1 { font-size:30px; } }
+
+.garden-actions{display:flex;gap:8px;margin:12px 0}.garden-actions button{flex:1;border:1px solid #d6d5b9;border-radius:12px;padding:12px 8px;background:#f4f1df;color:#385442;cursor:pointer;font:inherit;font-size:13px;transition:background .2s,transform .2s}.garden-actions button:hover{background:#dce6cc;transform:translateY(-2px)}
+
+body.in-room #bubble{display:none}
+
+@media(max-width:760px){
+ .album.book.one{flex:none;min-height:0;height:min(560px,calc(100dvh - 250px));}
+ .book.one .leaf{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:1.6fr 1fr 1.2fr;}
+ .book.one .photo.featured{grid-column:1/-1;grid-row:span 1;}
+ .book.one .photo:last-of-type{grid-column:1/-1;}
+ .hammock .pager{flex:none;}
+}
+
+/* Frames follow the photographs' real ratios; no fixed-height letterboxing. */
+.album.book{flex:none;max-height:none;min-height:0!important;}
+.book .leaf,.book.one .leaf{display:flex;flex-direction:column;gap:10px;align-content:initial;}
+.book .mosaic-row{display:flex;gap:10px;align-items:flex-start;justify-content:center;width:100%;}
+.book .photo,.book.one .photo.featured,.book.one .photo:last-of-type{flex:none;grid-column:auto;grid-row:auto;padding:4px 4px 20px;}
+.book .photo img{display:block;width:100%;object-fit:contain;background:transparent;}
+.book .leaf,.book.turn-fwd .leaf,.book.turn-back .leaf{animation:none;}
+.book .photo:hover,.book .photo:focus-visible{transform:translateY(-2px);}
+.book .photo{transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s;}
+.album-turn-overlay{perspective:1400px;overflow:visible;}
+.album-turn-overlay .leaf{will-change:transform,opacity;}
+@media(max-width:760px){.room-body.hammock{justify-content:center}.album.book.one{height:auto}}
+/* Keep the page number between the two turn corners, below the captions. */
+@media(max-width:760px){.book.one .leaf.l .folio{left:50%;right:auto;bottom:4px;transform:translateX(-50%)}}
+
+.album-turn-overlay{overflow:hidden}
+
+/* A shared cinema scene; the existing video player stays mounted when opened. */
+.theater-open,.theater-exit{border:1px solid #997d58;border-radius:4px;background:#fff9e9;color:#294736;font:700 11px 'Be Vietnam Pro',sans-serif;padding:10px 12px;cursor:pointer;box-shadow:0 3px 0 #493426}
+.theater-open{float:right;margin:0 0 6px 12px}
+.theater-backdrop{position:fixed;inset:0;background:#101b15;z-index:8;--stage-w:min(96vw,calc(84dvh * 1.7768));}
+.theater-art{position:absolute;left:50%;top:50%;width:var(--stage-w);aspect-ratio:1672/941;transform:translate(-50%,-50%);}
+.theater-scene{display:block;width:100%;height:100%;object-fit:contain}
+.theater-audience img{position:absolute;bottom:15%;height:auto;image-rendering:pixelated;transform-origin:50% 100%;animation:audience-breathe 4s ease-in-out infinite}
+.audience-husky{left:23%;width:8%}.audience-corgi{left:34%;width:7%}.audience-tabby{left:42%;width:5%}.audience-tux{left:56%;width:5%}.audience-spaniel{left:65%;width:7%}
+.theater-audience .audience-li{left:46.5%;width:7%;bottom:12%}
+@keyframes audience-breathe{0%,100%{translate:0 0}50%{translate:0 -1px}}
+.theater-exit{position:fixed;top:max(16px,env(safe-area-inset-top));left:max(16px,env(safe-area-inset-left));z-index:12}
+.room.theater-mode .st-head,.room.theater-mode .now-film,.room.theater-mode .tickets{display:none}
+.room.theater-mode .room-body.cine{position:fixed;inset:0;width:100%;height:100%;transform:none;display:block;pointer-events:none;z-index:10}
+.room.theater-mode .room-body.cine .screen{position:fixed;z-index:10;left:calc(50% - min(96vw,84dvh * 1.7768)*.185);top:calc(50% - min(96vw,84dvh * 1.7768)*.147);width:calc(min(96vw,84dvh * 1.7768)*.37);height:auto;max-height:none;aspect-ratio:16/9;border:0;box-shadow:none;pointer-events:auto;animation:none;mask-image:linear-gradient(to right,transparent,#000 2%,#000 98%,transparent),linear-gradient(to bottom,transparent,#000 3%,#000 97%,transparent);mask-composite:intersect;-webkit-mask-composite:source-in}
+.room.theater-mode .screen::before,.room.theater-mode .screen::after{display:none}
+@media(max-width:760px){.theater-open{float:none;display:block;margin:6px 0}.theater-backdrop{--stage-w:min(98vw,calc(74dvh * 1.7768))}.room.theater-mode .room-body.cine .screen{left:calc(50% - min(98vw,74dvh * 1.7768)*.185);top:calc(50% - min(98vw,74dvh * 1.7768)*.147);width:calc(min(98vw,74dvh * 1.7768)*.37)}}
+@media(prefers-reduced-motion:reduce){.theater-audience img{animation:none}}
+
+/* Keep the living pets in the garden instead of duplicating a clipped strip on panels. */
+body.at-stall #menu-pets,body.in-room #menu-pets{display:none}
+.pet-labels{position:fixed;inset:0;z-index:5;pointer-events:none}
+.pet-name{position:fixed;transform:translate(-50%,-100%);pointer-events:auto;border:1px solid #988462;border-radius:12px;background:#fff9e9eb;color:#304c3b;box-shadow:0 2px 5px #1d302844;padding:4px 8px;white-space:nowrap;font:700 10px/1.2 'Be Vietnam Pro',sans-serif;cursor:pointer}
+.pet-name::before{content:'';position:absolute;inset:-10px -5px}
+.pet-name[hidden]{display:none}.pet-name:hover,.pet-name:focus-visible{background:#fff7dc;color:#183a29;outline:2px solid #dcad54;outline-offset:2px}
+/* Navigation belongs to the website: one quiet, readable strip over the garden. */
+.menu{bottom:22px}
+.menu-row,body.night .menu-row{display:flex;align-items:center;gap:2px;padding:6px;background:rgba(30,52,40,.94);border:1px solid rgba(246,237,207,.33);border-radius:14px;box-shadow:0 9px 28px #17291d55,0 1px 0 #fff2cf24 inset;overflow:visible;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.menu-row::before{content:'KHÁM PHÁ';padding:0 12px 0 10px;color:#d2c69e;font:700 9px/1 'Be Vietnam Pro',sans-serif;letter-spacing:.11em;white-space:nowrap}
+.mbtn{width:auto;min-height:44px;flex-direction:row;justify-content:center;gap:7px;padding:0 11px;border-radius:9px;color:#f9f3e3;font:600 12px/1.2 'Be Vietnam Pro',sans-serif;text-shadow:none;white-space:nowrap;transition:background .2s ease,color .2s ease,translate .2s ease}
+.mbtn img{display:none}.mbtn span{font-size:inherit;opacity:1}
+.menu-icon{display:block;width:19px;height:19px;flex:none;color:#e5c993;transition:transform .24s ease,color .24s ease}
+.mbtn:hover .menu-icon,.mbtn:focus-visible .menu-icon{transform:translateY(-2px) rotate(-5deg);color:#fff0be}
+.mbtn[aria-current="location"] .menu-icon{color:#4c765c}
+.mbtn:hover,.mbtn:focus-visible{transform:none;translate:0 -2px;background:#ffffff1a;outline:none}
+.mbtn:hover span,.mbtn:focus-visible span{color:#fff8e6}
+.mbtn:focus-visible{outline:2px solid #f1cd83;outline-offset:2px}
+.mbtn[aria-current="location"]{background:#f5edd8;color:#294736;box-shadow:0 2px 8px #15261c33}
+.mbtn[aria-current="location"]:hover span,.mbtn[aria-current="location"]:focus-visible span{color:#294736}
+.mbtn[data-id="aulinh"]{margin-left:5px;padding-left:17px;color:#cfe6d7}
+.mbtn[data-id="aulinh"]::before{left:0;top:10px;bottom:10px;width:1px;background:#f9f2df40}
+@media(max-width:760px){.menu{width:min(420px,calc(100vw - 24px));bottom:calc(10px + env(safe-area-inset-bottom))}.menu-row,body.night .menu-row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:2px;padding:5px}.menu-row::before{display:none}.mbtn{grid-column:span 3;min-height:44px;padding:0 2px;font-size:10px;gap:4px}.mbtn:nth-child(n+5){grid-column:span 4}.menu-icon{width:16px;height:16px}.mbtn[data-id="aulinh"]{margin:0;padding:0 3px}.mbtn[data-id="aulinh"]::before{display:none}.garden-welcome,.mini-player{bottom:124px}}
+@media(prefers-reduced-motion:reduce){.menu-icon{transition:none}.mbtn:hover .menu-icon,.mbtn:focus-visible .menu-icon{transform:none}}
+/* The cinema is a single centered composition on larger screens. */
+@media(min-width:761px){
+ .room-body.cine{width:min(1000px,calc(100vw - 80px));grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto minmax(0,1fr) auto;justify-items:center;gap:12px}
+ .room-body.cine .screen{grid-column:1;grid-row:1;width:min(860px,100%,calc((100dvh - 410px)*1.7778))}
+ .room-body.cine .now-film{grid-column:1;grid-row:2;width:min(860px,100%,calc((100dvh - 410px)*1.7778));max-height:74px}
+ .room-body.cine .tickets{grid-column:1;grid-row:4;width:100%;min-height:140px}
+}
+.now-film .film-external{display:block;margin-top:4px}
+/* Featured record and a more tactile player: original covers and wooden controls. */
+.featured-album{position:absolute;left:clamp(350px,39vw,510px);bottom:135px;z-index:4;width:290px;display:flex;gap:14px;align-items:center;padding:12px;background:#fff9e9f2;border:1px solid #967b55;border-radius:5px;box-shadow:0 5px 0 #4c352b,0 12px 30px #17281950;color:#35291f;text-align:left;cursor:pointer;animation:board-enter .5s var(--ease) both}
+.featured-album img{width:96px;height:96px;object-fit:cover;box-shadow:0 3px 0 #573b2c}
+.featured-copy{display:flex;flex-direction:column;gap:5px;min-width:0}
+.featured-copy small{font:800 9px 'Be Vietnam Pro';letter-spacing:.12em;text-transform:uppercase;color:#935b31}
+.featured-copy strong{font:800 15px/1.25 'Be Vietnam Pro'}
+.featured-copy span{font:500 10px/1.4 'Be Vietnam Pro';color:#706854}
+.featured-copy em{font:800 10px 'Be Vietnam Pro';font-style:normal;color:#355443}
+.featured-album:hover{translate:0 -4px}
+.stall.list-open .featured-album{visibility:hidden}
+.st-ribbon{border:2px solid #73523c;box-shadow:0 5px 0 #3c2b20,0 12px 30px #182b1d4a}
+.now-cover{width:58px;height:58px;object-fit:cover;flex:none;border:3px solid #fff9e9;box-shadow:0 0 0 1px #82694b,0 3px 0 #503927}
+.st-ribbon .kick span{color:#85613c;letter-spacing:.14em}
+@media(max-height:800px) and (min-width:761px){.st-deck{--deck:2.25}}
+@media(max-height:700px) and (min-width:761px){.st-deck{--deck:1.9}}
+@media(max-width:760px){
+ .featured-album{left:auto;right:12px;top:350px;bottom:auto;width:178px;gap:8px;padding:8px}
+ .featured-album img{width:62px;height:62px}
+ .featured-copy strong{font-size:11px}.featured-copy small,.featured-copy em{font-size:8px}.featured-copy span{display:none}
+ .st-ribbon{grid-template-columns:52px 1fr auto;grid-template-rows:auto 44px 24px}
+ .now-cover{width:48px;height:48px;grid-column:1;grid-row:1}
+ .st-ribbon .now{grid-column:2/-1;grid-row:1}
+ .st-ctl{grid-column:1/3}.st-ribbon .list-btn{grid-column:3}
+}
+
+/* A quiet daily message, kept from the original garden. */
+.daily-invite{display:block;margin:8px 0 1px;padding:5px 8px;border:1px solid #9f895f;border-radius:6px;background:#fff9e8;color:#34543e;font:700 11px 'Be Vietnam Pro',sans-serif;cursor:pointer;pointer-events:auto}
+.daily-dialog{box-sizing:border-box;width:min(670px,calc(100vw - 32px));max-height:calc(100dvh - 32px);overflow:auto;padding:clamp(22px,4vw,36px);border:2px solid #816748;border-radius:14px;background:#fbf3df;color:#382f23;box-shadow:0 18px 70px #1a241ab0}
+.daily-dialog::backdrop{background:#14271999;backdrop-filter:blur(4px)}
+.daily-close{position:absolute;right:18px;top:15px;width:40px;height:40px;border:1px solid #cbb993;border-radius:50%;background:#f8eed8;color:#57422c;font-size:26px;cursor:pointer}
+.daily-eyebrow{margin:0 0 8px;color:#687b57;letter-spacing:.14em;font-size:11px;font-weight:700}.daily-dialog h2{font:700 clamp(24px,4vw,32px)/1.15 Georgia,serif;margin:0 40px 24px 0}
+.daily-reading{display:grid;grid-template-columns:minmax(95px,170px) minmax(0,1fr);gap:clamp(16px,3vw,26px);align-items:start}.daily-reading img{display:block;width:100%;height:auto;border-radius:8px;box-shadow:0 5px 18px #25362235}.daily-reading img.is-closed{transform:rotate(180deg)}
+.daily-reading small{font-size:11px;color:#727b60}.daily-reading h3{margin:8px 0;color:#36563f;font:700 22px/1.2 Georgia,serif}.daily-reading h4{margin:10px 0 7px;font-size:15px}.daily-reading p,.daily-note{font-size:14px;line-height:1.75}.daily-note{margin:24px 0 0;padding-top:15px;border-top:1px solid #e2d5b6;color:#75684e;font-size:12px}
+@media(max-width:480px){.daily-reading{grid-template-columns:88px minmax(0,1fr);gap:14px}.daily-reading h3{font-size:18px}.daily-reading p{font-size:13px;line-height:1.6}.daily-dialog{padding:23px 19px}}

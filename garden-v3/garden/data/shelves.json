@@ -1,0 +1,28 @@
+{
+ "_note": "Ali sửa file này để đổi kệ ở sạp nhạc. Ghi đúng tên album như trong catalog.json.",
+ "hero": {
+  "album": "Một Tần Số Khác",
+  "label": "Hero tháng 10",
+  "blurb": "Album Li muốn bạn nghe nhất tháng này."
+ },
+ "new": [
+  "Một Tần Số Khác",
+  "Chuyện Của Trăng",
+  "Biên Niên Thất Nghiệp Ký",
+  "Hòa Bình Và Lặng Lẽ"
+ ],
+ "picks": [
+  "Chuyện Của Trăng",
+  "Hòa Bình Và Lặng Lẽ",
+  "Unplugged Vol.2",
+  "Cả Biển Trời Trong Mắt",
+  "Thơ Ru Em Ngủ"
+ ],
+ "hot": [
+  "Một Tần Số Khác",
+  "Untamed",
+  "Lạ mà Quen",
+  "Tôi Hát Cả Bốn Mùa",
+  "Unplugged Vol.1"
+ ]
+}

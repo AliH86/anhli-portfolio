@@ -13,9 +13,9 @@ const loadImg = (src) => new Promise((ok) => { const i = new Image(); i.onload =
 let SRC = null, REGIONS = [];
 export async function buildWind(ground, base = '../world/sway/') {
   SRC = imgData(ground);
-  const meta = await (await fetch(`${base}sway.json`)).json();
+  const meta = await (await fetch(`${base}sway.json`, { cache: 'no-cache' })).json();
   REGIONS = await Promise.all(Object.entries(meta).map(async ([name, m]) => {
-    const wimg = await loadImg(`${base}${name}.png`); const wd = imgData(wimg).data;
+    const wimg = await loadImg(`${base}${name}.png?v=69`); const wd = imgData(wimg).data;
     const idx = [], wt = [];
     for (let y = 0; y < m.h; y++) for (let x = 0; x < m.w; x++) { const v = wd[(y * m.w + x) * 4]; if (v > 6) { idx.push(y * m.w + x); wt.push(v / 255); } }
     const c = off(m.w, m.h), g = c.getContext('2d');
@@ -37,7 +37,7 @@ export function windAt(t, wind) {
 function warp(r, t) {
   const W = r.w, src = SRC.data, SW = SRC.width, out = r.img.data;
   // Start from the untouched painting, then move the weighted pixels.
-  for (let y = 0; y < r.h; y++) { const s = ((r.y + y) * SW + r.x) * 4; out.set(src.subarray(s, s + W * 4), y * W * 4); }
+  out.fill(0); // Unchanged pixels must not erase the preceding region's wind.
   const rows = new Float32Array(r.h);
   for (let y = 0; y < r.h; y++) rows[y] = r.amp * wave(r, r.y + y, t, windStrength);
   for (let i = 0; i < r.idx.length; i++) {
@@ -48,6 +48,7 @@ function warp(r, t) {
     out[o] = src[so]; out[o + 1] = src[so + 1]; out[o + 2] = src[so + 2]; out[o + 3] = 255;
   }
   r.g.putImageData(r.img, 0, 0);
+
 }
 export function drawWind(ctx, view, t) {
   const step = Math.floor(t * 20);                  // 20 updates a second is plenty for wind
@@ -59,7 +60,7 @@ export function drawWind(ctx, view, t) {
 }
 // The same bend for a cut-out sprite drawn over the ground (papaya, frangipani...).
 export function warpSprite(f, t) {
-  const r = REGIONS.find((q) => f.x < q.x + q.w && f.x + f.w > q.x && f.y < q.y + q.h && f.y + f.h > q.y);
+  const r = REGIONS.find((q) => q.name === f.name);
   if (!r) return f.img;
   if (!f.data) { f.data = imgData(f.img); f.c = off(f.w, f.h); f.g = f.c.getContext('2d'); f.out = f.g.createImageData(f.w, f.h); f.wmap = new Float32Array(f.w * f.h); f.region = r;
     const lookup = new Float32Array(r.w * r.h); for (let i = 0; i < r.idx.length; i++) lookup[r.idx[i]] = r.wt[i];

@@ -1,113 +1,433 @@
 <!doctype html>
 <html lang="vi">
 <head>
-  <base href="./garden-v2/">
-  <meta charset="utf-8">
-  <link rel="icon" type="image/svg+xml" href="./assets/garden-mark.svg">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#f5efdf">
-  <meta name="description" content="Ghé khu vườn của Li. Chọn một album nhạc, nghe nhạc và xem những hình ảnh mình giữ lại.">
-  <title>Vườn của Li — Cái Sạp nhạc</title>
-  <link rel="stylesheet" href="./style.css">
-  <link rel="stylesheet" href="./refinement.css">
-  <link rel="stylesheet" href="./integration.css">
-  <link rel="stylesheet" href="./polish.css?v=20260917-3">
-  <link rel="stylesheet" href="./garden-life.css?v=final1">
-  <link rel="stylesheet" href="./final-review.css?v=release2">
-  <link rel="stylesheet" href="./garden-v21.css?v=23">
-  <link rel="stylesheet" href="./garden-v22.css?v=10">
-  <link rel="stylesheet" href="./garden-art.css?v=2">
-  <link rel="stylesheet" href="./garden-mobile.css?v=22-iphone1">
-  <link rel="stylesheet" href="./garden-finish.css?v=22-garden2">
-  <script type="module" src="./app.js?v=22-garden2"></script>
+<base href="./garden-v3/garden/">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vườn của Li · v3.3</title>
+<meta name="description" content="Khu vườn pixel của Anh Li — nghe nhạc, xem ảnh, đọc chuyện, và chơi với mấy em thú nhỏ. Có ngày đêm, nắng mưa theo giờ thật.">
+<meta name="theme-color" content="#2b2118">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Vườn của Li">
+<meta property="og:description" content="Có nhạc. Có cây. Có chỗ ngồi. Ghé vườn của Anh Li một chút.">
+<meta property="og:image" content="og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root { --ink: #2b2118; --paper: #fffaf0; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #2f86c9; font-family: 'Be Vietnam Pro', system-ui, sans-serif; color: var(--ink); }
+  canvas { display: block; position: fixed; left: 0; top: 0; image-rendering: pixelated; touch-action: none; cursor: crosshair; }
+  .hud { position: fixed; left: 16px; right: 16px; top: 16px; display: flex; justify-content: space-between; pointer-events: none; }
+  .hud > * { pointer-events: auto; }
+  .plaque { background: var(--paper); border: 4px solid var(--ink); box-shadow: 0 4px 0 var(--ink); padding: 6px 14px; }
+  .plaque b { display: block; font-size: 20px; font-weight: 800; }
+  .plaque small { font-size: 11px; font-weight: 600; letter-spacing: .1em; color: #6b5a3e; }
+  button.sq { width: 48px; height: 48px; background: var(--paper); border: 4px solid var(--ink); box-shadow: 0 4px 0 var(--ink); cursor: pointer; display: grid; place-items: center; color: var(--ink); }
+  .tools { display: flex; gap: 8px; align-items: flex-start; }
+  .clock { background: var(--paper); border: 4px solid var(--ink); box-shadow: 0 4px 0 var(--ink); padding: 10px 12px; font-weight: 800; font-size: 15px; cursor: pointer; white-space: nowrap; }
+  #sound[aria-pressed="false"] .wave { opacity: .25; }
+  body.night .plaque, body.night .clock, body.night .tag, body.night button.sq { background: #1c2c52; color: #e8f0ff; border-color: #e8f0ff; box-shadow: 0 4px 0 #0e1626; }
+  body.night .plaque small, body.night .tag small { color: #b8c4e0; }
+  .tag { position: fixed; pointer-events: none; background: var(--paper); border: 4px solid var(--ink); box-shadow: 0 4px 0 var(--ink); padding: 6px 12px; font-weight: 800; transform: translate(-50%, -100%); opacity: 0; white-space: nowrap; }
+  .tag.on { opacity: 1; }
+  .tag small { display: block; font-weight: 600; font-size: 12px; color: #6b5a3e; }
+
+  /* ---------- thumb stick (touch screens) ---------- */
+  .stick { position: fixed; left: 20px; bottom: calc(20px + env(safe-area-inset-bottom)); width: 112px; height: 112px; border-radius: 50%; background: rgba(255, 250, 240, .35); border: 4px solid rgba(43, 33, 24, .7); touch-action: none; z-index: 5; }
+  .stick[hidden] { display: none; }
+  .stick i { position: absolute; left: 50%; top: 50%; width: 48px; height: 48px; margin: -24px 0 0 -24px; border-radius: 50%; background: var(--paper); border: 4px solid var(--ink); box-shadow: 0 3px 0 var(--ink); }
+
+  /* ---------- now playing chip ---------- */
+  .np { display: flex; align-items: center; gap: 8px; height: 48px; box-sizing: border-box; max-width: 240px; background: var(--paper); border: 4px solid var(--ink); box-shadow: 0 4px 0 var(--ink); padding: 0 12px 0 8px; font: 800 13px 'Be Vietnam Pro', sans-serif; color: var(--ink); cursor: pointer; }
+  .np[hidden] { display: none; }
+  .np span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .np i { width: 14px; height: 14px; display: inline-grid; grid-template-columns: repeat(3, 1fr); gap: 2px; align-items: end; flex: none; }
+  .np i b { display: block; background: #c9483a; height: 4px; }
+  .np.playing i b { animation: eq .8s steps(4) infinite; } .np.playing i b:nth-child(2) { animation-delay: -.3s; } .np.playing i b:nth-child(3) { animation-delay: -.55s; }
+  @keyframes eq { 0% { height: 4px } 50% { height: 14px } 100% { height: 6px } }
+  body.night .np { background: #1c2c52; color: #e8f0ff; border-color: #e8f0ff; box-shadow: 0 4px 0 #0e1626; }
+
+  /* ---------- the stall: records on a clothesline, a big player, a bold ribbon ---------- */
+  :root { --u: 2px; --cream: #f6eeda; --clay: #c9483a; --sun: #ffc35a; }
+  .stall { position: fixed; inset: 0; z-index: 20; pointer-events: none; font-family: 'Be Vietnam Pro', sans-serif; }
+  .stall[hidden] { display: none; }
+  .stall > * { pointer-events: auto; }
+  .st-shade { position: absolute; inset: 0; pointer-events: none !important; background: linear-gradient(180deg, rgba(20, 14, 8, .42), transparent 34%, transparent 62%, rgba(20, 14, 8, .5)); }
+  .paper { border-style: solid; border-width: calc(var(--u) * 5); border-image: url(ui/paper.png) 5 fill / calc(var(--u) * 5) round; image-rendering: pixelated; color: var(--ink); }
+  .logbtn { width: calc(var(--u) * 24); height: calc(var(--u) * 24); flex: none; border: 0; padding: 0; background: url(ui/btn.png) center / 100% 100% no-repeat; image-rendering: pixelated; color: var(--cream); display: grid; place-items: center; cursor: pointer; filter: drop-shadow(0 var(--u) 0 rgba(43, 33, 24, .6)); }
+  .logbtn svg { filter: drop-shadow(0 var(--u) 0 #2b2118); }
+  .logbtn:active { transform: translateY(var(--u)); }
+  .logbtn.big { width: calc(var(--u) * 32); height: calc(var(--u) * 32); }
+
+  /* head: the sign, filter pills, leave */
+  .st-head { position: absolute; left: 16px; right: 16px; top: 12px; display: flex; align-items: center; gap: 16px; pointer-events: none; }
+  .st-head > * { pointer-events: auto; }
+  .st-sign { flex: none; width: calc(var(--u) * 100); height: calc(var(--u) * 50); background: url(ui/sign.png) 0 0 / 100% 100% no-repeat; image-rendering: pixelated; display: grid; place-items: center; padding-top: calc(var(--u) * 10); box-sizing: border-box; text-align: center; }
+  .st-sign h2 { margin: 0; font-size: 22px; font-weight: 800; color: var(--cream); line-height: 1; text-shadow: 0 2px 0 #2b2118, 2px 0 0 #2b2118, -2px 0 0 #2b2118, 0 -2px 0 #2b2118; }
+  .st-pills { flex: 1; min-width: 0; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding: 4px 2px 6px; }
+  .st-pills::-webkit-scrollbar { display: none; }
+  .pill { flex: none; height: 32px; padding: 0 14px; border: 2px solid #2b2118; background: rgba(255, 250, 240, .9); color: var(--ink); font: 800 12px 'Be Vietnam Pro', sans-serif; cursor: pointer; box-shadow: 0 3px 0 #2b2118; clip-path: polygon(4px 0, calc(100% - 4px) 0, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px), 0 4px); }
+  .pill[aria-pressed="true"] { background: var(--clay); color: var(--cream); }
+  .pill:hover { transform: translateY(-2px); }
+
+  /* the clothesline of records */
+  .st-line { position: absolute; left: 0; right: 0; top: 112px; height: 230px; touch-action: pan-y; cursor: grab; }
+  .st-line:active { cursor: grabbing; }
+  .st-line canvas { position: absolute; left: 0; top: 0; width: 100%; height: 80px; image-rendering: pixelated; pointer-events: none; }
+  .st-cards { position: absolute; inset: 0; }
+  .card { position: absolute; left: 0; top: 0; width: 106px; padding: 0; border-style: solid; border-width: calc(var(--u) * 4); border-image: url(ui/paper.png) 5 fill / calc(var(--u) * 4) round; image-rendering: pixelated; background: none; cursor: pointer; transform-origin: 50% -6px; text-align: center; color: var(--ink); will-change: transform; filter: drop-shadow(0 8px 0 rgba(20, 14, 8, .28)); }
+  .card img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; image-rendering: auto; box-shadow: 0 0 0 2px #2b2118; pointer-events: none; }
+  .card .name { display: block; margin-top: 5px; font: 700 10px/1.15 'Be Vietnam Pro', sans-serif; height: 2.3em; overflow: hidden; padding: 0 1px; }
+  .card .pin { position: absolute; left: 50%; top: -18px; width: calc(var(--u) * 6); height: calc(var(--u) * 14); margin-left: calc(var(--u) * -3); background: url(ui/pin.png) 0 0 / 100% 100%; image-rendering: pixelated; }
+  .card.on { outline: 3px solid var(--sun); outline-offset: 3px; }
+  .card .badge { position: absolute; left: -6px; top: 6px; font: 800 9px/1 'Be Vietnam Pro'; font-style: normal; letter-spacing: .06em; text-transform: uppercase; background: var(--clay); color: var(--cream); padding: 3px 6px; transform: rotate(-8deg); box-shadow: 2px 2px 0 #2b2118; }
+  .card .badge.new { background: #3f8f5a; }
+  .card.hero { width: 128px; filter: drop-shadow(0 0 0 #ffc35a) drop-shadow(0 10px 0 rgba(20,14,8,.28)); }
+  .card.hero::after { content: ''; position: absolute; inset: -5px; border: 3px solid #ffc35a; pointer-events: none; }
+  .card:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+  .st-line .empty { position: absolute; left: 50%; top: 70px; transform: translateX(-50%); margin: 0; font-weight: 800; color: var(--cream); text-shadow: 0 2px 0 #2b2118; }
+  .st-arrows { position: absolute; top: 210px; left: 12px; right: 12px; display: flex; justify-content: space-between; pointer-events: none; }
+  .st-arrows .logbtn { pointer-events: auto; }
+
+  /* the big player standing on the lawn */
+  .st-deck { position: absolute; left: max(12px, 3vw); bottom: 92px; width: calc(168px * var(--deck)); height: calc(112px * var(--deck)); pointer-events: none; --deck: 3; }
+  .st-deck canvas { position: static; width: 100%; height: 100%; image-rendering: pixelated; cursor: default; filter: drop-shadow(0 10px 0 rgba(20, 14, 8, .3)); }
+  .st-deck .skin { position: absolute; left: 50%; bottom: -6px; transform: translateX(-50%); pointer-events: auto; height: 28px; padding: 0 12px; border: 2px solid #2b2118; background: var(--cream); font: 800 11px 'Be Vietnam Pro'; color: var(--ink); cursor: pointer; box-shadow: 0 3px 0 #2b2118; white-space: nowrap; }
+
+  /* the ribbon: what's playing, bold and slanted */
+  .st-ribbon { position: absolute; left: 0; right: 0; bottom: 14px; height: 78px; display: flex; align-items: center; gap: 18px; padding: 0 24px 0 calc(max(12px, 3vw) + 168px * var(--deck, 3) * .78); background: #2b2118; color: var(--cream); transform: skewY(-1.2deg); box-shadow: 0 -4px 0 var(--clay), 0 6px 0 rgba(0, 0, 0, .25); }
+  .st-ribbon > * { transform: skewY(1.2deg); }
+  .st-ribbon .now { flex: 1 1 300px; min-width: 220px; display: flex; flex-direction: column; gap: 3px; }
+  .st-ribbon .kick { display: flex; align-items: center; gap: 8px; }
+  .st-ribbon .kick span { background: var(--clay); color: var(--cream); font: 800 10px 'Be Vietnam Pro'; letter-spacing: .14em; padding: 2px 6px; transform: skewX(-12deg); }
+  .st-ribbon .kick canvas { position: static; flex: 1; min-width: 0; height: 13px; image-rendering: pixelated; cursor: default; object-fit: cover; object-position: left; opacity: .9; }
+  .st-ribbon b { font: 800 italic 24px/1.1 'Be Vietnam Pro', sans-serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: -.01em; }
+  .st-ribbon small { font: 600 12px 'Be Vietnam Pro'; color: #e7c99a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .heart { border: 0; background: none; cursor: pointer; padding: 2px 4px; color: #e7c99a; font-size: 20px; line-height: 1; }
+  .heart[aria-pressed="true"] { color: #ff7a8a; }
+  .st-ctl { display: flex; align-items: center; gap: 8px; }
+  .stall.playing .i-play, .stall:not(.playing) .i-pause { display: none; }
+  .rope { flex: 0 1 220px; display: flex; align-items: center; gap: 10px; min-width: 120px; }
+  .rope input { flex: 1; min-width: 0; appearance: none; height: calc(var(--u) * 6); background: url(ui/rope.png) 0 0 / calc(var(--u) * 16) 100% repeat-x; image-rendering: pixelated; cursor: pointer; }
+  .rope input::-webkit-slider-thumb { appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--sun); border: 3px solid #2b2118; }
+  .rope input::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: var(--sun); border: 3px solid #2b2118; }
+  .rope output { font: 700 12px 'Be Vietnam Pro'; min-width: 78px; text-align: right; color: #e7c99a; }
+  .st-ribbon .list-btn { height: 34px; padding: 0 14px; border: 2px solid var(--cream); background: none; color: var(--cream); font: 800 12px 'Be Vietnam Pro'; cursor: pointer; white-space: nowrap; }
+  .st-ribbon .list-btn[aria-expanded="true"] { background: var(--cream); color: var(--ink); }
+
+  /* the track card */
+  .st-list { position: absolute; right: 20px; bottom: 112px; width: min(380px, calc(100vw - 40px)); max-height: min(50vh, 440px); display: flex; flex-direction: column; box-sizing: border-box; z-index: 2; transform: rotate(.8deg); }
+  .st-list[hidden] { display: none; }
+  .st-list header { position: relative; padding: 6px 30px 8px 6px; }
+  .st-list header b { display: inline-block; font: 800 italic 17px 'Be Vietnam Pro'; background: #2b2118; color: var(--cream); padding: 3px 10px; transform: skewX(-10deg); box-shadow: 3px 3px 0 var(--clay); }
+  .st-list header small { display: block; margin-top: 8px; font-size: 12px; color: #6b5a3e; }
+  .st-list header p { margin: 4px 0 0; font-size: 12px; color: #6b5a3e; }
+  .st-list header button { position: absolute; right: 0; top: 0; border: 0; background: none; font: 800 20px 'Be Vietnam Pro'; cursor: pointer; color: var(--ink); }
+  .tracks { list-style: none; margin: 0; padding: 0; overflow: auto; border-top: 2px dashed #c9b48e; }
+  .tracks button { width: 100%; display: grid; grid-template-columns: 26px 1fr auto; gap: 8px; align-items: center; padding: 7px 6px; border: 0; border-bottom: 2px dotted #e2d3b2; background: none; color: inherit; font: 600 14px 'Be Vietnam Pro', sans-serif; text-align: left; cursor: pointer; }
+  .tracks button:hover { background: #f1e5c8; }
+  .tracks i, .tracks em { font-style: normal; font-size: 12px; color: #8f7f64; }
+  .tracks li.on button { background: #ffe3a8; } .tracks li.on b { font-weight: 800; }
+
+  /* Li's speech: pops up only when he talks */
+  .bubble { position: fixed; z-index: 21; max-width: 260px; padding: 6px 10px; font: 700 13px/1.35 'Be Vietnam Pro', sans-serif; transform: translate(-50%, -100%) scale(1); transform-origin: 50% 100%; pointer-events: none; animation: pop .22s steps(3); }
+  .bubble::after { content: ''; position: absolute; left: 50%; bottom: calc(var(--u) * -9); width: calc(var(--u) * 6); height: calc(var(--u) * 6); margin-left: calc(var(--u) * -3); background: #f6eeda; box-shadow: 0 var(--u) 0 #2b2118, var(--u) 0 0 #2b2118, calc(var(--u) * -1) 0 0 #2b2118; clip-path: polygon(0 0, 100% 0, 50% 100%); }
+  .bubble[hidden] { display: none; }
+  @keyframes pop { from { transform: translate(-50%, -100%) scale(.4); } to { transform: translate(-50%, -100%) scale(1); } }
+  body.at-stall .hud, body.at-stall .stick { display: none; }
+
+  @media (max-height: 760px) and (min-width: 761px) { .st-deck { --deck: 2; } .st-ribbon { --deck: 2; } }
+  @media (max-width: 760px) {
+    :root { --u: 1.5px; }
+    .st-head { left: 8px; right: 8px; top: 8px; gap: 8px; flex-wrap: wrap; }
+    .st-sign h2 { font-size: 17px; }
+    .st-pills { order: 3; flex-basis: 100%; }
+    .st-head .st-close { margin-left: auto; }
+    .st-line { top: 118px; height: 160px; }
+    .card { width: 78px; }
+    .card .name { font-size: 9px; }
+    .st-arrows { display: none; }
+    .st-deck { --deck: 2; left: auto; right: 4px; transform: none; bottom: 200px; }
+    .st-ribbon { height: auto; flex-wrap: wrap; gap: 8px 12px; padding: 12px 14px 14px; bottom: 0; transform: none; }
+    .st-ribbon > * { transform: none; }
+    .st-ribbon .now { flex-basis: 100%; }
+    .st-ribbon b { font-size: 19px; }
+    .rope { flex: 1; width: auto; }
+    .st-list { right: 8px; left: 8px; width: auto; bottom: 150px; max-height: 46vh; }
+    .bubble { max-width: 190px; font-size: 12px; }
+  }
+
+  /* ---------- bottom menu: a floating dock with a lip of grass the pets walk on ---------- */
+  .menu { position: fixed; left: 50%; bottom: calc(14px + env(safe-area-inset-bottom)); transform: translateX(-50%); width: max-content; max-width: calc(100vw - 16px); z-index: 6; pointer-events: none; }
+  .menu > * { pointer-events: auto; }
+  .menu .ledge { display: none; height: 10px; margin: 0 10px -2px; background: url(ui/menu/ledge.png) 0 0 / 32px 20px repeat-x; image-rendering: pixelated; pointer-events: none; position: relative; z-index: 2; clip-path: polygon(0 100%, 4px 0, calc(100% - 4px) 0, 100% 100%); }
+  .menu-row { position: relative; display: flex; gap: 4px; padding: 8px 10px 6px; background: rgba(36, 27, 19, .78); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border: 3px solid #2b2118; box-shadow: 0 4px 0 rgba(20, 14, 8, .45), inset 0 2px 0 rgba(255, 236, 200, .12); clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px), 0 8px); overflow-x: auto; scrollbar-width: none; }
+  .menu-row::-webkit-scrollbar { display: none; }
+  .mbtn { flex: none; width: 70px; padding: 4px 2px 3px; border: 0; background: none; color: #f6eeda; font: 700 10.5px/1.15 'Be Vietnam Pro', sans-serif; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 5px; text-shadow: 0 1px 0 #1a120b; transition: transform .12s steps(2); }
+  .mbtn img { width: 48px; height: 48px; image-rendering: pixelated; box-shadow: 0 0 0 2px #2b2118, 0 0 0 4px rgba(246, 238, 218, .85), 0 4px 0 4px rgba(20, 14, 8, .4); clip-path: polygon(3px 0, calc(100% - 3px) 0, 100% 3px, 100% calc(100% - 3px), calc(100% - 3px) 100%, 3px 100%, 0 calc(100% - 3px), 0 3px); }
+  .mbtn span { opacity: .82; white-space: nowrap; }
+  .mbtn:hover, .mbtn:focus-visible { transform: translateY(-5px); outline: none; }
+  .mbtn:hover img, .mbtn:focus-visible img { box-shadow: 0 0 0 2px #2b2118, 0 0 0 4px #ffc35a, 0 6px 0 4px rgba(20, 14, 8, .4); }
+  .mbtn:hover span, .mbtn:focus-visible span { opacity: 1; color: #ffc35a; }
+  .mbtn[data-id="aulinh"] img { background: #24505a; box-shadow: 0 0 0 2px #2b2118, 0 0 0 4px #9be8d4, 0 4px 0 4px rgba(20, 14, 8, .4); }
+  .mbtn[data-id="aulinh"] { margin-left: 8px; position: relative; }
+  .mbtn[data-id="aulinh"]::before { content: ''; position: absolute; left: -7px; top: 8px; bottom: 14px; width: 2px; background: rgba(246, 238, 218, .2); }
+  body.night .menu-row { background: rgba(18, 24, 44, .8); }
+  body.at-stall .menu { display: none; }
+  /* little chibi pets stroll along the edge only while the stall or a room is open */
+  #menu-pets { display: none; position: fixed; left: 0; top: auto; z-index: 22; image-rendering: pixelated; pointer-events: none; }
+  body.at-stall #menu-pets { display: block; bottom: 90px; }
+  body.in-room #menu-pets { display: block; bottom: 2px; }
+  body.chill #menu-pets { display: none; }
+  @media (max-width: 760px) {
+    .menu { bottom: calc(8px + env(safe-area-inset-bottom)); }
+    .menu-row { gap: 2px; padding: 6px 6px 4px; }
+    .mbtn { width: 56px; font-size: 9.5px; }
+    .mbtn img { width: 38px; height: 38px; }
+  }
+  .stick { bottom: calc(130px + env(safe-area-inset-bottom)); }
+  @media (max-width: 760px) {
+    .hud { left: 8px; right: 8px; top: 8px; gap: 6px; }
+    .plaque { padding: 4px 10px; align-self: flex-start; } .plaque b { font-size: 15px; white-space: nowrap; } .plaque small { display: none; }
+    .tools { gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+    button.sq { width: 40px; height: 40px; } .clock { padding: 8px 9px; font-size: 13px; }
+  }
+  @media (max-width: 760px) {
+    .menu-row { justify-content: flex-start; gap: 6px; padding: 5px 8px calc(8px + env(safe-area-inset-bottom)); }
+    .mbtn { width: 66px; font-size: 10px; }
+    .mbtn img { width: 40px; height: 40px; }
+  }
+
+  /* ---------- chill: screensaver mode ---------- */
+  .hud, .menu, .stick, .stall > :not(.st-shade), .bubble { transition: opacity 1.2s ease; }
+  body.chill .hud, body.chill .menu, body.chill .stick, body.chill .stall > *, body.chill .bubble, body.chill .tag { opacity: 0; pointer-events: none !important; }
+  body.chill { cursor: none; }
+  .chill-cap { position: fixed; left: 28px; bottom: 26px; z-index: 30; color: #fffaf0; opacity: 0; transition: opacity 1.6s ease; pointer-events: none; text-shadow: 0 2px 0 rgba(30, 20, 10, .55); }
+  .chill-cap b { display: block; font: 800 italic 26px/1.1 'Be Vietnam Pro', sans-serif; }
+  .chill-cap small { font: 600 13px 'Be Vietnam Pro', sans-serif; letter-spacing: .06em; opacity: .9; }
+  body.chill .chill-cap { opacity: 1; }
+  body.chill::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 29; background: radial-gradient(ellipse 75% 70% at 50% 45%, transparent 55%, rgba(20, 14, 8, .35)); }
+
+  /* ---------- rooms: Chuyện của Li, Góc võng, Rạp phim (same kit as the stall) ---------- */
+  .room { position: fixed; inset: 0; z-index: 20; pointer-events: none; font-family: 'Be Vietnam Pro', sans-serif; }
+  .room[hidden] { display: none; }
+  .room > * { pointer-events: auto; }
+  .room .st-shade { pointer-events: none !important; }
+  body.in-room .hud, body.in-room .stick, body.in-room .menu { display: none; }
+  .room-body { position: absolute; left: 50%; transform: translateX(-50%); bottom: 16px; top: 84px; width: min(1100px, calc(100vw - 24px)); pointer-events: none; }
+  .room-body > * { pointer-events: auto; }
+  /* house: a letter on the right, Li on the left in the scene */
+  .room-body.house { display: grid; grid-template-columns: minmax(0, 1fr) min(520px, 52vw); grid-template-rows: 1fr auto; gap: 12px; }
+  .room-body.house > :not(.idcard) { grid-column: 2; grid-row: 1; align-self: start; max-height: 100%; overflow: auto; }
+  .letter { padding: 18px 22px; font: 500 15px/1.75 'Be Vietnam Pro', sans-serif; transform: rotate(-.6deg); box-shadow: 0 10px 0 rgba(20, 14, 8, .25); background: repeating-linear-gradient(180deg, transparent 0 27px, rgba(160, 130, 90, .22) 27px 28px); }
+  .letter .hello { font-weight: 800; font-style: italic; font-size: 17px; margin-top: 0; }
+  .letter .sign { text-align: right; font-weight: 800; font-style: italic; font-size: 18px; margin-bottom: 0; }
+  .letter .sign small { display: block; font: 600 12px 'Be Vietnam Pro'; color: #6b5a3e; font-style: normal; }
+  .road { display: flex; flex-direction: column; gap: 10px; padding-right: 4px; }
+  .stop { padding: 8px 12px; position: relative; }
+  .stop i { font-style: normal; font: 800 11px 'Be Vietnam Pro'; background: #2b2118; color: var(--cream); padding: 2px 8px; display: inline-block; transform: skewX(-10deg); }
+  .stop b { display: block; margin-top: 6px; font-size: 15px; } .stop small { color: #6b5a3e; font-weight: 600; } .stop p { margin: 4px 0 0; font-size: 13px; }
+  .craft { display: grid; gap: 10px; }
+  .card-note { padding: 10px 14px; } .card-note b { font-size: 15px; } .card-note p, .card-note li { font-size: 13px; line-height: 1.55; } .card-note ul { margin: 6px 0 0; padding-left: 18px; }
+  .idcard { grid-column: 2; grid-row: 2; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 8px 12px; }
+  .idcard b { font-size: 15px; } .idcard small { flex: 1; min-width: 160px; color: #6b5a3e; font-weight: 600; font-size: 12px; }
+  .idcard a.pill { text-decoration: none; display: inline-flex; align-items: center; }
+  /* hammock: an open photo album */
+  .room-body.hammock { display: flex; flex-direction: column; justify-content: flex-end; gap: 10px; }
+  .album { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px 12px; padding: 18px 16px 12px; background: #8a5532; border: 4px solid #2b2118; box-shadow: inset 0 0 0 4px #a2683f, 0 8px 0 rgba(20, 14, 8, .3); margin-left: min(300px, 26vw); }
+  .album.book { border: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0; padding: 10px 12px 14px; position: relative; background: #6b3f24; box-shadow: inset 0 0 0 3px #8a5532, 0 0 0 4px #2b2118, 0 4px 0 4px #e9dcbc, 0 8px 0 4px #d8c8a2, 0 12px 0 4px #2b2118, 0 18px 0 6px rgba(20, 14, 8, .28); perspective: 1600px; }
+  .album.book.one { grid-template-columns: 1fr; }
+  .book .leaf { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); align-content: start; gap: 18px 14px; padding: 22px 20px 34px; background: #f3e8cf repeating-linear-gradient(0deg, transparent 0 27px, rgba(140, 100, 60, .1) 27px 28px); }
+  .book .leaf.l { box-shadow: inset -18px 0 16px -12px rgba(70, 45, 20, .45), inset 2px 0 0 #e2d3b0; }
+  .book .leaf.r { box-shadow: inset 18px 0 16px -12px rgba(70, 45, 20, .45), inset -2px 0 0 #e2d3b0; }
+  .book.one .leaf { grid-template-columns: repeat(2, 1fr); box-shadow: inset 14px 0 14px -12px rgba(70, 45, 20, .45); }
+  .book:not(.one)::after { content: ''; position: absolute; left: 50%; top: 10px; bottom: 14px; width: 2px; margin-left: -1px; background: #2b2118; opacity: .55; }
+  .book .folio { position: absolute; bottom: 10px; font: 800 italic 11px 'Be Vietnam Pro'; color: #8a6a44; }
+  .book .leaf.l .folio { left: 20px; } .book .leaf.r .folio, .book.one .folio { right: 20px; }
+  .book .photo { padding: 5px 5px 18px; box-shadow: 0 0 0 1px rgba(43, 33, 24, .5), 2px 3px 0 rgba(70, 45, 20, .25); }
+  .book .photo::before, .book .photo::after { content: ''; position: absolute; width: 14px; height: 14px; background: #2b2118; z-index: 1; }
+  .book .photo::before { left: -3px; top: -3px; clip-path: polygon(0 0, 100% 0, 0 100%); }
+  .book .photo::after { right: -3px; bottom: 11px; clip-path: polygon(100% 0, 100% 100%, 0 100%); }
+  .book .photo small { position: absolute; left: 0; right: 0; bottom: 3px; text-align: center; font: 700 italic 9px 'Be Vietnam Pro'; color: #6b5440; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .book .corner { position: absolute; bottom: 14px; width: 34px; height: 34px; border: 0; cursor: pointer; background: linear-gradient(135deg, transparent 50%, #e2d3b0 50%, #d4c09a); box-shadow: -2px -2px 0 rgba(70, 45, 20, .25); }
+  .book .corner.r { right: 12px; } .book .corner.l { left: 12px; transform: scaleX(-1); }
+  .book .corner:hover { width: 44px; height: 44px; }
+  .book.turn-fwd .leaf.r, .book.one.turn-fwd .leaf { animation: turn-fwd .32s steps(5); transform-origin: left center; }
+  .book.turn-back .leaf.l, .book.one.turn-back .leaf { animation: turn-back .32s steps(5); transform-origin: right center; }
+  @keyframes turn-fwd { from { transform: rotateY(-80deg); } to { transform: none; } }
+  @keyframes turn-back { from { transform: rotateY(80deg); } to { transform: none; } }
+  .photo { position: relative; padding: 6px 6px 16px; border: 0; background: #f6eeda; box-shadow: 0 0 0 2px #2b2118, 3px 4px 0 rgba(0, 0, 0, .3); cursor: pointer; transform: rotate(var(--r)); transition: transform .15s steps(3); }
+  .photo img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; box-shadow: 0 0 0 1px #2b2118; }
+  .photo .pin { position: absolute; left: 50%; top: -10px; width: 12px; height: 28px; margin-left: -6px; background: url(ui/pin.png) 0 0 / 100% 100%; image-rendering: pixelated; }
+  .photo:hover, .photo:focus-visible { transform: rotate(0) translateY(-6px) scale(1.04); z-index: 1; outline: none; }
+  .pager { display: flex; align-items: center; justify-content: flex-end; gap: 10px; color: var(--cream); font-weight: 800; text-shadow: 0 2px 0 #2b2118; }
+  .pager button:disabled { opacity: .4; }
+  .lightbox { position: fixed; inset: 0; z-index: 5; display: grid; place-items: center; background: rgba(20, 14, 8, .6); }
+  .lightbox .polaroid { margin: 0; padding: 12px 12px 40px; background: #f6eeda; box-shadow: 0 0 0 3px #2b2118, 6px 8px 0 rgba(0, 0, 0, .35); transform: rotate(-1deg); position: relative; animation: pop .25s steps(4); }
+  .lightbox img { display: block; max-width: min(84vw, 900px); max-height: 72vh; }
+  .lightbox figcaption { position: absolute; left: 0; right: 0; bottom: 10px; text-align: center; font: 800 italic 15px 'Be Vietnam Pro'; color: var(--ink); }
+  .lightbox .logbtn { position: fixed; }
+  .lb-prev { left: 18px; top: 50%; } .lb-next { right: 18px; top: 50%; } .lb-x { right: 18px; top: 18px; }
+  /* cine: a cloth screen, the film card, tickets */
+  .room-body.cine { display: grid; grid-template-columns: minmax(0, 1fr) min(640px, 54vw); grid-template-rows: auto auto 1fr auto; gap: 12px; }
+  .screen { grid-column: 2; grid-row: 1; position: relative; background: #eef0f2; border: 6px solid #c9a06a; box-shadow: 0 0 0 4px #2b2118, 0 10px 0 rgba(20, 14, 8, .35); display: grid; place-items: center; aspect-ratio: 16 / 9; max-height: 100%; align-self: center; justify-self: center; width: 100%; }
+  .screen::before, .screen::after { content: ''; position: absolute; top: -26px; bottom: -14px; width: 10px; background: #c9a06a; box-shadow: 0 0 0 2px #2b2118; z-index: -1; }
+  .screen::before { left: -18px; } .screen::after { right: -18px; }
+  .screen iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .screen .idle { font: 800 italic 18px 'Be Vietnam Pro'; color: #8f7f64; }
+  .now-film { grid-column: 2; grid-row: 2; align-self: start; padding: 10px 14px; max-height: 100%; overflow: auto; }
+  .now-film b { display: block; font: 800 italic 17px 'Be Vietnam Pro'; } .now-film small { color: #6b5a3e; font-weight: 600; font-size: 12px; } .now-film p { font-size: 12px; line-height: 1.55; }
+  .tickets { grid-column: 1 / -1; grid-row: 4; display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; padding: 6px 2px 4px; }
+  .tickets::-webkit-scrollbar { display: none; }
+  .ticket { flex: 0 0 150px; display: flex; flex-direction: column; gap: 3px; padding: 6px 8px 8px; border: 2px solid #2b2118; background: #ffe3a8; color: var(--ink); text-align: left; cursor: pointer; font: 700 11px/1.25 'Be Vietnam Pro'; box-shadow: 0 4px 0 #2b2118; -webkit-mask: radial-gradient(circle 6px at 0 50%, transparent 98%, #000) left / 51% 100% no-repeat, radial-gradient(circle 6px at 100% 50%, transparent 98%, #000) right / 51% 100% no-repeat; }
+  .ticket img, .ticket .reel { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: repeating-linear-gradient(90deg, #2b2118 0 6px, #3a2e24 6px 12px); display: block; }
+  .ticket b { height: 2.5em; overflow: hidden; } .ticket small { color: #6b5a3e; font-weight: 600; }
+  .ticket.on { background: var(--clay); color: var(--cream); } .ticket.on small { color: #fbe0b0; }
+  /* the gate */
+  .gate { position: fixed; inset: 0; z-index: 40; display: grid; place-items: center; backdrop-filter: blur(6px) saturate(1.1); background: rgba(30, 22, 14, .28); transition: opacity .8s ease, backdrop-filter .8s ease; }
+  .gate.open { opacity: 0; backdrop-filter: blur(0); pointer-events: none; }
+  .gate-card { display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; padding: 24px 28px 18px; color: var(--cream); }
+  .gate-card .st-sign { width: 240px; height: 120px; } .gate-card .st-sign h2 { font-size: 30px; }
+  .gate-q { margin: 0; font: 800 italic clamp(22px, 4vw, 34px)/1.25 'Be Vietnam Pro', sans-serif; text-shadow: 0 3px 0 rgba(30, 20, 10, .6); max-width: 560px; }
+  .gate-go { height: 52px; padding: 0 26px; border: 3px solid #2b2118; background: var(--sun); color: var(--ink); font: 800 16px 'Be Vietnam Pro'; cursor: pointer; box-shadow: 0 5px 0 #2b2118; clip-path: polygon(6px 0, calc(100% - 6px) 0, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0 calc(100% - 6px), 0 6px); }
+  .gate-go:hover { transform: translateY(-2px); }
+  .gate-card small { font-weight: 600; letter-spacing: .06em; text-shadow: 0 2px 0 rgba(30, 20, 10, .6); }
+  @media (max-width: 760px) {
+    .room-body { top: 112px; bottom: 8px; width: calc(100vw - 16px); }
+    .room-body.house, .room-body.cine { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto; overflow: auto; align-content: end; }
+    .room-body.house > :not(.idcard), .idcard, .screen, .now-film, .tickets { grid-column: 1; grid-row: auto; }
+    .room-body.house > :not(.idcard) { max-height: 36vh; }
+    .letter { font-size: 13px; line-height: 1.6; padding: 12px 14px; }
+    .album { grid-template-columns: repeat(3, 1fr); }
+    .album { grid-template-columns: repeat(3, 1fr); margin-left: 0; gap: 12px 10px; padding: 14px 10px 8px; }
+    .album.book { grid-template-columns: 1fr; padding: 8px 8px 12px; }
+    .book .leaf { padding: 16px 14px 30px; min-height: 0; gap: 14px 12px; }
+    .now-film { max-height: 22vh; }
+    .ticket { flex-basis: 120px; }
+  }
+
+  /* ---------- loading: shown until the garden is ready ---------- */
+  .loading { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; background: #2b2118; color: #f6eeda; font-family: 'Be Vietnam Pro', sans-serif; transition: opacity .6s ease; }
+  .loading.done { opacity: 0; pointer-events: none; }
+  .loading div { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .loading b { font: 800 italic 26px 'Be Vietnam Pro'; }
+  .loading i { display: flex; gap: 6px; }
+  .loading i span { width: 10px; height: 10px; background: #ffc35a; animation: seed 1s steps(3) infinite; }
+  .loading i span:nth-child(2) { animation-delay: .2s; } .loading i span:nth-child(3) { animation-delay: .4s; }
+  @keyframes seed { 50% { transform: translateY(-8px); } }
+  .loading small { font-weight: 600; letter-spacing: .06em; opacity: .75; }
+  .noscript { position: fixed; inset: 0; display: grid; place-items: center; background: #2b2118; color: #f6eeda; z-index: 60; padding: 24px; text-align: center; }
+</style>
+<link rel="stylesheet" href="./interface.css?v=69">
 </head>
-<body data-entered="false">
-  <section id="entrance" class="entrance" role="dialog" aria-modal="true" aria-labelledby="entrance-title" tabindex="-1" data-state="loading">
-    <div class="entrance-air" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-    <div class="entrance-note">
-      <span class="entrance-eyebrow">MỘT GÓC NHỎ · MỘT CHÚT NHẠC</span>
-      <h1 id="entrance-title">Ghé vườn<br>nhà <em>Li.</em></h1>
-      <p id="entrance-quote">Ngoài kia vội quá thì ghé đây một chút.</p>
-      <button id="entrance-bell" class="entrance-bell" disabled><span class="bell-object" aria-hidden="true"><svg viewBox="0 0 64 72"><path class="bell-handle" d="M32 5v10M26 7q6-6 12 0"/><path class="bell-body" d="M16 43V31c0-22 32-22 32 0v12l6 8q2 4-4 4H14q-6 0-4-4Z"/><path class="bell-rim" d="M13 52h38"/><path class="bell-clapper" d="M26 57q6 11 12 0"/></svg></span><span id="entrance-action">Vườn đang thức giấc…</span><span class="bell-arrow" aria-hidden="true">↗</span></button>
-      <p id="entrance-status" role="status">Li đang mở cửa sổ, kê lại chiếc ghế.</p>
+<body class="at-gate">
+  <div class="loading" id="loading"><div><b>vườn của Li</b><i><span></span><span></span><span></span></i><small>Đang tưới cây, chờ Li chút nha…</small></div></div>
+  <script>
+    // If the garden fails to load, say so instead of spinning forever.
+    const oops = () => { const l = document.getElementById('loading'); if (l && !l.classList.contains('done')) l.querySelector('small').innerHTML = 'Vườn gặp chút trục trặc. <a href="" style="color:#ffc35a">Tải lại trang</a> nha.'; };
+    addEventListener('error', oops); addEventListener('unhandledrejection', oops);
+  </script>
+  <noscript><div class="noscript">Vườn của Li cần JavaScript để sống. Bật JavaScript rồi ghé lại nha.</div></noscript>
+  <div class="hud">
+    <div class="plaque"><b>vườn của Li</b><small>MỘT GÓC NHỎ · MỘT CHÚT NHẠC</small></div>
+    <div class="tools">
+    <button class="clock" id="clock" aria-expanded="false" aria-controls="garden-settings" title="Chọn giờ, thời tiết và chuyển động">--:--</button>
+    <button class="np" id="np" hidden title="Mở sạp nhạc"><i aria-hidden="true"><b></b><b></b><b></b></i><span id="np-title"></span></button>
+    <button class="sq" id="weather" aria-label="Đổi thời tiết" title="Thời tiết: tự động">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 15h10a4 4 0 0 0 0-8 5 5 0 0 0-9.6 1.4A3.3 3.3 0 0 0 6 15z"/><path d="M8 18l-1 2M12 18l-1 2M16 18l-1 2"/></svg>
+    </button>
+    <button class="sq" id="sound" aria-label="Bật âm thanh" aria-pressed="false" title="Bật âm thanh">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M3 8h4l5-4v14l-5-4H3z"/><path class="wave" d="M15 7c2 2 2 6 0 8M17.5 5c3.3 3.3 3.3 8.7 0 12"/></svg>
+    </button>
+    <button class="sq" id="outfit" aria-label="Đổi đồ cho Li" title="Đổi đồ cho Li">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M8 3l3 2 3-2 5 3-2 4-2-1v10H7V9l-2 1-2-4z"/></svg>
+    </button>
+    <button class="sq" id="wide" aria-label="Xem cả màn" title="Xem cả màn">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 8V3h5M19 8V3h-5M3 14v5h5M19 14v5h-5"/></svg>
+    </button>
     </div>
-    <span class="entrance-signature">ÂM NHẠC & NHỮNG ĐIỀU ĐỂ DÀNH</span>
-  </section>
-  <main id="garden" class="garden" inert>
-    <div class="scene-world">
-    <picture class="scene-layer far-layer" aria-hidden="true"><source media="(max-aspect-ratio:4/3)" srcset="./assets/garden-mobile.webp"><img src="./assets/garden-desktop.webp" alt=""></picture>
-    <picture class="scenery" id="scenery">
-      <source media="(max-aspect-ratio: 4/3)" srcset="./assets/garden-mobile.webp">
-      <img src="./assets/garden-desktop.webp" alt="Một khu vườn nhỏ với sạp nhạc, hiên nhà và bảng ảnh của Li." fetchpriority="high">
-    </picture>
-    <div class="lantern-light lantern-house" aria-hidden="true"></div><div class="lantern-light lantern-stall" aria-hidden="true"></div>
-    <div class="hero-atmosphere" aria-hidden="true"></div>
-    <div class="pond-glint" aria-hidden="true"></div>
-    <div class="garden-sprig sprig-house" aria-hidden="true"></div><div class="garden-sprig sprig-stall" aria-hidden="true"></div><div class="garden-sprig sprig-path" aria-hidden="true"></div>
-    <div class="scene-shade" aria-hidden="true"></div>
-    <div class="places" aria-label="Các góc trong vườn">
-      <button class="place place-profile" data-open="profile" aria-label="Chuyện của Li"><svg class="place-outline" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path pathLength="100" d="M4 23 Q4 20 8 18 L48 3 Q51 2 54 3 L95 20 L94 88 Q94 94 88 95 L10 98 Q4 98 4 91 Z"/></svg><span class="place-label"><i></i>Chuyện của Li<span>↗</span></span></button>
-      <button class="place place-music" data-open="music" aria-label="Ghé sạp nhạc"><svg class="place-outline" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path pathLength="100" d="M9 4 L87 6 Q91 6 92 10 L98 29 L94 33 L91 91 Q91 96 86 96 L10 96 Q5 96 5 91 L6 34 L2 30 L6 9 Q7 4 9 4 Z"/></svg><span class="place-label"><i></i>Cái sạp nhạc<span>↗</span></span></button>
-      <button class="place place-gallery" data-open="gallery" aria-label="Điều để dành"><svg class="place-outline" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path pathLength="100" d="M16 3 L95 10 L80 82 L85 97 L69 96 L66 85 L23 80 L14 95 L3 94 L13 77 L12 8 Q12 3 16 3 Z"/></svg><span class="place-label"><i></i>Điều để dành<span>↗</span></span></button>
+  </div>
+  <div class="tag" id="tag"></div>
+  <div class="chill-cap" id="chill-cap" aria-hidden="true"><b>vườn của Li</b><small></small></div>
+  <div class="stick" id="stick" hidden aria-hidden="true"><i></i></div>
+  <nav class="menu" id="menu" aria-label="Đi tới"><div class="menu-row"></div></nav>
+  <canvas id="menu-pets" aria-hidden="true"></canvas>
+  <div class="stall" id="stall" role="dialog" aria-modal="true" aria-label="Sạp nhạc" hidden>
+    <div class="st-shade"></div>
+    <div class="st-head">
+      <div class="st-sign"><h2>Sạp nhạc</h2></div>
+      <nav class="st-pills" id="tags" aria-label="Lọc theo dòng nhạc"></nav>
+      <button class="logbtn st-close" id="stall-close" aria-label="Rời sạp"><svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="3.2" aria-hidden="true"><path d="M4 4l10 10M14 4L4 14"/></svg></button>
     </div>
-    <div id="host" class="host" aria-hidden="true"><div class="host-shadow"></div><div class="host-cast-shadow"></div><div class="host-sprite"></div></div>
-    <div class="music-notes" aria-hidden="true"><span>♪</span><span>♫</span><span>♩</span></div>
-    <div class="dandelion-drift" aria-hidden="true"><span style="--seed:0"><svg viewBox="0 0 34 44"><path d="M17 14l-3 27M17 14L4 7m13 7L7 2m10 12L16 1m1 13L25 2m-8 12L32 8m-15 6L2 15m15-1l16 3"/></svg></span><span style="--seed:1"><svg viewBox="0 0 34 44"><path d="M17 14l-3 27M17 14L4 7m13 7L7 2m10 12L16 1m1 13L25 2m-8 12L32 8m-15 6L2 15m15-1l16 3"/></svg></span><span style="--seed:2"><svg viewBox="0 0 34 44"><path d="M17 14l-3 27M17 14L4 7m13 7L7 2m10 12L16 1m1 13L25 2m-8 12L32 8m-15 6L2 15m15-1l16 3"/></svg></span><span style="--seed:3"><svg viewBox="0 0 34 44"><path d="M17 14l-3 27M17 14L4 7m13 7L7 2m10 12L16 1m1 13L25 2m-8 12L32 8m-15 6L2 15m15-1l16 3"/></svg></span><span style="--seed:4"><svg viewBox="0 0 34 44"><path d="M17 14l-3 27M17 14L4 7m13 7L7 2m10 12L16 1m1 13L25 2m-8 12L32 8m-15 6L2 15m15-1l16 3"/></svg></span></div>
-    <picture class="scene-layer near-layer" aria-hidden="true"><source media="(max-aspect-ratio:4/3)" srcset="./assets/garden-mobile.webp"><img src="./assets/garden-desktop.webp" alt=""></picture>
-    <picture class="scene-layer far-layer night-scene" aria-hidden="true"><source media="(max-aspect-ratio:4/3)" srcset="./assets/garden-mobile-night.webp"><img src="./assets/garden-desktop-night.webp" alt="" decoding="async"></picture>
-    <picture class="scene-layer middle-layer night-scene" aria-hidden="true"><source media="(max-aspect-ratio:4/3)" srcset="./assets/garden-mobile-night.webp"><img src="./assets/garden-desktop-night.webp" alt="" decoding="async"></picture>
-    <picture class="scene-layer near-layer night-scene" aria-hidden="true"><source media="(max-aspect-ratio:4/3)" srcset="./assets/garden-mobile-night.webp"><img src="./assets/garden-desktop-night.webp" alt="" decoding="async"></picture>
-    <div class="canopy-frond" aria-hidden="true"></div>
-    <div class="scene-record" id="scene-record" hidden aria-hidden="true"><div class="vinyl-spin"><img alt=""><i class="vinyl-shine"></i></div></div>
+    <div class="stall-search"><label for="music-search">Tìm một giai điệu</label><input id="music-search" type="search" placeholder="Tên album hoặc bài hát…" autocomplete="off"></div>
+    <div class="playback-state" id="playback-state" role="status" hidden></div>
+    <div class="st-line" id="line" aria-label="Dây phơi đĩa nhạc">
+      <canvas id="rope-line" aria-hidden="true"></canvas>
+      <div class="st-cards" id="crate"></div>
     </div>
-    <div id="host-talk" class="host-talk" role="group" aria-label="Lời thoại của Li"><span id="host-words">Ghé vườn nhà Li chơi chút nha. Nghe vài bài hát Li sáng tác.</span><button id="tarot-draw" hidden>Rút một lá</button></div>
-    <header class="masthead">
-      <a href="./" class="wordmark" aria-label="Vườn của Li, về khu vườn">vườn của <em>Li.</em><small>GHÉ CHƠI · NGHE NHẠC</small></a>
-      <nav class="top-nav" aria-label="Trong khu vườn">
-        <button data-open="music"><span data-icon="music"></span><span>Sạp nhạc<small>Âm nhạc chữa lành</small></span></button>
-        <button data-open="profile"><span data-icon="user"></span><span>Chuyện của Li<small>Những câu chuyện nhỏ</small></span></button>
-        <button data-open="gallery"><span data-icon="image"></span><span>Điều để dành<small>Những khoảnh khắc đẹp</small></span></button>
-      </nav>
-      <button id="motion-toggle" data-motion-toggle class="round-button motion-toggle" aria-label="Tắt chuyển động" aria-pressed="false" title="Tắt chuyển động"><span data-icon="sparkle"></span></button>
-    </header>
-    <details class="garden-settings wood-panel"><summary aria-label="Mở tùy chỉnh khu vườn"><span data-icon="settings"></span></summary><div class="garden-tools paper-panel" role="group" aria-label="Không khí trong vườn"><p class="settings-title">Một chút không khí vườn</p><span id="world-time" class="garden-tag">Buổi sáng</span>
-      <div class="daylight-controls" role="group" aria-label="Ánh sáng khu vườn">
-        <button id="daylight-day" class="garden-tool" aria-label="Ban ngày" aria-pressed="false" title="Ban ngày"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button>
-        <button id="daylight-night" class="garden-tool" aria-label="Ban đêm" aria-pressed="false" title="Ban đêm"><svg viewBox="0 0 24 24"><path d="M20 15A9 9 0 0 1 9 4a9 9 0 1 0 11 11Z"/></svg></button>
-        <button id="daylight-auto" class="garden-tool" aria-label="Tự động theo giờ thiết bị" aria-pressed="true" title="Tự động · 05:30–17:30 ban ngày"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg></button>
+    <div class="st-arrows">
+      <button class="logbtn" id="crate-prev" aria-label="Kéo dây sang trái"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M11 2v12L3 8z"/></svg></button>
+      <button class="logbtn" id="crate-next" aria-label="Kéo dây sang phải"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M5 2v12l8-6z"/></svg></button>
+    </div>
+    <div class="st-deck">
+      <canvas id="deck" aria-label="Máy hát"></canvas>
+      <button class="skin" id="skin">Máy: Máy vali ›</button>
+    </div>
+    <button class="featured-album" id="featured-album" type="button" hidden>
+      <img alt="" id="featured-cover"><span class="featured-copy"><small id="featured-label"></small><strong id="featured-name"></strong><span id="featured-description"></span><em>Khám phá album →</em></span>
+    </button>
+    <div class="st-ribbon">
+      <img class="now-cover" id="now-cover" alt="">
+      <div class="now">
+        <div class="kick"><span>ĐANG PHÁT</span><canvas id="marquee" aria-hidden="true"></canvas></div>
+        <div style="display:flex;align-items:center;gap:6px;min-width:0"><b id="now-title">Chạm một bìa đĩa để nghe</b><button class="heart" id="fav" aria-pressed="false" aria-label="Thả tim bài này">♥</button></div>
+        <small id="now-album">26 album · 213 bài</small>
       </div>
-      <button id="ambience-toggle" class="garden-tool ambience-toggle" aria-pressed="false" aria-label="Bật tiếng vườn" title="Bật tiếng vườn"><svg viewBox="0 0 24 24"><path d="M9 18V5l11-2v13M9 8l11-2"/><ellipse cx="6" cy="18" rx="3" ry="2.5"/><ellipse cx="17" cy="16" rx="3" ry="2.5"/><path class="ambient-slash" d="M3 3l18 18"/></svg></button>
-    </div></details>
-    <section id="mini-player" class="mini-player" aria-label="Bài nhạc hiện tại">
-      <button id="mini-details" class="mini-details" data-open="music"><span id="mini-cover-wrap" class="mini-cover-wrap"><span data-icon="music"></span><img id="mini-cover" alt="" hidden></span><span class="mini-copy"><small id="mini-kicker">CÁI SẠP CỦA LI</small><strong id="mini-title">Chọn một album nhạc</strong><span id="mini-subtitle">Nghe khi bạn muốn.</span></span></button>
-      <button id="mini-play" class="play-button" aria-label="Phát nhạc" disabled><span data-icon="play"></span></button>
-      <button id="mini-next" class="round-button" aria-label="Bài tiếp theo" disabled><span data-icon="next"></span></button>
-    </section>
-    <aside id="welcome-loading" hidden aria-label="Khu vườn đang tải"></aside>
-    <footer class="garden-footer"><span>Vườn của Li · v2.2</span><span>Âm nhạc & những điều để dành.</span></footer>
-  </main>
-
-  <dialog id="room-dialog" class="room-dialog" aria-labelledby="room-title">
-    <div class="room-inner">
-      <header class="room-header"><div><p class="eyebrow" id="room-kicker">CÁI SẠP NHẠC</p><h1 id="room-title">Chọn một album nhạc.</h1></div><button class="round-button room-motion" data-motion-toggle aria-label="Giảm chuyển động để máy nhẹ hơn" aria-pressed="false"><span data-icon="sparkle"></span></button><button class="round-button close-room" aria-label="Đóng, trở về vườn"><span data-icon="close"></span></button></header>
-      <div id="room-content" class="room-content"></div>
+      <div class="st-ctl">
+        <button class="logbtn" id="prev" aria-label="Bài trước"><svg width="14" height="14" viewBox="0 0 18 18" fill="currentColor" aria-hidden="true"><path d="M3 3h2v12H3zM15 3v12L6 9z"/></svg></button>
+        <button class="logbtn big" id="play" aria-label="Phát / tạm dừng"><svg class="i-play" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M5 3l12 7-12 7z"/></svg><svg class="i-pause" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M4 3h4v14H4zM12 3h4v14h-4z"/></svg></button>
+        <button class="logbtn" id="next" aria-label="Bài sau"><svg width="14" height="14" viewBox="0 0 18 18" fill="currentColor" aria-hidden="true"><path d="M13 3h2v12h-2zM3 3v12l9-6z"/></svg></button>
+      </div>
+      <div class="rope"><input id="seek" type="range" min="0" max="1000" value="0" aria-label="Vị trí trong bài"><output id="time">0:00 / 0:00</output></div>
+      <button class="list-btn" id="list-btn" aria-expanded="false">Danh sách bài</button>
     </div>
-  </dialog>
+    <section class="st-list paper" id="tracklist" hidden aria-label="Danh sách bài">
+      <header><b id="album-name"></b><small id="album-sub"></small><p id="album-about"></p><button id="list-close" aria-label="Đóng danh sách">×</button></header>
+      <ol class="tracks" id="tracks"></ol>
+    </section>
+  </div>
+  <div class="bubble paper" id="bubble" hidden><span id="bubble-words"></span><button id="daily-invite" class="daily-invite" hidden>Đọc thông điệp hôm nay ✦</button></div>
 
-  <dialog id="lightbox" class="lightbox" aria-labelledby="lightbox-caption">
-    <button class="round-button lightbox-close" aria-label="Đóng ảnh"><span data-icon="close"></span></button>
-    <button class="round-button lightbox-prev" aria-label="Ảnh trước"><span data-icon="left"></span></button>
-    <figure><div class="pin-image-wrap"><img id="lightbox-image" alt=""></div><figcaption><small>ĐIỀU ĐỂ DÀNH</small><h2 id="lightbox-caption"></h2><p id="lightbox-detail"></p><button id="lightbox-heart" class="pin-like" aria-pressed="false"><span data-icon="heart"></span><span class="heart-label">Thả tim</span></button><p class="like-note">Giữ lại những hình bạn thích trên trình duyệt này.</p></figcaption></figure>
-    <button class="round-button lightbox-next" aria-label="Ảnh tiếp theo"><span data-icon="right"></span></button>
-  </dialog>
+  <aside class="garden-welcome" id="garden-welcome">
+    <button class="text-button welcome-close" id="welcome-close" aria-label="Ẩn lời chào">Ẩn</button>
+    <span class="eyebrow">Bạn đã đến vườn</span><h1>Chậm lại<br>một chút.</h1>
+    <p>Chọn một góc bên dưới.<br>Li ở đây, nhạc cũng ở đây.</p>
+    <button class="primary" id="welcome-music">Ghé sạp nghe nhạc</button>
+  </aside>
+  <button class="text-button" id="return-garden">Ngắm toàn vườn</button>
+  <aside class="mini-player" id="mini-player" hidden>
+    <button class="mini-open" id="mini-open"><small>ĐANG NGHE TRONG VƯỜN</small><b id="mini-title"></b></button>
+    <button class="mini-toggle" id="mini-toggle" aria-label="Tạm dừng nhạc">Dừng</button>
+  </aside>
+  <section class="settings" id="garden-settings" role="dialog" aria-modal="true" aria-label="Nhịp của vườn" hidden>
+    <header><h2>Nhịp của vườn</h2><button class="text-button" id="settings-close">Đóng</button></header>
+    <label>Khoảnh khắc<select id="time-mode"><option value="real">Theo giờ thật</option><option value="7.5">Sáng trong veo</option><option value="12">Trưa đầy nắng</option><option value="17.8">Chiều dịu xuống</option><option value="20.5">Đêm bên vườn</option></select></label>
+    <label>Thời tiết<select id="weather-mode"><option value="">Tự nhiên trong ngày</option><option value="clear">Trời nắng</option><option value="cloudy">Nhiều mây</option><option value="rain">Mưa nhẹ</option></select></label>
+    <div class="garden-actions"><button id="daily-open">✦ Thông điệp hôm nay</button></div>
+    <div class="garden-actions"><button id="call-pets">Gọi các con lại chơi</button><button id="water-plants">Ra vườn tưới cây</button></div>
+    <label>Hoạt ảnh giao diện<select id="motion-mode"><option value="system">Theo thiết bị</option><option value="full">Chuyển động nhẹ</option><option value="reduce">Giảm chuyển động</option></select></label>
+    <p>Đổi nhịp một chút, hoặc trở về giờ thật bất cứ lúc nào.</p>
+  </section>
   <dialog id="daily-dialog" class="daily-dialog" aria-labelledby="daily-heading">
-    <button id="daily-close" class="round-button" aria-label="Đóng thông điệp"><span data-icon="close"></span></button>
-    <p class="eyebrow">LI GỬI BẠN</p><h2 id="daily-heading">Một lời gửi hôm nay.</h2>
+    <button id="daily-close" class="daily-close" aria-label="Đóng thông điệp">×</button>
+    <p class="daily-eyebrow">✦ LI GỬI BẠN</p><h2 id="daily-heading">Một lời gửi hôm nay.</h2>
     <div class="daily-reading"><img id="daily-image" alt=""><div><small id="daily-date"></small><h3 id="daily-name"></h3><h4 id="daily-title"></h4><p id="daily-text"></p></div></div>
     <p class="daily-note">Thông điệp này ở lại cùng bạn hôm nay. Ngày mai, một hạt khác có thể ghé vườn.</p>
   </dialog>
-  <div id="notice" class="notice" role="status" aria-live="polite"></div>
-  <audio id="audio" preload="none" controlslist="nodownload" playsinline></audio>
-  <noscript><style>.entrance{display:none}.noscript{z-index:60;position:fixed}</style><div class="noscript"><h1>Vườn của Li</h1><p>Bật JavaScript để chọn album nhạc và xem album ảnh.</p><a href="mailto:ali.readytostart@gmail.com">Liên hệ Li</a></div></noscript>
+  <div class="notice" id="notice" role="status" aria-live="polite" hidden></div>
+  <script type="module" src="./main.js?v=69"></script>
 </body>
 </html>

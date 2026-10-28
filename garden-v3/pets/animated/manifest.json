@@ -1,0 +1,47 @@
+{
+  "husky": {
+    "play": {
+      "frames": 9,
+      "fps": 7,
+      "ax": 52.0,
+      "ay": 73,
+      "job": "cd440896-4e07-4789-b68c-3fa505cc96b4"
+    }
+  },
+  "corgi": {
+    "play": {
+      "frames": 9,
+      "fps": 7,
+      "ax": 44.0,
+      "ay": 47,
+      "job": "4e735a79-4c17-455f-b0ec-80f89f11e195"
+    }
+  },
+  "mun_tabby": {
+    "play": {
+      "frames": 9,
+      "fps": 7,
+      "ax": 34.0,
+      "ay": 37,
+      "job": "1e3c438b-7faa-4b95-a12a-df5327679f10"
+    }
+  },
+  "tux": {
+    "play": {
+      "frames": 9,
+      "fps": 7,
+      "ax": 34.0,
+      "ay": 35,
+      "job": "6b7a1667-e26c-45bc-ad73-02947dcbea4b"
+    }
+  },
+  "spaniel": {
+    "play": {
+      "frames": 9,
+      "fps": 7,
+      "ax": 42.0,
+      "ay": 50,
+      "job": "fccf28c1-dcc9-4a0e-b310-c4945d78df3e"
+    }
+  }
+}

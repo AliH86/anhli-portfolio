@@ -6,7 +6,7 @@ const loadImg = (src) => new Promise((ok, no) => { const i = new Image(); i.onlo
 const rnd = (a, b) => a + Math.random() * (b - a);
 
 export async function loadAnimals(base) {
-  const man = await (await fetch(`${base}manifest.json`)).json();
+  const man = await (await fetch(`${base}manifest.json`, { cache: 'no-cache' })).json();
   const sp = {};
   for (const [k, def] of Object.entries(man)) {
     sp[k] = { still: await loadImg(`${base}${k}/still.png`) };
@@ -33,8 +33,16 @@ export function makeAnimals() {
   };
 }
 
-function stepCat(c, dt, hour, nav, rain) {
-  const napAt = hour < 7 || hour >= 19 || rain > 0.5 ? 'porch' : hour >= 10 && hour < 15 ? 'bench' : null;   // rain: back under the eaves
+export function callGardenCat(c,li,nav) {
+  c.attention=20; c.called=true; c.goNap=null;
+  if(c.state!=='sleep'&&c.state!=='hop'){
+    c.path=nav(c.x,c.y,li.x+50,li.y+28);c.state='walk';c.called=false;
+  }
+}
+function stepCat(c, dt, hour, nav, rain, li) {
+  const benchTaken = li && (li.pose === 'sit' || li.wantPose === 'sit');
+  c.attention=Math.max(0,(c.attention||0)-dt);
+  const napAt = c.attention>0 ? null : hour < 7 || hour >= 19 || rain > 0.5 || benchTaken ? 'porch' : hour >= 10 && hour < 15 ? 'bench' : null;   // rain: back under the eaves
   c.t += dt;
   if (c.state === 'hop') {                     // a short arc up onto the porch or the bench
     c.k = Math.min(1, c.k + dt * 1.8);
@@ -52,8 +60,8 @@ function stepCat(c, dt, hour, nav, rain) {
   if (c.state === 'walk') {
     const tgt = c.path[0];
     if (!tgt) {
-      if (c.goNap) { const s = CAT[c.goNap]; Object.assign(c, { state: 'hop', k: 0, hx0: c.x, hy0: c.y, hx1: s[0], hy1: s[1], hopTo: c.goNap }); c.goNap = null; }
-      else { c.state = 'sit'; c.wait = rnd(3, 9); }
+      if (c.goNap && Math.hypot(c.x-(c.goNap==='bench'?1168:905), c.y-(c.goNap==='bench'?760:720))<12) { const s = CAT[c.goNap]; Object.assign(c, { state: 'hop', k: 0, hx0: c.x, hy0: c.y, hx1: s[0], hy1: s[1], hopTo: c.goNap }); c.goNap = null; }
+      else { c.goNap=null; c.state = 'sit'; c.wait = rnd(3, 9); }
       return;
     }
     const dx = tgt[0] - c.x, dy = tgt[1] - c.y, d = Math.hypot(dx, dy);
@@ -62,7 +70,8 @@ function stepCat(c, dt, hour, nav, rain) {
     if (Math.abs(dx) > 1) c.flip = dx < 0;
     return;
   }
-  // Sitting: either head for a nap or stroll somewhere new.
+  // Sitting: either respond to Ba ba, head for a nap, or stroll somewhere new.
+  if(c.called&&c.attention>0){c.called=false;c.path=nav(c.x,c.y,li.x+50,li.y+28);c.state='walk';return;}
   c.wait -= dt;
   if (napAt) { const front = napAt === 'bench' ? [1168, 760] : [905, 720]; c.path = nav(c.x, c.y, ...front); c.goNap = napAt; c.state = 'walk'; return; }
   if (c.wait <= 0) { const w = CAT.wander[(Math.random() * CAT.wander.length) | 0]; c.path = nav(c.x, c.y, w[0], w[1]); c.state = 'walk'; }
@@ -114,7 +123,7 @@ function takeOff(s, x, y, toPerch) {
 }
 
 export function stepAnimals(an, dt, hour, rain, li, nav, fits) {
-  stepCat(an.cat, dt, hour, nav, rain);
+  stepCat(an.cat, dt, hour, nav, rain, li);
   const day = hour >= 6 && hour < 18.2;
   for (const h of an.hens) { h.hidden = !day || rain > 0.7; if (!h.hidden) stepHen(h, dt, fits); }
   for (const s of an.sparrows) { s.hidden = !day || rain > 0.5; if (!s.hidden) stepSparrow(s, dt, li); }
