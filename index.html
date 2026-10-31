@@ -3,8 +3,9 @@
 <head>
 <base href="./garden-v3/garden/">
 <meta charset="utf-8">
+<link rel="preload" as="image" href="../world/garden-day-v34.webp" fetchpriority="high">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Vườn của Li · v3.3</title>
+<title>Vườn của Li · v3.5</title>
 <meta name="description" content="Khu vườn pixel của Anh Li — nghe nhạc, xem ảnh, đọc chuyện, và chơi với mấy em thú nhỏ. Có ngày đêm, nắng mưa theo giờ thật.">
 <meta name="theme-color" content="#2b2118">
 <meta property="og:type" content="website">
@@ -15,7 +16,7 @@
 <link rel="icon" type="image/png" href="icon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <style>
   :root { --ink: #2b2118; --paper: #fffaf0; }
   html, body { margin: 0; height: 100%; overflow: hidden; background: #2f86c9; font-family: 'Be Vietnam Pro', system-ui, sans-serif; color: var(--ink); }
@@ -321,20 +322,28 @@
   .loading small { font-weight: 600; letter-spacing: .06em; opacity: .75; }
   .noscript { position: fixed; inset: 0; display: grid; place-items: center; background: #2b2118; color: #f6eeda; z-index: 60; padding: 24px; text-align: center; }
 </style>
-<link rel="stylesheet" href="./interface.css?v=70">
+<link rel="stylesheet" href="./interface.css?v=3504">
+<link rel="stylesheet" href="./visual-v34.css?v=3504">
+<link rel="stylesheet" href="./rooms-v34.css?v=3504">
+<link rel="stylesheet" href="./renovation-v35.css?v=3504">
 </head>
-<body class="at-gate">
+<body class="at-gate" data-build="3504">
   <div class="loading" id="loading"><div><b>vườn của Li</b><i><span></span><span></span><span></span></i><small>Đang tưới cây, chờ Li chút nha…</small></div></div>
   <script>
-    // If the garden fails to load, say so instead of spinning forever.
-    const oops = () => { const l = document.getElementById('loading'); if (l && !l.classList.contains('done')) l.querySelector('small').innerHTML = 'Vườn gặp chút trục trặc. <a href="" style="color:#ffc35a">Tải lại trang</a> nha.'; };
-    addEventListener('error', oops); addEventListener('unhandledrejection', oops);
+    (()=>{
+      const l=document.getElementById('loading');let timer;
+      const showError=()=>{if(!l||l.classList.contains('done'))return;clearTimeout(timer);l.querySelector('small').textContent='Kết nối chưa tải xong khu vườn. Anh thử lại nhé.';l.querySelector('button').hidden=false;};
+      const b=document.createElement('button');b.textContent='Tải lại vườn';b.hidden=true;b.onclick=()=>location.reload();l.firstElementChild.append(b);
+      timer=setTimeout(()=>{if(!l.classList.contains('done')){l.querySelector('small').textContent='Mạng hơi chậm, Li vẫn đang tải vườn… Anh có thể chờ thêm hoặc tải lại.';b.hidden=false;}},30000);
+      addEventListener('error',e=>{if(e.target===window||e.target?.matches?.('script[type="module"]'))showError();},true);addEventListener('unhandledrejection',showError);
+      new MutationObserver(()=>{if(l.classList.contains('done'))clearTimeout(timer);}).observe(l,{attributes:true});
+    })();
   </script>
   <noscript><div class="noscript">Vườn của Li cần JavaScript để sống. Bật JavaScript rồi ghé lại nha.</div></noscript>
   <div class="hud">
-    <div class="plaque"><b>vườn của Li</b><small>MỘT GÓC NHỎ · MỘT CHÚT NHẠC</small></div>
+    <button type="button" class="plaque" id="garden-menu-toggle" aria-expanded="false" aria-controls="menu"><b>Vườn Anh Li</b><small>GHÉ MỘT GÓC <span aria-hidden="true">⌄</span></small></button>
     <div class="tools">
-    <button class="clock" id="clock" aria-expanded="false" aria-controls="garden-settings" title="Chọn giờ, thời tiết và chuyển động">--:--</button>
+    <button class="clock" id="clock" aria-expanded="false" aria-controls="garden-settings" title="Chọn giờ, thời tiết và chuyển động"><time>--:--</time><small>nhịp của vườn</small></button>
     <button class="np" id="np" hidden title="Mở sạp nhạc"><i aria-hidden="true"><b></b><b></b><b></b></i><span id="np-title"></span></button>
     <button class="sq" id="weather" aria-label="Đổi thời tiết" title="Thời tiết: tự động">
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 15h10a4 4 0 0 0 0-8 5 5 0 0 0-9.6 1.4A3.3 3.3 0 0 0 6 15z"/><path d="M8 18l-1 2M12 18l-1 2M16 18l-1 2"/></svg>
@@ -342,6 +351,7 @@
     <button class="sq" id="sound" aria-label="Bật âm thanh" aria-pressed="false" title="Bật âm thanh">
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M3 8h4l5-4v14l-5-4H3z"/><path class="wave" d="M15 7c2 2 2 6 0 8M17.5 5c3.3 3.3 3.3 8.7 0 12"/></svg>
     </button>
+    <button class="sq" id="settings-toggle" aria-label="Nhịp của vườn" aria-expanded="false" aria-controls="garden-settings" title="Nhịp của vườn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 7h16M4 17h16"/><rect x="7" y="4" width="4" height="6" rx="1" fill="var(--paper)"/><rect x="14" y="14" width="4" height="6" rx="1" fill="var(--paper)"/></svg></button>
     <button class="sq" id="outfit" aria-label="Đổi đồ cho Li" title="Đổi đồ cho Li">
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M8 3l3 2 3-2 5 3-2 4-2-1v10H7V9l-2 1-2-4z"/></svg>
     </button>
@@ -355,10 +365,10 @@
   <div class="stick" id="stick" hidden aria-hidden="true"><i></i></div>
   <nav class="menu" id="menu" aria-label="Đi tới"><div class="menu-row"></div></nav>
   <canvas id="menu-pets" aria-hidden="true"></canvas>
-  <div class="stall" id="stall" role="dialog" aria-modal="true" aria-label="Sạp nhạc" hidden>
-    <div class="st-shade"></div>
+  <div class="stall v34-shop" id="stall" role="dialog" aria-modal="false" aria-label="Sạp nhạc" hidden>
+    <div class="st-shade"></div><img class="shop-awning" loading="lazy" decoding="async" src="./art-v34/ui/awning.webp" alt="" aria-hidden="true"><img class="shop-counter-clean" loading="lazy" decoding="async" src="./art-v35/counter-empty.webp" alt="" aria-hidden="true"><img class="shop-machine" id="shop-machine" src="./ui/skins/suitcase.png" alt="Máy nghe nhạc đang chọn"><img class="shop-disc" loading="lazy" src="./art-v34/ui/vinyl.webp" alt="" aria-hidden="true">
     <div class="st-head">
-      <div class="st-sign"><h2>Sạp nhạc</h2></div>
+      <div class="st-sign"><img loading="lazy" decoding="async" src="./art-v35/shop-sign-clean.webp" alt="Sạp nhạc của Li"></div>
       <nav class="st-pills" id="tags" aria-label="Lọc theo dòng nhạc"></nav>
       <button class="logbtn st-close" id="stall-close" aria-label="Rời sạp"><svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="3.2" aria-hidden="true"><path d="M4 4l10 10M14 4L4 14"/></svg></button>
     </div>
@@ -372,7 +382,7 @@
       <button class="logbtn" id="crate-prev" aria-label="Kéo dây sang trái"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M11 2v12L3 8z"/></svg></button>
       <button class="logbtn" id="crate-next" aria-label="Kéo dây sang phải"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M5 2v12l8-6z"/></svg></button>
     </div>
-    <div class="st-deck">
+    <div class="st-deck legacy-deck">
       <canvas id="deck" aria-label="Máy hát"></canvas>
       <button class="skin" id="skin">Máy: Máy vali ›</button>
     </div>
@@ -380,7 +390,8 @@
       <img alt="" id="featured-cover"><span class="featured-copy"><small id="featured-label"></small><strong id="featured-name"></strong><span id="featured-description"></span><em>Khám phá album →</em></span>
     </button>
     <div class="st-ribbon">
-      <img class="now-cover" id="now-cover" alt="">
+      <div class="album-stage"><img class="now-cover" id="now-cover" alt="Bìa album đang chọn"><div class="album-host"><button type="button" class="li-avatar" aria-label="Nghe Li kể một câu"><img class="li-host-motion" loading="lazy" src="./art-v34/ui/li-host-idle.webp" alt="Li ngồi cạnh album"><img class="li-host-still" loading="lazy" src="./art-v34/ui/li-host-transparent.webp" alt="Li ngồi cạnh album"></button><button type="button" class="li-quote" aria-label="Đổi câu chuyện của Li">Ngồi chơi một chút nhé.</button></div></div>
+
       <div class="now">
         <div class="kick"><span>ĐANG PHÁT</span><canvas id="marquee" aria-hidden="true"></canvas></div>
         <div style="display:flex;align-items:center;gap:6px;min-width:0"><b id="now-title">Chạm một bìa đĩa để nghe</b><button class="heart" id="fav" aria-pressed="false" aria-label="Thả tim bài này">♥</button></div>
@@ -398,24 +409,20 @@
       <header><b id="album-name"></b><small id="album-sub"></small><p id="album-about"></p><button id="list-close" aria-label="Đóng danh sách">×</button></header>
       <ol class="tracks" id="tracks"></ol>
     </section>
+<div class="theme-picker"><span class="theme-label">Máy nghe nhạc</span><button type="button" data-skin="suitcase"><img loading="lazy" src="ui/skins/suitcase.png" alt="">Đĩa than</button><button type="button" data-skin="boombox"><img loading="lazy" src="art-v35/cassette.webp" alt="">Cassette</button><button type="button" data-skin="gramophone"><img loading="lazy" src="ui/skins/gramophone.png" alt="">Loa kèn</button></div><div class="sound-mix"><label class="music-level">♫ Nhạc<input data-music-volume type="range" min="0" max="100" value="75" aria-label="Âm lượng nhạc"></label><label class="ambient-pick">Thiên nhiên<select data-ambient-mode aria-label="Chọn âm thanh nền"><option value="garden">Theo nhịp vườn</option><option value="morning">Chim buổi sáng</option><option value="stream">Suối róc rách</option><option value="rain">Mưa trên lá</option><option value="wind">Gió qua cây</option><option value="night">Đêm &amp; tiếng dế</option></select></label><label class="ambient-level"><input data-ambient-enabled type="checkbox" checked aria-label="Bật âm thanh nền"><input data-ambient-volume type="range" min="0" max="100" value="70" aria-label="Âm lượng thiên nhiên"></label></div>
   </div>
   <div class="bubble paper" id="bubble" hidden><span id="bubble-words"></span><button id="daily-invite" class="daily-invite" hidden>Đọc thông điệp hôm nay ✦</button></div>
 
-  <aside class="garden-welcome" id="garden-welcome">
-    <button class="text-button welcome-close" id="welcome-close" aria-label="Ẩn lời chào">Ẩn</button>
-    <span class="eyebrow">Bạn đã đến vườn</span><h1>Chậm lại<br>một chút.</h1>
-    <p>Chọn một góc bên dưới.<br>Li ở đây, nhạc cũng ở đây.</p>
-    <button class="primary" id="welcome-music">Ghé sạp nghe nhạc</button>
-  </aside>
   <button class="text-button" id="return-garden">Ngắm toàn vườn</button>
   <aside class="mini-player" id="mini-player" hidden>
-    <button class="mini-open" id="mini-open"><small>ĐANG NGHE TRONG VƯỜN</small><b id="mini-title"></b></button>
+    <button class="mini-open" id="mini-open" aria-label="Mở sạp nhạc"><img id="mini-machine" src="ui/skins/suitcase.png" alt=""><small>ĐANG NGHE TRONG VƯỜN</small><b id="mini-title"></b></button>
     <button class="mini-toggle" id="mini-toggle" aria-label="Tạm dừng nhạc">Dừng</button>
   </aside>
   <section class="settings" id="garden-settings" role="dialog" aria-modal="true" aria-label="Nhịp của vườn" hidden>
     <header><h2>Nhịp của vườn</h2><button class="text-button" id="settings-close">Đóng</button></header>
     <label>Khoảnh khắc<select id="time-mode"><option value="real">Theo giờ thật</option><option value="7.5">Sáng trong veo</option><option value="12">Trưa đầy nắng</option><option value="17.8">Chiều dịu xuống</option><option value="20.5">Đêm bên vườn</option></select></label>
-    <label>Thời tiết<select id="weather-mode"><option value="">Tự nhiên trong ngày</option><option value="clear">Trời nắng</option><option value="cloudy">Nhiều mây</option><option value="rain">Mưa nhẹ</option></select></label>
+    <label>Thời tiết<select id="weather-mode"><option value="">Tự nhiên trong ngày</option><option value="clear">Trời nắng</option><option value="cloudy">Nhiều mây</option><option value="windy">Gió lộng · lá bay</option><option value="rain">Mưa nhẹ</option><option value="mist">Sương sớm</option></select></label>
+<label>Âm thanh nền<select data-ambient-mode><option value="garden">Theo nhịp vườn</option><option value="morning">Chim buổi sáng</option><option value="stream">Suối róc rách</option><option value="rain">Mưa trên lá</option><option value="wind">Gió qua cây</option><option value="night">Đêm &amp; tiếng dế</option></select></label><label>Âm lượng thiên nhiên<input data-ambient-volume type="range" min="0" max="100" value="70"></label>
     <div class="garden-actions"><button id="daily-open">✦ Thông điệp hôm nay</button></div>
     <div class="garden-actions"><button id="call-pets">Gọi các con lại chơi</button><button id="water-plants">Ra vườn tưới cây</button></div>
     <label>Hoạt ảnh giao diện<select id="motion-mode"><option value="system">Theo thiết bị</option><option value="full">Chuyển động nhẹ</option><option value="reduce">Giảm chuyển động</option></select></label>
@@ -428,6 +435,6 @@
     <p class="daily-note">Thông điệp này ở lại cùng bạn hôm nay. Ngày mai, một hạt khác có thể ghé vườn.</p>
   </dialog>
   <div class="notice" id="notice" role="status" aria-live="polite" hidden></div>
-  <script type="module" src="./main.js?v=70"></script>
+  <script type="module" src="./app/main-3504.js"></script>
 </body>
 </html>

@@ -6,6 +6,13 @@
 const rnd = (a, b) => a + Math.random() * (b - a);
 const S = { on: false, ctx: null };
 
+let ambientMode='garden',ambientVolume=.7;
+try{ambientMode=localStorage.getItem('li-ambient-mode')||'garden';ambientVolume=Number(localStorage.getItem('li-ambient-volume')??.7);}catch{}
+export const getAmbientMode=()=>ambientMode;
+export const getAmbientVolume=()=>ambientVolume;
+export function setAmbientMode(value){ambientMode=value;try{localStorage.setItem('li-ambient-mode',value);}catch{}}
+export function setAmbientVolume(value){ambientVolume=Math.max(0,Math.min(1,Number(value)));if(S.ctx)S.master.gain.setTargetAtTime(S.on?ambientVolume:0,S.ctx.currentTime,.2);try{localStorage.setItem('li-ambient-volume',ambientVolume);}catch{}}
+
 function noiseBuffer(ctx, sec = 3) {
   const b = ctx.createBuffer(1, ctx.sampleRate * sec, ctx.sampleRate), d = b.getChannelData(0);
   for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
@@ -72,7 +79,7 @@ const BIRDS = [
 export function toggleAmbient(base) {
   if (!S.ctx) initAmbient(base);
   S.on = !S.on;
-  S.master.gain.setTargetAtTime(S.on ? 0.9 : 0, S.ctx.currentTime, 0.5);
+  S.master.gain.setTargetAtTime(S.on ? ambientVolume : 0, S.ctx.currentTime, 0.5);
   if (S.on) S.ctx.resume();
   try { localStorage.setItem('li-garden-sound', S.on ? 'on' : 'off'); } catch { /* private mode */ }
   return S.on;
@@ -83,22 +90,24 @@ export const wantsSound = () => { try { return localStorage.getItem('li-garden-s
 // state: hour, night (0..1), wind (0..2), gust (0..1), rain (0..1), music, nearPond (0..1), fire (0..1)
 export function updateAmbient(st, t) {
   if (!S.on) return;
+  if(ambientMode!=='garden')st={...st,hour:ambientMode==='night'?22:10,night:ambientMode==='night'?1:0,rain:ambientMode==='rain'?.65:0,wind:ambientMode==='wind'?1.2:.25,gust:ambientMode==='wind'?.85:.15,nearPond:ambientMode==='stream'?1:0,fire:0};
+  const birdMode=['garden','morning'].includes(ambientMode), nightMode=['garden','night'].includes(ambientMode);
   const { ctx } = S, n = ctx.currentTime, ease = (p, v, k = 0.8) => p.setTargetAtTime(v, n, k);
   const day = st.hour > 5.3 && st.hour < 18.6 ? 1 : 0, dawn = st.hour > 5 && st.hour < 8.5 ? 1 : 0;
   ease(S.duck.gain, st.music ? 0.32 : 1, 1.2);
-  ease(S.birds.gain, day * (1 - st.rain * 0.85) * 0.38);
-  ease(S.crickets.gain, st.night * (1 - st.rain * 0.7) * 0.42);
+  ease(S.birds.gain, (birdMode?day:0) * (1 - st.rain * 0.85) * 0.38);
+  ease(S.crickets.gain, (nightMode?st.night:0) * (1 - st.rain * 0.7) * 0.42);
   const gustAmt = (0.4 + st.wind * 0.7) * st.gust;
   ease(S.wind.g.gain, Math.min(0.24, 0.025 + gustAmt * 0.08), 1.5);
   S.wind.fl.frequency.setTargetAtTime(260 + gustAmt * 420, n, 1.5);
   ease(S.rustle.g.gain, Math.min(0.09, gustAmt * 0.05), 0.6);
   ease(S.rain.g.gain, st.rain * 0.2, 1.5);
   ease(S.rainLow.g.gain, st.rain * 0.12, 1.5);
-  ease(S.water.g.gain, 0.012 + st.nearPond * 0.05, 1);
+  ease(S.water.g.gain, (ambientMode==='garden'||ambientMode==='stream')?0.012 + st.nearPond * 0.05:0, 1);
   S.water.fl.frequency.setTargetAtTime(1500 + Math.sin(t * 7) * 400 + Math.sin(t * 13) * 200, n, 0.05);
   const nx = S.next;
   // Bird calls: thick at dawn, steady by day, none in rain or at night.
-  if (day && st.rain < 0.5 && t > nx.bird) { BIRDS[(Math.random() * BIRDS.length) | 0](); nx.bird = t + (dawn ? rnd(0.8, 2.5) : rnd(2.5, 7)); }
+  if (birdMode && day && st.rain < 0.5 && t > nx.bird) { BIRDS[(Math.random() * BIRDS.length) | 0](); nx.bird = t + (dawn ? rnd(0.8, 2.5) : rnd(2.5, 7)); }
   // Leaves crackling in gusts.
   if (gustAmt > 0.35 && t > nx.leaf) { for (let i = 0; i < 4; i++) burst({ f: rnd(2500, 6000), q: 2, dur: 0.03, gain: 0.02 * gustAmt, pan: rnd(-1, 1), at: i * rnd(0.02, 0.08) }); nx.leaf = t + rnd(0.2, 0.9); }
   // Raindrops on leaves and the pond; a far roll of thunder now and then in heavy rain.

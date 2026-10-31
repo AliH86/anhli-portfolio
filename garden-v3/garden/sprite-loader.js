@@ -1,27 +1,26 @@
-// One bundled transfer for the original PNG frames; individual files remain a fallback.
-let bundle;
+import { fetchWithDeadline, loadImage } from './network.js?v=3504';
+let indexPromise;
+const parts = new Map(), images = new Map();
 export function warmSpriteBundle() {
-  if (!bundle) bundle = Promise.all([
-    fetch('../sprite-bundle/index.json?v=70').then(r => { if (!r.ok) throw Error('sprite index'); return r.json(); }),
-    fetch('../sprite-bundle/frames.bin?v=70').then(r => { if (!r.ok) throw Error('sprite bundle'); return r.arrayBuffer(); }),
-  ]).catch(() => null);
-  return bundle;
+  return indexPromise ||= fetchWithDeadline('../sprite-bundle/index-v34.json?v=3504',{},5000).then(r=>r.json()).catch(()=>null);
 }
-function loadImage(src, optional) {
-  return new Promise((resolve, reject) => {
-    const image = new Image(); image.onload = () => resolve(image);
-    image.onerror = () => optional ? resolve(null) : reject(Error(`Không tải được ${src}`)); image.src = src;
-  });
+function part(name) {
+  if (!parts.has(name)) parts.set(name, fetchWithDeadline(`../sprite-bundle/${name}?v=3504`,{},8000).then(r=>r.arrayBuffer()).catch(()=>null));
+  return parts.get(name);
 }
-export async function loadSprite(src, optional = false) {
-  const data = await warmSpriteBundle();
-  const ROOT = new URL('../', document.baseURI).href;
-  const absolute = new URL(src, document.baseURI).href;
+async function decode(src, optional) {
+  const index = await warmSpriteBundle();
+  const ROOT = new URL('../',document.baseURI).href, absolute = new URL(src,document.baseURI).href;
   const key = absolute.startsWith(ROOT) ? absolute.slice(ROOT.length).split('?')[0] : '';
-  const entry = data?.[0]?.[key];
-  if (!entry) return loadImage(src, optional);
-  const url = URL.createObjectURL(new Blob([data[1].slice(entry[0], entry[0] + entry[1])], {type:'image/png'}));
-  try { return await loadImage(url, false); }
-  catch { return loadImage(src, optional); }
+  const entry = index?.[key], data = entry && await part(entry[2] || 'frames.bin');
+  if (!data || entry[0]+entry[1]>data.byteLength) return loadImage(src,optional);
+  const url = URL.createObjectURL(new Blob([data.slice(entry[0],entry[0]+entry[1])],{type:'image/png'}));
+  try { return await loadImage(url); }
+  catch { return loadImage(src,optional); }
   finally { URL.revokeObjectURL(url); }
+}
+export function loadSprite(src, optional=false) {
+  const key = `${src}|${optional}`;
+  if (!images.has(key)) images.set(key,decode(src,optional).catch(error=>{images.delete(key);throw error;}));
+  return images.get(key);
 }

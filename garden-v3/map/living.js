@@ -69,7 +69,8 @@ export function stepParticles(dt, t, view) {
     } else if (p.kind === 'firefly') {
       p.x += Math.sin(t * 1.3 + p.seed) * 6 * dt; p.y += Math.cos(t * 1.1 + p.seed) * 4 * dt;
     } else if (p.kind === 'zzz') { p.x += 4 * dt; p.y -= 8 * dt; }
-    else if (p.kind === 'leaf') { p.x += (60 + wx.wind * 60) * dt; p.y += Math.sin(t * 3 + p.seed) * 14 * dt; }
+    else if (p.kind === 'leaf') { p.x += (22 + wx.wind * 38) * dt; p.y += (10+Math.sin(t * 3 + p.seed) * 12) * dt; }
+    else if(p.kind==='pollen'){p.x+=(4+wx.wind*8+Math.sin(t+p.seed)*3)*dt;p.y+=Math.cos(t*.7+p.seed)*3*dt;}
     else if (p.kind === 'ripple') { /* stays */ }
     if (p.age > p.life) parts.splice(k, 1);
   }
@@ -87,11 +88,12 @@ export function drawParticles(ctx, cx, cy) {
     } else if (p.kind === 'zzz') {
       ctx.fillStyle = `rgba(235,240,255,${fade})`;
       Z.forEach((row, j) => [...row].forEach((ch, i) => { if (ch === '#') ctx.fillRect(x + i, y + j, 1, 1); }));
-    } else if (p.kind === 'leaf') { ctx.fillStyle = `rgba(110,170,70,${fade})`; ctx.fillRect(x, y, 2, 1); }
+    } else if (p.kind === 'leaf') { ctx.save();ctx.translate(x,y);ctx.rotate(Math.sin(p.age*3+p.seed)*.8);ctx.scale(Math.cos(p.age*4+p.seed),1);ctx.fillStyle=`rgba(153,157,65,${fade*.8})`;ctx.fillRect(-3,-1,6,2);ctx.fillRect(-1,-2,3,4);ctx.fillStyle=`rgba(80,106,46,${fade})`;ctx.fillRect(-2,0,4,1);ctx.restore();}
+    else if(p.kind==='pollen'){ctx.fillStyle=`rgba(255,235,172,${fade*.55})`;ctx.fillRect(x,y,1,1);}
     else if (p.kind === 'ripple') {
       const r = Math.round(1 + p.age * 6);
       ctx.strokeStyle = `rgba(230,245,255,${0.6 * (1 - p.age / p.life)})`; ctx.lineWidth = 1;
-      ctx.strokeRect(x - r, y - Math.round(r / 2), r * 2, r);
+      ctx.beginPath();ctx.ellipse(x,y,r,r*.38,0,0,Math.PI*2);ctx.stroke();
     }
   }
 }
@@ -149,6 +151,14 @@ export function drawOverlay(ctx, view, t, grade, lights) {
     const c = grade.night > 0.5 ? '120,135,170' : '232,238,242';
     g.addColorStop(0, `rgba(${c},${0.75 * wx.fog})`); g.addColorStop(0.6, `rgba(${c},${0.35 * wx.fog})`); g.addColorStop(1, `rgba(${c},${0.12 * wx.fog})`);
     ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+    // Low ribbons drift across garden depth instead of a stationary opaque veil.
+    for(let i=0;i<3;i++){
+      const fy=170+i*220-view.y+Math.sin(t*.13+i)*15;
+      const fx=((t*(7+i*2)+i*620)%2300)-450-view.x;
+      const band=ctx.createRadialGradient(fx,fy,0,fx,fy,320);
+      band.addColorStop(0,`rgba(${c},${wx.fog*.17})`);band.addColorStop(1,`rgba(${c},0)`);
+      ctx.save();ctx.translate(fx,fy);ctx.scale(1,.17);ctx.translate(-fx,-fy);ctx.fillStyle=band;ctx.fillRect(fx-320,fy-320,640,640);ctx.restore();
+    }
   }
   // Rain darkens the whole scene a touch more.
   if (wx.rain > 0.05) { ctx.fillStyle = `rgba(40,55,75,${0.12 * wx.rain})`; ctx.fillRect(0, 0, w, h); }

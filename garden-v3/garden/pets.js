@@ -1,41 +1,23 @@
+import { actorFrame } from './actors-v34.js?v=3504';
+import { fetchWithDeadline as fetch } from './network.js?v=3504';
 // Ali's own pets, drawn from photos (pets/<name>/: still, walk/0..n, optional sit, sleep).
 // In the garden they roam the lawn, nap by day, gather round Li now and then, and
-// curl up near the porch at night. All sprites face right; facing left is a mirror.
+// curl up near the porch at night. Each atlas clip declares its own facing.
 
-import { loadSprite } from './sprite-loader.js?v=70';
+import { loadSprite } from './sprite-loader.js?v=3504';
 const loadImg = (src) => loadSprite(src, true);
 const rnd = (a, b) => a + Math.random() * (b - a);
 
-export async function loadPets(base) {
-  const man = await (await fetch(`${base}manifest.json`, { cache: 'no-cache' })).json();
-  const POSES = ['sit', 'lie', 'sleep', 'play', 'roll'];
-  const entries = await Promise.all(Object.entries(man).map(async ([name, def]) => {
-    const [still, walk, ...poses] = await Promise.all([
-      loadImg(`${base}${name}/still.png`),
-      Promise.all([...Array(def.walk || 0).keys()].map((i) => loadImg(`${base}${name}/walk/${i}.png`))),
-      ...POSES.map((k) => (def[k] ? loadImg(`${base}${name}/${k}.png`) : null)),
-    ]);
-    const sp = { name, still: name === 'mun_tabby' ? walk[0] || still : still, walk: walk.filter(Boolean).length ? walk.filter(Boolean) : [still] };
-    POSES.forEach((k, i) => { if (poses[i]) sp[k] = poses[i]; });
-    // These two tabby files contain disconnected tail fragments. Use the
-    // intact sitting pose until clean, identity-matched resting frames exist.
-    if (name === 'mun_tabby') { delete sp.lie; delete sp.sleep; }
-    return [name, sp];
-  }));
-  const sprites=Object.fromEntries(entries);
-  const motions=await fetch(`${base}animated/manifest.json`).then(r=>r.ok?r.json():{}).catch(()=>({}));
-  for(const [name,clips] of Object.entries(motions)) for(const [key,m] of Object.entries(clips)) {
-    const frames=await Promise.all(Array.from({length:m.frames},(_,i)=>loadImg(`${base}animated/${name}/${i}.png`)));
-    if(frames.every(Boolean)) { sprites[name].clips ||= {}; sprites[name].clips[key]={...m,frames}; }
-  }
-  return sprites;
+// Named pets now use the approved V3.4 atlas. Do not request legacy poses and
+// silently switch identities when they sit, sleep or enter the navigation strip.
+export async function loadPets() {
+ return Object.fromEntries(Object.keys(PET_NAMES).map(name=>[name,{name}]));
 }
 
-
 export const PET_SCALE={bo:1.55,vang:1.4,muc:1.4,mun_tabby:1.4,socola:1.45,tux:1.4,corgi:1.65,husky:1.45,poodle:1.4,spaniel:1.5};
-export const PET_NAMES={bo:'Ca cao',vang:'Mina',muc:'Lùn',mun_tabby:'Bông',tux:'Jun',corgi:'Sable',husky:'Ly Ly',poodle:'Mít',spaniel:'Lắc ki chim'};
+export const PET_NAMES={bo:'Ca cao',vang:'Mina',muc:'Lùn',mun_tabby:'Bông',tux:'Jun',corgi:'Sable',husky:'Lyly',le:'Lé',poodle:'Mít',spaniel:'Lắc ki chim'};
 export const petRadius=p=>p.name==='husky'?20:p.name==='corgi'?18:['bo','spaniel'].includes(p.name)?14:10;
-const CATS=new Set(['mun_tabby','tux']);
+const CATS=new Set(['tux']);
 const LAWN=[[620,820],[760,900],[900,780],[1000,900],[560,940],[840,980],[1080,960],[700,760],[980,800],[480,860],[1150,800],[380,900]];
 export const PORCH=[[612,622],[654,622],[696,622],[739,622],[782,634],[826,634],[876,634],[924,632],[620,642],[680,641]];
 const PERCHES=[
@@ -58,7 +40,7 @@ function toPerch(p,list,li,nav){const q=choosePerch(p,list,li);if(!q)return fals
 export function callPets(list,li,nav){
  for(const [i,p]of list.entries()) {p.attention=12;p.prey=null;p.goPerch=null;if(p.perch){down(p);continue;}if(p.state==='climb')continue;const a=i/list.length*Math.PI*2;go(p,nav,li.x+Math.cos(a)*(80+petRadius(p)),li.y+28+Math.sin(a)*42);}
 }
-export function petAt(list,sprites,x,y){return [...list].reverse().find(p=>{const f=petFrame(p,sprites[p.name]),s=PET_SCALE[p.name]||1;return x>p.x-f.ax*s&&x<p.x+(f.img.width-f.ax)*s&&y>p.y-f.ay*s-p.lift&&y<p.y+4-p.lift;});}
+export function petAt(list,sprites,x,y){return [...list].reverse().find(p=>{const f=petFrame(p,sprites[p.name]),s=f.scale??PET_SCALE[p.name]??1;return x>p.x-f.ax*s&&x<p.x+(f.img.width-f.ax)*s&&y>p.y-f.ay*s-p.lift&&y<p.y+4-p.lift;});}
 export function stepGardenPets(list,dt,hour,rain,li,nav,fits=()=>true){
  const night=hour<6.5||hour>=21.5,home=night||rain>.4;
  for(const [index,p] of list.entries()){
@@ -112,6 +94,7 @@ export function stepGardenPets(list,dt,hour,rain,li,nav,fits=()=>true){
    // Yield at close ground contact; never let a chase merge two bodies.
    const other=list.find(q=>q!==p&&!q.perch&&q.state!=='climb'&&Math.hypot(nx-q.x,(ny-q.y)*1.7)<(petRadius(p)+petRadius(q))*(p.home&&q.home?.45:1.4)&&Math.hypot(nx-q.x,(ny-q.y)*1.7)<Math.hypot(p.x-q.x,(p.y-q.y)*1.7));
    if(other){p.blocked=(p.blocked||0)+dt;if(p.blocked>1+index*.1){p.blocked=0;const end=p.home?p.bed:p.goal||tgt;const route=nav(p.x,p.y,...end,p,list.filter(q=>q!==p&&!q.perch&&q.state!=='climb'));if(route.length){p.path=route;p.detouring=false;}else {const a=Math.atan2(p.y-other.y,p.x-other.x);p.path=nav(p.x,p.y,p.x+Math.cos(a)*28,p.y+Math.sin(a)*20,p);p.detouring=p.path.length>0;if(!p.path.length)rest(p,'stand',.3,.8);}}continue;}
+   p.direction=['east','south-east','south','south-west','west','north-west','north','north-east'][(Math.round(Math.atan2(dy,dx)/(Math.PI/4))+8)%8];
    p.blocked=0;p.x=nx;p.y=ny;if(Math.abs(dx)>.4)p.flip=dx<0;continue;
   }
   p.wait-=dt;if(p.wait>0)continue;
@@ -134,7 +117,9 @@ export function stepGardenPets(list,dt,hour,rain,li,nav,fits=()=>true){
   else rest(p,Math.random()<.5?'lie':'sleep',7,15);
  }
 }
-function petFrame(p,s){
+export function petFrame(p,s){
+ if(s.hq)return actorFrame(s.hq,['walk','run','flee','playrun'].includes(p.state)?'walk':['lie','sleep'].includes(p.state)?'rest':'idle',p.direction|| (p.flip?'west':'east'),p.t);
+
  const moving=['walk','run','flee','playrun'].includes(p.state),clip=(p.state==='play'||p.state==='perch')&&s.clips?.play;
  if(clip)return{img:clip.frames[Math.floor(p.t*clip.fps)%clip.frames.length],ax:clip.ax,ay:clip.ay};
  const pose={perch:s.sit,lie:s.lie||s.sleep||s.sit,sleep:s.sleep||s.lie||s.sit,play:s.play||s.sit,roll:s.roll||s.lie||s.sit,climb:s.still}[p.state]||s[p.state]||s.still;
@@ -152,14 +137,14 @@ export function spriteHeadOffset(img,anchor,scale=1){
  }
  return Math.max(0,anchor-top)*scale;
 }
-export function petLabelHeight(p,s){const f=petFrame(p,s);return spriteHeadOffset(f.img,f.ay,PET_SCALE[p.name]||1)+(p.lift||0);}
+export function petLabelHeight(p,s){const f=petFrame(p,s);return spriteHeadOffset(f.img,f.ay,f.scale??PET_SCALE[p.name]??1)+(p.lift||0);}
 export function petDraws(list,sprites,ctx,view,t){return list.map(p=>({y:p.perch?.sort||(p.state==='climb'?Math.max(p.hopFrom[1],p.hopTo[1])+1:p.y),draw:()=>{
- const {img,ax,ay}=petFrame(p,sprites[p.name]),s=PET_SCALE[p.name]||1,w=Math.round(img.width*s),h=Math.round(img.height*s),x=Math.round(p.x-ax*s-view.x),y=Math.round(p.y-ay*s-(p.lift||0)-view.y);
+ const f=petFrame(p,sprites[p.name]),{img,ax,ay}=f,s=f.scale??PET_SCALE[p.name]??1,w=Math.round(img.width*s),h=Math.round(img.height*s),x=Math.round(p.x-ax*s-view.x),y=Math.round(p.y-ay*s-(p.lift||0)-view.y);
  ctx.fillStyle='rgba(20,40,20,.24)';ctx.beginPath();ctx.ellipse(Math.round(p.x-view.x),Math.round(p.y-view.y),petRadius(p)*(p.lift ? .7 : 1),3,0,0,Math.PI*2);ctx.fill();
- if(p.flip){ctx.save();ctx.translate(Math.round(p.x-view.x),0);ctx.scale(-1,1);ctx.drawImage(img,Math.round(-ax*s),y,w,h);ctx.restore();}else ctx.drawImage(img,x,y,w,h);
+ if(f.hq?f.flip:p.flip){ctx.save();ctx.translate(Math.round(p.x-view.x),0);ctx.scale(-1,1);ctx.drawImage(img,Math.round(-ax*s),y,w,h);ctx.restore();}else ctx.drawImage(img,x,y,w,h);
  if(p.state==='sleep'&&Math.floor(t*.7+p.x)%3===0){ctx.fillStyle='#fff9e9';ctx.font='bold 9px sans-serif';ctx.fillText('z',x+w-5,y-3-t*4%6);}
 }}));}
-export function petBoxes(list,sprites){return list.filter(p=>!p.perch&&p.state!=='climb').map(p=>{const f=petFrame(p,sprites[p.name]),s=PET_SCALE[p.name]||1;return{x:p.x,y:p.y,w:f.img.width*s,h:f.ay*s};});}
+export function petBoxes(list,sprites){return list.filter(p=>!p.perch&&p.state!=='climb').map(p=>{const f=petFrame(p,sprites[p.name]),s=f.scale??PET_SCALE[p.name]??1;return{x:p.x,y:p.y,w:f.img.width*s,h:f.ay*s};});}
 // ---------- the two canaries and the hamsters ----------
 const PERCH = [[1212, 452], [1168, 420], [1262, 470], [905, 360], [640, 520], [1330, 560]];
 export async function loadSmall(base) {

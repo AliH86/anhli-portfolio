@@ -27,9 +27,9 @@ let activeScope = null;
 export function focusScope(root, on) {
   if (on) {
     root._returnFocus = document.activeElement;
-    activeScope = root;
+    activeScope = root.getAttribute('aria-modal') === 'false' ? null : root;
     queueMicrotask(() => focusable(root)[0]?.focus({ preventScroll: true }));
-  } else if (activeScope === root) {
+  } else if (activeScope === root || root.getAttribute('aria-modal') === 'false') {
     activeScope = null;
     const target = root._returnFocus;
     if (target?.isConnected && target.getClientRects().length) target.focus({ preventScroll: true });

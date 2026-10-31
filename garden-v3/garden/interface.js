@@ -1,15 +1,16 @@
-import { reveal, focusScope, announce, setMotion, getMotion } from './motion.js?v=70';
+import { reveal, focusScope, announce, setMotion, getMotion } from './motion.js?v=3504';
 
 export function initInterface({ visit, live, callPets, resetLi, setWide, openDaily }) {
   const panel = document.getElementById('garden-settings');
-  const clock = document.getElementById('clock');
-  const close = () => { reveal(panel, false); focusScope(panel, false); clock.setAttribute('aria-expanded', 'false'); };
-  const open = () => { reveal(panel, true); focusScope(panel, true); clock.setAttribute('aria-expanded', 'true'); };
+  const clock = document.getElementById('clock'),settings=document.getElementById('settings-toggle');
+  const close = () => { reveal(panel, false); focusScope(panel, false); clock.setAttribute('aria-expanded', 'false');settings.setAttribute('aria-expanded','false'); };
+  const open = () => { reveal(panel, true); focusScope(panel, true); clock.setAttribute('aria-expanded', 'true');settings.setAttribute('aria-expanded','true'); };
+  settings.addEventListener('click',()=>panel.hidden||panel.inert?open():close());
   clock.addEventListener('click', () => panel.hidden || panel.inert ? open() : close());
   document.getElementById('weather').addEventListener('click', open);
   document.getElementById('settings-close').addEventListener('click', close);
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && !panel.hidden) close(); });
-  document.addEventListener('pointerdown', e => { if (!panel.hidden && !panel.contains(e.target) && !e.target.closest('#clock,#weather')) close(); });
+  document.addEventListener('pointerdown', e => { if (!panel.hidden && !panel.contains(e.target) && !e.target.closest('#clock,#weather,#settings-toggle')) close(); });
   document.getElementById('time-mode').addEventListener('change', e => {
     const now = new Date();
     live.setHour(e.target.value === 'real' ? now.getHours() + now.getMinutes() / 60 : Number(e.target.value));
@@ -24,8 +25,6 @@ export function initInterface({ visit, live, callPets, resetLi, setWide, openDai
   document.getElementById('daily-open').addEventListener('click',()=>{close();openDaily();});
   document.getElementById('call-pets').addEventListener('click',()=>{close();callPets();});
   document.getElementById('water-plants').addEventListener('click',()=>{close();visit('garden');});
-  document.getElementById('welcome-music').addEventListener('click', () => visit('stall'));
-  document.getElementById('welcome-close').addEventListener('click', () => reveal(document.getElementById('garden-welcome'), false));
   document.getElementById('return-garden').addEventListener('click', () => { visit(null); setWide(); });
   return { closeSettings: close };
 }

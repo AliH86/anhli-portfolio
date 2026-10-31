@@ -20,7 +20,7 @@ export function makeNavigator({ width, height, fits, grid = 16 }) {
     return null;
   }
   function lineFree(a, b) {
-    const n = Math.max(1, Math.ceil(Math.hypot(b[0] - a[0], b[1] - a[1]) / 4));
+    const n = Math.max(1, Math.ceil(Math.hypot(b[0] - a[0], b[1] - a[1]) / 0.75));
     for (let i = 1; i <= n; i++) if (!fits(a[0] + (b[0] - a[0]) * i / n, a[1] + (b[1] - a[1]) * i / n)) return false;
     return true;
   }

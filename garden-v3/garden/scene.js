@@ -1,4 +1,4 @@
-// Li's garden as one painted picture (world/garden_day.png, 1536x1280, same pixel
+// Li's garden as one painted picture (world/garden_day.webp, 1536x1280, same pixel
 // density as Li). Everything here is in picture pixels; feet positions for Li.
 
 export const W = 1536, H = 1280;
@@ -32,10 +32,11 @@ export const BLOCK_ELLIPSES = [
   [1028, 923, 27, 14],
   [1271, 895, 65, 17],
   [600, 1090, 35, 14],
-  [705, 1110, 152, 86],        // lotus pond
-  [955, 1042, 72, 40],         // the little pond on the right
+  [705, 1118, 160, 92],        // lotus pond
+  [943, 1054, 100, 52],         // the little pond on the right
 ];
-export const WALK_RECTS = [[748, 1018, 935, 1118]];   // the plank bridge crosses the water
+export const WALK_RECTS = [];
+export const BRIDGE = [[750,1040],[821,1018],[941,1091],[872,1118]];   // the plank bridge crosses the water
 
 // Tall things that stand in front of whoever walks behind them are cut out of the
 // picture as sprites by tools/cutout.py (world/front/front.json): papaya, frangipani,

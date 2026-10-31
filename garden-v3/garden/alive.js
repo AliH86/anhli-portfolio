@@ -1,3 +1,5 @@
+import { loadImage } from './network.js?v=3504';
+import { fetchWithDeadline as fetch } from './network.js?v=3504';
 // What makes the painted garden breathe: foliage that sways, a real campfire,
 // a pond that glints and ripples, koi, butterflies. All drawn in picture pixels.
 
@@ -9,36 +11,38 @@ const off = (w, h) => { const c = document.createElement('canvas'); c.width = w;
 // d = round(amp * weight * wave(y, t)). Weights are smooth, so neighbours differ by
 // at most a pixel: leaves lean and bounce back, roots, walls and pots stay put.
 const imgData = (img) => { const c = off(img.width, img.height), g = c.getContext('2d', { willReadFrequently: true }); g.drawImage(img, 0, 0); return g.getImageData(0, 0, img.width, img.height); };
-const loadImg = (src) => new Promise((ok) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => ok(null); i.src = src; });
+const loadImg = loadImage;
 let SRC = null, REGIONS = [];
 export async function buildWind(ground, base = '../world/sway/') {
   SRC = imgData(ground);
   const meta = await (await fetch(`${base}sway.json`, { cache: 'no-cache' })).json();
   REGIONS = await Promise.all(Object.entries(meta).map(async ([name, m]) => {
-    const wimg = await loadImg(`${base}${name}.png?v=70`); const wd = imgData(wimg).data;
+    const wimg = await loadImg(`${base}${name}.png?v=3504`); const wd = imgData(wimg).data;
     const idx = [], wt = [];
     for (let y = 0; y < m.h; y++) for (let x = 0; x < m.w; x++) { const v = wd[(y * m.w + x) * 4]; if (v > 6) { idx.push(y * m.w + x); wt.push(v / 255); } }
     const c = off(m.w, m.h), g = c.getContext('2d');
-    return { ...m, name, idx: Uint32Array.from(idx), wt: Float32Array.from(wt), c, g, img: g.createImageData(m.w, m.h), last: -1, phase: (m.x * 0.013 + m.y * 0.007) % 6.28 };
+    return { ...m, name, idx: Uint32Array.from(idx), wt: Float32Array.from(wt), c, g, img: g.createImageData(m.w, m.h), rows:new Float32Array(m.h), last: -1, phase: (m.x * 0.013 + m.y * 0.007) % 6.28 };
   }));
   return REGIONS;
 }
 // Horizontal offset of a world pixel at time t (shared by the ground and the front cut-outs).
 function wave(r, y, t, strength) {
-  const k = t * r.speed + r.phase + y * 0.012;
-  return strength * (Math.sin(k) * 0.75 + Math.sin(k * 2.3 + 1.7) * 0.25);
+  const k = t * r.speed * .68 + r.phase + y * 0.009;
+  return strength * (Math.sin(k) * 0.86 + Math.sin(k * 1.8 + 1.7) * 0.14);
 }
-let windStrength = 1;
+let windStrength = .4, lastWindTime=null;
 export function windAt(t, wind) {
   const gust = 0.55 + 0.45 * Math.sin(t * 0.37) * Math.sin(t * 0.11 + 1);
-  windStrength = (0.55 + wind * 0.8) * gust;
+  const dt=lastWindTime==null?0:Math.min(.1,Math.max(0,t-lastWindTime));lastWindTime=t;
+  const target=(.5+wind*.65)*gust;
+  windStrength+=(target-windStrength)*(1-Math.exp(-dt*1.7));
   return windStrength;
 }
 function warp(r, t) {
   const W = r.w, src = SRC.data, SW = SRC.width, out = r.img.data;
   // Start from the untouched painting, then move the weighted pixels.
   out.fill(0); // Unchanged pixels must not erase the preceding region's wind.
-  const rows = new Float32Array(r.h);
+  const rows = r.rows;
   for (let y = 0; y < r.h; y++) rows[y] = r.amp * wave(r, r.y + y, t, windStrength);
   for (let i = 0; i < r.idx.length; i++) {
     const p = r.idx[i], y = (p / W) | 0, x = p - y * W, d = Math.round(rows[y] * r.wt[i]);

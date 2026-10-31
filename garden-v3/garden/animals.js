@@ -1,19 +1,21 @@
+import { paintActor } from './actors-v34.js?v=3504';
+import { fetchWithDeadline as fetch } from './network.js?v=3504';
 // Small animals drawn at the garden's own scale (Li is ~130 px tall): a cat that
 // naps by the hour, hens scratching by the vegetable beds, sparrows that take off
 // when Li walks close. Sprites face right; facing left is a mirror.
 
-import { loadSprite } from './sprite-loader.js?v=70';
+import { loadSprite } from './sprite-loader.js?v=3504';
 const loadImg = (src) => loadSprite(src, false);
 const rnd = (a, b) => a + Math.random() * (b - a);
 
 export async function loadAnimals(base) {
   const man = await (await fetch(`${base}manifest.json`, { cache: 'no-cache' })).json();
   const sp = {};
-  for (const [k, def] of Object.entries(man)) {
-    sp[k] = { still: await loadImg(`${base}${k}/still.png`) };
-    for (const [a, n] of Object.entries(def)) if (a !== 'size') sp[k][a] = await Promise.all([...Array(n).keys()].map((i) => loadImg(`${base}${k}/${a}/${i}.png`)));
-  }
-  sp.cat.sleep = await loadImg(`${base}cat/sleep.png`);
+  await Promise.all(Object.entries(man).map(async([k,def])=>{
+    const entries=await Promise.all(Object.entries(def).filter(([a])=>a!=='size').map(async([a,n])=>[a,await Promise.all(Array.from({length:n},(_,i)=>loadImg(`${base}${k}/${a}/${i}.png`)))]));
+    sp[k]={still:await loadImg(`${base}${k}/still.png`),...Object.fromEntries(entries)};
+  }));
+  sp.cat.sleep=await loadImg(`${base}cat/sleep.png`);
   return sp;
 }
 
@@ -142,6 +144,7 @@ export function animalDraws(an, sp, ctx, view, t) {
   };
   const c = an.cat;
   out.push({ y: c.y, draw: () => {
+    if(sp.cat.hq){ctx.fillStyle='rgba(20,40,20,.22)';ctx.beginPath();ctx.ellipse(c.x-view.x,c.y-view.y,14,3,0,0,Math.PI*2);ctx.fill();paintActor(ctx,'jo',c.state==='walk'?'walk':c.state==='sleep'?'rest':'idle',c.flip?'west':'east',c.t,c.x-view.x,c.y-view.y-(c.lift||0));return;}
     if (c.state === 'sleep') {
       const img = sp.cat.sleep, breathe = Math.sin(t * 2.2) > 0.3 ? 1 : 0;   // the back rises by a pixel
       const px = Math.round(c.x - img.width / 2 - view.x), py = Math.round(c.y - img.height - view.y);

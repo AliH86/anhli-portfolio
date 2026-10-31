@@ -1,42 +1,52 @@
-import { makeNavigator } from './navigation.js?v=70';
-import { initInterface } from './interface.js?v=70';
-import { reducedMotion, announce } from './motion.js?v=70';
-import * as S from './scene.js?v=70';
-import * as live from '../map/living.js?v=70';
-import * as A from './alive.js?v=70';
-import * as Z from './animals.js?v=70';
-import { initStall } from './stall.js?v=70';
-import { initMenu } from './menu.js?v=70';
-import { initRooms, initGate, ROOMS } from './rooms.js?v=70';
-import * as AM from './ambient.js?v=70';
-import * as N from './night.js?v=70';
-import * as P from './pets.js?v=70';
-import * as WET from './puddles.js?v=70';
-import { loadSprite, warmSpriteBundle } from './sprite-loader.js?v=70';
-import { createDailyReader } from './daily.js?v=70';
-import { createDialogueDeck, gardenQuotes, nightQuotes, dailyAside } from './dialogue.js?v=70';
+import { createPetBanter } from './pet-dialogue.js?v=3504';
+import { loadImage, loadingStage } from './network.js?v=3504';
+import { loadActors, paintActor, actorFrame } from './actors-v34.js?v=3504';
+import { loadPond } from './pond-v34.js?v=3504';
+import { fetchWithDeadline as fetch } from './network.js?v=3504';
+import { makeNavigator } from './navigation.js?v=3504';
+import { initInterface } from './interface.js?v=3504';
+import { reducedMotion, announce } from './motion.js?v=3504';
+import * as S from './scene.js?v=3504';
+import * as live from '../map/living.js?v=3504';
+import * as A from './alive.js?v=3504';
+import * as Z from './animals.js?v=3504';
+import { lazyStall } from './lazy-stall.js?v=3504';
+import { initMenu } from './menu.js?v=3504';
+import { initRooms, initGate, ROOMS } from './rooms.js?v=3504';
+import * as AM from './ambient.js?v=3504';
+import * as N from './night.js?v=3504';
+import * as P from './pets.js?v=3504';
+import * as WET from './puddles.js?v=3504';
+import { loadSprite, warmSpriteBundle } from './sprite-loader.js?v=3504';
+import { createDailyReader } from './daily.js?v=3504';
+import { createDialogueDeck, gardenQuotes, nightQuotes, dailyAside } from './dialogue.js?v=3504';
 
 const SOUND = '../web/assets/';
-const loadImg = (src) => new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = no; i.src = src; });
+const loadImg = loadImage;
+loadingStage('Li đang mở vườn…');
+const actorsPromise = loadActors();
 warmSpriteBundle();
-const groundPromise = loadImg('../world/garden_day.png');
-const flowerPromise = loadImg('../world/flower-repair-v64.png');
-const cinemaPromise = loadImg('../world/cinema-corner-v58.png');
+// A slow connection must never silently substitute the old world artwork.
+const groundPromise = loadImg('../world/garden-day-v34.webp',false,45000,'high');
+const artGroundPromise=groundPromise.then(img=>img.src.includes('garden-day-v34')?img:null);
+const flowerPromise = artGroundPromise.then(img=>img?null:loadImg('../world/flower-repair-v64-runtime.webp',true));
+const cinemaPromise = artGroundPromise.then(img=>img?null:loadImg('../world/cinema-corner-v58-runtime.webp',true));
 const animalsPromise = Z.loadAnimals('../animals/');
 const petsPromise = P.loadPets('../pets/');
 const smallPromise = P.loadSmall('../pets/');
 const nightPromise = N.loadNight('../pets/_night/');
-const luckyPromise = loadImg('../world/lucky.png');
+const luckyPromise = loadImg('../world/lucky.png',true);
+// Fetch occlusion masks alongside the ground; compose them only once both are ready.
+const frontPromise = fetch('../world/front/front.json').then(r=>r.json()).catch(()=>({})).then(async meta=>(await Promise.all(Object.entries(meta).map(async ([name,m])=>({name,...m,img:await loadImg(`../world/front/${name}.png?v=3504`,true)})))).filter(f=>f.img));
 const liManifestPromise = fetch('../li2/manifest.json', { cache: 'no-cache' }).then(r => r.json());
 const poseMasksPromise = fetch('../li2/pose/masks.json').then(r => r.json());
-const liAssetsPromise = (async () => {
+let rainLoading=false, rainRetryAt=0;
+const loadRainAssets = async () => {
   const manifest = await liManifestPromise;
   const dirs = ['east', 'north-east', 'north', 'north-west', 'west', 'south-west', 'south', 'south-east'];
-  const entries = await Promise.all(Object.entries(manifest.outfits).map(async ([name, counts]) => [name, Object.fromEntries(await Promise.all(Object.entries(counts).map(async ([anim, n]) => [anim, Object.fromEntries(await Promise.all(dirs.map(async d => [d, await Promise.all(Array.from({length:n}, (_,i) => loadSprite(`../li2/${name}/${anim}/${d}/${i}.png`)))])))])))]));
+  const entries = await Promise.all(Object.entries(manifest.outfits).filter(([name])=>name==='rain').map(async ([name, counts]) => [name, Object.fromEntries(await Promise.all(Object.entries(counts).map(async ([anim, n]) => [anim, Object.fromEntries(await Promise.all(dirs.map(async d => [d, await Promise.all(Array.from({length:n}, (_,i) => loadSprite(`../li2/${name}/${anim}/${d}/${i}.png`)))])))])))]));
   return Object.fromEntries(entries);
-})();
-const idlePromise = Promise.all(['east','north-east','north','north-west','west','south-west','south','south-east'].map(async d => [d, await loadSprite(`../li2/corrected/rotation-${d}.png`)]));
-const northPromise = Promise.all([0,1,2,3].map(i => loadSprite(`../li2/corrected/north-${i}.png`)));
+};
 const waterPromise = Promise.all(Array.from({length:9},(_,i)=>loadSprite(`../li2/watering/${i}.png`)));
 const posesPromise = Promise.all(Object.entries(S.POSES).map(async ([k,p]) => [k, await loadSprite(p.img)]));
 const ground = await groundPromise;
@@ -44,7 +54,7 @@ const ground = await groundPromise;
 const flowerSource=await flowerPromise;
 const flowerLayer=document.createElement('canvas'); flowerLayer.width=120; flowerLayer.height=260;
 const fg=flowerLayer.getContext('2d'); fg.imageSmoothingEnabled=false;
-fg.drawImage(flowerSource,100*flowerSource.width/288,20*flowerSource.height/288,120*flowerSource.width/288,260*flowerSource.height/288,0,0,120,260);
+if(flowerSource)fg.drawImage(flowerSource,100*flowerSource.width/288,20*flowerSource.height/288,120*flowerSource.width/288,260*flowerSource.height/288,0,0,120,260);
 fg.globalCompositeOperation='destination-in';
 for(const axis of ['x','y']){
   const size=axis==='x'?120:260, gradient=axis==='x'?fg.createLinearGradient(0,0,120,0):fg.createLinearGradient(0,0,0,260);
@@ -52,13 +62,17 @@ for(const axis of ['x','y']){
   fg.fillStyle=gradient; fg.fillRect(0,0,120,260);
 }
 const sceneGround=document.createElement('canvas'); sceneGround.width=ground.width; sceneGround.height=ground.height;
-const sg=sceneGround.getContext('2d'); sg.imageSmoothingEnabled=false; sg.drawImage(ground,0,0); sg.drawImage(flowerLayer,1000,220);
+const sg=sceneGround.getContext('2d'); sg.imageSmoothingEnabled=false; sg.drawImage(ground,0,0);
+const artGround=await artGroundPromise;
+if(artGround){sg.drawImage(artGround,0,0,S.W,S.H);
+ // Navigation coordinates remain those of the original garden.
+}else sg.drawImage(flowerLayer,1000,220);
 // Replacement is a separate, reviewable layer; the original painting is untouched.
 const cinemaSource = await cinemaPromise;
 const cinemaX=1040, cinemaY=830, cinemaSize=288;
 const cinemaLayer=document.createElement('canvas'); cinemaLayer.width=cinemaLayer.height=cinemaSize;
 const cinemaCtx=cinemaLayer.getContext('2d'); cinemaCtx.imageSmoothingEnabled=false;
-cinemaCtx.drawImage(cinemaSource,0,0,cinemaSize,cinemaSize);
+if(cinemaSource)cinemaCtx.drawImage(cinemaSource,0,0,cinemaSize,cinemaSize);
 cinemaCtx.globalCompositeOperation='destination-in';
 for(const axis of ['x','y']){
   const gradient=axis==='x'?cinemaCtx.createLinearGradient(0,0,cinemaSize,0):cinemaCtx.createLinearGradient(0,0,0,cinemaSize);
@@ -69,14 +83,16 @@ cinemaCtx.globalCompositeOperation='destination-out';
 // Keep the original campfire and logs, whose animation and collision use those positions.
 cinemaCtx.fillStyle='#000'; cinemaCtx.fillRect(180,205,108,83);
 cinemaCtx.globalCompositeOperation='source-over';
-await A.buildWind(sceneGround);
+// Optional motion does not hold the entrance hostage.
+const startWind=()=>A.buildWind(sceneGround).catch(error=>console.warn('Foliage motion unavailable',error.message));
+let livingPond=null;
+const startPond=()=>loadPond(sceneGround).then(p=>{livingPond=p;art.dataset.waterRenderer='three-webgl';}).catch(error=>{art.dataset.waterRenderer='canvas-fallback';console.warn('Pond fallback',error.message);});
 const pond = A.buildPond(sceneGround, S.BLOCK_ELLIPSES);
 const fire = A.makeFire(S.FIRE[0], S.FIRE[1]);
 const butterflies = A.makeButterflies(S.BUTTERFLIES);
 let bits = [];
 const puddles = WET.makePuddles();
-const frontMeta = await (await fetch('../world/front/front.json', { cache: 'no-cache' })).json();
-const front = await Promise.all(Object.entries(frontMeta).map(async ([name, m]) => ({ name, ...m, img: await loadImg(`../world/front/${name}.png?v=70`) })));
+const front = await frontPromise;
 const cinemaShrub=front.find(f=>f.name==='shrub_cine');
 if(cinemaShrub){
   // Reuse the original plant's transparency, but sample the newly painted view.
@@ -87,18 +103,31 @@ if(cinemaShrub){
   g.globalCompositeOperation='destination-in'; g.drawImage(cinemaShrub.img,0,0);
   cinemaShrub.img=c;
 }
+if(artGround)for(const f of front){const c=document.createElement('canvas');c.width=f.w;c.height=f.h;const g=c.getContext('2d');g.imageSmoothingEnabled=false;g.drawImage(sceneGround,-f.x,-f.y);g.globalCompositeOperation='destination-in';g.drawImage(f.img,0,0);f.img=c;}
+// Preserve the reeds in front of the waterfall: their original silhouette stays
+// visible while the new cascade sits behind them on the stone bank.
+const pondReeds=document.createElement('canvas');pondReeds.width=36;pondReeds.height=68;
+const prg=pondReeds.getContext('2d');prg.drawImage(sceneGround,916,984,36,68,0,0,36,68);
+const pr=prg.getImageData(0,0,36,68);
+for(let y=0;y<68;y++)for(let x=0;x<36;x++){const i=(y*36+x)*4,r=pr.data[i],g=pr.data[i+1],b=pr.data[i+2];if(!(g>r*1.08&&g>b*1.2&&r<150&&b<100))pr.data[i+3]=0;}prg.putImageData(pr,0,0);
 const zoo = await animalsPromise;
 const animals = Z.makeAnimals();
 const petSprites = await petsPromise;
+await actorsPromise;
+for(const [name,id] of Object.entries({muc:'lun',husky:'lyly',le:'le',bo:'bo',vang:'vang',mun_tabby:'mun_tabby',corgi:'corgi',poodle:'poodle',spaniel:'spaniel',tux:'tux'})){const f=actorFrame(id,'idle','south');petSprites[name]={...petSprites[name],name,hq:id,still:f.img,walk:[f.img]};}
+zoo.cat.hq='jo';
+loadingStage('Đang xếp nhạc và mở các góc vườn…');
 const pets = P.makeGardenPets(petSprites);
-const luckyImg = await luckyPromise;
+// This optional decoration can arrive later without blocking the entrance.
+let luckyImg = null; luckyPromise.then(image=>{luckyImg=image;});
 const liSay = { text: '', until: 0 };
 const smallSprites = await smallPromise;
 const small = P.makeSmall();
 const nightSprites = await nightPromise;
 const night_ = N.makeNight();
-const stall = await initStall({ onOpenChange: (on) => {
+const stall = lazyStall({ onOpenChange: (on) => {
   document.body.classList.toggle('at-stall', on);
+  if(!on)document.querySelector('.mbtn[data-id=stall]')?.setAttribute('aria-current','false');
   if (!on) return;
   if (rooms.current) rooms.close();
   tag.classList.remove('on'); li.dir = 'south'; li.hidden = false; li.userUntil = performance.now() / 1000 + 600;
@@ -128,6 +157,7 @@ dailyInvite.addEventListener('click', e => { e.stopPropagation(); openDaily(); }
 const rooms = await initRooms({
   onOpenChange: (id) => {
     document.body.classList.toggle('in-room', !!id);
+    if(!id)document.querySelectorAll('.mbtn').forEach(b=>b.setAttribute('aria-current','false'));
     if (!id) return;
     if (stall.isOpen) stall.close();
     tag.classList.remove('on'); li.hidden = false; li.userUntil = performance.now() / 1000 + 600;
@@ -154,9 +184,9 @@ const menu = initMenu({
   },
 });
 function visit(id) {
-  document.querySelectorAll('.mbtn').forEach(b => b.setAttribute('aria-current', b.dataset.id === id ? 'location' : 'false'));
   if (rooms.current) rooms.close(); if (stall.isOpen) stall.close();
   pendingOpen = null;
+  document.querySelectorAll('.mbtn').forEach(b=>b.setAttribute('aria-current',b.dataset.id===id?'location':'false'));
   if (!id) return;
   const z = S.ZONES.find(q => q.id === id); if (!z) return;
   li.userUntil = performance.now() / 1000 + 60; li.hidden = false; cam.wide = false;
@@ -173,12 +203,10 @@ const tag = document.getElementById('tag');
 const DIRS8 = ['east', 'north-east', 'north', 'north-west', 'west', 'south-west', 'south', 'south-east'];
 const liM = await liManifestPromise;
 const FPS = { idle: 4, walk: 10 };
-const outfits = await liAssetsPromise;
+const outfits = {};
 const LI_SCALE = .70; // display only; all source pixels stay unchanged
-const idleClean = Object.fromEntries(await idlePromise);
-const northIdle = await northPromise;
 const wateringFrames = await waterPromise;
-const OUTFITS = Object.keys(outfits).filter((k) => k !== 'rain');
+const OUTFITS = ['v3'];
 const poseImg = Object.fromEntries(await posesPromise);
 const poseMasks = await poseMasksPromise;
 // Extract only the approved character pixels. Existing painted furniture remains the support.
@@ -201,12 +229,18 @@ for(const item of nameItems){
  b.addEventListener('click',()=>callChild(item.actor,item.kind));petLabels.append(b);item.node=b;
 }
 
+const petBanter=createPetBanter(nameItems);
+let hoveredPet=null,selectedPet=null,selectedUntil=0;
+for(const item of nameItems){item.node.addEventListener('pointerenter',()=>{hoveredPet=item.actor;});item.node.addEventListener('pointerleave',()=>{hoveredPet=null;});}
+
 // ---------- where Li can walk ----------
 const inRect = (x, y, r) => x > r[0] && x < r[2] && y > r[1] && y < r[3];
 const inEll = (x, y, e) => ((x - e[0]) / e[2]) ** 2 + ((y - e[1]) / e[3]) ** 2 < 1;
 function walkable(x, y) {
   if(x<0||y<0||x>=S.W||y>=S.H)return false;
-  if (S.WALK_RECTS.some((r) => inRect(x, y, r))) return true;
+  let bridge=false;
+  for(let i=0,j=S.BRIDGE.length-1;i<S.BRIDGE.length;j=i++){const a=S.BRIDGE[i],b=S.BRIDGE[j];if((a[1]>y)!==(b[1]>y)&&x<(b[0]-a[0])*(y-a[1])/(b[1]-a[1])+a[0])bridge=!bridge;}
+  if(bridge)return true;
   return !S.BLOCK_RECTS.some((r) => inRect(x, y, r)) && !S.BLOCK_ELLIPSES.some((e) => inEll(x, y, e));
 }
 // Li has a body: test a small footprint, not a single point.
@@ -226,7 +260,7 @@ const petWalkable = (x,y) => {
 };
 const petRoutes=new Map();
 for(const radius of [10,14,18,20]) {
- const fits=(x,y)=>[[-radius,0],[radius,0],[0,-6]].every(([dx,dy])=>petWalkable(x+dx,y+dy));
+ const fits=(x,y)=>[[0,0],[-radius,0],[radius,0],[0,-6]].every(([dx,dy])=>petWalkable(x+dx,y+dy));
  petRoutes.set(radius,{fits,...makeNavigator({width:S.W,height:S.H,fits,grid:8})});
 }
 const petFits=(x,y,p={name:'muc'})=>petRoutes.get(P.petRadius(p)).fits(x,y);
@@ -252,7 +286,7 @@ function resize() {
   VW = Math.ceil(dw / K); VH = Math.ceil(dh / K);
   // Preserve source detail when the screen has enough physical pixels: actors
   // scaled within a 1x world buffer otherwise lose pixels before enlargement.
-  const renderScale = Math.min(2, K);
+  const renderScale = 2;
   art.width = VW * renderScale; art.height = VH * renderScale;
   art.style.width = `${VW * K / dpr}px`; art.style.height = `${VH * K / dpr}px`;
   ctx.setTransform(renderScale, 0, 0, renderScale, 0, 0);
@@ -270,18 +304,22 @@ const toWorld = (ev) => {
 };
 const zoneAt = (x, y) => S.ZONES.find((z) => inRect(x, y, z.r));
 function callChild(child,kind='pet'){
+ selectedPet=child;selectedUntil=performance.now()/1000+5;petBanter.cuddle(child,performance.now()/1000);
  li.userUntil=performance.now()/1000+60;li.hidden=false;
  if(kind==='cat')Z.callGardenCat(child,li,nav);else P.callPets([child],li,petNav);
  liSay.text=(kind==='cat'||child.cat)?'Con muốn ngồi cạnh Ba ba không?':'Con ơi, lại đây chơi với Ba ba nào.';liSay.until=performance.now()/1000+5;
 }
 addEventListener('pointermove', (ev) => {
+  if(ev.target!==art && !ev.target.closest('.pet-name'))hoveredPet=null;
   if(ev.target!==art || stall.isOpen || rooms.current || document.querySelector('.gate')) { tag.classList.remove('on'); art.style.cursor='default'; return; }
-  const z = zoneAt(...toWorld(ev));
+  const point=toWorld(ev);hoveredPet=P.petAt(pets,petSprites,...point)||((Math.abs(point[0]-animals.cat.x)<30&&point[1]<animals.cat.y&&point[1]>animals.cat.y-50)?animals.cat:null);
+  const z = zoneAt(...point);
   if (z) { tag.innerHTML = `${z.label[0]}<small>${z.label[1]}</small>`; tag.style.left = `${ev.clientX}px`; tag.style.top = `${ev.clientY - 12}px`; tag.classList.add('on'); art.style.cursor = 'pointer'; }
   else { tag.classList.remove('on'); art.style.cursor = 'crosshair'; }
 });
 art.addEventListener('pointerdown', (ev) => {
   const [x, y] = toWorld(ev), z = zoneAt(x, y);
+  if(livingPond?.ripple(x,y,performance.now()/1000))return;
   const child=P.petAt(pets,petSprites,x,y);
   if(child){callChild(child);return;}
 
@@ -320,12 +358,14 @@ const TOUR = [[700, 640], [1250, 700], [1200, 1060], [760, 1080], [300, 700], [8
 const wake = () => { lastInput = performance.now() / 1000; if (chill) { chill = false; document.body.classList.remove('chill'); } };
 for (const ev of ['pointermove', 'pointerdown', 'keydown', 'wheel', 'touchstart']) addEventListener(ev, wake, { passive: true });
 const chillCap = document.getElementById('chill-cap');
+document.body.dataset.readyMs=String(Math.round(performance.now()));
+requestAnimationFrame(()=>requestAnimationFrame(()=>{startPond();startWind();}));
 { const ld = document.getElementById('loading'); ld.classList.add('done'); setTimeout(() => ld.remove(), 700); }
 initGate({ onEnter: () => { lastInput = performance.now() / 1000; nextTalk = lastInput + 12; document.querySelector('.mbtn')?.focus({preventScroll:true}); } });
 initInterface({ visit, live, openDaily, callPets:()=>{li.hidden=false;P.callPets(pets,li,petNav);liSay.text='Các con ơi, lại đây với Ba ba nào.';liSay.until=performance.now()/1000+5;li.userUntil=performance.now()/1000+60;}, resetLi: () => { li.userUntil = 0; }, setWide: () => { cam.wide = !cam.wide; } });
 const clockEl = document.getElementById('clock');
 const sBtn = document.getElementById('sound');
-const showSound = (on) => { sBtn.setAttribute('aria-pressed', String(on)); sBtn.title = on ? 'Tắt âm thanh' : 'Bật âm thanh'; sBtn.setAttribute('aria-label',sBtn.title); };
+const showSound = (on) => { for(const el of document.querySelectorAll('[data-ambient-enabled]'))el.checked=on; sBtn.setAttribute('aria-pressed', String(on)); sBtn.title = on ? 'Tắt âm thanh' : 'Bật âm thanh'; sBtn.setAttribute('aria-label',sBtn.title); };
 sBtn.addEventListener('click', (e) => { e.stopPropagation(); showSound(AM.toggleAmbient(SOUND)); });
 // The garden's sound comes on with the first touch, unless the visitor turned it off before.
 const firstTouch = () => { removeEventListener('pointerdown', firstTouch, true); removeEventListener('keydown', firstTouch, true); if (AM.wantsSound() && !AM.ambientOn()) showSound(AM.toggleAmbient(SOUND)); };
@@ -334,6 +374,11 @@ if (OUTFITS.length < 2) document.getElementById('outfit').style.display = 'none'
 document.getElementById('outfit').addEventListener('click', () => { li.outfit = OUTFITS[(OUTFITS.indexOf(li.outfit) + 1) % OUTFITS.length]; });
 document.getElementById('wide').addEventListener('click', () => { cam.wide = !cam.wide; });
 
+// Sound controls share the existing sound engine; music keeps playing across themes.
+for(const el of document.querySelectorAll('[data-ambient-mode]')){el.value=AM.getAmbientMode();el.addEventListener('change',()=>{AM.setAmbientMode(el.value);if(!AM.ambientOn())showSound(AM.toggleAmbient(SOUND));for(const q of document.querySelectorAll('[data-ambient-mode]'))q.value=el.value;for(const q of document.querySelectorAll('[data-ambient-enabled]'))q.checked=AM.ambientOn();});}
+for(const el of document.querySelectorAll('[data-ambient-volume]')){el.value=AM.getAmbientVolume()*100;el.addEventListener('input',()=>{AM.setAmbientVolume(el.value/100);for(const q of document.querySelectorAll('[data-ambient-volume]'))q.value=el.value;});}
+for(const el of document.querySelectorAll('[data-ambient-enabled]')){el.checked=AM.ambientOn();el.addEventListener('change',()=>{if(el.checked!==AM.ambientOn())showSound(AM.toggleAmbient(SOUND));});}
+for(const el of document.querySelectorAll('[data-music-volume]')){el.addEventListener('input',()=>{const audio=document.getElementById('garden-audio');if(audio)audio.volume=el.value/100;});}
 // ---------- loop ----------
 let last = performance.now();
 function tick(now) {
@@ -344,6 +389,9 @@ function tick(now) {
   live.stepWeather(date, dt, !live.wx.started); live.wx.started = true;
   const night = grade.night > 0.6;
   // Leave room for visitor actions and keep Li's occasional words unhurried.
+  if(live.wx.rain>.1&&!outfits.rain&&!rainLoading&&t>rainRetryAt){
+    rainLoading=true;loadRainAssets().then(data=>Object.assign(outfits,data)).catch(error=>{rainRetryAt=t+30;console.warn('Umbrella frames will retry',error.message);}).finally(()=>rainLoading=false);
+  }
   if (t >= nextTalk && !readingDaily && !document.hidden && !li.hidden && !rooms.current && !stall.isOpen && !dailyDialog.open && document.getElementById('garden-settings').hidden && !cam.wide && !chill && t >= liSay.until) {
     nextTalk = t + 75 + Math.random() * 35;
     if (talkCount++ % 3 === 0) {
@@ -356,7 +404,8 @@ function tick(now) {
     } else { liSay.text = night ? nextNightQuote() : nextQuote(); liSay.until = t + 12; dailyUntil = 0; }
   }
   document.body.classList.toggle('night', night);
-  clockEl.textContent = `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')} · ${live.wx.name === 'clear' && night ? 'trời quang' : live.WEATHER[live.wx.name].label}`;
+  const clockText=`${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')} · ${live.wx.name === 'clear' && night ? 'trời quang' : live.WEATHER[live.wx.name].label}`;
+  if(clockEl.dataset.label!==clockText){clockEl.dataset.label=clockText;const [time,weather]=clockText.split(' · ');clockEl.querySelector('time').textContent=time;clockEl.querySelector('small').textContent=weather;clockEl.setAttribute('aria-label',clockText+' · Nhịp của vườn');}
 
   // Li follows his day unless the visitor is leading.
   if (!(li.userUntil > t)) {
@@ -435,7 +484,8 @@ function tick(now) {
   const cx = cam.wide ? 0 : Math.round(cam.x), cy = cam.wide ? 0 : Math.round(cam.y), view = { x: cx, y: cy, w: cam.wide ? S.W : VW, h: cam.wide ? S.H : VH };
 
   if (night && Math.random() < dt * 6) live.spawn({ kind: 'firefly', x: 120 + Math.random() * 1300, y: 700 + Math.random() * 500, life: 5, seed: Math.random() * 9 });
-  if (live.wx.wind > 1 && Math.random() < dt * 4) live.spawn({ kind: 'leaf', x: cx - 10, y: cy + Math.random() * VH, life: 8, seed: Math.random() * 9 });
+  if (!reducedMotion() && live.wx.wind > .8 && Math.random() < dt * 5) live.spawn({ kind: 'leaf', x: cx - 10, y: cy + Math.random() * VH, life: 8, seed: Math.random() * 9 });
+  if(!reducedMotion()&&!night&&live.wx.rain<.1&&Math.random()<dt*2)live.spawn({kind:'pollen',x:cx+Math.random()*VW,y:cy+Math.random()*VH,life:6,seed:Math.random()*9});
   if (Math.random() < dt * (0.6 + live.wx.rain * 6)) { const a = Math.random() * Math.PI * 2, r = Math.sqrt(Math.random()); live.spawn({ kind: 'ripple', x: S.POND.x + Math.cos(a) * r * S.POND.rx, y: S.POND.y + Math.sin(a) * r * S.POND.ry, life: 1.4 }); }
   live.stepParticles(dt, t, view);
   Z.stepAnimals(animals, dt, hour, live.wx.rain, li, nav, fits);
@@ -446,16 +496,19 @@ function tick(now) {
     const ox=cam.wide?(VW-S.W*k)/2:0,oy=cam.wide?(VH-S.H*k)/2:0,placed=[];
     const show=!cam.wide&&!stall.isOpen&&!rooms.current&&!document.querySelector('.gate')&&!chill;
     for(const item of nameItems){
-      const p=item.actor,catImg=p.state==='sleep'?zoo.cat.sleep:zoo.cat.still,h=item.kind==='pet'?P.petLabelHeight(p,petSprites[p.name]):P.spriteHeadOffset(catImg,catImg.height)+(p.lift||0);
+      const p=item.actor,catImg=p.state==='sleep'?zoo.cat.sleep:zoo.cat.still,h=item.kind==='pet'?P.petLabelHeight(p,petSprites[p.name]):(zoo.cat.hq?(()=>{const f=actorFrame('jo',p.state==='walk'?'walk':'idle',p.flip?'west':'east',p.t);return P.spriteHeadOffset(f.img,f.ay,f.scale);})():P.spriteHeadOffset(catImg,catImg.height))+(p.lift||0);
       const x=r.left+(ox+(p.x-cx)*k)/VW*r.width;
       let y=r.top+(oy+(p.y-h-cy)*k)/VH*r.height-7;
       const width=Math.max(38,Math.min(115,18+item.name.length*7));
       for(let n=0;n<4&&placed.some(a=>Math.abs(a.x-x)<(a.w+width)/2+4&&Math.abs(a.y-y)<23);n++)y-=23;
-      const visible=show&&x>width/2&&x<innerWidth-width/2&&y>22&&y<innerHeight-20;
+      const onScreen=show&&x>width/2&&x<innerWidth-width/2&&y>22&&y<innerHeight-20;
+      item.screenX=x;item.screenY=y;item.onScreen=onScreen;
+      const visible=onScreen&&(hoveredPet===p||(selectedPet===p&&t<selectedUntil)||document.activeElement===item.node);
       item.node.hidden=!visible;
       if(visible){item.node.style.left=`${Math.round(x)}px`;item.node.style.top=`${Math.round(y)}px`;placed.push({x,y,w:width});}
     }
   }
+  petBanter.update(t,!stall.isOpen&&!rooms.current&&!document.querySelector('.gate')&&!cam.wide&&!chill&&!document.hidden&&!dailyDialog.open&&document.getElementById('garden-settings').hidden,live.wx.name,night);
   const fireLit = live.inHours(hour, [[18.5, 23]]) && live.wx.rain < 0.5;
   A.stepFire(fire, dt, fireLit, live.wx.wind);
   A.fireBits((b) => bits.push(b), fire, dt, live.wx.wind);
@@ -477,14 +530,16 @@ function tick(now) {
     ctx.save(); ctx.translate(ox, oy); ctx.scale(k, k);
     ctx.drawImage(sceneGround, 0, 0);
   } else ctx.drawImage(sceneGround, cx, cy, VW, VH, 0, 0, VW, VH);
-  A.windAt(t, live.wx.wind);
-  A.drawWind(ctx, view, t);
-  ctx.drawImage(cinemaLayer,cinemaX-cx,cinemaY-cy);
-  A.drawPond(ctx, pond, view, t, dt, grade.night < 0.5);
+  A.windAt(reducedMotion()?0:t, live.wx.wind);
+  A.drawWind(ctx, view, reducedMotion()?0:t);
+  if(!artGround)ctx.drawImage(cinemaLayer,cinemaX-cx,cinemaY-cy);
+  if(livingPond)livingPond.drawWater(ctx,view,reducedMotion()?0:t,reducedMotion()?0:live.wx.rain);
+  else A.drawPond(ctx, pond, view, t, dt, grade.night < 0.5);
   WET.drawPuddles(ctx,puddles,view,t);
   // Li and the animals, nearest feet drawn last.
   const draws = [{ y: S.LUCKY[1], draw: () => luckyImg && ctx.drawImage(luckyImg, Math.round(S.LUCKY[0] - luckyImg.width*S.LUCKY_SCALE/2 - cx), Math.round(S.LUCKY[1] - luckyImg.height*S.LUCKY_SCALE - cy), Math.round(luckyImg.width*S.LUCKY_SCALE), Math.round(luckyImg.height*S.LUCKY_SCALE)) },...Z.animalDraws(animals, zoo, ctx, view, t), ...P.petDraws(pets, petSprites, ctx, view, t), ...P.smallDraws(small, smallSprites, ctx, view, t), ...N.nightDraws(night_, nightSprites, ctx, view, t)];
-  const showLi=!li.hidden&&rooms.current!=='cine'; // Cinema panel otherwise exposes only his legs under the frame.
+  if(livingPond){draws.push({y:1042,draw:()=>livingPond.drawCascade(ctx,view,reducedMotion()?0:t)});draws.push({y:1054,draw:()=>ctx.drawImage(pondReeds,916-cx,984-cy)});}
+  const showLi=!li.hidden&&!stall.isOpen&&rooms.current!=='cine'; // The stall already hosts Li in its portrait; avoid a second cropped body below the counter.
   if (showLi && li.pose) { const p=poseMasks[li.pose],im=poseImg[li.pose]; draws.push({ y:p.sort, draw:()=>{
     ctx.save();
     if(p.localAnchor) { ctx.translate(p.worldAnchor[0]-cx,p.worldAnchor[1]-cy); ctx.rotate(p.rotation); ctx.scale(p.scale,p.scale); ctx.drawImage(im,-p.localAnchor[0],-p.localAnchor[1]); }
@@ -494,15 +549,13 @@ function tick(now) {
   else if (showLi) draws.push({ y: li.y, draw: () => {
     // In the rain he carries his umbrella (its own PixelLab state), except under the eaves.
     const look = outfits.rain && live.wx.rain > 0.45 && !(li.y < 735 && li.x > 560 && li.x < 900) ? 'rain' : li.outfit;
-    const fr = outfits[look][li.anim][li.dir];
-    let img = fr[Math.floor(li.t * FPS[li.anim]) % fr.length];
-    let ax = liM.ax, ay = liM.ay, breath = 0;
-    if (look === 'v3' && li.anim === 'idle') {
-      // Old template mixed north with a front-facing frame. Use verified identity rotations.
-      if (li.dir === 'north') { img = northIdle[reducedMotion() ? 0 : Math.floor(li.t * 2) % 4]; ax = 127; ay = 242; }
-      else { img = idleClean[li.dir]; ax = 64; ay = li.dir.includes('north') ? 243 : 244; breath = reducedMotion() ? 0 : Math.round((Math.sin(li.t * 1.5) + 1) / 2); }
+    if(look!=='rain'&&!li.watering){
+      ctx.fillStyle='rgba(20,40,20,.25)';ctx.beginPath();ctx.ellipse(li.x-cx,li.y-cy,19,4,0,0,Math.PI*2);ctx.fill();
+      paintActor(ctx,'li',li.anim,li.dir,reducedMotion()?0:li.t,li.x-cx,li.y-cy);return;
     }
-    if(li.watering){img=wateringFrames[Math.floor(li.t*6)%wateringFrames.length];ax=128;ay=242;breath=0;}
+    let img,ax=liM.ax,ay=liM.ay,breath=0;
+    if(li.watering){img=wateringFrames[Math.floor(li.t*6)%wateringFrames.length];ax=128;ay=242;}
+    else {const fr=outfits.rain[li.anim][li.dir];img=fr[Math.floor(li.t*FPS[li.anim])%fr.length];}
     ctx.fillStyle = 'rgba(20,40,20,0.28)';
     ctx.beginPath(); ctx.ellipse(Math.round(li.x - cx), Math.round(li.y - 2 - cy), 20, 5, 0, 0, Math.PI * 2); ctx.fill();
     ctx.drawImage(img, Math.round(li.x - ax * LI_SCALE - cx), Math.round(li.y - ay * LI_SCALE - cy - breath), Math.round(img.width * LI_SCALE), Math.round(img.height * LI_SCALE + breath));
@@ -512,13 +565,13 @@ function tick(now) {
   const actors = [...(!showLi || li.pose ? [] : [{ x: li.x, y: li.y, w: 54, h: 166 }]), ...Z.actorBoxes(animals), ...P.petBoxes(pets, petSprites)];
   for (const f of front) {
     // The cinema is replaced by the new layer; its old cutouts no longer match.
-    if(f.name==='screen') continue;
+    if(!artGround&&f.name==='screen') continue;
     const behind = actors.some((a) => a.y < f.base && a.x + a.w / 2 > f.x && a.x - a.w / 2 < f.x + f.w && a.y > f.y && a.y - a.h < f.y + f.h);
     if (behind) draws.push({ y: f.base, draw: () => {
-      ctx.drawImage(f.name==='shrub_cine'?f.img:A.warpSprite(f,t),f.x-cx,f.y-cy);
+      ctx.drawImage(f.name==='shrub_cine'?f.img:A.warpSprite(f,reducedMotion()?0:t),f.x-cx,f.y-cy);
     } });
   }
-  if(actors.some(a=>a.y<1062 && a.x+a.w/2>1068 && a.x-a.w/2<1290 && a.y>885 && a.y-a.h<1062)) draws.push({y:1062,draw:()=>{
+  if(!artGround&&actors.some(a=>a.y<1062 && a.x+a.w/2>1068 && a.x-a.w/2<1290 && a.y>885 && a.y-a.h<1062)) draws.push({y:1062,draw:()=>{
     ctx.save(); ctx.translate(cinemaX-cx,cinemaY-cy); ctx.beginPath();
     for(const poly of [[[60,88],[84,88],[84,230],[60,230]],[[70,100],[201,55],[214,55],[214,165],[72,202]],[[190,54],[215,54],[215,168],[190,168]],[[28,216],[65,95],[75,100],[36,226]],[[203,55],[213,55],[249,145],[240,151]]]){
       ctx.moveTo(...poly[0]); for(const point of poly.slice(1))ctx.lineTo(...point); ctx.closePath();
@@ -544,7 +597,10 @@ function tick(now) {
     const r = art.getBoundingClientRect();
     const bw = bubbleEl.offsetWidth / 2 + 8;   // keep the whole bubble on screen
     bubbleEl.style.left = `${Math.min(innerWidth - bw, Math.max(bw, r.left + (li.x - cx) / VW * r.width))}px`;
-    bubbleEl.style.top = `${r.top + (li.y - 180 - cy) / VH * r.height}px`;
+    const headY=r.top+(li.y-180-cy)/VH*r.height;
+    const top=Math.max(92+bubbleEl.offsetHeight,headY-14);
+    bubbleEl.style.top=`${top}px`;
+    if(top>headY-14){const actorX=r.left+(li.x-cx)/VW*r.width;const left=actorX<innerWidth/2?actorX+bw+34:actorX-bw-34;bubbleEl.style.left=`${Math.min(innerWidth-bw,Math.max(bw,left))}px`;}
   }
   A.drawBits(ctx, bits, view);
   N.drawNightGlow(night_, ctx, view, t);

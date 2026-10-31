@@ -1,4 +1,5 @@
-import { PET_SCALE } from './pets.js?v=70';
+import { actorFrame } from './actors-v34.js?v=3504';
+import { PET_SCALE } from './pets.js?v=3504';
 // The bottom menu: a strip of lawn with the garden's places as buttons, and the
 // garden's animals living on it. They stroll, peck and hop; hover a button and the
 // nearest one trots over and bounces; pick one and they all jump.
@@ -7,34 +8,31 @@ import { PET_SCALE } from './pets.js?v=70';
 
 const rnd = (a, b) => a + Math.random() * (b - a);
 const SCALE = 1;   // shared species ratios; nearest-neighbor pixels
-// Small, coherent line illustrations for the site's navigation.
-const ICONS = {
-  stall:'<circle cx="11" cy="12" r="7.5"/><circle cx="11" cy="12" r="2"/><path d="M18 3v6.5a2.5 2.5 0 1 1-1.5-2.3V4l4-1"/>',
-  house:'<path d="M3 10.5 12 3l9 7.5M5.5 9.5v10h13v-10M10 19.5v-6h4v6"/><path d="M16 4.5V3h2v3"/>',
-  garden:'<path d="M12 21v-9M12 15c-5 0-7.5-2.5-7.5-6.5C9 8.5 12 10 12 15ZM12 12c0-4.3 2.8-7 7.5-7 0 4.5-2.5 7-7.5 7Z"/><path d="M7 21h10"/>',
-  pond:'<path d="M3 16c2-1.3 4-1.3 6 0s4 1.3 6 0 4-1.3 6 0M4 19c2 1.2 4 1.2 6 0s4-1.2 6 0 3 1 4 0"/><path d="M7 12c1.5-2 3.2-2.2 5 0 1.8-2.2 3.5-2 5 0-1 2-2.7 2.5-5 2.5S8 14 7 12ZM12 11.5V6M9.5 8.5 12 6l2.5 2.5"/>',
-  hammock:'<path d="M3 6v14M21 6v14M3 8c3 0 4 1 5 3 1.2 2.4 2.3 4 4 4s2.8-1.6 4-4c1-2 2-3 5-3"/><path d="M5 10c2.4 5.3 4.4 7 7 7s4.6-1.7 7-7M2 20h3M19 20h3"/>',
-  cine:'<path d="M4 5h16v11H4zM8 20h8M12 16v4"/><path d="m10 8 5 2.5-5 2.5z"/>',
-  aulinh:'<path d="M7 20V10a5 5 0 0 1 10 0v10M5 20h14M9 20v-9a3 3 0 0 1 6 0v9"/><path d="M19 4v3M17.5 5.5h3M4 3v3M2.5 4.5h3"/>'
-};
-
 export function initMenu({ items, sprites, pets: petSprites = {}, onPick }) {
   const nav = document.getElementById('menu'), row = nav.querySelector('.menu-row');
   const cv = document.getElementById('menu-pets'), g = cv.getContext('2d');
-  row.replaceChildren(...items.map((it) => {
+  const descriptions={stall:'Nhạc Li chọn',house:'Chuyện & công việc',garden:'Một chút xanh',pond:'Ngồi nghe gió',hammock:'Ảnh & ký ức',cine:'Những thước phim',aulinh:'Thế giới bên kia'};
+  row.replaceChildren(...items.map((it,index) => {
     const b = document.createElement('button');
-    b.type = 'button'; b.className = 'mbtn'; b.dataset.id = it.id; b.title = it.hint || it.label;
-    b.innerHTML = `<svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[it.id] || ''}</svg><span></span>`;
+    b.style.setProperty('--i',index); b.type = 'button'; b.className = 'mbtn'; b.dataset.id = it.id; b.title = it.hint || it.label;
+    b.innerHTML = `<img class="menu-icon" src="./art-v34/ui/icon-${index}.webp" alt=""><span></span><small>${descriptions[it.id]}</small>`;
     b.querySelector('span').textContent = it.label;
-    b.addEventListener('click', () => { for (const p of pets) hop(p, 1 + Math.random()); onPick(it); });
+    b.addEventListener('click', () => { for (const p of pets) hop(p, 1 + Math.random()); onPick(it);collapse(); });
     b.addEventListener('pointerenter', () => callOver(b));
     b.addEventListener('focus', () => callOver(b));
     return b;
   }));
 
-  const W = () => Math.ceil(innerWidth / SCALE), GROUND = 142, CH = 158;   // feet line in art px
+  const toggle=document.getElementById('garden-menu-toggle');
+  const collapse=()=>{nav.dataset.expanded='false';nav.inert=true;toggle.setAttribute('aria-expanded','false');};
+  collapse();
+  toggle.onclick=()=>{const expanded=nav.dataset.expanded!=='true';nav.dataset.expanded=String(expanded);nav.inert=!expanded;toggle.setAttribute('aria-expanded',String(expanded));};
+  document.addEventListener('pointerdown',e=>{if(!nav.contains(e.target)&&!toggle.contains(e.target))collapse();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&nav.dataset.expanded==='true'){collapse();toggle.focus();e.stopImmediatePropagation();}});
+  const stripRect=()=>({left:Math.max(12,(innerWidth-Math.min(800,innerWidth-24))/2),width:Math.min(800,innerWidth-24),top:innerHeight-12});
+  const W = () => Math.ceil(stripRect().width / SCALE), GROUND = 90, CH = 100;   // feet line in art px
   // Ali's pets take turns on the strip, a few at a time, plus a hen and a sparrow.
-  const names = Object.keys(petSprites).sort(() => Math.random() - 0.5);
+  const names = Object.keys(petSprites).filter(n=>n!=='socola').sort(() => Math.random() - 0.5);
   let nextIn = 0;
   const onStrip = () => Math.min(names.length, innerWidth < 760 ? 3 : 5);
   const pets = [
@@ -46,17 +44,22 @@ export function initMenu({ items, sprites, pets: petSprites = {}, onPick }) {
 
   function hop(p, k = 1) { if (p.lift <= 0.01) p.vy = 70 + 30 * k; }
   function callOver(b) {
-    const r = b.getBoundingClientRect(), x = (r.left + r.width / 2) / SCALE;
+    const r = b.getBoundingClientRect(), strip=stripRect(), x = Math.max(62,Math.min(strip.width-62,(r.left+r.width/2-strip.left)/SCALE));
     const p = pets.reduce((a, q) => (Math.abs(q.x - x) < Math.abs(a.x - x) ? q : a));
     p.target = x; p.joy = 2;
   }
 
   function frame(t, dt) {
     if (!document.body.classList.contains('at-stall') && !document.body.classList.contains('in-room')) return;
-    const w = W();
+    const w = W(),nr=stripRect();cv.style.left=nr.left+'px';cv.style.bottom=(innerHeight-nr.top-10)+'px';
     if (cv.width !== w) { cv.width = w; cv.height = CH; cv.style.width = `${w * SCALE}px`; cv.style.height = `${CH * SCALE}px`; }
     g.imageSmoothingEnabled=false;
     g.clearRect(0, 0, cv.width, cv.height);
+    // Keep individual silhouettes legible on the foreground strip.
+    for(let i=0;i<pets.length;i++)for(let j=i+1;j<pets.length;j++){
+      const a=pets[i],b=pets[j];if(a.kind!=='pet'||b.kind!=='pet'||a.leaving||b.leaving)continue;
+      const dx=b.x-a.x,gap=58;if(Math.abs(dx)<gap){const push=Math.min((gap-Math.abs(dx))*.5,dt*24),sign=dx>=0?1:-1;a.x-=push*sign;b.x+=push*sign;}
+    }
     for (const p of pets) {
       p.t += dt;
       // Gravity for hops.
@@ -90,10 +93,11 @@ export function initMenu({ items, sprites, pets: petSprites = {}, onPick }) {
       else if (p.kind === 'hen') img = p.state === 'walk' || p.target != null ? s.walk[Math.floor(p.t * 9) % s.walk.length] : s.peck[Math.floor((p.t + (p.phase || 0)) * 7) % s.peck.length];
       else if (p.kind === 'sparrow') img = p.lift > 0 ? s.flap[Math.floor(p.t * 16) % s.flap.length] : s.peck[Math.floor(p.t * 8) % s.peck.length];
       else { const q=petSprites[p.name],clip=p.state!=='walk'&&p.target==null&&q.clips?.play; if(clip){img=clip.frames[Math.floor(p.t*clip.fps)%clip.frames.length];pivot=clip;}else img=p.state==='walk'||p.target!=null?q.walk[Math.floor(p.t*10)%q.walk.length]:(q.sit||q.still); }
-      const scale=p.kind==='pet'?(PET_SCALE[p.name]||1):1,iw=Math.round(img.width*scale),ih=Math.round(img.height*scale);
+      let hq=null;if(p.kind==='cat'&&sprites.cat.hq){hq=actorFrame('jo',p.state==='walk'||p.target!=null?'walk':'idle',p.dir<0?'west':'east',p.t);img=hq.img;pivot=hq;}if(p.kind==='pet'&&petSprites[p.name].hq){hq=actorFrame(petSprites[p.name].hq,p.state==='walk'||p.target!=null?'walk':'idle',p.dir<0?'west':'east',p.t);img=hq.img;pivot=hq;}
+      const scale=hq?hq.scale*.95:p.kind==='pet'?(PET_SCALE[p.name]||1)*.6:.75,iw=Math.round(img.width*scale),ih=Math.round(img.height*scale);
       const x = Math.round(p.x - (pivot?.ax??img.width/2)*scale), y = Math.round(GROUND - (pivot?.ay??img.height)*scale - p.lift);
-      g.fillStyle = 'rgba(20, 40, 20, .25)'; g.fillRect(Math.round(p.x - img.width * 0.28), GROUND - 1, Math.round(img.width * 0.56), 2);
-      if (p.dir < 0) { g.save(); g.scale(-1, 1); g.drawImage(img, -x - iw, y,iw,ih); g.restore(); } else g.drawImage(img, x, y,iw,ih);
+      g.fillStyle = 'rgba(20, 40, 20, .25)'; g.fillRect(Math.round(p.x - iw * 0.22), GROUND - 1, Math.round(iw * 0.44), 2);
+      if (hq ? hq.flip : p.dir < 0) { g.save(); g.scale(-1, 1); g.drawImage(img, -x - iw, y,iw,ih); g.restore(); } else g.drawImage(img, x, y,iw,ih);
     }
     // A butterfly wandering above them.
     fly.ph += dt; fly.x = (w / 2) + Math.sin(fly.ph * 0.31) * w * 0.42; fly.y = 8 + Math.sin(fly.ph * 1.7) * 4;

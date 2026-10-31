@@ -2,13 +2,14 @@
 // circling the lamps, bats crossing the sky, more fireflies by the water.
 // They come out at dusk and slip away at dawn; owl eyes and moths catch the light.
 
-import { loadSprite } from './sprite-loader.js?v=70';
+import { loadSprite } from './sprite-loader.js?v=3504';
 const loadImg = (src) => loadSprite(src, true);
 const rnd = (a, b) => a + Math.random() * (b - a);
 
 export async function loadNight(base) {
   const L = (n) => loadImg(`${base}${n}.png`);
-  return { owl: { perch: await L('owl_perch'), turn: await L('owl_turn'), fly: [await L('owl_f0'), await L('owl_f1')] }, frog: { sit: await L('frog_sit'), croak: await L('frog_croak') } };
+  const [perch,turn,f0,f1,sit,croak]=await Promise.all(['owl_perch','owl_turn','owl_f0','owl_f1','frog_sit','frog_croak'].map(L));
+  return {owl:{perch,turn,fly:[f0,f1]},frog:{sit,croak}};
 }
 
 const OWL_PERCH = [[1214, 448], [1150, 418]];

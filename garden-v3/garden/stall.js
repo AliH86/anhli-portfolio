@@ -1,4 +1,5 @@
-import { reveal, focusScope, arrive, reducedMotion, announce } from './motion.js?v=70';
+import { fetchWithDeadline as fetch } from './network.js?v=3504';
+import { reveal, focusScope, arrive, reducedMotion, announce } from './motion.js?v=3504';
 // Li's music stall: a shelf of records, a player (vinyl or cassette), and timed
 // lyrics for the songs that have them. Data is the live V2.2 catalog; lyrics use
 // the V2.2 contract (data/lyrics/index.json -> per-track file). No lyric is ever
@@ -160,11 +161,11 @@ const loadFav = () => { try { return new Set(JSON.parse(localStorage.getItem(FAV
 const saveFav = (f) => { try { localStorage.setItem(FAV_KEY, JSON.stringify([...f])); } catch { /* private mode */ } };
 
 export async function initStall({ onOpenChange, onPlayChange }) {
-  const albums = await (await fetch('./data/catalog.json', { cache: 'no-cache' })).json();
+  const [albums,shelves] = await Promise.all([fetch('./data/catalog.json',{},8000).then(r=>r.json()),fetch('./data/shelves.json',{},4000).then(r=>r.json()).catch(()=>({}))]);
   const coverOf = (a) => `./data/${a.cover.replace('assets/covers/', 'covers/')}`;
   const root = $('#stall'), crate = $('#crate', root), tracksEl = $('#tracks', root), tagsEl = $('#tags', root);
   const deck = makeDeck($('#deck', root)), marquee = makeMarquee($('#marquee', root));
-  const audio = new Audio(); audio.preload = 'none'; audio.id = 'garden-audio'; document.body.append(audio);
+  const audio = new Audio(); audio.preload = 'none'; audio.volume=Number(document.querySelector('[data-music-volume]')?.value??75)/100; audio.id = 'garden-audio'; document.body.append(audio);
   const status = $('#playback-state');
   const showStatus = (text) => { status.textContent = text; status.hidden = !text; };
   const normalize = s => String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').toLowerCase();
@@ -172,7 +173,7 @@ export async function initStall({ onOpenChange, onPlayChange }) {
   const st = { sayText: '', sayUntil: 0, album: null, track: null, trackAlbum: null, skin: (() => { try { return localStorage.getItem('li-garden-skin') || 'suitcase'; } catch { return 'suitcase'; } })(), lines: null, open: false, tag: 'all', greet: GREETINGS[0] };
   const fav = loadFav();
   // Shelves Ali curates in data/shelves.json; "Nghe nhiều" also learns from what this visitor plays.
-  const shelves = await fetch('./data/shelves.json', { cache: 'no-cache' }).then((r) => r.json()).catch(() => ({}));
+
   const byName = (n) => albums.find((a) => a.name === n);
   const plays = (() => { try { return JSON.parse(localStorage.getItem('li-garden-plays') || '{}'); } catch { return {}; } })();
   const hero = byName(shelves.hero?.album);
@@ -237,8 +238,8 @@ export async function initStall({ onOpenChange, onPlayChange }) {
   const gap = () => (innerWidth < 760 ? 100 : 144);
   const edge = () => innerWidth < 760 ? 16 : 62;
   const maxOff = () => Math.max(0, (cards.length - 1) * gap() + edge() * 2 + gap() * .1 + (innerWidth < 760 ? 90 : 128) - lineEl.clientWidth);
-  function scrollToCard(b) { const i = cards.indexOf(b), x = edge() + gap() * .1 + i * gap() - line.off, width = b.offsetWidth; if (x < edge() || x + width > lineEl.clientWidth - edge()) line.off = Math.min(maxOff(), Math.max(0, edge() + gap() * .1 + i * gap() + width / 2 - lineEl.clientWidth / 2)); }
-  lineEl.addEventListener('pointerdown', (e) => { line.drag = { x: e.clientX, off: line.off, t: performance.now() }; line.moved = 0; line.vel = 0; });
+  function scrollToCard(b) { if(root.classList.contains('v34-shop'))return; const i = cards.indexOf(b), x = edge() + gap() * .1 + i * gap() - line.off, width = b.offsetWidth; if (x < edge() || x + width > lineEl.clientWidth - edge()) line.off = Math.min(maxOff(), Math.max(0, edge() + gap() * .1 + i * gap() + width / 2 - lineEl.clientWidth / 2)); }
+  lineEl.addEventListener('pointerdown', (e) => { if(root.classList.contains('v34-shop'))return; line.drag = { x: e.clientX, off: line.off, t: performance.now() }; line.moved = 0; line.vel = 0; });
   addEventListener('pointermove', (e) => {
     if (!line.drag) return;
     const dx = e.clientX - line.drag.x; line.moved = Math.max(line.moved, Math.abs(dx));
@@ -246,10 +247,10 @@ export async function initStall({ onOpenChange, onPlayChange }) {
     line.vel = (line.off - prev) / Math.max(1, (performance.now() - line.drag.t)) * 16; line.drag.t = performance.now();
   });
   addEventListener('pointerup', () => { line.drag = null; });
-  lineEl.addEventListener('wheel', (e) => { line.off = Math.min(maxOff(), Math.max(0, line.off + (Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY))); e.preventDefault(); }, { passive: false });
+  lineEl.addEventListener('wheel', (e) => { if(root.classList.contains('v34-shop'))return; line.off = Math.min(maxOff(), Math.max(0, line.off + (Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY))); e.preventDefault(); }, { passive: false });
   $('#crate-prev', root).addEventListener('click', () => { line.vel = -gap() * 0.22; });
   $('#crate-next', root).addEventListener('click', () => { line.vel = gap() * 0.22; });
-  function layoutLine(t, dt) {
+  function layoutLine(t, dt) { if(root.classList.contains('v34-shop'))return;
     if (!line.drag && Math.abs(line.vel) > 0.1) { line.off = Math.min(maxOff(), Math.max(0, line.off + line.vel)); line.vel *= Math.pow(0.9, dt * 60); }
     const W = lineEl.clientWidth, top = 6, sag = innerWidth < 760 ? 18 : 34, ropeY = (x) => top + sag * (1 - ((x - W / 2) / (W / 2)) ** 2);
     if (ropeCv.width !== Math.round(W / 2)) { ropeCv.width = Math.round(W / 2); ropeCv.height = 40; }
@@ -267,6 +268,7 @@ export async function initStall({ onOpenChange, onPlayChange }) {
 
   function pickAlbum(a) {
     st.album = a; markCrate();
+    if(!st.track){$('#now-cover',root).src=coverOf(a);$('#now-title',root).textContent=a.name;$('#now-album',root).textContent=a.sub||'';}
     $('#album-name', root).textContent = a.name;
     $('#album-sub', root).textContent = a.sub || '';
     $('#album-about', root).textContent = a.description || '';
@@ -315,7 +317,7 @@ export async function initStall({ onOpenChange, onPlayChange }) {
   audio.addEventListener('error', () => showStatus('Bài này chưa tải được. Thử lại hoặc chọn bài khác nha.'));
   audio.addEventListener('ended', () => step(1));
   audio.addEventListener('pause', () => { if (!audio.ended && performance.now() - (st.changedAt || 0) > 800) say('Tạm dừng chút nha.', 2.5); });
-  for (const ev of ['play', 'pause']) audio.addEventListener(ev, () => { root.classList.toggle('playing', !audio.paused); $('#np').hidden = !st.track; $('#np').classList.toggle('playing', !audio.paused); onPlayChange?.(!audio.paused); $('#play').setAttribute('aria-label',audio.paused?'Phát nhạc':'Tạm dừng nhạc'); $('#mini-toggle').textContent=audio.paused?'Phát':'Dừng'; $('#mini-open small').textContent=audio.paused?'ĐANG TẠM DỪNG':'ĐANG NGHE TRONG VƯỜN'; $('#mini-toggle').setAttribute('aria-label',audio.paused?'Phát nhạc':'Tạm dừng nhạc'); $('#mini-player').hidden=!st.track; document.body.classList.toggle('has-music',!!st.track); $('.kick span').textContent=audio.paused?'ĐANG TẠM DỪNG':'ĐANG PHÁT'; });
+  for (const ev of ['play', 'pause']) audio.addEventListener(ev, () => { root.classList.toggle('playing', !audio.paused); $('#np').hidden = !st.track; $('#np').classList.toggle('playing', !audio.paused); onPlayChange?.(!audio.paused); $('#play').setAttribute('aria-label',audio.paused?'Phát nhạc':'Tạm dừng nhạc'); $('#mini-toggle').textContent=audio.paused?'▶':'Ⅱ'; $('#mini-open small').textContent=audio.paused?'ĐANG TẠM DỪNG':'ĐANG NGHE TRONG VƯỜN'; $('#mini-toggle').setAttribute('aria-label',audio.paused?'Phát nhạc':'Tạm dừng nhạc'); $('#mini-player').hidden=!st.track; document.body.classList.toggle('has-music',!!st.track); $('.kick span').textContent=audio.paused?'ĐANG TẠM DỪNG':'ĐANG PHÁT'; });
   if ('mediaSession' in navigator) {
     navigator.mediaSession.setActionHandler('play', () => audio.play().catch(()=>showStatus('Bấm Phát để thử lại.')));
     navigator.mediaSession.setActionHandler('pause', () => audio.pause());
@@ -341,12 +343,23 @@ export async function initStall({ onOpenChange, onPlayChange }) {
   const seek = $('#seek', root);
   seek.addEventListener('input', () => { if (Number.isFinite(audio.duration)) audio.currentTime = seek.value / 1000 * audio.duration; });
   const skinBtn = $('#skin', root);
-  const showSkin = () => { const i = SKINS.findIndex((k) => k.id === st.skin); skinBtn.textContent = `Máy: ${SKINS[Math.max(0, i)].label} ›`; };
+  const showSkin = () => {
+    if(!SKINS.some(k=>k.id===st.skin)){st.skin='suitcase';try{localStorage.setItem('li-garden-skin',st.skin);}catch{}}
+    const src=st.skin==='boombox'?'art-v35/cassette.webp':SKINS.find(k=>k.id===st.skin).src;
+    const machine=$('#mini-machine');machine.hidden=false;machine.src=src;
+    $('#mini-player').dataset.skin=st.skin;
+    $('#shop-machine').src=src;
+    root.dataset.skin=st.skin;
+    root.dataset.media=st.skin==='suitcase'?'vinyl':st.skin==='boombox'?'cassette':'gramophone';
+    for(const b of root.querySelectorAll('button[data-skin]'))b.setAttribute('aria-pressed',String(b.dataset.skin===st.skin));
+    skinBtn.textContent=`Máy: ${SKINS.find(k=>k.id===st.skin).label} ›`;
+  };
   skinBtn.addEventListener('click', () => {
     const i = SKINS.findIndex((k) => k.id === st.skin);
     st.skin = SKINS[(i + 1) % SKINS.length].id; showSkin();
     try { localStorage.setItem('li-garden-skin', st.skin); } catch { /* private mode */ }
   });
+  for(const b of root.querySelectorAll('button[data-skin]'))b.addEventListener('click',()=>{st.skin=b.dataset.skin;showSkin();try{localStorage.setItem('li-garden-skin',st.skin);}catch{}});
   showSkin();
   $('#stall-close', root).addEventListener('click', () => setOpen(false));
   $('#np').addEventListener('click', () => setOpen(true));
@@ -363,6 +376,7 @@ export async function initStall({ onOpenChange, onPlayChange }) {
     if (on) {
       say(GREETINGS[(Math.random() * GREETINGS.length) | 0], 4);
       if (!st.album) pickAlbum(hero || albums[0]);
+      listOpen(true);
       $('.kick span').textContent = st.track ? (audio.paused?'ĐANG TẠM DỪNG':'ĐANG PHÁT') : 'LI GỢI Ý HÔM NAY';
     } else listOpen(false);
   }
@@ -377,11 +391,16 @@ export async function initStall({ onOpenChange, onPlayChange }) {
     return performance.now() / 1000 < st.sayUntil ? st.sayText : '';
   }
 
+  const hostQuotes=['Ngồi chơi một chút nhé.','Hôm nay, mình cứ chậm thôi.','Có bài hát nghe như một cái ôm.','Ngoài kia vội, trong này có nhạc.','Pha trà rồi nghe thêm một bài nha.'];
+  let hostQuote=0, nextHostQuote=0;
+  const changeHostQuote=()=>{$('.li-quote',root).textContent=hostQuotes[++hostQuote%hostQuotes.length];nextHostQuote=performance.now()+24000;};
+  $('.li-avatar',root).addEventListener('click',changeHostQuote);$('.li-quote',root).addEventListener('click',changeHostQuote);
   let last = performance.now();
   function frame(now) {
     const dt = Math.min(0.05, (now - last) / 1000); last = now;
     const p = Number.isFinite(audio.duration) && audio.duration ? audio.currentTime / audio.duration : 0;
     if (st.open) {
+      if(!document.hidden&&!reducedMotion()&&now>nextHostQuote){if(nextHostQuote)changeHostQuote();else nextHostQuote=now+24000;}
       layoutLine(now / 1000, dt);
       deck.frame(reducedMotion()?0:dt, !audio.paused, p, st.skin);
       marquee.frame(reducedMotion()?0:dt);
@@ -390,7 +409,7 @@ export async function initStall({ onOpenChange, onPlayChange }) {
       $('#time', root).textContent = `${fmt(audio.currentTime)} / ${fmt(audio.duration)}`;
     }
     $('#np-title').textContent = st.track ? st.track.name : '';
-    $('#mini-title').textContent = st.track ? st.track.name : '';
+    $('#mini-title').textContent = st.track ? st.track.name : '';$('#mini-open').title=st.track?'Mở sạp · '+st.track.name:'Mở sạp nhạc';
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
