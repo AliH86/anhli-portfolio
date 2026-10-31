@@ -1,10 +1,10 @@
-import { paintActor } from './actors-v34.js?v=3504';
-import { fetchWithDeadline as fetch } from './network.js?v=3504';
+import { paintActor } from './actors-v34.js?v=3505';
+import { fetchWithDeadline as fetch } from './network.js?v=3505';
 // Small animals drawn at the garden's own scale (Li is ~130 px tall): a cat that
 // naps by the hour, hens scratching by the vegetable beds, sparrows that take off
 // when Li walks close. Sprites face right; facing left is a mirror.
 
-import { loadSprite } from './sprite-loader.js?v=3504';
+import { loadSprite } from './sprite-loader.js?v=3505';
 const loadImg = (src) => loadSprite(src, false);
 const rnd = (a, b) => a + Math.random() * (b - a);
 

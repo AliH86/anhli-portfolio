@@ -1,11 +1,11 @@
-import { fetchWithDeadline, loadImage } from './network.js?v=3504';
+import { fetchWithDeadline, loadImage } from './network.js?v=3505';
 let indexPromise;
 const parts = new Map(), images = new Map();
 export function warmSpriteBundle() {
-  return indexPromise ||= fetchWithDeadline('../sprite-bundle/index-v34.json?v=3504',{},5000).then(r=>r.json()).catch(()=>null);
+  return indexPromise ||= fetchWithDeadline('../sprite-bundle/index-v34.json?v=3505',{},5000).then(r=>r.json()).catch(()=>null);
 }
 function part(name) {
-  if (!parts.has(name)) parts.set(name, fetchWithDeadline(`../sprite-bundle/${name}?v=3504`,{},8000).then(r=>r.arrayBuffer()).catch(()=>null));
+  if (!parts.has(name)) parts.set(name, fetchWithDeadline(`../sprite-bundle/${name}?v=3505`,{},8000).then(r=>r.arrayBuffer()).catch(()=>null));
   return parts.get(name);
 }
 async function decode(src, optional) {

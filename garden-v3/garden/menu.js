@@ -1,5 +1,5 @@
-import { actorFrame } from './actors-v34.js?v=3504';
-import { PET_SCALE } from './pets.js?v=3504';
+import { actorFrame } from './actors-v34.js?v=3505';
+import { PET_SCALE } from './pets.js?v=3505';
 // The bottom menu: a strip of lawn with the garden's places as buttons, and the
 // garden's animals living on it. They stroll, peck and hop; hover a button and the
 // nearest one trots over and bounces; pick one and they all jump.

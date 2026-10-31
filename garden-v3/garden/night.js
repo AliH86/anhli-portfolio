@@ -2,7 +2,7 @@
 // circling the lamps, bats crossing the sky, more fireflies by the water.
 // They come out at dusk and slip away at dawn; owl eyes and moths catch the light.
 
-import { loadSprite } from './sprite-loader.js?v=3504';
+import { loadSprite } from './sprite-loader.js?v=3505';
 const loadImg = (src) => loadSprite(src, true);
 const rnd = (a, b) => a + Math.random() * (b - a);
 

@@ -10,7 +10,7 @@ export function lazyStall(options) {
     status.replaceChildren();status.append('Li đang xếp đĩa nhạc…');status.hidden=false;
     const close=document.createElement('button');close.textContent='Để sau';close.onclick=dismiss;status.append(close);
     try {
-      loading ||= import('./stall.js?v=3504').then(m=>m.initStall(options)).then(p=>player=p).catch(e=>{loading=null;throw e;});
+      loading ||= import('./stall.js?v=3505').then(m=>m.initStall(options)).then(p=>player=p).catch(e=>{loading=null;throw e;});
       await loading;status.hidden=true;if(wanted)player.open();
     }catch(error){
       if(!wanted)return;

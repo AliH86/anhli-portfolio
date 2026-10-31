@@ -12,7 +12,7 @@ export async function fetchWithDeadline(url, options = {}, timeout = 15000) {
     throw error;
   } finally { clearTimeout(timer); }
 }
-export function loadImage(src, optional = false, timeout = 15000, priority = 'auto') {
+export function loadImage(src, optional = false, timeout = 45000, priority = 'auto') {
   return new Promise((resolve,reject) => {
     const img = new Image(); let timer;
     const done = (error) => {

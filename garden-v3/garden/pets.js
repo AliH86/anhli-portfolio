@@ -1,10 +1,10 @@
-import { actorFrame } from './actors-v34.js?v=3504';
-import { fetchWithDeadline as fetch } from './network.js?v=3504';
+import { actorFrame } from './actors-v34.js?v=3505';
+import { fetchWithDeadline as fetch } from './network.js?v=3505';
 // Ali's own pets, drawn from photos (pets/<name>/: still, walk/0..n, optional sit, sleep).
 // In the garden they roam the lawn, nap by day, gather round Li now and then, and
 // curl up near the porch at night. Each atlas clip declares its own facing.
 
-import { loadSprite } from './sprite-loader.js?v=3504';
+import { loadSprite } from './sprite-loader.js?v=3505';
 const loadImg = (src) => loadSprite(src, true);
 const rnd = (a, b) => a + Math.random() * (b - a);
 

@@ -1,11 +1,11 @@
-import { fetchWithDeadline, loadImage } from './network.js?v=3504';
+import { fetchWithDeadline, loadImage } from './network.js?v=3505';
 export const actorHeights={li:168,le:51,lun:45,lyly:73,bo:58,vang:44,mun_tabby:48,tux:50,corgi:52,poodle:43,spaniel:57,jo:52};
 const actors={};
 export async function loadActors(){
- const man=await fetchWithDeadline('./art-v34/manifest.json?v=3504').then(r=>r.json());
+ const man=await fetchWithDeadline('./art-v34/manifest.json?v=3505').then(r=>r.json());
  const sheets=new Map();
  await Promise.all(Object.entries(man.actors).map(async([id,actor])=>{
-  if(!sheets.has(actor.sheet))sheets.set(actor.sheet,loadImage('./art-v34/'+actor.sheet));
+  if(!sheets.has(actor.sheet))sheets.set(actor.sheet,loadImage('./art-v34/'+actor.sheet,false,45000,'high'));
   const sheet=await sheets.get(actor.sheet), frames={};
   for(const [key,[x,y,w,h]] of Object.entries(actor.rects)){
    const c=document.createElement('canvas');c.width=w;c.height=h;
