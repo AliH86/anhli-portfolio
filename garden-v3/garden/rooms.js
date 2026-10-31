@@ -1,5 +1,5 @@
-import { fetchWithDeadline as fetch } from './network.js?v=3505';
-import { arrive, reveal, focusScope, reducedMotion } from './motion.js?v=3505';
+import { fetchWithDeadline as fetch } from './network.js?v=3506';
+import { arrive, reveal, focusScope, reducedMotion } from './motion.js?v=3506';
 // The garden's other places, built like the music stall: the camera frames the spot,
 // Li steps over to host, and wood, paper and polaroids sit over the living scene.
 //   house   — Chuyện của Li: a letter, the profile, the road so far
@@ -21,7 +21,7 @@ export const ROOMS = {
 export async function initRooms({ onOpenChange, onPlayVideo }) {
   let profile, gallery, videos, request = 0;
   const data = new Map();
-  const read = name => { if(!data.has(name)) data.set(name, fetch(`./data/${name}.json`,{},8000).then(r=>r.json()).catch(e=>{data.delete(name);throw e;})); return data.get(name); }; 
+  const read = name => { if(!data.has(name)) data.set(name, fetch(`./data/${name}.json`,{},45000).then(r=>r.json()).catch(e=>{data.delete(name);throw e;})); return data.get(name); }; 
   const root = el('div', 'room'); root.hidden = true; root.setAttribute('role','dialog'); root.setAttribute('aria-modal','false'); document.body.append(root);
   const st = { id: null, sayText: '', sayUntil: 0 };
   let resizeRoom=null;

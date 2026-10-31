@@ -1,5 +1,5 @@
-import { fetchWithDeadline as fetch } from './network.js?v=3505';
-import { reveal, focusScope, arrive, reducedMotion, announce } from './motion.js?v=3505';
+import { fetchWithDeadline as fetch } from './network.js?v=3506';
+import { reveal, focusScope, arrive, reducedMotion, announce } from './motion.js?v=3506';
 // Li's music stall: a shelf of records, a player (vinyl or cassette), and timed
 // lyrics for the songs that have them. Data is the live V2.2 catalog; lyrics use
 // the V2.2 contract (data/lyrics/index.json -> per-track file). No lyric is ever
@@ -161,7 +161,7 @@ const loadFav = () => { try { return new Set(JSON.parse(localStorage.getItem(FAV
 const saveFav = (f) => { try { localStorage.setItem(FAV_KEY, JSON.stringify([...f])); } catch { /* private mode */ } };
 
 export async function initStall({ onOpenChange, onPlayChange }) {
-  const [albums,shelves] = await Promise.all([fetch('./data/catalog.json',{},8000).then(r=>r.json()),fetch('./data/shelves.json',{},4000).then(r=>r.json()).catch(()=>({}))]);
+  const [albums,shelves] = await Promise.all([fetch('./data/catalog.json',{},45000).then(r=>r.json()),fetch('./data/shelves.json',{},4000).then(r=>r.json()).catch(()=>({}))]);
   const coverOf = (a) => `./data/${a.cover.replace('assets/covers/', 'covers/')}`;
   const root = $('#stall'), crate = $('#crate', root), tracksEl = $('#tracks', root), tagsEl = $('#tags', root);
   const deck = makeDeck($('#deck', root)), marquee = makeMarquee($('#marquee', root));

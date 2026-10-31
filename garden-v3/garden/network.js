@@ -1,5 +1,5 @@
 // Deadline covers the body too: a server sending headers then stalling must settle.
-export async function fetchWithDeadline(url, options = {}, timeout = 15000) {
+export async function fetchWithDeadline(url, options = {}, timeout = 45000) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeout);
   try {
