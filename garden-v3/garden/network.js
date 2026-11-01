@@ -41,6 +41,37 @@ export function loadImage(src, optional = false, timeout = 45000, priority = 'au
     start(src);
   });
 }
+// Large images continue from the last byte received instead of restarting a stalled download.
+export async function fetchResumable(url, {stallMs=8000, tries=6}={}) {
+  const parts = []; let received = 0, type = '';
+  for (let attempt = 0; attempt < tries; attempt++) {
+    const controller = new AbortController();
+    let watchdog; const arm = () => { clearTimeout(watchdog); watchdog = setTimeout(() => controller.abort(), stallMs); };
+    try {
+      arm();
+      const response = await globalThis.fetch(url, {signal:controller.signal, headers:received ? {Range:`bytes=${received}-`} : {}});
+      if (response.status === 200) { parts.length = 0; received = 0; }
+      else if (response.status !== 206) throw Object.assign(Error(`HTTP ${response.status}: ${url}`), {final:true});
+      type = response.headers.get('content-type') || type;
+      const reader = response.body.getReader();
+      for (;;) {
+        const {done, value} = await reader.read();
+        if (done) return new Blob(parts, {type});
+        parts.push(value); received += value.length; arm();
+      }
+    } catch (error) { if (error.final) throw error; }
+    finally { clearTimeout(watchdog); }
+  }
+  throw Error(`Tải quá lâu: ${url}`);
+}
+export async function loadLargeImage(src, optional = false, timeout = 45000, priority = 'auto') {
+  let blob;
+  try { blob = await fetchResumable(src); }
+  catch { return loadImage(src, optional, timeout, priority); }
+  const url = URL.createObjectURL(blob);
+  try { return await loadImage(url, optional, timeout, priority); }
+  finally { URL.revokeObjectURL(url); }
+}
 export function loadingStage(text) {
   const node = document.querySelector('#loading small'); if (node) node.textContent = text;
 }

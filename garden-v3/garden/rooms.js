@@ -1,5 +1,5 @@
-import { fetchWithDeadline as fetch } from './network.js?v=3507';
-import { arrive, reveal, focusScope, reducedMotion } from './motion.js?v=3507';
+import { fetchWithDeadline as fetch } from './network.js?v=3508';
+import { arrive, reveal, focusScope, reducedMotion } from './motion.js?v=3508';
 // The garden's other places, built like the music stall: the camera frames the spot,
 // Li steps over to host, and wood, paper and polaroids sit over the living scene.
 //   house   — Chuyện của Li: a letter, the profile, the road so far

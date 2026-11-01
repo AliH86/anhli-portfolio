@@ -1,12 +1,12 @@
 import spriteIndex from '../sprite-bundle/index-v34.json' with {type:'json'};
-import { fetchWithDeadline, loadImage } from './network.js?v=3507';
+import { fetchWithDeadline, loadImage } from './network.js?v=3508';
 let indexPromise;
 const parts = new Map(), images = new Map();
 export function warmSpriteBundle() {
   return indexPromise ||= Promise.resolve(spriteIndex);
 }
 function part(name) {
-  if (!parts.has(name)) parts.set(name, fetchWithDeadline(`../sprite-bundle/${name}?v=3507`,{},45000).then(r=>r.arrayBuffer()).catch(()=>null));
+  if (!parts.has(name)) parts.set(name, fetchWithDeadline(`../sprite-bundle/${name}?v=3508`,{},45000).then(r=>r.arrayBuffer()).catch(()=>null));
   return parts.get(name);
 }
 async function decode(src, optional) {

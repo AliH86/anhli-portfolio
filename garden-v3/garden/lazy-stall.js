@@ -1,4 +1,4 @@
-import { loadImage } from './network.js?v=3507';
+import { loadImage } from './network.js?v=3508';
 // One player instance survives room navigation; an abandoned load never reopens it.
 // Waits briefly for the wooden frame; after that the CSS fallback carries the page.
 // The disc sits on the counter painted into the frame, so it waits for that art.
@@ -14,7 +14,7 @@ export function lazyStall(options) {
     status.replaceChildren();status.append('Li đang xếp đĩa nhạc…');status.hidden=false;
     const close=document.createElement('button');close.textContent='Để sau';close.onclick=dismiss;status.append(close);
     try {
-      loading ||= import('./stall.js?v=3507').then(m=>m.initStall(options)).then(p=>player=p).catch(e=>{loading=null;throw e;});
+      loading ||= import('./stall.js?v=3508').then(m=>m.initStall(options)).then(p=>player=p).catch(e=>{loading=null;throw e;});
       await Promise.all([loading,frameReady()]);status.hidden=true;if(wanted)player.open();
     }catch(error){
       if(!wanted)return;

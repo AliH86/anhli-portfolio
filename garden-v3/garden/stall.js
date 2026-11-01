@@ -1,5 +1,5 @@
-import { fetchWithDeadline as fetch } from './network.js?v=3507';
-import { reveal, focusScope, arrive, reducedMotion, announce } from './motion.js?v=3507';
+import { fetchWithDeadline as fetch } from './network.js?v=3508';
+import { reveal, focusScope, arrive, reducedMotion, announce } from './motion.js?v=3508';
 // Li's music stall: a shelf of records, a player (vinyl or cassette), and timed
 // lyrics for the songs that have them. Data is the live V2.2 catalog; lyrics use
 // the V2.2 contract (data/lyrics/index.json -> per-track file). No lyric is ever
