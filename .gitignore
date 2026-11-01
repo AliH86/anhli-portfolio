@@ -8,3 +8,8 @@ _originals/
 _audio-local/
 data/audio-manifest.json
 .wrangler/
+
+# Internal notes and local tools stay on this machine, not on the public site
+/*.md
+/*.command
+/docs/

@@ -1,5 +1,5 @@
-import { fetchWithDeadline as fetch } from './network.js?v=3506';
-import { reveal, focusScope, arrive, reducedMotion, announce } from './motion.js?v=3506';
+import { fetchWithDeadline as fetch } from './network.js?v=3507';
+import { reveal, focusScope, arrive, reducedMotion, announce } from './motion.js?v=3507';
 // Li's music stall: a shelf of records, a player (vinyl or cassette), and timed
 // lyrics for the songs that have them. Data is the live V2.2 catalog; lyrics use
 // the V2.2 contract (data/lyrics/index.json -> per-track file). No lyric is ever
@@ -7,6 +7,19 @@ import { reveal, focusScope, arrive, reducedMotion, announce } from './motion.js
 
 const $ = (s, r = document) => r.querySelector(s);
 const fmt = (s) => (Number.isFinite(s) ? `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}` : '0:00');
+const coverWatch = 'IntersectionObserver' in window ? new IntersectionObserver((entries) => {
+  for (const e of entries) if (e.isIntersecting) { coverWatch.unobserve(e.target); e.target.src = e.target.dataset.src; }
+}, { rootMargin: '300px', scrollMargin: '300px' }) : null;
+function retryOnce(img) {
+  img.addEventListener('error', () => {
+    if (!img.getAttribute('src')) return;
+    if (img.dataset.retried) { img.classList.add('cover-missing'); return; }
+    img.dataset.retried = '1';
+    setTimeout(() => { img.src = `${img.getAttribute('src')}?retry=1`; }, 1500);
+  });
+  img.addEventListener('load', () => { img.classList.remove('cover-missing'); delete img.dataset.retried; });
+  return img;
+}
 const loadImg = (src) => new Promise((ok) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => ok(null); i.src = src; });
 
 // ---------- lyrics (same rules as garden-v2/garden-lyrics.js) ----------
@@ -179,7 +192,7 @@ export async function initStall({ onOpenChange, onPlayChange }) {
   const hero = byName(shelves.hero?.album);
   if (hero) {
     $('#now-title', root).textContent = `Li gợi ý: ${hero.name}`;
-    $('#now-cover',root).src=coverOf(hero); $('#featured-cover',root).src=coverOf(hero);
+    retryOnce($('#now-cover',root)); $('#now-cover',root).src=coverOf(hero); $('#featured-cover',root).src=coverOf(hero);
     $('#featured-label',root).textContent=shelves.hero?.label||'Li gợi ý';
     $('#featured-name',root).textContent=hero.name;
     $('#featured-description',root).textContent=shelves.hero?.blurb||hero.sub;
@@ -219,7 +232,7 @@ export async function initStall({ onOpenChange, onPlayChange }) {
       const b = document.createElement('button');
       b.className = 'card'; b.type = 'button'; b.title = `${a.name} · ${a.tracks.length} bài`;
       b.innerHTML = '<i class="pin" aria-hidden="true"></i><img alt="" loading="lazy"><span class="name"></span>';
-      b.querySelector('img').src = coverOf(a); b.querySelector('.name').textContent = a.name;
+      const cover = retryOnce(b.querySelector('img')); if (coverWatch) { cover.dataset.src = coverOf(a); coverWatch.observe(cover); } else cover.src = coverOf(a); b.querySelector('.name').textContent = a.name;
       b.albumRef = a; b.phase = i * 1.37;
       if (a === hero && (st.tag === 'all' || st.tag === 'new')) { b.classList.add('hero'); b.insertAdjacentHTML('beforeend', `<em class="badge">${shelves.hero.label || 'Hero tháng'}</em>`); }
       else if ((shelves.new || []).includes(a.name) && st.tag !== 'new') b.insertAdjacentHTML('beforeend', '<em class="badge new">Mới</em>');

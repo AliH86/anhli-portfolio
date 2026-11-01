@@ -3,20 +3,24 @@
 <head>
 <meta charset="utf-8">
 <link rel="preload" as="image" href="../world/garden-day-v34.webp" fetchpriority="high">
-<link rel="modulepreload" href="./app/main-3506.js">
+<link rel="modulepreload" href="./app/main-3507.js">
 <link rel="preload" as="image" href="./art-v34/le.webp" fetchpriority="high">
 <link rel="preload" as="image" href="./art-v34/li.webp" fetchpriority="high">
 <link rel="preload" as="image" href="./art-v34/lun.webp" fetchpriority="high">
 <link rel="preload" as="image" href="./art-v34/lyly.webp" fetchpriority="high">
 <link rel="preload" as="image" href="./art-v34/pets-matched.webp" fetchpriority="high">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Vườn của Li · v3.5</title>
+<title>Vườn của Li — nhạc, ảnh và chuyện của Anh Li</title>
+<link rel="canonical" href="https://anhli.com/">
 <meta name="description" content="Khu vườn pixel của Anh Li — nghe nhạc, xem ảnh, đọc chuyện, và chơi với mấy em thú nhỏ. Có ngày đêm, nắng mưa theo giờ thật.">
 <meta name="theme-color" content="#2b2118">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Vườn của Li">
 <meta property="og:description" content="Có nhạc. Có cây. Có chỗ ngồi. Ghé vườn của Anh Li một chút.">
-<meta property="og:image" content="og.png">
+<meta property="og:url" content="https://anhli.com/">
+<meta property="og:image" content="https://anhli.com/garden-v3/garden/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="icon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -327,19 +331,20 @@
   .loading small { font-weight: 600; letter-spacing: .06em; opacity: .75; }
   .noscript { position: fixed; inset: 0; display: grid; place-items: center; background: #2b2118; color: #f6eeda; z-index: 60; padding: 24px; text-align: center; }
 </style>
-<link rel="stylesheet" href="./interface.css?v=3506">
-<link rel="stylesheet" href="./visual-v34.css?v=3506">
-<link rel="stylesheet" href="./rooms-v34.css?v=3506">
-<link rel="stylesheet" href="./renovation-v35.css?v=3506">
+<link rel="stylesheet" href="./interface.css?v=3507">
+<link rel="stylesheet" href="./visual-v34.css?v=3507">
+<link rel="stylesheet" href="./rooms-v34.css?v=3507">
+<link rel="stylesheet" href="./renovation-v35.css?v=3507">
 </head>
-<body class="at-gate" data-build="3506">
+<body class="at-gate" data-build="3507">
+<h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap">Vườn của Li — khu vườn pixel của Anh Li</h1>
   <div class="loading" id="loading"><div><b>vườn của Li</b><i><span></span><span></span><span></span></i><small>Đang tưới cây, chờ Li chút nha…</small></div></div>
   <script>
     (()=>{
       const l=document.getElementById('loading');let timer;
-      const showError=()=>{if(!l||l.classList.contains('done'))return;clearTimeout(timer);l.querySelector('small').textContent='Kết nối chưa tải xong khu vườn. Anh thử lại nhé.';l.querySelector('button').hidden=false;};
+      const showError=()=>{if(!l||l.classList.contains('done'))return;clearTimeout(timer);l.querySelector('small').textContent='Kết nối chưa tải xong khu vườn. Bạn thử lại nhé.';l.querySelector('button').hidden=false;};
       const b=document.createElement('button');b.textContent='Tải lại vườn';b.hidden=true;b.onclick=()=>location.reload();l.firstElementChild.append(b);
-      timer=setTimeout(()=>{if(!l.classList.contains('done')){l.querySelector('small').textContent='Mạng hơi chậm, Li vẫn đang tải vườn… Anh có thể chờ thêm hoặc tải lại.';b.hidden=false;}},30000);
+      timer=setTimeout(()=>{if(!l.classList.contains('done')){l.querySelector('small').textContent='Mạng hơi chậm, Li vẫn đang tải vườn… Bạn có thể chờ thêm hoặc tải lại.';b.hidden=false;}},30000);
       addEventListener('error',e=>{if(e.target===window||e.target?.matches?.('script[type="module"]'))showError();},true);addEventListener('unhandledrejection',showError);
       new MutationObserver(()=>{if(l.classList.contains('done'))clearTimeout(timer);}).observe(l,{attributes:true});
     })();
@@ -440,6 +445,6 @@
     <p class="daily-note">Thông điệp này ở lại cùng bạn hôm nay. Ngày mai, một hạt khác có thể ghé vườn.</p>
   </dialog>
   <div class="notice" id="notice" role="status" aria-live="polite" hidden></div>
-  <script type="module" src="./app/main-3506.js"></script>
+  <script type="module" src="./app/main-3507.js"></script>
 </body>
 </html>

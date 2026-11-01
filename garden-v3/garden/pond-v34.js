@@ -1,6 +1,6 @@
-import { loadImage } from './network.js?v=3506';
+import { loadImage } from './network.js?v=3507';
 export async function loadPond(ground) {
- const {createPond}=await import('./pond-three.js?v=3506');
+ const {createPond}=await import('./pond-three.js?v=3507');
  const waterBox={x:550,y:1002,w:520,h:218}, {x,y,w,h}=waterBox;
  const c=document.createElement('canvas');c.width=w;c.height=h;const q=c.getContext('2d');q.drawImage(ground,-x,-y);
  const src=q.getImageData(0,0,w,h).data,waterMask=new Uint8Array(w*h);

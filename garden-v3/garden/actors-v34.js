@@ -1,5 +1,5 @@
 import actorMetadata from './art-v34/manifest.json' with {type:'json'};
-import { fetchWithDeadline, loadImage } from './network.js?v=3506';
+import { fetchWithDeadline, loadImage } from './network.js?v=3507';
 export const actorHeights={li:168,le:51,lun:45,lyly:73,bo:58,vang:44,mun_tabby:48,tux:50,corgi:52,poodle:43,spaniel:57,jo:52};
 const actors={};
 export async function loadActors(){
